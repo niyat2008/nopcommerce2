@@ -1,0 +1,71 @@
+﻿@using Nop.Web.Areas.Admin.ViewModel
+@model VendorWareHouseViewModel
+
+
+<div asp-validation-summary="All"></div>
+<input asp-for=@Model.WarehouseModel.Id type="hidden" />
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            @await Component.InvokeAsync("AdminWidget", new { widgetZone = "admin_warehouse_details_top", additionalData = Model.WarehouseModel.Id })
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <nop-label asp-for=@Model.WarehouseModel.Name />
+                        </div>
+                        <div class="col-md-9">
+                            <nop-editor asp-for=@Model.WarehouseModel.Name asp-required="true" />
+                            <span asp-validation-for=@Model.WarehouseModel.Name></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-3">
+                         @*   <nop-label @T("Vendor.Fields.Name") />*@
+                            <div class="label-wrapper">
+                                <label class="control-label">@T("Vendor.Fields.Name")</label>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="input-group input-group-required">
+                                <select asp-for="VendorId" asp-items="@(new SelectList(Model.Vendors,"Id","Name"))">
+                                    <option>Please select Vendor</option>
+                                </select>
+
+                                @*<select name="@Model.Vendors.FirstOrDefault().Id" class="form-control" required>
+
+                                    <option value="0" selected="selected">Please select one</option>
+                                    @foreach (var item in Model.Vendors)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>*@
+                            </div>
+                            @*<span asp-validation-for=@Model.Vendors.SingleOrDefault().Id></span>*@
+
+                         
+
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <nop-label asp-for=@Model.WarehouseModel.AdminComment />
+                        </div>
+                        <div class="col-md-9">
+                            <nop-textarea asp-for=@Model.WarehouseModel.AdminComment />
+                            <span asp-validation-for=@Model.WarehouseModel.AdminComment></span>
+                        </div>
+                    </div>
+                    <nop-editor asp-for=@Model.WarehouseModel.Address asp-template="Address" />
+                </div>
+            </div>
+            @await Component.InvokeAsync("AdminWidget", new { widgetZone = "admin_warehouse_details_bottom", additionalData = Model.WarehouseModel.Id })
+        </div>
+    </div>
+</div>
