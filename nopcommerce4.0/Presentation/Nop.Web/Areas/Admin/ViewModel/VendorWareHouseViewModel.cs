@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Nop.Web.Areas.Admin.ViewModel
 {
 
-    //[Validator(typeof(WarehouseValidator))]
+    [Validator(typeof(VendorWareHouseViewModelValidator))]
     public class VendorWareHouseViewModel
     {
         public VendorWareHouseViewModel()

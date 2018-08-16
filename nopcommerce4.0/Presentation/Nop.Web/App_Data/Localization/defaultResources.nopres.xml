@@ -8196,6 +8196,12 @@
   <LocaleResource Name="Admin.Configuration.Shipping.Warehouses.Fields.Name.Required">
     <Value>Please provide a name.</Value>
   </LocaleResource>
+  
+     <LocaleResource Name="Admin.Configuration.Shipping.Warehouses.Fields.VendorId.Required">
+    <Value>Please provide a vendor name.</Value>
+  </LocaleResource>
+  
+  
   <LocaleResource Name="Admin.Configuration.Shipping.Warehouses.Fields.AdminComment">
     <Value>Admin comment</Value>
   </LocaleResource>

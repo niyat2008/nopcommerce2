@@ -23,29 +23,25 @@
 
                     <div class="form-group">
                         <div class="col-md-3">
-                         @*   <nop-label @T("Vendor.Fields.Name") />*@
+
                             <div class="label-wrapper">
                                 <label class="control-label">@T("Vendor.Fields.Name")</label>
                             </div>
                         </div>
                         <div class="col-md-9">
                             <div class="input-group input-group-required">
-                                <select asp-for="VendorId" asp-items="@(new SelectList(Model.Vendors,"Id","Name"))">
-                                    <option>Please select Vendor</option>
-                                </select>
 
-                                @*<select name="@Model.Vendors.FirstOrDefault().Id" class="form-control" required>
+                                @Html.DropDownList("VendorId",
+                                     new SelectList(Model.Vendors, "Id", "Name"),
+                                 "Please select Vendor",
+                             new { @class = "form-control" })
 
-                                    <option value="0" selected="selected">Please select one</option>
-                                    @foreach (var item in Model.Vendors)
-                                    {
-                                        <option value="@item.Id">@item.Name</option>
-                                    }
-                                </select>*@
+
+
                             </div>
-                            @*<span asp-validation-for=@Model.Vendors.SingleOrDefault().Id></span>*@
+                            <span asp-validation-for=@Model.VendorId></span>
 
-                         
+
 
 
                         </div>

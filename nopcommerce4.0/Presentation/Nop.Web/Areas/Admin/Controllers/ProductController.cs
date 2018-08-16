@@ -48,6 +48,8 @@ using Nop.Web.Framework.Extensions;
 using Nop.Web.Framework.Kendoui;
 using Nop.Web.Framework.Mvc;
 using Nop.Web.Framework.Mvc.Filters;
+using Nop.Core.Infrastructure;
+using Nop.Core.Domain.Customers;
 
 namespace Nop.Web.Areas.Admin.Controllers
 {
@@ -549,7 +551,7 @@ namespace Nop.Web.Areas.Admin.Controllers
             }
             return result.ToArray();
         }
-        
+
         protected virtual void PrepareProductModel(ProductModel model, Product product, bool setPredefinedValues, bool excludeProperties)
         {
             if (model == null)
@@ -571,7 +573,7 @@ namespace Nop.Web.Areas.Admin.Controllers
             model.PrimaryStoreCurrencyCode = _currencyService.GetCurrencyById(_currencySettings.PrimaryStoreCurrencyId).CurrencyCode;
             model.BaseWeightIn = _measureService.GetMeasureWeightById(_measureSettings.BaseWeightId).Name;
             model.BaseDimensionIn = _measureService.GetMeasureDimensionById(_measureSettings.BaseDimensionId).Name;
-            
+
             //little performance hack here
             //there's no need to load attributes when creating a new product
             //anyway they're not used (you need to save a product before you map them)
@@ -690,8 +692,14 @@ namespace Nop.Web.Areas.Admin.Controllers
                 });
             }
 
-            //warehouses
+            var _workContextForVendor = EngineContext.Current.Resolve<IWorkContext>();
+            var isUseradmin = _workContextForVendor.CurrentCustomer.IsAdmin();
             var warehouses = _shippingService.GetAllWarehouses();
+            if (!isUseradmin)
+            {
+                warehouses = _shippingService.GetAllWarehouses(_workContext.CurrentVendor.Id);
+            }
+            
             model.AvailableWarehouses.Add(new SelectListItem
             {
                 Text = _localizationService.GetResource("Admin.Catalog.Products.Fields.Warehouse.None"),
@@ -785,7 +793,7 @@ namespace Nop.Web.Areas.Admin.Controllers
             var productEditorSettings = _settingService.LoadSetting<ProductEditorSettings>();
             model.ProductEditorSettingsModel = productEditorSettings.ToModel();
         }
-
+     
         protected virtual List<int> GetChildCategoryIds(int parentCategoryId)
         {
             var categoriesIds = new List<int>();
@@ -1346,7 +1354,12 @@ namespace Nop.Web.Areas.Admin.Controllers
 
             var model = new ProductModel();
 
-            PrepareProductModel(model, null, true, true);
+           
+           
+               PrepareProductModel(model, null, true, true);
+            
+        
+
             AddLocales(_languageService, model.Locales);
             PrepareAclModel(model, null, false);
             PrepareStoresMappingModel(model, null, false);

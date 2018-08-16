@@ -17,10 +17,17 @@ namespace Nop.Web.Areas.Admin.Models.Shipping
         [NopResourceDisplayName("Admin.Configuration.Shipping.Warehouses.Fields.Name")]
         public string Name { get; set; }
 
+
+        [NopResourceDisplayName("Admin.Configuration.Shipping.Warehouses.Fields.VendorId")]
+        public string VendorId { get; set; }
+
         [NopResourceDisplayName("Admin.Configuration.Shipping.Warehouses.Fields.AdminComment")]
         public string AdminComment { get; set; }
 
         [NopResourceDisplayName("Admin.Configuration.Shipping.Warehouses.Fields.Address")]
         public AddressModel Address { get; set; }
+
+
+
     }
 }
