@@ -697,7 +697,7 @@ namespace Nop.Web.Areas.Admin.Controllers
             var warehouses = _shippingService.GetAllWarehouses();
             if (!isUseradmin)
             {
-                warehouses = _shippingService.GetAllWarehouses(_workContext.CurrentVendor.Id);
+                warehouses = _shippingService.GetVendorWarehouses(_workContext.CurrentVendor.Id);
             }
             
             model.AvailableWarehouses.Add(new SelectListItem
@@ -1223,9 +1223,22 @@ namespace Nop.Web.Areas.Admin.Controllers
 
             //warehouses
             model.AvailableWarehouses.Add(new SelectListItem { Text = _localizationService.GetResource("Admin.Common.All"), Value = "0" });
-            foreach (var wh in _shippingService.GetAllWarehouses())
+
+            var _workContextForVendor = EngineContext.Current.Resolve<IWorkContext>();
+            var isUseradmin = _workContextForVendor.CurrentCustomer.IsAdmin();
+            var warehouses = _shippingService.GetAllWarehouses();
+            if (!isUseradmin)
+            {
+                warehouses = _shippingService.GetVendorWarehouses(_workContext.CurrentVendor.Id);
+            }
+            foreach (var wh in warehouses)
                 model.AvailableWarehouses.Add(new SelectListItem { Text = wh.Name, Value = wh.Id.ToString() });
 
+           
+
+
+         
+        
             //vendors
             model.AvailableVendors.Add(new SelectListItem { Text = _localizationService.GetResource("Admin.Common.All"), Value = "0" });
             var vendors = SelectListHelper.GetVendorList(_vendorService, _cacheManager, true);
