@@ -216,7 +216,7 @@
                 {
                     @await Html.PartialAsync("_CheckoutAttributes", Model)
                 }
-                @await Component.InvokeAsync("SelectedCheckoutAttributes")
+           @await Component.InvokeAsync("SelectedCheckoutAttributes")
             </div>
             <div class="cart-footer">
                 @await Component.InvokeAsync("Widget", new { widgetZone = "order_summary_cart_footer" })

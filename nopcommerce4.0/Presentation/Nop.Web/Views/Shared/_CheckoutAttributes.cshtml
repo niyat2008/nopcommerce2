@@ -14,20 +14,20 @@
                 var controlId = $"checkout_attribute_{attribute.Id}";
                 var textPrompt = !string.IsNullOrEmpty(attribute.TextPrompt) ? attribute.TextPrompt : attribute.Name;
                 <dt id="@($"checkout_attribute_label_{attribute.Id}")">
-                    <label class="text-prompt">
+                    <label class="text-prompt" >
                         @textPrompt
                     </label>
                     @if (attribute.IsRequired)
                     {
-                        <span class="required">*</span>
+                        <span class="required" >*</span>
                     }
                 </dt>
-                <dd id="@($"checkout_attribute_input_{attribute.Id}")">
+                <dd id="@($"checkout_attribute_input_{attribute.Id}")" >
                     @switch (attribute.AttributeControlType)
                     {
                         case AttributeControlType.DropdownList:
                             {
-                        <select name="@(controlId)" id="@(controlId)">
+                        <select name="@(controlId)" id="@(controlId)" >
                             @if (!attribute.IsRequired)
                             {
                                 <option value="0">---</option>
