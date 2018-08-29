@@ -6,5 +6,7 @@ namespace Nop.Web.Models.Directory
     {
         public int id { get; set; }
         public string name { get; set; }
+
+        //public string arname { get; set; }
     }
 }

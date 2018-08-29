@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Linq;
+using Nop.Core;
 using Nop.Core.Caching;
 using Nop.Core.Data;
 using Nop.Core.Domain.Directory;
+using Nop.Data;
 using Nop.Services.Events;
 using Nop.Services.Localization;
 
@@ -37,6 +41,8 @@ namespace Nop.Services.Directory
         private readonly IRepository<StateProvince> _stateProvinceRepository;
         private readonly IEventPublisher _eventPublisher;
         private readonly ICacheManager _cacheManager;
+        private readonly IWorkContext _workContext;
+        private readonly IDbContext _dbContext;
 
         #endregion
 
@@ -50,11 +56,13 @@ namespace Nop.Services.Directory
         /// <param name="eventPublisher">Event published</param>
         public StateProvinceService(ICacheManager cacheManager,
             IRepository<StateProvince> stateProvinceRepository,
-            IEventPublisher eventPublisher)
+            IEventPublisher eventPublisher, IWorkContext workContext, IDbContext dbContext)
         {
             _cacheManager = cacheManager;
             _stateProvinceRepository = stateProvinceRepository;
             _eventPublisher = eventPublisher;
+            _workContext = workContext;
+            _dbContext = dbContext;
         }
 
         #endregion
@@ -123,12 +131,28 @@ namespace Nop.Services.Directory
             var key = string.Format(STATEPROVINCES_ALL_KEY, countryId, languageId, showHidden);
             return _cacheManager.Get(key, () =>
             {
-                var query = from sp in _stateProvinceRepository.Table
-                            orderby sp.DisplayOrder, sp.Name
-                            where sp.CountryId == countryId &&
-                            (showHidden || sp.Published)
-                            select sp;
+                string lang = _workContext.WorkingLanguage.Name;
+
+                
+                    var query = from sp in _stateProvinceRepository.Table
+                                orderby sp.DisplayOrder, sp.Name
+                                where sp.CountryId == countryId &&
+                                (showHidden || sp.Published)
+                                select sp;
+
                 var stateProvinces = query.ToList();
+
+                //Arabic 
+                //if (lang!= "English")
+                //{
+
+
+                //    stateProvinces = _dbContext.SqlQuery<StateProvince>("dbo.state_ar @countryId", new SqlParameter("countryId", countryId)).ToList();
+
+
+                //}
+
+              
 
                 if (languageId > 0)
                 {

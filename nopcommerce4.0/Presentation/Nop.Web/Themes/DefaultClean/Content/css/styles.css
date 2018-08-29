@@ -5089,7 +5089,7 @@ input:hover
 	background-color:#037726 !important;
 }
 
-input[type=text],.email,.password
+input[type=text],input[type=email],input[type=tel],input[type=password],.email,.password
 {
 	background-color:white !important;
 	
@@ -5295,7 +5295,7 @@ input:hover
 	background-color:#037726 !important;
 }
 
-input[type=text],.email,.password
+input[type=text],input[type=email],input[type=tel],input[type=password],.email,.password
 {
 	background-color:white !important;
 	
@@ -5516,7 +5516,7 @@ input:hover
 	background-color:#037726 !important;
 }
 
-input[type=text],.email,.password
+input[type=text],input[type=email],input[type=tel],input[type=password],.email,.password
 {
 	background-color:white !important;
 	
@@ -6131,7 +6131,7 @@ input:hover
 	background-color:#037726 !important;
 }
 
-input[type=text],.email,.password
+input[type=text],input[type=email],input[type=tel],input[type=password],.email,.password
 {
 	background-color:white !important;
 	
@@ -6923,7 +6923,7 @@ input:hover
 	background-color:#037726 !important;
 }
 
-input[type=text],.email,.password
+input[type=text],input[type=email],input[type=tel],input[type=password],.email,.password
 {
 	background-color:white !important;
 	
@@ -7088,7 +7088,7 @@ a:hover
 	color:#037726!important;
 }
 
-input[type=text],.email,.password
+input[type=text],input[type=email],input[type=tel],input[type=password],.email,.password
 {
 	background-color:white !important;
 	

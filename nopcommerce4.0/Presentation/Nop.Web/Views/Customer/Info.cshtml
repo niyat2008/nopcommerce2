@@ -246,7 +246,10 @@
                         {
                             <div class="inputs">
                                 <label asp-for="CountryId" asp-postfix=":"></label>
-                                <select asp-for="CountryId" asp-items="Model.AvailableCountries"></select>
+                                <select asp-for="CountryId" asp-items="Model.AvailableCountries">
+                                 
+                                </select>
+
                                 @if (Model.CountryRequired)
                                 {
                                     <nop-required />

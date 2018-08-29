@@ -25,6 +25,7 @@
                     success: function (data) {
                         ddlStates.html('');
                         $.each(data, function (id, option) {
+                           
                             ddlStates.append($('<option></option>').val(option.id).html(option.name));
                         });
                         statesProgress.hide();
@@ -235,6 +236,16 @@
                             <div class="inputs">
                                 <label asp-for="StateProvinceId" asp-postfix=":"></label>
                                 <select asp-for="StateProvinceId" asp-items="Model.AvailableStates"></select>
+
+                                @*<select id="StateProvinceId" name="StateProvinceId">
+                                    @foreach (var item in Model.AvailableStates)
+                                    {
+                                        
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                    
+                                </select>*@
+                                
                                 @if (Model.StateProvinceRequired)
                                 {
                                     <nop-required />
