@@ -274,10 +274,15 @@ namespace Nop.Core.Domain.Customers
         /// </summary>
         public bool PhoneEnabled { get; set; }
 
+        public bool MobileEnabled = true;//{ get; set; }
+
         /// <summary>
         /// Gets or sets a value indicating whether 'Phone number' is required
         /// </summary>
         public bool PhoneRequired { get; set; }
+
+        public bool MobileRequired = true;
+
 
         /// <summary>
         /// Gets or sets a value indicating whether 'Fax number' is enabled

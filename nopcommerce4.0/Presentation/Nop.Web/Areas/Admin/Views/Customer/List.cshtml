@@ -73,6 +73,15 @@
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <div class="col-md-4">
+                                        <nop-label asp-for="SearchMobile" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <nop-editor asp-for="SearchMobile" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-4">
                                         <nop-label asp-for="SearchEmail" />
                                     </div>
                                     <div class="col-md-8">
@@ -137,7 +146,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                                }
+                                }
                             </div>
                             <div class="col-md-7">
                                 @if (Model.CompanyEnabled)
@@ -162,6 +171,10 @@
                                         </div>
                                     </div>
                                 }
+
+                              
+
+
                                 @if (Model.ZipPostalCodeEnabled)
                                 {
                                     <div class="form-group">
@@ -305,6 +318,19 @@
                 },</text>
                 }
 
+                
+                @if (Model.MobileEnabled)
+                {
+                    <text>{
+                    field: "Mobile",
+                    title: "@T("Admin.Customers.Customers.Fields.Mobile")",
+                    width: 200
+                },</text>
+
+                }
+
+
+
                 @if (Model.PhoneEnabled)
                 {
                     <text>{
@@ -370,6 +396,7 @@
         });
 
         $("".concat("#@Html.IdFor(model => model.SearchEmail),",
+            "#@Html.IdFor(model => model.SearchMobile),",
             "#@Html.IdFor(model => model.SearchUsername),",
             "#@Html.IdFor(model => model.SearchFirstName),",
             "#@Html.IdFor(model => model.SearchLastName),",
@@ -430,6 +457,7 @@
         var data = {
             SearchCustomerRoleIds: $('#@Html.IdFor(model => model.SearchCustomerRoleIds)').val(),
             SearchEmail: $('#@Html.IdFor(model => model.SearchEmail)').val(),
+            SearchMobile: $('#@Html.IdFor(model => model.SearchMobile)').val(),
             SearchUsername: $('#@Html.IdFor(model => model.SearchUsername)').val(),
             SearchFirstName: $('#@Html.IdFor(model => model.SearchFirstName)').val(),
             SearchLastName: $('#@Html.IdFor(model => model.SearchLastName)').val(),
@@ -468,6 +496,7 @@
 </script>
 
 @*export selected (Excel). We don't use GET approach because it's limited to 2K-4K chars and won't work for large number of entities*@
+
 <form asp-controller="Customer" asp-action="ExportExcelSelected" method="post" id="export-excel-selected-form">
     <input type="hidden" id="selectedIds" name="selectedIds" value="" />
 </form>

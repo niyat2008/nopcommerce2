@@ -70,6 +70,9 @@ namespace Nop.Core.Domain.Common
         /// </summary>
         public bool PhoneEnabled { get; set; }
 
+
+        public bool MobileRequired = true;
+
         /// <summary>
         /// Gets or sets a value indicating whether 'Phone number' is required
         /// </summary>

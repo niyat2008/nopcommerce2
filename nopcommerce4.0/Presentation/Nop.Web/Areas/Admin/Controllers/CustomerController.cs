@@ -270,6 +270,7 @@ namespace Nop.Web.Areas.Admin.Controllers
             {
                 Id = customer.Id,
                 Email = customer.IsRegistered() ? customer.Email : _localizationService.GetResource("Admin.Customers.Guest"),
+                Mobile =  customer.Mobile,
                 Username = customer.Username,
                 FullName = customer.GetFullName(),
                 Company = customer.GetAttribute<string>(SystemCustomerAttributeNames.Company),
@@ -490,6 +491,7 @@ namespace Nop.Web.Areas.Admin.Controllers
                 {
                     model.Email = customer.Email;
                     model.Username = customer.Username;
+                    model.Mobile = customer.Mobile;
                     model.VendorId = customer.VendorId;
                     model.AdminComment = customer.AdminComment;
                     model.IsTaxExempt = customer.IsTaxExempt;
@@ -533,6 +535,7 @@ namespace Nop.Web.Areas.Admin.Controllers
                     }
 
                     //form fields
+
                     model.FirstName = customer.GetAttribute<string>(SystemCustomerAttributeNames.FirstName);
                     model.LastName = customer.GetAttribute<string>(SystemCustomerAttributeNames.LastName);
                     model.Gender = customer.GetAttribute<string>(SystemCustomerAttributeNames.Gender);
@@ -546,6 +549,7 @@ namespace Nop.Web.Areas.Admin.Controllers
                     model.StateProvinceId = customer.GetAttribute<int>(SystemCustomerAttributeNames.StateProvinceId);
                     model.Phone = customer.GetAttribute<string>(SystemCustomerAttributeNames.Phone);
                     model.Fax = customer.GetAttribute<string>(SystemCustomerAttributeNames.Fax);
+                    
                 }
             }
 
@@ -710,6 +714,7 @@ namespace Nop.Web.Areas.Admin.Controllers
             model.Address.LastNameRequired = true;
             model.Address.EmailEnabled = true;
             model.Address.EmailRequired = true;
+           
             model.Address.CompanyEnabled = _addressSettings.CompanyEnabled;
             model.Address.CompanyRequired = _addressSettings.CompanyRequired;
             model.Address.CountryEnabled = _addressSettings.CountryEnabled;
@@ -725,6 +730,7 @@ namespace Nop.Web.Areas.Admin.Controllers
             model.Address.ZipPostalCodeRequired = _addressSettings.ZipPostalCodeRequired;
             model.Address.PhoneEnabled = _addressSettings.PhoneEnabled;
             model.Address.PhoneRequired = _addressSettings.PhoneRequired;
+         
             model.Address.FaxEnabled = _addressSettings.FaxEnabled;
             model.Address.FaxRequired = _addressSettings.FaxRequired;
             //countries
@@ -769,7 +775,9 @@ namespace Nop.Web.Areas.Admin.Controllers
             var defaultRoleIds = new List<int> {_customerService.GetCustomerRoleBySystemName(SystemCustomerRoleNames.Registered).Id};
             var model = new CustomerListModel
             {
+                
                 UsernamesEnabled = _customerSettings.UsernamesEnabled,
+                MobileEnabled = _customerSettings.MobileEnabled,
                 DateOfBirthEnabled = _customerSettings.DateOfBirthEnabled,
                 CompanyEnabled = _customerSettings.CompanyEnabled,
                 PhoneEnabled = _customerSettings.PhoneEnabled,
@@ -781,6 +789,7 @@ namespace Nop.Web.Areas.Admin.Controllers
             {
                 model.AvailableCustomerRoles.Add(new SelectListItem
                 {
+                    
                     Text = role.Name,
                     Value = role.Id.ToString(),
                     Selected = defaultRoleIds.Any(x => x == role.Id)
@@ -810,6 +819,7 @@ namespace Nop.Web.Areas.Admin.Controllers
                 username: model.SearchUsername,
                 firstName: model.SearchFirstName,
                 lastName: model.SearchLastName,
+                mobile:model.SearchMobile,
                 dayOfBirth: searchDayOfBirth,
                 monthOfBirth: searchMonthOfBirth,
                 company: model.SearchCompany,
@@ -819,6 +829,7 @@ namespace Nop.Web.Areas.Admin.Controllers
                 loadOnlyWithShoppingCart: false,
                 pageIndex: command.Page - 1,
                 pageSize: command.PageSize);
+
             var gridModel = new DataSourceResult
             {
                 Data = customers.Select(PrepareCustomerModelForList),
@@ -853,6 +864,15 @@ namespace Nop.Web.Areas.Admin.Controllers
                 if (cust2 != null)
                     ModelState.AddModelError("", "Email is already registered");
             }
+
+            if (!string.IsNullOrWhiteSpace(model.Mobile))
+            {
+                var cust2 = _customerService.GetCustomerByMobile(model.Mobile);
+                if (cust2 != null)
+                    ModelState.AddModelError("", "Mobile is already registered");
+            }
+
+
             if (!string.IsNullOrWhiteSpace(model.Username) & _customerSettings.UsernamesEnabled)
             {
                 var cust2 = _customerService.GetCustomerByUsername(model.Username);
@@ -897,6 +917,7 @@ namespace Nop.Web.Areas.Admin.Controllers
                 {
                     CustomerGuid = Guid.NewGuid(),
                     Email = model.Email,
+                    Mobile =model.Mobile,
                     Username = model.Username,
                     VendorId = model.VendorId,
                     AdminComment = model.AdminComment,
@@ -1051,6 +1072,7 @@ namespace Nop.Web.Areas.Admin.Controllers
                 return RedirectToAction("List");
 
             var model = new CustomerModel();
+            
             PrepareCustomerModel(model, customer, false);
             return View(model);
         }
@@ -1119,6 +1141,17 @@ namespace Nop.Web.Areas.Admin.Controllers
                     else
                     {
                         customer.Email = model.Email;
+                    }
+
+
+                    //mobile
+                    if (!string.IsNullOrWhiteSpace(model.Mobile))
+                    {
+                        _customerRegistrationService.SetMobile(customer, model.Mobile, false);
+                    }
+                    else
+                    {
+                        customer.Mobile = model.Mobile;
                     }
 
                     //username

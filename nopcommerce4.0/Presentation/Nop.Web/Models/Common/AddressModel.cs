@@ -22,10 +22,15 @@ namespace Nop.Web.Models.Common
         public string FirstName { get; set; }
         [NopResourceDisplayName("Address.Fields.LastName")]
         public string LastName { get; set; }
+
         [DataType(DataType.EmailAddress)]
         [NopResourceDisplayName("Address.Fields.Email")]
         public string Email { get; set; }
 
+
+        [DataType(DataType.PhoneNumber)]
+        [NopResourceDisplayName("Address.Fields.Mobile")]
+        public string Mobile { get; set; }
 
         public bool CompanyEnabled { get; set; }
         public bool CompanyRequired { get; set; }

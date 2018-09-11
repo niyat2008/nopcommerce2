@@ -15,6 +15,8 @@ namespace Nop.Services.Customers
         /// <returns>Result</returns>
         CustomerLoginResults ValidateCustomer(string usernameOrEmail, string password);
 
+
+        CustomerLoginResults ValidateCustomerByMobile(string usernameOrMobile, string password);
         /// <summary>
         /// Register customer
         /// </summary>
@@ -36,6 +38,8 @@ namespace Nop.Services.Customers
         /// <param name="newEmail">New email</param>
         /// <param name="requireValidation">Require validation of new email address</param>
         void SetEmail(Customer customer, string newEmail, bool requireValidation);
+
+        void SetMobile(Customer customer, string newMobile, bool requireValidation);
 
         /// <summary>
         /// Sets a customer username

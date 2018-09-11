@@ -30,6 +30,7 @@
                     </div>
                 </div>
             }*@
+
             @await Component.InvokeAsync("AdminWidget", new { widgetZone = "admin_dashboard_news_after" })
             @if (!Model.IsLoggedInAsVendor && canManageOrders && canManageCustomers && canManageProducts && canManageReturnRequests)
             {
@@ -69,6 +70,7 @@
                     </div>
                 </div>
             }
+
             @await Component.InvokeAsync("AdminWidget", new { widgetZone = "admin_dashboard_orderreports_after" })
             @if (!Model.IsLoggedInAsVendor && (canManageOrders || canManageProducts))
             {

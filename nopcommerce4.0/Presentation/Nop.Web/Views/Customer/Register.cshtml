@@ -83,16 +83,14 @@
                     {
                         <div class="inputs date-of-birth">
                             <label>@T("Account.Fields.DateOfBirth"):</label>
-                            <nop-date-picker 
-                                asp-day-name="@Html.NameFor(x => x.DateOfBirthDay)" 
-                                asp-month-name="@Html.NameFor(x => x.DateOfBirthMonth)" 
-                                asp-year-name="@Html.NameFor(x => x.DateOfBirthYear)"
-                                asp-begin-year="@(DateTime.Now.Year - 110)"
-                                asp-end-year="@(DateTime.Now.Year)"
-                                asp-selected-day="@Model.DateOfBirthDay"
-                                asp-selected-month="@Model.DateOfBirthMonth"
-                                asp-selected-year="@Model.DateOfBirthYear"
-                            />
+                            <nop-date-picker asp-day-name="@Html.NameFor(x => x.DateOfBirthDay)"
+                                             asp-month-name="@Html.NameFor(x => x.DateOfBirthMonth)"
+                                             asp-year-name="@Html.NameFor(x => x.DateOfBirthYear)"
+                                             asp-begin-year="@(DateTime.Now.Year - 110)"
+                                             asp-end-year="@(DateTime.Now.Year)"
+                                             asp-selected-day="@Model.DateOfBirthDay"
+                                             asp-selected-month="@Model.DateOfBirthMonth"
+                                             asp-selected-year="@Model.DateOfBirthYear" />
                             @if (Model.DateOfBirthRequired)
                             {
                                 <nop-required />
@@ -102,6 +100,14 @@
                             <span asp-validation-for="DateOfBirthYear"></span>
                         </div>
                     }
+
+                    <div class="inputs">
+                        <label asp-for="Mobile" asp-postfix=":"></label>
+                        <input asp-for="Mobile" />
+                        <nop-required />
+                        <span asp-validation-for="Mobile"></span>
+                    </div>
+
                     <div class="inputs">
                         <label asp-for="Email" asp-postfix=":"></label>
                         <input asp-for="Email" />

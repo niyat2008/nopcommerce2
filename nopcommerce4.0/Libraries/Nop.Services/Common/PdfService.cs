@@ -16,6 +16,7 @@ using Nop.Core.Domain.Orders;
 using Nop.Core.Domain.Shipping;
 using Nop.Core.Domain.Tax;
 using Nop.Core.Html;
+using Nop.Core.Infrastructure;
 using Nop.Services.Catalog;
 using Nop.Services.Configuration;
 using Nop.Services.Directory;
@@ -1088,6 +1089,10 @@ namespace Nop.Services.Common
             {
                 Reference = store.Url
             };
+
+            //added by ali
+            var storeContext = EngineContext.Current.Resolve<IStoreContext>();
+            var storeName = storeContext.CurrentStore.Name;
 
             var cellHeader = GetPdfCell(string.Format(_localizationService.GetResource("PDFInvoice.Order#", lang.Id), order.CustomOrderNumber), titleFont);
             cellHeader.Phrase.Add(new Phrase(Environment.NewLine));

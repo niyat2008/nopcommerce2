@@ -36,7 +36,12 @@
     <div class="page-body">
         @await Component.InvokeAsync("Widget", new { widgetZone = "orderdetails_page_top", additionalData = Model.Id })
         <div class="order-overview">
+            <div>
+                <strong class="col-md-offset-2">@ViewData["storeName"]</strong>
+            </div>
             <div class="order-number">
+
+
                 <strong>@T("Order.Order#")@Model.CustomOrderNumber</strong>
             </div>
             <ul class="order-overview-content">

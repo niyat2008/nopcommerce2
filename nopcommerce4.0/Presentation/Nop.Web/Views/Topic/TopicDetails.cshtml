@@ -88,8 +88,10 @@
 <div class="page topic-page" id="ph-topic">
     <div class="page-title" id="ph-title">
         <h1>@Model.Title</h1>
+        @*<h1>@T(Model.Title)</h1>*@
     </div>
     <div class="page-body">
         @Html.Raw(Model.Body)
+        @*@Html.Raw(T(Model.Body))*@
     </div>
 </div>

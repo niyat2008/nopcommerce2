@@ -11,9 +11,16 @@ namespace Nop.Web.Models.Customer
     {
         public bool CheckoutAsGuest { get; set; }
 
-        [DataType(DataType.EmailAddress)]
-        [NopResourceDisplayName("Account.Login.Fields.Email")]
-        public string Email { get; set; }
+        //[DataType(DataType.EmailAddress)]
+        //[NopResourceDisplayName("Account.Login.Fields.Email")]
+        //public string Email { get; set; }
+
+
+        [DataType(DataType.PhoneNumber)]
+        [NopResourceDisplayName("Account.Login.Fields.Mobile")]
+        public string Mobile { get; set; }
+
+
 
         public bool UsernamesEnabled { get; set; }
         [NopResourceDisplayName("Account.Login.Fields.UserName")]

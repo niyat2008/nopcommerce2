@@ -50,6 +50,7 @@ namespace Nop.Services.Messages
         /// <returns>Queued email identifier</returns>
         int SendCustomerEmailRevalidationMessage(Customer customer, int languageId);
 
+    //    int SendCustomerMobileRevalidationMessage(Customer customer, int languageId);
         /// <summary>
         /// Sends password recovery message to a customer
         /// </summary>

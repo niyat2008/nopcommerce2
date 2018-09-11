@@ -42,6 +42,7 @@ namespace Nop.Services.Authentication.External
         /// </summary>
         public string Email { get; set; }
 
+        public string Mobile { get; set; }
         /// <summary>
         /// Gets or sets the additional user info as a list of a custom claims
         /// </summary>

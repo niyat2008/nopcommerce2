@@ -274,14 +274,15 @@ namespace Nop.Web.Controllers
                 {
                     model.Username = model.Username.Trim();
                 }
-                var loginResult = _customerRegistrationService.ValidateCustomer(_customerSettings.UsernamesEnabled ? model.Username : model.Email, model.Password);
+                var loginResult = _customerRegistrationService.ValidateCustomerByMobile(_customerSettings.UsernamesEnabled ? model.Username : model.Mobile, model.Password);
+              
                 switch (loginResult)
                 {
                     case CustomerLoginResults.Successful:
                         {
                             var customer = _customerSettings.UsernamesEnabled
                                 ? _customerService.GetCustomerByUsername(model.Username)
-                                : _customerService.GetCustomerByEmail(model.Email);
+                                : _customerService.GetCustomerByMobile(model.Mobile);
 
                             //migrate shopping cart
                             _shoppingCartService.MigrateShoppingCart(_workContext.CurrentCustomer, customer, true);
@@ -584,8 +585,8 @@ namespace Nop.Web.Controllers
 
                 var isApproved = _customerSettings.UserRegistrationType == UserRegistrationType.Standard;
                 var registrationRequest = new CustomerRegistrationRequest(customer,
-                    model.Email,
-                    _customerSettings.UsernamesEnabled ? model.Username : model.Email,
+                    model.Email,model.Mobile,
+                    _customerSettings.UsernamesEnabled ? model.Username : model.Mobile,
                     model.Password,
                     _customerSettings.DefaultPasswordFormat,
                     _storeContext.CurrentStore.Id,
@@ -687,6 +688,8 @@ namespace Nop.Web.Controllers
                         FirstName = customer.GetAttribute<string>(SystemCustomerAttributeNames.FirstName),
                         LastName = customer.GetAttribute<string>(SystemCustomerAttributeNames.LastName),
                         Email = customer.Email,
+                        Mobile = customer.Mobile,
+                       
                         Company = customer.GetAttribute<string>(SystemCustomerAttributeNames.Company),
                         CountryId = customer.GetAttribute<int>(SystemCustomerAttributeNames.CountryId) > 0
                             ? (int?)customer.GetAttribute<int>(SystemCustomerAttributeNames.CountryId)
@@ -920,8 +923,13 @@ namespace Nop.Web.Controllers
                         }
                     }
 
-                    //properties
-                    if (_dateTimeSettings.AllowCustomersToSetTimeZone)
+                    if (!customer.Mobile.Equals(model.Mobile.Trim(), StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        _customerRegistrationService.SetMobile(customer, model.Mobile.Trim(),false);
+                    }
+
+                        //properties
+                        if (_dateTimeSettings.AllowCustomersToSetTimeZone)
                     {
                         _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.TimeZoneId,
                             model.TimeZoneId);
