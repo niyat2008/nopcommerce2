@@ -14,5 +14,21 @@
   "Shipping.UPS",
   "Tax.FixedOrByCountryStateZip",
   "Widgets.GoogleAnalytics",
-  "Widgets.NivoSlider"
+  "Widgets.NivoSlider",
+  "SevenSpikes.Core",
+  "SevenSpikes.Nop.Plugins.AjaxCart",
+  "SevenSpikes.Nop.Plugins.AjaxFilters",
+  "SevenSpikes.Nop.Plugins.AnywhereSliders",
+  "SevenSpikes.Nop.Plugins.CloudZoom",
+  "SevenSpikes.Nop.Plugins.FacebookShop",
+  "SevenSpikes.Nop.Plugins.InstantSearch",
+  "SevenSpikes.Nop.Plugins.JCarousel",
+  "SevenSpikes.Nop.Plugins.MegaMenu",
+  "SevenSpikes.Nop.Plugins.PrevNextProduct",
+  "SevenSpikes.Nop.Plugins.ProductRibbons",
+  "SevenSpikes.Nop.Plugins.NopQuickTabs",
+  "SevenSpikes.Nop.Plugins.QuickView",
+  "SevenSpikes.Nop.Plugins.RichBlog",
+  "SevenSpikes.Nop.Plugins.SmartProductCollections",
+  "SevenSpikes.Theme.Pavilion"
 ]

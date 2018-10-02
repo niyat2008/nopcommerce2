@@ -1,0 +1,74 @@
+﻿@{
+    Layout = "~/Views/Shared/_Root.cshtml";
+}
+
+@{
+    //current category ID
+    int currentCategoryId = 0;
+    if (Url.RequestContext.RouteData.Values["controller"].ToString().Equals("catalog", StringComparison.InvariantCultureIgnoreCase) &&
+        Url.RequestContext.RouteData.Values["action"].ToString().Equals("category", StringComparison.InvariantCultureIgnoreCase))
+    {
+        currentCategoryId = Convert.ToInt32(Url.RequestContext.RouteData.Values["categoryId"].ToString());
+    }
+
+
+    //current manufacturer ID
+    int currentManufacturerId = 0;
+    if (Url.RequestContext.RouteData.Values["controller"].ToString().Equals("catalog", StringComparison.InvariantCultureIgnoreCase) &&
+        Url.RequestContext.RouteData.Values["action"].ToString().Equals("manufacturer", StringComparison.InvariantCultureIgnoreCase))
+    {
+        currentManufacturerId = Convert.ToInt32(Url.RequestContext.RouteData.Values["manufacturerId"].ToString());
+    }
+
+
+    //current product ID
+    int currentProductId = 0;
+    if (Url.RequestContext.RouteData.Values["controller"].ToString().Equals("catalog", StringComparison.InvariantCultureIgnoreCase) &&
+        Url.RequestContext.RouteData.Values["action"].ToString().Equals("product", StringComparison.InvariantCultureIgnoreCase))
+    {
+        currentProductId = Convert.ToInt32(Url.RequestContext.RouteData.Values["productId"].ToString());
+    }
+}
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="container">
+		  <div class="row">
+				<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 pull-right">
+					@Html.Widget("main_column_before")     
+					@RenderBody()
+					@Html.Widget("main_column_after") 
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+					@if (IsSectionDefined("left"))
+            {
+                @RenderSection("left")
+            }
+            else
+            {
+                @Html.Widget("left_side_column_before")
+                @Html.Action("CategoryNavigation", "Catalog", new { currentCategoryId = currentCategoryId, currentProductId = currentProductId })
+                @Html.Action("HomepageBestSellers", "Product")
+                @Html.Widget("left_side_column_after_category_navigation")
+                @*@Html.Action("ManufacturerNavigation", "Catalog", new { currentManufacturerId = currentManufacturerId })*@         
+                @*@Html.Action("PopularProductTags", "Catalog")*@                  
+                <section class="slider-category-area">
+                    <div class="left_bottom_image">
+						<a href="#">
+							<img src="~/Themes/Mylibrary/Content/Library_img/add/home-1/1.jpg" alt="">
+						</a>
+					</div>
+                </section>
+                @Html.Widget("left_side_column_after")
+                @*@Html.Action("VendorNavigation", "Catalog")*@
+            }
+				</div>
+				
+		  </div>
+		</div>
+
+    </div>
+</div>
+

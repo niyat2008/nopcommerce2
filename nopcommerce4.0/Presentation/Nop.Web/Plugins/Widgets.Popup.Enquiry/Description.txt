@@ -1,0 +1,9 @@
+Group: Technoscore
+FriendlyName: Any Page Contact Us Form
+SystemName: Widgets.Popup.Enquiry
+Version: 1.00
+SupportedVersions: 3.90
+Author: SuntecIndia Team
+DisplayOrder: 1
+FileName: Nop.Plugin.Widgets.Popup.Enquiry.dll
+Description: To Display Call out contact us form, add @Html.Widget("Popup.Enquiry.Form") widget before @Html.Widget("body_end_html_tag_before") on _Root.cshtml.

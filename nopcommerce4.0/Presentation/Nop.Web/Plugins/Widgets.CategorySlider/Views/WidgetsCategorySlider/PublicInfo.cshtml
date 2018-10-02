@@ -1,0 +1,160 @@
+﻿@model Nop.Plugin.Widgets.CategorySlider.Models.PublicInfoModel 
+@{
+    Layout = "";
+
+    Html.AddScriptParts("~/Plugins/Widgets.CategorySlider/Scripts/jssor.slider.js");
+    Html.AddScriptParts("~/Plugins/Widgets.CategorySlider/Scripts/jssor.js");
+    //Html.AddScriptParts("~/Plugins/Widgets.CategorySlider/Scripts/jssor.slider.min.js");
+    
+    Html.AddCssFileParts("~/Plugins/Widgets.CategorySlider/Content/categoryslider/themes/default/default.css");
+    Html.AddCssFileParts("~/Plugins/Widgets.CategorySlider/Content/categoryslider/jssor/style.css");
+}
+@using System
+@using Nop.Web.Framework.UI
+
+@helper RenderSliderLine(string pictureUrl, string heading, string text, string link,bool IsExternalLink, string captionbgcolor, string captionfgcolor, string captiondivstyle, string dataTransition = "")
+{
+
+    if (!string.IsNullOrEmpty(pictureUrl))
+    {
+        if (!string.IsNullOrEmpty(link))
+        {
+            
+                <div> 
+                    <a href="@link" target='@(IsExternalLink ? "_blank" : "_self")'>
+                        <img style="height: 400px;width: 100%;" src="@pictureUrl" u="@text" title="@heading" />
+
+                        @if (!string.IsNullOrEmpty(text))
+                        {
+
+                        <div u="caption" t="0" style='@captiondivstyle'>
+                            <div style="color:@captionfgcolor; background-color: @captionbgcolor;">
+                                @Html.Raw(@text)
+                            </div>
+
+                        </div>
+                        }
+
+                    </a>
+                </div>
+            
+        }
+        else
+        {
+            <div> <img src="@pictureUrl"  u="@text" alt="" title="@heading" />
+                
+                @if (!string.IsNullOrEmpty(text))
+                {
+                <div u="caption" t="0" style="@captiondivstyle">
+                    <div style="color:@captionfgcolor; background-color: @captionbgcolor ">
+                        @Html.Raw(@text)
+                    </div>
+
+                </div>
+               }               
+
+            </div>
+        }
+    }
+
+  
+}
+@if (Model.CategorySliderModel.Count > 0 && Model != null)
+{            
+<div class="slider-wrapper theme-default">
+    <div id="slider1_container" style="position: relative; top: 0px; left: 0px; right:0;bottom:15px; width: 980px;height:400px; margin-bottom:5px;">
+        <div u="slides" style="cursor: move; position: absolute; overflow: hidden; left: 0px; top: 0px; width: 980px; height: 400px;">
+            @foreach (var item in Model.CategorySliderModel)
+            {
+              if (!Request.Browser.IsMobileDevice)
+              {
+                
+                @RenderSliderLine(item.PictureUrl, item.Heading, item.Text, item.Link,item.IsExternalLink, item.CaptionBGColorWithOpacity, item.CaptionContentFGColor, item.CaptionDivStyleHTML)
+              }
+              else
+              {
+                @RenderSliderLine(item.MobilePictureUrl, item.Heading, item.Text, item.Link, item.IsExternalLink, item.CaptionBGColorWithOpacity, item.CaptionContentFGColor, item.CaptionDivStyleHTML)
+              }
+            }
+        </div>
+        <!-- Bullet Navigator Skin Begin -->
+        <!-- bullet navigator container -->
+        <div u="navigator" class="jssorb03" style="position: absolute; bottom: 4px;">
+            <!-- bullet navigator item prototype -->
+            <div u="prototype" style="position: absolute; width: 18px; height: 18px; text-align:center; line-height:18px; color:white; font-size:12px;"></div>
+        </div>
+        <!-- Bullet Navigator Skin End -->
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        var _SlideshowTransitions = [];
+
+        _SlideshowTransitions = eval(jQuery.parseJSON((JSON.stringify('[' + '@Model.TransitionEffect' + ']'))));
+        if (_SlideshowTransitions == null || _SlideshowTransitions.length ==0)
+            _SlideshowTransitions = [{ $Duration: 900, $Opacity: 2, $Brother: { $Duration: 1000, $Opacity: 2 } }];
+
+         var _CaptionTransitions = [];
+        //Left to Right
+        _CaptionTransitions["L-R"] = { $Duration: 800, $FlyDirection: 1 };
+        ////Right to Left
+        _CaptionTransitions["R-L"] = { $Duration: 800, $FlyDirection: 2 };
+        ////Top to Bottom
+        _CaptionTransitions["T-B"] = { $Duration: 800, $FlyDirection: 4 };
+        ////Bottom to Top
+        _CaptionTransitions["B-T"] = { $Duration: 800, $FlyDirection: 8 };
+        _CaptionTransitions["tt"] = { $Duration: 900, x: 0.6, $Easing: { $Left: $JssorEasing$.$EaseInOutSine }, $Opacity: 2 };
+        var options = {
+            $DragOrientation: 3,                                //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
+            $AutoPlay: true,
+            $BulletNavigatorOptions: {                                //[Optional] Options to specify and enable navigator or not
+                $Class: $JssorBulletNavigator$,                       //[Required] Class to create navigator instance
+                $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+                $AutoCenter: 0,                                 //[Optional] Auto center navigator in parent container, 0 None, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+                $Steps: 1,                                      //[Optional] Steps to go for each navigation request, default value is 1
+                $Lanes: 1,                                      //[Optional] Specify lanes to arrange items, default value is 1
+                $SpacingX: 4,                                   //[Optional] Horizontal space between each item in pixel, default value is 0
+                $SpacingY: 4,                                   //[Optional] Vertical space between each item in pixel, default value is 0
+                $Orientation: 1                                 //[Optional] The orientation of the navigator, 1 horizontal, 2 vertical, default value is 1
+            },
+            $SlideshowOptions: {
+                    $Class: $JssorSlideshowRunner$,
+                    $Transitions: _SlideshowTransitions
+            },
+            $CaptionSliderOptions: {
+            $Class: $JssorCaptionSlider$,
+            $CaptionTransitions: _CaptionTransitions,
+            $PlayInMode: 1,
+            $PlayOutMode: 3
+           },
+        };
+        var jssor_slider1 = new $JssorSlider$("slider1_container", options);
+        //jssor_slider1.$SetCaptionTransitions(_CaptionTransitions)
+
+		
+		function ScaleSlider() {
+            var parentWidth = $('#slider1_container').parent().width();
+            if (parentWidth) {
+                 jssor_slider1.$ScaleWidth(parentWidth);
+            }
+            else
+                window.setTimeout(ScaleSlider, 30);
+        }		
+
+        
+		
+		
+
+        ScaleSlider();
+        $Jssor$.$AddEvent(window, "load", ScaleSlider);
+
+        if (!navigator.userAgent.match(/(iPhone|iPod|iPad|BlackBerry|IEMobile)/)) {
+            $Jssor$.$AddEvent(window, "resize", $Jssor$.$WindowResizeFilter(window, ScaleSlider));
+        }
+
+        $(window).bind("orientationchange", ScaleSlider);
+    });
+</script>
+}

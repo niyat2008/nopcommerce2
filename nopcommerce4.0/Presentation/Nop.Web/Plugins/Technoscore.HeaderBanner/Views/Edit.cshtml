@@ -1,0 +1,101 @@
+﻿@model Nop.Plugin.Technoscore.HeaderBanner.Models.HeaderBanners
+@using System;
+@using System.Web.UI;
+@using Nop.Web.Framework.UI;
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+         Edit - Header Banner
+        <small><i class="fa fa-arrow-circle-left"></i><a href="@Url.Content("~/Admin/Widget/ConfigureWidget?systemName=Technoscore.HeaderBanner")">back to Banner list</a></small>
+    </h1>
+    <div class="pull-right">
+        &nbsp;
+    </div>
+</div>
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Edit Page Header Banner
+                </div>
+                @using (Html.BeginForm("Edit", "HeaderBanner", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.Id)
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.StoreId)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.StoreId, ViewData["StoreList"] as List<SelectListItem>)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-9 col-md-offset-3">
+                                <img src="~/Content/Uploads/@Model.Id@Model.ImageExt" width="150"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.Label("Select File")
+                            </div>
+                            <div class="col-md-9">
+                                <input type="file" name="postedFile" id="fileToUpload" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.PageSystemName)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.PageSystemName, ViewData["PageList"] as List<SelectListItem>)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.WidgetZone)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.WidgetZone, ViewData["WidgetsList"] as List<SelectListItem>)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.IsUseTheme)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.IsUseTheme)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-9 col-md-offset-3">
+                                <input type="submit" value="Upload" onclick="return Validate()" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-9">
+                                <span style="color:green">@ViewBag.Message</span>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

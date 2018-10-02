@@ -1,0 +1,174 @@
+﻿@model ProductsByTagModel
+@{
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+
+    //title
+    Html.AddTitleParts(string.Format(T("PageTitle.ProductsByTag").Text, Model.TagName));
+}
+@using Nop.Web.Models.Catalog;
+@using Nop.Web.Extensions;
+<div class="area-title">
+    <h2>@String.Format(T("Products.Tags.ProductsTaggedWith").Text, Model.TagName)</h2>
+</div>
+<div class="row">
+<div class="pupular_toolbar">
+    <div class="col-sm-12 col-lg-12 col-md-12">
+        @Html.Widget("categorydetails_top")
+        @Html.Widget("categorydetails_after_featured_products")
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="toolbar">
+                    @*view mode*@
+                    @if (Model.PagingFilteringContext.AllowProductViewModeChanging && Model.Products.Count > 0)
+                    {
+                        <div class="view-mode">
+                            <ul>
+                                @if (Model.PagingFilteringContext.AvailableViewModes.Count > 1)
+                                {
+                                    var gridMode = Model.PagingFilteringContext.AvailableViewModes[0];
+                                    var listMode = Model.PagingFilteringContext.AvailableViewModes[1];
+
+                                    <li><a class="@if(gridMode.Selected){<text>selected</text>}" href="@gridMode.Value" title="@gridMode.Text"><i class="fa fa-th-large"></i></a></li>
+                                    <li><a class="@if (listMode.Selected){<text>selected</text>}" href="@listMode.Value" title="@listMode.Text"><i class="fa fa-th-list"></i></a></li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                    @*sorting*@
+                    @if (Model.PagingFilteringContext.AllowProductSorting && Model.Products.Count > 0)
+                    {
+                        <div class="short-by">
+                            <span>@T("Catalog.OrderBy"):</span>
+                        </div>
+                        <div class="short-by">
+                            @Html.DropDownList("products-orderby", Model.PagingFilteringContext.AvailableSortOptions, new { @class = "form-control dropdown-filter", onchange = "setLocation(this.value);" })
+                        </div>
+                    }
+                    @*page size*@
+                    @if (Model.PagingFilteringContext.AllowCustomersToSelectPageSize && Model.Products.Count > 0)
+                    {
+                        <div class="short-by page">
+                            <span>@T("Catalog.PageSize"):</span>
+                        </div>
+                        <div class="short-by page">
+                            @Html.DropDownList("products-pagesize", Model.PagingFilteringContext.PageSizeOptions, new { @class = "form-control dropdown-filter", onchange = "setLocation(this.value);" })
+                        </div>
+                    }
+                    <div class="pager">
+                        @Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber")
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @Html.Widget("categorydetails_before_filters")
+        @section left
+        {
+            <div class="product-filters-wrapper">
+                @*filtering*@
+                @if (Model.PagingFilteringContext.PriceRangeFilter.Enabled)
+                {
+                    @Html.Partial("_FilterPriceBox", Model.PagingFilteringContext.PriceRangeFilter, new ViewDataDictionary())
+                }
+                @*filtering*@
+                @if (Model.PagingFilteringContext.SpecificationFilter.Enabled)
+                {
+                    @Html.Partial("_FilterSpecsBox", Model.PagingFilteringContext.SpecificationFilter, new ViewDataDictionary())
+                }
+            </div>
+        }
+        @Html.Widget("categorydetails_before_product_list")
+        @*product list*@
+        @if (Model.Products.Count > 0)
+        {
+            if (Model.PagingFilteringContext.ViewMode == "list")
+            {
+                foreach (var product in Model.Products)
+                {
+                    <div class="row">
+                        @Html.Partial("_ListProductBox", product)
+                    </div>
+                }
+            }
+            else
+            {
+                @*grid mode*@
+                <div class="product-grid home-page-product-grid">
+                    @{
+                var pg_i = 0;
+                    }
+                    @foreach (var product in Model.Products)
+                    {
+                        if (pg_i % 4 == 0)
+                        {
+                            @:<div class="row box-products">
+                        }
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="offer offer-default silde-show-offer pull-text-center">
+                                @Html.Partial("_ProductBox", product)
+                            </div>
+                        </div>
+                        if (pg_i % 4 == 3)
+                        {
+                            @:</div>
+                        }
+
+                        pg_i++;
+                    }
+                    @if (pg_i % 4 != 0)
+                    {
+                        @:</div>
+                        }
+                </div>
+            }
+        }
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="toolbar j3">
+                    @*view mode*@
+                    @if (Model.PagingFilteringContext.AllowProductViewModeChanging && Model.Products.Count > 0)
+                    {
+                        <div class="view-mode">
+                            <ul>
+                                @if (Model.PagingFilteringContext.AvailableViewModes.Count > 1)
+                                {
+                                    var gridMode = Model.PagingFilteringContext.AvailableViewModes[0];
+                                    var listMode = Model.PagingFilteringContext.AvailableViewModes[1];
+
+                                    <li><a class="@if(gridMode.Selected){<text>selected</text>}" href="@gridMode.Value" title="@gridMode.Text"><i class="fa fa-th-large"></i></a></li>
+                                    <li><a class="@if (listMode.Selected){<text>selected</text>}" href="@listMode.Value" title="@listMode.Text"><i class="fa fa-th-list"></i></a></li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                    @*sorting*@
+                    @if (Model.PagingFilteringContext.AllowProductSorting && Model.Products.Count > 0)
+                    {
+                        <div class="short-by">
+                            <span>@T("Catalog.OrderBy"):</span>
+                        </div>
+                        <div class="short-by">
+                            @Html.DropDownList("products-orderby", Model.PagingFilteringContext.AvailableSortOptions, new { @class = "form-control dropdown-filter", onchange = "setLocation(this.value);" })
+                        </div>
+                    }
+                    @*page size*@
+                    @if (Model.PagingFilteringContext.AllowCustomersToSelectPageSize && Model.Products.Count > 0)
+                    {
+                        <div class="short-by page">
+                            <span>@T("Catalog.PageSize"):</span>
+                        </div>
+                        <div class="short-by page">
+                            @Html.DropDownList("products-pagesize", Model.PagingFilteringContext.PageSizeOptions, new { @class = "form-control dropdown-filter", onchange = "setLocation(this.value);" })
+                        </div>
+                    }
+                    <div class="pager">
+                        @Html.Pager(Model.PagingFilteringContext).QueryParam("pagenumber")
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.Widget("categorydetails_bottom")
+    </div>
+</div>

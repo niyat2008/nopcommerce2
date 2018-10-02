@@ -1,0 +1,184 @@
+﻿@using Nop.Plugin.Widgets.CategorySlider.Models
+@model CategorySliderModel
+
+@{
+    //Layout = "";
+    //  Layout = "_AdminLayout.cshtml";
+}
+
+
+@using Nop.Web.Framework
+@using Nop.Web.Framework.UI
+
+<div class="section-header content-header clearfix">
+    <h1 class="pull-left">
+        @T("Category Slider")
+    </h1>
+    <div class="pull-right">
+        <a href="@Url.Action("Create", "WidgetsCategorySlider")" class="k-button btn bg-blue"><i class="fa fa-plus-square"></i>@T("Admin.Common.AddNew")</a>
+        <a href="@Url.Action("SliderSetting", "WidgetsCategorySlider")" class="k-button btn bg-blue">Slider Setting</a>
+    </div>
+</div>
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default panel-search">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                @Html.NopLabelFor(model => model.CategoryId)
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DropDownList("CategoryId", Model.AvailableCategories, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                @Html.NopLabelFor(model => model.StoreId)
+                            </div>
+                            <div class="col-md-8">
+                                @Html.DropDownList("StoreId", Model.AvailableStores, new { @class="form-control"})
+                            </div>
+                        </div>
+
+                        <div class="form-group">                           
+                            <div class="col-md-8  col-md-offset-4">
+                                <button type="button" id="btnSearch" class="btn btn-primary btn-search"><i class="fa fa-search"></i>@T("Admin.Common.Search")</button>
+                            </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div id="categoryslider-grid"></div>
+
+                    <script>
+    $(document).ready(function () {
+        $("#categoryslider-grid").kendoGrid({
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: {
+                        url: "@Html.Raw(Url.Action("CategorySliderList", "WidgetsCategorySlider"))",
+                        type: "POST",
+                        dataType: "json",
+                        data: additionalData
+                    },
+                    update: {
+                        url: "@Html.Raw(Url.Action("Update", "WidgetsCategorySlider"))",
+                        type: "POST",
+                        dataType: "json"
+                    },
+                    destroy: {
+                        url: "@Html.Raw(Url.Action("Delete", "WidgetsCategorySlider"))",
+                        type: "POST",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    data: "Data",
+                    total: "Total",
+                    errors: "Errors"
+
+                },
+                requestEnd: function (e) {
+                    if (e.type == "update") {
+                        this.read();
+                    }
+                },
+                error: function (e) {
+                    display_kendoui_grid_error(e);
+                    // Cancel the changes
+                    this.cancelChanges();
+                },
+                serverPaging: true,
+                serverFiltering: true,
+                serverSorting: true
+            },
+            pageable: {
+                refresh: true,
+                numeric: false,
+                previousNext: false,
+                info: false
+            },
+            scrollable: false,
+            columns: [{
+                field: "PictureUrl",
+                title: "@T("Plugins.Widgets.CategorySlider.Picture")",
+                template: '<a href="#=PictureUrl#" target="_blank"><img alt="#=PictureId#" src="#=PictureUrl#" width="150" /><a/>',
+                width: 200
+            },
+            {
+                field: "StoreName",
+                title: "Store",
+                width: 150
+            }, {
+                field: "CategoryName",
+                title: "Category",
+                width: 150
+            },
+            {
+                field: "Published",
+                title: "Published",
+                width: 100,
+                headerAttributes: { style: "text-align:center" },
+                attributes: { style: "text-align:center" },
+                template:'# if(Published) {# <i class="fa fa-check true-icon"></i> #} else {# <i class="fa fa-close false-icon"></i> #} #'
+            },
+             {
+                 field: "DisplayOrder",
+                 title: "DisplayOrder",
+                 format: "{0:0}",
+                 width: 100
+             },
+            {
+                field: "Id",
+                title: "@T("Admin.Common.Edit")",
+                width: 100,
+                template: '<a class="btn btn-default" href="/WidgetsCategorySlider/Update/#=Id#""><i class="fa fa-pencil"></i>@T("Admin.Common.Edit")</a> <a onclick="fndelete()" class="btn btn-default" href="/WidgetsCategorySlider/Delete/#=Id#"><i class="fa fa-remove"></i>@T("Admin.Common.Delete")</a>'
+            }]
+    });
+
+
+    //search button
+    $('#btnSearch').click(function () {
+        //search
+        var grid = $('#categoryslider-grid').data('kendoGrid');
+        grid.dataSource.page(1); //new search. Set page size to 1
+        grid.dataSource.read();
+
+        return false;
+    });
+
+    });
+
+    function additionalData() {
+        return {
+            StoreId: $('#@Html.FieldIdFor(model => model.StoreId)').val(),
+            StoreName: '',
+            CategoryId: $('#@Html.FieldIdFor(model => model.CategoryId)').val(),
+            CategoryName: '',
+            PictureId: 0,
+            PictureUrl: '',
+            Text: '',
+            Text: '',
+            Link: ''
+        };
+    }
+    function fndelete() {
+        var confirmdelete = confirm("Do You Want to Delete");
+        if (confirmdelete)
+            return true;
+
+        return false;
+    }
+
+
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

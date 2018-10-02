@@ -1,0 +1,125 @@
+﻿@model SevenSpikes.Nop.Conditions.Areas.Admin.Models.ConditionModel
+
+<nop-antiforgery-token />
+<input type="hidden" asp-for="ConditionId" />
+<input type="hidden" asp-for="DefaultConditionStatementId" />
+
+<input id="available-condition-types" type="hidden" value="@Model.AvailableConditionTypesCommaSeparated">
+
+<input id="condition-id" type="hidden" value="@Model.ConditionId">
+<input id="condition-groups" type="hidden" value="@Model.ConditionGroups">
+<input id="read-condition-group-url" type="hidden" value="@Url.Action("GetConditionGroup", "ConditionsAdmin")">
+<input id="update-condition-url" type="hidden" value="@Url.Action("UpdateCondition", "ConditionsAdmin")">
+<input id="update-condition-statement-url" type="hidden" value="@Url.Action("UpdateConditionStatement", "ConditionsAdmin")">
+<input id="update-default-condition-group-statement-url" type="hidden" value="@Url.Action("UpdateDefaultConditionGroupStatement", "ConditionsAdmin")">
+<input id="destroy-condition-statement-url" type="hidden" value="@Url.Action("DeleteConditionStatement", "ConditionsAdmin")">
+<input id="create-condition-group-url" type="hidden" value="@Url.Action("CreateConditionGroup", "ConditionsAdmin")">
+<input id="create-condition-statement-url" type="hidden" value="@Url.Action("CreateConditionStatement", "ConditionsAdmin")">
+<input id="get-condition-type-url" type="hidden" value="@Url.Action("GetConditionTypes", "ConditionsAdmin")">
+<input id="delete-condition-group-url" type="hidden" value="@Url.Action("DeleteConditionGroup", "ConditionsAdmin")">
+<input id="delete-unused-condition-groups-url" type="hidden" value="@Url.Action("DeleteUnusedConditionGroups", "ConditionsAdmin")">
+
+<div class="content">
+    <div class="form-horizontal">
+        <div id="condition" class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @T("SevenSpikes.Conditions.Admin.Condition.AboutCondtionGroups")
+                </div>
+                <div class="panel-body">
+                    <p>@T("SevenSpikes.Conditions.Admin.Condition.Description")</p>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @T("SevenSpikes.Conditions.Admin.Condition")
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <nop-label asp-for="ConditionName" />
+                        </div>
+                        <div class="col-md-9">
+                            <nop-editor asp-for="ConditionName" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <nop-label asp-for="Active" />
+                        </div>
+                        <div class="col-md-9">
+                            <div class="editor-field">
+                                <input class="check-box" id="@(Html.IdFor(x => x.Active))" name="@(Html.NameFor(x => x.Active))" type="checkbox" value="true" @(Model.Active == true ? "checked='checked'" : "")>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="default-condition-group" class="form-group">
+                        <div class="col-md-3">
+                            <nop-label asp-for="DefaultConditionValue" />
+                        </div>
+                        <div class="col-md-9">
+                            <nop-select asp-for="DefaultConditionValue" asp-items="Model.AvailableDefaultConditionValues" />
+                        </div>
+                    </div>
+                    <div class="callout bg-gray-light no margin">@T("SevenSpikes.Conditions.Admin.Condition.DefaultConditionValue.Hint")</div>
+                </div>
+            </div>
+            <div class="panel panel-default condition-groups-panel">
+                <div class="panel-heading">
+                    @T("SevenSpikes.Conditions.Admin.Condition.CondtionGroupsTitle")
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <a class="btn bg-blue add-condition-group">
+                                <i class="fa fa-plus-square"></i>
+                                @T("SevenSpikes.Conditions.Admin.Condition.AddConditionGroup")
+                            </a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div id="condition-groups-wrapper" class="col-md-12"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script id="popup_editor" type="text/x-kendo-template">
+            <div id="editor">
+                <div class="k-edit-label">
+                    <label for="Type">Condition Type</label>
+                </div>
+                <div class="k-edit-field">
+                    <select id="condition-type" style="width:230px;" data-role="dropdownlist" data-value-field="ConditionTypeId" data-text-field="ConditionType"
+                            data-bind="source: typeSource, value: selectedType" data-editvalue=""></select>
+                </div>
+                <div class="k-edit-label">
+                    <label for="Condition Property">Condition Property</label>
+                </div>
+                <div class="k-edit-field">
+                    <select id="condition-property" style="width:230px;" data-role="dropdownlist" data-value-field="ConditionPropertyValue" data-text-field="ConditionPropertyText"
+                            data-bind="source: selectedType.ConditionProperties, value: selectedProperty" data-editvalue=""></select>
+                </div>
+                <div class="k-edit-label">
+                    <label for="Operator">Operator</label>
+                </div>
+                <div class="k-edit-field">
+                    <select id="condition-operator" style="width:230px;" data-role="dropdownlist" data-value-field="OperatorTypeValue" data-text-field="OperatorTypeText"
+                            data-bind="source: selectedProperty.Operators, value: selectedOperator" data-editvalue=""></select>
+                </div>
+                <div class="k-edit-label">
+                    <label for="Value">Value</label>
+                </div>
+                <div class="k-edit-field">
+                    <select id="condition-value" style="width:230px;" data-role="dropdownlist" data-value-field="Value" data-text-field="Text"
+                            data-bind="source: selectedProperty.Values, value: selectedValue, visible: selectedProperty.ShowDropdown" data-editvalue=""></select>
+
+                    <input id="condition-num-value" style="width:230px;" type="number" data-role="numerictextbox" data-bind="value: selectedValue, visible: selectedProperty.ShowNumericTextbox" data-editvalue="" />
+                    <input id="condition-text-value" style="width:230px;" type="text" data-bind="value: selectedValue, visible: selectedProperty.ShowTextbox" data-editvalue="" class="k-textbox" />
+                </div>
+            </div>
+        </script>
+
+    </div>
+</div>

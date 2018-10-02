@@ -1,0 +1,9 @@
+Group: Technoscore
+FriendlyName: Nop Category Slider
+SystemName: Widgets.CategorySlider
+Version: 1.00
+SupportedVersions: 3.90
+Author: SuntecIndia Team
+DisplayOrder: -1
+FileName: Nop.Plugin.Widgets.CategorySlider.dll
+Description: To Display Banner slider, add @Html.Widget("category_slider", Model.Id) widget on category template.

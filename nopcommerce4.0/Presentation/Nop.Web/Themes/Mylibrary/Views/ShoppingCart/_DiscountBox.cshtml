@@ -1,0 +1,59 @@
+﻿@model ShoppingCartModel.DiscountBoxModel
+@using Nop.Web.Models.ShoppingCart;
+@if (Model.Display)
+{
+    <div class="coupon-box offer offer-default">
+        <div class="title">
+            <h4>@T("ShoppingCart.DiscountCouponCode")</h4>
+        </div>
+        <div class="hint">
+            @T("ShoppingCart.DiscountCouponCode.Tooltip")
+        </div>
+        <div class="row coupon-code form-group">
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+				<input name="discountcouponcode" type="text" class="form-control square-box" />
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+				<input type="submit" name="applydiscountcouponcode" value="@T("ShoppingCart.DiscountCouponCode.Button")" class="btn btn-default gift_btn" />
+			</div>
+        </div>
+        @*@if (!String.IsNullOrEmpty(Model.Message))
+        {
+            <div class="alert alert-info square-box">
+                @Model.Message
+            </div>
+        }*@
+        @foreach (var message in Model.Messages)
+        {
+            <div class="@(Model.IsApplied ? "message-success" : "message-failure")">
+                @message
+            </div>
+        }
+        @*@if (!String.IsNullOrEmpty(Model.CurrentCode))
+        {
+            <div class="alert alert-info square-box">
+                @string.Format(T("ShoppingCart.DiscountCouponCode.CurrentCode").Text, Model.CurrentCode)
+                @*empty value (little hack for FormValueExistsAttribute)
+                <input type="submit" name="removediscountcouponcode" value=" " title="@T("Common.Remove")" class="btn btn-default" />
+            </div>
+        }*@
+        @foreach (var discount in Model.AppliedDiscountsWithCodes)
+        {
+            <div class="current-code">
+                <span class="applied-discount-code">@string.Format(T("ShoppingCart.DiscountCouponCode.CurrentCode").Text, discount.CouponCode)</span>
+                @*empty value (little hack for FormValueExistsAttribute)*@
+                <input type="submit" name="removediscount-@discount.Id" value=" " title="@T("Common.Remove")" class="remove-discount-button" />
+            </div>
+        }
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#discountcouponcode').keydown(function (event) {
+                if (event.keyCode == 13) {
+                    $('#applydiscountcouponcode').click();
+                    return false;
+                }
+            });
+        });
+    </script>
+}

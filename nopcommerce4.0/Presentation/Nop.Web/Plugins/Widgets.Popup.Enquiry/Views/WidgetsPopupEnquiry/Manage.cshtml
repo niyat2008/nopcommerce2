@@ -1,0 +1,110 @@
+﻿@using Nop.Plugin.Widgets.Popup.Enquiry.Models
+@model EnquiryFormModel
+
+@{
+    //Layout = "";
+    //  Layout = "_AdminLayout.cshtml";
+}
+
+
+@using Nop.Web.Framework
+@using Nop.Web.Framework.UI
+
+<div class="section-header content-header clearfix">
+    <h1 class="pull-left">
+        @T("Enquiry.List")
+    </h1>
+    
+</div>
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+         
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div id="categoryslider-grid"></div>
+
+                    <script>
+    $(document).ready(function () {
+        $("#categoryslider-grid").kendoGrid({
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: {
+                        url: "@Html.Raw(Url.Action("EnquiryList", "WidgetsEnquiryForm"))",
+                        type: "POST",
+                        dataType: "json"
+                        
+                    },
+                    destroy: {
+                        url: "@Html.Raw(Url.Action("Delete", "WidgetsEnquiryForm"))",
+                        type: "POST",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    data: "Data",
+                    total: "Total",
+                    errors: "Errors"
+
+                },
+                requestEnd: function (e) {
+                    if (e.type == "update") {
+                        this.read();
+                    }
+                },
+                error: function (e) {
+                    display_kendoui_grid_error(e);
+                    // Cancel the changes
+                    this.cancelChanges();
+                },
+                serverPaging: true,
+                serverFiltering: true,
+                serverSorting: true
+            },
+            pageable: {
+                refresh: true,
+                numeric: false,
+                previousNext: false,
+                info: false
+            },
+            scrollable: false,
+            columns: [{
+                field: "Name",
+                title: "@T("Plugins.Widgets.Popup.Enquiry.Name")",
+                width: 200
+            },
+            {
+                field: "ContactNumber",
+                title: "@T("Plugins.Widgets.Popup.Enquiry.ContactNumber")",
+                width: 150
+            }, {
+                field: "EmailId",
+                title: "@T("Plugins.Widgets.Popup.Enquiry.EmailId")",
+                width: 150
+            },
+             {
+                 field: "CreatedOnUtc",
+                 title: "@T("Plugins.Widgets.Popup.Enquiry.CreatedOnUtc")",
+                 width: 100,
+                 type: "date",
+                 format: "{0:G}"
+            },
+            {
+                field: "Message",
+                title: "@T("Plugins.Widgets.Popup.Enquiry.Message")",
+                width: 200
+               
+            }]
+    });
+
+    });
+
+
+
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

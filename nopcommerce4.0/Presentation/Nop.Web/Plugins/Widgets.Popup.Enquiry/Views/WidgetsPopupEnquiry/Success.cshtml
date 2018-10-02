@@ -1,0 +1,15 @@
+﻿@model Nop.Plugin.Widgets.Popup.Enquiry.Models.EnquiryFormModel
+@{
+
+    Layout = "~/Views/Shared/_ColumnsOne.cshtml";
+}
+@using System
+@using Nop.Web.Framework
+@using Nop.Web.Framework.UI
+
+@if (Model.SuccessfullySent)
+{
+    <div class="result text-center">
+        @Model.Result
+    </div>
+}

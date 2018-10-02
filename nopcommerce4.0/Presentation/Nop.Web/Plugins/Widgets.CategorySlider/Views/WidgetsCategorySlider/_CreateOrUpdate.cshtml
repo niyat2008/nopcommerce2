@@ -1,0 +1,273 @@
+﻿@using Nop.Plugin.Widgets.CategorySlider.Models
+@model CategorySliderModel
+@using System
+
+@using Nop.Web.Framework
+@using Nop.Web.Framework.UI
+@Html.ValidationSummary(false)
+@Html.HiddenFor(model => model.Id)
+
+<script type="text/javascript" src="~/Plugins/Widgets.CategorySlider/Scripts/Spectrum/spectrum.js"></script>
+<link href="~/Plugins/Widgets.CategorySlider/Scripts/Spectrum/spectrum.css" rel="stylesheet" />
+<script>
+    $(function () {
+
+
+        $("#@Html.FieldIdFor(model => model.CaptionBGColorWithOpacity)").spectrum({
+            preferredFormat: "rgb",
+            showAlpha: true,
+            showInput: true,
+            showPalette: true,
+            showSelectionPalette: true,
+            clickoutFiresChange: true,
+
+            change: function (color) {
+                color.toRgbString(); // "hsl(0, 100%, 50%)"
+
+            }
+
+        });
+
+        $("#@Html.FieldIdFor(model => model.CaptionContentFGColor)").spectrum({
+            preferredFormat: "rgb",
+            showInput: true,
+            showPalette: true,
+            showSelectionPalette: true,
+            clickoutFiresChange: true,
+
+            change: function (color) {
+                color.toRgbString();  // "rgb(255, 0, 0)"
+
+            }
+
+        });
+
+        //position: absolute;top: 30px; left: 30px; width: 50px;height: 50px;
+        var captiondivstyle = $("#@Html.FieldIdFor(model => model.CaptionDivStyleHTML)").val();
+        captiondivstyle = captiondivstyle.replace(/;\s*$/, "");
+
+        captiondivstyle = captiondivstyle.replace(/px/g, '');
+        var captiondivarray = captiondivstyle.split(';');
+        captiondivarray.splice(0, 1);
+        //alert(captiondivarray[1]);
+        var array = eval(jQuery.parseJSON(JSON.stringify("[{" + captiondivarray + "}]")));
+        // alert(array[0].top);
+
+        var captionTop = array[0].top;
+        var captionLeft = array[0].left;
+        var captionHeight = array[0].height;
+        var captionWidth = array[0].width;
+        $("#captionTop").val(captionTop);
+        $("#captionLeft").val(captionLeft);
+        $("#captionHeight").val(captionHeight);
+        $("#captionWidth").val(captionWidth);
+
+        $("#captionTop").on('change  paste mouseup', function () {
+            if ($(this).val() != captionTop) {
+                captionTop = $(this).val();
+                var strdiv = "position: absolute; width:" + captionWidth + "px; height:" + captionHeight + "px; left:" + captionLeft + "px; top:" + captionTop + "px;"
+                $("#@Html.FieldIdFor(model => model.CaptionDivStyleHTML)").val(strdiv);
+            }
+        });
+        $("#captionLeft").on('change  paste mouseup', function () {
+            if ($(this).val() != captionLeft) {
+                captionLeft = $(this).val();
+                var strdiv = "position: absolute; width:" + captionWidth + "px; height:" + captionHeight + "px; left:" + captionLeft + "px; top:" + captionTop + "px;"
+                $("#@Html.FieldIdFor(model => model.CaptionDivStyleHTML)").val(strdiv);
+            }
+
+        });
+        $("#captionHeight").on('change  paste mouseup', function () {
+            if ($(this).val() != captionHeight) {
+                captionHeight = $(this).val();
+                var strdiv = "position: absolute; width:" + captionWidth + "px; height:" + captionHeight + "px; left:" + captionLeft + "px; top:" + captionTop + "px;"
+                $("#@Html.FieldIdFor(model => model.CaptionDivStyleHTML)").val(strdiv);
+            }
+
+        });
+        $("#captionWidth").on('change  paste mouseup', function () {
+            if ($(this).val() != captionWidth) {
+                captionWidth = $(this).val();
+                var strdiv = "position: absolute; width:" + captionWidth + "px; height:" + captionHeight + "px; left:" + captionLeft + "px; top:" + captionTop + "px;"
+                $("#@Html.FieldIdFor(model => model.CaptionDivStyleHTML)").val(strdiv);
+            }
+
+        });
+
+    });
+
+
+</script>
+
+
+
+<div id="categoryslider-edit">
+    @*<div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Plugins.Widgets.CategorySlider.Picture")
+        </h1>
+        <div class="pull-right"></div>
+    </div>*@
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default panel-search">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @Html.NopLabelFor(model => model.PictureId)
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.PictureId)
+                                    @Html.ValidationMessageFor(model => model.PictureId)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @Html.NopLabelFor(model => model.CategoryId)
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.DropDownList("CategoryId", Model.AvailableCategories)
+                                    @Html.ValidationMessageFor(model => model.CategoryId)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
+
+                                    @Html.NopLabelFor(model => model.StoreId)
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.DropDownList("StoreId", Model.AvailableStores)
+                                    @Html.ValidationMessageFor(model => model.StoreId)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
+
+                                    @Html.NopLabelFor(model => model.CaptionBGColorWithOpacity)
+                                </div>
+                                <div class="col-md-8">
+                                    <div style="float:left; width:150px;">
+                                        @Html.TextBoxFor(model => model.CaptionBGColorWithOpacity)
+                                        @Html.ValidationMessageFor(model => model.CaptionBGColorWithOpacity)
+                                    </div>
+                                    <div style="float:left; width:200px; padding-top:5px;">
+                                        @Html.NopLabelFor(model => model.CaptionContentFGColor)
+                                    </div>
+                                    <div style="float:left">
+                                        @Html.TextBoxFor(model => model.CaptionContentFGColor)
+                                        @Html.ValidationMessageFor(model => model.CaptionContentFGColor)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @Html.NopLabelFor(model => model.CaptionDivStyleHTML)
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.TextBoxFor(model => model.CaptionDivStyleHTML, new { @readonly = "readonly", style = "height: 25px; width:600px" })
+                                    @Html.ValidationMessageFor(model => model.CaptionDivStyleHTML)
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4 control-label">
+                                    Caption Top Position
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="captionTop" type="number" style="width:90px; height:25px" /> px
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4 control-label">
+                                    Caption Left Position
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="captionLeft" type="number" style="width:90px; height:25px" /> px
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4 control-label">
+                                    Caption Height
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="captionHeight" type="number" style="width:90px; height:25px" /> px
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4 control-label">
+                                    Caption Width
+                                </div>
+                                <div class="col-md-8">
+                                    <input id="captionWidth" type="number" style="width:90px; height:25px" /> px
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @Html.NopLabelFor(model => model.Text)
+                                </div>
+                                <div class="col-md-8">
+                                    @*@Html.EditorFor(model => model.Text1)*@
+                                    @Html.EditorFor(model => model.Text, "RichEditor")
+                                    @Html.ValidationMessageFor(model => model.Text)
+                                </div>
+                            </div>
+                            @*<tr>
+                                    <td class="adminTitle">
+                                        @Html.NopLabelFor(model => model.Heading):
+                                    </td>
+                                    <td class="adminData">
+                                        @Html.EditorFor(model => model.Heading)
+                                        @Html.ValidationMessageFor(model => model.Heading)
+                                    </td>
+                                </tr>*@
+
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @Html.NopLabelFor(model => model.Link)
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Link)
+                                    @Html.ValidationMessageFor(model => model.Link)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
+
+                                    @Html.NopLabelFor(model => model.IsExternalLink)
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.IsExternalLink)
+                                    @Html.ValidationMessageFor(model => model.IsExternalLink)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @Html.NopLabelFor(model => model.Published)
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Published)
+                                    @Html.ValidationMessageFor(model => model.Published)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @Html.NopLabelFor(model => model.DisplayOrder)
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.DisplayOrder)
+                                    @Html.ValidationMessageFor(model => model.DisplayOrder)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

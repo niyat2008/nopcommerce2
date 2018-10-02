@@ -1,0 +1,43 @@
+﻿@model CustomerAddressEditModel
+@using Nop.Web.Models.Customer;
+@{
+    Layout = "~/Views/Shared/_ColumnsTwoCustomer.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Account").Text);
+}
+@section left
+{
+    @Html.Action("CustomerNavigation", "Customer", new { selectedTabId = CustomerNavigationEnum.Addresses })
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="page account-page address-edit-page">
+        <div class="customer_info_wrapper form-panel">
+			<div class="area-title">
+				<h2>@T("Account.MyAccount") - @T("Account.CustomerAddresses.AddNew")</h2>
+            </div>
+            <div class="myaccount_address_wrapper account_padding">
+               <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                @{
+                    var dataDictAddress = new ViewDataDictionary();
+                    //Merge ModelState (required for validation)
+                    dataDictAddress.ModelState.Merge(ViewData.ModelState);
+                    dataDictAddress.TemplateInfo.HtmlFieldPrefix = "Address";
+                    @Html.Partial("_CreateOrUpdateAddress", Model.Address, dataDictAddress)              
+                }
+				<div class="form-group">
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"></div>
+					<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+						 <div class="buttons">
+							<input type="submit" class="button-1 save-address-button btn btn-default" value="@T("Common.Save")" />
+						</div>
+					</div>
+				</div>
+               
+            </div>
+			</div>
+        </div>
+    </div>
+}

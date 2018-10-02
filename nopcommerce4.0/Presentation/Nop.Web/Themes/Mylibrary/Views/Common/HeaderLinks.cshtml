@@ -1,0 +1,123 @@
+﻿@model HeaderLinksModel
+@using Nop.Web.Models.Common;
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 hidden-xs">
+            <div class="currency">
+                <span class="menu-lavel">
+                    Currency :
+                </span>
+                <div class="cur-lang-menu">
+                    <ul>
+                        <li>
+                            @Html.Action("CurrencySelector", "Common")
+                        </li>                  
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 hidden-sm hidden-xs">
+            <div class="welcome-msg">
+                @Html.Widget("header_links_before")
+               <p>@Html.Action("AdminHeaderLinks", "Common")</p>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="top-menu">
+                <nav>
+                    <ul>
+                        @if (Model.IsAuthenticated)
+                        {
+                            <li><a href="@Url.RouteUrl("CustomerInfo")"><span>@Model.CustomerName</span></a></li>
+                            <li><a href="@Url.RouteUrl("Logout")"><i class="fa fa-sign-out" aria-hidden="true"></i><span>@T("Account.Logout")</span></a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.RouteUrl("Register")"><i class="fa fa-user" aria-hidden="true"></i> <span>@T("Account.Register")</span></a></li>
+                            <li><a href="@Url.RouteUrl("Login")"><i class="fa fa-sign-in" aria-hidden="true"></i> <span>@T("Account.Login")</span></a></li>
+                        }
+                        @if (Model.AllowPrivateMessages)
+                        {
+                            <li>
+                                <a href="@Url.RouteUrl("PrivateMessages", new { tab = "" })" class="ico-inbox">@T("PrivateMessages.Inbox") <span class="unread-private-messages">@Model.UnreadPrivateMessages</span> </a>
+                            </li>
+                            if (!string.IsNullOrEmpty(Model.AlertMessage))
+                            {
+                                <script type="text/javascript">
+                                    $(document).ready(function () {
+                                        $('#notificationModal').modal('show');
+                                    });
+                                </script>
+                            }
+                        }
+      
+                        @if (Model.WishlistEnabled)
+                        {
+                            <li>
+                                <a href="@Url.RouteUrl("Wishlist")">
+									<i class="fa fa-heart" aria-hidden="true"></i>
+                                    <span>@T("Wishlist")</span>
+                                    <span class="wishlist-qty">@T("Wishlist.HeaderQuantity", Model.WishlistItems)</span>
+                                </a>
+                            </li>
+                        }
+                        <li>
+                            @Html.Action("TaxTypeSelector", "Common")
+                        </li>                       
+                        <li>
+                            @Html.Action("LanguageSelector", "Common")
+                        </li>
+                        @Html.Widget("header_links_after")                     
+                    </ul>
+                </nav>
+            </div>
+  
+        </div>
+        <div class="manage_cart">
+            @if (Model.ShoppingCartEnabled)
+            {
+			<div class="shopping-cart">
+				<ul>
+					<li id="topcartlink">
+						<a href="@Url.RouteUrl("ShoppingCart")">
+							<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+							<span>@T("ShoppingCart")</span>
+							<span class="cart-qty">@T("ShoppingCart.HeaderQuantity", Model.ShoppingCartItems)</span>
+						</a>
+
+						@if (!String.IsNullOrWhiteSpace(@Html.Action("FlyoutShoppingCart", "ShoppingCart").ToString()))
+						{
+							@Html.Action("FlyoutShoppingCart", "ShoppingCart")
+						}
+						else
+						{
+							<a href="@Url.RouteUrl("ShoppingCart")">
+								<span>@T("ShoppingCart")</span>
+								<span>@T("ShoppingCart.HeaderQuantity", Model.ShoppingCartItems)</span>
+							</a>
+						}
+					</li>
+				</ul>
+			</div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+@*Notification window*@
+<div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="notificationModalLabel">@T("Common.Notification")</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Raw(HttpUtility.JavaScriptStringEncode(Model.AlertMessage))
+            </div>
+        </div>
+    </div>
+</div>
+

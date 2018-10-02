@@ -1,0 +1,32 @@
+﻿@model HeaderLinksModel
+@using Nop.Web.Models.Common;
+
+@if (Model.ShoppingCartEnabled)
+{
+
+    <div class="shopping-cart">
+        <ul>
+            <li id="topcartlink">
+                <a href="@Url.RouteUrl("ShoppingCart")">
+                    <b>@T("ShoppingCart")</b>
+                    <span class="cart-qty">
+                        @T("ShoppingCart.HeaderQuantity", Model.ShoppingCartItems +"-items")
+                    </span>
+                </a>          
+                @if (!String.IsNullOrWhiteSpace(@Html.Action("FlyoutShoppingCart", "ShoppingCart").ToString()))
+                {
+                    @Html.Action("FlyoutShoppingCart", "ShoppingCart")
+                }
+                else
+                {
+                    <a href="@Url.RouteUrl("ShoppingCart")">
+                        <b>@T("ShoppingCart")</b>
+                        <span>@T("ShoppingCart.HeaderQuantity", Model.ShoppingCartItems)</span>
+                    </a>
+                }
+            </li>
+        </ul>		
+    </div>
+}
+
+

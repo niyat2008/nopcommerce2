@@ -1,0 +1,134 @@
+﻿@model FooterModel
+@using Nop.Web.Extensions
+@using Nop.Web.Models.Common;
+@using Nop.Core
+@using Nop.Core.Domain.Tax
+@using Nop.Core.Infrastructure
+
+
+<!-- footer-area-start -->
+<footer>
+    <section class="footer-area">
+        <div class="container">
+            <div class="row">
+                <div class="footer">
+                    <div class="col-sm-3 col-lg-3 col-md-3">
+                        <div class="static-book">
+                            <div class="footer-title">
+                                <h2>About Mylibrary</h2>
+                            </div>
+                            <div class="footer-content">   
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of to scrambled”</p>
+                                <span class="author">- John yan -</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-lg-2 col-md-2">
+                        <div class="my-account">
+                            <div class="footer-title">
+                                <h2>@T("Footer.MyAccount")</h2>
+                            </div>
+                            <div class="footer-menu">
+                                <ul>
+                                    <li><a href="@Url.RouteUrl("CustomerInfo")">@T("Account.MyAccount")</a></li>
+                                    @if (Model.AllowCustomersToApplyForVendorAccount)
+                                    {
+                                        <li><a href="@Url.RouteUrl("ApplyVendorAccount")">@T("Vendors.ApplyAccount")</a></li>
+                                    }
+                                    @if (Model.ShoppingCartEnabled)
+                                    {
+                                        <li><a href="@Url.RouteUrl("ShoppingCart")">@T("ShoppingCart")</a></li>
+                                    }
+                                    @if (Model.WishlistEnabled)
+                                    {
+                                        <li><a href="@Url.RouteUrl("Wishlist")">@T("Wishlist")</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 hidden-sm">
+                        <div class="Tienda Online-area">
+                            <div class="footer-title">
+                                <h2>@T("Footer.Information")</h2>
+                            </div>
+                            <div class="footer-menu">
+                                <ul>
+                                    @if (Model.SitemapEnabled)
+                                    {
+                                        <li><a href="@Url.RouteUrl("Sitemap")">@T("Sitemap")</a></li>
+                                    }
+                                    @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn1).ToList())
+                                    {
+                                        <li><a href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a></li>
+                                    }
+                                    <li><a href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-lg-2 col-md-2">
+                        <div class="footer-menu-area">
+                            <div class="footer-title">
+                                <h2>@T("User Service")</h2>
+                            </div>
+                            <div class="footer-menu">
+                                <ul>
+                                    <li><a href="@Url.RouteUrl("ProductSearch")">@T("Search")</a> </li>
+                                    @if (Model.NewsEnabled)
+                                    {
+                                        <li><a href="@Url.RouteUrl("NewsArchive")">@T("News")</a></li>
+                                    }
+                                    @if (Model.BlogEnabled)
+                                    {
+                                        <li><a href="@Url.RouteUrl("Blog")">@T("Blog")</a></li>
+                                    }
+                                    @if (Model.ForumEnabled)
+                                    {
+                                        <li><a href="@Url.RouteUrl("Boards")">@T("Forum.Forums")</a></li>
+                                    }                                  
+                                    @if (Model.CompareProductsEnabled)
+                                    {
+                                        <li><a href="@Url.RouteUrl("CompareProducts")">@T("Products.Compare.List")</a></li>
+                                    }
+                                    @if (Model.NewProductsEnabled)
+                                    {
+                                        <li><a href="@Url.RouteUrl("NewProducts")">@T("Products.NewProducts")</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-lg-3 col-md-3">
+                        <div class="store-information-area">
+                            <div class="footer-title">
+                                <h2>Information Shops</h2>
+                            </div>
+                            <div class="store-content">
+                                <ul>
+                                    <li>Axy. 83 Po Delhi, New. New Delhi, India</li>
+                                    <li>Call: <span>(548) 834-0000</span></li>
+                                    <li>Email:<a href="mailto:mail@yourdomain.com">email@yourdomain.com</a></li>
+                                </ul>
+                            </div>
+                            <div class="footer-payment">
+                                <img alt="" src="~/Themes/Mylibrary/Content/Library_img/payment.png">                           
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="copyright-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="copyright">
+                        <p>@T("Content.CopyrightNotice", DateTime.Now.Year.ToString(), Model.StoreName)</p>
+                    </div>           
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

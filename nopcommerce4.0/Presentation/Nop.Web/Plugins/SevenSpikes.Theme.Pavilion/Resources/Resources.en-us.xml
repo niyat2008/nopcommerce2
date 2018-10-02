@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.Menu.MenuName">
+    <Value>Pavilion</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Admin.SettingsSubmenu.Pavilion">
+    <Value>Settings</Value>
+  </LocaleResource>
+  <LocaleResource Name="Sevenspikes.Themes.Admin.ManageResources.Pavilion">
+    <Value>Manage Resources</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.Settings">
+    <Value>Settings</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.Settings.ThemeSettings">
+    <Value>Pavilion Theme Settings</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.Settings.IsHomePageMainSliderFullWidth">
+    <Value>Is Home Page Main Slider Full Width</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.Settings.IsHomePageMainSliderFullWidth.Hint">
+    <Value>Check if you want your home page main slider to be full-width.</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.Settings.ProductAttributeId">
+    <Value>Color Square product attribute</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.Settings.ProductAttributeId.Hint">
+    <Value>Choose the color square product attribute which will be shown in the product box. Note: The attribute should be of type 'color square'!</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.Settings.Preset">
+    <Value>Preset</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.Settings.Preset.Hint">
+    <Value>Choose your color preset of the theme.</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.Settings.ShowLoginPopup">
+    <Value>Show Login Form As Popup</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.Settings.ShowLoginPopup.Hint">
+    <Value>Check if you want to show the login form in popup instead of new page. NOTE: If you have SSL enabled, you must check the setting "Force SSL for all site pages"</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.Settings.IsLogoStickyOnMobileDevice">
+    <Value>Sticky Logo On Mobile Device</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.Settings.IsLogoStickyOnMobileDevice.Hint">
+    <Value>Check if you want the logo to stick to the top when scrolled on mobile device.</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.Settings.ShowCategoriesInSideMenu">
+    <Value>Show Categories In Side Menu</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.Settings.ShowCategoriesInSideMenu.Hint">
+    <Value>Check to show the categories menu item as a separate panel in the left side of the header.</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.Settings.StickyCategoryMenuFlyout">
+    <Value>Sticky Category Menu Flyout</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.Settings.StickyCategoryMenuFlyout.Hint">
+    <Value>Check so that the flyout of the category menu sticks to the top of side menu.</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.Settings.NumberOfSubcategories">
+    <Value>Number Of Second Level Subcategories</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.Settings.NumberOfSubcategories.Hint">
+    <Value>Set the number of second level subcategories shown in the subcategory navigation on category page.</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.TabTitle.GeneralSettings">
+    <Value>General Settings</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.TabTitle.AdditionalSettings">
+    <Value>Additional Settings</Value>
+  </LocaleResource>
+
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Header.MyAccount">
+    <Value>My Account</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Header.Preferences">
+    <Value>Preferences</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Flyout.Cart">
+    <Value>items</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Header.AllCategories">
+    <Value>All Categories</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.TopMenu.Categories">
+    <Value>Categories</Value>
+  </LocaleResource>
+  <LocaleResource Name="Newsletter.Title">
+    <Value>Sign up for our newsletter</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Footer.ContactUs">
+    <Value>Contact Us</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Footer.Address">
+    <Value>5th Avenue. London. 03SL40F</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Footer.Email">
+    <Value>pavilion-store@gmail.com</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Footer.Phone">
+    <Value>359-889-23-01-90; 359-889-23-01-90</Value>
+  </LocaleResource>
+  <LocaleResource Name="Manufacturers">
+    <Value>Manufacturers</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Catalog.Subcategories">
+    <Value>Subcategories</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Catalog.Subcategories.ViewAll">
+    <Value>View All</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Manufacturers.ShowAllProducts">
+    <Value>Show all products</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Vendors.ShowAllProducts">
+    <Value>Show all products</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Products.Sharing.Text">
+    <Value>Share</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.ProductRemove">
+    <Value>Remove</Value>
+  </LocaleResource>
+  <LocaleResource Name="Wishlist.HeaderQuantity">
+    <Value>({0})</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.ExternalAuthentication">
+    <Value>External Authentication</Value>
+  </LocaleResource>
+  <LocaleResource Name="Checkout.Button">
+    <Value>Proceed to checkout</Value>
+  </LocaleResource>
+  <LocaleResource Name="blog.tagcloud">
+    <Value>Popular tags</Value>
+  </LocaleResource>
+  <LocaleResource Name="blog.filteredbymonth">
+    <Value>{0}, {1}</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.MegaMenu.Admin.Settings.MenuItemNameValue">
+    <Value>Categories</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Plugins.PrevNextProduct.PrevButtonText">
+    <Value>Prev</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Plugins.PrevNextProduct.NextButtonText">
+    <Value>Next</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Plugins.Pavilion.RichBlog.PrevButtonText">
+    <Value>Prev</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Plugins.Pavilion.RichBlog.NextButtonText">
+    <Value>Next</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.RealOnePageCheckout.Public.CompleteButton">
+    <Value>Proceed to checkout</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.StoreLocator.Public.SortMethod.SearchForShopInRadius">
+    <Value>In radius of</Value>
+  </LocaleResource>
+  <LocaleResource Name="SevenSpikes.Themes.Pavilion.Admin.AdditionalSettings.ShowLoginPopupHint">
+    <Value>The login popup will not show if reCAPTCHA Version 1 is enabled on the login page or if SSL is enabled and is not forced on all pages.</Value>
+  </LocaleResource>
+</Language>

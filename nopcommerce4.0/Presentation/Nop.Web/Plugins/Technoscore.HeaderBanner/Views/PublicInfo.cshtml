@@ -1,0 +1,22 @@
+﻿@using Nop.Web.Framework
+@using Nop.Web.Framework.UI
+@using Nop.Plugin.Technoscore.HeaderBanner.Models
+@{
+    Layout = "";
+    string widgetZone = "";
+
+    if (ViewContext.RouteData.Values["widgetZone"] != null)
+    {
+        widgetZone = ViewContext.RouteData.Values["widgetZone"].ToString();
+    }
+}
+
+@model List<Nop.Plugin.Technoscore.HeaderBanner.Models.HeaderBanners>
+
+@if (widgetZone != "head_html_tag")
+{
+    foreach (var item in Model)
+    {
+        @Html.Raw(item.HtmlContent)   
+    }
+}
