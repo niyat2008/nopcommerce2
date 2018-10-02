@@ -44,6 +44,12 @@
                         {
                             <li><a href="@Url.RouteUrl("Topic", new {Sename = Html.GetTopicSeName(item.SystemName)})">@item.Title</a></li>
                         }
+
+                        @*foreach (var item in Model.Topics)
+                            {
+                                <li><a href="@Url.RouteUrl("Topic", new {Sename = Html.GetTopicSeName(item.SystemName)})">@T(item.Title)</a></li>
+                            }*@
+
                     }
                 </ul>
             </div>
@@ -57,7 +63,7 @@
                 <div class="entity-body">
                     <ul>
                         @foreach (var category in Model.Categories)
-                        { 
+                        {
                             <li><a href="@Url.RouteUrl("Category", new { SeName = category.SeName })">@category.Name</a></li>
                         }
                     </ul>
@@ -73,7 +79,7 @@
                 <div class="entity-body">
                     <ul>
                         @foreach (var manufacturer in Model.Manufacturers)
-                        { 
+                        {
                             <li><a href="@Url.RouteUrl("Manufacturer", new { SeName = manufacturer.SeName })">@manufacturer.Name</a></li>
                         }
                     </ul>
@@ -89,7 +95,7 @@
                 <div class="entity-body">
                     <ul>
                         @foreach (var product in Model.Products)
-                        { 
+                        {
                             <li><a href="@Url.RouteUrl("Product", new { SeName = product.SeName })">@product.Name</a></li>
                         }
                     </ul>

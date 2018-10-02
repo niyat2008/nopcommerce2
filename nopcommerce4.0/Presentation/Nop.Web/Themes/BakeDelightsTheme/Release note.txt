@@ -1,0 +1,22 @@
+Release Date: December 6, 2017
+Bake Delights Theme version: 2.0.0
+
+Added Feature
+
+Support for nopCommerce 4.0 added
+
+==========================================
+
+Release Date: September 27, 2017
+Bake Delights Theme version: 1.0.1
+
+Release Bake Delights Theme after bug fixing version 1.0.1.
+
+==========================================
+
+Release Date: September 9, 2017
+Bake Delights Theme version: 1.0.0
+
+Release Bake Delights Theme Initial version 1.0.0.
+
+==========================================

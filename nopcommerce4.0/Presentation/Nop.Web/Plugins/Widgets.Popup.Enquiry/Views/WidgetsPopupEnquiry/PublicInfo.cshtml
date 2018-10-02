@@ -1,0 +1,68 @@
+﻿@model Nop.Plugin.Widgets.Popup.Enquiry.Models.EnquiryFormModel
+@{
+    Layout = "";   
+    Html.AddCssFileParts("~/Plugins/Widgets.Popup.Enquiry/Content/themes/default/bottom-popup.css");
+
+}
+@using System
+@using Nop.Web.Framework
+@using Nop.Web.Framework.UI
+
+<div class="enquiry-now">
+    @using (Html.BeginForm("Success", "WidgetsEnquiryForm", FormMethod.Post, new { id = "enquiry-form" }))
+    {
+        <div class="enquiry-btn clearfix">
+            <img src="~/Plugins/Widgets.Popup.Enquiry/Content/themes/default/btn-en.png">
+        </div>
+
+        <div class="en-form">
+            <h3 class="clearfix">@T("Plugins.Widgets.Popup.Enquiry.heading") <span class="icon-close close-enquiry close-form" style="cursor:pointer;font-size:15px;color:#ffffff;margin-top:1px;">X</span></h3>
+            <div class="botton-fr">
+                <div class="form-fields">
+                    <div class="inputs">
+                        @Html.LabelFor(model => model.Name, false):
+                        @Html.RequiredHint()
+                        @Html.TextBoxFor(model => model.Name)
+
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </div>
+                    <div class="inputs">
+                        @Html.LabelFor(model => model.ContactNumber, false):
+                        @Html.RequiredHint()
+                        @Html.TextBoxFor(model => model.ContactNumber)
+
+                        @Html.ValidationMessageFor(model => model.ContactNumber)
+                    </div>
+                    <div class="inputs">
+                        @Html.LabelFor(model => model.EmailId, false):
+                        @Html.RequiredHint()
+                        @Html.TextBoxFor(model => model.EmailId)
+
+                        @Html.ValidationMessageFor(model => model.EmailId)
+                    </div>
+                    <div class="inputs">
+                        @Html.LabelFor(model => model.Message, false):
+                        @Html.TextAreaFor(model => model.Message)
+                    </div>
+                    <div class="buttons">
+                        <input type="submit" name="save" class="k-button btn bg-blue" value="@T("Plugins.Widgets.Popup.Enquiry.Send.query")" />
+                    </div>
+                    <div class="help-line">@T("Plugins.Widgets.Popup.Enquiry.help.number")</div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<script lang="ja" type="text/javascript">
+    $(function () {
+
+        $('.enquiry-btn').click(function () {
+            $('.enquiry-now').addClass('open-form');
+            $('.close-enquiry').addClass('close-form');
+            $('.close-form').click(function () {
+                $('.enquiry-now').removeClass('open-form');
+            });
+        });
+    });
+   
+</script>

@@ -125,7 +125,7 @@ namespace Nop.Web.Factories
         /// <param name="overrideAttributesXml">Override attributes xml</param>
         /// <returns>Billing address model</returns>
         public virtual CheckoutBillingAddressModel PrepareBillingAddressModel(IList<ShoppingCartItem> cart,
-            int? selectedCountryId = null,
+            int? selectedCountryId =  null,
             bool prePopulateNewAddressWithCustomerFields = false,
             string overrideAttributesXml = "")
         {
@@ -524,6 +524,8 @@ namespace Nop.Web.Factories
                 ShippingRequired = cart.RequiresShipping(_productService, _productAttributeParser),
                 DisableBillingAddressCheckoutStep = _orderSettings.DisableBillingAddressCheckoutStep,
                 BillingAddress = PrepareBillingAddressModel(cart, prePopulateNewAddressWithCustomerFields: true)
+
+
             };
             return model;
         }

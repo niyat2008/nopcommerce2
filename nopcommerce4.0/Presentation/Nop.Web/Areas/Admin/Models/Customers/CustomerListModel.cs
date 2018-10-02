@@ -44,6 +44,10 @@ namespace Nop.Web.Areas.Admin.Models.Customers
         public string SearchPhone { get; set; }
         public bool PhoneEnabled { get; set; }
 
+        [NopResourceDisplayName("Admin.Customers.Customers.List.SearchMobile")]
+        public string SearchMobile { get; set; }
+        public bool MobileEnabled = true;
+
         [NopResourceDisplayName("Admin.Customers.Customers.List.SearchZipCode")]
         public string SearchZipPostalCode { get; set; }
         public bool ZipPostalCodeEnabled { get; set; }

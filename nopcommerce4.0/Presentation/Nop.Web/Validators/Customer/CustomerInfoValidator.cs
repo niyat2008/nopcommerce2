@@ -18,6 +18,9 @@ namespace Nop.Web.Validators.Customer
         {
             RuleFor(x => x.Email).NotEmpty().WithMessage(localizationService.GetResource("Account.Fields.Email.Required"));
             RuleFor(x => x.Email).EmailAddress().WithMessage(localizationService.GetResource("Common.WrongEmail"));
+
+
+
             RuleFor(x => x.FirstName).NotEmpty().WithMessage(localizationService.GetResource("Account.Fields.FirstName.Required"));
             RuleFor(x => x.LastName).NotEmpty().WithMessage(localizationService.GetResource("Account.Fields.LastName.Required"));
 
@@ -98,6 +101,10 @@ namespace Nop.Web.Validators.Customer
             if (customerSettings.PhoneRequired && customerSettings.PhoneEnabled)
             {
                 RuleFor(x => x.Phone).NotEmpty().WithMessage(localizationService.GetResource("Account.Fields.Phone.Required"));
+            }
+            if (customerSettings.MobileRequired )
+            {
+                RuleFor(x => x.Mobile).NotEmpty().WithMessage(localizationService.GetResource("Account.Fields.Mobile.Required"));
             }
             if (customerSettings.FaxRequired && customerSettings.FaxEnabled)
             {

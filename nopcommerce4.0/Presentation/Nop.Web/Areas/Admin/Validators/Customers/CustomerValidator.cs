@@ -28,6 +28,14 @@ namespace Nop.Web.Areas.Admin.Validators.Customers
                 //only for registered users
                 .When(x => IsRegisteredCustomerRoleChecked(x, customerService));
 
+
+            RuleFor(x => x.Mobile)
+                .NotEmpty()
+                //.WithMessage("Valid Email is required for customer to be in 'Registered' role")
+                .WithMessage(localizationService.GetResource("Admin.Customers.Customers.Fields.Mobile.Required"))
+                //only for registered users
+                .When(x => IsRegisteredCustomerRoleChecked(x, customerService));
+
             //form fields
             if (customerSettings.CountryEnabled && customerSettings.CountryRequired)
             {
@@ -95,6 +103,9 @@ namespace Nop.Web.Areas.Admin.Validators.Customers
                     //only for registered users
                     .When(x => IsRegisteredCustomerRoleChecked(x, customerService));
             }
+
+           
+
             if (customerSettings.PhoneRequired && customerSettings.PhoneEnabled)
             {
                 RuleFor(x => x.Phone)

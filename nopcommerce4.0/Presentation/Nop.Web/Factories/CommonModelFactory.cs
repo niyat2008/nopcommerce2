@@ -397,6 +397,7 @@ namespace Nop.Web.Factories
                 {
                     Id = t.Id,
                     Name = t.GetLocalized(x => x.Title),
+                    //Name = t.Title,
                     SeName = t.GetSeName(),
                     IncludeInFooterColumn1 = t.IncludeInFooterColumn1,
                     IncludeInFooterColumn2 = t.IncludeInFooterColumn2,

@@ -125,7 +125,7 @@ button.ticket-info-button.k-button:before,
 .sale-of-the-day-offer .owl-dot.active,
 .sale-of-the-day-offer .go-to-product-page,
 .home-page-filter-button .search-button {
-  background-color: #88a900;
+  background-color: #218811;
 }
 .cart .edit-item a,
 .ui-dialog-titlebar,
@@ -209,7 +209,7 @@ button.ticket-info-button.k-button:before,
 .nop-jcarousel .sub-category-item:hover .title a,
 .nop-jcarousel .manufacturer-item:hover .title a,
 .nop-jcarousel .vendor-item:hover .title a {
-  color: #88a900;
+  color: #218811;
 }
 .mini-shopping-cart input.checkout-button:hover,
 .mini-shopping-cart input[type="button"]:only-child:hover,
@@ -253,15 +253,15 @@ button.ticket-info-button.k-button:before,
 .filter-shops-button:hover,
 .sale-of-the-day-offer .go-to-product-page:hover,
 .home-page-filter-button .search-button:hover {
-  outline-color: #88a900;
+  outline-color: #218811;
 }
 .cart-collaterals .active .accordion-tab-title,
 /*plugins*/ .quickView .ui-accordion-header-active,
 .ropc .section .title.active {
-  border-bottom-color: #88a900;
+  border-bottom-color: #218811;
 }
 .order-progress li.active-step a:after {
-  border-left-color: #88a900;
+  border-left-color: #218811;
 }
 /* JCarousel Styling */
 
@@ -269,14 +269,14 @@ button.ticket-info-button.k-button:before,
 .jCarouselMainWrapper .slick-next:hover,
 .nop-jcarousel .slick-dots .slick-active button,
 .nop-jcarousel .slick-dots button:hover {
-  background-color: #88a900 !important;
+  background-color: #218811 !important;
 }
 /* secondary color */
 
 .footer-upper,
 .ui-datepicker-header,
 .ui-datepicker-calendar .ui-state-active {
-  background-color: #71367a;
+  background-color: #3e874b;
 }
 .cart .subtotal,
 .mini-shopping-cart .price strong,
@@ -289,15 +289,15 @@ button.ticket-info-button.k-button:before,
 /*plugins*/ .productAddedToCartWindowDescription .price,
 .sale-of-the-day-offer .timer-info-box,
 .sale-of-the-day-offer .price.actual-price {
-  color: #71367a;
+  color: #3e874b;
 }
 .ui-datepicker-calendar .ui-state-active {
-  outline-color: #71367a;
+  outline-color: #3e874b;
 }
 @media all and (max-width: 1024px) {
   .responsive-nav-wrapper > div,
   .plus-button {
-    background-color: #88a900;
+    background-color: #218811;
   }
   .category-page-body .page-title h1,
   .manufacturer-page-body .page-title h1,
@@ -310,23 +310,23 @@ button.ticket-info-button.k-button:before,
   .recently-added-products-page-body .page-title h1,
   .compare-products-page-body .page-title h1,
   /*plugins*/ .spc-categories .category-title {
-    color: #88a900;
+    color: #218811;
   }
   /* secondary color */
   
   .admin-header-links,
   .store-search-box {
-    background-color: #71367a;
+    background-color: #3e874b;
   }
   .responsive-nav-wrapper-parent {
-    border-top-color: #71367a;
+    border-top-color: #3e874b;
   }
 }
 @media all and (min-width: 481px) {
   /*plugins*/
   
   .spc-categories .product-box-add-to-cart-button:hover {
-    background-color: #88a900;
+    background-color: #218811;
   }
 }
 @media all and (min-width: 769px) {
@@ -335,15 +335,15 @@ button.ticket-info-button.k-button:before,
   .product-selectors .product-viewmode a.selected,
   .product-list .item-box .buttons-lower button,
   .topic-post .post-actions .manage-post a:hover {
-    background-color: #88a900;
+    background-color: #218811;
   }
   .product-list .item-box .buttons-lower button:hover {
-    outline-color: #88a900;
+    outline-color: #218811;
   }
   /*plugins*/
   
   .ropc .section .title {
-    border-bottom-color: #88a900;
+    border-bottom-color: #218811;
   }
 }
 @media all and (min-width: 1025px) {
@@ -360,7 +360,7 @@ button.ticket-info-button.k-button:before,
   .spc-categories .product-grid .item-box button.button-2:hover,
   .rich-blog-body .block:hover .title,
   .rich-blog-body .blog-search-box.active .search-box-button {
-    background-color: #88a900;
+    background-color: #218811;
   }
   .side-2 .page-title h1,
   .category-navigation-list > li:hover > a,
@@ -372,30 +372,30 @@ button.ticket-info-button.k-button:before,
   /*plugins*/ .category-navigation-list > li > .sublist-wrap > .sublist .box li a:hover,
   .header-menu > ul > li > .sublist-wrap > .sublist .box li a:hover,
   .spc-categories .category-info:hover .category-title {
-    color: #88a900;
+    color: #218811;
   }
   /*plugins*/
   
   .ropc .coupon-box-panel .coupon-code button:hover,
   .ropc .giftcard-box-panel .coupon-code button:hover {
-    outline-color: #88a900;
+    outline-color: #218811;
   }
   .flyout-cart-wrapper:hover .cart-trigger {
-    border-color: #88a900;
+    border-color: #218811;
   }
   .header-links,
   .header-selectors {
-    border-top-color: #88a900;
+    border-top-color: #218811;
   }
   .category-navigation-list > li > .sublist-wrap > .sublist > li > a,
   .header-menu > ul > li > .sublist-wrap > .sublist > li > a,
   /*plugins*/ .category-navigation-list > li > .sublist-wrap > .sublist .box .title,
   .header-menu > ul > li > .sublist-wrap > .sublist .box .title {
-    border-bottom-color: #88a900;
+    border-bottom-color: #218811;
   }
   /* secondary color */
   
   .header-lower {
-    background-color: #71367a;
+    background-color: #3e874b;
   }
 }

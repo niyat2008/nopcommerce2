@@ -24,11 +24,12 @@ namespace Nop.Web.MVC.Tests.Public.Validators.Customer
         {
             var model = new LoginModel
             {
-                Email = null
+                //Email = null
+                Mobile= null
             };
-            _validator.ShouldHaveValidationErrorFor(x => x.Email, model);
-            model.Email = "";
-            _validator.ShouldHaveValidationErrorFor(x => x.Email, model);
+            _validator.ShouldHaveValidationErrorFor(x => x.Mobile, model);
+            model.Mobile = "";
+            _validator.ShouldHaveValidationErrorFor(x => x.Mobile, model);
         }
 
         [Test]
@@ -36,9 +37,10 @@ namespace Nop.Web.MVC.Tests.Public.Validators.Customer
         {
             var model = new LoginModel
             {
-                Email = "adminexample.com"
+                Mobile = "+966539090781"
+                //Email = "admin@example.com"
             };
-            _validator.ShouldHaveValidationErrorFor(x => x.Email, model);
+            _validator.ShouldNotHaveValidationErrorFor(x => x.Mobile, model);
         }
 
         [Test]
@@ -46,9 +48,10 @@ namespace Nop.Web.MVC.Tests.Public.Validators.Customer
         {
             var model = new LoginModel
             {
-                Email = "admin@example.com"
+                Mobile = "+966539090781"
+                //Email = "admin@example.com"
             };
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Email, model);
+            _validator.ShouldNotHaveValidationErrorFor(x => x.Mobile, model);
         }
 
         [Test]
@@ -62,9 +65,10 @@ namespace Nop.Web.MVC.Tests.Public.Validators.Customer
 
             var model = new LoginModel
             {
-                Email = null
+              //  Email = null
+              Mobile=null
             };
-            _validator.ShouldNotHaveValidationErrorFor(x => x.Email, model);
+            _validator.ShouldNotHaveValidationErrorFor(x => x.Mobile, model);
         }
     }
 }

@@ -1,0 +1,78 @@
+﻿@using Nop.Plugin.Widgets.CategorySlider.Models
+@model ConfigurationModel
+@{
+    //page title
+    //ViewBag.Title = T("Add New Category Slider");
+    Layout = "_AdminLayout.cshtml";
+}
+@using System
+@using Nop.Web.Framework
+@using Nop.Web.Framework.UI
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $("#ssTransition").change(function () {
+            var drpvalue = $('#ssTransition').val();
+            //alert(drpvalue);
+            $('#sButtonPlay').removeAttr('disabled'); // to enable them
+            if (!drpvalue || drpvalue == 'null')
+                $('#sButtonPlay').attr('disabled', 'disabled'); // to disable buttons
+        });
+        $('#sButtonPlay').click(function () {
+            var drpvalue = $('#ssTransition').val();
+            //  $('#stTransition').val(drpvalue);
+            $("#@Html.FieldIdFor(model => model.TransitionEffect)").val(drpvalue);
+        });
+    });
+</script>
+
+@using (Html.BeginForm("SliderSetting", "WidgetsCategorySlider", FormMethod.Post))
+{
+    <div class="section-header">
+        <div class="content-header clearfix">
+            <h1 class="pull-left">
+                @T("Configure Slider Setting") <small><i class="fa fa-arrow-circle-left"></i>@Html.ActionLink("(" + T("back to category slider list") + ")", "Configure", "WidgetsCategorySlider")</small>
+            </h1>
+            <div class="pull-right">
+                <input type="submit" name="save" class="k-button btn bg-blue" value="@T("Admin.Common.Save")" />
+            </div>
+        </div>
+    </div>
+
+    <div class="section-header">
+        <div class="content-header clearfix">
+            <h1 class="pull-left">@T("Slideshow Transition Selector")</h1>
+            <div class="pull-right"></div>
+        </div>
+        <div class="content">
+            <div class="form-horizontal">
+                <div class="panel-group">
+                    <div class="panel panel-default panel-search">
+                        <div class="panel-body">
+                            <div class="row">
+                                @Html.Partial("~/Plugins/Widgets.CategorySlider/Views/WidgetsCategorySlider/jssor/_JssorSliderOptions.cshtml")
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        @Html.NopLabelFor(model => model.SliderName)
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(model => model.SliderName, new { disabled = "disabled", @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(model => model.SliderName)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        @Html.NopLabelFor(model => model.TransitionEffect)
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(model => model.TransitionEffect, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.TransitionEffect)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

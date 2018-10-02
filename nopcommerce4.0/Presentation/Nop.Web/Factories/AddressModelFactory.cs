@@ -175,6 +175,7 @@ namespace Nop.Web.Factories
                 model.FirstName = address.FirstName;
                 model.LastName = address.LastName;
                 model.Email = address.Email;
+                model.Mobile = address.Mobile;
                 model.Company = address.Company;
                 model.CountryId = address.CountryId;
                 model.CountryName = address.Country != null
@@ -197,6 +198,7 @@ namespace Nop.Web.Factories
                 if (customer == null)
                     throw new Exception("Customer cannot be null when prepopulating an address");
                 model.Email = customer.Email;
+                model.Mobile = customer.Mobile;
                 model.FirstName = customer.GetAttribute<string>(SystemCustomerAttributeNames.FirstName);
                 model.LastName = customer.GetAttribute<string>(SystemCustomerAttributeNames.LastName);
                 model.Company = customer.GetAttribute<string>(SystemCustomerAttributeNames.Company);

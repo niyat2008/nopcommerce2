@@ -33,6 +33,12 @@
 <input asp-for="Id" type="hidden"/>
 <div class="edit-address">
     <div class="inputs">
+        <label asp-for="Mobile" asp-postfix=":"></label>
+        <input asp-for="Mobile" />
+        <nop-required />
+        <span asp-validation-for="Mobile"></span>
+    </div>
+    <div class="inputs">
         <label asp-for="FirstName" asp-postfix=":"></label>
         <input asp-for="FirstName" />
         <nop-required />

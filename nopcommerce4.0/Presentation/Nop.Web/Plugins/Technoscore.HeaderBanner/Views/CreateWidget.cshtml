@@ -1,0 +1,74 @@
+﻿@model Nop.Plugin.Technoscore.HeaderBanner.Models.WidgetList
+@using System;
+@using System.Web.UI;
+@using Nop.Web.Framework.UI;
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Html.AddScriptParts("~/Plugins/Technoscore.HeaderBanner/Scripts/jquery.header.min.js");
+}
+
+<script type="text/javascript">
+    function ValidateZone() {
+        debugger;
+        var zone = document.getElementById("WidgetZone");
+        if (zone.value == "") {
+            alert("Please Enter widget zone with out space.");
+            zone.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+
+
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        Create - New Widget
+        <small><i class="fa fa-arrow-circle-left"></i><a href="@Url.Content("~/Admin/Widget/ConfigureWidget?systemName=Technoscore.HeaderBanner")">back to Banner list</a></small>
+    </h1>
+    <div class="pull-right">
+        &nbsp;
+    </div>
+</div>
+
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Add Widget
+                </div>
+
+                @using (Html.BeginForm("CreateWidget", "HeaderBanner", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                @Html.LabelFor(model => model.WidgetZone)
+                            </div>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(model => model.WidgetZone)                          
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-9 col-md-offset-3">
+                                <input type="submit" value="Save" onclick="return ValidateZone()" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-9">
+                                <span style="color:green">@ViewBag.Message</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

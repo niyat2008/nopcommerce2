@@ -332,7 +332,7 @@ namespace Nop.Services.Shipping
         /// Gets all warehouses
         /// </summary>
         /// <returns>Warehouses</returns>
-        public virtual IList<Warehouse> GetAllWarehouses(int vendorId)
+        public virtual IList<Warehouse> GetVendorWarehouses(int vendorId)
         {
             //var query = from wh in _warehouseRepository.Table
             //            orderby wh.Name

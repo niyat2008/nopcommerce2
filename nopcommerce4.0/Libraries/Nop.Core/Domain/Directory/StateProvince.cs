@@ -32,6 +32,8 @@ namespace Nop.Core.Domain.Directory
         /// </summary>
         public int DisplayOrder { get; set; }
 
+       
+
         /// <summary>
         /// Gets or sets the country
         /// </summary>

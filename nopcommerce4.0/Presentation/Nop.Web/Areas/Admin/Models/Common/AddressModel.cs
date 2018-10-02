@@ -29,6 +29,10 @@ namespace Nop.Web.Areas.Admin.Models.Common
         [NopResourceDisplayName("Admin.Address.Fields.Email")]
         public string Email { get; set; }
 
+        [DataType(DataType.PhoneNumber)]
+        [NopResourceDisplayName("Admin.Address.Fields.Mobile")]
+        public string Mobile { get; set; }
+
         [NopResourceDisplayName("Admin.Address.Fields.Company")]
         public string Company { get; set; }
 

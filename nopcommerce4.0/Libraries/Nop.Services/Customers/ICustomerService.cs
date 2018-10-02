@@ -38,7 +38,7 @@ namespace Nop.Services.Customers
         /// <returns>Customers</returns>
         IPagedList<Customer> GetAllCustomers(DateTime? createdFromUtc = null,
             DateTime? createdToUtc = null, int affiliateId = 0, int vendorId = 0,
-            int[] customerRoleIds = null, string email = null, string username = null,
+            int[] customerRoleIds = null, string email = null, string mobile = null, string username = null,
             string firstName = null, string lastName = null,
             int dayOfBirth = 0, int monthOfBirth = 0,
             string company = null, string phone = null, string zipPostalCode = null,
@@ -89,7 +89,9 @@ namespace Nop.Services.Customers
         /// <param name="email">Email</param>
         /// <returns>Customer</returns>
         Customer GetCustomerByEmail(string email);
-        
+
+        Customer GetCustomerByMobile(string mobile);
+
         /// <summary>
         /// Get customer by system role
         /// </summary>

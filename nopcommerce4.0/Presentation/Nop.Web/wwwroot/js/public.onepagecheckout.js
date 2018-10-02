@@ -73,6 +73,7 @@ var Checkout = {
 
     setStepResponse: function (response) {
         if (response.update_section) {
+            console.log('response', response.update_section);
             $('#checkout-' + response.update_section.name + '-load').html(response.update_section.html);
         }
         if (response.allow_sections) {

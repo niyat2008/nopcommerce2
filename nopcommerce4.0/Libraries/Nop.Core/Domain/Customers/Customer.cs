@@ -39,11 +39,13 @@ namespace Nop.Core.Domain.Customers
         /// </summary>
         public string Email { get; set; }
 
+        public string Mobile { get; set; }
         /// <summary>
         /// Gets or sets the email that should be re-validated. Used in scenarios when a customer is already registered and wants to change an email address.
         /// </summary>
         public string EmailToRevalidate { get; set; }
 
+     
         /// <summary>
         /// Gets or sets the admin comment
         /// </summary>

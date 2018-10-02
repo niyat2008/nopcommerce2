@@ -304,7 +304,7 @@ namespace Nop.Services.Customers
         /// <returns>Customers</returns>
         public virtual IPagedList<Customer> GetAllCustomers(DateTime? createdFromUtc = null,
             DateTime? createdToUtc = null, int affiliateId = 0, int vendorId = 0,
-            int[] customerRoleIds = null, string email = null, string username = null,
+            int[] customerRoleIds = null, string email = null,string mobile=null, string username = null,
             string firstName = null, string lastName = null,
             int dayOfBirth = 0, int monthOfBirth = 0,
             string company = null, string phone = null, string zipPostalCode = null,
@@ -325,6 +325,8 @@ namespace Nop.Services.Customers
                 query = query.Where(c => c.CustomerRoles.Select(cr => cr.Id).Intersect(customerRoleIds).Any());
             if (!string.IsNullOrWhiteSpace(email))
                 query = query.Where(c => c.Email.Contains(email));
+            if (!string.IsNullOrWhiteSpace(mobile))
+                query = query.Where(c => c.Mobile.Contains(mobile));
             if (!string.IsNullOrWhiteSpace(username))
                 query = query.Where(c => c.Username.Contains(username));
             if (!string.IsNullOrWhiteSpace(firstName))
@@ -566,6 +568,20 @@ namespace Nop.Services.Customers
             var query = from c in _customerRepository.Table
                         orderby c.Id
                         where c.Email == email
+                        select c;
+            var customer = query.FirstOrDefault();
+            return customer;
+        }
+
+
+        public virtual Customer GetCustomerByMobile(string mobile)
+        {
+            if (string.IsNullOrWhiteSpace(mobile))
+                return null;
+
+            var query = from c in _customerRepository.Table
+                        orderby c.Id
+                        where c.Mobile==mobile.Trim()
                         select c;
             var customer = query.FirstOrDefault();
             return customer;

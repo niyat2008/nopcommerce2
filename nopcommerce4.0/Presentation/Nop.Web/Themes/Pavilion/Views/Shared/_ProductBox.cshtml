@@ -1,4 +1,4 @@
-﻿@model ProductOverviewModel
+@model ProductOverviewModel
 @using Nop.Core
 @using Nop.Core.Domain.Catalog
 @using Nop.Core.Domain.Orders
@@ -78,10 +78,12 @@
                 @*<span class="price actual-price">@Model.ProductPrice.PriceWithDiscount</span>
                     @if (Model.ProductPrice.Price != Model.ProductPrice.PriceWithDiscount)*@
                 <span class="price actual-price">@Model.ProductPrice.Price</span>
+
                 @if (!string.IsNullOrEmpty(Model.ProductPrice.OldPrice))
                 {
                     <span class="price old-price">@Model.ProductPrice.OldPrice</span>
                 }
+
                 //     <span class="price base-price">@Model.ProductPrice.PriceWithDiscount</span>
                 @*@if (Model.ProductPrice.DisplayTaxShippingInfo)
                     {
@@ -138,3 +140,10 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+

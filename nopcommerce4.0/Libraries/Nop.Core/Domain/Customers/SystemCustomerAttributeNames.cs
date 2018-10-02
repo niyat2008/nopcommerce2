@@ -112,6 +112,10 @@ namespace Nop.Core.Domain.Customers
         /// EmailRevalidationToken
         /// </summary>
         public static string EmailRevalidationToken { get { return "EmailRevalidationToken"; } }
+
+      //  public static string MobileRevalidationToken { get { return "MobileRevalidationToken"; } }
+
+
         /// <summary>
         /// LastVisitedPage
         /// </summary>

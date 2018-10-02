@@ -1,0 +1,69 @@
+﻿<header>
+    <div class="header-container">
+        <!-- header-top-area start -->
+        <div class="header-top-area">
+            @Html.Widget("header")
+            @Html.Action("HeaderLinks", "Common")   
+        </div>
+        <!-- header-top-area end -->
+        <!--Search and logo-->
+        <div class="header-bottom-area">
+            <div class="container">
+                <div class="row">
+                    @Html.Widget("bsmegamenu")
+                    @Html.Partial("_Notifications")
+                    <!-- logo start -->
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="logo">
+                            <a href="@Url.RouteUrl("HomePage")">
+                                <img src="~/Themes/Mylibrary/Content/Library_img/logo/logo.png" alt="">
+                            </a>                           
+                        </div>
+                    </div>
+                    <!-- logo end -->
+                    <!-- search-box start -->
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12"> 
+                        @Html.Action("SearchBox", "Catalog")                     
+                    </div>
+                    <!-- search-box end -->                   
+                </div>
+            </div>
+        </div>
+        <!--Search and logo end-->
+  
+    </div>
+</header>
+	<!-- static-right-social-area start-->
+<div class="static-right-social-area">
+    <div class="static-right-social">
+        <ul>
+            <li>
+                <a href="#">
+                    <i class="fa fa-facebook"></i>
+                    #libreriacuesta
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-instagram"></i>
+                    #libreriacuesta
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-twitter"></i>
+                    #libreriacuesta
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-google-plus"></i>
+                    #libreriacuesta
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- static-right-social-area end-->
+
+

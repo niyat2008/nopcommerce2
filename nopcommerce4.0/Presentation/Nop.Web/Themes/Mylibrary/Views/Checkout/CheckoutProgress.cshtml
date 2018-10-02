@@ -1,0 +1,152 @@
+﻿@model CheckoutProgressModel
+@using Nop.Web.Models.Checkout;
+
+<div class="payment_step_wrapper">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 hidden-xs">
+                <div class="order-step">
+                    <ul>
+                        @*-------Cart-------*@
+                        @if (Model.CheckoutProgressStep == CheckoutProgressStep.Cart)
+                        {
+                            @:<li class="done-step">
+                                }
+                                else
+                                {
+                                @:<li>
+                                }
+                                   <a @(Model.CheckoutProgressStep == CheckoutProgressStep.Cart ? @Html.Raw(" class=\"done-step\"") : @Html.Raw(" class=\"inactive-step\"")) @(Model.CheckoutProgressStep != CheckoutProgressStep.Complete ? @Html.Raw(string.Format(" href=\"{0}\"", Url.RouteUrl("ShoppingCart"))) : null)><span><i class="fa fa-shopping-cart fa-2x"></i>@T("Checkout.Progress.Cart")</a></span>
+                                
+                                @if (Model.CheckoutProgressStep == CheckoutProgressStep.Cart)
+                        {
+                                    @: </li>
+                    }
+                        else
+                        {
+                                    @:</li>
+                    }
+                @*-------end Cart-------*@
+
+
+                @*-------Address-------*@
+                @if (Model.CheckoutProgressStep == CheckoutProgressStep.Address)
+                    {
+                    @:<li class="done-step">
+                    }
+                    else
+                    {
+                    @:<li>
+                     }
+
+               <a @(Model.CheckoutProgressStep == CheckoutProgressStep.Address ? @Html.Raw(" class=\"done-step\"") : @Html.Raw(" class=\"inactive-step\"")) @(Model.CheckoutProgressStep != CheckoutProgressStep.Cart && Model.CheckoutProgressStep != CheckoutProgressStep.Complete ? @Html.Raw(string.Format(" href=\"{0}\"", Url.RouteUrl("CheckoutBillingAddress"))) : null)><span><i class="fa fa-map-marker fa-2x"></i>@T("Checkout.Progress.Address")</span></a>
+                   
+                @if (Model.CheckoutProgressStep == CheckoutProgressStep.Address)
+{
+                    @:</li>
+}
+else
+{
+                    @:</li>
+}
+                @*-------end Address-------*@
+
+
+                @*-------Shipping-------*@
+                @if (Model.CheckoutProgressStep == CheckoutProgressStep.Shipping)
+                {
+                    @:<li class="done-step">
+                        }
+                        else
+                        {
+                        @:<li>
+                        }
+                        
+                            <a @(Model.CheckoutProgressStep == CheckoutProgressStep.Shipping ? @Html.Raw(" class=\"done-step\"") : @Html.Raw(" class=\"done-step\"")) @(Model.CheckoutProgressStep != CheckoutProgressStep.Cart && Model.CheckoutProgressStep != CheckoutProgressStep.Address && Model.CheckoutProgressStep != CheckoutProgressStep.Complete ? @Html.Raw(string.Format(" href=\"{0}\"", Url.RouteUrl("CheckoutShippingMethod"))) : null)><span><i class="fa fa-truck fa-2x"></i>@T("Checkout.Progress.Shipping")</span></a>
+                      
+                        @if (Model.CheckoutProgressStep == CheckoutProgressStep.Shipping)
+                {
+                            @:</li>
+        }
+                else
+                {
+                            @:</li>
+        }
+                        @*-------end Shipping-------*@
+
+
+                        @*-------Payment-------*@
+                        @if (Model.CheckoutProgressStep == CheckoutProgressStep.Payment)
+                {
+                            @:<li class="done-step">
+        }
+                else
+                {
+                            @:<li>
+        }
+                       <a @(Model.CheckoutProgressStep == CheckoutProgressStep.Payment ? @Html.Raw(" class=\"done-step\"") : @Html.Raw(" class=\"inactive-step\"")) @(Model.CheckoutProgressStep != CheckoutProgressStep.Cart && Model.CheckoutProgressStep != CheckoutProgressStep.Address && Model.CheckoutProgressStep != CheckoutProgressStep.Shipping && Model.CheckoutProgressStep != CheckoutProgressStep.Complete ? @Html.Raw(string.Format(" href=\"{0}\"", Url.RouteUrl("CheckoutPaymentMethod"))) : null)><span><i class="fa fa-credit-card fa-2x"></i>@T("Checkout.Progress.Payment")</span></a>
+                    
+                        @if (Model.CheckoutProgressStep == CheckoutProgressStep.Payment)
+                {
+                            @:</li>
+        }
+                else
+                {
+                            @:</li>
+        }
+                        @*-------end Payment-------*@
+
+                        @*-------Confirm-------*@
+                        @if (Model.CheckoutProgressStep == CheckoutProgressStep.Confirm)
+                {
+                            @:<li class="done-step">
+        }
+                else
+                {
+                            @:<li>
+        }
+                       <a @(Model.CheckoutProgressStep == CheckoutProgressStep.Confirm ? @Html.Raw(" class=\"done-step\"") : @Html.Raw(" class=\"inactive-step\"")) @(Model.CheckoutProgressStep != CheckoutProgressStep.Cart && Model.CheckoutProgressStep != CheckoutProgressStep.Address && Model.CheckoutProgressStep != CheckoutProgressStep.Shipping && Model.CheckoutProgressStep != CheckoutProgressStep.Payment && Model.CheckoutProgressStep != CheckoutProgressStep.Complete ? @Html.Raw(string.Format(" href=\"{0}\"", Url.RouteUrl("CheckoutConfirm"))) : null)><span><i class="fa fa-thumbs-up fa-2x"></i>@T("Checkout.Progress.Confirm")</span></a>
+                           
+                        @if (Model.CheckoutProgressStep == CheckoutProgressStep.Confirm)
+                {
+                            @:</li>
+        }
+                else
+                {
+                            @:</li>
+        }
+                        @*-------end Confirm-------*@
+
+                        @*-------Complete-------*@
+                        @if (Model.CheckoutProgressStep == CheckoutProgressStep.Complete)
+                {
+                            @:<li class="done-step">
+        }
+                else
+                {
+                            @:<li>
+        }
+                      <a @(Model.CheckoutProgressStep == CheckoutProgressStep.Complete ? @Html.Raw(" class=\"done-step\"") : @Html.Raw(" class=\"inactive-step\""))><span><i class="fa fa-check fa-2x"></i>@T("Checkout.Progress.Complete")</span></a>
+                         
+                        @if (Model.CheckoutProgressStep == CheckoutProgressStep.Complete)
+                {
+                            @:</li>
+        }
+                else
+                {
+                            @:</li>
+        }
+
+                        @*-------end Complete-------*@
+
+
+                    </ul>
+            </div>
+        </div>
+       </div>
+
+</div>
+
+
+
+
+

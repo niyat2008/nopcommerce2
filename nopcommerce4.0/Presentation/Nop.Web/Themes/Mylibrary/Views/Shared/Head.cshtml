@@ -1,0 +1,40 @@
+﻿@using Nop.Core;
+@using Nop.Core.Infrastructure;
+@using Nop.Web.Framework.UI
+@{
+    var supportRtl = EngineContext.Current.Resolve<IWorkContext>().WorkingLanguage.Rtl;
+    if (supportRtl)
+    {
+        <link rel="stylesheet" type="text/css" href="~/Themes/Mylibrary/Content/color-styles/blue.css" title="black" media="screen" />
+
+        Html.AppendCssFileParts("~/Content/jquery-ui-themes/smoothness/jquery-ui-1.10.3.custom.min.css");
+        Html.AppendCssFileParts("~/Themes/Mylibrary/Content/font-awosome-3/css/font-awesome.rtl.css");
+        Html.AppendCssFileParts("~/Themes/Mylibrary/Content/bootstrap-3.2.0/css/bootstrap.rtl.css");   
+        Html.AppendCssFileParts("~/Themes/Mylibrary/Content/styles.rtl.css");
+
+        //new Html css file
+        Html.AppendCssFileParts("~/Themes/Mylibrary/Content/Library_css/Librarystyle.css");
+   
+    
+    }
+    else
+    {
+        <!--Uncomment following line to select 'Black' as theme color || Comment following line if you dont want-->
+        <link rel="stylesheet" type="text/css" href="~/Themes/Mylibrary/Content/color-styles/black.css" title="black" media="screen" />
+
+        //new Html css file
+        Html.AppendCssFileParts("~/Themes/Mylibrary/Content/Library_css/Librarystyle.css");
+        Html.AppendCssFileParts("~/Themes/Mylibrary/Content/Library_css/bootstrap.min.css");
+
+        Html.AppendCssFileParts("~/Themes/Mylibrary/Content/Library_css/owl.carousel.css");
+        Html.AppendCssFileParts("~/Themes/Mylibrary/Content/Library_css/owl.theme.css");
+        Html.AppendCssFileParts("~/Themes/Mylibrary/Content/Library_css/owl.transitions.css");        
+        //end
+
+        Html.AppendCssFileParts("~/Content/jquery-ui-themes/smoothness/jquery-ui-1.10.3.custom.min.css");
+        Html.AppendCssFileParts("~/Themes/Mylibrary/Content/font-awosome-3/css/font-awesome.css");      
+    }
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+}

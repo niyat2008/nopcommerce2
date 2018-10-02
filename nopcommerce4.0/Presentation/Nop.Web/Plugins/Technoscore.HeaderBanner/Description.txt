@@ -1,0 +1,9 @@
+﻿Group: Technoscore
+FriendlyName: Header Banner
+SystemName: Technoscore.HeaderBanner
+Version: 1.50
+SupportedVersions: 3.90
+Author: technoscore team
+DisplayOrder: 1
+FileName: Nop.Plugin.Technoscore.HeaderBanner.dll
+Description: This extention will allow you to add banner on all nopCommerce store pages.

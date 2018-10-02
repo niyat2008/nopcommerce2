@@ -81,18 +81,6 @@
                                 </div>
                             }
 
-                            @*added by ali*@
-
-                            @if (Model.AvailableShippingMethods.Count > -1)
-                            {
-                                <div class="inputs">
-                                    <label asp-for="ShippingMethodid">@T("Search.ShippingMethods"):</label>
-                                    <select asp-for="ShippingMethodid" asp-items="Model.AvailableShippingMethods"></select>
-                                </div>
-                            }
-
-                            @*end of added by ali*@
-
 
                             <div class="inputs">
                                 <label>@T("Search.PriceRange"):</label>

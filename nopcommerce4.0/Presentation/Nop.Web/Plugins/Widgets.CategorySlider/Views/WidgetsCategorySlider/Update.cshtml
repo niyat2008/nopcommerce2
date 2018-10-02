@@ -1,0 +1,25 @@
+﻿@using Nop.Plugin.Widgets.CategorySlider.Models
+@model CategorySliderModel
+@{
+    //page title
+    //ViewBag.Title = T("Add New Category Slider");
+    Layout = "_AdminLayout.cshtml";
+}
+@using System
+@using Nop.Web.Framework
+@using Nop.Web.Framework.UI
+@using (Html.BeginForm("Update", "WidgetsCategorySlider", FormMethod.Post))
+{
+    <div class="section-header">
+        <div class=" content-header clearfix">
+            <h1 class="pull-left">
+                @T("Edit Category Slider") <small><i class="fa fa-arrow-circle-left"></i>@Html.ActionLink("(" + T("back to category slider list") + ")", "Configure", "WidgetsCategorySlider")</small>
+            </h1>
+            <div class="pull-right">
+                <input type="submit" name="save" class="k-button btn bg-blue" value="@T("Admin.Common.Save")" />
+                <input type="submit" name="save-continue" class="k-button btn bg-blue" value="@T("Admin.Common.SaveContinue")" />
+            </div>
+        </div>
+    </div>
+    @Html.Partial("~/Plugins/Widgets.CategorySlider/Views/WidgetsCategorySlider/_CreateOrUpdate.cshtml", Model)
+}

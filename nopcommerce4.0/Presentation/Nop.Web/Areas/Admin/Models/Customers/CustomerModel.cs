@@ -44,6 +44,10 @@ namespace Nop.Web.Areas.Admin.Models.Customers
         [NopResourceDisplayName("Admin.Customers.Customers.Fields.Email")]
         public string Email { get; set; }
 
+        [DataType(DataType.PhoneNumber)]
+        [NopResourceDisplayName("Admin.Customers.Customers.Fields.Mobile")]
+        public string Mobile { get; set; }
+
         [NopResourceDisplayName("Admin.Customers.Customers.Fields.Password")]
         [DataType(DataType.Password)]
         [NoTrim]

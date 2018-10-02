@@ -1,0 +1,10 @@
+﻿@model string
+@using Nop.Core
+@using Nop.Core.Infrastructure
+@using Nop.Services.Localization
+
+@{
+    string storeName = EngineContext.Current.Resolve<IStoreContext>().CurrentStore.GetLocalized(x => x.Name);
+}
+
+<img alt="@storeName" src="@Model" />

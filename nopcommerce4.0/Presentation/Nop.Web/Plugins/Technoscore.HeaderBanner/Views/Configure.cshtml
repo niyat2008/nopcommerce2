@@ -1,0 +1,127 @@
+﻿@model Nop.Plugin.Technoscore.HeaderBanner.Models.CommonModel
+@using System;
+@using System.Web.UI;
+@using Nop.Web.Framework.UI;
+@{
+    Layout = "";
+    Html.AddScriptParts("~/Plugins/Technoscore.HeaderBanner/Scripts/jquery.header.min.js");
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Add Page Header Banner
+        <div class="pull-right">
+            <a href="@Url.Content("~/HeaderBanner/CreateWidget")">Create New Widget Zone</a>
+        </div>       
+    </div>
+    
+
+    @using (Html.BeginForm("Configure", "HeaderBanner", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="panel-body">
+
+            <div class="form-group">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.headerBanner.StoreId)
+                </div>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.headerBanner.StoreId, ViewData["StoreList"] as List<SelectListItem>)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    @Html.Label("Select File")
+                </div>
+                <div class="col-md-9">
+                    <input type="file" name="postedFile" id="fileToUpload" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.headerBanner.PageSystemName)
+                </div>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.headerBanner.PageSystemName, ViewData["PageList"] as List<SelectListItem>)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.headerBanner.WidgetZone)
+                </div>
+                <div class="col-md-9">
+                    @Html.DropDownListFor(model => model.headerBanner.WidgetZone, ViewData["WidgetsList"] as List<SelectListItem>)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.headerBanner.IsUseTheme)
+                </div>
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.headerBanner.IsUseTheme)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-9 col-md-offset-3">
+                    <input type="submit" value="Upload" onclick="return Validate()" />
+                </div>
+            </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-9">
+                        <span style="color:green">@ViewBag.Message</span>
+                    </div>
+                </div>
+        </div>
+    }
+</div>
+
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div id="productpictures-grid" data-role="grid" class="k-grid k-widget">
+                <table role="grid">
+                    <colgroup>
+                        <col style="width:300px">
+                        <col style="width:200px">
+                        <col style="width:100px">
+                        <col style="width:200px">
+                        <col style="width:100px">
+                        <col style="width:100px">
+                    </colgroup>
+                    <thead class="k-grid-header" role="rowgroup">
+                        <tr role="row">
+                            <th role="columnheader" data-field="PictureUrl" data-title="Picture" class="k-header">Picture</th>
+                            <th role="columnheader" data-field="OverrideTitleAttribute" data-title="Title" class="k-header">Page Name</th>
+                            <th role="columnheader" data-field="OverrideTitleAttribute" data-title="Title" class="k-header">Use Theme</th>
+                            <th role="columnheader" data-field="OverrideTitleAttribute" data-title="Title" class="k-header">Widgets Zone</th>
+                            <th role="columnheader" data-field="OverrideTitleAttribute" data-title="Title" class="k-header">Use For Store</th>
+                            <th role="columnheader" data-field="OverrideTitleAttribute" data-title="Title" class="k-header">Action</th>
+                        </tr>
+                    </thead>
+                    @if (Model.pictureDetails.Count > 0)
+                    {
+                        <tbody id="Pagerowgroup" role="rowgroup" class="picture-body">
+                            @foreach (var item in Model.pictureDetails)
+                            {
+                                <tr role='row'>
+                                    <td role='gridcell'><img src="@item.src" width='150'></td>
+                                    <td role='gridcell'>@item.PageName</td>
+                                    <td role='gridcell'>@item.UseTheme</td>
+                                    <td role='gridcell'>@item.WidgetZone</td>
+                                    <td role='gridcell'>@item.UseForStore</td>
+                                    <td><a href="@Url.Content("~/HeaderBanner/Edit/")@item.Editlink">Edit</a>   | <a href="@item.Deletelink">Delete</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

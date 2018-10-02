@@ -1,4 +1,11 @@
-﻿<div class="header">
+﻿@using Nop.Core
+@using Nop.Core.Infrastructure
+@{
+    var storeContext = EngineContext.Current.Resolve<IStoreContext>();
+    var storeName = storeContext.CurrentStore.Name;
+}
+
+<div class="header">
     @await Component.InvokeAsync("Widget", new { widgetZone = "header_before" })
     <div class="header-upper">
         <div class="header-selectors-wrapper">
@@ -17,6 +24,16 @@
         <div class="header-logo">
             @await Component.InvokeAsync("Logo")
         </div>
+
+        @*
+            added by ali
+            if you want to display store name in the header
+        *@
+
+        @*<p class="store-name">@storeName</p>*@
+
+        @*end of added by ali*@
+
         <div class="search-box store-search-box">
             @await Component.InvokeAsync("SearchBox")
         </div>

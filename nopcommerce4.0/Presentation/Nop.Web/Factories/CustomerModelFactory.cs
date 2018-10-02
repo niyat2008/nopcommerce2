@@ -290,6 +290,7 @@ namespace Nop.Web.Factories
                 model.Signature = customer.GetAttribute<string>(SystemCustomerAttributeNames.Signature);
 
                 model.Email = customer.Email;
+                model.Mobile = customer.Mobile;
                 model.Username = customer.Username;
             }
             else

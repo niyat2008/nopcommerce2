@@ -1,0 +1,87 @@
+﻿/*
+* Copyright 2016 Seven Spikes Ltd. All rights reserved. (http://www.nop-templates.com)
+* http://www.nop-templates.com/t/licensinginfo
+*/
+
+.spc-header li span:after {
+	right: 0;
+	left: auto;
+}
+.spc-body .loading-overlay:before {
+	right: 50%;
+	left: auto;
+	margin: -25px -25px 0 0;
+}
+.spc-body .loading-overlay:after {
+	right: 50%;
+	left: auto;
+	margin: 35px -25px 0 0;
+}
+
+
+@media all and (min-width: 481px) {
+	
+.spc-categories .product-item {
+	text-align: right;
+}
+.spc-categories .picture {
+	float: right;
+	padding: 20px 20px 20px 10px;
+}
+.spc-categories .details {
+	float: left;
+	padding: 20px 10px 20px 20px;
+}
+.spc-categories .buttons-upper,
+.spc-categories .buttons-lower {
+	float: right;
+}
+.spc-categories input.button-2,
+.spc-categories button.button-2 {
+	margin: 0 0 0 3px !important;
+}
+
+}
+
+@media all and (min-width: 681px) {
+	
+.spc-categories .item-box:nth-child(odd) .product-item {
+	border-right-color: transparent !important;
+	border-left-color: #f0f0f0 !important;
+}
+.spc-categories .item-box:nth-child(even) .product-item {
+	border-left-color: transparent !important;
+	border-right-color: #f0f0f0 !important;
+}
+.spc-categories .item-box + .item-box .product-item {
+	border-right-color: transparent !important;
+}
+
+}
+
+@media all and (min-width: 1025px) {
+
+.spc-products .spc-header ul {
+	left: 0;
+	right: auto;
+}
+
+.spc-categories .spc-header ul {
+	float: left;
+}
+.spc-categories .category-info {
+	float: right;
+}
+.spc-categories .category-title {
+	right: 0;
+	left: auto;
+}
+.spc-categories .category-details {
+	right: 0;
+	left: auto;
+}
+.spc-categories .category-products {
+	float: left;
+}
+
+}

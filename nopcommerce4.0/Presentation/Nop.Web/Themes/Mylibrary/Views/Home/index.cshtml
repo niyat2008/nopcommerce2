@@ -1,0 +1,54 @@
+@{
+    Layout = "~/Themes/Mylibrary/Views/Shared/_ColumnsTwoHomepage.cshtml";
+    <script type="text/javascript">
+        $('.product_scroll').fakeScroll();
+    </script>
+}
+
+
+@Html.Widget("home_page_top") 
+@Html.Widget("home_page_before_categories")
+@Html.Action("HomepageCategories", "Catalog")
+@Html.Action("TopicBlock", "Topic", new { systemName = "HomePageText" })
+@Html.Widget("home_page_before_products")
+@Html.Action("HomepageProducts", "Product")
+@Html.Widget("home_page_before_best_sellers")
+	<!-- banner-area start-->
+<div class="banner-area">
+    <div class="row">
+        <div class="col-sm-8 col-lg-8 col-md-8">
+            <div class="single-banner">
+                <a href="#">                 
+                    <img src="~/Themes/Mylibrary/Content/Library_img/banner/home-1/4.png" />
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="single-banner">
+                <a href="#">                
+                    <img src="~/Themes/Mylibrary/Content/Library_img/banner/home-1/5.png" />
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- banner-area end-->
+@Html.Widget("home_page_before_news")
+@*@Html.Action("HomePageNews", "News")*@
+@Html.Widget("home_page_before_poll")
+@*@Html.Action("HomePagePolls", "Poll")*@
+@Html.Action("RecentlyViewedProducts", "Product")
+@Html.Widget("home_page_bottom")
+
+
+
+
+
+
+
+
+
+
+
+
+

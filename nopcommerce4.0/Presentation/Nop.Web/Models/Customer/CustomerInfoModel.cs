@@ -28,9 +28,15 @@ namespace Nop.Web.Models.Customer
         [DataType(DataType.EmailAddress)]
         [NopResourceDisplayName("Account.Fields.Email")]
         public string Email { get; set; }
+
         [DataType(DataType.EmailAddress)]
         [NopResourceDisplayName("Account.Fields.EmailToRevalidate")]
         public string EmailToRevalidate { get; set; }
+
+
+        [DataType(DataType.PhoneNumber)]
+        [NopResourceDisplayName("Account.Fields.Mobile")]
+        public string Mobile { get; set; }
 
         public bool CheckUsernameAvailabilityEnabled { get; set; }
         public bool AllowUsersToChangeUsernames { get; set; }
@@ -153,6 +159,7 @@ namespace Nop.Web.Models.Customer
         public partial class AssociatedExternalAuthModel : BaseNopEntityModel
         {
             public string Email { get; set; }
+
 
             public string ExternalIdentifier { get; set; }
 

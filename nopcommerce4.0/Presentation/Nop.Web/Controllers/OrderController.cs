@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Nop.Core;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Orders;
+using Nop.Core.Infrastructure;
 using Nop.Services.Common;
 using Nop.Services.Orders;
 using Nop.Services.Payments;
@@ -160,6 +161,12 @@ namespace Nop.Web.Controllers
                 return Challenge();
 
             var model = _orderModelFactory.PrepareOrderDetailsModel(order);
+
+
+            var storeContext = EngineContext.Current.Resolve<IStoreContext>();
+            var storeName = storeContext.CurrentStore.Name;
+            ViewData["storeName"] = storeName;
+
             return View(model);
         }
 
@@ -173,6 +180,10 @@ namespace Nop.Web.Controllers
 
             var model = _orderModelFactory.PrepareOrderDetailsModel(order);
             model.PrintMode = true;
+
+            var storeContext = EngineContext.Current.Resolve<IStoreContext>();
+            var storeName = storeContext.CurrentStore.Name;
+            ViewData["storeName"] = storeName;
 
             return View("Details", model);
         }
@@ -192,6 +203,7 @@ namespace Nop.Web.Controllers
                 _pdfService.PrintOrdersToPdf(stream, orders, _workContext.WorkingLanguage.Id);
                 bytes = stream.ToArray();
             }
+
             return File(bytes, MimeTypes.ApplicationPdf, $"order_{order.Id}.pdf");
         }
 

@@ -1,0 +1,9 @@
+Group: Technoscore
+FriendlyName: Horizon MegaMenu
+SystemName: Technoscore.HorizonMegaMenu
+Version: 2.30
+SupportedVersions: 3.90
+Author: Technoscore team
+DisplayOrder: 1
+FileName: Nop.Plugin.Technoscore.HorizonMegaMenu.dll
+Description: To Display Horizon Mega Menu, replace @Html.Action("TopMenu", "Catalog") by @Html.Action("TopMenu", "HorizonMegaMenu") on _Root.cshtml.

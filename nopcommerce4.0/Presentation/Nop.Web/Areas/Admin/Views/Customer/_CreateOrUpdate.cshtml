@@ -17,6 +17,9 @@
                 <nop-tab asp-name="tab-activitylog" asp-title="@T("Admin.Customers.Customers.ActivityLog")">@await Html.PartialAsync("_CreateOrUpdate.ActivityLog", Model)</nop-tab>
                 <nop-tab asp-name="tab-impersonate" asp-title="@T("Admin.Customers.Customers.Impersonate")">@await Html.PartialAsync("_CreateOrUpdate.Impersonate", Model)</nop-tab>
                 <nop-tab asp-name="tab-backinstock" asp-title="@T("Admin.Customers.Customers.BackInStockSubscriptions")">@await Html.PartialAsync("_CreateOrUpdate.BackInStockSubscriptions", Model)</nop-tab>
+
+
+
             }
             @if (Model.DisplayRewardPointsHistory)
             {

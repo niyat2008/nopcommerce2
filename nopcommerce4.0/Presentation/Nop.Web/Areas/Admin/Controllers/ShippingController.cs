@@ -666,6 +666,9 @@ namespace Nop.Web.Areas.Admin.Controllers
             if (!_permissionService.Authorize(StandardPermissionProvider.ManageShippingSettings))
                 return AccessDeniedView();
 
+
+
+
             return View();
         }
 
@@ -730,7 +733,7 @@ namespace Nop.Web.Areas.Admin.Controllers
 
 
                 var vendorId = _workContext.CurrentVendor.Id;
-                var warehousesModel = _shippingService.GetAllWarehouses()
+                var warehousesModel = _shippingService.GetVendorWarehouses(vendorId)
                     .Select(x =>
                     {
                         var warehouseModel = new WarehouseModel

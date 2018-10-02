@@ -170,7 +170,7 @@ namespace Nop.Services.Authentication.External
 
             //create registration request
             var registrationRequest = new CustomerRegistrationRequest(_workContext.CurrentCustomer,
-                parameters.Email, parameters.Email,
+                parameters.Email,parameters.Mobile, parameters.Mobile,
                 CommonHelper.GenerateRandomDigitCode(20),
                 PasswordFormat.Clear,
                 _storeContext.CurrentStore.Id,

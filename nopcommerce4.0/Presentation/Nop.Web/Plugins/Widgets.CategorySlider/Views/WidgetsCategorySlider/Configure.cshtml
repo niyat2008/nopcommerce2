@@ -1,0 +1,14 @@
+﻿@{
+    //page title
+    Layout = "_AdminLayout.cshtml";
+}
+<div class="section-header">
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @*<img src="@Url.Content("~/Administration/Content/images/ico-content.png")" alt="" />*@
+            @T("Admin.ContentManagement.Widgets.Configure") -  Solutions Category Slider  <small><i class="fa fa-arrow-circle-left"></i>@Html.ActionLink("(" + T("Admin.ContentManagement.Widgets.BackToList") + ")", "List", "Widget", new { area = "Admin" }, null)</small>
+        </h1>
+        <div class="pull-right"></div>
+    </div>
+</div>
+    @Html.Action("Manage", "WidgetsCategorySlider")

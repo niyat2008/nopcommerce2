@@ -26,6 +26,11 @@ namespace Nop.Web.Validators.Common
             RuleFor(x => x.Email)
                 .EmailAddress()
                 .WithMessage(localizationService.GetResource("Common.WrongEmail"));
+
+            RuleFor(x => x.Mobile)
+                .NotEmpty()
+                .WithMessage(localizationService.GetResource("address.fields.mobile.required"));
+
             if (addressSettings.CountryEnabled)
             {
                 RuleFor(x => x.CountryId)

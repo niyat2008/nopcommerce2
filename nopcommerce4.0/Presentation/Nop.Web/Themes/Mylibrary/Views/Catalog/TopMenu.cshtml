@@ -1,0 +1,278 @@
+﻿@model TopMenuModel
+@using System.Text.RegularExpressions
+@using Nop.Web.Models.Catalog;
+@{
+    var isRtl = this.ShouldUseRtlTheme();
+}
+@helper Bracket_Remover(string input)
+{
+    int index1 = input.IndexOf('(');
+    string result = input.Remove(index1, 1);
+
+    index1 = result.IndexOf(')');
+    result = result.Remove(index1, 1);
+
+    @Html.Raw(@result)
+}
+
+
+@helper RenderSubCategoryLine(CategorySimpleModel category, int level)
+{
+    <li class="mobMenu">
+		
+        @*<a class="dropdown-toggle" data-toggle="dropdown" href="@Url.RouteUrl("Category", new { SeName = category.SeName })">*@
+        <a href="@Url.RouteUrl("Category", new { SeName = category.SeName })">
+            @category.Name
+            @*&nbsp;<i class="fa fa-angle-down"></i>*@
+            @*&nbsp;<i class="fa fa-angle-right"></i>*@
+        </a>
+		<a class="mean-expand" rel="subli" href="javascript:void(0)" style="font-size: 18px">+</a>
+        <ul class="sub-menu subli">
+            @foreach (var subCategory in category.SubCategories)
+            {
+                @RenderCategoryLine(subCategory, level + 1)
+            }
+        </ul>
+
+    </li>
+}
+
+@helper RenderCategoryLine(CategorySimpleModel category, int level)
+{
+    if (category.SubCategories.Count > 0)
+    {
+        @RenderSubCategoryLine(category, 0)
+    }
+    else
+    {
+        <li class="@category.SeName">
+            <a href='@Url.RouteUrl("Category", new { SeName = category.SeName })'>
+                @category.Name
+            </a>
+        </li>
+    }
+}
+
+
+<!-- main-menu-area start -->
+<div class="main-menu-area">
+    <div class="bg-half"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="main-menu">
+                    <nav>
+                        <div class="navbar" role="navigation">
+                            <div class="desktop_menu_space_remove">
+                                <div class="navbar-header">
+									<span class="mobile_show_desktop_hide">Menu</span>
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".category-navbar-collapse">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                </div>
+                                <div class="collapse navbar-collapse category-navbar-collapse">
+
+                                    <ul class="nav navbar-nav mymenu">
+                                        @Html.Widget("header_menu_before")
+                                        <li><a href="@Url.RouteUrl("HomePage")"><span class="home_mobile">Home</span><span class="home_desktop"><i class="fa fa-home"></i></span></a></li>
+                                        @{
+                                            var rootCategories = Model.Categories.Where(x => x.IncludeInTopMenu).ToList();
+                                        }
+                                        @foreach (var category in rootCategories)
+                                        {
+                                            @RenderCategoryLine(category, 0)
+                                        }
+
+                                        @foreach (var topic in Model.Topics)
+                                        {
+                                            <li><a href="@Url.RouteUrl("Topic", new {SeName = topic.SeName})">@topic.Name</a></li>
+
+                                        }
+                                        @if (Model.Categories.Count == 0 && Model.Topics.Count == 0)
+                                        {
+                                            //no categories to display?
+                                            //in this cae let's diplay some default menu items
+                                            <li><a href="@Url.RouteUrl("HomePage")">@T("HomePage")</a></li>
+                                            if (Model.NewProductsEnabled)
+                                            {
+                                                <li>
+                                                    <a href="@Url.RouteUrl("NewProducts")">@T("Products.NewProducts")</a>
+                                                </li>
+                                            }
+                                            <li><a href="@Url.RouteUrl("ProductSearch")">@T("Search")</a> </li>
+                                            <li><a href="@Url.RouteUrl("CustomerInfo")">@T("Account.MyAccount")</a></li>
+                                            if (Model.BlogEnabled)
+                                            {
+                                                <li><a href="@Url.RouteUrl("Blog")">@T("Blog")</a></li>
+                                            }
+                                            if (Model.ForumEnabled)
+                                            {
+                                                <li><a href="@Url.RouteUrl("Boards")">@T("Forum.Forums")</a></li>
+                                            }
+                                            <li><a href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>
+                                        }
+                                        @Html.Widget("header_menu_after")
+                                    </ul>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.navbar a.dropdown-toggle').on('click', function (e) {
+            var elmnt = $(this).parent().parent();
+            if (!elmnt.hasClass('nav')) {
+                var li = $(this).parent();
+                var heightParent = parseInt(elmnt.css('height').replace('px', '')) / 2;
+                var widthParent = parseInt(elmnt.css('width').replace('px', '')) - 10;
+
+                if (!li.hasClass('open')) li.addClass('open')
+                else li.removeClass('open');
+                $(this).next().css('top', heightParent + 'px');
+                $(this).next().css('left', widthParent + 'px');
+
+                return false;
+            }
+        });
+    });
+</script>
+
+<script>
+$(document).ready(function(){
+    $(".mean-expand").click(function(){
+		var subMenu = $(this).siblings('ul.subli');
+		
+		console.log(subMenu);
+		
+		if(subMenu.hasClass('menu_open'))
+		{
+			subMenu.removeClass('menu_open');
+			$(this).text('+');
+		}
+		else{
+			//$(this).text('+'); 
+			subMenu.removeClass('menu_open'); 
+			$(this).text('-');
+			subMenu.addClass('menu_open');
+		}
+		
+		
+		/* if(menu == 'subli')
+		{
+		    $(".subli").toggleClass('menu_open'); 
+			$(".children-books").removeClass('menu_open'); 
+		}
+		if(menu == 'children-books')
+		{
+		    $(".children-books").toggleClass('menu_open'); 
+			$(".food-and-recipes-books").removeClass('menu_open'); 
+		} */
+		//$(".sub-menu").addClass('menu_open');
+		//$(".sub-menu"+test).css('block');
+		//.main-menu ul li ul.sub-menu
+		//alert(test);
+		//$(".sub-menu").toggle();
+		//$(".sub-menu").toggleClass('menu_open');
+        //$(this).toggle();
+		/*$(".mymenu > li > ul").removeClass("menu_open");
+		if(!$(this).next('ul .sub-menu').hasClass('menu_open'))
+		{
+			$(this).next('ul .sub-menu').addClass('menu_open');
+		}*/
+		
+		//$("ul .sub-menu").next().toggleClass('menu_open');
+    });
+	
+	 
+});
+</script>
+
+
+<script>
+    function setMouseHoverDropdown() {
+
+        if ($(window).innerWidth() > 767) {
+            $('ul.nav li').hover(function () {
+                $(this).find('> .dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+            }, function () {
+                $(this).find('> .dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+            });
+        }
+    }
+  $(window).load(function () {
+        setMouseHoverDropdown();
+    });
+    $(document).ready(function () {
+        setMouseHoverDropdown();
+    });
+    $(window).resize(function () {
+        setMouseHoverDropdown();
+    }); 
+</script>
+
+<script>
+    $(document).ready(function () {
+        $(".navbar-toggle").click(function () {
+            $(this).parent().find("> .navbar-header").css("overflow-y", "auto");
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        // Call stylesheet init so that all stylesheet changing functions
+        // will work.
+        $.stylesheetInit();
+
+        // This code loops through the stylesheets when you click the link with
+        // an ID of "toggler" below.
+        $('#toggler').bind(
+            'click',
+            function (e) {
+                $.stylesheetToggle();
+                return false;
+            }
+        );
+
+        // When one of the styleswitch links is clicked then switch the stylesheet to
+        // the one matching the value of that links rel attribute.
+        $('.styleswitch').bind(
+            'click',
+            function (e) {
+                $.stylesheetSwitch(this.getAttribute('rel'));
+                return false;
+            }
+        );
+
+
+        $("#configure-button").on("click", function (e) {
+            e.preventDefault();
+            if ($(this).data("expanded") == "true") {
+                $("#color-options").css({ right: '-140px' });
+                $("#configure-button").css({ right: '0px' });
+                $(this).data("expanded", "false");
+            } else {
+                $("#color-options").css({ right: '0px' });
+                $("#configure-button").css({ right: '140px' });
+                $(this).data("expanded", "true");
+            }
+
+        });
+
+
+    });
+
+</script>
+
+

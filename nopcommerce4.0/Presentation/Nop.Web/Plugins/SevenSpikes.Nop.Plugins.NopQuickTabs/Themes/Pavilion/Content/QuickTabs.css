@@ -1,0 +1,11 @@
+﻿
+.ui-tabs .message-error {
+	margin: 20px 0;
+}
+.ui-tabs .form-fields {
+	max-width: 600px;
+	margin: 30px auto;
+}
+.ui-tabs .form-fields:first-child {
+	margin-top: 15px;
+}

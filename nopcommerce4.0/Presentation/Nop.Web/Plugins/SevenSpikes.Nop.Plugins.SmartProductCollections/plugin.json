@@ -1,0 +1,15 @@
+{
+  "Group": "7Spikes",
+  "FriendlyName": "Nop Smart Product Collections",
+  "SystemName": "SevenSpikes.Nop.Plugins.SmartProductCollections",
+  "Version": "4.0",
+  "SupportedVersions": [
+    "4.00"
+  ],
+  "Author": "Seven Spikes Ltd",
+  "DisplayOrder": 1,
+  "FileName": "SevenSpikes.Nop.Plugins.SmartProductCollections.dll",
+  "Description": "With the Sale Of The Day you can organize your products into collections and display them on any of your website pages.",
+  "LimitedToStores": [],
+  "LimitedToCustomerRoles": []
+}

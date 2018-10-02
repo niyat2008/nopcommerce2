@@ -1,0 +1,100 @@
+﻿@model IList<ProductOverviewModel>
+@{
+    //Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+    Layout = "";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.RecentlyViewedProducts").Text);
+}
+
+@using Nop.Core.Domain.Orders
+@using Nop.Web.Models.Catalog;
+@if (Model.Count > 0)
+{
+    <div class="recently-bought-product">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="product-header">
+                    <div class="area-title">
+                        <h2>RECENT VIEWS</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="tab-content">
+                <!-- pants-tab-start -->
+                <div class="tab-pane fade active in" id="pants">
+                    <!-- single-product-start -->
+                    @foreach (var product in Model)
+                    {
+                        //var product = Model[i];
+
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <div class="single-product-bought recent_image_height">
+                                <div class="image-area">
+                                    <a href="@Url.RouteUrl("Product", new { SeName = product.SeName })" title="@product.DefaultPictureModel.Title">
+                                        @if (!String.IsNullOrEmpty(product.DefaultPictureModel.ImageUrl))
+                                        {
+                                            <img alt="@product.DefaultPictureModel.AlternateText" src="@product.DefaultPictureModel.ImageUrl" title="@product.DefaultPictureModel.Title" />
+                                        }
+                                    </a>
+                                </div>
+                                <div class="product-info">
+                                    <h2 class="product-name">
+                                        <a href="@Url.RouteUrl("Product", new { SeName = product.SeName })">@product.Name</a>
+                                    </h2>
+                                    <div class="price-box-area">
+                                        <span class="new-price from_small_text">
+                                            @product.ProductPrice.Price
+                                        </span>
+                                        <span class="old-price"></span>
+                                    </div>
+                                    @{
+                                        int ratingPercent = 0;
+                                        if (product.ReviewOverviewModel.TotalReviews != 0)
+                                        {
+                                            ratingPercent = ((product.ReviewOverviewModel.RatingSum * 100) / product.ReviewOverviewModel.TotalReviews) / 5;
+                                        }
+                                    }
+                                    @if (product.ReviewOverviewModel.AllowCustomerReviews)
+                                    {
+                                        <div class="product-reviews-overview" @if (product.ReviewOverviewModel.TotalReviews > 0) { <text> itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" </text>        }>
+
+                                            <div class="ratings">
+                                                <div class="rating-box">
+                                                    <div style="width: @(ratingPercent)%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                    <div class="action-button">
+                                        @{
+                                            // for compare product
+                                               var addtocomparelink = Url.RouteUrl("AddProductToCompare", new { productId = product.Id });
+                                               
+                                            // for add to list list   
+                                               string addtocartlink = "";
+                                               var shoppingCartTypeId = (int)ShoppingCartType.ShoppingCart;
+                                               var quantity = 1;
+                                               addtocartlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = product.Id, shoppingCartTypeId = shoppingCartTypeId, quantity = quantity, });
+                                        }
+
+                                        @*add to cart*@
+                                        <input type="button" class="btn btn-default add-to-cart-button" value="+ @T("ShoppingCart.AddToCart")" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink    ');return false;" />
+                                        @*add to wishlist*@
+                                        @*<input type="button" value="@T("ShoppingCart.AddToCompareList")" title="@T("ShoppingCart.AddToCompareList")" class="btn btn-default add-to-wishlist-button" onclick="AjaxCart.addproducttocomparelist('@addtocomparelink');return false;" />*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <!-- single-product-end -->
+                </div>
+                <!-- pants-tab-end -->
+            </div>
+        </div>
+    </div>
+}

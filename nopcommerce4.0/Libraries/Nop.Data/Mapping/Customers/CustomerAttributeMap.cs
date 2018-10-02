@@ -17,6 +17,7 @@ namespace Nop.Data.Mapping.Customers
             this.Property(ca => ca.Name).IsRequired().HasMaxLength(400);
 
             this.Ignore(ca => ca.AttributeControlType);
+            
         }
     }
 }

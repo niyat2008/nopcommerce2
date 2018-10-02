@@ -1,0 +1,61 @@
+﻿@model IList<ProductOverviewModel>
+
+@using Nop.Web.Models.Catalog;
+@if (Model.Count > 0)
+{
+            <div class="product-grid home-page-product-grid">
+                <div class="area-title">
+                    <h2>@T("Products.AlsoPurchased")</h2>
+                    @if (Model.Count > 4)
+                    {
+                        <span class="slider_next_prev_btn">
+                            <a href="#carousel-example-generic-purchased-product" data-slide="prev">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a href="#carousel-example-generic-purchased-product" data-slide="next">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        </span> 
+                    }
+                </div>
+        
+                <div id="carousel-example-generic-purchased-product" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        @{
+                            var pg_i = 0;
+                        } 
+                        @foreach (var item in Model)
+                        {
+                            if(pg_i==0)
+                            {
+                                @:<div class="item active">
+                                @:<div class="box-products" >
+                            }else if(pg_i%4==0){
+                                @:<div class="item">
+                                @:<div class="row box-products" >
+                            }
+                    
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                <div class="offer offer-default silde-show-offer pull-text-center">
+                                    @Html.Partial("_ProductBox", item)
+                                </div>
+                            </div>
+                    
+
+                            if(pg_i%4==3){
+                                @:</div>
+                                @:</div>
+                            }
+                            pg_i++;
+                        }
+                        @if(pg_i%4!=0){
+                            @:</div>
+                            @:</div>
+                        }
+                    </div>
+                </div>
+            </div>
+}

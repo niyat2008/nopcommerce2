@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using FluentValidation.Attributes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Nop.Services.Localization;
 using Nop.Web.Framework.Mvc.ModelBinding;
 using Nop.Web.Framework.Mvc.Models;
 using Nop.Web.Validators.Customer;
@@ -13,6 +14,7 @@ namespace Nop.Web.Models.Customer
     [Validator(typeof(RegisterValidator))]
     public partial class RegisterModel : BaseNopModel
     {
+        
         public RegisterModel()
         {
             this.AvailableTimeZones = new List<SelectListItem>();
@@ -29,11 +31,13 @@ namespace Nop.Web.Models.Customer
         public string Email { get; set; }
         
         public bool EnteringEmailTwice { get; set; }
+
         [DataType(DataType.EmailAddress)]
         [NopResourceDisplayName("Account.Fields.ConfirmEmail")]
         public string ConfirmEmail { get; set; }
 
         public bool UsernamesEnabled { get; set; }
+
         [NopResourceDisplayName("Account.Fields.Username")]
         public string Username { get; set; }
 
@@ -59,6 +63,15 @@ namespace Nop.Web.Models.Customer
         [NopResourceDisplayName("Account.Fields.LastName")]
         public string LastName { get; set; }
 
+        
+
+        [DataType(DataType.PhoneNumber)]
+        [NoTrim]
+        [NopResourceDisplayName("Account.Fields.MobileNumber")]
+        public string Mobile { get; set; }
+
+
+
         public bool DateOfBirthEnabled { get; set; }
         [NopResourceDisplayName("Account.Fields.DateOfBirth")]
         public int? DateOfBirthDay { get; set; }
@@ -83,49 +96,58 @@ namespace Nop.Web.Models.Customer
 
         public bool CompanyEnabled { get; set; }
         public bool CompanyRequired { get; set; }
+
         [NopResourceDisplayName("Account.Fields.Company")]
         public string Company { get; set; }
 
         public bool StreetAddressEnabled { get; set; }
         public bool StreetAddressRequired { get; set; }
+
         [NopResourceDisplayName("Account.Fields.StreetAddress")]
         public string StreetAddress { get; set; }
 
         public bool StreetAddress2Enabled { get; set; }
         public bool StreetAddress2Required { get; set; }
+
         [NopResourceDisplayName("Account.Fields.StreetAddress2")]
         public string StreetAddress2 { get; set; }
 
         public bool ZipPostalCodeEnabled { get; set; }
         public bool ZipPostalCodeRequired { get; set; }
+
         [NopResourceDisplayName("Account.Fields.ZipPostalCode")]
         public string ZipPostalCode { get; set; }
 
         public bool CityEnabled { get; set; }
         public bool CityRequired { get; set; }
+
         [NopResourceDisplayName("Account.Fields.City")]
         public string City { get; set; }
 
         public bool CountryEnabled { get; set; }
         public bool CountryRequired { get; set; }
+
         [NopResourceDisplayName("Account.Fields.Country")]
         public int CountryId { get; set; }
         public IList<SelectListItem> AvailableCountries { get; set; }
 
         public bool StateProvinceEnabled { get; set; }
         public bool StateProvinceRequired { get; set; }
+
         [NopResourceDisplayName("Account.Fields.StateProvince")]
         public int StateProvinceId { get; set; }
         public IList<SelectListItem> AvailableStates { get; set; }
 
         public bool PhoneEnabled { get; set; }
         public bool PhoneRequired { get; set; }
+
         [DataType(DataType.PhoneNumber)]
         [NopResourceDisplayName("Account.Fields.Phone")]
         public string Phone { get; set; }
 
         public bool FaxEnabled { get; set; }
         public bool FaxRequired { get; set; }
+
         [DataType(DataType.PhoneNumber)]
         [NopResourceDisplayName("Account.Fields.Fax")]
         public string Fax { get; set; }
@@ -140,12 +162,14 @@ namespace Nop.Web.Models.Customer
         //time zone
         [NopResourceDisplayName("Account.Fields.TimeZone")]
         public string TimeZoneId { get; set; }
+
         public bool AllowCustomersToSetTimeZone { get; set; }
         public IList<SelectListItem> AvailableTimeZones { get; set; }
 
         //EU VAT
         [NopResourceDisplayName("Account.Fields.VatNumber")]
         public string VatNumber { get; set; }
+
         public bool DisplayVatNumber { get; set; }
 
         public bool HoneypotEnabled { get; set; }

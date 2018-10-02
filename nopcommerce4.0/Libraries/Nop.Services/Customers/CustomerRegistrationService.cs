@@ -171,6 +171,53 @@ namespace Nop.Services.Customers
             return CustomerLoginResults.Successful;
         }
 
+        public virtual CustomerLoginResults ValidateCustomerByMobile(string usernameOrMobile, string password)
+        {
+            var customer = _customerSettings.UsernamesEnabled ?
+                _customerService.GetCustomerByUsername(usernameOrMobile) :
+                _customerService.GetCustomerByMobile(usernameOrMobile);
+
+            if (customer == null)
+                return CustomerLoginResults.CustomerNotExist;
+            if (customer.Deleted)
+                return CustomerLoginResults.Deleted;
+            if (!customer.Active)
+                return CustomerLoginResults.NotActive;
+            //only registered can login
+            if (!customer.IsRegistered())
+                return CustomerLoginResults.NotRegistered;
+            //check whether a customer is locked out
+            if (customer.CannotLoginUntilDateUtc.HasValue && customer.CannotLoginUntilDateUtc.Value > DateTime.UtcNow)
+                return CustomerLoginResults.LockedOut;
+
+            if (!PasswordsMatch(_customerService.GetCurrentPassword(customer.Id), password))
+            {
+                //wrong password
+                customer.FailedLoginAttempts++;
+                if (_customerSettings.FailedPasswordAllowedAttempts > 0 &&
+                    customer.FailedLoginAttempts >= _customerSettings.FailedPasswordAllowedAttempts)
+                {
+                    //lock out
+                    customer.CannotLoginUntilDateUtc = DateTime.UtcNow.AddMinutes(_customerSettings.FailedPasswordLockoutMinutes);
+                    //reset the counter
+                    customer.FailedLoginAttempts = 0;
+                }
+                _customerService.UpdateCustomer(customer);
+
+                return CustomerLoginResults.WrongPassword;
+            }
+
+            //update login details
+            customer.FailedLoginAttempts = 0;
+            customer.CannotLoginUntilDateUtc = null;
+            customer.RequireReLogin = false;
+            customer.LastLoginDateUtc = DateTime.UtcNow;
+            _customerService.UpdateCustomer(customer);
+
+            return CustomerLoginResults.Successful;
+        }
+
+
         /// <summary>
         /// Register customer
         /// </summary>
@@ -205,6 +252,11 @@ namespace Nop.Services.Customers
                 result.AddError(_localizationService.GetResource("Account.Register.Errors.EmailIsNotProvided"));
                 return result;
             }
+            if (string.IsNullOrEmpty(request.Mobile))
+            {
+                result.AddError(_localizationService.GetResource("Account.Register.Errors.MobileIsNotProvided"));
+                return result;
+            }
             if (!CommonHelper.IsValidEmail(request.Email))
             {
                 result.AddError(_localizationService.GetResource("Common.WrongEmail"));
@@ -225,6 +277,12 @@ namespace Nop.Services.Customers
             }
 
             //validate unique user
+            if (_customerService.GetCustomerByMobile(request.Mobile) != null)
+            {
+                result.AddError(_localizationService.GetResource("Account.Register.Errors.MobileAlreadyExists"));
+                return result;
+            }
+
             if (_customerService.GetCustomerByEmail(request.Email) != null)
             {
                 result.AddError(_localizationService.GetResource("Account.Register.Errors.EmailAlreadyExists"));
@@ -242,6 +300,8 @@ namespace Nop.Services.Customers
             //at this point request is valid
             request.Customer.Username = request.Username;
             request.Customer.Email = request.Email;
+            request.Customer.Mobile = request.Mobile;
+
 
             var customerPassword = new CustomerPassword
             {
@@ -438,6 +498,60 @@ namespace Nop.Services.Customers
                 }
             }
         }
+
+
+
+        public virtual void SetMobile(Customer customer, string newMobile, bool requireValidation)
+        {
+            if (customer == null)
+                throw new ArgumentNullException(nameof(customer));
+
+            if (newMobile == null)
+                throw new NopException("Mobile cannot be null");
+
+            newMobile = newMobile.Trim();
+            var oldMobile = customer.Mobile;
+
+            if (!CommonHelper.IsValidMobile(newMobile))
+                throw new NopException(_localizationService.GetResource("Account.MobileUsernameErrors.NewMobileIsNotValid"));
+
+          
+            var customer2 = _customerService.GetCustomerByMobile(newMobile);
+            if (customer2 != null && customer.Id != customer2.Id)
+                throw new NopException(_localizationService.GetResource("Account.MobilesernameErrors.MobileAlreadyExists"));
+
+            //if (requireValidation)
+            //{
+            //    //re-validate mobile
+            //    customer.MobileToRevalidate = newMobile;
+            //    _customerService.UpdateCustomer(customer);
+
+            //    //mobile re-validation message
+            //    _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.MobileRevalidationToken, Guid.NewGuid().ToString());
+            //    _workflowMessageService.SendCustomerEmailRevalidationMessage(customer, _workContext.WorkingLanguage.Id);
+            //    _workflowMessageService.SendCustomerMobileRevalidationMessage(customer, _workContext.WorkingLanguage.Id);
+
+            //}
+           
+                customer.Mobile = newMobile;
+                _customerService.UpdateCustomer(customer);
+
+                //update newsletter subscription (if required)
+                //if (!string.IsNullOrEmpty(oldMobile) && !oldMobile.Equals(newMobile, StringComparison.InvariantCultureIgnoreCase))
+                //{
+                //    foreach (var store in _storeService.GetAllStores())
+                //    {
+                //        var subscriptionOld = _newsLetterSubscriptionService.GetNewsLetterSubscriptionByEmailAndStoreId(oldMobile, store.Id);
+                //        if (subscriptionOld != null)
+                //        {
+                //            subscriptionOld.Email = newMobile;
+                //            _newsLetterSubscriptionService.UpdateNewsLetterSubscription(subscriptionOld);
+                //        }
+                //    }
+                //}
+            }
+        
+
 
         /// <summary>
         /// Sets a customer username

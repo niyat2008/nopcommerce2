@@ -17,7 +17,7 @@ namespace Nop.Services.Customers
         /// <param name="passwordFormat">Password format</param>
         /// <param name="storeId">Store identifier</param>
         /// <param name="isApproved">Is approved</param>
-        public CustomerRegistrationRequest(Customer customer, string email, string username,
+        public CustomerRegistrationRequest(Customer customer, string email,string mobile, string username,
             string password,
             PasswordFormat passwordFormat,
             int storeId,
@@ -25,6 +25,7 @@ namespace Nop.Services.Customers
         {
             this.Customer = customer;
             this.Email = email;
+            this.Mobile = mobile;
             this.Username = username;
             this.Password = password;
             this.PasswordFormat = passwordFormat;
@@ -42,6 +43,7 @@ namespace Nop.Services.Customers
         /// </summary>
         public string Email { get; set; }
 
+        public string Mobile { get; set; }
         /// <summary>
         /// Username
         /// </summary>

@@ -16,6 +16,7 @@
                 @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn1).ToList())
                 {
                     <li><a href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a></li>
+                    @*<li><a href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@T(topic.Name)</a></li>*@
                 }
                 <li><a href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>
             </ul>
@@ -53,6 +54,7 @@
                 @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn2).ToList())
                 {
                     <li><a href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a></li>
+                    @*<li><a href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@T(topic.Name)</a></li>*@
                 }
             </ul>
         </div>
@@ -79,6 +81,7 @@
                 @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn3).ToList())
                 {
                     <li><a href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a></li>
+                    @*<li><a href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@T(topic.Name)</a></li>*@
                 }
             </ul>
         </div>

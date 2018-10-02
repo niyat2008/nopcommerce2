@@ -24,6 +24,11 @@ namespace Nop.Core.Domain.Common
         public string Email { get; set; }
 
         /// <summary>
+        /// Gets or sets the Mobile
+        /// </summary>
+        public string Mobile { get; set; }
+
+        /// <summary>
         /// Gets or sets the company
         /// </summary>
         public string Company { get; set; }
@@ -99,6 +104,7 @@ namespace Nop.Core.Domain.Common
                 FirstName = this.FirstName,
                 LastName = this.LastName,
                 Email = this.Email,
+                Mobile=this.Mobile,
                 Company = this.Company,
                 Country = this.Country,
                 CountryId = this.CountryId,
