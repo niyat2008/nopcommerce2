@@ -21,7 +21,7 @@ namespace Nop.Web.Validators.Customer
 
             RuleFor(x => x.Mobile).NotEmpty().WithMessage(localizationService.GetResource("Account.Fields.Mobile.Required"));
             RuleFor(x => x.Mobile).MaximumLength(15).WithMessage(localizationService.GetResource("Account.Fields.MobileErrorMessage"));
-            RuleFor(x => x.Mobile).MinimumLength(7).WithMessage(localizationService.GetResource("Account.Fields.MobileErrorMessage"));
+            RuleFor(x => x.Mobile).MinimumLength(9).WithMessage(localizationService.GetResource("Account.Fields.MobileErrorMessage"));
 
             if (customerSettings.EnteringEmailTwice)
             {

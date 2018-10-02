@@ -581,12 +581,13 @@ namespace Nop.Web.Controllers
                 if (_customerSettings.UsernamesEnabled && model.Username != null)
                 {
                     model.Username = model.Username.Trim();
+                   
                 }
 
                 var isApproved = _customerSettings.UserRegistrationType == UserRegistrationType.Standard;
                 var registrationRequest = new CustomerRegistrationRequest(customer,
                     model.Email,model.Mobile,
-                    _customerSettings.UsernamesEnabled ? model.Username : model.Mobile,
+                    _customerSettings.UsernamesEnabled ? model.Username :model.FirstName +" " +model.LastName ,//model.Mobile,
                     model.Password,
                     _customerSettings.DefaultPasswordFormat,
                     _storeContext.CurrentStore.Id,
