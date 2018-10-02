@@ -1,0 +1,27 @@
+﻿@using Nop.Core
+@using Nop.Services.Localization
+@using Nop.Web.Framework.Themes
+
+@inject IThemeContext themeContext
+@inject IStoreContext storeContext
+
+@model LogoModel
+
+@{
+    var logoPath = $"~/Themes/{themeContext.WorkingThemeName}/Content/img/logo.png";
+
+    var themeLogo = await Component.InvokeAsync("Widget", new { widgetZone = "pavilion_theme_logo" });
+    
+}
+
+<a href="@Url.RouteUrl("HomePage")" class="logo">
+    @if (!String.IsNullOrEmpty(themeLogo.ToHtmlString()))
+    {
+        @themeLogo
+    }
+    else
+    {
+        string storeName = storeContext.CurrentStore.GetLocalized(x => x.Name);
+        <img title="" alt="@storeName" src="@Url.Content(logoPath)">
+    }
+</a>
