@@ -27,21 +27,21 @@
             @{
                 var taxTypeSelectorHtml = await Component.InvokeAsync("TaxTypeSelector");
                 var currencySelectorHtml = await Component.InvokeAsync("CurrencySelector");
-                var languageSelectorHtml = await Component.InvokeAsync("LanguageSelector");
+                //var languageSelectorHtml = await Component.InvokeAsync("LanguageSelector");
                 var headerSelectorWidgetHtml = await Component.InvokeAsync("Widget", new { widgetZone = "header_selectors" });
             }
 
             @if (!String.IsNullOrEmpty(taxTypeSelectorHtml.ToHtmlString()) ||
-                 !String.IsNullOrEmpty(currencySelectorHtml.ToHtmlString()) ||
-                 !String.IsNullOrEmpty(languageSelectorHtml.ToHtmlString()) ||
-                 !String.IsNullOrEmpty(headerSelectorWidgetHtml.ToHtmlString()))
+                !String.IsNullOrEmpty(currencySelectorHtml.ToHtmlString()) ||
+                //!String.IsNullOrEmpty(languageSelectorHtml.ToHtmlString()) ||
+                !String.IsNullOrEmpty(headerSelectorWidgetHtml.ToHtmlString()))
             {
                 <div class="header-selectors-wrapper">
                     <label>@T("SevenSpikes.Themes.Pavilion.Header.Preferences")</label>
                     <div class="header-selectors">
                         @taxTypeSelectorHtml
                         @currencySelectorHtml
-                        @languageSelectorHtml
+                        @*@languageSelectorHtml*@
                         @headerSelectorWidgetHtml
                     </div>
                 </div>
