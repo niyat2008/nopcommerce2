@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Nop.Core.Domain.Common;
 using Nop.Core.Domain.Orders;
+using Nop.Core.Domain.Z_Consultant;
 
 namespace Nop.Core.Domain.Customers
 {
@@ -22,6 +24,10 @@ namespace Nop.Core.Domain.Customers
         public Customer()
         {
             this.CustomerGuid = Guid.NewGuid();
+            CustomersComments = new Collection<Z_Consultant_Comment>();
+            ConsultantsComments = new Collection<Z_Consultant_Comment>();
+            ConsultantsPosts = new Collection<Z_Consultant_Post>();
+            CustomersPosts = new Collection<Z_Consultant_Post>();
         }
 
         /// <summary>
@@ -183,6 +189,14 @@ namespace Nop.Core.Domain.Customers
         /// Default shipping address
         /// </summary>
         public virtual Address ShippingAddress { get; set; }
+
+
+        public ICollection<Z_Consultant_Comment> CustomersComments { get; set; }
+        public ICollection<Z_Consultant_Comment> ConsultantsComments { get; set; }
+        public ICollection<Z_Consultant_Post> CustomersPosts { get; set; }
+        public ICollection<Z_Consultant_Post> ConsultantsPosts { get; set; }
+
+
 
         /// <summary>
         /// Gets or sets customer addresses

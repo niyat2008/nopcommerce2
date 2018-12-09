@@ -30,5 +30,6 @@
   "SevenSpikes.Nop.Plugins.QuickView",
   "SevenSpikes.Nop.Plugins.RichBlog",
   "SevenSpikes.Nop.Plugins.SmartProductCollections",
-  "SevenSpikes.Theme.Pavilion"
+  "SevenSpikes.Theme.Pavilion",
+  "Consultant.Api"
 ]

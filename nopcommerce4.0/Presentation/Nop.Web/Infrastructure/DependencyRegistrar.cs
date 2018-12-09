@@ -2,6 +2,7 @@ using Autofac;
 using Nop.Core.Configuration;
 using Nop.Core.Infrastructure;
 using Nop.Core.Infrastructure.DependencyManagement;
+using Nop.Web.ConsultantTasks;
 using Nop.Web.Factories;
 using Nop.Web.Infrastructure.Installation;
 
@@ -45,6 +46,7 @@ namespace Nop.Web.Infrastructure
             builder.RegisterType<TopicModelFactory>().As<ITopicModelFactory>().InstancePerLifetimeScope();
             builder.RegisterType<VendorModelFactory>().As<IVendorModelFactory>().InstancePerLifetimeScope();
             builder.RegisterType<WidgetModelFactory>().As<IWidgetModelFactory>().InstancePerLifetimeScope();
+            builder.RegisterType<ClosePostAfter48Hours>().As<IClosePostAfter48Hours>().InstancePerLifetimeScope();
         }
 
         /// <summary>

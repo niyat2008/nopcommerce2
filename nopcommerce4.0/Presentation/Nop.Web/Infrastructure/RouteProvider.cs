@@ -25,7 +25,7 @@ namespace Nop.Web.Infrastructure
 
             //home page
             routeBuilder.MapLocalizedRoute("HomePage", "",
-				new { controller = "Home", action = "Index" });
+                new { controller = "Home", action = "Index" });
 
             //login
             routeBuilder.MapLocalizedRoute("Login", "login/",
@@ -336,6 +336,7 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapLocalizedRoute("ContactVendor", "contactvendor/{vendorId}",
 				new { controller = "Common", action = "ContactVendor" });
 
+
             //apply for vendor account
             routeBuilder.MapLocalizedRoute("ApplyVendorAccount", "vendor/apply",
 				new { controller = "Vendor", action = "ApplyVendor" });
@@ -499,9 +500,13 @@ namespace Nop.Web.Infrastructure
             //page not found
             routeBuilder.MapLocalizedRoute("PageNotFound", "page-not-found", 
                 new { controller = "Common", action = "PageNotFound" });
+
+            
         }
 
         #endregion
+
+
 
         #region Properties
 
