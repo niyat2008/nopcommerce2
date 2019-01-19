@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Nop.Core.Domain.Customers;
@@ -16,6 +17,7 @@ using System.Threading.Tasks;
 
 namespace Nop.Plugin.Consultant.Api.Controllers
 {
+    
     public class PostController : Controller
     {
 
@@ -90,6 +92,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title=m.Title,
                     CategoryId = m.CategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
                     PostOwner = m.Customer.Username,
@@ -125,6 +128,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
                     PostOwner = m.Customer.Username,
@@ -161,6 +165,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -197,6 +202,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -251,6 +257,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -298,6 +305,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -344,6 +352,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -388,6 +397,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -434,6 +444,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -481,6 +492,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -527,6 +539,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -572,6 +585,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -618,6 +632,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -638,7 +653,6 @@ namespace Nop.Plugin.Consultant.Api.Controllers
 
 
 
-       
 
 
         [HttpPost]
@@ -685,7 +699,6 @@ namespace Nop.Plugin.Consultant.Api.Controllers
 
             var postToReturn = post.ToPostModel();
             postToReturn.PostOwner = userName;
-
             return CreatedAtRoute("Consultant.Api.Post.GetPost", new { PostId = postToReturn.Id }, postToReturn);
         }
 
@@ -718,7 +731,87 @@ namespace Nop.Plugin.Consultant.Api.Controllers
             if (closeAndRatePostModel.IsColsed == null && closeAndRatePostModel.Rate == null)
                 return BadRequest();
 
+            if(!_postService.IsAnswered(closeAndRatePostModel.Id))
+                return BadRequest("The post must be answered to Rating or closing it");
+
             var thereIsCahnges = _postService.CloseAndRatePost(closeAndRatePostModel, currentUserId);
+
+            if (thereIsCahnges)
+                return Ok();
+            else
+                return BadRequest();
+        }
+
+
+        [HttpPost]
+        public IActionResult ClosePost([FromBody]ClosePostModel closePostModel)
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
+                return Forbid();
+
+
+            var currentUserId = _workContext.CurrentCustomer.Id;
+
+
+            if (!_postService.IsCustomerAuthToPost(closePostModel.Id, currentUserId))
+                return Forbid();
+
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+
+            if (closePostModel.Id <= 0)
+                return BadRequest("Rating and closing must be belong to post");
+
+            
+
+            if (!_postService.IsAnswered(closePostModel.Id))
+                return BadRequest("The post must be answered to  closing it");
+
+            var thereIsCahnges = _postService.ClosePost(closePostModel, currentUserId);
+
+            if (thereIsCahnges)
+                return Ok();
+            else
+                return BadRequest();
+        }
+
+
+        [HttpPost]
+        public IActionResult RatePost([FromBody]RatePostModel RatePostModel)
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
+                return Forbid();
+
+
+            var currentUserId = _workContext.CurrentCustomer.Id;
+
+
+            if (!_postService.IsCustomerAuthToPost(RatePostModel.Id, currentUserId))
+                return Forbid();
+
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+
+            if (RatePostModel.Id <= 0)
+                return BadRequest("Rating and closing must be belong to post");
+
+
+            if (!_postService.IsAnswered(RatePostModel.Id))
+                return BadRequest("The post must be answered to  rating it");
+
+            var thereIsCahnges = _postService.RatePost(RatePostModel, currentUserId);
 
             if (thereIsCahnges)
                 return Ok();
@@ -753,6 +846,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -794,6 +888,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -836,6 +931,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -910,6 +1006,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -953,6 +1050,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -997,6 +1095,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -1041,6 +1140,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -1085,6 +1185,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -1129,6 +1230,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -1174,6 +1276,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -1218,6 +1321,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -1262,6 +1366,7 @@ namespace Nop.Plugin.Consultant.Api.Controllers
                 {
                     Id = m.Id,
                     Text = m.Text,
+                    Title = m.Title,
                     CategoryId = m.CategoryId,
                     SubCategoryId = m.SubCategoryId,
                     IsSetToSubCategory = m.IsSetToSubCategory,
@@ -1422,6 +1527,144 @@ namespace Nop.Plugin.Consultant.Api.Controllers
             
             _postService.UnReservePost(reservePost.PostId);
             return Ok();
+        }
+
+
+
+
+
+
+        [HttpGet]
+        public IActionResult GetAllReservedPostsForConsultant(PagingParams pagingParams)
+        {
+
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Consultant, true))
+                return Forbid();
+
+            var currentUserId = _workContext.CurrentCustomer.Id;
+
+
+            var model = _postService.GetReservedPostsForConsultant(pagingParams, currentUserId);
+
+            Response.Headers.Add("X-Pagination", model.GetHeader().ToJson());
+
+            var outputModel = new PostOutputModel
+            {
+                Paging = model.GetHeader(),
+                Links = GetLinks(model, "Consultant.Api.Post.GetAllReservedPostsForConsultant"),
+                Items = model.List.Select(m => new PostModel()
+                {
+                    Id = m.Id,
+                    Text = m.Text,
+                    Title = m.Title,
+                    CategoryId = m.CategoryId,
+                    SubCategoryId = m.SubCategoryId,
+                    IsSetToSubCategory = m.IsSetToSubCategory,
+                    PostOwner = m.Customer.Username,
+                    DateCreated = m.DateCreated,
+                    DateUpdated = m.DateUpdated,
+                    IsAnswered = m.IsAnswered,
+                    IsClosed = m.IsClosed,
+                    Rate = m.Rate,
+                    IsDispayed = m.IsDispayed,
+                    IsReserved = m.IsReserved,
+                    CategoryName = m.Category.Name,
+                    SubCategoryName = m.SubCategory?.Name
+                }).ToList(),
+            };
+            return Ok(outputModel);
+        }
+
+
+        [HttpGet]
+        public IActionResult GetAllReservedPostsForConsultantByCategoryId(PagingParams pagingParams, int CategoryId)
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Consultant, true))
+                return Forbid();
+
+            var currentUserId = _workContext.CurrentCustomer.Id;
+
+
+            var model = _postService.GetReservedPostsForConsultantByCategoryId(pagingParams, CategoryId, currentUserId);
+
+            Response.Headers.Add("X-Pagination", model.GetHeader().ToJson());
+
+            var outputModel = new PostOutputModel
+            {
+                Paging = model.GetHeader(),
+                Links = GetLinks(model, "Consultant.Api.Post.GetAllReservedPostsForConsultantByCategoryId"),
+                Items = model.List.Select(m => new PostModel()
+                {
+                    Id = m.Id,
+                    Text = m.Text,
+                    Title = m.Title,
+                    CategoryId = m.CategoryId,
+                    SubCategoryId = m.SubCategoryId,
+                    IsSetToSubCategory = m.IsSetToSubCategory,
+                    PostOwner = m.Customer.Username,
+                    DateCreated = m.DateCreated,
+                    DateUpdated = m.DateUpdated,
+                    IsAnswered = m.IsAnswered,
+                    IsClosed = m.IsClosed,
+                    Rate = m.Rate,
+                    IsDispayed = m.IsDispayed,
+                    IsReserved = m.IsReserved,
+                    CategoryName = m.Category.Name,
+                    SubCategoryName = m.SubCategory?.Name
+                }).ToList(),
+            };
+            return Ok(outputModel);
+
+        }
+
+
+        [HttpGet]
+        public IActionResult GetAllReservedPostsForConsultantBySubCategoryId(PagingParams pagingParams, int SubCategoryId)
+        {
+
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Consultant, true))
+                return Forbid();
+
+            var currentUserId = _workContext.CurrentCustomer.Id;
+
+            var model = _postService.GetReservedPostsForConsultantBySubCategoryId(pagingParams, SubCategoryId, currentUserId);
+
+            Response.Headers.Add("X-Pagination", model.GetHeader().ToJson());
+
+            var outputModel = new PostOutputModel
+            {
+                Paging = model.GetHeader(),
+                Links = GetLinks(model, "Consultant.Api.Post.GetAllReservedPostsForConsultantBySubCategoryId"),
+                Items = model.List.Select(m => new PostModel()
+                {
+                    Id = m.Id,
+                    Text = m.Text,
+                    Title = m.Title,
+                    CategoryId = m.CategoryId,
+                    SubCategoryId = m.SubCategoryId,
+                    IsSetToSubCategory = m.IsSetToSubCategory,
+                    PostOwner = m.Customer.Username,
+                    DateCreated = m.DateCreated,
+                    DateUpdated = m.DateUpdated,
+                    IsAnswered = m.IsAnswered,
+                    IsClosed = m.IsClosed,
+                    Rate = m.Rate,
+                    IsDispayed = m.IsDispayed,
+                    IsReserved = m.IsReserved,
+                    CategoryName = m.Category.Name,
+                    SubCategoryName = m.SubCategory?.Name
+                }).ToList(),
+            };
+            return Ok(outputModel);
         }
 
         #endregion

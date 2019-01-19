@@ -1,0 +1,239 @@
+﻿/* You can add global styles to this file, and also import other style files */
+
+
+/*html, body {
+}*/
+
+body {
+    margin: 0;
+    font-family: 'Tajawal', serif;
+    direction: rtl;
+    background: #fafafa;
+    overflow-x: hidden
+}
+/* body { margin: 0; font-family: 'Amiri', serif; overflow: hidden; direction: rtl; } */
+*, a, span, p, strong, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Tajawal', serif;
+    direction: rtl;
+    text-align: right
+}
+/* *, a, span, p, strong, h1, h2, h3, h4, h5, h6 { font-family: 'Amiri', serif; direction: rtl; text-align: right } */
+/* body { fontifamily: Roboto, "Helvetica Neue", sans-serif;  } */
+
+/* Over ride on igx avatar library */
+.igx-avatar--small .igx-avatar__initials {
+    margin-right: 90% !important;
+}
+
+/* over ride on  file uploader in home page */
+.ui-widget.ui-button, .ui-button {
+    border: 1px solid #3b7d3b !important;
+    background: #7cb87c !important;
+}
+
+button, button:focus {
+    outline: 0
+}
+
+.form-control {
+    box-shadow: none
+}
+
+    .form-control:focus {
+        box-shadow: none;
+        border: 1px solid #ccc
+    }
+
+input.form-control {
+    border: 1px solid #ddd
+}
+
+::selection {
+    background: #4da74d;
+    color: #fff
+}
+
+::-webkit-selection {
+    background: #4da74d;
+    color: #fff
+}
+
+/* Post Style */
+.post {
+    border: 1px solid #4da74d;
+    border-radius: 20px;
+    margin-bottom: 35px;
+    background: #fff;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.3)
+}
+
+    .post .heading {
+        border-bottom: 1px solid #ddd;
+        padding: 15px;
+    }
+
+        .post .heading span i {
+            color: #aaa;
+            font-size: 14px
+        }
+
+        .post .heading span.selected i {
+            color: orange
+        }
+
+        .post .heading .status {
+            color: #fff;
+            padding: 2px 9px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+            .post .heading .status.open {
+                background: #5cb85c;
+            }
+
+            .post .heading .status.waiting {
+                background: #d58512;
+            }
+
+            .post .heading .status.closed {
+                background: #d9534f;
+            }
+
+        .post .heading span.separator {
+            padding: 0 6px;
+        }
+
+    .post .post-body {
+        padding: 15px;
+    }
+
+        .post .post-body img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #fff;
+            border: 1px solid #98c24d;
+            padding: 3px;
+        }
+
+            .post .post-body img.imgPost {
+                width: 50%;
+                height: auto;
+                border-radius: 0;
+                background: transparent;
+                border: 0;
+                padding: 0;
+            }
+
+        .post .post-body h4 {
+            margin-top: 5px;
+            margin-bottom: 5px
+        }
+
+        .post .post-body span {
+            color: #aaa
+        }
+
+        .post .post-body p {
+            margin-top: 15px;
+            margin-bottom: 10px;
+            color: #888;
+            font-size: 17px;
+        }
+
+    .post .post-footer {
+        border-top: 1px solid #ddd;
+        padding: 15px;
+        min-height: 50px
+    }
+
+        .post .post-footer span.buton {
+            border: 1px solid #4da74d;
+            font-size: 14px;
+            color: #4da74d;
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-right: 6px;
+            -moz-transition: all 0.3s;
+            -webkit-transition: all 0.3s;
+            -o-transition: all 0.3s;
+            -ms-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+
+            .post .post-footer span.buton, .post .post-footer span.buton:focus {
+                outline: 0
+            }
+
+                .post .post-footer span.primary, .post .post-footer span.buton:hover {
+                    background: #4da74d;
+                    color: #fff;
+                }
+
+@media(max-width:767px) {
+    .post .heading {
+        min-height: 64px
+    }
+}
+
+/* Modal Style */
+.modal-content {
+    border-radius: 20px;
+    margin-top: 160px
+}
+
+.modal-header {
+    padding: 15px;
+    border-bottom: 0;
+    background: #4da74d;
+    color: #fff;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.modal-title {
+    line-height: 2.2;
+}
+
+.modal {
+    background: rgba(2,2,2,0.6);
+}
+
+.modal-header .close {
+    margin: 0;
+}
+
+.modal button.close {
+    padding: 10px 9px
+}
+
+.close, .close:hover {
+    color: #fff;
+    text-shadow: none;
+    opacity: 1;
+    font-weight: 400
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+.orange-star {
+    color: orange
+}
+
+.swal-footer {
+    text-align: center;
+}
+
+.swal-button {
+    padding: 10px 30px;
+    background: #4da74d;
+    border-radius: 20px
+}
+
+    .swal-button:hover, .swal-button:not([disabled]):hover {
+        background: #4da74d;
+    }

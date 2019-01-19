@@ -10,6 +10,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Nop.Web.ConsultantTasks;
 using Nop.Web.Framework.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace Nop.Web
 {
@@ -49,6 +52,7 @@ namespace Nop.Web
         {
 
             
+
             services.AddSingleton<Microsoft.AspNetCore.Mvc.Infrastructure.IActionContextAccessor, Microsoft.AspNetCore.Mvc.Infrastructure.ActionContextAccessor>();
 
             services.AddScoped<Microsoft.AspNetCore.Mvc.IUrlHelper>(factory =>
@@ -57,8 +61,36 @@ namespace Nop.Web
                                            .ActionContext;
                 return new Microsoft.AspNetCore.Mvc.Routing.UrlHelper(actionContext);
             });
-            services.AddCors();
-            services.AddTransient<ClosePostAfter48Hours>();
+
+            //services.AddCors();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder =>
+                    {
+                        builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                    });
+            });
+
+            //services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            //{
+            //    builder.AllowAnyOrigin()
+            //           .AllowAnyMethod()
+            //           .AllowAnyHeader()
+            //           .AllowCredentials();
+            //}));
+
+            //services.Configure<MvcOptions>(options =>
+            //{
+            //    options.Filters.Add(new CorsAuthorizationFilterFactory("MyPolicy"));
+            //});
+
+            //services.AddTransient<ClosePostAfter48Hours>();
             return services.ConfigureApplicationServices(Configuration);
         }
 
@@ -66,11 +98,20 @@ namespace Nop.Web
         /// Configure the application HTTP request pipeline
         /// </summary>
         /// <param name="application">Builder for configuring an application's request pipeline</param>
-        public void Configure(IApplicationBuilder application, IClosePostAfter48Hours closePostAfter48Hours)
+        public void Configure(IApplicationBuilder application)//, IClosePostAfter48Hours closePostAfter48Hours
         {
-            application.UseCors(m => m.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
+            //application.UseCors("MyPolicy");
+
+            //application.UseCors(builder => builder.WithOrigins("http://localhost:4200")
+            //                    .AllowAnyMethod()
+            //                    .AllowAnyHeader()
+            //                    .AllowCredentials());
+
+            //application.UseCors(m => m.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+            application.UseCors("AllowAll");
             application.ConfigureRequestPipeline();
-            closePostAfter48Hours.StartClosingService();
+            //closePostAfter48Hours.StartClosingService();
+            
         }
     }
 }

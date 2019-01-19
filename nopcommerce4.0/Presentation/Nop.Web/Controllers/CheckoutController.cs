@@ -503,6 +503,16 @@ namespace Nop.Web.Controllers
 
             var newAddress = model.ShippingNewAddress;
 
+            //added by niyat developers
+            if(string.IsNullOrEmpty(newAddress.Email))
+            {
+                try
+                {
+                    newAddress.Email = _workContext.CurrentCustomer.Addresses.FirstOrDefault().Email;
+                }
+                catch { }
+            }
+
             if (ModelState.IsValid)
             {
                 //try to find an address with the same values (don't duplicate records)
@@ -740,7 +750,7 @@ namespace Nop.Web.Controllers
             //save
             _genericAttributeService.SaveAttribute(_workContext.CurrentCustomer,
                 SystemCustomerAttributeNames.SelectedPaymentMethod, paymentmethod, _storeContext.CurrentStore.Id);
-            
+
             return RedirectToRoute("CheckoutPaymentInfo");
         }
 

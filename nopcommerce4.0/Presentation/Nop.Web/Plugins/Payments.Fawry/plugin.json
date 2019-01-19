@@ -1,0 +1,15 @@
+{
+  "Group": "Payment methods",
+  "FriendlyName": "Fawry",
+  "SystemName": "Payments.Fawry",
+  "Version": "1.42",
+  "SupportedVersions": [
+    "4.00"
+  ],
+  "Author": "EgyNopCom team",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Payments.Fawry.dll",
+  "Description": "This plugin allows paying  by Fawry",
+  "LimitedToStores": [],
+  "LimitedToCustomerRoles": []
+}

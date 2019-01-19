@@ -5,7 +5,14 @@
 =====================================================*/
 
 @media all and (min-width: 481px) {
-	
+
+    .nivoSlider {
+        top: 34px;
+    }
+
+    #topThreeHeader {
+        display: block;
+    }
 /* GLOBAL STYLES */
 /* GLOBAL FORMS */
 

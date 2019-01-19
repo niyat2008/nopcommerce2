@@ -1,4 +1,4 @@
-@model ProductOverviewModel
+﻿@model ProductOverviewModel
 @using Nop.Core
 @using Nop.Core.Domain.Catalog
 @using Nop.Core.Domain.Orders
@@ -24,27 +24,98 @@
     var addtowishlistlink = Url.RouteUrl("AddProductToCart-Catalog", new { productId = Model.Id, shoppingCartTypeId = (int)ShoppingCartType.Wishlist, quantity = quantity });
     var addtocomparelink = Url.RouteUrl("AddProductToCompare", new { productId = Model.Id });
 }
+
+
+
+
+
+
+
+
+
+
+
+@*@{
+
+    if (!string.IsNullOrEmpty(Model.ProductPrice.OldPrice) && !string.IsNullOrEmpty(Model.ProductPrice.Price))
+    {
+        try
+        {
+            var OldPrice = double.Parse(Model.ProductPrice.OldPrice.Substring(0, Model.ProductPrice.OldPrice.Length - 5));//Replace Rs. with configured Currency symbol i.e "$"
+            var PriceRow = double.Parse(Model.ProductPrice.Price.Substring(0, Model.ProductPrice.Price.Length - 5));//Replace Rs. with configured Currency symbol i.e "$"
+
+            if (PriceRow > 0 && OldPrice > 0)
+            {
+                var discountValue = OldPrice - PriceRow; // calculate the amount
+                var discountPercentage = Math.Round(100 / (OldPrice / discountValue)); // calculate the percentage
+                if (discountPercentage > 0)
+                {
+                    <div class="promotion"> <span style="background-color:red; color:white; font-size:medium; padding:1% 1% 1% 1%;" class="discount">@discountPercentage% خصم</span> </div>
+                }
+            }
+        }
+        catch { }
+    }
+}*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="product-item" data-productid="@Model.Id">
-    <div class="picture">
+
+    @{
+
+        if (!string.IsNullOrEmpty(Model.ProductPrice.OldPrice) && !string.IsNullOrEmpty(Model.ProductPrice.Price))
+        {
+            try
+            {
+                var OldPrice = double.Parse(Model.ProductPrice.OldPrice.Substring(0, Model.ProductPrice.OldPrice.Length - 5));//Replace Rs. with configured Currency symbol i.e "$"
+                var PriceRow = double.Parse(Model.ProductPrice.Price.Substring(0, Model.ProductPrice.Price.Length - 5));//Replace Rs. with configured Currency symbol i.e "$"
+
+                if (PriceRow > 0 && OldPrice > 0)
+                {
+                    var discountValue = OldPrice - PriceRow; // calculate the amount
+                    var discountPercentage = Math.Round(100 / (OldPrice / discountValue)); // calculate the percentage
+                    if (discountPercentage > 0)
+                    {
+                        <div style="text-align:right;z-index:10;top:0;" class=""> <span style="background-color:#f74258; color:white; font-size:small; padding:1% 1% 1% 1%;" class="">@discountPercentage% خصم</span> </div>
+                    }
+                }
+            }
+            catch { }
+        }
+    }
+
+    <div class="picture" style="top:0;">
         <a href="@Url.RouteUrl("Product", new { SeName = Model.SeName })" title="@Model.DefaultPictureModel.Title">
             <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" />
         </a>
     </div>
     @*@if (Model.ProductPrice.Discount > 0 && Model.IsRegistered)dont uncommentthis*@
     @*@if (!String.IsNullOrWhiteSpace(Model.ProductPrice.OldPrice))
-    {
+        {
 
-        <a class="ribbon-position top-right" data-productribbonid="3" data-productid="@Model.Id">
-            <div class="product-ribbon" style="background: #f6f6f6;padding: 5px 15px;top: 15px;">*@
+            <a class="ribbon-position top-right" data-productribbonid="3" data-productid="@Model.Id">
+                <div class="product-ribbon" style="background: #f6f6f6;padding: 5px 15px;top: 15px;">*@
 
-                @*<label class="ribbon-text" style="font-size: 13px;font-weight: bold;color: #f74258;">-@Model.ProductPrice.Discount%</label>dont uncommentthis*@
-                @*<label class="ribbon-text" style="font-size: 13px;font-weight: bold;color: #f74258;">-@(string.Format("{0:00}%", (decimal.Parse(Model.ProductPrice.OldPrice) - decimal.Parse(Model.ProductPrice.Price))))</label>
+    @*<label class="ribbon-text" style="font-size: 13px;font-weight: bold;color: #f74258;">-@Model.ProductPrice.Discount%</label>dont uncommentthis*@
+    @*<label class="ribbon-text" style="font-size: 13px;font-weight: bold;color: #f74258;">-@(string.Format("{0:00}%", (decimal.Parse(Model.ProductPrice.OldPrice) - decimal.Parse(Model.ProductPrice.Price))))</label>
 
-            </div>
-        </a>
+                </div>
+            </a>
 
 
-    }*@
+        }*@
     <div class="details">
         @if (Model.ReviewOverviewModel.AllowCustomerReviews)
         {
@@ -79,12 +150,12 @@
                     @if (Model.ProductPrice.Price != Model.ProductPrice.PriceWithDiscount)*@
                 <span class="price actual-price">@Model.ProductPrice.Price</span>
 
-                @if (!string.IsNullOrEmpty(Model.ProductPrice.OldPrice))
-                {
-                    <span class="price old-price">@Model.ProductPrice.OldPrice</span>
-                }
+                @*@if (!string.IsNullOrEmpty(Model.ProductPrice.OldPrice))
+                    {
+                        <span class="price old-price">@Model.ProductPrice.OldPrice</span>
+                    }*@
 
-                //     <span class="price base-price">@Model.ProductPrice.PriceWithDiscount</span>
+                @*<span class="price base-price">@Model.ProductPrice.PriceWithDiscount</span>*@
                 @*@if (Model.ProductPrice.DisplayTaxShippingInfo)
                     {
                         var inclTax = workContext.TaxDisplayType == TaxDisplayType.IncludingTax;

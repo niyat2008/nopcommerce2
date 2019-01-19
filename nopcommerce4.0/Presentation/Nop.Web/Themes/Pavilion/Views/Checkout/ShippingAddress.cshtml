@@ -21,7 +21,7 @@
                 {
                     <div class="section select-shipping-address">
                         <div class="title">
-                            <strong>@T("Checkout.SelectShippingAddress")</strong>
+                            <strong style="color:black;">@T("Checkout.SelectShippingAddress")</strong>
                         </div>
                         <div class="address-grid">
                             @foreach (var item in Model.ExistingAddresses)
@@ -115,7 +115,7 @@
                     <div class="section pickup-in-store">
                         <div class="selector">
 	                        <input asp-for="PickUpInStore"/>
-	                        <label asp-for="PickUpInStore">@T("Checkout.PickupPoints")</label>
+	                        <label asp-for="PickUpInStore"><strong style="color:black;">@T("Checkout.PickupPoints")</strong></label>
 	                    </div>
 	                    <div class="description">
 	                        @T("Checkout.PickupPoints.Description")
@@ -307,11 +307,11 @@
                     <div class="title">
                         @if (Model.ExistingAddresses.Count > 0)
                         {
-                            <strong>@T("Checkout.OrEnterNewAddress")</strong>
+                            <strong style="color:black;">@T("Checkout.OrEnterNewAddress")</strong>
                         }
                         else
                         {
-                            <strong>@T("Checkout.EnterShippingAddress")</strong>
+                            <strong style="color:black;">@T("Checkout.EnterShippingAddress")</strong>
                         }
                     </div>
                     <div class="enter-address">

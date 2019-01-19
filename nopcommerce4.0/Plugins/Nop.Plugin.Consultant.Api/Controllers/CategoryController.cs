@@ -58,6 +58,33 @@ namespace Nop.Plugin.Consultant.Api.Controllers
 
 
 
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         [HttpGet]

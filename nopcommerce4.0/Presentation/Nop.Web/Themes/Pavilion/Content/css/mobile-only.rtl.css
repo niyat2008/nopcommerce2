@@ -1,28 +1,37 @@
 @media all and (max-width: 1024px) {
-	
-.admin-header-links {
-	position: fixed;
-	top: 0;
-	z-index: 1030;
-	width: 100%;
-	background-color: #00a1b1;
-	color: #fff;
-}
+    .nivoSlider{
+        top:34px;
+    }
+    #topThreeHeader {
+        display: block;
+    }
+    #WidgetSlider-home_page_bottom-9 {
+        top: 0;
+    }
+
+    .admin-header-links {
+        position: fixed;
+        top: 0;
+        z-index: 1030;
+        width: 100%;
+        background-color: #00a1b1;
+        color: #fff;
+    }
 .header-upper {
 	display: none;
 }
 .header .header-logo {
 	position: absolute;
-	top: 53px;
+	top: 85px;
 	z-index: 1020;
 	width: 100%;
 	height: 110px;
 	background-color: #fff;
-	line-height: 110px;
+	line-height: 130px;
 }
 .responsive-nav-wrapper-parent {
 	position: fixed;
-	top: 0;
+	top: 32px;
 	z-index: 1020;
 	width: 100%;
 	height: 53px !important; /*override inline height*/
@@ -265,7 +274,7 @@
 .flyout-cart-wrapper {
 	display: none;
 	position: fixed;
-	top: 53px;
+	top: 85px;
 	right: 0;
 	z-index: 1070;
 	width: 100%;
@@ -295,7 +304,7 @@
 .header-selectors {
 	display: none;
 	position: fixed;
-	top: 53px;
+	top: 85px;
 	right: 0;
 	z-index: 1070;
 	width: 100%;
@@ -349,7 +358,7 @@
 .store-search-box {
 	display: none;
 	position: fixed;
-	top: 53px;
+	top: 85px;
 	right: 0;
 	z-index: 1070;
 	width: 100%;

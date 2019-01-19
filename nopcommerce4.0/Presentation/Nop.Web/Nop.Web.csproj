@@ -61,6 +61,11 @@
 
     <!-- We copy the \Logs directory -->
     <Content Include="Logs\**" CopyToPublishDirectory="PreserveNewest" />
+    <Content Remove="wwwroot\css\Consultant\imageResponsive.css" />
+    <Content Remove="wwwroot\fonts\fonts\Home.cshtml" />
+    <EmbeddedResource Include="wwwroot\css\Consultant\imageResponsive.css">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
 
     <None Update="Areas\Admin\sitemap.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -68,8 +73,33 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Extensions\ConsultantAdmin\" />
+    <Folder Include="Infrastructure\ConsultantAdmin\" />
+    <Folder Include="Models\ConsultantAdmin\" />
+    <Folder Include="Validators\Consultant\" />
+    <Folder Include="Validators\ConsultantAdmin\" />
+    <Folder Include="wwwroot\ConsultantAdmin\" />
     <Folder Include="wwwroot\ConsultantApi\Uploads\Images\" />
     <Folder Include="wwwroot\Shared\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\fonts\fonts\Home.cshtml" />
+    <None Include="wwwroot\images\Consultant\images\logo3.svg" />
+    <None Include="wwwroot\js\ConsultantAdmin\plugins\bootstrap-datepicker.min.js" />
+    <None Include="wwwroot\js\ConsultantAdmin\plugins\bootstrap-notify.min.js" />
+    <None Include="wwwroot\js\ConsultantAdmin\plugins\chart.js" />
+    <None Include="wwwroot\js\ConsultantAdmin\plugins\dataTables.bootstrap.min.js" />
+    <None Include="wwwroot\js\ConsultantAdmin\plugins\fullcalendar.min.js" />
+    <None Include="wwwroot\js\ConsultantAdmin\plugins\jquery-ui.custom.min.js" />
+    <None Include="wwwroot\js\ConsultantAdmin\plugins\jquery.dataTables.min.js" />
+    <None Include="wwwroot\js\ConsultantAdmin\plugins\jquery.vmap.min.js" />
+    <None Include="wwwroot\js\ConsultantAdmin\plugins\jquery.vmap.sampledata.js" />
+    <None Include="wwwroot\js\ConsultantAdmin\plugins\jquery.vmap.world.js" />
+    <None Include="wwwroot\js\ConsultantAdmin\plugins\moment.min.js" />
+    <None Include="wwwroot\js\ConsultantAdmin\plugins\pace.min.js" />
+    <None Include="wwwroot\js\ConsultantAdmin\plugins\select2.min.js" />
+    <None Include="wwwroot\js\ConsultantAdmin\plugins\sweetalert.min.js" />
   </ItemGroup>
 
   <!-- This target execute after "Build" target.

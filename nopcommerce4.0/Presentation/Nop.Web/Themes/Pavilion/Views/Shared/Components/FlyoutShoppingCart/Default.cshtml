@@ -3,10 +3,10 @@
     <a href="@Url.RouteUrl("ShoppingCart")" class="cart-trigger">
         <span class="cart-qty">@T("ShoppingCart.HeaderQuantity", Model.TotalProducts)</span>
         <span class="cart-label">@T("SevenSpikes.Themes.Pavilion.Flyout.Cart")</span>
-        @if (!string.IsNullOrEmpty(Model.SubTotal))
+        @*@if (!string.IsNullOrEmpty(Model.SubTotal))
         {
             <span class="cart-ttl">- @Model.SubTotal</span>
-        }
+        }*@
     </a>
     <div class="flyout-cart">
         <div class="mini-shopping-cart">
@@ -45,8 +45,8 @@
                                         @Html.Raw(item.AttributeInfo)
                                     </div>
                                 }
-                                @*<div class="price">@T("ShoppingCart.Mini.UnitPrice"): <span>@item.UnitPrice</span></div>
-                                <div class="quantity">@T("ShoppingCart.Mini.Quantity"): <span>@item.Quantity</span></div>*@
+                                <div class="price">@T("ShoppingCart.Mini.UnitPrice"): <span>@item.UnitPrice</span></div>
+                                <div class="quantity">@T("ShoppingCart.Mini.Quantity"): <span>@item.Quantity</span></div>
                                 <div class="price"><label>@item.Quantity</label> <span>x</span> <strong>@item.UnitPrice</strong></div>
                             </div>
                         </div>

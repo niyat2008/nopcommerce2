@@ -53,7 +53,7 @@
     <div class="inputs">
         <label asp-for="Email" asp-postfix=":"></label>
         <input asp-for="Email" />
-        <nop-required />
+        @*<nop-required />*@
         <span asp-validation-for="Email"></span>
     </div>
     @if (Model.CompanyEnabled)

@@ -20,6 +20,11 @@ namespace Nop.Plugin.Consultant.Api
 
         public void RegisterRoutes(IRouteBuilder routeBuilder)
         {
+            
+
+
+
+
 
             routeBuilder.MapRoute("Consultant.Api.User.Search", "Consultant/Api/User/GetUserInfo",
             new { controller = "User", action = "GetUserInfo" });
@@ -93,6 +98,18 @@ namespace Nop.Plugin.Consultant.Api
             routeBuilder.MapRoute("Consultant.Api.Post.UnReservePost", "Consultant/Api/Post/UnReservePost/",
             new { controller = "Post", action = "UnReservePost" });
 
+            routeBuilder.MapRoute("Consultant.Api.Post.GetAllReservedPostsForConsultant", "Consultant/Api/Post/GetAllReservedPostsForConsultant",
+            new { controller = "Post", action = "GetAllReservedPostsForConsultant" });
+            routeBuilder.MapRoute("Consultant.Api.Post.GetAllReservedPostsForConsultantByCategoryId", "Consultant/Api/Post/GetAllReservedPostsForConsultantByCategoryId/{CategoryId:min(0)}",
+            new { controller = "Post", action = "GetAllReservedPostsForConsultantByCategoryId" });
+            routeBuilder.MapRoute("Consultant.Api.Post.GetAllReservedPostsForConsultantBySubCategoryId", "Consultant/Api/Post/GetAllReservedPostsForConsultantBySubCategoryId/{SubCategoryId:min(0)}",
+            new { controller = "Post", action = "GetAllReservedPostsForConsultantBySubCategoryId" });
+
+            routeBuilder.MapRoute("Consultant.Api.Post.ClosePost", "Consultant/Api/Post/ClosePost/",
+            new { controller = "Post", action = "ClosePost" });
+            routeBuilder.MapRoute("Consultant.Api.Post.RatePost", "Consultant/Api/Post/RatePost/",
+            new { controller = "Post", action = "RatePost" });
+
             routeBuilder.MapRoute("Consultant.Api.Post.DisplayPost", "Consultant/Api/Post/DisplayPost/",
             new { controller = "Post", action = "DisplayPost" });
             routeBuilder.MapRoute("Consultant.Api.Post.HidePost", "Consultant/Api/Post/HidePost/",
@@ -147,7 +164,7 @@ namespace Nop.Plugin.Consultant.Api
             routeBuilder.MapRoute("Consultant.Api.Comment.DeleteComment", "Consultant/Api/Comment/DeleteComment/",
             new { controller = "Comment", action = "DeleteComment" });
 
-
+            
 
             //admin
 

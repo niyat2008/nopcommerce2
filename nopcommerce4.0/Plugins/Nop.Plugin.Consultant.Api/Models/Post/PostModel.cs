@@ -10,6 +10,7 @@ namespace Nop.Plugin.Consultant.Api.Models.Post
     public class PostModel : BaseNopEntityModel
     {
         public string Text { get; set; }
+        public string Title { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
         public bool IsClosed { get; set; }

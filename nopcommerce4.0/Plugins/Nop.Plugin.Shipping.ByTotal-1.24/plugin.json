@@ -1,0 +1,11 @@
+{
+  "Group": "Shipping rate computation",
+  "FriendlyName": "Shipping by total",
+  "SystemName": "Shipping.ByTotal",
+  "Version": "1.24",
+  "SupportedVersions": [ "4.00" ],
+  "Author": "mb",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Shipping.ByTotal.dll",
+  "Description": "This plugin provides shipping rates based on an order's subtotal."
+}

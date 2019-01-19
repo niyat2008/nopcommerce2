@@ -1,0 +1,15 @@
+﻿.img-mobile-image {
+    display: none;
+}
+
+@media (max-width:767px) {
+    .img-responsive
+
+{
+    display: none;
+}
+
+.img-mobile-image {
+    display: block !important;
+}
+}

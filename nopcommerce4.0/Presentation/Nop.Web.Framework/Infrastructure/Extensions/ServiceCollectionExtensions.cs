@@ -220,6 +220,7 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
         /// <returns>A builder for configuring MVC services</returns>
         public static IMvcBuilder AddNopMvc(this IServiceCollection services)
         {
+            
             //add basic MVC feature
             var mvcBuilder = services.AddMvc();
 

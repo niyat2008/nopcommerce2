@@ -28,7 +28,7 @@
                         <label>@T("ShoppingCart.Totals.Shipping"):</label>
                         @if (Model.RequiresShipping && !string.IsNullOrEmpty(Model.SelectedShippingMethod))
                         {
-                            <span class="selected-shipping-method">@T("ShoppingCart.Totals.Shipping.Method", Model.SelectedShippingMethod)</span>
+                            @*<span class="selected-shipping-method">@T("ShoppingCart.Totals.Shipping.Method", Model.SelectedShippingMethod)</span>*@
                         }
                     </td>
                     <td class="cart-total-right">
@@ -36,11 +36,11 @@
                         {
                             if (!string.IsNullOrEmpty(Model.Shipping))
                             {
-                            <span class="value-summary">@Model.Shipping</span>
+                                <span class="value-summary">@Model.Shipping</span>
                             }
                             else
                             {
-                            <span>@T("ShoppingCart.Totals.CalculatedDuringCheckout")</span>
+                                <span>@T("ShoppingCart.Totals.CalculatedDuringCheckout")</span>
                             }
                         }
                         else
@@ -65,14 +65,14 @@
             {
                 foreach (var taxRate in Model.TaxRates)
                 {
-                <tr class="tax-rate">
-                    <td class="cart-total-left">
-                        <label>@string.Format(T("ShoppingCart.Totals.TaxRateLine").Text, taxRate.Rate):</label>
-                    </td>
-                    <td class="cart-total-right">
-                        <span>@taxRate.Value</span>
-                    </td>
-                </tr>
+                    <tr class="tax-rate">
+                        <td class="cart-total-left">
+                            <label>@string.Format(T("ShoppingCart.Totals.TaxRateLine").Text, taxRate.Rate):</label>
+                        </td>
+                        <td class="cart-total-right">
+                            <span>@taxRate.Value</span>
+                        </td>
+                    </tr>
                 }
             }
             @if (Model.DisplayTax)
@@ -101,21 +101,21 @@
             {
                 foreach (var gc in Model.GiftCards)
                 {
-                <tr class="giftcard-summary">
-                    <td class="cart-total-left">
-                        <label>@T("ShoppingCart.Totals.GiftCardInfo"):</label>
-                        <span>@T("ShoppingCart.Totals.GiftCardInfo.Code", gc.CouponCode)</span>
-                        @if (Model.IsEditable)
-                        {
-                            //little hack here with empty "value" element
-                            <input type="submit" name="removegiftcard-@gc.Id" value=" " title="@T("Common.Remove")" class="remove-gift-card-button" />
-                        }
-                        <span class="giftcard-remaining">@string.Format(T("ShoppingCart.Totals.GiftCardInfo.Remaining").Text, gc.Remaining)</span>
-                    </td>
-                    <td class="cart-total-right">
-                        <span class="value-summary">@gc.Amount</span>
-                    </td>
-                </tr>
+                    <tr class="giftcard-summary">
+                        <td class="cart-total-left">
+                            <label>@T("ShoppingCart.Totals.GiftCardInfo"):</label>
+                            <span>@T("ShoppingCart.Totals.GiftCardInfo.Code", gc.CouponCode)</span>
+                            @if (Model.IsEditable)
+                            {
+                                //little hack here with empty "value" element
+                                <input type="submit" name="removegiftcard-@gc.Id" value=" " title="@T("Common.Remove")" class="remove-gift-card-button" />
+                            }
+                            <span class="giftcard-remaining">@string.Format(T("ShoppingCart.Totals.GiftCardInfo.Remaining").Text, gc.Remaining)</span>
+                        </td>
+                        <td class="cart-total-right">
+                            <span class="value-summary">@gc.Amount</span>
+                        </td>
+                    </tr>
                 }
             }
             @if (Model.RedeemedRewardPoints > 0)
@@ -155,6 +155,10 @@
                     </td>
                 </tr>
             }
+
+            
+          
+
         </tbody>
     </table>
 </div>

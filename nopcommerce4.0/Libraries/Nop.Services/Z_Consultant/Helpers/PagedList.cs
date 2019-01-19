@@ -10,15 +10,27 @@ namespace Nop.Services.Z_Consultant.Helpers
 {
     public class PagedList<T> where T : BaseEntity
     {
-        public PagedList(IQueryable<T> source, int pageNumber, int pageSize)
+        public PagedList(IQueryable<T> source, int pageNumber, int pageSize,bool orederByDes)
         {
-            this.TotalItems = source.Count();
-            this.PageNumber = pageNumber;
-            this.PageSize = pageSize;
-            this.List = source.OrderBy(s => s.Id)
-                            .Skip(pageSize * (pageNumber - 1))
-                            .Take(pageSize)
-                            .ToList();
+            if (orederByDes)
+            {
+                this.TotalItems = source.Count();
+                this.PageNumber = pageNumber;
+                this.PageSize = pageSize;
+                this.List = source.Skip(pageSize * (pageNumber - 1))
+                                .Take(pageSize)
+                                .ToList();
+            }
+            else
+            {
+                this.TotalItems = source.Count();
+                this.PageNumber = pageNumber;
+                this.PageSize = pageSize;
+                this.List = source.OrderBy(s => s.Id)
+                                .Skip(pageSize * (pageNumber - 1))
+                                .Take(pageSize)
+                                .ToList();
+            }
         }
 
         public int TotalItems { get; }

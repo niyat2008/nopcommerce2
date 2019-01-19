@@ -67,6 +67,7 @@ namespace Nop.Services.Z_Consultant.Post
             var post = new Z_Consultant_Post()
             {
                 Text = postForPostModel.Text,
+                Title= postForPostModel.Title,
                 CategoryId = postForPostModel.CategoryId,
                 CustomerId = cutomerId,
                 DateCreated = DateTime.Now,
@@ -238,7 +239,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetClosedPostsAdmin(PagingParams pagingParams)
@@ -249,7 +250,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetClosedPostsByCategoryId(PagingParams pagingParams, int categoryId)
@@ -261,7 +262,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
         public PagedList<Z_Consultant_Post> GetClosedPostsByCategoryIdAdmin(PagingParams pagingParams, int categoryId)
         {
@@ -272,7 +273,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetClosedPostsBySubCategoryId(PagingParams pagingParams, int subCategoryId)
@@ -284,7 +285,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetClosedPostsBySubCategoryIdAdmin(PagingParams pagingParams, int subCategoryId)
@@ -296,7 +297,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetClosedPostsForCustomer(PagingParams pagingParams, int customerId)
@@ -308,7 +309,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetClosedPostsForCustomerByCategoryId(PagingParams pagingParams, int categoryId, int customerId)
@@ -320,7 +321,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetClosedPostsForCustomerBySubCategoryId(PagingParams pagingParams, int subCategoryId, int customerId)
@@ -332,7 +333,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetOpenPostsForCustomer(PagingParams pagingParams, int customerId)
@@ -344,7 +345,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetOpenPostsForCustomerByCategoryId(PagingParams pagingParams, int categoryId, int customerId)
@@ -356,7 +357,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetOpenPostsForCustomerBySubCategoryId(PagingParams pagingParams, int subCategoryId, int customerId)
@@ -368,7 +369,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetPostsForCustomer(PagingParams pagingParams, int customerId)
@@ -380,7 +381,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetPostsForCustomerByCategoryId(PagingParams pagingParams, int categoryId, int customerId)
@@ -392,7 +393,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetPostsForCustomerBySubCategoryId(PagingParams pagingParams, int subCategoryId, int customerId)
@@ -404,7 +405,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public bool CloseAndRatePost(CloseAndRatePostModel closeAndRatePostDto, int customerId)
@@ -448,10 +449,10 @@ namespace Nop.Services.Z_Consultant.Post
                 .Include(p => p.Category).Include(p => p.SubCategory)
                 .Where(p => p.IsClosed == false && p.IsReserved==false && p.IsAnswered == false);
 
-            query = query.OrderBy(p => p.DateCreated);
+            query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetOpenPostsNotAnsByCategoryId(PagingParams pagingParams, int categoryId)
@@ -463,7 +464,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderBy(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetOpenPostsNotAnsBySubCategoryId(PagingParams pagingParams, int subCategoryId)
@@ -475,43 +476,43 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderBy(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetOpenPostsForConsultant(PagingParams pagingParams, int consultantId)
         {
             var query = _postRepository.TableNoTracking.Include(p => p.Customer)
                 .Include(p => p.Category).Include(p => p.SubCategory)
-                .Where(p => p.ConsultantId == consultantId && p.IsReserved==true && p.IsClosed == false);
+                .Where(p => p.ConsultantId == consultantId && p.IsAnswered==true && p.IsClosed == false);
 
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetOpenPostsForConsultantByCategoryId(PagingParams pagingParams, int categoryId, int consultantId)
         {
             var query = _postRepository.TableNoTracking.Include(p => p.Customer)
                 .Include(p => p.Category).Include(p => p.SubCategory)
-                .Where(p => p.IsClosed == false && p.IsReserved==true && (p.CategoryId == categoryId || p.SubCategory.CategoryId == categoryId) && p.ConsultantId == consultantId);
+                .Where(p => p.IsClosed == false && p.IsAnswered==true && (p.CategoryId == categoryId || p.SubCategory.CategoryId == categoryId) && p.ConsultantId == consultantId);
 
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetOpenPostsForConsultantBySubCategoryId(PagingParams pagingParams, int subCategoryId, int consultantId)
         {
             var query = _postRepository.TableNoTracking.Include(p => p.Customer)
                 .Include(p => p.Category).Include(p => p.SubCategory)
-                .Where(p => p.IsClosed == false && p.IsReserved==true && p.SubCategoryId == subCategoryId && p.ConsultantId == consultantId);
+                .Where(p => p.IsClosed == false && p.IsAnswered==true && p.SubCategoryId == subCategoryId && p.ConsultantId == consultantId);
 
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetClosedPostsForConsultant(PagingParams pagingParams, int consultantId)
@@ -523,7 +524,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetClosedPostsForConsultantByCategoryId(PagingParams pagingParams, int categoryId, int consultantId)
@@ -535,7 +536,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetClosedPostsForConsultantBySubCategoryId(PagingParams pagingParams, int subCategoryId, int consultantId)
@@ -547,7 +548,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetPostsForConsultant(PagingParams pagingParams, int consultantId)
@@ -559,7 +560,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetPostsForConsultantByCategoryId(PagingParams pagingParams, int categoryId, int consultantId)
@@ -571,7 +572,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetPostsForConsultantBySubCategoryId(PagingParams pagingParams, int subCategoryId, int consultantId)
@@ -583,7 +584,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public bool IsConsultantAuthToPost(int postId, int consultantId)
@@ -666,8 +667,8 @@ namespace Nop.Services.Z_Consultant.Post
         public void SetPostAnsweredByConsultant(int postId, int consultantId)
         {
             var post = _postRepository.Table.Where(p => p.Id == postId).FirstOrDefault();
-            post.IsReserved = true;
             post.IsAnswered = true;
+            post.IsReserved = true;
             post.ConsultantId = consultantId;
             _postRepository.Update(post);
         }
@@ -675,7 +676,7 @@ namespace Nop.Services.Z_Consultant.Post
         public void SetPostToCategoryAndSubCategory(SetPostToCategoryAndSubCategoryModel setPostToCategoryAndSub)
         {
             var post = _postRepository.Table
-                .Where(p => p.Id == setPostToCategoryAndSub.PostId && p.IsReserved==true).FirstOrDefault();
+                .Where(p => p.Id == setPostToCategoryAndSub.PostId).FirstOrDefault();
 
 
             if (post != null)
@@ -708,7 +709,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetPostsByCategoryId(PagingParams pagingParams, int categoryId)
@@ -720,7 +721,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetPostsBySubCategoryId(PagingParams pagingParams, int subCategoryId)
@@ -732,7 +733,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetOpenPostsAns(PagingParams pagingParams)
@@ -744,7 +745,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderBy(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetOpenPostsAnsByCategoryId(PagingParams pagingParams, int categoryId)
@@ -756,7 +757,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderBy(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetOpenPostsAnsBySubCategoryId(PagingParams pagingParams, int subCategoryId)
@@ -768,7 +769,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderBy(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetOpenPosts(PagingParams pagingParams)
@@ -780,7 +781,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderBy(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetOpenPostsByCategoryId(PagingParams pagingParams, int categoryId)
@@ -792,7 +793,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderBy(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetOpenPostsBySubCategoryId(PagingParams pagingParams, int subCategoryId)
@@ -804,7 +805,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderBy(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetClosedDisplayedPosts(PagingParams pagingParams)
@@ -815,7 +816,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetClosedDisplayedPostsByCategoryId(PagingParams pagingParams, int categoryId)
@@ -827,7 +828,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetClosedDisplayedPostsBySubCategoryId(PagingParams pagingParams, int subCategoryId)
@@ -839,7 +840,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
 
@@ -851,7 +852,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetClosedHiddenPostsByCategoryId(PagingParams pagingParams, int categoryId)
@@ -863,7 +864,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public PagedList<Z_Consultant_Post> GetClosedHiddenPostsBySubCategoryId(PagingParams pagingParams, int subCategoryId)
@@ -875,7 +876,7 @@ namespace Nop.Services.Z_Consultant.Post
             query = query.OrderByDescending(p => p.DateCreated);
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public bool IsReserved(int postId)
@@ -918,11 +919,84 @@ namespace Nop.Services.Z_Consultant.Post
             string[] words = searchModel.Term.Split(' ');
             var query = _postRepository.TableNoTracking
                 .Include(p => p.Customer).Include(p => p.Category).Include(p => p.SubCategory)
-                .Where(p => words.Any(word => p.Text.Contains(word)));
+                .Where(p=> p.IsClosed == true && p.IsDispayed==true   &&  (words.Any(word => p.Text.Contains(word)) || words.Any(word => p.Title.Contains(word))));
 
             return new PagedList<Z_Consultant_Post>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,false);
         }
 
+        public bool ClosePost(ClosePostModel closePostDto, int customerId)
+        {
+            var atLeastSingleChange = false;
+
+            var post = _postRepository.Table.Where(p => p.Id == closePostDto.Id).FirstOrDefault();
+
+            if (!post.IsClosed)
+            {
+                post.IsClosed = true;
+                atLeastSingleChange = true;
+            }
+            
+
+            if (atLeastSingleChange)
+                _postRepository.Update(post);
+
+            return atLeastSingleChange;
+        }
+
+        public bool RatePost(RatePostModel ratePostDto, int customerId)
+        {
+            var atLeastSingleChange = false;
+
+            var post = _postRepository.Table.Where(p => p.Id == ratePostDto.Id).FirstOrDefault();
+
+            if (!post.IsClosed)
+            {
+                post.Rate = ratePostDto.Rate;
+                atLeastSingleChange = true;
+            }
+
+
+            if (atLeastSingleChange)
+                _postRepository.Update(post);
+
+            return atLeastSingleChange;
+        }
+
+        public PagedList<Z_Consultant_Post> GetReservedPostsForConsultant(PagingParams pagingParams, int consultantId)
+        {
+            var query = _postRepository.TableNoTracking.Include(p => p.Customer)
+                .Include(p => p.Category).Include(p => p.SubCategory)
+                .Where(p => p.ConsultantId == consultantId && p.IsReserved == true && p.IsAnswered == false && p.IsClosed == false);
+
+            query = query.OrderByDescending(p => p.DateCreated);
+
+            return new PagedList<Z_Consultant_Post>(
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
+        }
+
+        public PagedList<Z_Consultant_Post> GetReservedPostsForConsultantByCategoryId(PagingParams pagingParams, int categoryId, int consultantId)
+        {
+            var query = _postRepository.TableNoTracking.Include(p => p.Customer)
+                .Include(p => p.Category).Include(p => p.SubCategory)
+                .Where(p => p.IsClosed == false && p.IsAnswered == false && p.IsReserved == true && (p.CategoryId == categoryId || p.SubCategory.CategoryId == categoryId) && p.ConsultantId == consultantId);
+
+            query = query.OrderByDescending(p => p.DateCreated);
+
+            return new PagedList<Z_Consultant_Post>(
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
+        }
+
+        public PagedList<Z_Consultant_Post> GetReservedPostsForConsultantBySubCategoryId(PagingParams pagingParams, int subCategoryId, int consultantId)
+        {
+            var query = _postRepository.TableNoTracking.Include(p => p.Customer)
+                .Include(p => p.Category).Include(p => p.SubCategory)
+                .Where(p => p.IsClosed == false && p.IsAnswered == false && p.IsReserved == true && p.SubCategoryId == subCategoryId && p.ConsultantId == consultantId);
+
+            query = query.OrderByDescending(p => p.DateCreated);
+
+            return new PagedList<Z_Consultant_Post>(
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
+        }
     }
 }

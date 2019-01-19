@@ -131,7 +131,7 @@
                     </div>
                 }
                 @await Component.InvokeAsync("Widget", new {widgetZone = "checkout_billing_address_middle"})
-                @*<div class="section new-billing-address">
+                <div class="section new-billing-address" id="new-billing-address">
                     <div class="title">
                         @if (Model.ExistingAddresses.Count > 0)
                         {
@@ -153,7 +153,7 @@
                     <div class="buttons">
                         <input type="submit" name="nextstep" value="@T("Checkout.NextButton")" class="button-1 new-address-next-step-button" />
                     </div>
-                </div>*@
+                </div>
                 @await Component.InvokeAsync("Widget", new {widgetZone = "checkout_billing_address_bottom"})
             </div>
         </form>
@@ -165,3 +165,4 @@
         </div>
     </div>
 </div>
+

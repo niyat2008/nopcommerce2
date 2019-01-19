@@ -23,6 +23,7 @@ namespace Nop.Core.Domain.Z_Consultant
 
         //[Required]
         public string Text { get; set; }
+        public string Title { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
         public bool IsClosed { get; set; }

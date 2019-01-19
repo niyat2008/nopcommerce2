@@ -1,0 +1,102 @@
+﻿<link href="~/css/Consultant/CustomerConsultations.css" rel="stylesheet" />
+
+
+<!-- Tab -->
+
+
+<div>
+    <div class="container-fluid">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" Class="active">
+                    <a onclick="selectedTabChanged(0)" aria-controls="home" role="tab" data-toggle="tab">لم يرد عليها  </a>
+                </li>
+                <li role="presentation" [ngClass]="{'active': selectedTab==1}">
+                    <a onclick="selectedTabChanged(1)" aria-controls="profile" role="tab" data-toggle="tab">المحجوزة</a>
+                </li>
+                <li role="presentation" [ngClass]="{'active': selectedTab==2}">
+                    <a onclick="selectedTabChanged(2)" aria-controls="messages" role="tab" data-toggle="tab">المفتوحة</a>
+                </li>
+                <li role="presentation" [ngClass]="{'active': selectedTab==3}">
+                    <a onclick="selectedTabChanged(3)" aria-controls="profile" role="tab" data-toggle="tab">المغلقة</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                @*<div role="tabpanel" class="tab-pane " Class="active"  id="home">
+                    @*<app-post *ngFor="let post of unassignedPosts" [consultation]="post"></app-post>*@
+                    <div id="tabpanelPosts">لا يوجد</div>
+                    <not-found *ngIf="!unassignedPosts.length"></not-found>
+                    <tw-pagination *ngIf="unassignedPosts.length" [numberOfPages]="paging?.totalPages" (pageChanged)="unassignedPageChanged($event)"></tw-pagination>
+                @*</div>*@
+                @*<div role="tabpanel" class="tab-pane" [ngClass]="{'active': selectedTab==1}" id="profile">
+                    <app-post *ngFor="let post of closedPosts" [consultation]="post"></app-post>
+                    <not-found *ngIf="!closedPosts.length"></not-found>
+                    <tw-pagination *ngIf="closedPosts.length" [numberOfPages]="paging?.totalPages" (pageChanged)="closedPageChanged($event)"></tw-pagination>
+                </div>
+                <div role="tabpanel" class="tab-pane" [ngClass]="{'active': selectedTab==2}" id="messages">
+                    <app-post *ngFor="let post of openPosts " [consultation]="post"></app-post>
+                    <not-found *ngIf="!openPosts.length"></not-found>
+                    <tw-pagination *ngIf="openPosts.length" [numberOfPages]="paging?.totalPages" (pageChanged)="openedPageChanged($event)"></tw-pagination>
+                </div>*@
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $.ajax({
+            type: 'GET',
+            url: 'Consultations/GetConsultantNotAnsweredPosts',
+            success: function (data) {
+                $("#tabpanelPosts").html(data);
+
+            },
+            error: function () {
+                alert("حدث خطأ ما");
+            }
+        });
+        
+        
+    });
+
+
+    function selectedTabChanged(tabIndex) {
+        var url = "Consultations/GetConsultantNotAnsweredPosts";
+        if (tabIndex == 0) {
+            url = "Consultations/GetConsultantNotAnsweredPosts";
+        }
+        else if (tabIndex == 1) {
+            url = "Consultations/GetConsultantReservedPosts";
+        }
+        else if (tabIndex == 2) {
+            url = "Consultations/GetConsultantOpenPosts";
+        }
+        else if (tabIndex == 3) {
+            url = "Consultations/GetConsultantClosedPosts";
+        }
+
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (data) {
+                $("#tabpanelPosts").html(data);
+
+            },
+            error: function () {
+                alert("حدث خطأ ما");
+            }
+        });
+    };
+   
+</script>

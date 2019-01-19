@@ -27,7 +27,7 @@ namespace Nop.Services.Z_Consultant.Comment
                 PostId = CommentForPostDto.PostId,
                 ConsultantId = consultantId,
                 CommentedBy = CommentByTypes.Consultant,
-                DateCreated = DateTime.Now
+                DateCreated = DateTime.Now,
             };
             _commentRepository.Insert(comment);
             return comment;
@@ -87,11 +87,12 @@ namespace Nop.Services.Z_Consultant.Comment
         {
             var query = _commentRepository.TableNoTracking
                 .Include(c => c.Customer).Include(c => c.Consultant)
-                .Where(c => c.PostId == postId);
+                .Where(c => c.PostId == postId)
+                .OrderBy(c => c.DateCreated);
 
             query = query.OrderBy(c => c.DateCreated);
             return new PagedList<Z_Consultant_Comment>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
 
         public int GetPostIdByCommentId(int commentId)

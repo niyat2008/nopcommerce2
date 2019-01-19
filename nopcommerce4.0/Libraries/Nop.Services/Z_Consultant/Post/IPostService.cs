@@ -28,13 +28,18 @@ namespace Nop.Services.Z_Consultant.Post
         PagedList<Z_Consultant_Post> GetPostsForCustomerBySubCategoryId(PagingParams pagingParams, int subCategoryId, int customerId);
         Z_Consultant_Post AddNewPost(PostForPostModel postForPostModel, int cutomerId, IList<string> files, List<string> errors);
         bool CloseAndRatePost(CloseAndRatePostModel closeAndRatePostDto, int customerId);
+        bool ClosePost(ClosePostModel closePostDto, int customerId);
+        bool RatePost(RatePostModel ratePostDto, int customerId);
         bool IsCustomerAuthToPost(int postId, int customerId);
         PagedList<Z_Consultant_Post> GetOpenPostsNotAns(PagingParams pagingParams);
         PagedList<Z_Consultant_Post> GetOpenPostsNotAnsByCategoryId(PagingParams pagingParams, int categoryId);
         PagedList<Z_Consultant_Post> GetOpenPostsNotAnsBySubCategoryId(PagingParams pagingParams, int subCategoryId);
         PagedList<Z_Consultant_Post> GetOpenPostsForConsultant(PagingParams pagingParams, int consultantId);
+        PagedList<Z_Consultant_Post> GetReservedPostsForConsultant(PagingParams pagingParams, int consultantId);
         PagedList<Z_Consultant_Post> GetOpenPostsForConsultantByCategoryId(PagingParams pagingParams, int categoryId, int consultantId);
+        PagedList<Z_Consultant_Post> GetReservedPostsForConsultantByCategoryId(PagingParams pagingParams, int categoryId, int consultantId);
         PagedList<Z_Consultant_Post> GetOpenPostsForConsultantBySubCategoryId(PagingParams pagingParams, int subCategoryId, int consultantId);
+        PagedList<Z_Consultant_Post> GetReservedPostsForConsultantBySubCategoryId(PagingParams pagingParams, int subCategoryId, int consultantId);
         PagedList<Z_Consultant_Post> GetClosedPostsForConsultant(PagingParams pagingParams, int consultantId);
         PagedList<Z_Consultant_Post> GetClosedPostsForConsultantByCategoryId(PagingParams pagingParams, int categoryId, int consultantId);
         PagedList<Z_Consultant_Post> GetClosedPostsForConsultantBySubCategoryId(PagingParams pagingParams, int subCategoryId, int consultantId);

@@ -18,6 +18,83 @@ namespace Nop.Web.Infrastructure
         /// <param name="routeBuilder">Route builder</param>
         public void RegisterRoutes(IRouteBuilder routeBuilder)
         {
+
+
+            //admin consultant
+
+            routeBuilder.MapRoute("Consultant.Admin.Dashboard", "Consultations/Admin",
+            new { controller = "DashboardConsultant", action = "Home" });
+
+            //end admin consultant
+
+            routeBuilder.MapRoute("Consultant.Api.Consultations", "Consultations",
+            new { controller = "Consultations", action = "Home" });
+
+            routeBuilder.MapRoute("Consultations.Api.Post.getFile", "Consultations/Images/{path}",
+            new { controller = "Consultations", action = "getFile" });
+            routeBuilder.MapRoute("Consultations.Api.Post.getFilePrivate", "Consultations/Imgs/{path}",
+            new { controller = "Consultations", action = "getFilePrivate" });
+
+            routeBuilder.MapRoute("Consultant.Consultations.GetAllClosedPosts", "Consultations/GetAllClosedPosts",
+            new { controller = "Consultations", action = "GetAllClosedPosts" });
+            routeBuilder.MapRoute("Consultant.Consultations.Navbar", "Consultations/Navbar",
+            new { controller = "Consultations", action = "Navbar" });
+
+            routeBuilder.MapRoute("Consultant.Consultations.GetCategories", "Consultations/GetCategories",
+            new { controller = "Consultations", action = "GetCategories" });
+
+            routeBuilder.MapRoute("Consultant.Consultations.GetAllClosedPostsByCategoryId", "Consultations/GetAllClosedPostsByCategoryId",
+            new { controller = "Consultations", action = "GetAllClosedPostsByCategoryId" });
+
+
+            routeBuilder.MapRoute("Consultant.Consultations.GetAllClosedPostsBySubCategoryId", "Consultations/GetAllClosedPostsBySubCategoryId",
+            new { controller = "Consultations", action = "GetAllClosedPostsBySubCategoryId" });
+
+
+            routeBuilder.MapRoute("Consultant.Consultations.GetCustomerClosedPosts", "Consultations/GetCustomerClosedPosts",
+            new { controller = "Consultations", action = "GetCustomerClosedPosts" });
+
+
+
+            routeBuilder.MapRoute("Consultant.Consultations.GetCustomerOpenPosts", "Consultations/GetCustomerOpenPosts",
+            new { controller = "Consultations", action = "GetCustomerOpenPosts" });
+
+
+            routeBuilder.MapRoute("Consultant.Consultations.GetConsultantNotAnsweredPosts", "Consultations/GetConsultantNotAnsweredPosts",
+            new { controller = "Consultations", action = "GetConsultantNotAnsweredPosts" });
+
+
+            routeBuilder.MapRoute("Consultant.Consultations.GetConsultantReservedPosts", "Consultations/GetConsultantReservedPosts",
+            new { controller = "Consultations", action = "GetConsultantReservedPosts" });
+
+
+            routeBuilder.MapRoute("Consultant.Consultations.GetConsultantOpenPosts", "Consultations/GetConsultantOpenPosts",
+            new { controller = "Consultations", action = "GetConsultantOpenPosts" });
+
+
+
+            routeBuilder.MapRoute("Consultant.Consultations.GetConsultantClosedPosts", "Consultations/GetConsultantClosedPosts",
+            new { controller = "Consultations", action = "GetConsultantClosedPosts" });
+
+
+            routeBuilder.MapRoute("Consultant.Consultations.GetCommentsByPostId", "Consultations/GetCommentsByPostId",
+            new { controller = "Consultations", action = "GetCommentsByPostId" });
+
+
+            routeBuilder.MapRoute("Consultant.Consultations.Search", "Consultations/Search",
+            new { controller = "Consultations", action = "Search" });
+
+
+            routeBuilder.MapRoute("Consultant.Consultations.ChangeCatAndSub", "Consultations/ChangeCatAndSub",
+            new { controller = "Consultations", action = "ChangeCatAndSub" });
+
+
+            routeBuilder.MapRoute("Consultant.Consultations.GetSubCategoriesByCategoryId", "Consultations/GetSubCategoriesByCategoryId",
+            new { controller = "Consultations", action = "GetSubCategoriesByCategoryId" });
+
+
+
+
             //reorder routes so the most used ones are on top. It can improve performance
 
             //areas

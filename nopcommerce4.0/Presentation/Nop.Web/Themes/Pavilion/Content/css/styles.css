@@ -871,7 +871,7 @@ label, label + * {
 	height: 43px;
 	margin: 0 5px;
 	border: none;
-	background-color: rgba(0,0,0,0.2);
+	/*background-color: rgba(0,0,0,0.2);*/
 	padding: 0 12px;
 	vertical-align: middle;
 	color: rgba(255,255,255,0.7);
@@ -882,18 +882,18 @@ label, label + * {
 .store-search-box input::-webkit-input-placeholder {
 	color: rgba(255,255,255,0.7);
 }
-.store-search-box .search-box-button {
-	display: inline-block;
-	width: 47px;
-	height: 47px;
-	margin: 0 5px;
-	border: none;
-	background: #f74258 url('../img/search-button.png') center no-repeat;
-	vertical-align: middle;
-	font-size: 0;
-	outline: 1px solid transparent;
-	transition: all 0.2s ease;
-}
+    .store-search-box .search-box-button {
+        display: inline-block;
+        width: 47px;
+        height: 47px;
+        margin: 0 5px;
+        border: none;
+        background: #4da74d url('../img/search-button.png') center no-repeat;
+        vertical-align: middle;
+        font-size: 0;
+        outline: 1px solid transparent;
+        transition: all 0.2s ease;
+    }
 .store-search-box .search-box-button:hover {
 	outline-color: #fff;
 }
@@ -5033,12 +5033,12 @@ label, label + * {
 	padding: 0 18px;
 }
 .forum-search-box .search-box-button {
-	float: left;
-	width: 40px;
-	height: 40px;
-	border: none;
-	background: #f74258 url('../img/search-button.png') center no-repeat;
-	font-size: 0;
+    float: left;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: #4da74d url('../img/search-button.png') center no-repeat;
+    font-size: 0;
 }
 .forum-search-box .advanced a {
 	font-size: 13px;

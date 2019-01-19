@@ -1,0 +1,216 @@
+﻿/* Home Style */
+* {
+    direction: rtl
+}
+
+a {
+    cursor: pointer;
+}
+
+/*Add Consultation*/
+.addConsultation {
+    margin-bottom: 20px;
+    border-radius: 20px;
+    min-height: 400px;
+}
+
+    .addConsultation .block {
+        position: relative;
+        min-height: 400px
+    }
+
+        .addConsultation .block img.ask {
+            width: 100%;
+            border-radius: 20px;
+            min-height: 400px
+        }
+
+        .addConsultation .block .block_details {
+            position: absolute;
+            top: 0;
+            text-align: center;
+            ;
+            width: 100%
+        }
+
+            .addConsultation .block .block_details h3 {
+                text-align: center;
+                margin-bottom: 35px;
+                color: #fff
+            }
+
+    .addConsultation .block_details select.form-control {
+        height: 42px;
+    }
+
+    .addConsultation select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        appearance: none;
+        outline: 0;
+        box-shadow: none;
+        border: 0 !important;
+        background: #4da74d;
+        color: #fff;
+        background-image: none;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 20px;
+    }
+
+    .addConsultation .select {
+        position: relative;
+    }
+
+    .addConsultation select::-ms-expand {
+        display: none
+    }
+
+    .addConsultation .select::after {
+        content: '\25BC';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        padding: 12px 1em;
+        background: #479a47;
+        pointer-events: none;
+        color: rgba(0,0,0,0.6);
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+
+    .addConsultation .select:hover::after {
+        color: #fff
+    }
+
+    .addConsultation .select::after {
+        -webkit-transition: .25s all ease;
+        -o-transition: .25s all ease;
+        transition: .25s all ease;
+    }
+
+    .addConsultation .bordering {
+        min-height: 90px;
+        margin-top: 30px;
+        padding-bottom: 10px;
+        overflow-y: auto;
+        background: transparent;
+        border: 2px solid #fff;
+        border-radius: 20px
+    }
+
+    .addConsultation textarea {
+        background: transparent;
+        border: 0;
+        color: #Fff;
+        font-size: 17px;
+    }
+
+        .addConsultation textarea::placeholder {
+            color: #fff
+        }
+
+    .addConsultation input.title {
+        background: transparent;
+        color: #fff;
+        margin-top: 20px;
+        border-radius: 20px;
+        border: 2px solid #fff;
+    }
+
+        .addConsultation input.title::placeholder {
+            color: #fff
+        }
+    /* .addConsultation .bordering .images { height: 60px; } */
+    .addConsultation .bordering .images .img_blck {
+        float: right;
+        margin-right: 5px;
+        position: relative;
+        width: 100px
+    }
+
+        .addConsultation .bordering .images .img_blck .overlay {
+            width: 100%;
+            background: rgba(2,2,2,0.4);
+            display: none;
+            position: absolute;
+            top: 0;
+            cursor: pointer;
+            line-height: 60px;
+            color: #fff;
+            text-align: center;
+        }
+        /* .addConsultation .bordering .images .img_blck i { display: none; position: absolute; top: 0; cursor: pointer; line-height: 60px; color: #fff; text-align: center; left: 44px; } */
+        .addConsultation .bordering .images .img_blck:hover .overlay {
+            display: block
+        }
+
+.add_image {
+    border: 3px dashed #ddd;
+    width: 100px;
+    height: 60px;
+    float: right;
+    margin-right: 5px;
+    line-height: 53px;
+    cursor: pointer;
+    color: #ddd;
+}
+
+    .add_image span {
+        font-size: 25px
+    }
+
+.addConsultation button {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    height: 42px;
+    background: #4da74d;
+    border: 0;
+    color: #fff;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.file {
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 15px;
+}
+
+    .file label {
+        background: #fff;
+        padding: 5px 20px;
+        color: #479a47;
+        font-weight: bold;
+        font-size: .9em;
+        transition: all .4s;
+        cursor: pointer;
+        border: 1px solid #479a47;
+        border-radius: 20px
+    }
+
+    .file input {
+        position: absolute;
+        display: inline-block;
+        left: 0;
+        top: 0;
+        opacity: 0.01;
+        cursor: pointer;
+    }
+
+        .file input:hover + label, .file input:focus + label {
+            background: #479a47;
+            color: #fff;
+            cursor: pointer;
+        }
+/* option::-webkit-selection { background: red; }
+  option::selection { background: red; }
+  select:focus option:checked {
+    background: red linear-gradient(0deg, red 0%, red 100%);
+  } */

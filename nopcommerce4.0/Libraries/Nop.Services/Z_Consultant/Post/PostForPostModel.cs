@@ -16,6 +16,8 @@ namespace Nop.Services.Z_Consultant.Post
 
         public string Text { get; set; }
 
+        public string Title { get; set; }
+
         public int CategoryId { get; set; }
 
         public IList<string> Files { get; set; }

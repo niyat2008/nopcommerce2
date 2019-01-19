@@ -30,7 +30,7 @@ namespace Nop.Services.Z_Consultant.Category
             var query = _categoryRepository.TableNoTracking;
 
             return new PagedList<Z_Consultant_Category>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,false);
         }
 
         public PagedList<Z_Consultant_Category> GetCategoriesWithSubCategories(PagingParams pagingParams)
@@ -38,7 +38,7 @@ namespace Nop.Services.Z_Consultant.Category
             var query = _categoryRepository.TableNoTracking.Include(c => c.SubCategories);
 
             return new PagedList<Z_Consultant_Category>(
-                query, pagingParams.PageNumber, pagingParams.PageSize);
+                query, pagingParams.PageNumber, pagingParams.PageSize,false);
         }
 
         public Z_Consultant_Category GetCategoryById(int CategoryId)

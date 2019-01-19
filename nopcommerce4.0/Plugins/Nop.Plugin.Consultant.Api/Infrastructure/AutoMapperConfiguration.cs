@@ -67,6 +67,8 @@ namespace Nop.Plugin.Consultant.Api.Infrastructure
                     mo => mo.MapFrom(src => src.IsSetToSubCategory))
                     .ForMember(dest => dest.Text,
                     mo => mo.MapFrom(src => src.Text))
+                    .ForMember(dest => dest.Title,
+                    mo => mo.MapFrom(src => src.Title))
                     .ForMember(dest => dest.SubCategoryId,
                     mo => mo.MapFrom(src => src.SubCategoryId))
                     .ForMember(dest => dest.PostOwner,
@@ -97,6 +99,8 @@ namespace Nop.Plugin.Consultant.Api.Infrastructure
                     mo => mo.MapFrom(src => src.IsSetToSubCategory))
                     .ForMember(dest => dest.Text,
                     mo => mo.MapFrom(src => src.Text))
+                    .ForMember(dest => dest.Title,
+                    mo => mo.MapFrom(src => src.Title))
                     .ForMember(dest => dest.SubCategoryId,
                     mo => mo.MapFrom(src => src.SubCategoryId))
                     .ForMember(dest => dest.PostOwner,

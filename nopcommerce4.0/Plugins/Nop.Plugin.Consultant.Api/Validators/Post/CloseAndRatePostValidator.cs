@@ -16,7 +16,7 @@ namespace Nop.Plugin.Consultant.Api.Validators.Post
         public CloseAndRatePostValidator(ILocalizationService localizationService, IDbContext dbContext)
         {
             
-            RuleFor(x => x.Rate).NotNull().NotEmpty().WithErrorCode("Post Id is required")
+            RuleFor(x => x.Id).NotNull().NotEmpty().WithErrorCode("Post Id is required")
                 .GreaterThan(0).WithErrorCode("Post Id is digit grater than 0");
             RuleFor(x => x.Rate).GreaterThan(0).LessThan(6)
                 .WithMessage("Rate must be digit betwwen 1-5");

@@ -15,6 +15,7 @@ namespace Nop.Data.Mapping.Z_Consultant
             this.HasKey(p => p.Id);
 
             this.Property(p => p.Text).IsRequired().HasMaxLength(4000);
+            this.Property(p => p.Title).IsRequired().HasMaxLength(4000);
             this.Property(p => p.DateCreated).IsRequired();
             this.Property(p => p.DateUpdated).IsOptional();
             this.Property(p => p.IsClosed).IsRequired();

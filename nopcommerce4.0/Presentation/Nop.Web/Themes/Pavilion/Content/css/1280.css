@@ -86,7 +86,7 @@
 }
 .header-menu > ul > li > .sublist-wrap {
 	width: 1200px;
-	margin: 0 0 0 -240px; /*depends on logo cell width, which is always fixed*/
+	/*margin: 0 0 0 -240px;*/ /*depends on logo cell width, which is always fixed*/
 }
 .category-navigation-list > li > .sublist-wrap > .sublist { /*this is the inner list inside the flyout panel*/
 	padding: 18px 12px;

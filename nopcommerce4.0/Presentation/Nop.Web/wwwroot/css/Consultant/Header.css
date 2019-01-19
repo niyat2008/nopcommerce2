@@ -1,0 +1,293 @@
+﻿/* Header Style */
+a:hover {
+    color: #40ca40
+}
+
+/*top-bar*/
+.top_bar {
+    background: #333;
+    padding: 10px 0
+}
+
+    .top_bar span {
+        cursor: pointer;
+        color: #fff;
+        font-size: 17px;
+        padding: 10px 30px
+    }
+
+        .top_bar span.active {
+            background: #4da74d
+        }
+
+.logo {
+    width: 100%;
+    height: 45px;
+    cursor: pointer;
+}
+/*Search*/
+.search {
+    padding: 20px 0
+}
+
+.form-group {
+    margin-bottom: 0;
+    position: relative;
+}
+
+.form-control {
+    height: 44px;
+}
+
+.search input {
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.08);
+    border: 1px solid #ddd
+}
+
+.search button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50px;
+    text-align: center;
+    border: 0;
+    background: #4da74d;
+    color: #fff
+}
+
+.welcome {
+    position: relative;
+    width: 145px;
+}
+
+    .welcome a {
+        text-decoration: none;
+        color: #888;
+        cursor: pointer;
+        font-size: 18px;
+        line-height: 46px;
+        padding: 10px 20px;
+        border: 1px solid #ddd;
+    }
+
+    .welcome ul {
+        position: absolute;
+        z-index: 999;
+        background: #fff;
+        min-width: 145px;
+        padding: 10px 0;
+        border: 1px solid #ddd;
+    }
+
+.mnuList {
+    display: none;
+}
+
+.welcome ul li {
+    text-align: center
+}
+
+    .welcome ul li a {
+        font-size: 14px;
+        border: 0;
+    }
+
+        .welcome ul li a.login {
+            background: #4da74d;
+            color: #fff;
+            border-radius: 20px;
+        }
+
+    .welcome ul li span.register {
+        cursor: pointer;
+        color: #40ca40
+    }
+
+    .welcome ul li span.noAcc {
+        font-size: 12px
+    }
+/* .welcome ul li.item { border-top: 1px solid #ddd; margin-top: 11px; } */
+.weLink:hover ~ .mnuList {
+    display: block;
+    border-top: 0;
+}
+
+.mnuList:hover {
+    display: block;
+    border-top: 0
+}
+
+.user {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    position: relative;
+    min-width: 145px;
+    padding: 5px 10px;
+}
+
+    .user:hover {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-bottom: 0
+    }
+
+    .user img {
+        margin-left: 5px
+    }
+
+    .user i {
+        color: #888;
+        padding-right: 5px;
+    }
+
+.avatar {
+    position: relative;
+}
+
+    .avatar ul {
+        position: absolute;
+        z-index: 999;
+        background: #fff;
+        min-width: 145px;
+        padding-top: 10px;
+        border: 1px solid #ddd;
+        width: 100%;
+        display: none
+    }
+
+        .avatar ul li {
+            text-align: center;
+            border-bottom: 1px solid #ddd
+        }
+
+            .avatar ul li:last-child {
+                border-bottom: 0;
+                padding-bottom: 10px;
+            }
+
+            .avatar ul li a {
+                text-decoration: none;
+                cursor: pointer;
+                color: #4da74d;
+                padding: 10px;
+                font-size: 16px
+            }
+
+            .avatar ul li.name {
+                padding-bottom: 10px
+            }
+
+            .avatar ul li.link {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                cursor: pointer;
+            }
+
+                .avatar ul li.link:hover {
+                    background: #eee
+                }
+
+    .avatar:hover ul {
+        display: block
+    }
+
+.profile_blck:hover .user {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-bottom: 0
+}
+
+/*Nav*/
+.navbar-collapse {
+    padding: 0;
+    position: relative;
+    background: #e8ebee
+}
+
+.navbar-default {
+    border-color: #ededed;
+    background: #e8ebee
+}
+
+    .navbar-default .navbar-nav > li > a, .subNav li a {
+        color: #000;
+        font-size: 16px;
+        cursor: pointer;
+        text-decoration: none
+    }
+
+    .navbar-default .navbar-nav > li.main > a.active, .navbar-default .navbar-nav > li.main:hover > a {
+        color: #4da74d;
+        font-weight: bold;
+        background: #fff;
+        border-top: 2px solid #4da74d;
+    }
+
+.subNav {
+    display: none;
+    min-height: 100px;
+    padding: 10px 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    position: absolute;
+    top: 51px;
+    z-index: 9999;
+    min-width: 1000px;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.08);
+    -ms-transition: all 3s ease-in-out;
+    -o-transition: all 3s ease-in-out;
+    -webkit-transition: all 3s ease-in-out;
+    transition: all 3s ease-in-out;
+}
+/* .subNav { display: none; min-height: 100px; padding: 10px 0; background:#fff; border:1px solid #ddd; position: absolute; top: 51px; right: -292px; z-index: 9999; width: 1518px; box-shadow: 0 1px 2px 0 rgba(0,0,0,.08); -ms-transition: all 3s ease-in-out; -o-transition: all 3s ease-in-out; -webkit-transition: all 3s ease-in-out; transition: all 3s ease-in-out; } */
+/* .navbar-default .navbar-nav>li.hasSubMenu :hover { background:#fff; border-top:1px solid #4da74d } */
+.navbar-default .navbar-nav > li.hasSubMenu :hover ~ .subNav {
+    display: block;
+    -ms-transition: all 3s ease-in-out;
+    -o-transition: all 3s ease-in-out;
+    -webkit-transition: all 3s ease-in-out;
+    transition: all 3s ease-in-out;
+}
+
+.navbar-default .navbar-nav > li.hasSubMenu a:hover {
+    color: #4da74d;
+    font-weight: bold
+}
+
+.navbar-default .navbar-nav > li.hasSubMenu a {
+    font-size: 15px
+}
+
+.subNav:hover {
+    display: block
+}
+
+.subNav ul {
+    float: right;
+    min-width: 220px;
+    margin-right: 15px;
+    border-left: 1px solid #ddd;
+}
+
+    .subNav ul:last-of-type {
+        border-left: 0
+    }
+
+    .subNav ul li {
+        padding-bottom: 15px
+    }
+
+        .subNav ul li a {
+            font-size: 14px;
+            color: #888
+        }
+
+.heading_nav {
+    background: #e8ebee;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+}

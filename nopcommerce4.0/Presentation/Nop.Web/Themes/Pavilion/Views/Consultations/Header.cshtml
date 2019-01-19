@@ -1,0 +1,203 @@
+﻿@using Nop.Web.Models.Consultant.User;
+@model UserModel
+@{
+    string getCustomerPosts = "";
+    if (@Model.UserRole == "Registered")
+    {
+        getCustomerPosts = "getCustomerPosts()";
+    }
+    else if (@Model.UserRole == "Consultant")
+    {
+        getCustomerPosts = "getConsultantPosts()";
+    }
+}
+
+
+
+
+@*<link href="~/css/Consultant/Main.css" rel="stylesheet" />
+    <link href="~/css/Consultant/Navbar.css" rel="stylesheet" />*@
+
+@*<link href="~/css/Consultant/ConsultantCss.css" rel="stylesheet" />*@
+<link href="~/css/Consultant/Header.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Consultations</title>
+
+<style type="text/css">
+    .register {
+        color: green !important;
+    }
+
+    ul {
+        display: block;
+        list-style-type: none !important;
+    }
+</style>
+
+
+<!-- Header -->
+<!-- Top Bar -->
+<section class="top_bar">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center">
+                    <span onclick="window.location.href = '/';">سوق</span>
+                    <span class="active" onclick="goToHome()">الاستشارات</span>
+                    @*<span>حراج</span>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Search -->
+<section class="search">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <img class="logo" src="~/images/Consultant/images/logo3.svg" onclick="goToHome()" />
+            </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <input id="searchText" type="text"
+                           class="form-control" placeholder="ابحث عن ...">
+                    <button onclick="filterWithText()">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            @if (string.IsNullOrEmpty(Model.UserRole))
+            {
+                <div class="col-md-2">
+                    <div class="welcome">
+                        <a class="weLink">مرحبا  ...  دخول</a>
+                        <ul class="mnuList">
+                            <li>
+
+                                @Html.RouteLink("دخول", "login", new { returnUrl= "consultations" }, new { @class = "login" })
+                            </li>
+                            <li>
+                                <span class="noAcc">لا تمتلك حساب ؟</span> <br />
+
+                                @Html.RouteLink("سجل الآن", "register", new { returnUrl = "consultations" }, new { @class = "register" })
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-2 profile_blck">
+                    <div class="avatar">
+                        <div class="user">
+                            <img src="~/images/Consultant/images/user.png" />
+
+                        </div>
+                        <ul>
+                            <li class="name"><span>@Model.Username</span></li>
+                            <li class="link" onclick="@getCustomerPosts"><a>استشاراتى</a></li>
+                            <li class="link" (click)="logout()">@Html.RouteLink("تسجيل  خروج", "logout", new { returnUrl = "consultations" })</li>
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!--<!-- Nav -->
+<div id="Nav"></div>
+
+
+
+
+
+
+<script>
+    $.ajax({
+        type: 'GET',
+        url: 'Consultations/Navbar',
+
+        success: function (data) {
+            $("#Nav").html(data);
+        }
+    });
+
+
+    function getCustomerPosts() {
+        $.ajax({
+            type: 'GET',
+            url: 'Consultations/GetCustomerConsultations',
+            success: function (data) {
+
+                $("#navSelectedCat").css("display", "none");
+                $("#AddPost").css("display", "none");
+                $("#posts").css("display", "none");
+                $("#otherpage").html(data);
+
+            },
+            error: function () {
+                alert("حدث خطأ ما");
+            }
+        });
+    }
+
+    function getConsultantPosts() {
+        $.ajax({
+            type: 'GET',
+            url: 'Consultations/GetConsultantConsultations',
+            success: function (data) {
+
+                $("#navSelectedCat").css("display", "none");
+                $("#AddPost").css("display", "none");
+                $("#posts").css("display", "none");
+                $("#otherpage").html(data);
+
+            },
+            error: function () {
+                alert("حدث خطأ ما");
+            }
+        });
+    }
+
+
+
+
+    function goToHome() {
+        window.location.href = "Consultations";
+    }
+
+
+    function filterWithText() {
+        var Term = $("#searchText").val();
+
+        if (Term) {
+            $.ajax({
+
+                type: "GET",
+                url: 'Consultations/Search',
+                data: { Term: Term },
+                success: function (data) {
+
+                    $("#posts").html(data);
+                    $("#otherpage").html("");
+                    $("#navSelectedCat").css("display", "none");
+                    $("#AddPost").css("display", "none");
+                    $("#posts").css("display", "block");
+                },
+                error: function () {
+                    alert("حدث خطأ ما ");
+                }
+            });
+        }
+        else {
+            alert("ادخل كلمات للبحث");
+        }
+    }
+
+
+</script>
+

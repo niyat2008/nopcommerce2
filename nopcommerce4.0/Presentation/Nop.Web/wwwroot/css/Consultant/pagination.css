@@ -1,0 +1,84 @@
+﻿
+/*Pager*/
+nav.pagination-outer {
+    text-align: center
+}
+
+.pagination {
+    display: inline-flex;
+    position: relative;
+    border-radius: 0 !important;
+}
+
+    .pagination li a.page-link, .pagination li:first-child a.page-link, .pagination li:last-child a.page-link {
+        border: none;
+        height: 45px;
+        width: 55px;
+        line-height: 45px;
+        text-align: center;
+        padding: 0;
+        font-size: 20px;
+        font-weight: 600;
+        color: #fff;
+        background-color: #ccc;
+        margin: 0 -8px 0 0;
+        border-radius: 0;
+        transition: all 0.3s linear 0s;
+        -webkit-clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+        clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+        cursor: pointer;
+    }
+
+        .pagination li a.page-link:before, .pagination li:first-child a.page-link:before, .pagination li:last-child a.page-link:before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: #4da74d;
+            display: block;
+            opacity: 0;
+            transform: scale(0.1);
+            z-index: -1;
+            transform-origin: bottom right 0;
+        }
+
+        .pagination li a.page-link:hover:before, .pagination li.active a.page-link:before {
+            opacity: 1;
+            transform: scale(1);
+            transition: all 0.3s ease-in-out
+        }
+
+    .pagination li:first-child a.page-link {
+        -webkit-clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0% 0%);
+        clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0% 0%);
+        border-radius: 0;
+        margin-right: 0px;
+        margin-left: 13px;
+    }
+
+    .pagination li:last-child a.page-link {
+        margin-right: 0;
+        -webkit-clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+        clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+        border-radius: 0;
+    }
+
+    .pagination li.active a.page-link, .pagination li a.page-link:hover, .pagination li.active a.page-link:hover {
+        border: none;
+        background: transparent;
+        color: #fff;
+    }
+
+    .pagination li a.page-link.notAllow, .pagination li a.page-link.notAllow:hover {
+        cursor: not-allowed;
+        background-color: #ccc;
+        transition: 0s;
+    }
+
+        .pagination li a.page-link.notAllow:hover:before, .pagination li.active a.page-link.notAllow:before {
+            opacity: 0;
+            transform: scale(1);
+            transition: all 0.3s ease-in-out
+        }

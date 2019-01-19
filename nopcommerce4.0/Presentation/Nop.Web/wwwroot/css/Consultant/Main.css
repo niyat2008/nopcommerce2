@@ -1,0 +1,71 @@
+﻿mat-sidenav-container {
+    height: 100%;
+}
+
+mat-sidenav {
+    min-width: 200px;
+}
+
+.search-icon {
+    position: absolute;
+    top: 37px;
+    left: 48px;
+    color: #0000008a;
+}
+
+    .search-icon i {
+        cursor: pointer;
+    }
+
+    .search-icon:hover {
+        color: #799940;
+    }
+
+#search-bar {
+    margin: 30px auto;
+    max-width: 77%;
+    border-radius: 37px;
+    border: 1px solid #7cb87c;
+}
+
+
+
+
+
+
+
+
+
+
+
+.promotion {
+    background-color:red;
+    line-height: 18px;
+    position: absolute;
+    z-index: 10;
+    bottom: 20px;
+    left: 0;
+    height: 24px;
+    width: auto;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+    left: 0px;
+     /*Modify left value to adjust discount tag according to your e-commerce design top: 5px;
+    Modify Top value to adjust discount tag according to your e-commerce design*/
+}
+
+.discount {
+    background: #eb4800;
+    height: 100%;
+    display: inline-block;
+    padding: 3px 5px;
+    color: #fff;
+    float: left;
+    font-size: 15px;
+    font-weight: 300;
+    border-radius: 0 4px 4px 0;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+}

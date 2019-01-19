@@ -248,9 +248,20 @@ namespace Nop.Web.Controllers
         [CheckAccessClosedStore(true)]
         //available even when navigation is not allowed
         [CheckAccessPublicStore(true)]
-        public virtual IActionResult Login(bool? checkoutAsGuest)
+        public virtual IActionResult Login(bool? checkoutAsGuest , string returnUrl)
         {
             var model = _customerModelFactory.PrepareLoginModel(checkoutAsGuest);
+
+            
+            if (!string.IsNullOrEmpty(returnUrl) && returnUrl.Contains("consultations"))
+            {
+                TempData["ReturnURL"] = "consultations";
+            }
+            else
+            {
+                TempData["ReturnURL"] = string.Empty;
+            }
+
             return View(model);
         }
 
@@ -296,6 +307,9 @@ namespace Nop.Web.Controllers
                             //activity log
                             _customerActivityService.InsertActivity(customer, "PublicStore.Login", _localizationService.GetResource("ActivityLog.PublicStore.Login"));
 
+                            if((string)TempData["ReturnURL"]== "consultations")
+                                return RedirectToRoute("Consultant.Api.Consultations");
+
                             if (string.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
                                 return RedirectToRoute("HomePage");
 
@@ -325,6 +339,7 @@ namespace Nop.Web.Controllers
 
             //If we got this far, something failed, redisplay form
             model = _customerModelFactory.PrepareLoginModel(model.CheckoutAsGuest);
+
             return View(model);
         }
 
@@ -332,7 +347,7 @@ namespace Nop.Web.Controllers
         [CheckAccessClosedStore(true)]
         //available even when navigation is not allowed
         [CheckAccessPublicStore(true)]
-        public virtual IActionResult Logout()
+        public virtual IActionResult Logout(string returnUrl)
         {
             if (_workContext.OriginalCustomerIfImpersonated != null)
             {
@@ -375,6 +390,9 @@ namespace Nop.Web.Controllers
                 //but it'll be displayed for further page loads
                 TempData["nop.IgnoreEuCookieLawWarning"] = true;
             }
+
+            if (returnUrl == "consultations")
+                return RedirectToRoute("Consultant.Api.Consultations");
 
             return RedirectToRoute("HomePage");
         }
@@ -524,7 +542,7 @@ namespace Nop.Web.Controllers
         [HttpsRequirement(SslRequirement.Yes)]
         //available even when navigation is not allowed
         [CheckAccessPublicStore(true)]
-        public virtual IActionResult Register()
+        public virtual IActionResult Register(string returnUrl)
         {
             //check whether registration is allowed
             if (_customerSettings.UserRegistrationType == UserRegistrationType.Disabled)
@@ -532,6 +550,16 @@ namespace Nop.Web.Controllers
 
             var model = new RegisterModel();
             model = _customerModelFactory.PrepareRegisterModel(model, false, setDefaultValues: true);
+
+
+            if (!string.IsNullOrEmpty(returnUrl) && returnUrl.Contains("consultations"))
+            {
+                TempData["ReturnURL"] = "consultations";
+            }
+            else
+            {
+                TempData["ReturnURL"] = string.Empty;
+            }
 
             return View(model);
         }
@@ -736,12 +764,17 @@ namespace Nop.Web.Controllers
                                 _genericAttributeService.SaveAttribute(customer, SystemCustomerAttributeNames.AccountActivationToken, Guid.NewGuid().ToString());
                                 _workflowMessageService.SendCustomerEmailValidationMessage(customer, _workContext.WorkingLanguage.Id);
 
+                                if ((string)TempData["ReturnURL"] == "consultations")
+                                    return RedirectToRoute("Consultant.Api.Consultations");
                                 //result
                                 return RedirectToRoute("RegisterResult",
                                     new { resultId = (int)UserRegistrationType.EmailValidation });
                             }
                         case UserRegistrationType.AdminApproval:
                             {
+                                if ((string)TempData["ReturnURL"] == "consultations")
+                                    return RedirectToRoute("Consultant.Api.Consultations");
+
                                 return RedirectToRoute("RegisterResult",
                                     new { resultId = (int)UserRegistrationType.AdminApproval });
                             }
@@ -753,10 +786,17 @@ namespace Nop.Web.Controllers
                                 var redirectUrl = Url.RouteUrl("RegisterResult", new { resultId = (int)UserRegistrationType.Standard });
                                 if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                                     redirectUrl = _webHelper.ModifyQueryString(redirectUrl, "returnurl=" + WebUtility.UrlEncode(returnUrl), null);
+
+                                if ((string)TempData["ReturnURL"] == "consultations")
+                                    return RedirectToRoute("Consultant.Api.Consultations");
+
                                 return Redirect(redirectUrl);
                             }
                         default:
                             {
+                                if ((string)TempData["ReturnURL"] == "consultations")
+                                    return RedirectToRoute("Consultant.Api.Consultations");
+
                                 return RedirectToRoute("HomePage");
                             }
                     }

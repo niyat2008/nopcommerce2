@@ -31,5 +31,8 @@
   "SevenSpikes.Nop.Plugins.RichBlog",
   "SevenSpikes.Nop.Plugins.SmartProductCollections",
   "SevenSpikes.Theme.Pavilion",
-  "Consultant.Api"
+  "Consultant.Api",
+  "Payments.Fawry",
+  "Shipping.ByTotal",
+  "Payments.CashOnDelivery"
 ]

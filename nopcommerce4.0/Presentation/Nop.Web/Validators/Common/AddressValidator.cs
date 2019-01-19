@@ -20,9 +20,9 @@ namespace Nop.Web.Validators.Common
             RuleFor(x => x.LastName)
                 .NotEmpty()
                 .WithMessage(localizationService.GetResource("Address.Fields.LastName.Required"));
-            RuleFor(x => x.Email)
-                .NotEmpty()
-                .WithMessage(localizationService.GetResource("Address.Fields.Email.Required"));
+            //RuleFor(x => x.Email)
+            //    .NotEmpty()
+            //    .WithMessage(localizationService.GetResource("Address.Fields.Email.Required"));
             RuleFor(x => x.Email)
                 .EmailAddress()
                 .WithMessage(localizationService.GetResource("Common.WrongEmail"));

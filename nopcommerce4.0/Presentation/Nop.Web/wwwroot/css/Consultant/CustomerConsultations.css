@@ -1,0 +1,43 @@
+﻿/* Customer Consultation Style */
+.nav-tabs {
+    border-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    margin-bottom: 30px
+}
+
+    .nav-tabs li {
+        cursor: pointer;
+        margin-right: 10px;
+        background: transparent;
+    }
+
+    .nav-tabs > li > a {
+        border: 1px solid #4da74d;
+        border-radius: 20px;
+        background: transparent;
+        color: #4da74d;
+        -webkit-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+
+        .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover, .nav-tabs > li > a:hover {
+            border: 0;
+            color: #fff;
+            background: #4da74d;
+            cursor: pointer;
+            border-radius: 20px
+        }
+
+/* mat-card { margin-top:30px; border-radius: 20px; border: 1px solid #98c24d; }
+.avatar-img { width: 80px; height: 80px; border-radius: 50%; background:#fff; border: 1px solid #98c24d; padding: 3px; }
+.mat-card-title span { font-size: 22px }
+.mat-card-content p { font-size: 22px; margin: 2px 24px; }
+.mat-card-content button { background: #98c24d; color: #fff }
+::ng-deep .mat-tab-label .mat-tab-label-content { font-size: 20px; color: #98c24d; font-weight: 700; }
+.mat-tab-group { margin-top: 20px; margin-bottom: 11%; }
+mat-paginator {  float: right;  background: inherit;  color: #3f5617; } */
