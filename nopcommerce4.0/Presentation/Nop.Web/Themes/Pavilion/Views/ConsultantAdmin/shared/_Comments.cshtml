@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Nop.Web.Models.ConsultantAdmin.Comment.CommentModel>
+
+    @foreach (var comment in Model)
+    {
+        <div class="container">
+            <div class="title">
+                @comment.Text
+            </div>
+        </div>
+
+    }

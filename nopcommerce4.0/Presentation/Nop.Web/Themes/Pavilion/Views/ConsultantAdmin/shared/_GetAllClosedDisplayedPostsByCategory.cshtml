@@ -1,0 +1,65 @@
+﻿@model Nop.Web.Models.ConsultantAdmin.Post.PostModel
+
+<div>closed displayed</div>
+<table id="tabel" class="table table-bordered table-hover">
+    <thead>
+        <tr class="table-active">
+            <th>العنوان</th>
+            <th>الوصف</th>
+            <th>التاريخ</th>
+            <th>الصنف الرئيسى</th>
+            <th>الصنف الفرعى</th>
+            <th>عمليات</th>
+
+        </tr>
+    </thead>
+</table>
+
+    
+    <script>
+    $(document).ready(function () {
+        $("#tabel").DataTable({
+            "responsive": "true",
+            "ajax": {
+                "url":"/Consultations/Admin/Posts/ClosedDisplayedInJson"
+
+            },
+            "columns": [
+                { "data": "Title" },
+                { "data": "Text" },
+                { "data": "DateCreated" },
+                { "data": "CategoryName" },
+                { "data": "SubCategoryName" },
+                {
+                    "data": "Text",
+                    "render": function (data) {
+                        return "<a href='#' class='btn btn-info btn-small'> التفاصيل </a>"+"  "+"<a href='#' class='btn btn-danger'>حذف</a>";
+
+                    }
+
+                }
+
+            ],
+            "language": {
+                "sProcessing": "جارٍ التحميل...",
+                "sLengthMenu": "أظهر _MENU_ مدخلات",
+                "sZeroRecords": "لم يعثر على أية سجلات",
+                "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                "sInfoPostFix": "",
+                "sSearch": "ابحث:",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "الأول",
+                    "sPrevious": "السابق",
+                    "sNext": "التالي",
+                    "sLast": "الأخير"
+                }
+            }
+
+
+        });
+
+    });
+    </script>

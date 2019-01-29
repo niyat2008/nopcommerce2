@@ -1,0 +1,126 @@
+﻿@using Nop.Web.Models.Consultant.Comment;
+@model CommentOutputModel
+
+<link href="~/css/Consultant/pagination.css" rel="stylesheet" />
+
+
+@foreach (var comment in Model.Items)
+{
+    <!-- Comments -->
+    <div class="comments">
+        <!-- Comment -->
+        <div class="comment">
+            <div class="row">
+                @if (comment.CommentedBy == "Registered")
+                {
+                    <div class="col-xs-2 text-center">
+                        <img class="userimagelarge" src="~/images/Consultant/images/no-img.png" />
+                        <img class="userimagemedium" src="~/images/Consultant/images/no-img-mobile.png" style="width:50px;height:50px;" />
+                        <img class="userimagesmall" src="~/images/Consultant/images/no-img-mobile.png" style="width:35px;height:35px;" />
+                    </div>
+                }
+                else
+                {
+                    <div class="col-xs-2 text-center">
+                        <img class="userimagelarge" src="~/images/Consultant/images/no-img-consultant.png" />
+                        <img class="userimagemedium" src="~/images/Consultant/images/no-img-mobile-consultant.png" style="width:50px;height:50px;" />
+                        <img class="userimagesmall" src="~/images/Consultant/images/no-img-mobile-consultant.png" style="width:35px;height:35px;" />
+                    </div>
+                }
+                <div class="col-xs-10">
+                    <h4>@comment.CommentOwner</h4>
+                    <span>@comment.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @comment.DateCreated.ToString("hh:mm:ss")</span>
+                    <p style="width:fit-content;"> @comment.Text </p>
+                    @*<a>رد</a>*@
+                </div>
+            </div>
+        </div><hr />
+    </div>
+
+}
+
+
+
+
+
+@if (Model.Paging.PageNumber <= Model.Paging.TotalPages)
+{
+
+
+    @if (Model.Links.Count == 2)
+    {
+        @if (Model.Paging.PageNumber == 1)
+        {
+            <!-- Pager -->
+            <nav class="pagination-outer" aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Next" onclick="getCommentPaging('@Model.Links[1]?.Href')">
+                            <span aria-hidden="true"> <<< </span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link">@Model.Paging.PageNumber</a>
+                    </li>
+
+                </ul>
+            </nav>
+        }
+        else if (Model.Paging.PageNumber == Model.Paging.TotalPages)
+        {
+            <!-- Pager -->
+            <nav class="pagination-outer" aria-label="Page navigation">
+                <ul class="pagination">
+
+                    <li class="page-item">
+                        <a class="page-link">@Model.Paging.PageNumber</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Previous" onclick="getCommentPaging('@Model.Links[0]?.Href')">
+                            <span aria-hidden="true"> >>> </span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        }
+    }
+    else if (Model.Links.Count > 2)
+    {
+        <!-- Pager -->
+        <nav class="pagination-outer" aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" aria-label="Next" onclick="getCommentPaging('@Model.Links[2]?.Href')">
+                        <span aria-hidden="true"> <<< </span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link">@Model.Paging.PageNumber</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" aria-label="Previous" onclick="getCommentPaging('@Model.Links[0]?.Href')">
+                        <span aria-hidden="true"> >>> </span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    }
+}
+
+<script type="text/javascript">
+
+        function getCommentPaging(url) {
+
+            var indexmyurl = url.indexOf("Consultations/Consultations");
+            var myurl = url.substring(indexmyurl);
+
+            $.ajax({
+                type: 'GET',
+                url: myurl,
+
+                success: function (data) {
+                    $("#comments").html(data);
+                }
+            });
+        }
+</script>

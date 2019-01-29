@@ -28,7 +28,7 @@
 
         @if (Model.SubCategories.Count > 0)
         {
-            <div class="category-details">
+            <div class="category-details" style="background-color:rgba(0, 0, 0,.4); color:white;font-size:larger;font-weight:bolder;">
                 <h2 class="category-inner-title">
                     <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">@Model.Name</a>
                 </h2>

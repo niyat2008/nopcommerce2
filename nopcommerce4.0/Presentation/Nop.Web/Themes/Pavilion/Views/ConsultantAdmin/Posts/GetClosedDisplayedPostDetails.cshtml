@@ -1,0 +1,192 @@
+﻿@model Nop.Web.Models.ConsultantAdmin.Post.PostWithFilesModel
+@{
+    ViewBag.Title = "PostDetails";
+    Layout = "~/Themes/Pavilion/Views/ConsultantAdmin/shared/_Layout.cshtml";
+}
+
+
+@Html.Partial("~/Themes/Pavilion/Views/ConsultantAdmin/Shared/_CSS.cshtml")
+
+@Html.Partial("~/Themes/Pavilion/Views/ConsultantAdmin/Shared/_Js.cshtml")
+<div class="post-title">تفاصيل الاستشارة</div>
+@*@using (Html.BeginForm())
+    {
+        <div class="form-group">
+            <label class="form-lbl">*العنوان</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(p => p.Title, new { @class = "form-control textBox" })
+           </div>
+        </div>
+        <div class="form-group">
+            <label class="form-lbl">*الوصف</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(p => p.Text, new { @class = "form-control textBox", @rows = "6" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-lbl">*صاحب الاستشارة</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(p => p.PostOwner, new { @class = "form-control textBox" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-lbl"> *الصنف الرئيسى</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(p => p.CategoryName, new { @class = "form-control textBox" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-lbl">*الصنف الفرعى  </label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(p => p.SubCategoryName, new { @class = "form-control textBox" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-lbl">*تاريخ الانشاء </label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(p => p.DateCreated, new { @class = "form-control textBox" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-lbl">*تاريخ التحديث</label>
+            <div class="col-md-10">
+                @Html.TextBoxFor(p => p.DateUpdated, new { @class = "form-control textBox" })
+            </div>
+        </div>
+
+        <a href="@ViewBag.url" class="btn btn-primary">رجوع</a>
+        }*@
+
+
+
+
+@using (Html.BeginForm())
+{
+    
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-lbl">العنوان</label>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(p => p.Title, new { @class = "form-control textBox" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-lbl">الصنف الرئيسى</label>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(p => p.CategoryName, new { @class = "form-control textBox" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-lbl">الوصف</label>
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(p => p.Text, new { @class = "form-control textBox", @rows = "7" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-lbl">صاحب الاستشارة</label>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(p => p.PostOwner, new { @class = "form-control textBox" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-lbl">الصنف الفرعى</label>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(p => p.SubCategoryName, new { @class = "form-control textBox" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-lbl">تاريخ الانشاء</label>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(p => p.DateCreated, new { @class = "form-control textBox" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-lbl">تاريخ التحديث</label>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(p => p.DateUpdated, new { @class = "form-control textBox" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+
+
+   
+
+    <a href="/Consultations/Admin/Posts/ClosedDisplayed" class="btn btn-primary">رجوع</a>
+}
+@foreach (var photo in Model.Files)
+{
+    <div>
+        <img src="@photo" />
+    </div>
+
+}
+@*<div id="comment">
+        <h5></h5>
+        <div class="text">
+
+        </div>
+        <span></span>
+        <span></span>
+    </div>*@
+<div id="comments"></div>
+<script>
+        $(document).ready(function () {
+
+        $.ajax({
+            type: "GET",
+            url: "/Consultations/Admin/Posts/GetPostComments?postId=" +@Model.Id+"",
+            success: function (data) {
+
+
+                $.each(data.data, function (key, value) {
+                    $("<div id='comment'></div>").append($("<div class='text'>" + value.Text + "</div>")).append($("<hr/>")).append($("<span class='commentedBy'>تم التعليق بواسطة : " + value.CommentedBy + "</span>")).append($("<br/>")).append($("<span class='commentOwner'>اسم صاحب التعليق : " + value.CommentOwner + "</span>")).append($("<br/>")).append($("<span class='dateCreated'>تاريخ الانشاء : " + value.DateCreated + "</span>")).append($("<br/>")).append($("<span class='dateUpdated'>تاريخ التعديل : " + value.DateUpdated + "</span>")).appendTo('#comments');
+
+
+                    //$('#comment').find('h5').html(value.Text);
+                    //$('#comment').find('.text').html(value.CommentedBy);
+                });
+
+            }
+
+            });
+        });
+</script>
+
+
+
+
+

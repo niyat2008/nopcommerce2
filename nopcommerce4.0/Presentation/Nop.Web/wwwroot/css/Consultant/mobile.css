@@ -1,0 +1,48 @@
+﻿
+.userimagelarge {
+    display:inline;
+}
+.userimagemedium {
+    display: none;
+}
+.userimagesmall {
+    display: none;
+}
+#messagep{
+    font-size:120%;
+}
+
+
+
+@media all and (max-width: 600px) {
+    .userimagemedium {
+        display: inline;
+    }
+    .userimagelarge {
+        display: none;
+    }
+    .userimagesmall {
+        display: none;
+    }
+    #messagep {
+        font-size: 110%;
+    }
+
+}
+
+@media all and (max-width: 400px) {
+    .userimagesmall {
+        display: inline;
+    }
+
+    .userimagelarge {
+        display: none;
+    }
+    .userimagemedium {
+        display: none;
+    }
+    #messagep {
+        font-size: 75%;
+    }
+
+}

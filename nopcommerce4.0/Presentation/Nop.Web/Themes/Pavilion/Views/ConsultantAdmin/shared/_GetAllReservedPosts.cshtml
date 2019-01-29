@@ -1,0 +1,256 @@
+﻿@model Nop.Web.Models.ConsultantAdmin.Post.PostModel
+
+<div>Reserved</div>
+
+
+<div class="container" style="margin-bottom:70px;">
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-3">
+                    <div style="margin-top:7px;"> من :</div>
+
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control" id="dateFrom" value="01-01-2000" type="date" placeholder="اختر تاريخ">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-3">
+                    <div style="margin-top:7px;">    الى : </div>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control" id="dateTo" type="date" placeholder="اختر تاريخ" style="direction:rtl!important;text-align:right!important">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-4">
+                    رقم الاستشارة
+                </div>
+                <div class="col-md-8">
+                    <div id="inputGroup" class="input-group">
+
+                        <input class="form-control" id="postId" type="text" placeholder="">
+                        <button id="postById" class="input-group-append">sea</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+
+            <button type="button" class="btn btn-info" id="sear">بحث</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+<table id="posts" class="table table-bordered table-hover">
+    <thead>
+        <tr class="table-active">
+            <th>رقم الاستشارة</th>
+            <th>العنوان</th>
+            <th>الوصف</th>
+            <th>التاريخ</th>
+            <th>الصنف الرئيسى</th>
+            <th>الصنف الفرعى</th>
+            <th>عمليات</th>
+
+        </tr>
+    </thead>
+</table>
+
+    
+    <script>
+    $(document).ready(function () {
+        var dataTable=  $("#posts").DataTable({
+            "responsive": "true",
+            "ajax": {
+                "url": "/Consultations/Admin/Posts/GetAllReservedPostsInJson"
+
+            },
+            "columns": [
+                {"data":"Id"},
+                { "data": "Title" },
+                { "data": "Text" },
+                { "data": "DateCreated" },
+                { "data": "CategoryName" },
+                { "data": "SubCategoryName" },
+                {
+                    "data": "Id",
+                    "render": function (data) {
+                        return "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' data-post-id="+data+" class='btn btn-info btn-small'> التفاصيل </a>" + "  " +"<button id='cancel' data-post-id="+data+" class='btn btn-danger'>فك الحجز</button>";
+
+                    }
+
+                }
+
+            ],
+            "language": {
+                "sProcessing": "جارٍ التحميل...",
+                "sLengthMenu": "أظهر _MENU_ مدخلات",
+                "sZeroRecords": "لم يعثر على أية سجلات",
+                "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                "sInfoPostFix": "",
+                "sSearch": "ابحث:",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "الأول",
+                    "sPrevious": "السابق",
+                    "sNext": "التالي",
+                    "sLast": "الأخير"
+                }
+            }
+
+
+        });
+       
+        $("#posts").on("click", "#cancel", function () {
+            var button = $(this);
+           
+            swal({
+                title: "فك الحجز؟",
+                text: "هل انت متاكد انك تريد فك حجز هذه الاستشارة؟",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        
+                        $.ajax({
+                            url: "/Consultations/Admin/Posts/PostCancelReserving?postId=" + button.attr("data-post-id") + "",
+
+                            "success": function (result) {
+                                window.location.href = window.location.href;
+                                swal("تم فك حجز هذه الاستشارة بنجاح", {
+                                    icon: "success",
+                                    
+                                });
+
+
+                            }
+                        });
+                    } else {
+                        swal("التراجع عن فك حجز هذه الرسالة؟");
+                    }
+                });
+        });
+        $("#postById").on("click", function (e) {
+            e.preventDefault();
+            dataTable.destroy();
+            dataTable = $("#posts").DataTable({
+                "responsive": "true",
+                "ajax": {
+
+                    "url": "/Consultations/Admin/Posts/GetPostById?postId=" + $('#postId').val() + "&type=Reserved",
+
+                },
+
+                "columns": [
+
+                    { "data": "Id" },
+                    { "data": "Title" },
+                    { "data": "Text" },
+                    { "data": "DateCreated" },
+                    { "data": "CategoryName" },
+                    { "data": "SubCategoryName" },
+                    {
+                        "data": "Id",
+                        "render": function (data) {
+                            return "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' class='btn btn-info btn-small' data-post-id=" + data + " > التفاصيل </a>" + "  " + "<button id='cancel' data-post-id=" + data + " class='btn btn-danger'>فك الحجز</button>";
+
+                        }
+
+                    }
+
+                ],
+                "language": {
+                    "sProcessing": "جارٍ التحميل...",
+                    "sLengthMenu": "أظهر _MENU_ مدخلات",
+                    "sZeroRecords": "لم يعثر على أية سجلات",
+                    "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                    "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                    "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                    "sInfoPostFix": "",
+                    "sSearch": "ابحث:",
+                    "sUrl": "",
+                    "oPaginate": {
+                        "sFirst": "الأول",
+                        "sPrevious": "السابق",
+                        "sNext": "التالي",
+                        "sLast": "الأخير"
+                    }
+                }
+
+
+            });
+
+
+
+
+           
+
+        })
+        $("#sear").on("click", function (e) {
+            e.preventDefault();
+            dataTable.destroy();
+            dataTable = $("#posts").DataTable({
+                "responsive": "true",
+                "order": [[3, "des"]],
+                "ajax": {
+
+                    "url": "/Consultations/Admin/Posts/GetPostsByDate?firstDate=" + $('#dateFrom').val() + "&secondDate=" + $('#dateTo').val() + "&type=Reserved",
+
+                },
+
+                "columns": [
+
+                    { "data": "Id" },
+                    { "data": "Title" },
+                    { "data": "Text" },
+                    { "data": "DateCreated" },
+                    { "data": "CategoryName" },
+                    { "data": "SubCategoryName" },
+                    {
+                        "data": "Id",
+                        "render": function (data) {
+                            return "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' class='btn btn-info btn-small' data-post-id=" + data + " > التفاصيل </a>" + "  " + "<button id='cancel' data-post-id=" + data + " class='btn btn-danger'>فك الحجز</button>";
+
+                        }
+
+                    }
+
+                ],
+                "language": {
+                    "sProcessing": "جارٍ التحميل...",
+                    "sLengthMenu": "أظهر _MENU_ مدخلات",
+                    "sZeroRecords": "لم يعثر على أية سجلات",
+                    "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                    "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                    "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                    "sInfoPostFix": "",
+                    "sSearch": "ابحث:",
+                    "sUrl": "",
+                    "oPaginate": {
+                        "sFirst": "الأول",
+                        "sPrevious": "السابق",
+                        "sNext": "التالي",
+                        "sLast": "الأخير"
+                    }
+                }
+
+
+            });
+            console.log("datefr= " + $('#dateFrom').val() + "to" + $('#dateTo').val());
+        });
+    });
+    </script>

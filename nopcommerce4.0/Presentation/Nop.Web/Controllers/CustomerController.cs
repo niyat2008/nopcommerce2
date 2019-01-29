@@ -308,7 +308,7 @@ namespace Nop.Web.Controllers
                             _customerActivityService.InsertActivity(customer, "PublicStore.Login", _localizationService.GetResource("ActivityLog.PublicStore.Login"));
 
                             if((string)TempData["ReturnURL"]== "consultations")
-                                return RedirectToRoute("Consultant.Api.Consultations");
+                                return RedirectToRoute("Consultant.ConsultantHome");
 
                             if (string.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
                                 return RedirectToRoute("HomePage");
@@ -392,7 +392,7 @@ namespace Nop.Web.Controllers
             }
 
             if (returnUrl == "consultations")
-                return RedirectToRoute("Consultant.Api.Consultations");
+                return RedirectToRoute("Consultant.ConsultantHome");
 
             return RedirectToRoute("HomePage");
         }
@@ -765,7 +765,7 @@ namespace Nop.Web.Controllers
                                 _workflowMessageService.SendCustomerEmailValidationMessage(customer, _workContext.WorkingLanguage.Id);
 
                                 if ((string)TempData["ReturnURL"] == "consultations")
-                                    return RedirectToRoute("Consultant.Api.Consultations");
+                                    return RedirectToRoute("Consultant.ConsultantHome");
                                 //result
                                 return RedirectToRoute("RegisterResult",
                                     new { resultId = (int)UserRegistrationType.EmailValidation });
@@ -773,7 +773,7 @@ namespace Nop.Web.Controllers
                         case UserRegistrationType.AdminApproval:
                             {
                                 if ((string)TempData["ReturnURL"] == "consultations")
-                                    return RedirectToRoute("Consultant.Api.Consultations");
+                                    return RedirectToRoute("Consultant.ConsultantHome");
 
                                 return RedirectToRoute("RegisterResult",
                                     new { resultId = (int)UserRegistrationType.AdminApproval });
@@ -788,14 +788,14 @@ namespace Nop.Web.Controllers
                                     redirectUrl = _webHelper.ModifyQueryString(redirectUrl, "returnurl=" + WebUtility.UrlEncode(returnUrl), null);
 
                                 if ((string)TempData["ReturnURL"] == "consultations")
-                                    return RedirectToRoute("Consultant.Api.Consultations");
+                                    return RedirectToRoute("Consultant.ConsultantHome");
 
                                 return Redirect(redirectUrl);
                             }
                         default:
                             {
                                 if ((string)TempData["ReturnURL"] == "consultations")
-                                    return RedirectToRoute("Consultant.Api.Consultations");
+                                    return RedirectToRoute("Consultant.ConsultantHome");
 
                                 return RedirectToRoute("HomePage");
                             }

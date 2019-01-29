@@ -1,0 +1,77 @@
+﻿@using Nop.Web.Models.Consultant.Category;
+@model CategoryOutputModel
+
+<div class="modal" tabindex="-1" role="dialog" Style="display:block" id="changeCatAndSubDiv">
+    @*changeCatModal*@
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" aria-label="Close" onclick="closePopupModel()"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"> تعديل التصنيف</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <select id="CategorySelectList" onchange="GetSubCategories()" name=""
+                            required
+                            class="form-control"
+                            placeholder="التصنيف الاساسي">
+                        <option selected
+                                value="0">
+                            التصنيف الاساسي
+                        </option>
+                        @foreach (var cat in Model.Items)
+                        {
+                            <option 
+                                    value="@cat.Id">
+                                @cat.Name
+                            </option>
+                        }
+
+
+                    </select>
+
+                    <select id="subCategoriesSelectList" name=""
+                            required
+                            class="form-control"
+                            placeholder=" التصنيف الفرعى ">
+                        <option selected
+                                value="0">
+                            التصنيف الفرعى
+                        </option>
+                        
+                    </select>
+
+                    <div class="modal-footer">
+                        <button type="button" onclick="submitChangeCatAndSub()" class="btn btn-success">تعديل</button>
+                        <button type="button" onclick="closePopupModel()" class="btn btn-default closebtn">اغلاق</button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal !-->
+
+
+<script type="text/javascript">
+
+    function GetSubCategories() {
+        
+        var CategoryId = $('#CategorySelectList').find(":selected").val();
+
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Consultant.Post.GetSubCategoriesByCategoryId")',
+            data: { CategoryId: CategoryId },
+            success: function (data) {
+                $("#subCategoriesSelectList").html(data);
+               
+            }
+        });
+    }
+
+    function closePopupModel() {
+        $("#changeCatAndSubDiv").css("display","none");
+    }
+
+</script>

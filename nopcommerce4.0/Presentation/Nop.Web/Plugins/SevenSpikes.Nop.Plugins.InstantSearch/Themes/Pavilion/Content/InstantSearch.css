@@ -220,7 +220,98 @@
 }
 
 
-@media all and (min-width: 1410px) {
+@media (min-width: 910px) {
+
+    #problem {
+        padding-right: 0px;
+    }
+
+    .men {
+        padding-right: 4%;
+    }
+}
+
+@media (min-width: 1110px) {
+
+    #problem {
+        padding-right: 0px !important;
+    }
+   
+    .men {
+        padding-right: 5%;
+    }
+}
+
+@media (min-width: 1150px) {
+
+    #problem {
+        padding-right: 5px !important;
+    }
+
+    .men {
+        padding-right: 7%;
+    }
+}
+
+@media (min-width: 1180px) {
+
+    #problem {
+        padding-right: 20px !important;
+    }
+
+    .men {
+        padding-right: 8%;
+    }
+}
+
+@media (min-width: 1210px) {
+
+    #problem {
+        padding-right: 5% !important;
+    }
+
+    .men {
+        padding-right: 9%;
+    }
+}
+
+@media (min-width: 1270px) {
+
+    #problem {
+        padding-right: 5% !important;
+    }
+
+    .men {
+        padding-right: 9%;
+    }
+}
+
+
+
+@media (min-width: 1280px) {
+
+    #problem {
+        padding-right: 0px !important;
+    }
+
+    .men {
+        padding-right: 4%;
+    }
+}
+
+
+@media (min-width: 1350px) {
+
+    #problem {
+        padding-right: 0px !important;
+    }
+
+    .men {
+        padding-right: 6%;
+    }
+}
+
+@media  (min-width: 1410px) {
     
     .store-search-box {
         margin-right: 1%;
@@ -228,6 +319,41 @@
     }
     
     #problem {
-        padding-right:5% !important;
+        padding-right:2% !important;
+    }
+    .men {
+        padding-right: 7%;
+    }
+}
+
+@media (min-width: 1610px) {
+
+    .store-search-box {
+        margin-right: 1%;
+        margin-left: 5%;
+    }
+
+    #problem {
+        padding-right: 9% !important;
+    }
+
+    .men {
+        padding-right: 14%;
+    }
+}
+
+@media (min-width: 1810px) {
+
+    .store-search-box {
+        margin-right: 1%;
+        margin-left: 5%;
+    }
+
+    #problem {
+        padding-right: 15% !important;
+    }
+
+    .men {
+        padding-right: 20%;
     }
 }

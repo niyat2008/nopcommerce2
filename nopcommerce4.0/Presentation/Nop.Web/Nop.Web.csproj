@@ -73,10 +73,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Extensions\ConsultantAdmin\" />
-    <Folder Include="Infrastructure\ConsultantAdmin\" />
     <Folder Include="Models\ConsultantAdmin\" />
-    <Folder Include="Validators\Consultant\" />
     <Folder Include="Validators\ConsultantAdmin\" />
     <Folder Include="wwwroot\ConsultantAdmin\" />
     <Folder Include="wwwroot\ConsultantApi\Uploads\Images\" />
@@ -84,6 +81,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Themes\Pavilion\Views\ConsultantAdmin\DashboardConsultant\Home.cshtml" />
+    <None Include="Themes\Pavilion\Views\ConsultantAdmin\Posts\GetClosedDisplayedPostDetails.cshtml" />
+    <None Include="Themes\Pavilion\Views\ConsultantAdmin\Posts\GetClosedDisplayedPosts.cshtml" />
+    <None Include="Themes\Pavilion\Views\ConsultantAdmin\Posts\GetClosedNotDisplayedPosts.cshtml" />
+    <None Include="Themes\Pavilion\Views\ConsultantAdmin\Posts\GetNotRepliedPosts.cshtml" />
+    <None Include="Themes\Pavilion\Views\ConsultantAdmin\Posts\GetOpenPosts.cshtml" />
+    <None Include="Themes\Pavilion\Views\ConsultantAdmin\Posts\GetReservedPosts.cshtml" />
+    <None Include="Themes\Pavilion\Views\ConsultantAdmin\Posts\Test.cshtml" />
+    <None Include="Themes\Pavilion\Views\ConsultantAdmin\shared\_Comments.cshtml" />
+    <None Include="Themes\Pavilion\Views\ConsultantAdmin\shared\_CSS.cshtml" />
+    <None Include="Themes\Pavilion\Views\ConsultantAdmin\shared\_GetAllClosedDisplayedPosts.cshtml" />
+    <None Include="Themes\Pavilion\Views\ConsultantAdmin\shared\_GetAllClosedDisplayedPostsByCategory.cshtml" />
+    <None Include="Themes\Pavilion\Views\ConsultantAdmin\shared\_GetAllClosedNotDisplayedPosts.cshtml" />
+    <None Include="Themes\Pavilion\Views\ConsultantAdmin\shared\_GetAllNotRepliedPosts.cshtml" />
+    <None Include="Themes\Pavilion\Views\ConsultantAdmin\shared\_GetAllOpenPosts.cshtml" />
+    <None Include="Themes\Pavilion\Views\ConsultantAdmin\shared\_GetAllReservedPosts.cshtml" />
+    <None Include="Themes\Pavilion\Views\ConsultantAdmin\shared\_Js.cshtml" />
+    <None Include="Themes\Pavilion\Views\ConsultantAdmin\shared\_Layout.cshtml" />
+    <None Include="Themes\Pavilion\Views\ConsultantAdmin\shared\_SearchSection.cshtml" />
     <None Include="wwwroot\fonts\fonts\Home.cshtml" />
     <None Include="wwwroot\images\Consultant\images\logo3.svg" />
     <None Include="wwwroot\js\ConsultantAdmin\plugins\bootstrap-datepicker.min.js" />
@@ -100,6 +116,21 @@
     <None Include="wwwroot\js\ConsultantAdmin\plugins\pace.min.js" />
     <None Include="wwwroot\js\ConsultantAdmin\plugins\select2.min.js" />
     <None Include="wwwroot\js\ConsultantAdmin\plugins\sweetalert.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Themes\Pavilion\Views\Consultant\Post\ChangeCatAndSub.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Consultant\Post\ListOfCategory.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Consultant\Post\ListOfSubCategories.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Consultant\Post\PostsAjax.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
   </ItemGroup>
 
   <!-- This target execute after "Build" target.

@@ -1,0 +1,22 @@
+﻿
+@model Nop.Web.Models.ConsultantAdmin.Post.PostModel
+@{
+    ViewBag.Title = "Posts";
+    Layout = "~/Themes/Pavilion/Views/ConsultantAdmin/shared/_Layout.cshtml";
+
+}
+
+
+
+
+@Html.Partial("~/Themes/Pavilion/Views/ConsultantAdmin/Shared/_CSS.cshtml")
+
+@Html.Partial("~/Themes/Pavilion/Views/ConsultantAdmin/Shared/_Js.cshtml")
+
+@Html.Partial("~/Themes/Pavilion/Views/ConsultantAdmin/Shared/_GetAllNotRepliedPosts.cshtml")
+
+@*@if (Model.Filter == "All")
+    {
+        @Html.Partial("~/Themes/Pavilion/Views/ConsultantAdmin/Shared/_GetAllClosedDisplayedPosts.cshtml")
+    }*@
+

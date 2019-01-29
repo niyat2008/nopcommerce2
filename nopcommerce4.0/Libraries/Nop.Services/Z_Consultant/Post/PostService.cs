@@ -234,7 +234,7 @@ namespace Nop.Services.Z_Consultant.Post
         public PagedList<Z_Consultant_Post> GetClosedPosts(PagingParams pagingParams)
         {
             var query = _postRepository.TableNoTracking.Include(p => p.Category).Include(p => p.SubCategory)
-                .Include(p => p.Customer).Where(p => p.IsClosed == true && p.IsDispayed==true);
+                .Include(p => p.Customer).Include(p => p.Photos).Where(p => p.IsClosed == true && p.IsDispayed==true);
 
             query = query.OrderByDescending(p => p.DateCreated);
 
@@ -998,5 +998,23 @@ namespace Nop.Services.Z_Consultant.Post
             return new PagedList<Z_Consultant_Post>(
                 query, pagingParams.PageNumber, pagingParams.PageSize,true);
         }
+
+        public bool IsRated(int postId)
+        {
+            var post = _postRepository.TableNoTracking.Where(p => p.Id == postId).FirstOrDefault();
+            if (post != null)
+            {
+                if (post.Rate >0 && post.Rate<6)
+                    return true;
+                else
+                    return false;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        
     }
 }

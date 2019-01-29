@@ -1,0 +1,92 @@
+﻿@using Nop.Web.Models.Consultant.Category;
+@model CategoryWithSubCategoriesOutputModel
+
+
+
+<style type="text/css">
+    li:hover div {
+        display: block !important;
+    }
+</style>
+
+
+
+
+
+<!-- Nav -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                
+
+                @foreach (var item in Model.Items)
+                {
+                <li class="main hasSubMenu">
+                   
+                    @Html.RouteLink(item.Name, "Consultant.GetAllClosedPostsByCategoryId", new { CategoryId = item.Id })
+                    
+                    <div class="subNav">
+
+
+                        <ul class="col-md-3 col-sm-6">
+
+                            @foreach (var subCat in item.SubCategories)
+                            {
+                                <li>
+                                    @Html.RouteLink(subCat.Name, "Consultant.GetAllClosedPostsBySubCategoryId", new { SubCategoryId = subCat.Id })
+                                </li>
+                            }
+
+
+
+                        </ul>
+
+
+                    </div>
+                </li>
+                }
+
+
+
+               
+            </ul>
+        </div><!-- /.navbar-collapse -->
+        
+
+    </div><!-- /.container-fluid -->
+</nav>
+
+
+
+<div class="" id="navSelectedCat">
+    <div class="container-fluid">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="heading_nav">
+                <span id="slectedCatSpan">كل التصنيفات</span> / <span id="slectedSubSpan"></span>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#navSelectedCat").css("display", "none");
+        });
+
+    
+
+</script>

@@ -1,0 +1,81 @@
+﻿body{
+    background-color:#fff!important;
+}
+#posts_wrapper {
+    margin-top: 50px !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    box-sizing: border-box;
+    display: inline-block;
+    min-width: 1.5em;
+    padding: 0.5em 1em;
+    margin-left: -26px;
+    text-align: center;
+    text-decoration: none !important;
+    cursor: pointer;
+    *cursor: hand;
+    color: #333 !important;
+    border: 1px solid transparent;
+    border-radius: 2px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover
+{
+        background:none !important;
+        border:none!important
+}
+    .dataTables_wrapper .dataTables_paginate .paginate_button:active {
+        outline: none;
+        background-color: transparent !important;
+        background: none !important;
+    }
+.dataTables_wrapper .dataTables_info 
+{
+    clear: both;
+    float: right;
+    padding-top: 0.755em;
+}
+.dataTables_wrapper .dataTables_paginate {
+    float: left;
+    text-align: right;
+    padding-top: 0.25em;
+
+}
+.dataTables_wrapper .dataTables_paginate {
+    float: left;
+    text-align: right;
+    padding-top: 0.25em;
+    margin-left: 10px !important;
+}
+  
+
+    
+    /*******front **********/
+    .post-title {
+        text-align: center !important;
+        font-size: 29px;
+        font-family: initial;
+        margin-bottom: 43px;
+    }
+.textBox {
+    max-width: 500px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #fff;
+}
+.form-lbl {
+    font-size: 15px;
+    font-family: unset;
+    margin-right:18px;
+}
+#comment {
+    background-color: #fff;
+    max-width: 500px;
+    border: green 1px solid;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top:20px!important;
+}
+#comment span {
+    margin-left:20px;
+}
+/*******front end**********/

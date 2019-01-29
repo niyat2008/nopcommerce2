@@ -1,0 +1,257 @@
+﻿@model Nop.Web.Models.ConsultantAdmin.Post.PostModel
+
+<div>closed displayed</div>
+
+@Html.Partial("~/Themes/Pavilion/Views/ConsultantAdmin/Shared/_SearchSection.cshtml")
+@*_SearchSection.cshtml*@
+<div class="table-responsive">
+    <table id="posts" class="table table-bordered table-hover">
+        <thead>
+            <tr class="table-active">
+                <th>رقم الاستشارة</th>
+                <th>العنوان</th>
+                <th>الوصف</th>
+                <th>التاريخ</th>
+                <th>الصنف الرئيسى</th>
+                <th>الصنف الفرعى</th>
+                <th>التفاصيل</th>
+                <th>حذف</th>
+
+            </tr>
+        </thead>
+    </table>
+
+</div>
+  
+    <script>
+        $(document).ready(function () {
+            
+            function getUrl() {
+                return "/Consultations/Admin/Posts/GetPostById?postId=" + $('#postId').val() + "&type=ClosedDisplayed";
+
+            }
+            var dataTable = $("#posts").DataTable({
+                "responsive": "true",
+                "ajax": {
+
+                    "url":"/Consultations/Admin/Posts/ClosedDisplayedInJson",
+
+                    },
+
+                "columns": [
+ 
+                    { "data": "Id" },
+                    { "data": "Title" },
+                    { "data": "Text" },
+                    { "data": "DateCreated" },
+                    { "data": "CategoryName" },
+                    { "data": "SubCategoryName" },
+                    {
+                        "data": "Id",
+                        "render": function (data) {
+                            return "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' class='btn btn-info btn-small' data-post-id=" + data + " > التفاصيل </a>" ;
+
+                        }
+
+                    },
+                    {
+                        "data": "Id",
+                        "render": function (data) {
+                            return "<button class='btn btn-danger' id='delete' data-post-id=" + data + " >حذف</button>";
+
+                        }
+
+                    }
+
+                ],
+                "language": {
+                    "sProcessing": "جارٍ التحميل...",
+                    "sLengthMenu": "أظهر _MENU_ مدخلات",
+                    "sZeroRecords": "لم يعثر على أية سجلات",
+                    "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                    "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                    "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                    "sInfoPostFix": "",
+                    "sSearch": "ابحث:",
+                    "sUrl": "",
+                    "oPaginate": {
+                        "sFirst": "الأول",
+                        "sPrevious": "السابق",
+                        "sNext": "التالي",
+                        "sLast": "الأخير"
+                    }
+                }
+
+
+            });
+
+
+
+            $("#postById").on("click", function (e) {
+                e.preventDefault();
+                dataTable.destroy();
+                dataTable=$("#posts").DataTable({
+                    "responsive": "true",
+                    "ajax": {
+
+                        "url": "/Consultations/Admin/Posts/GetPostById?postId=" + $('#postId').val() + "&type=ClosedDisplayed",
+
+                    },
+
+                    "columns": [
+
+                        { "data": "Id" },
+                        { "data": "Title" },
+                        { "data": "Text" },
+                        { "data": "DateCreated" },
+                        { "data": "CategoryName" },
+                        { "data": "SubCategoryName" },
+                        {
+                            "data": "Id",
+                            "render": function (data) {
+                                return "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' class='btn btn-info btn-small' data-post-id=" + data + " > التفاصيل </a>" + "  " + "<button class='btn btn-danger' id='delete' data-post-id=" + data + " >حذف</button>";
+
+                            }
+
+                        }
+
+                    ],
+                    "language": {
+                        "sProcessing": "جارٍ التحميل...",
+                        "sLengthMenu": "أظهر _MENU_ مدخلات",
+                        "sZeroRecords": "لم يعثر على أية سجلات",
+                        "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                        "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                        "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                        "sInfoPostFix": "",
+                        "sSearch": "ابحث:",
+                        "sUrl": "",
+                        "oPaginate": {
+                            "sFirst": "الأول",
+                            "sPrevious": "السابق",
+                            "sNext": "التالي",
+                            "sLast": "الأخير"
+                        }
+                    }
+
+
+                });
+
+
+               
+               
+                //dataTable.ajax.url(getUrl()).load();
+                //dataTable.rows()
+                //    .invalidate()
+                //    .draw();
+
+
+                //$.get("/Consultations/Admin/Posts/GetPostById?postId=" + $('#postId').val() + "&type=ClosedDisplayed", function (newDataArray) {
+                //    dataTable.clear();
+                //    dataTable.rows.add(newDataArray);
+                //    dataTable.draw();
+                //});
+             
+            })
+
+
+
+            $("#posts").on("click", "#delete", function () {
+                var button = $(this);
+                swal({
+                    title: "هل انت متاكد؟",
+                    text: "هل انت متاكد انك تريد مسح هذه الاستشارة؟",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                                "url": "/Consultations/Admin/Posts/RemovePost?postId=" + button.attr("data-post-id") + "",
+                                "method": "DELETE",
+                                "success": function (result) {
+                                    dataTable.row(button.parents("tr")).remove().draw();
+                                    //dataTable.rows().remove().draw();
+                                    swal("تم مسح الاستشارة بنجاح", {
+                                        icon: "success",
+
+                                    });
+
+
+                                }
+                            });
+                        } else {
+                            swal("التراجع عن مسح هذه الرسالة؟");
+                        }
+                    });
+            });
+
+           
+
+
+            $("#sear").on("click", function (e) {
+                e.preventDefault();
+                dataTable.destroy();
+                dataTable = $("#posts").DataTable({
+                    "responsive": "true",
+                    "order": [[3, "des"]],
+                    "ajax": {
+
+                        "url": "/Consultations/Admin/Posts/GetPostsByDate?firstDate=" + $('#dateFrom').val() + "&secondDate=" + $('#dateTo').val() + "&type=ClosedDisplayed",
+
+                    },
+
+                    "columns": [
+
+                        { "data": "Id" },
+                        { "data": "Title" },
+                        { "data": "Text" },
+                        { "data": "DateCreated" },
+                        { "data": "CategoryName" },
+                        { "data": "SubCategoryName" },
+                        {
+                            "data": "Id",
+                            "render": function (data) {
+                                return "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' class='btn btn-info btn-small' data-post-id=" + data + " > التفاصيل </a>" + "  " + "<button class='btn btn-danger' id='delete' data-post-id=" + data + " >حذف</button>";
+
+                            }
+
+                        }
+
+                    ],
+                    "language": {
+                        "sProcessing": "جارٍ التحميل...",
+                        "sLengthMenu": "أظهر _MENU_ مدخلات",
+                        "sZeroRecords": "لم يعثر على أية سجلات",
+                        "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                        "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                        "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                        "sInfoPostFix": "",
+                        "sSearch": "ابحث:",
+                        "sUrl": "",
+                        "oPaginate": {
+                            "sFirst": "الأول",
+                            "sPrevious": "السابق",
+                            "sNext": "التالي",
+                            "sLast": "الأخير"
+                        }
+                    }
+
+
+                });
+                console.log("datefr= " + $('#dateFrom').val()+"to"+$('#dateTo').val());
+            });
+
+
+
+
+
+
+        });
+
+        
+          /* href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "'*/
+
+
+    </script>

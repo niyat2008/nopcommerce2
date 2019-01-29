@@ -88,7 +88,7 @@
                     var discountPercentage = Math.Round(100 / (OldPrice / discountValue)); // calculate the percentage
                     if (discountPercentage > 0)
                     {
-                        <div style="text-align:right;z-index:10;top:0;" class=""> <span style="background-color:#f74258; color:white; font-size:small; padding:1% 1% 1% 1%;" class="">@discountPercentage% خصم</span> </div>
+                        <div style="text-align:right;position:absolute;z-index:10;width:100%;" class=""> <span style="background-color:#f74258; color:white; font-size:small; padding:1% 1% 1% 1%;" class="">@discountPercentage% خصم</span> </div>
                     }
                 }
             }
@@ -96,7 +96,7 @@
         }
     }
 
-    <div class="picture" style="top:0;">
+    <div class="picture">
         <a href="@Url.RouteUrl("Product", new { SeName = Model.SeName })" title="@Model.DefaultPictureModel.Title">
             <img alt="@Model.DefaultPictureModel.AlternateText" src="@Model.DefaultPictureModel.ImageUrl" title="@Model.DefaultPictureModel.Title" />
         </a>

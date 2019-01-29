@@ -20,77 +20,198 @@ namespace Nop.Web.Infrastructure
         {
 
 
-            //admin consultant
+            //----------------- Consultant----------------------------
 
+
+            routeBuilder.MapRoute("Consultant.ConsultantHome", "Consultations",
+            new { controller = "ConsultantHome", action = "Home" });
+            
+
+            routeBuilder.MapRoute("Consultant.Navbar", "Consultations/Consultant/Navbar",
+            new { controller = "ConsultantHome", action = "Navbar" });
+            routeBuilder.MapRoute("Consultant.User.GetUserInfo", "Consultations/User/GetUserInfo",
+            new { controller = "User", action = "GetUserInfo" });
+            routeBuilder.MapRoute("Consultant.User.GetUserRoles", "Consultations/User/GetUserRoles",
+            new { controller = "User", action = "GetUserRoles" });
+
+
+            routeBuilder.MapRoute("Consultant.Post.GetAllClosedPostsAjax", "Consultations/GetAllClosedPostsAjax",
+            new { controller = "Post", action = "GetAllClosedPostsAjax" });
+            routeBuilder.MapRoute("Consultant.Post.GetAllClosedPosts", "Consultations/LastConsultations",
+            new { controller = "Post", action = "GetAllClosedPosts" });
+            routeBuilder.MapRoute("Consultant.GetAllClosedPostsByCategoryId", "Consultations/CategoryConsultations",
+            new { controller = "Post", action = "GetAllClosedPostsByCategoryId" });
+            routeBuilder.MapRoute("Consultant.GetAllClosedPostsBySubCategoryId", "Consultations/SubCategoryConsultations",
+            new { controller = "Post", action = "GetAllClosedPostsBySubCategoryId" });
+            routeBuilder.MapRoute("Consultant.Post.GetCustomerOpenPosts", "Consultations/UserOpenConsultations",
+            new { controller = "Post", action = "GetCustomerOpenPosts" });
+            routeBuilder.MapRoute("Consultant.Post.GetCustomerClosedPosts", "Consultations/UserClosedConsultations",
+            new { controller = "Post", action = "GetCustomerClosedPosts" });
+            routeBuilder.MapRoute("Consultant.Post.GetConsultantNotAnsweredPosts", "Consultations/ConsultantNotAnsweredConsultations",
+            new { controller = "Post", action = "GetConsultantNotAnsweredPosts" });
+            routeBuilder.MapRoute("Consultant.Post.GetConsultantReservedPosts", "Consultations/ConsultantReservedConsultations",
+            new { controller = "Post", action = "GetConsultantReservedPosts" });
+            routeBuilder.MapRoute("Consultant.Post.GetConsultantOpenPosts", "Consultations/ConsultantOpenConsultations",
+            new { controller = "Post", action = "GetConsultantOpenPosts" });
+            routeBuilder.MapRoute("Consultant.Post.GetConsultantClosedPosts", "Consultations/ConsultantClosedConsultations",
+            new { controller = "Post", action = "GetConsultantClosedPosts" });
+
+            routeBuilder.MapRoute("Consultant.Post.GetPost", "Consultations/Post",
+            new { controller = "Post", action = "GetPost" });
+            routeBuilder.MapRoute("Consultant.Post.getFile", "Consultations/Images/{path}",
+            new { controller = "Post", action = "getFile" });
+            routeBuilder.MapRoute("Consultant.Post.getFilePrivate", "Consultations/Imgs/{path}",
+            new { controller = "Post", action = "getFilePrivate" });
+
+            routeBuilder.MapRoute("Consultant.Comment.GetCommentsByPostId", "Consultations/PostComments",
+            new { controller = "Comment", action = "GetCommentsByPostId" });
+
+            routeBuilder.MapRoute("Consultant.Post.ClosePost", "Consultations/Post/ClosePost",
+            new { controller = "Post", action = "ClosePost" });
+            routeBuilder.MapRoute("Consultant.Post.RatePost", "Consultations/Post/RatePost",
+            new { controller = "Post", action = "RatePost" });
+            routeBuilder.MapRoute("Consultant.Post.ReservePost", "Consultations/Post/ReservePost",
+            new { controller = "Post", action = "ReservePost" });
+            routeBuilder.MapRoute("Consultant.Post.UnReservePost", "Consultations/Post/UnReservePost",
+            new { controller = "Post", action = "UnReservePost" });
+            routeBuilder.MapRoute("Consultant.Post.ChangeCatAndSub", "Consultations/Post/ChangeCatAndSub",
+            new { controller = "Post", action = "ChangeCatAndSub" });
+            routeBuilder.MapRoute("Consultant.Post.GetSubCategoriesByCategoryId", "Consultations/Post/GetSubCategoriesByCategoryId",
+            new { controller = "Post", action = "GetSubCategoriesByCategoryId" });
+            routeBuilder.MapRoute("Consultant.Post.SetPostToCategoryAndSubCategory", "Consultations/Post/SetPostToCategoryAndSubCategory",
+            new { controller = "Post", action = "SetPostToCategoryAndSubCategory" });
+            routeBuilder.MapRoute("Consultant.Post.AddPost", "Consultations/Post/AddPost",
+            new { controller = "Post", action = "AddPost" });
+            routeBuilder.MapRoute("Consultant.Post.GetCategories", "Consultations/Post/GetCategories",
+            new { controller = "Post", action = "GetCategories" });
+            routeBuilder.MapRoute("Consultant.Post.AddPostAjax", "Consultations/Post/AddPostAjax",
+            new { controller = "Post", action = "AddPostAjax" });
+            routeBuilder.MapRoute("Consultant.Post.Search", "Consultations/Post/Search",
+            new { controller = "Post", action = "Search" });
+
+
+            routeBuilder.MapRoute("Consultant.Comment.AddComment", "Consultations/Comment/AddComment",
+            new { controller = "Comment", action = "AddComment" });
+            routeBuilder.MapRoute("Consultant.Comment.GetComment", "Consultations/Comment/GetComment",
+            new { controller = "Comment", action = "GetComment" });
+
+
+
+            //-----------------enf of Consultant----------------------------
+
+
+
+
+            //-----------------Admin Consultant----------------------------
+
+
+            //Dashboard 
             routeBuilder.MapRoute("Consultant.Admin.Dashboard", "Consultations/Admin",
             new { controller = "DashboardConsultant", action = "Home" });
-
-            //end admin consultant
-
-            routeBuilder.MapRoute("Consultant.Api.Consultations", "Consultations",
-            new { controller = "Consultations", action = "Home" });
-
-            routeBuilder.MapRoute("Consultations.Api.Post.getFile", "Consultations/Images/{path}",
-            new { controller = "Consultations", action = "getFile" });
-            routeBuilder.MapRoute("Consultations.Api.Post.getFilePrivate", "Consultations/Imgs/{path}",
-            new { controller = "Consultations", action = "getFilePrivate" });
-
-            routeBuilder.MapRoute("Consultant.Consultations.GetAllClosedPosts", "Consultations/GetAllClosedPosts",
-            new { controller = "Consultations", action = "GetAllClosedPosts" });
-            routeBuilder.MapRoute("Consultant.Consultations.Navbar", "Consultations/Navbar",
-            new { controller = "Consultations", action = "Navbar" });
-
-            routeBuilder.MapRoute("Consultant.Consultations.GetCategories", "Consultations/GetCategories",
-            new { controller = "Consultations", action = "GetCategories" });
-
-            routeBuilder.MapRoute("Consultant.Consultations.GetAllClosedPostsByCategoryId", "Consultations/GetAllClosedPostsByCategoryId",
-            new { controller = "Consultations", action = "GetAllClosedPostsByCategoryId" });
-
-
-            routeBuilder.MapRoute("Consultant.Consultations.GetAllClosedPostsBySubCategoryId", "Consultations/GetAllClosedPostsBySubCategoryId",
-            new { controller = "Consultations", action = "GetAllClosedPostsBySubCategoryId" });
-
-
-            routeBuilder.MapRoute("Consultant.Consultations.GetCustomerClosedPosts", "Consultations/GetCustomerClosedPosts",
-            new { controller = "Consultations", action = "GetCustomerClosedPosts" });
+            //Closed Displayed Posts
+            routeBuilder.MapRoute("Consultant.Admin.GetAllClosedDisplayedPosts", "Consultations/Admin/Posts/ClosedDisplayed",
+                new { controller = "Consultations", action = "GetClosedDisplayedPosts" });
+            //Closed Displayed Post By Id
+            routeBuilder.MapRoute("Consultant.Admin.GetPostById", "Consultations/Admin/Posts/GetPostById",
+                new { controller = "Consultations", action = "GetPostById" });
+            //Closed Displayed Posts In Json 
+            routeBuilder.MapRoute("Consultant.Admin.GetAllClosedDisplayedPostsInJson", "Consultations/Admin/Posts/ClosedDisplayedInJson",
+                new { controller = "Consultations", action = "GetAllClosedDisplayedPostsInJson" });
+            //Closed Displayed Posts With Category Id In Json 
+            routeBuilder.MapRoute("Consultant.Admin.GetAllClosedDisplayedPostsWithCategoryIdInJson", "Consultations/Admin/Posts/ClosedDisplayedWithCategoryIdInJson",
+                 new { controller = "Consultations", action = "GetAllClosedDisplayedPostsWithCategoryIdInJson" });
+            //Closed Displayed Posts With SubCategory Id In Json
+            routeBuilder.MapRoute("Consultant.Admin.GetAllClosedDisplayedPostsWithSubCategoryIdInJson", "Consultations/Admin/Posts/ClosedDisplayedWithSubCategoryIdInJson",
+                 new { controller = "Consultations", action = "GetAllClosedDisplayedPostsWithSubCategoryIdInJson" });
+            //Closed Displayed Posts By Date In Json
+            routeBuilder.MapRoute("Consultant.Admin.GetPostsByDate", "Consultations/Admin/Posts/GetPostsByDate",
+                 new { controller = "Consultations", action = "GetPostsByDate" });
+            //Remove  Post
+            routeBuilder.MapRoute("Consultant.Admin.RemovePost", "Consultations/Admin/Posts/RemovePost",
+                 new { controller = "Consultations", action = "RemovePost" });
+            //Get  Post Details
+            routeBuilder.MapRoute("Consultant.Admin.GetPostDetails", "Consultations/Admin/Posts/GetPostDetails",
+                new { controller = "Consultations", action = "GetPostDetails" });
+            //Get  Post Comments
+            routeBuilder.MapRoute("Consultant.Admin.GetPostComments", "Consultations/Admin/Posts/GetPostComments",
+                new { controller = "Consultations", action = "GetPostComments" });
 
 
 
-            routeBuilder.MapRoute("Consultant.Consultations.GetCustomerOpenPosts", "Consultations/GetCustomerOpenPosts",
-            new { controller = "Consultations", action = "GetCustomerOpenPosts" });
+
+            //Closed Not Displayed Posts
+            routeBuilder.MapRoute("Consultant.Admin.GetAllClosedNotDisplayedPosts", "Consultations/Admin/Posts/ClosedNotDisplayed",
+                new { controller = "Consultations", action = "GetClosedNotDisplayedPosts" });
+            //Closed Not Displayed Posts in Json
+            routeBuilder.MapRoute("Consultant.Admin.GetAllClosedNotDisplayedPostsInJson", "Consultations/Admin/Posts/ClosedNotDisplayedInJson",
+                new { controller = "Consultations", action = "GetAllClosedNotDisplayedPostsInJson" });
+            //Closed Not Displayed Posts With Category Id in Json
+            routeBuilder.MapRoute("Consultant.Admin.GetAllClosedNotDisplayedPostsWithCategoryIdInJson", "Consultations/Admin/Posts/ClosedNotDisplayedWithCategoryIdInJson",
+                new { controller = "Consultations", action = "GetAllClosedNotDisplayedPostsWithCategoryIdInJson" });
+            //Closed Not Displayed Posts With SubCategory Id in Json
+            routeBuilder.MapRoute("Consultant.Admin.GetAllClosedNotDisplayedPostsWithSubCategoryIdInJson", "Consultations/Admin/Posts/ClosedNotDisplayedWithSubCategoryIdInJson",
+                new { controller = "Consultations", action = "GetAllClosedNotDisplayedPostsWithSubCategoryIdInJson" });
+            //Post Display
+            routeBuilder.MapRoute("Consultant.Admin.PostDisplay", "Consultations/Admin/Posts/PostDisplay",
+                new { controller = "Consultations", action = "PostDisplay" });
 
 
-            routeBuilder.MapRoute("Consultant.Consultations.GetConsultantNotAnsweredPosts", "Consultations/GetConsultantNotAnsweredPosts",
-            new { controller = "Consultations", action = "GetConsultantNotAnsweredPosts" });
+
+            // Not Replied Posts
+            routeBuilder.MapRoute("Consultant.Admin.GetAllNotRepliedPosts", "Consultations/Admin/Posts/GetAllNotRepliedPosts",
+                new { controller = "Consultations", action = "GetNotRepliedPosts" });
+            // Not Replied Posts In Json
+            routeBuilder.MapRoute("Consultant.Admin.GetAllNotRepliedPostsInJson", "Consultations/Admin/Posts/GetAllNotRepliedPostsInJson",
+                new { controller = "Consultations", action = "GetAllNotRepliedPostsInJson" });
+            // Not Replied Posts With Category In Json
+            routeBuilder.MapRoute("Consultant.Admin.GetAllNotRepliedPostsWithCategoryInJson", "Consultations/Admin/Posts/GetAllNotRepliedPostsWithCategoryInJson",
+                new { controller = "Consultations", action = "GetAllNotRepliedPostsWithCategoryInJson" });
+            // Not Replied Posts With SubCategory In Json
+            routeBuilder.MapRoute("Consultant.Admin.GetAllNotRepliedPostsWithSubCategoryInJson", "Consultations/Admin/Posts/GetAllNotRepliedPostsWithSubCategoryInJson",
+                new { controller = "Consultations", action = "GetAllNotRepliedPostsWithSubCategoryInJson" });
 
 
-            routeBuilder.MapRoute("Consultant.Consultations.GetConsultantReservedPosts", "Consultations/GetConsultantReservedPosts",
-            new { controller = "Consultations", action = "GetConsultantReservedPosts" });
 
 
-            routeBuilder.MapRoute("Consultant.Consultations.GetConsultantOpenPosts", "Consultations/GetConsultantOpenPosts",
-            new { controller = "Consultations", action = "GetConsultantOpenPosts" });
+            //  Reserved Posts
+            routeBuilder.MapRoute("Consultant.Admin.GetAllReservedPosts", "Consultations/Admin/Posts/GetAllReservedPosts",
+                new { controller = "Consultations", action = "GetReservedPosts" });
+            //  Reserved Posts In Json
+            routeBuilder.MapRoute("Consultant.Admin.GetAllReservedPostsInJson", "Consultations/Admin/Posts/GetAllReservedPostsInJson",
+                new { controller = "Consultations", action = "GetAllReservedPostsInJson" });
+            //  Reserved Posts With Category Id In Json
+            routeBuilder.MapRoute("Consultant.Admin.GetAllReservedPostsWithCategoryIdInJson", "Consultations/Admin/Posts/GetAllReservedPostsWithCategoryIdInJson",
+                new { controller = "Consultations", action = "GetAllReservedPostsWithCategoryIdInJson" });
+            //  Reserved Posts With SubCategory Id In Json
+            routeBuilder.MapRoute("Consultant.Admin.GetAllReservedPostsWithSubCategoryIdInJson", "Consultations/Admin/Posts/GetAllReservedPostsWithSubCategoryIdInJson",
+                new { controller = "Consultations", action = "GetAllReservedPostsWithSubCategoryIdInJson" });
+            //Post Cancelling Reserving
+            routeBuilder.MapRoute("Consultant.Admin.PostCancelReserving", "Consultations/Admin/Posts/PostCancelReserving",
+                new { controller = "Consultations", action = "PostCancelReserving" });
 
 
-
-            routeBuilder.MapRoute("Consultant.Consultations.GetConsultantClosedPosts", "Consultations/GetConsultantClosedPosts",
-            new { controller = "Consultations", action = "GetConsultantClosedPosts" });
-
-
-            routeBuilder.MapRoute("Consultant.Consultations.GetCommentsByPostId", "Consultations/GetCommentsByPostId",
-            new { controller = "Consultations", action = "GetCommentsByPostId" });
-
-
-            routeBuilder.MapRoute("Consultant.Consultations.Search", "Consultations/Search",
-            new { controller = "Consultations", action = "Search" });
-
-
-            routeBuilder.MapRoute("Consultant.Consultations.ChangeCatAndSub", "Consultations/ChangeCatAndSub",
-            new { controller = "Consultations", action = "ChangeCatAndSub" });
+            //  Open Posts
+            routeBuilder.MapRoute("Consultant.Admin.GetAllOpenPosts", "Consultations/Admin/Posts/GetAllOpenPosts",
+                new { controller = "Consultations", action = "GetOpenPosts" });
+            //  Open Posts In Json
+            routeBuilder.MapRoute("Consultant.Admin.GetAllOpenPostsInJson", "Consultations/Admin/Posts/GetAllOpenPostsInJson",
+                new { controller = "Consultations", action = "GetAllOpenPostsInJson" });
+            //  Open Posts With Category In Json
+            routeBuilder.MapRoute("Consultant.Admin.GetAllOpenPostsWithCategoryInJson", "Consultations/Admin/Posts/GetAllOpenPostsWithCategoryInJson",
+                new { controller = "Consultations", action = "GetAllOpenPostsWithCategoryInJson" });
+            //  Open Posts With SubCategory In Json
+            routeBuilder.MapRoute("Consultant.Admin.GetAllOpenPostsWithSubCategoryInJson", "Consultations/Admin/Posts/GetAllOpenPostsWithSubCategoryInJson",
+                new { controller = "Consultations", action = "GetAllOpenPostsWithSubCategoryInJson" });
 
 
-            routeBuilder.MapRoute("Consultant.Consultations.GetSubCategoriesByCategoryId", "Consultations/GetSubCategoriesByCategoryId",
-            new { controller = "Consultations", action = "GetSubCategoriesByCategoryId" });
+            
+
+            routeBuilder.MapRoute("Consultant.Admin.Test", "Consultations/Admin/Test",
+           new { controller = "Consultations", action = "Test" });
+
+
+            //-------------------End Admin Consultant-------------------------------
+
 
 
 

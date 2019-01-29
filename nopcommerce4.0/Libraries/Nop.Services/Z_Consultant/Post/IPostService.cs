@@ -31,6 +31,7 @@ namespace Nop.Services.Z_Consultant.Post
         bool ClosePost(ClosePostModel closePostDto, int customerId);
         bool RatePost(RatePostModel ratePostDto, int customerId);
         bool IsCustomerAuthToPost(int postId, int customerId);
+        bool IsRated(int postId);
         PagedList<Z_Consultant_Post> GetOpenPostsNotAns(PagingParams pagingParams);
         PagedList<Z_Consultant_Post> GetOpenPostsNotAnsByCategoryId(PagingParams pagingParams, int categoryId);
         PagedList<Z_Consultant_Post> GetOpenPostsNotAnsBySubCategoryId(PagingParams pagingParams, int subCategoryId);

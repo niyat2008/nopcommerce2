@@ -1,0 +1,182 @@
+﻿
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Tajawal" rel="stylesheet">
+<script src="~/js/Consultant/jquery.min.js"></script>
+<link href="~/css/Consultant/bootstrap.min.css" rel="stylesheet" />
+<script src="~/js/Consultant/bootstrap.min.js"></script>
+
+
+<link href="~/css/Consultant/bootstrap-rtl.min.css" rel="stylesheet" />
+<link href="~/fonts/Consultant/font-awesome.min.css" rel="stylesheet" />
+
+
+
+<link href="~/css/Consultant/ConsultantCss.css" rel="stylesheet" />
+<link href="~/css/Consultant/Home.css" rel="stylesheet" />
+
+
+<script src="~/js/Consultant/main.js"></script>
+<script src="~/js/Consultant/jquery.nicescroll.min.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="~/css/Consultant/mobile.css" rel="stylesheet" />
+
+<script src="~/js/Consultant/lightbox.js"></script>
+<link href="~/css/Consultant/lightbox.css" rel="stylesheet" />
+
+<link href="~/css/Consultant/Header.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Consultations</title>
+
+<style type="text/css">
+    .register {
+        color: green !important;
+    }
+
+    ul {
+        display: block;
+        list-style-type: none !important;
+    }
+
+    .consultantlink:hover {
+        text-decoration: none;
+    }
+    .btndarckgreen:hover {
+        background-color: darkgreen !important;
+    }
+
+</style>
+
+
+<!-- Header -->
+<!-- Top Bar -->
+<section class="top_bar">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center">
+                    <span>@Html.RouteLink("سوق", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                    <span class="active">@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                    @*<span>حراج</span>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div  style="background-color:#e8ebee;padding:0.3px;padding-top:6px;"><p id="messagep" style="text-align:center;">خدمة الاستشارات هى خدمة مجانية تقدم من قبل موقع المزراع لمساعدة حل المشاكل الزراعية بواسطة مستشارين مختصين فى هذا المجال.</p></div>
+
+
+<!-- Search -->
+<section class="search">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2" style="text-align:center;">
+                <img class="logo" src="~/images/Consultant/images/logo3.png" onclick="goToHome()" />
+
+            </div>
+            <div class="col-md-8" style="padding-top:12px;">
+                <div class="form-group">
+                    <input id="searchText" type="text" style="height:44px;"
+                           class="form-control" placeholder="ابحث عن ...">
+                    <button onclick="filterWithText()" style="height:44px;" class="btndarckgreen">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="userInfo" style="padding-top:12px;"></div>
+        </div>
+    </div>
+</section>
+
+<!--<!-- Nav -->
+<div id="Nav"></div>
+
+
+
+<div class="home" id="homeBody">
+    <div class="container-fluid">
+        <div class="col-md-2" id="threebuttons" style="margin-bottom:5%;">
+
+        </div>
+
+        <div class="col-md-8">
+            <div class="allPage" id="allpage">
+                @RenderBody()
+                <div id="posts"></div>
+                <not-found *ngIf="!posts.length"></not-found>
+                <tw-pagination *ngIf="posts?.length" [numberOfPages]="totalNumberOfPages" (pageChanged)="getClosedPost($event)"></tw-pagination>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Consultant.User.GetUserInfo")',
+
+            success: function (data) {
+                $("#userInfo").html(data);
+            }
+        });
+
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Consultant.Navbar")',
+
+            success: function (data) {
+                $("#Nav").html(data);
+            }
+        });
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Consultant.User.GetUserRoles")',
+
+            success: function (data) {
+                $("#threebuttons").html(data);
+            }
+        });
+
+    });
+
+
+
+
+    function login() {
+        window.location.href = "login?returnUrl=consultations";
+    }
+
+
+    function goToHome() {
+        window.location.href = '@Url.RouteUrl("Consultant.ConsultantHome")';
+    }
+
+
+    function filterWithText() {
+        var Term = $("#searchText").val();
+
+        if (Term) {
+
+            window.location.href = '@Url.RouteUrl("Consultant.Post.Search")'+"?Term=" + Term;
+        }
+        else {
+            alert("ادخل كلمات للبحث");
+        }
+    }
+
+
+</script>
+

@@ -23,5 +23,6 @@ namespace Nop.Web.Models.Consultant.Post
         public string SubCategoryName { get; set; }
         public int CategoryId { get; set; }
         public string PostOwner { get; set; }
+        public string Photo { get; set; }
     }
 }
