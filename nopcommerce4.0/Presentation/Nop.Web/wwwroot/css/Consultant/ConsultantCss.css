@@ -60,8 +60,7 @@ input.form-control {
 
 /* Post Style */
 .post {
-    border: 1px solid #4da74d;
-    border-radius: 20px;
+    border: 1px solid #4da74d; 
     margin-bottom: 35px;
     background: #fff;
     box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.3)
@@ -109,9 +108,8 @@ input.form-control {
     }
 
         .post .post-body img {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
+            width: 30px;
+            height: 30px; 
             background: #fff;
             border: 1px solid #98c24d;
             padding: 0px;

@@ -25,6 +25,7 @@ namespace Nop.Data.Mapping.Z_Consultant
             this.Property(p => p.IsDispayed).IsRequired();
             this.Property(p => p.IsReserved).IsRequired();
             this.Property(p => p.LastCommentTime).IsOptional();
+            this.Property(p => p.IsCommon).IsOptional();
 
             this.HasRequired(p => p.Customer)
                 .WithMany(c => c.CustomersPosts)
@@ -41,8 +42,7 @@ namespace Nop.Data.Mapping.Z_Consultant
             this.HasOptional(p => p.SubCategory)
                 .WithMany(s => s.Posts)
                 .HasForeignKey(p => p.SubCategoryId);
-
-
+             
         }
     }
 }

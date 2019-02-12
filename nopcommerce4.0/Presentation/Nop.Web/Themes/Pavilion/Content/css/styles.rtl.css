@@ -1032,9 +1032,10 @@ label, label + * {
 .social-sharing .twitter a {
 	background-position: -32px 0;
 }
-.social-sharing .google a {
-	background-position: -64px 0;
-}
+    .social-sharing .google a {
+        background: url('../img/ma3roof.png') no-repeat;
+        background-size: contain;
+    }
 .social-sharing .pinterest a {
 	background-position: -96px 0;
 }
@@ -1044,8 +1045,14 @@ label, label + * {
 .social-sharing .youtube a {
 	background-position: -160px 0;
 }
+
+.order-summary-content > form > div > label.info {
+    font-size: 25px;
+    font-weight: bold;
+    color: red;
+}
 .social-sharing .rss a {
-	background-position: -192px 0;
+    background-position: -192px 0;
 }
 .social-sharing .instagram a {
 	background-position: -224px 0;

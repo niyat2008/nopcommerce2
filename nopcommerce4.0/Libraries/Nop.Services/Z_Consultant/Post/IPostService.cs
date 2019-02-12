@@ -83,5 +83,6 @@ namespace Nop.Services.Z_Consultant.Post
         PagedList<Z_Consultant_Post> GetClosedHiddenPostsBySubCategoryId(PagingParams pagingParams, int subCategoryId);
         void DisplayPost(int PostId);
         void HidePost(int PostId);
+        PagedList<Z_Consultant_Post> GetCommonPostsForCustomer(PagingParams pagingParams, int currentUserId);
     }
 }

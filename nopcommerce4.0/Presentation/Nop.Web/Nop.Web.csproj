@@ -63,6 +63,7 @@
     <Content Include="Logs\**" CopyToPublishDirectory="PreserveNewest" />
     <Content Remove="wwwroot\css\Consultant\imageResponsive.css" />
     <Content Remove="wwwroot\fonts\fonts\Home.cshtml" />
+    <None Remove="Themes\Pavilion\Content\img\New folder\ma3roof.png" />
     <EmbeddedResource Include="wwwroot\css\Consultant\imageResponsive.css">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
@@ -73,10 +74,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Infrastructure\Harag\" />
     <Folder Include="Models\ConsultantAdmin\" />
+    <Folder Include="Themes\Pavilion\Views\Harag\" />
     <Folder Include="Validators\ConsultantAdmin\" />
     <Folder Include="wwwroot\ConsultantAdmin\" />
     <Folder Include="wwwroot\ConsultantApi\Uploads\Images\" />
+    <Folder Include="wwwroot\HaragApi\Uploads\Images\" />
     <Folder Include="wwwroot\Shared\" />
   </ItemGroup>
 
@@ -129,6 +133,9 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Consultant\Post\PostsAjax.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Shared\Components\OrderSummar\Default.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>

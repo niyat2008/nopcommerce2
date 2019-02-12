@@ -498,6 +498,51 @@ namespace Nop.Web.Controllers.Consultant
         }
 
 
+        [HttpGet]
+        public IActionResult GetCustomerCommonPosts(PagingParams pagingParams)
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
+                return Forbid();
+            ViewBag.UserRole = RolesType.Registered;
+
+            var currentUserId = _workContext.CurrentCustomer.Id;
+
+            var model = _postService.GetCommonPostsForCustomer(pagingParams, currentUserId);
+
+            Response.Headers.Add("X-Pagination", model.GetHeader().ToJson());
+
+            var outputModel = new PostOutputModel
+            {
+                Paging = model.GetHeader(),
+                Links = GetLinks(model, "Consultant.Post.GetCustomerClosedPosts"),
+                Items = model.List.Select(m => new PostModel()
+                {
+                    Id = m.Id,
+                    Text = m.Text,
+                    Title = m.Title,
+                    CategoryId = m.CategoryId,
+                    SubCategoryId = m.SubCategoryId,
+                    IsSetToSubCategory = m.IsSetToSubCategory,
+                    PostOwner = m.Customer.Username,
+                    DateCreated = m.DateCreated,
+                    DateUpdated = m.DateUpdated,
+                    IsAnswered = m.IsAnswered,
+                    IsClosed = m.IsClosed,
+                    Rate = m.Rate,
+                    IsCommon = m.IsCommon,
+                    IsDispayed = m.IsDispayed,
+                    IsReserved = m.IsReserved,
+                    CategoryName = m.Category.Name,
+                    SubCategoryName = m.SubCategory?.Name,
+                    Photo = GetPostPhoto(m.Photos?.FirstOrDefault()?.Url)
+                }).ToList(),
+            };
+            return View("~/Themes/Pavilion/Views/Consultant/Post/CustomerClosedConsultations.cshtml", outputModel);
+        }
 
 
         [HttpGet]
@@ -698,7 +743,7 @@ namespace Nop.Web.Controllers.Consultant
                 return NotFound();
             string UserRole = "Vistor";
 
-            PostWithFilesModel model = new PostWithFilesModel();
+            PostWithFilesModel model  = new PostWithFilesModel();
 
             if (!_postService.IsClosed(PostId))
             {

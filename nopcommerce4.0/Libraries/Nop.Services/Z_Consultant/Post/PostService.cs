@@ -1015,6 +1015,16 @@ namespace Nop.Services.Z_Consultant.Post
             }
         }
 
-        
+        public PagedList<Z_Consultant_Post> GetCommonPostsForCustomer(PagingParams pagingParams, int currentUserId)
+        {
+            var query = _postRepository.TableNoTracking.Include(p => p.Customer)
+                .Include(p => p.Category).Include(p => p.SubCategory)
+                .Where(p => p.IsCommon == true);
+
+            query = query.OrderBy(p => p.DateCreated);
+
+            return new PagedList<Z_Consultant_Post>(
+                query, pagingParams.PageNumber, pagingParams.PageSize, true);
+        }
     }
 }

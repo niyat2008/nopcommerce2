@@ -1040,6 +1040,9 @@ namespace Nop.Web.Factories
         /// <returns>Order totals model</returns>
         public virtual OrderTotalsModel PrepareOrderTotalsModel(IList<ShoppingCartItem> cart, bool isEditable)
         {
+            // to get it in case of null
+            decimal customSubTotal = 0;
+
             var model = new OrderTotalsModel
             {
                 IsEditable = isEditable
@@ -1052,6 +1055,9 @@ namespace Nop.Web.Factories
                 _orderTotalCalculationService.GetShoppingCartSubTotal(cart, subTotalIncludingTax, out decimal orderSubTotalDiscountAmountBase, out List<DiscountForCaching> _, out decimal subTotalWithoutDiscountBase, out decimal _);
                 var subtotalBase = subTotalWithoutDiscountBase;
                 var subtotal = _currencyService.ConvertFromPrimaryStoreCurrency(subtotalBase, _workContext.WorkingCurrency);
+                // set the subtotal
+                customSubTotal = subtotal;
+
                 model.SubTotal = _priceFormatter.FormatPrice(subtotal, true, _workContext.WorkingCurrency, _workContext.WorkingLanguage, subTotalIncludingTax);
 
                 if (orderSubTotalDiscountAmountBase > decimal.Zero)
@@ -1066,11 +1072,15 @@ namespace Nop.Web.Factories
                 if (model.RequiresShipping)
                 {
                     var shoppingCartShippingBase = _orderTotalCalculationService.GetShoppingCartShippingTotal(cart);
+
+                 
                     if (shoppingCartShippingBase.HasValue)
                     {
-                        var shoppingCartShipping = _currencyService.ConvertFromPrimaryStoreCurrency(shoppingCartShippingBase.Value, _workContext.WorkingCurrency);
+                        var shoppingCartShipping = _currencyService.ConvertFromPrimaryStoreCurrency(shoppingCartShippingBase.Value, 
+                            _workContext.WorkingCurrency);
                         model.Shipping = _priceFormatter.FormatShippingPrice(shoppingCartShipping, true);
 
+                       
                         //selected shipping method
                         var shippingOption = _workContext.CurrentCustomer.GetAttribute<ShippingOption>(SystemCustomerAttributeNames.SelectedShippingOption, _storeContext.CurrentStore.Id);
                         if (shippingOption != null)
@@ -1133,6 +1143,12 @@ namespace Nop.Web.Factories
                 var shoppingCartTotalBase = _orderTotalCalculationService.GetShoppingCartTotal(cart, out decimal orderTotalDiscountAmountBase, out List<DiscountForCaching> _, out List<AppliedGiftCard> appliedGiftCards, out int redeemedRewardPoints, out decimal redeemedRewardPointsAmount);
                 if (shoppingCartTotalBase.HasValue)
                 {
+                    var shoppingCartTotal = _currencyService.ConvertFromPrimaryStoreCurrency(shoppingCartTotalBase.Value, _workContext.WorkingCurrency);
+                    model.OrderTotal = _priceFormatter.FormatPrice(shoppingCartTotal, true, false);
+                }
+                else
+                {
+                    shoppingCartTotalBase = customSubTotal + 20;
                     var shoppingCartTotal = _currencyService.ConvertFromPrimaryStoreCurrency(shoppingCartTotalBase.Value, _workContext.WorkingCurrency);
                     model.OrderTotal = _priceFormatter.FormatPrice(shoppingCartTotal, true, false);
                 }

@@ -398,7 +398,7 @@
             }
 
             .mini-shopping-cart .totals {
-                text-align: left;
+                text-align: right;
             }
 
             .mini-shopping-cart .buttons {
@@ -568,7 +568,7 @@
             .category-navigation-list > li > .sublist-wrap > .sublist > li,
             .header-menu > ul > li > .sublist-wrap > .sublist > li { /*this is a subcategory item (contains a list)*/
                 float: right;
-                width: 16%;
+                /* width: 16%; */
                 padding: 10px;
                 font-size: 13px;
             }
@@ -582,6 +582,7 @@
                 .header-menu > ul > li > .sublist-wrap > .sublist > li > a { /*this is a subcategory item title (list title)*/
                     display: block;
                     margin: 0 0 10px;
+                    width: fit-content;
                     border-bottom: 3px solid #f74258;
                     padding: 0 0 5px;
                     font-weight: bold;
@@ -713,12 +714,12 @@
             display: block;
             margin: 45px 0 0;
             border: 1px solid #e9e9e9;
-            background-color: #fff;
+            background-color: #e7eaed;
         }
 
         .two-columns-area.slider-right-column
         .home-page-product-grid:first-child {
-            margin-top: 0;
+            margin-top: 34px;
         }
 
         .two-columns-area .home-page-product-grid .title {
@@ -1051,8 +1052,8 @@
         }
 
         .product-grid .item-box .buttons-upper {
-            position: absolute;
-            bottom: 15px;
+            /*position: absolute;
+            bottom: 15px;*/
             right: 0;
             z-index: 1;
             width: 100%;
@@ -1064,12 +1065,13 @@
         }
 
         .product-grid .item-box .buttons-lower {
-            position: absolute;
-            bottom: 0;
+            /* position: absolute; */
+            /* bottom: -28px; */
+            margin-bottom: -45px;
             right: 0;
             z-index: 2;
             width: 100%;
-            height: 45px;
+            /* height: 45px; */
             border-width: 1px;
             border-style: solid;
             border-color: #f0f0f0 #e9e9e9 #e9e9e9;

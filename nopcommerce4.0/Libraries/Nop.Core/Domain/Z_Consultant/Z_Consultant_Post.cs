@@ -30,6 +30,7 @@ namespace Nop.Core.Domain.Z_Consultant
         public bool IsAnswered { get; set; }
 
         public bool IsDispayed { get; set; }
+        public bool IsCommon { get; set; }
 
         public bool IsReserved { get; set; }
 

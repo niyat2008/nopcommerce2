@@ -1,6 +1,6 @@
 {
   "Group": "Payment methods",
-  "FriendlyName": "Fawry",
+  "FriendlyName": "فوري",
   "SystemName": "Payments.Fawry",
   "Version": "1.42",
   "SupportedVersions": [
