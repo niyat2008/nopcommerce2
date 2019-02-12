@@ -40,7 +40,8 @@
                             }
                             else
                             {
-                                <span>@T("ShoppingCart.Totals.CalculatedDuringCheckout")</span>
+                                <span>@T("ShoppingCart.Totals.Defaultshippingcost")</span>
+                              
                             }
                         }
                         else
@@ -140,7 +141,10 @@
                     }
                     else
                     {
-                        <span>@T("ShoppingCart.Totals.CalculatedDuringCheckout")</span>
+                        <span>
+                            @*@T("ShoppingCart.Totals.CalculatedDuringCheckout")*@
+                            @Model.OrderTotal
+                        </span>
                     }
                 </td>
             </tr>

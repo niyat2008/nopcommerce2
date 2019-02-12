@@ -44,4 +44,8 @@
     <PackageReference Include="System.Linq.Dynamic" Version="1.0.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Domain\Z_Harag\" />
+  </ItemGroup>
+
 </Project>

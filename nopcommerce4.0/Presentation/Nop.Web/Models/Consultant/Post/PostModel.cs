@@ -24,5 +24,6 @@ namespace Nop.Web.Models.Consultant.Post
         public int CategoryId { get; set; }
         public string PostOwner { get; set; }
         public string Photo { get; set; }
+        public bool IsCommon { get; set; }
     }
 }

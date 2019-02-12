@@ -33,10 +33,14 @@ namespace Nop.Web.Infrastructure
             new { controller = "User", action = "GetUserInfo" });
             routeBuilder.MapRoute("Consultant.User.GetUserRoles", "Consultations/User/GetUserRoles",
             new { controller = "User", action = "GetUserRoles" });
-
+            
 
             routeBuilder.MapRoute("Consultant.Post.GetAllClosedPostsAjax", "Consultations/GetAllClosedPostsAjax",
             new { controller = "Post", action = "GetAllClosedPostsAjax" });
+            // Ali
+            routeBuilder.MapRoute("Consultant.Post.GetCustomerCommonPosts", "Consultations/CommonConsultations",
+            new { controller = "Post", action = "GetCustomerCommonPosts" });
+
             routeBuilder.MapRoute("Consultant.Post.GetAllClosedPosts", "Consultations/LastConsultations",
             new { controller = "Post", action = "GetAllClosedPosts" });
             routeBuilder.MapRoute("Consultant.GetAllClosedPostsByCategoryId", "Consultations/CategoryConsultations",

@@ -15,11 +15,12 @@
 }
 
 <style type="text/css">
-    .threebuttons:hover{
-        background-color:darkgreen !important;
+    .threebuttons:hover {
+        background-color: darkgreen !important;
     }
-    .nodoc:hover{
-        text-decoration:none;
+
+    .nodoc:hover {
+        text-decoration: none;
     }
 </style>
 
@@ -57,6 +58,10 @@
 <a href="@Url.RouteUrl("Consultant.Post.GetAllClosedPosts")" class="nodoc">
     <input id="searchText" type="button" class="form-control col-md-12 threebuttons" value="احدث الاستشارات" style="margin:2px;background-color:#4da74d;color:#fff;">
 </a>
+<a href="@Url.RouteUrl("Consultant.Post.GetCustomerCommonPosts")" class="nodoc">
+    <input id="searchText" type="button" class="form-control col-md-12 threebuttons" value= " الاستشارات الشائعه" style="margin:2px;background-color:#4da74d;color:#fff;">
+</a>
+
 
 
 

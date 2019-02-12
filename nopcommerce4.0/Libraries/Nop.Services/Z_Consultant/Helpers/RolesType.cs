@@ -10,6 +10,6 @@ namespace Nop.Services.Z_Consultant.Helpers
     {
         public static readonly string Registered = "Registered";
         public static readonly string Consultant = "Consultant";
-        public static readonly string Administrators = "Administrators";
+        public static readonly string Administrators = "Administrators"; 
     }
 }
