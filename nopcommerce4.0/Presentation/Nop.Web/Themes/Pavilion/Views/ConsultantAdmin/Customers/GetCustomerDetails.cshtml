@@ -1,0 +1,56 @@
+﻿ @model Nop.Web.Models.ConsultantAdmin.Customers.CustomersModel
+
+
+@{ 
+    ViewBag.Title = "Customers";
+    Layout = "~/Themes/Pavilion/Views/ConsultantAdmin/shared/_Layout.cshtml";
+}
+
+
+@Html.Partial("~/Themes/Pavilion/Views/ConsultantAdmin/Shared/_CSS.cshtml")
+
+@Html.Partial("~/Themes/Pavilion/Views/ConsultantAdmin/Shared/_Js.cshtml")
+
+<div class="page-title">تفاصيل العضو</div>
+
+<form>
+    <div class="form-group">
+        <label>رقم المستخدم</label>
+        @Html.TextBoxFor(c => c.Id, new { @class = "form-control detailsTextBox" })
+        @Html.ValidationMessageFor(c => c.Id)
+    </div>
+
+    <div class="form-group">
+        <label>اسم المستخدم</label>
+        @Html.TextBoxFor(c=>c.Username,new { @class= "form-control detailsTextBox" })
+        @Html.ValidationMessageFor(c=>c.Username)
+    </div>
+    <div class="form-group">
+        <label>الايميل</label>
+        @Html.TextBoxFor(c => c.Email, new { @class = "form-control detailsTextBox" })
+        @Html.ValidationMessageFor(c => c.Email)
+    </div>
+
+    <div class="form-group">
+        <label>الموبايل</label>
+        @Html.TextBoxFor(c => c.Mobile, new { @class = "form-control detailsTextBox" })
+        @Html.ValidationMessageFor(c => c.Mobile)
+    </div>
+    @*<div class="checkbox">
+           <label>
+                @Html.CheckBoxFor(m => m.Active,new { @disabled="disabled"}) نشط؟
+          </label>
+   </div>*@
+
+    @*<div class="form-group">
+        <label>ip</label>
+        @Html.TextBoxFor(c => c.LastIpAddress, new { @class = "form-control detailsTextBox" })
+        @Html.ValidationMessageFor(c => c.Mobile)
+    </div>
+    <div class="form-group">
+        <label>النشاط الاخير</label>
+        @Html.TextBoxFor(c => c.LastActivityDateUtc, new { @class = "form-control detailsTextBox" })
+        @Html.ValidationMessageFor(c => c.Mobile)
+    </div>*@
+
+</form>

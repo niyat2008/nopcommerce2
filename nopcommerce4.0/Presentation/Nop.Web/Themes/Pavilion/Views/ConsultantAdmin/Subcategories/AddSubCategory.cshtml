@@ -1,0 +1,115 @@
+﻿@model Nop.Services.Z_ConsultantAdmin.SubCategories.SubCategoryForPost
+
+
+@{
+    ViewBag.Title = "Categories";
+    Layout = "~/Themes/Pavilion/Views/ConsultantAdmin/shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Themes/Pavilion/Views/ConsultantAdmin/Shared/_DataTable.cshtml")
+<div class="page-title">اضف صنف فرعى</div>
+
+<form id="addSubCategory">
+    <div class="form-group">
+        <label class="form-lbl">الصنف الرئيسى</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.CategoryId,new SelectList(Model.Categories,"Id","Name"),"اختر الصنف الرئيسى", new { @class = "form-control detailsDropDown" })
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-lbl">الصنف الفرعى</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control add-name detailsTextBox" })
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="form-lbl">الوصف</label>
+
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control add-description detailsTextBox" })
+        @Html.ValidationMessageFor(m => m.Description)
+
+    </div>
+
+    <button type="submit" class="btn btn-primary add">اضافة</button>
+</form>
+
+<script src="~/js/ConsultantAdmin/notify.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#addSubCategory").submit(function (event) {
+            var ajaxRequest;
+            event.preventDefault();
+
+            //var values = $(this).serialize();
+            //var values = JSON.stringify($("#addCategory").serializeArray());
+            var model = {
+                "CategoryId": $(".detailsDropDown").val(),
+                "Name": $(".add-name").val(),
+                "Description": $(".add-description").val()
+
+            };
+
+            if ((model.CategoryId === null || model.CategoryId === "") && model.Name === "" && model.Description == "") {
+
+                alert(" اختر صنف وادخل الاسم والوصف");
+
+            } else if ((model.CategoryId === null || model.CategoryId === "") && model.Name == "") {
+                alert("اختر صنف وادخل الوصف");
+
+            } else if (model.Name === "" && model.Description == "") {
+
+                alert("ادخل الاسم والوصف");
+
+            } else if (model.Name === "") {
+                alert("ادخل الاسم")
+
+            } else if ((model.CategoryId === null || model.CategoryId === "") && model.Description == "") {
+
+                alert("ادخل الوصف واختر الصنف");
+            } else if (model.Description === "") {
+                alert("ادخل الوصف")
+            } else if (model.CategoryId === "" || model.CategoryId === null) {
+                alert("اختر صنف");
+            } else {
+
+                var values = JSON.stringify(model);
+                ajaxRequest = $.ajax({
+                    url: "/Consultations/Admin/SubCategories/AddSubCategoryAjax",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    type: "post",
+                    data: values
+                });
+                ajaxRequest.done(function (response) {
+                    if (response.result == true) {
+
+                        $(".detailsDropDown").val("");
+                        $(".add-name").val("");
+                            $(".add-description").val("");
+
+                        $.notify("تمت الاضافة بنجاح", "success");
+
+                    }
+
+
+                });
+                ajaxRequest.fail(function (response) {
+                    if (response.result == false) {
+                        console.log("fail");
+                        $.notify("failed", "error");
+                    }
+
+                });
+            }
+
+
+        });
+
+    });
+</script>
+

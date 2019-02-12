@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Nop.Web.Models.ConsultantAdmin.Post.Dashboard
+@{
     Layout = "~/Themes/Pavilion/Views/ConsultantAdmin/shared/_Layout.cshtml";
     ViewBag.Title = "لوحة التحكم الرئيسية";
 }
@@ -9,8 +10,8 @@
         <div class="widget-small primary coloured-icon">
             <i class="icon fa fa-users fa-3x"></i>
             <div class="info">
-                <h4>Users</h4>
-                <p><b>5</b></p>
+                <h4>Members</h4>
+                <p><b>@Model.MembersCount</b></p>
             </div>
         </div>
     </div>
@@ -18,8 +19,8 @@
         <div class="widget-small info coloured-icon">
             <i class="icon fa fa-thumbs-o-up fa-3x"></i>
             <div class="info">
-                <h4>Likes</h4>
-                <p><b>25</b></p>
+                <h4>Posts</h4>
+                <p><b>@Model.PostsCount</b></p>
             </div>
         </div>
     </div>
@@ -42,7 +43,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+@*<div class="row">
     <div class="col-md-6">
         <div class="tile">
             <h3 class="tile-title">Monthly Sales</h3>
@@ -88,7 +89,7 @@
             <p>The source code is available on GitHub. If anything is missing or weird please report it as an issue on <a href="https://github.com/pratikborsadiya/vali-admin" target="_blank">GitHub</a>. If you want to contribute to this theme pull requests are always welcome.</p>
         </div>
     </div>
-</div>
+</div>*@
 
 
 

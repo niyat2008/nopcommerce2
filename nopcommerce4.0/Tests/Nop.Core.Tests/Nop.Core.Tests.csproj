@@ -13,6 +13,9 @@
     				<Product>Nop.Core.Tests</Product>
   			</PropertyGroup>
   			<ItemGroup>
+  			  <PackageReference Include="System.Linq.Dynamic" Version="1.0.7" />
+  			</ItemGroup>
+  			<ItemGroup>
   			  <ProjectReference Include="..\..\Libraries\Nop.Core\Nop.Core.csproj" />
   			  <ProjectReference Include="..\Nop.Tests\Nop.Tests.csproj" />
   			</ItemGroup>

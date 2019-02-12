@@ -32,6 +32,7 @@ namespace Nop.Core.Domain.Z_Consultant
         public bool IsDispayed { get; set; }
 
         public bool IsReserved { get; set; }
+        public bool IsCommon { get; set; }
 
         public bool IsSetToSubCategory { get; set; }
 

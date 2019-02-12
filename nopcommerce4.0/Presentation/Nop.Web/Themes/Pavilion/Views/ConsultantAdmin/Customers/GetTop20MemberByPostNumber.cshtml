@@ -1,0 +1,92 @@
+﻿@model Nop.Services.Z_ConsultantAdmin.Customers.Top20CustomerByPostsNumber
+
+
+@{
+    ViewBag.Title = "الاعضاء";
+    Layout = "~/Themes/Pavilion/Views/ConsultantAdmin/shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Themes/Pavilion/Views/ConsultantAdmin/Shared/_DataTable.cshtml")
+
+
+
+<div class="page-title">أعلى 20 عضو بعدد الاستشارات  </div>
+
+
+
+
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover" id="customers">
+        <thead>
+            <tr>
+                <th>رقم العضو</th>
+                <th>الاسم</th>
+                <th>الايميل</th>
+                <th>رقم الهاتف </th>
+                <th>عدد الاستشارات</th>
+               
+               
+            </tr>
+        </thead>
+    </table>
+</div>
+
+
+
+
+<script>
+
+    //Data Table
+    var dataTable = $("#customers").DataTable({
+
+        "responsive": "true",
+
+        "autoWidth": "true",
+        "order": [[4, "des"]],
+        "ajax": {
+
+            "url": "/Consultations/Admin/Customer/GetTop20MemberByPostsNumberInJson",
+            
+        },
+
+        "columns": [
+            { "data": "Id", "width": "5%" },
+            { "data": "Name" },
+            { "data": "Email" },
+            { "data": "Phone" },
+            { "data": "PostsCount" },
+           
+            //{
+            //    "data": "Id",
+            //    "render": function (data) {
+            //        return "<a id='details' href='#' class='btn btn-info btn-small' data-post-id=" + data + "> التفاصيل </a>";
+
+            //    }
+
+            //}
+
+
+        ],
+        "language": {
+            "sProcessing": "جارٍ التحميل...",
+            "sLengthMenu": "أظهر _MENU_ مدخلات",
+            "sZeroRecords": "لم يعثر على أية سجلات",
+            "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+            "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+            "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+            "sInfoPostFix": "",
+            "sSearch": "ابحث:",
+            "sUrl": "",
+            "oPaginate": {
+                "sFirst": "الأول",
+                "sPrevious": "السابق",
+                "sNext": "التالي",
+                "sLast": "الأخير"
+            }
+        }
+
+
+    });
+
+ </script>

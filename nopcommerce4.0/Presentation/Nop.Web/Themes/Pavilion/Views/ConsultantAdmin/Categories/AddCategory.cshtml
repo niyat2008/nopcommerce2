@@ -1,0 +1,133 @@
+﻿ @model Nop.Services.Z_ConsultantAdmin.Categories.CategoryModelForPost
+
+
+@{ 
+    ViewBag.Title = "Add Category";
+    Layout = "~/Themes/Pavilion/Views/ConsultantAdmin/shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Themes/Pavilion/Views/ConsultantAdmin/Shared/_DataTable.cshtml")
+
+@*@Html.Partial("~/Themes/Pavilion/Views/ConsultantAdmin/Shared/_CSS.cshtml")*@
+
+<div class="page-title">اضف صنف رئيسى </div>
+
+<form id="addCategory" >
+    <div class="form-group">
+        <label>اسم الصنف</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control categoryName detailsTextBox" })
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label>الوصف</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Description, new { @class = "form-control categoryDescription detailsTextBox" })
+            @Html.ValidationMessageFor(m => m.Description)
+        </div>
+    </div>
+
+    <input type="submit" value="اضافة" class="btn btn-primary add" />    
+</form>
+
+
+<script src="~/js/ConsultantAdmin/notify.js"></script>
+
+
+
+
+
+
+@*@Html.Partial("~/Themes/Pavilion/Views/ConsultantAdmin/Shared/_Js.cshtml")*@
+
+
+<script>
+    $(document).ready(function () {
+        $("#addCategory").submit(function (event) {
+            var ajaxRequest;
+            event.preventDefault();
+            
+            //var values = $(this).serialize();
+            //var values = JSON.stringify($("#addCategory").serializeArray());
+            var model = {
+                "Name": $(".categoryName").val(),
+                "Description": $(".categoryDescription").val()
+
+            };
+
+            if (model.Name === "") {
+                alert("ادخل اسم الصنف")
+
+            } else if (model.Description === "") {
+                alert("ادخل الوصف")
+
+            } else if (model.Name === "" || model.Description === "") {
+                alert("ادخل اسم الصنف والوصف")
+
+            } else {
+
+                var values = JSON.stringify(model);
+                ajaxRequest = $.ajax({
+                    url: "/Consultations/Admin/Categories/AddCategoryAjax",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    type: "post",
+                    data: values
+                });
+                ajaxRequest.done(function (response) {
+                    if (response.result == true) {
+                        $(".categoryName").val("");
+                        $(".categoryDescription").val("");
+                        $.notify("تمت الاضافة بنجاح", "success",
+                            {position:"center"}
+                        );
+                    }
+
+
+                });
+                ajaxRequest.fail(function (response) {
+                    if (response.result == false) {
+                        console.log("fail");
+                        $.notify("failed", "error");
+                    }
+
+                });
+           }
+
+           
+            
+
+           
+            
+           
+        });
+
+
+        
+        });    
+</script>
+
+
+
+
+
+@*<link href="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/css/jquery.calendars.picker.css" rel="stylesheet" />*@ 
+
+
+
+@*<script src="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/js/jquery.calendars.js"></script>
+    <script src="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/js/jquery.calendars.plus.min.js"></script>
+    <script src="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/js/jquery.plugin.min.js"></script>
+    <script src="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/js/jquery.calendars.picker.js"></script>
+    <script src="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/js/jquery.calendars.islamic.min.js"></script>*@
+
+@*$('#txtHijriDate').calendarsPicker({
+    //    calendar: $.calendars.instance('islamic'),
+    //    monthsToShow: [2, 3],
+    //    showOtherMonths: true,
+    //    onSelect: function (date) {
+    //        alert('You picked ' + date[0].formatDate());
+    //    }
+    //});*@

@@ -1,0 +1,92 @@
+﻿
+<div class="customer-search">
+    <div class="row" style="margin-bottom:20px;">
+        <div class="col-md-3">
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div style="margin-top:7px;"> من :</div>
+
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control" id="dateFrom" type="date" placeholder="اختر تاريخ" style="direction:rtl!important;text-align:right!important">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-3">
+                    <div style="margin-top:7px;">    الى : </div>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control" id="dateTo" type="date" placeholder="اختر تاريخ" style="direction:rtl!important;text-align:right!important">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-3">
+                    <div style="margin-top:7px;">    نوع الاستشارة : </div>
+                </div>
+                <div class="col-md-9">
+                    <select name="drop1" id="dropdownSearch" class="form-control" placeholder="اختر نوع الاستشارة" style="direction:rtl!important;text-align:right!important">
+                        <option value="All">الكل</option>
+                        <option value="ClosedDisplayed">المعروضة</option>
+                        <option value="ClosedNotDisplayed">مغلقة غير معروضة</option>
+                        <option value="NotReplied">لم يتم الرد</option>
+                        <option value="Reserved">محجوزة</option>
+                        <option value="Open">مفتوحة</option>
+                    </select>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-1">
+
+            <button type="button" class="btn btn-info" id="sear">بحث</button>
+        </div>
+
+
+
+    </div>
+    <div class="row" style="margin-bottom:20px;">
+
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-3">
+                    <div style="margin-top:7px;">    نوع الاستشارة : </div>
+                </div>
+                <div class="col-md-9">
+                    <select name="drop1" id="dropdownSearch2" class="form-control" placeholder="اختر نوع الاستشارة" style="direction:rtl!important;text-align:right!important">
+                        <option value="All">الكل</option>
+                        <option value="ClosedDisplayed">المعروضة</option>
+                        <option value="ClosedNotDisplayed">مغلقة غير معروضة</option>
+                        <option value="NotReplied">لم يتم الرد</option>
+                        <option value="Reserved">محجوزة</option>
+                        <option value="Open">مفتوحة</option>
+                    </select>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-3" style="margin-top:6px;">
+                    رقم الاستشارة
+                </div>
+                <div class="col-md-9">
+                    <div id="inputGroup" class="input-group">
+
+                        <input class="form-control" id="postId" type="text" placeholder="">
+                        <button id="postById" class="input-group-append btn btn-info">بحث</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

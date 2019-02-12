@@ -1,6 +1,6 @@
 ﻿@model Nop.Web.Models.ConsultantAdmin.Post.PostModel
 
-<div>Not replied</div>
+<div class="page-title">الاستشارات التى لم يرد عليها</div>
 
 
 
@@ -9,7 +9,7 @@
 
 
 
-<table id="posts" class="table table-bordered table-hover">
+<table id="posts" class="table table-bordered table-hover display">
     <thead>
         <tr class="table-active">
             <th>رقم الاستشارة</th>
@@ -18,8 +18,8 @@
             <th>التاريخ</th>
             <th>الصنف الرئيسى</th>
             <th>الصنف الفرعى</th>
-            <th>التفاصيل</th>
-            <th>حذف</th>
+            <th>عمليات</th>
+            
 
         </tr>
     </thead>
@@ -29,34 +29,33 @@
     <script>
     $(document).ready(function () {
         var dataTable = $("#posts").DataTable({
+            "serverSide": "true",
             "responsive": "true",
+            "processing": "true",
+            "autoWidth": "true",
+            "order": [[3, "des"]],
             "ajax": {
-                "url":"/Consultations/Admin/Posts/GetAllNotRepliedPostsInJson"
+                "url": "/Consultations/Admin/Posts/GetAllNotRepliedPostsInJson",
+                "type": "post",
+                "dataType": "json"
 
             },
             "columns": [
-                {"data":"Id"},
-                { "data": "Title" },
-                { "data": "Text" },
+                { "data": "Id", "name": "Id","width":"10%"},
+                { "data": "Title", "width": "10%" },
+                { "data": "Text","width":"35%" },
                 { "data": "DateCreated" },
                 { "data": "CategoryName" },
                 { "data": "SubCategoryName" },
                 {
                     "data": "Id",
-                    "render": function (data) {
-                        return "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId="+data+"' class='btn btn-info btn-small' data-post-id=" + data + " > التفاصيل </a>" ;
-
-                    }
-
-                },
-                {
-                    "data": "Id",
-                    "render": function (data) {
-                        return "<button class='btn btn-danger' id='delete' data-post-id=" + data + " >حذف</button>";
+                    "render": function (data,type,post) {
+                        return (post.IsCommon)? "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' class='btn btn-default btn-small' data-post-id=" + post.Id + " ><i class='fa fa-eye'></i> التفاصيل </a>" + " " + "<span id='display' data-post-id=" + post.Id + "  class='btn btn-default btn-small'><i class='fa fa-eye'></i> عرض كشائعة</span>" + " " + "<button class='btn btn-danger btn-small' id='delete' data-post-id=" + post.Id + " >حذف</button>":"<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' class='btn btn-default btn-small' data-post-id=" + post.Id + " ><i class='fa fa-eye'></i> التفاصيل </a>" + " " + "<span id='display' data-post-id=" + post.Id + "  class='btn btn-default btn-small'><i class='fa fa-eye'></i> معروضة كشائعة</span>" + " " + "<button class='btn btn-danger btn-small' id='delete' data-post-id=" + post.Id + " >حذف</button>" ;
 
                     }
 
                 }
+                
 
             ],
             "language": {
@@ -121,57 +120,93 @@
         });
         $("#sear").on("click", function (e) {
             e.preventDefault();
-            dataTable.destroy();
-            dataTable = $("#posts").DataTable({
-                "responsive": "true",
-                "order": [[3, "des"]],
-                "ajax": {
+            dataTable.ajax.url("/Consultations/Admin/Posts/GetPostsByDate?firstDate=" + $('#dateFrom').val() + "&secondDate=" + $('#dateTo').val() + "&type=NotReplied").load();
+            //dataTable.destroy();
+            //dataTable = $("#posts").DataTable({
+            //    "responsive": "true",
+            //    "order": [[3, "des"]],
+            //    "ajax": {
 
-                    "url": "/Consultations/Admin/Posts/GetPostsByDate?firstDate=" + $('#dateFrom').val() + "&secondDate=" + $('#dateTo').val() + "&type=NotReplied",
+            //        "url": "/Consultations/Admin/Posts/GetPostsByDate?firstDate=" + $('#dateFrom').val() + "&secondDate=" + $('#dateTo').val() + "&type=NotReplied",
 
-                },
+            //    },
 
-                "columns": [
+            //    "columns": [
 
-                    { "data": "Id" },
-                    { "data": "Title" },
-                    { "data": "Text" },
-                    { "data": "DateCreated" },
-                    { "data": "CategoryName" },
-                    { "data": "SubCategoryName" },
-                    {
-                        "data": "Id",
-                        "render": function (data) {
-                            return "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' class='btn btn-info btn-small' data-post-id=" + data + " > التفاصيل </a>" + "  " + "<button class='btn btn-danger' id='delete' data-post-id=" + data + " >حذف</button>";
+            //        { "data": "Id" },
+            //        { "data": "Title" },
+            //        { "data": "Text" },
+            //        { "data": "DateCreated" },
+            //        { "data": "CategoryName" },
+            //        { "data": "SubCategoryName" },
+            //        {
+            //            "data": "Id",
+            //            "render": function (data) {
+            //                return "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' class='btn btn-info btn-small' data-post-id=" + data + " > التفاصيل </a>" + "  " + "<button class='btn btn-danger' id='delete' data-post-id=" + data + " >حذف</button>";
 
-                        }
+            //            }
 
-                    }
+            //        }
 
-                ],
-                "language": {
-                    "sProcessing": "جارٍ التحميل...",
-                    "sLengthMenu": "أظهر _MENU_ مدخلات",
-                    "sZeroRecords": "لم يعثر على أية سجلات",
-                    "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
-                    "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
-                    "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
-                    "sInfoPostFix": "",
-                    "sSearch": "ابحث:",
-                    "sUrl": "",
-                    "oPaginate": {
-                        "sFirst": "الأول",
-                        "sPrevious": "السابق",
-                        "sNext": "التالي",
-                        "sLast": "الأخير"
-                    }
-                }
+            //    ],
+            //    "language": {
+            //        "sProcessing": "جارٍ التحميل...",
+            //        "sLengthMenu": "أظهر _MENU_ مدخلات",
+            //        "sZeroRecords": "لم يعثر على أية سجلات",
+            //        "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+            //        "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+            //        "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+            //        "sInfoPostFix": "",
+            //        "sSearch": "ابحث:",
+            //        "sUrl": "",
+            //        "oPaginate": {
+            //            "sFirst": "الأول",
+            //            "sPrevious": "السابق",
+            //            "sNext": "التالي",
+            //            "sLast": "الأخير"
+            //        }
+            //    }
 
 
-            });
+            //});
             console.log("datefr= " + $('#dateFrom').val() + "to" + $('#dateTo').val());
         });
+        $(".ref").on("click", function (e) {
+            e.preventDefault();
+            window.location.href = window.location.href;
 
+        });
+        $("#posts").on("click", "#display", function () {
+            var button = $(this);
+            swal({
+                title: "  عرض الاستشارة كشائعة",
+                text: "هل انت متاكد انك تريد عرض هذه الاستشارة كشائعة ؟",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: "/Consultations/Admin/Posts/SetPostToCommon?id=" + button.attr("data-post-id") + "",
+                            "type": "post",
+                            "dataType": "json",
+
+                            "success": function (result) {
+                                button.html('معروضة كشائعة');
+                                swal("تم عرض هذه الاستشارة كشائعة بنجاح", {
+                                    icon: "success",
+
+                                });
+
+
+                            }
+                        });
+                    } else {
+                        swal("التراجع عن عرض هذه الرسالة؟");
+                    }
+                });
+        });
 
 
 

@@ -1,57 +1,14 @@
 ﻿@model Nop.Web.Models.ConsultantAdmin.Post.PostModel
 
-<div>Reserved</div>
+<div class="page-title">الاستشارات المحجوزة</div>
 
 
-<div class="container" style="margin-bottom:70px;">
-
-    <div class="row">
-        <div class="col-md-3">
-            <div class="row">
-                <div class="col-md-3">
-                    <div style="margin-top:7px;"> من :</div>
-
-                </div>
-                <div class="col-md-9">
-                    <input class="form-control" id="dateFrom" value="01-01-2000" type="date" placeholder="اختر تاريخ">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="row">
-                <div class="col-md-3">
-                    <div style="margin-top:7px;">    الى : </div>
-                </div>
-                <div class="col-md-9">
-                    <input class="form-control" id="dateTo" type="date" placeholder="اختر تاريخ" style="direction:rtl!important;text-align:right!important">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="row">
-                <div class="col-md-4">
-                    رقم الاستشارة
-                </div>
-                <div class="col-md-8">
-                    <div id="inputGroup" class="input-group">
-
-                        <input class="form-control" id="postId" type="text" placeholder="">
-                        <button id="postById" class="input-group-append">sea</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-
-            <button type="button" class="btn btn-info" id="sear">بحث</button>
-        </div>
-    </div>
-</div>
+@Html.Partial("~/Themes/Pavilion/Views/ConsultantAdmin/Shared/_SearchSection.cshtml")
 
 
 
 
-<table id="posts" class="table table-bordered table-hover">
+<table id="posts" class="table table-bordered table-hover display">
     <thead>
         <tr class="table-active">
             <th>رقم الاستشارة</th>
@@ -61,6 +18,7 @@
             <th>الصنف الرئيسى</th>
             <th>الصنف الفرعى</th>
             <th>عمليات</th>
+            
 
         </tr>
     </thead>
@@ -70,26 +28,33 @@
     <script>
     $(document).ready(function () {
         var dataTable=  $("#posts").DataTable({
+            "serverSide": "true",
             "responsive": "true",
+            "processing": "true",
+            "autoWidth": "true",
+            "order": [[3, "des"]],
             "ajax": {
-                "url": "/Consultations/Admin/Posts/GetAllReservedPostsInJson"
+                "url": "/Consultations/Admin/Posts/GetAllReservedPostsInJson",
+                "type": "post",
+                "dataType": "json"
 
             },
             "columns": [
-                {"data":"Id"},
-                { "data": "Title" },
-                { "data": "Text" },
+                { "data": "Id", "name": "Id","width":"10%"},
+                { "data": "Title","width":"10%" },
+                { "data": "Text","width":"35%" },
                 { "data": "DateCreated" },
                 { "data": "CategoryName" },
                 { "data": "SubCategoryName" },
                 {
-                    "data": "Id",
-                    "render": function (data) {
-                        return "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' data-post-id="+data+" class='btn btn-info btn-small'> التفاصيل </a>" + "  " +"<button id='cancel' data-post-id="+data+" class='btn btn-danger'>فك الحجز</button>";
+                    "data": "Title",
+                    "render": function (data,type,post) {
+                        return (post.IsCommon)?"<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' data-post-id=" + post.Id + " class='btn btn-default btn-small'><i class='fa fa-eye'></i> التفاصيل </a>" + " " + "<span id='display' data-post-id=" + post.Id + "  class='btn btn-default btn-small'><i class='fa fa-eye'></i> عرض كشائعة</span>" + " " + "<button id='cancel' data-post-id=" + post.Id + " class='btn btn-danger'>فك الحجز</button>":"<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' data-post-id=" + post.Id + " class='btn btn-default btn-small'><i class='fa fa-eye'></i> التفاصيل </a>" + " " + "<span id='display' data-post-id=" + post.Id + "  class='btn btn-default btn-small'><i class='fa fa-eye'></i> معروضة كشائعة</span>" + " " + "<button id='cancel' data-post-id=" + post.Id + " class='btn btn-danger'>فك الحجز</button>"; 
 
                     }
-
+                    
                 }
+               
 
             ],
             "language": {
@@ -251,6 +216,37 @@
 
             });
             console.log("datefr= " + $('#dateFrom').val() + "to" + $('#dateTo').val());
+        });
+        $("#posts").on("click", "#display", function () {
+            var button = $(this);
+            swal({
+                title: "  عرض الاستشارة كشائعة",
+                text: "هل انت متاكد انك تريد عرض هذه الاستشارة كشائعة ؟",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: "/Consultations/Admin/Posts/SetPostToCommon?id=" + button.attr("data-post-id") + "",
+                            "type": "post",
+                            "dataType": "json",
+
+                            "success": function (result) {
+                                button.html('معروضة كشائعة');
+                                swal("تم عرض هذه الاستشارة كشائعة بنجاح", {
+                                    icon: "success",
+
+                                });
+
+
+                            }
+                        });
+                    } else {
+                        swal("التراجع عن عرض هذه الرسالة؟");
+                    }
+                });
         });
     });
     </script>

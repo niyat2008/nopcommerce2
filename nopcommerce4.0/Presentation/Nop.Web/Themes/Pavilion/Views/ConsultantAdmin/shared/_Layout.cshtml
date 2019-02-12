@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html lang="en" dir="rtl">
 <head>
     <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
@@ -21,14 +23,15 @@
     <link rel="stylesheet" type="text/css" href="~/css/ConsultantAdmin/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="~/css/ConsultantAdmin/MyCss.css" rel="stylesheet" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+    <link href="~/lib/adminLTE/AdminLTE-2.3.0.css" rel="stylesheet" />
+    <link href="~/css/ConsultantAdmin/MyCss.css" rel="stylesheet" />
 
 </head>
 <body class="app sidebar-mini rtl">
     <!-- Navbar-->
     <header class="app-header">
-        <a class="app-header__logo" href="index.html">Vali</a>
+        <a class="app-header__logo" href="index.html">الاستشارات</a>
         <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
         <!-- Navbar Right Menu-->
         <ul class="app-nav">
@@ -116,65 +119,68 @@
     <!-- Sidebar menu-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
-        <div class="app-sidebar__user">
+        @*<div class="app-sidebar__user">
             <img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
             <div>
                 <p class="app-sidebar__user-name">John Doe</p>
                 <p class="app-sidebar__user-designation">Frontend Developer</p>
             </div>
-        </div>
+        </div>*@
         <ul class="app-menu">
-            <li><a class="app-menu__item active" href="index.html"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
+            <li><a class="app-menu__item active" href="/Consultations/Admin"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">لوحة التحكم الرئيسية</span></a></li>
             <li class="treeview">
                 <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">الاستشارات</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="/Consultations/Admin/Posts/ClosedDisplayed?filterType=All"><i class="icon fa fa-circle-o"></i> المعروضة</a></li>
-                    <li><a class="treeview-item" href="https://fontawesome.com/v4.7.0/icons/" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> Font Icons</a></li>
-                    <li><a class="treeview-item" href="ui-cards.html"><i class="icon fa fa-circle-o"></i> Cards</a></li>
-                    <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> Widgets</a></li>
+                    <li><a class="treeview-item" href="/Consultations/Admin/Posts/ClosedDisplayed"><i class="icon fa fa-circle-o"></i> المعروضة</a></li>
+                    <li><a class="treeview-item" href="/Consultations/Admin/Posts/ClosedNotDisplayed" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> مغلقة غير معروضة</a></li>
+                    <li><a class="treeview-item" href="/Consultations/Admin/Posts/GetAllNotRepliedPosts"><i class="icon fa fa-circle-o"></i> لم يرد عليها</a></li>
+                    <li><a class="treeview-item" href="/Consultations/Admin/Posts/GetAllReservedPosts"><i class="icon fa fa-circle-o"></i> محجوزة للرد</a></li>
+                    <li><a class="treeview-item" href="/Consultations/Admin/Posts/GetAllOpenPosts"><i class="icon fa fa-circle-o"></i> مفتوحة</a></li>
                 </ul>
             </li>
-            <li><a class="app-menu__item" href="charts.html"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Charts</span></a></li>
+
             <li class="treeview">
-                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Forms</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">الاعضاء</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Form Components</a></li>
-                    <li><a class="treeview-item" href="form-custom.html"><i class="icon fa fa-circle-o"></i> Custom Components</a></li>
-                    <li><a class="treeview-item" href="form-samples.html"><i class="icon fa fa-circle-o"></i> Form Samples</a></li>
-                    <li><a class="treeview-item" href="form-notifications.html"><i class="icon fa fa-circle-o"></i> Form Notifications</a></li>
-                </ul>
-            </li>
-            <li class="treeview">
-                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Tables</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="table-basic.html"><i class="icon fa fa-circle-o"></i> Basic Tables</a></li>
-                    <li><a class="treeview-item" href="table-data-table.html"><i class="icon fa fa-circle-o"></i> Data Tables</a></li>
+                    <li><a class="treeview-item" href="/Consultations/Admin/Customer/GetCustomers"><i class="icon fa fa-circle-o"></i>الاعضاء</a></li>
+                    <li><a class="treeview-item" href="/Consultations/Admin/Customer/GetTop20MemberByPostsNumber"><i class="icon fa fa-circle-o"></i> اعلى عشرين عضو بعدد الاشتشارات</a></li>
+                    @*<li><a class="treeview-item" href="form-samples.html"><i class="icon fa fa-circle-o"></i> Form Samples</a></li>
+                    <li><a class="treeview-item" href="form-notifications.html"><i class="icon fa fa-circle-o"></i> Form Notifications</a></li>*@
                 </ul>
             </li>
             <li class="treeview">
-                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">Pages</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">المستشارين</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="blank-page.html"><i class="icon fa fa-circle-o"></i> Blank Page</a></li>
-                    <li><a class="treeview-item" href="page-login.html"><i class="icon fa fa-circle-o"></i> Login Page</a></li>
-                    <li><a class="treeview-item" href="page-lockscreen.html"><i class="icon fa fa-circle-o"></i> Lockscreen Page</a></li>
-                    <li><a class="treeview-item" href="page-user.html"><i class="icon fa fa-circle-o"></i> User Page</a></li>
-                    <li><a class="treeview-item" href="page-invoice.html"><i class="icon fa fa-circle-o"></i> Invoice Page</a></li>
-                    <li><a class="treeview-item" href="page-calendar.html"><i class="icon fa fa-circle-o"></i> Calendar Page</a></li>
-                    <li><a class="treeview-item" href="page-mailbox.html"><i class="icon fa fa-circle-o"></i> Mailbox</a></li>
-                    <li><a class="treeview-item" href="page-error.html"><i class="icon fa fa-circle-o"></i> Error Page</a></li>
+                    <li><a class="treeview-item" href="/Consultations/Admin/Customer/GetConsultants"><i class="icon fa fa-circle-o"></i> المستشارين</a></li>
+                    <li><a class="treeview-item" href="/Consultations/Admin/Customer/GetTop20ConsultantByPostsNumber"><i class="icon fa fa-circle-o"></i> اعلى 20 مستشار بعدد الاستشارات</a></li>
+                    <li><a class="treeview-item" href="/Consultations/Admin/Customer/GetTop20ConsultantByPostsEvaluation"><i class="icon fa fa-circle-o"></i> اعلى 20 مستشار بعدد التقيمات</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">الاصناف</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="/Consultations/Admin/Categories/GetCategories"><i class="icon fa fa-circle-o"></i> الاصناف الرئيسية</a></li>
+                    <li><a class="treeview-item" href="/Consultations/Admin/SubCategories/GetSubCategories"><i class="icon fa fa-circle-o"></i>الاصناف الفرعية</a></li>
+
+                    @*<li><a class="treeview-item" href="page-lockscreen.html"><i class="icon fa fa-circle-o"></i> Lockscreen Page</a></li>
+                        <li><a class="treeview-item" href="page-user.html"><i class="icon fa fa-circle-o"></i> User Page</a></li>
+                        <li><a class="treeview-item" href="page-invoice.html"><i class="icon fa fa-circle-o"></i> Invoice Page</a></li>
+                        <li><a class="treeview-item" href="page-calendar.html"><i class="icon fa fa-circle-o"></i> Calendar Page</a></li>
+                        <li><a class="treeview-item" href="page-mailbox.html"><i class="icon fa fa-circle-o"></i> Mailbox</a></li>
+                        <li><a class="treeview-item" href="page-error.html"><i class="icon fa fa-circle-o"></i> Error Page</a></li>*@
                 </ul>
             </li>
         </ul>
     </aside>
-    
+
     <main class="app-content">
-        
-      
+
+
 
 
         @RenderBody()
 
-        
+
     </main>
     <!-- Essential javascripts for application to work-->
     <script src="~/js/ConsultantAdmin/jquery-3.2.1.min.js"></script>
@@ -185,7 +191,7 @@
     <script src="~/js/ConsultantAdmin/plugins/pace.min.js"></script>
     <!-- Page specific javascripts-->
     <script type="text/javascript" src="~/js/ConsultantAdmin/plugins/chart.js"></script>
-   
+
     <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     <script src="//cdn.datatables.net/plug-ins/1.10.19/i18n/Arabic.json"></script>
@@ -250,5 +256,6 @@
              ga('send', 'pageview');
          }
     </script>
+    <script src="~/js/ConsultantAdmin/notify.js"></script>
 </body>
 </html>

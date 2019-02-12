@@ -14,6 +14,10 @@ using Nop.Web.Models.ConsultantAdmin.Comment;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using System.Globalization;
+using System.Text;
+using Nop.Services.Customers;
+using Nop.Services.Z_ConsultantAdmin.Categories;
+using Nop.Services.Z_ConsultantAdmin.Post;
 
 namespace Nop.Web.Controllers.Consultant_Admin
 {
@@ -23,20 +27,37 @@ namespace Nop.Web.Controllers.Consultant_Admin
         private readonly IPostService _postService;
         private readonly Core.IWorkContext _workContext;
         private readonly IHostingEnvironment _env;
+        private readonly ICustomerService _customer;
+       
         #endregion
 
 
         #region Ctor
-        public ConsultationsController(IPostService postService, Core.IWorkContext workContext,IHostingEnvironment env)
+        public ConsultationsController(IPostService postService, Core.IWorkContext workContext,IHostingEnvironment env, ICustomerService customer)
         {
             this._postService = postService;
             this._workContext = workContext;
             this._env = env;
+            this._customer = customer;
         }
         #endregion
 
 
         #region Methods
+
+        public ActionResult GetAllCustomers()
+        {
+            var customers = _customer.GetAllCustomers();
+            return Json(new { data = customers });
+        }
+
+
+
+       
+        
+
+
+
         //Closed Displayed
         [HttpGet]
         public ActionResult GetClosedDisplayedPosts(string filterType)
@@ -96,9 +117,9 @@ namespace Nop.Web.Controllers.Consultant_Admin
 
         }
         //Closed Displayed In Json
-        [HttpGet]
+        [HttpPost]
         public ActionResult GetAllClosedDisplayedPostsInJson()
-        {
+      {
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Unauthorized();
 
@@ -106,8 +127,17 @@ namespace Nop.Web.Controllers.Consultant_Admin
             if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
                 return Forbid();
 
+            //Server Side Parameters
+            var start =Convert.ToInt32(Request.Form["start"].FirstOrDefault());
+            //int startRec = Request.Form.GetValues("start").First;
+            //int start = Convert.ToInt32(Request.Form.GetValues("start")[0]);
+            int length = Convert.ToInt32(Request.Form["length"]);
+            string searchValue = Request.Form["search[value]"];
+            string sortColumnName = Request.Form["columns[" + Request.Form["order[0][column]"] + "][name]"];
+            string sortDirection = Request.Form["order[0][dir]"];
+
             
-            var posts = _postService.GetClosedDisplayedPosts();
+            var posts = _postService.GetClosedDisplayedPosts(start, length, searchValue, sortColumnName, sortDirection);
 
 
             var outputModel = new PostOutputModel
@@ -266,17 +296,17 @@ namespace Nop.Web.Controllers.Consultant_Admin
 
             List<string> files = new List<string>();
 
-            //foreach (var model in postDetailsInDb.Photos)
-            //{
+            foreach (var model in postDetailsInDb.Photos)
+            {
 
-            //    string pathReplaced = Path.Combine(_env.WebRootPath, "/ConsultantApi/Uploads/Images/" + model.Url);
+                string pathReplaced = Path.Combine(_env.WebRootPath, "/ConsultantApi/Uploads/Images/" + model.Url);
 
-            //    files.Add(pathReplaced);
-            //}
-            //var modelToReturn = postDetailsInDb.ToPostWithFilesModel();
-           
-            
-            var modelToReturn = new PostWithFilesModel
+                files.Add(pathReplaced);
+            }
+           // var modelToReturn = postDetailsInDb.ToPostWithFilesModel();
+
+
+            var modelToReturn = new Models.ConsultantAdmin.Post.PostWithFilesModel
             {
                     Id = postDetailsInDb.Id,
                     Text = postDetailsInDb.Text,
@@ -330,10 +360,32 @@ namespace Nop.Web.Controllers.Consultant_Admin
         //Get Posts By Date
         public ActionResult GetPostsByDate(DateTime firstDate,DateTime secondDate,string type)
         {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+                return Forbid();
+
             if (firstDate == null || secondDate == null)
                 return NotFound();
+
+            //----------------------
+            //var f = firstDate.ToString("dd/MM/yyyy");
+            //CultureInfo arSA = new CultureInfo("ar-SA");
+            //arSA.DateTimeFormat.Calendar = new HijriCalendar();
+            //var dateValue = DateTime.ParseExact(f, "dd/MM/yyyy", arSA);
+            //StringBuilder builder = new StringBuilder();
+            //builder.Append(dateValue.Day);
+            //builder.Append("/");
+            //builder.Append(dateValue.Month);
+            //builder.Append("/");
+            //builder.Append(dateValue.Year);
+           
+
             
-            
+
+            //----------------------
+
             var postsInDb = _postService.GetPostsByDate(firstDate, secondDate,type);
             var posts = new PostOutputModel
             {
@@ -359,7 +411,34 @@ namespace Nop.Web.Controllers.Consultant_Admin
             };
             return Json(new { data = posts.Posts });
         }
+        //Update Post 
+       
+        //public ActionResult UpdatePost(PostModelForPost post)
+        //{
+        //    if (!_workContext.CurrentCustomer.IsRegistered())
+        //        return Unauthorized();
 
+        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+        //        return Forbid();
+
+        //    return View("", post);
+        //}
+        //Update Post In Ajax
+        [HttpPost]
+        public ActionResult SetPostToCommon(int id)
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+                return Forbid();
+
+            
+
+             _postService.SetPostToCommon(id);
+
+            return Json(new { result = true });
+        }
 
 
 
@@ -392,6 +471,7 @@ namespace Nop.Web.Controllers.Consultant_Admin
             return View("~/Themes/Pavilion/Views/ConsultantAdmin/Posts/GetClosedNotDisplayedPosts.cshtml",filteringType);
         }
         //Closed Not Displayed In Json
+        [HttpPost]
         public ActionResult GetAllClosedNotDisplayedPostsInJson()
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
@@ -400,7 +480,18 @@ namespace Nop.Web.Controllers.Consultant_Admin
 
             if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
                 return Forbid();
-            var posts = _postService.GetClosedNotDisplayedPosts();
+
+            //Server Side Parameters
+            var start = Convert.ToInt32(Request.Form["start"].FirstOrDefault());
+            //int startRec = Request.Form.GetValues("start").First;
+            //int start = Convert.ToInt32(Request.Form.GetValues("start")[0]);
+            int length = Convert.ToInt32(Request.Form["length"]);
+            string searchValue = Request.Form["search[value]"];
+            string sortColumnName = Request.Form["columns[" + Request.Form["order[0][column]"] + "][name]"];
+            string sortDirection = Request.Form["order[0][dir]"];
+
+
+            var posts = _postService.GetClosedNotDisplayedPosts(start, length, searchValue, sortColumnName, sortDirection);
             var postOutputModel = new PostOutputModel
             {
                 Posts = posts.Select(m => new PostModel()
@@ -520,7 +611,7 @@ namespace Nop.Web.Controllers.Consultant_Admin
             _postService.PostDisplay(postId);
             return Json(new { result = true });
         }
-        
+
 
 
 
@@ -531,6 +622,7 @@ namespace Nop.Web.Controllers.Consultant_Admin
 
 
         //Not Replied
+        
         public ActionResult GetNotRepliedPosts(string filterType)
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
@@ -549,6 +641,7 @@ namespace Nop.Web.Controllers.Consultant_Admin
             return View("~/Themes/Pavilion/Views/ConsultantAdmin/Posts/GetNotRepliedPosts.cshtml",filteringType);
         }
         //Not Replied In Json
+        [HttpPost]
         public ActionResult GetAllNotRepliedPostsInJson(int categoryId)
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
@@ -557,7 +650,17 @@ namespace Nop.Web.Controllers.Consultant_Admin
 
             if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
                 return Forbid();
-            var posts = _postService.GetNotRepliedPosts();
+
+            //Server Side Parameters
+            var start = Convert.ToInt32(Request.Form["start"].FirstOrDefault());
+            //int startRec = Request.Form.GetValues("start").First;
+            //int start = Convert.ToInt32(Request.Form.GetValues("start")[0]);
+            int length = Convert.ToInt32(Request.Form["length"]);
+            string searchValue = Request.Form["search[value]"];
+            string sortColumnName = Request.Form["columns[" + Request.Form["order[0][column]"] + "][name]"];
+            string sortDirection = Request.Form["order[0][dir]"];
+
+            var posts = _postService.GetNotRepliedPosts(start, length, searchValue, sortColumnName, sortDirection);
             var outputModel = new PostOutputModel
             {
                 Posts = posts.Select(m => new PostModel()
@@ -693,13 +796,24 @@ namespace Nop.Web.Controllers.Consultant_Admin
             return View("~/Themes/Pavilion/Views/ConsultantAdmin/Posts/GetReservedPosts.cshtml",filteringType);
         }
         //Reserved Posts With Category Id In Json
+        [HttpPost]
         public ActionResult GetAllReservedPostsInJson()
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Unauthorized();
             if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
                 return Forbid();
-            var posts = _postService.GetIsReservedPosts();
+
+            //Server Side Parameters
+            var start = Convert.ToInt32(Request.Form["start"].FirstOrDefault());
+            //int startRec = Request.Form.GetValues("start").First;
+            //int start = Convert.ToInt32(Request.Form.GetValues("start")[0]);
+            int length = Convert.ToInt32(Request.Form["length"]);
+            string searchValue = Request.Form["search[value]"];
+            string sortColumnName = Request.Form["columns[" + Request.Form["order[0][column]"] + "][name]"];
+            string sortDirection = Request.Form["order[0][dir]"];
+
+            var posts = _postService.GetIsReservedPosts(start, length, searchValue, sortColumnName, sortDirection);
             var outputModel = new PostOutputModel
             {
                 Posts = posts.Select(m => new PostModel
@@ -851,13 +965,25 @@ namespace Nop.Web.Controllers.Consultant_Admin
             return View("~/Themes/Pavilion/Views/ConsultantAdmin/Posts/GetOpenPosts.cshtml",filteringType);
         }
         //Open Posts In Json
+        [HttpPost]
         public ActionResult GetAllOpenPostsInJson()
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Unauthorized();
             if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
                 return Forbid();
-            var posts = _postService.GetOpenPosts();
+
+            //Server Side Parameters
+            var start = Convert.ToInt32(Request.Form["start"].FirstOrDefault());
+            //int startRec = Request.Form.GetValues("start").First;
+            //int start = Convert.ToInt32(Request.Form.GetValues("start")[0]);
+            int length = Convert.ToInt32(Request.Form["length"]);
+            string searchValue = Request.Form["search[value]"];
+            string sortColumnName = Request.Form["columns[" + Request.Form["order[0][column]"] + "][name]"];
+            string sortDirection = Request.Form["order[0][dir]"];
+
+
+            var posts = _postService.GetOpenPosts(start, length, searchValue, sortColumnName, sortDirection);
             var outputModel = new PostOutputModel
             {
                 Posts = posts.Select(m => new PostModel()
@@ -880,7 +1006,7 @@ namespace Nop.Web.Controllers.Consultant_Admin
                     SubCategoryName = m.SubCategory?.Name
                 }).ToList()
             };
-            return Json(new { outputModel.Posts });
+            return Json(new { data=outputModel.Posts });
 
         }
        //Open Posts With Category Id In Json

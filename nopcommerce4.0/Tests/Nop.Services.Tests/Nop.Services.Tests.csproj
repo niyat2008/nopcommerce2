@@ -12,6 +12,9 @@
     				<Description>The project contains a set of classes for testing of Nop.Services</Description>
   			</PropertyGroup>
   			<ItemGroup>
+  			  <PackageReference Include="System.Linq.Dynamic" Version="1.0.7" />
+  			</ItemGroup>
+  			<ItemGroup>
   			  <ProjectReference Include="..\..\Libraries\Nop.Services\Nop.Services.csproj" />
   			  <ProjectReference Include="..\Nop.Tests\Nop.Tests.csproj" />
   			</ItemGroup>

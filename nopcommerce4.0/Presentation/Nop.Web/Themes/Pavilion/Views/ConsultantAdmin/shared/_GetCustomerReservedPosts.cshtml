@@ -1,0 +1,49 @@
+﻿@model string
+
+
+ dataTable.destroy();
+
+         dataTable=  $("#posts").DataTable({
+            "responsive": "true",
+            "ajax": {
+                "url": @Model
+
+            },
+            "columns": [
+                {"data":"Id","width":"5%"},
+                { "data": "Title" },
+                { "data": "Text","width":"35%" },
+                { "data": "DateCreated" },
+                { "data": "CategoryName" },
+                { "data": "SubCategoryName" },
+                {
+                    "data": "Id",
+                    "render": function (data) {
+                        return "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' data-post-id=" + data + " class='btn btn-info btn-small'> التفاصيل </a>" + " " + "<button id='cancel' data-post-id=" + data + " class='btn btn-danger'>فك الحجز</button>";
+
+                    }
+
+                }
+
+
+            ],
+            "language": {
+                "sProcessing": "جارٍ التحميل...",
+                "sLengthMenu": "أظهر _MENU_ مدخلات",
+                "sZeroRecords": "لم يعثر على أية سجلات",
+                "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                "sInfoPostFix": "",
+                "sSearch": "ابحث:",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "الأول",
+                    "sPrevious": "السابق",
+                    "sNext": "التالي",
+                    "sLast": "الأخير"
+                }
+            }
+
+
+        });

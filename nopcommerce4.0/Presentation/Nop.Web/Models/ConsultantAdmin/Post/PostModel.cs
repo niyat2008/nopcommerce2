@@ -19,6 +19,7 @@ namespace Nop.Web.Models.ConsultantAdmin.Post
         public int? Rate { get; set; }
         public bool IsDispayed { get; set; }
         public bool IsReserved { get; set; }
+        public bool IsCommon { get; set; }
         public bool IsSetToSubCategory { get; set; }
         public int? SubCategoryId { get; set; }
         public string CategoryName { get; set; }

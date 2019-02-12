@@ -1,6 +1,6 @@
 ﻿@model Nop.Web.Models.ConsultantAdmin.Post.PostModel
 
-<div>closed Not displayed</div>
+<div class="page-title">الاستشارات المغلقة الغير معروضة</div>
 
 
 
@@ -8,7 +8,7 @@
 @Html.Partial("~/Themes/Pavilion/Views/ConsultantAdmin/Shared/_SearchSection.cshtml")
 
 
-<table id="posts" class="table table-bordered table-hover">
+<table id="posts" class="table table-bordered table-hover display">
     <thead>
         <tr class="table-active">
             <th>رقم الاستشارة</th>
@@ -17,8 +17,8 @@
             <th>التاريخ</th>
             <th>الصنف الرئيسى</th>
             <th>الصنف الفرعى</th>
-            <th>التفاصيل</th>
-            <th>حذف</th>
+            <th>عمليات</th>
+            
 
         </tr>
     </thead>
@@ -27,23 +27,29 @@
     
     <script>
     $(document).ready(function () {
-        $("#posts").DataTable({
+        var dataTable=  $("#posts").DataTable({
+            "serverSide": "true",
             "responsive": "true",
+            "processing": "true",
+            "autoWidth": "true",
+            "order": [[3, "des"]],
             "ajax": {
-                "url":"/Consultations/Admin/Posts/ClosedNotDisplayedInJson"
+                "url": "/Consultations/Admin/Posts/ClosedNotDisplayedInJson",
+                "type": "post",
+                "dataType":"json"
 
             },
             "columns": [
-                {"data":"Id"},
-                { "data": "Title" },
-                { "data": "Text" },
+                { "data": "Id", "name": "Id","width":"10%"},
+                { "data": "Title","widht":"10%" },
+                { "data": "Text","widht":"35%" },
                 { "data": "DateCreated" },
                 { "data": "CategoryName" },
                 { "data": "SubCategoryName" },
                 {
                     "data": "Id",
-                    "render": function (data) {
-                        return "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" +data+ "' data-post-id=" + data + " class='btn btn-info btn-small'> التفاصيل </a>" + "  " + "<button id='delete' data-post-id=" + data + " class='btn btn-danger'>حذف</button>" + " " + "<button id='display' data-post-id=" + data +" class='btn btn-info btn-small'>عرض</a>";
+                    "render": function (data,type,post) {
+                        return (post.IsCommon)? "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' data-post-id=" + data + " class='btn btn-default btn-small'><i class='fa fa-eye'></i> التفاصيل </a>" + " " + "<span id='display' data-post-id=" + post.Id + " class='btn btn-default btn-small'><i class='fa fa-eye'></i> عرض</span>" + " " + "<span id='displaying' data-post-id=" + post.Id + "  class='btn btn-default btn-small'><i class='fa fa-eye'></i> عرض كشائعة</span>" + "  " + "<button id='delete' data-post-id=" + post.Id + " class='btn btn-danger btn-small'><i class='fa fa-trash'></i> حذف</button>":"<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' data-post-id=" + data + " class='btn btn-default btn-small'><i class='fa fa-eye'></i> التفاصيل </a>" + " " + "<span id='display' data-post-id=" + post.Id + " class='btn btn-default btn-small'><i class='fa fa-eye'></i> عرض</span>" + " " + "<span id='displaying' data-post-id=" + post.Id + "  class='btn btn-default btn-small'><i class='fa fa-eye'></i> معروضة كشائعة</span>" + "  " + "<button id='delete' data-post-id=" + post.Id + " class='btn btn-danger btn-small'><i class='fa fa-trash'></i> حذف</button>" ;
 
                     }
 
@@ -175,7 +181,7 @@
                             url: "/Consultations/Admin/Posts/PostDisplay?postId=" + button.attr("data-post-id") + "",
 
                             "success": function (result) {
-
+                                dataTable.row(button.parents("tr")).remove().draw();
                                 swal("تم عرض هذه الاستشارة بنجاح", {
                                     icon: "success",
 
@@ -241,7 +247,37 @@
             });
             console.log("datefr= " + $('#dateFrom').val() + "to" + $('#dateTo').val());
         });
+        $("#posts").on("click", "#displaying", function () {
+            var button = $(this);
+            swal({
+                title: "  عرض الاستشارة كشائعة",
+                text: "هل انت متاكد انك تريد عرض هذه الاستشارة كشائعة ؟",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: "/Consultations/Admin/Posts/SetPostToCommon?id=" + button.attr("data-post-id") + "",
+                            "type": "post",
+                            "dataType": "json",
 
+                            "success": function (result) {
+                                button.html('معروضة كشائعة');
+                                swal("تم عرض هذه الاستشارة كشائعة بنجاح", {
+                                    icon: "success",
+
+                                });
+
+
+                            }
+                        });
+                    } else {
+                        swal("التراجع عن عرض هذه الرسالة؟");
+                    }
+                });
+        });
 
     });
     </script>

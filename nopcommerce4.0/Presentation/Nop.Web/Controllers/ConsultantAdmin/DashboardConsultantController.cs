@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Nop.Services.Z_ConsultantAdmin;
+using Nop.Services.Z_ConsultantAdmin.Customers;
+using Nop.Services.Z_ConsultantAdmin.Post;
+using Nop.Web.Models.ConsultantAdmin.Post;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +14,46 @@ namespace Nop.Web.Controllers.ConsultantِAdmin
     //BasePublicController
     public class DashboardConsultantController : BasePublicController
     {
-        public DashboardConsultantController()
+
+        #region Fields
+        private readonly IPostService _postService;
+        private readonly Core.IWorkContext _workContext;
+        private readonly IHostingEnvironment _env;
+        private readonly ICustomerService _customer;
+        #endregion
+
+        #region Ctor
+        public DashboardConsultantController(IPostService postService, Core.IWorkContext workContext, IHostingEnvironment env, ICustomerService customer)
         {
-               
+            this._postService = postService;
+            this._workContext = workContext;
+            this._env = env;
+            this._customer = customer;
         }
+        #endregion
+
+
 
 
         public virtual IActionResult Home()
         {
-            
+            var posts = _postService.GetPostsNumber();
+            var members = _customer.GetMembersNumber();
+            var consultants = _customer.GetConsultantsNumber();
+            var onlineMembers = _customer.GetOnlineMembersNumber();
+            var onlineConsultants = _customer.GetOnlineConsultantsNumber();
 
-            return View("~/Themes/Pavilion/Views/ConsultantAdmin/DashboardConsultant/Home.cshtml");
+
+            var model = new Dashboard
+            {
+                PostsCount=posts,
+                MembersCount=members,
+                ConsultantCount=consultants,
+                OnlineMembersCount=onlineMembers,
+                OnlineConsultantsCount=onlineConsultants
+            };
+
+            return View("~/Themes/Pavilion/Views/ConsultantAdmin/DashboardConsultant/Home.cshtml",model);
         }
 
 

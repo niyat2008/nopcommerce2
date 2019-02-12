@@ -20,6 +20,7 @@ namespace Nop.Data.Mapping.Z_Consultant
             this.Property(p => p.DateUpdated).IsOptional();
             this.Property(p => p.IsClosed).IsRequired();
             this.Property(p => p.IsAnswered).IsRequired();
+            this.Property(p => p.IsCommon).IsRequired();
             this.Property(p => p.IsSetToSubCategory).IsRequired();
             this.Property(p => p.Rate).IsOptional();
             this.Property(p => p.IsDispayed).IsRequired();

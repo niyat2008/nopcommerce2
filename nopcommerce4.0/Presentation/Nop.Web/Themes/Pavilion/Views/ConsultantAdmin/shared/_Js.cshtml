@@ -1,12 +1,12 @@
 ﻿<script src="~/js/ConsultantAdmin/jquery-3.2.1.min.js"></script>
 <script src="~/js/ConsultantAdmin/popper.min.js"></script>
 <script src="~/js/ConsultantAdmin/bootstrap.min.js"></script>
-<script src="~/js/ConsultantAdmin/main.js"></script>
+
 <!-- The javascript plugin to display page loading on top-->
 <script src="~/js/ConsultantAdmin/plugins/pace.min.js"></script>
 <!-- Page specific javascripts-->
 <script type="text/javascript" src="~/js/ConsultantAdmin/plugins/chart.js"></script>
-
+<script src="~/js/ConsultantAdmin/main.js"></script>
 <!-- Google analytics script-->
 
 <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
@@ -14,7 +14,7 @@
 
 <script src="//cdn.datatables.net/plug-ins/1.10.19/i18n/Arabic.json"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script type="text/javascript">
+@*<script type="text/javascript">
      var data = {
          labels: ["January", "February", "March", "April", "May"],
          datasets: [
@@ -60,4 +60,14 @@
 
      var ctxp = $("#pieChartDemo").get(0).getContext("2d");
      var pieChart = new Chart(ctxp).Pie(pdata);
+</script>*@
+<script>
+     $(document).ready(function () {
+         $(".detailsEdit").on("click", function () {
+             $('.detailsTextBox').removeAttr("readonly")
+
+         });
+
+     });
 </script>
+<script src="~/js/ConsultantAdmin/notify.js"></script>

@@ -14,6 +14,7 @@
   			<ItemGroup>
   			  <PackageReference Include="NUnit" Version="3.8.1" />
   			  <PackageReference Include="RhinoMocks" Version="3.6.1" />
+  			  <PackageReference Include="System.Linq.Dynamic" Version="1.0.7" />
   			</ItemGroup>
   			<ItemGroup>
   			  <ProjectReference Include="..\..\Libraries\Nop.Core\Nop.Core.csproj" />
