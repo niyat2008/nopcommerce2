@@ -232,6 +232,7 @@ namespace Nop.Web.Controllers.Consultant
 
         #region methods
 
+      
 
         [HttpGet]
         public virtual IActionResult GetAllClosedPosts(PagingParams pagingParams)
@@ -543,8 +544,21 @@ namespace Nop.Web.Controllers.Consultant
             };
             return View("~/Themes/Pavilion/Views/Consultant/Post/CustomerClosedConsultations.cshtml", outputModel);
         }
+        [HttpGet]
 
+        private IActionResult GetAllCitiesAjax()
+        {
+            var cities = _postService.GetCities();
 
+            return Json(cities);
+        }
+        [HttpGet]
+        private IActionResult GetAllCityNeighborhoodAjax(int cityId)
+        {
+            var cityNeighborhood = _postService.GetCityNeighborhood(cityId);
+
+            return Json(cityNeighborhood);
+        }
         [HttpGet]
         public virtual IActionResult GetConsultantNotAnsweredPosts(PagingParams pagingParams)
         {

@@ -23,6 +23,8 @@ namespace Nop.Services.Z_Consultant.Post
 
         private readonly IRepository<Z_Consultant_Post> _postRepository;
         private readonly IRepository<Z_Consultant_Category> _categoryRepository;
+        private readonly IRepository<City> _cityRepository;
+        private readonly IRepository<Neighbohood> _neighborhoodRepository;
         private readonly IEventPublisher _eventPublisher;
         private readonly IHostingEnvironment _env;
         ILocalizationService _localizationService;
@@ -1025,6 +1027,29 @@ namespace Nop.Services.Z_Consultant.Post
 
             return new PagedList<Z_Consultant_Post>(
                 query, pagingParams.PageNumber, pagingParams.PageSize, true);
+        }
+
+
+
+
+        /// <summary>
+        ///  For Shipping Address 
+        /// </summary>
+        /// <returns></returns>
+
+        public List<City> GetCities()
+        {
+            var query = _cityRepository.TableNoTracking;
+            return query.ToList();
+        }
+
+        public List<Neighbohood> GetCityNeighborhood(int cityId)
+        {
+            var query = _neighborhoodRepository.TableNoTracking;
+
+            query = query.Where(m => m.CityId == cityId);
+
+            return query.ToList();
         }
     }
 }

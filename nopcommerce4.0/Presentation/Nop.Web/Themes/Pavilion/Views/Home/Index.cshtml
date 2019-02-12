@@ -10,26 +10,27 @@
 
 <div class="page home-page">
     <div class="page-body">
-        @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_top" })
-        @await Component.InvokeAsync("TopicBlock", new { systemName = "HomePageText" })
+        @*@await Component.InvokeAsync("Widget", new { widgetZone = "home_page_top" })*@
+        @*@await Component.InvokeAsync("TopicBlock", new { systemName = "HomePageText" })*@
         @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_before_categories" })
         @await Component.InvokeAsync("HomepageCategories")
         @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_before_products" })
         @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_before_best_sellers" })
+        @await Component.InvokeAsync("ManufacturerNavigation")
 
-        <div class="homepage-middle-wrapper">
-		    @await Component.InvokeAsync("HomepageBestSellers")
-		    @await Component.InvokeAsync("Widget", new { widgetZone = "pavilion_home_page_richblog" })
+        @*<div class="homepage-middle-wrapper">
+            @await Component.InvokeAsync("HomepageBestSellers") 
+            @await Component.InvokeAsync("Widget", new { widgetZone = "pavilion_home_page_richblog" })
         </div>
 
         @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_before_news" })
         @await Component.InvokeAsync("HomepageNews")
         @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_before_poll" })
-        @await Component.InvokeAsync("HomepagePolls")
+        @await Component.InvokeAsync("HomepagePolls")*@
 
-        <div class="homepage-bottom-wrapper">
+        @*<div class="homepage-bottom-wrapper">
             @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_bottom" })
-        </div>
+        </div>*@
 
     </div>
 </div>

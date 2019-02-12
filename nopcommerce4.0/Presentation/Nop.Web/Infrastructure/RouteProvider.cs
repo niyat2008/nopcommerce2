@@ -37,12 +37,21 @@ namespace Nop.Web.Infrastructure
 
             routeBuilder.MapRoute("Consultant.Post.GetAllClosedPostsAjax", "Consultations/GetAllClosedPostsAjax",
             new { controller = "Post", action = "GetAllClosedPostsAjax" });
-            // Ali
+
+            ///
+            /*
+             * Ali Edits on Consultant
+             * Edit no. 12
+             */
+            ///
             routeBuilder.MapRoute("Consultant.Post.GetCustomerCommonPosts", "Consultations/CommonConsultations",
             new { controller = "Post", action = "GetCustomerCommonPosts" });
+            //routeBuilder.MapRoute("Consultant.Post.GetAllClosedPostsAjax", "Consultations/GetAllClosedPostsAjax",
+            //new { controller = "Post", action = "GetAllClosedPostsAjax" }); 
 
             routeBuilder.MapRoute("Consultant.Post.GetAllClosedPosts", "Consultations/LastConsultations",
             new { controller = "Post", action = "GetAllClosedPosts" });
+
             routeBuilder.MapRoute("Consultant.GetAllClosedPostsByCategoryId", "Consultations/CategoryConsultations",
             new { controller = "Post", action = "GetAllClosedPostsByCategoryId" });
             routeBuilder.MapRoute("Consultant.GetAllClosedPostsBySubCategoryId", "Consultations/SubCategoryConsultations",
@@ -100,12 +109,18 @@ namespace Nop.Web.Infrastructure
             new { controller = "Comment", action = "GetComment" });
 
 
+            // get cities 
+            routeBuilder.MapRoute("Consultant.Post.GetAllCitiesAjax", "Consultations/GetAllStateCitiesAjax",
+           new { controller = "Post", action = "GetAllCitiesAjax" });
+
+            // get Neighborhood
+            routeBuilder.MapRoute("Consultant.Post.GetAllCityNeighborhoodAjax", "Consultations/GetAllStateCityNeighborhoodsAjax",
+           new { controller = "Post", action = "GetAllCityNeighborhoodAjax" });
+
 
             //-----------------enf of Consultant----------------------------
 
-
-
-
+             
             //-----------------Admin Consultant----------------------------
             routeBuilder.MapRoute("Consultant.Admin.GetAllCustomers", "Consultations/Admin/Posts/GetAllCustomers",
                new { controller = "Consultations", action = "GetAllCustomers" });
@@ -317,8 +332,7 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapRoute("Consultant.Admin.AddCategoryAjax", "Consultations/Admin/Categories/AddCategoryAjax",
              new { controller = "Categories", action = "AddCategoryAjax" });
 
-
-
+        
 
 
 

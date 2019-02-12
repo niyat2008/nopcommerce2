@@ -84,5 +84,8 @@ namespace Nop.Services.Z_Consultant.Post
         void DisplayPost(int PostId);
         void HidePost(int PostId);
         PagedList<Z_Consultant_Post> GetCommonPostsForCustomer(PagingParams pagingParams, int currentUserId);
+
+        List<City> GetCities();
+        List<Neighbohood> GetCityNeighborhood(int cityId);
     }
 }
