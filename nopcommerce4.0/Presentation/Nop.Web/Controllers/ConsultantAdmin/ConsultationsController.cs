@@ -59,7 +59,7 @@ namespace Nop.Web.Controllers.Consultant_Admin
 
 
         //Closed Displayed
-        [HttpGet]
+       
         public ActionResult GetClosedDisplayedPosts(string filterType)
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
@@ -151,6 +151,7 @@ namespace Nop.Web.Controllers.Consultant_Admin
                     DateUpdated = m.DateUpdated,
                     IsClosed = m.IsClosed,
                     IsAnswered = m.IsAnswered,
+                    IsCommon=m.IsCommon,
                     Rate = m.Rate,
                     IsDispayed = m.IsDispayed,
                     IsReserved = m.IsReserved,
@@ -503,6 +504,7 @@ namespace Nop.Web.Controllers.Consultant_Admin
                     DateUpdated = m.DateUpdated,
                     IsClosed = m.IsClosed,
                     IsAnswered = m.IsAnswered,
+                    IsCommon = m.IsCommon,
                     Rate = m.Rate,
                     IsDispayed = m.IsDispayed,
                     IsReserved = m.IsReserved,
@@ -672,6 +674,7 @@ namespace Nop.Web.Controllers.Consultant_Admin
                     DateUpdated = m.DateUpdated,
                     IsClosed = m.IsClosed,
                     IsAnswered = m.IsAnswered,
+                    IsCommon = m.IsCommon,
                     Rate = m.Rate,
                     IsDispayed = m.IsDispayed,
                     IsReserved = m.IsReserved,
@@ -825,6 +828,7 @@ namespace Nop.Web.Controllers.Consultant_Admin
                     DateUpdated = m.DateUpdated,
                     IsClosed = m.IsClosed,
                     IsAnswered = m.IsAnswered,
+                    IsCommon = m.IsCommon,
                     Rate = m.Rate,
                     IsDispayed = m.IsDispayed,
                     IsReserved = m.IsReserved,
@@ -995,6 +999,7 @@ namespace Nop.Web.Controllers.Consultant_Admin
                     DateUpdated = m.DateUpdated,
                     IsClosed = m.IsClosed,
                     IsAnswered = m.IsAnswered,
+                    IsCommon = m.IsCommon,
                     Rate = m.Rate,
                     IsDispayed = m.IsDispayed,
                     IsReserved = m.IsReserved,

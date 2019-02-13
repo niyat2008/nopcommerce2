@@ -49,7 +49,7 @@
                 {
                     "data": "Title",
                     "render": function (data,type,post) {
-                        return (post.IsCommon)?"<a href='/Consultations/Admin/Posts/GetPostDetails?postId=" + post.Id + "' class='btn btn-default btn-small'><i class='fa fa-eye'></i> التفاصيل </a>" + " " + "<span id='display' data-post-id=" + post.Id + "  class='btn btn-default btn-small'><i class='fa fa-eye'></i> عرض كشائعة</span>":"<a href='/Consultations/Admin/Posts/GetPostDetails?postId=" + post.Id + "' class='btn btn-default btn-small'><i class='fa fa-eye'></i> التفاصيل </a>" + " " + "<span id='display' data-post-id=" + post.Id + "  class='btn btn-default btn-small'><i class='fa fa-eye'></i> معروضة كشائعة</span>" ;
+                        return (post.IsCommon) ? "<a href='/Consultations/Admin/Posts/GetPostDetails?postId=" + post.Id + "' class='btn btn-default btn-small'><i class='fa fa-eye'></i> التفاصيل </a>" + " " + "<span id='display' data-post-id=" + post.Id + "  class='btn btn-default btn-small'><i class='fa fa-eye'></i>معروضة كشائعة  </span>" : "<a href='/Consultations/Admin/Posts/GetPostDetails?postId=" + post.Id + "' class='btn btn-default btn-small'><i class='fa fa-eye'></i> التفاصيل </a>" + " " + "<span id='display' data-post-id=" + post.Id + "  class='btn btn-default btn-small'><i class='fa fa-eye'></i> عرض كشائعة</span>" ;
 
                     }
 

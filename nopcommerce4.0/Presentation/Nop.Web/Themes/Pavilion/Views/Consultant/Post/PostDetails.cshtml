@@ -47,8 +47,9 @@
         @if (!Model.IsClosed && (Model.IsAnswered || Model.IsReserved) && ViewBag.UserRole == "Consultant")
         {
 
-            <button onclick="changeCatAndSub()" class="btndarckgreen"> تعديل </button>
+            <button id="Ahmed" onclick="changeCatAndSub()" class="btndarckgreen"> تعديل </button>
         }
+        @*onclick="changeCatAndSub()"*@
         <span class="pull-left">
             @if (ViewBag.UserRole == "Vistor")
             {
@@ -197,7 +198,7 @@
 
 
         <div id="comments">
-           
+            
         </div>
 
 
@@ -231,10 +232,13 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <select id="CategorySelectList"></select>
+
+                    @*<select id="CategorySelectList"></select>*@
                     <select id="subCategoriesSelectList"></select>
+                    <div style="width:100px;background-color:red;" id="Ahmed"></div>
                     <div class="modal-footer">
                         <button type="button" onclick="submitChangeCatAndSub()" class="btn btn-success">تعديل</button>
+                        
 
                     </div>
                 </form>
@@ -392,26 +396,33 @@
 
     function changeCatAndSub() {
         $.ajax({
-        type: 'GET',
-       url: '@Url.RouteUrl("Consultant.Post.ChangeCatAndSub")',
+        type: "GET",
+        url: "/Consultations/Post/GetCategory?categoryId="+@Model.CategoryId+"",
+
         success: function (data) {
             $("#changeCatAndSubDiv").html(data);
+
+            console.log("cate " +@Model.CategoryId);
             $("#changeCatAndSubDiv").css("display","block");
         }
     });
+
     }
 
+    //$('#CategorySelectList').find(":selected").val();
+    //$('#CategorySelectList').find(":selected").text()
 
-
-    function submitChangeCatAndSub(PostId)
+    function submitChangeCatAndSub()
     {
-        var CategoryId = $('#CategorySelectList').find(":selected").val();
+        var CategoryId =@Model.CategoryId;
+        var SelectedCategoryName ='@Model.CategoryName';
+
         var SubCategoryId = $('#subCategoriesSelectList').find(":selected").val();
 
-        var SelectedCategoryName = $('#CategorySelectList').find(":selected").text();
+
         var SelectedSubCategoryName = $('#subCategoriesSelectList').find(":selected").text();
 
-        var PostId = '@Model.Id';
+        var PostId = @Model.Id;
 
         var model = {
             PostId: PostId,
@@ -432,7 +443,7 @@
                 if (data.status == 200) {
                     $("#changeCatAndSubDiv").css("display", "none");
                     alert("تمت التغيير  بنجاح");
-                    $("#CategoryNameSpan").text(SelectedCategoryName);
+                    @*$("#CategoryNameSpan").text('@Model.CategoryName');*@
                     $("#SubCategoryNameSpan").text(SelectedSubCategoryName);
                 }
                 else {
@@ -442,14 +453,11 @@
             }
         });
     }
+    function closePopupModel() {
+        $("#changeCatAndSubDiv").css("display", "none");
+    }
 
     var Files = []; 
-
-    $(document).ready(function () {
-
-
-
-    });
 
     function addCommentConsultant() {
         var Text = $("#CommentText").val();

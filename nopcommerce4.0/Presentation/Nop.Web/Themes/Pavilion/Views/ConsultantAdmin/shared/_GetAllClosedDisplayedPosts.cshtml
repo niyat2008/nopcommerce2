@@ -55,9 +55,9 @@
                     { "data": "CategoryName"},
                     { "data": "SubCategoryName"},
                     {
-                        "data": "Title",
+                        "data": "Title","width":"25%",
                         "render": function (data,type,post) {
-                            return (post.IsCommon) ? "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' class='btn btn-xs btn-default btn-small' data-post-id=" + post.Id + " ><i class='fa fa-eye' ></i> التفاصيل </a>" + " " + "<span id='display' data-post-id=" + post.Id + "  class='btn btn-default btn-small'><i class='fa fa-eye'></i>عرض كشائعة</span>" + " " + "<button class='btn btn-danger' id='delete' data-post-id=" + post.Id + " ><i class='fa fa-trash' ></i>حذف</button>" : "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' class='btn btn-xs btn-default btn-small' data-post-id=" + post.Id + " ><i class='fa fa-eye' ></i> التفاصيل </a>" + " " + "<span id='display' data-post-id=" + post.Id + "  class='btn btn-default btn-small'><i class='fa fa-eye'></i>معروضة كشائعة كشائعة</span>" + " " + "<button class='btn btn-danger' id='delete' data-post-id=" + post.Id + " ><i class='fa fa-trash' ></i>حذف</button>";
+                            return (post.IsCommon) ? "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + post.Id + "' class='btn btn-xs btn-default btn-small' data-post-id=" + post.Id + " ><i class='fa fa-eye' ></i> التفاصيل </a>" + " " + "<span id='display' data-post-id=" + post.Id + "  class='btn btn-default btn-small'><i class='fa fa-eye'></i> معروضة كشائعة</span>" + " " + "<button class='btn btn-danger' id='delete' data-post-id=" + post.Id + " ><i class='fa fa-trash' ></i>حذف</button>" : "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + post.Id + "' class='btn btn-xs btn-default btn-small' data-post-id=" + post.Id + " ><i class='fa fa-eye' ></i> التفاصيل </a>" + " " + "<span id='display' data-post-id=" + post.Id + "  class='btn btn-default btn-small'><i class='fa fa-eye'></i> عرض كشائعة</span>" + " " + "<button class='btn btn-danger' id='delete' data-post-id=" + post.Id + " ><i class='fa fa-trash' ></i>حذف</button>";
 
                         }
 
@@ -85,6 +85,15 @@
 
 
             });
+
+            //$("#posts").on("click", "#details", function () {
+            //    var button = $(this);
+            //    $.ajax({
+            //        url: "/Consultations/Admin/Posts/GetPostDetails?postId=" + button.attr("data-post-id") + ""
+
+
+            //    });
+            //});
 
             $("#posts").on("click", "#display", function () {
                 var button = $(this);
@@ -275,6 +284,6 @@
 
         
           /* href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "'*/
-
+        /*href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "'*/
 
     </script>

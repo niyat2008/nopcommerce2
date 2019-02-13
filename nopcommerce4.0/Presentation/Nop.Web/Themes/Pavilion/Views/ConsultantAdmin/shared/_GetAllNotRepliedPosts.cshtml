@@ -48,9 +48,9 @@
                 { "data": "CategoryName" },
                 { "data": "SubCategoryName" },
                 {
-                    "data": "Id",
-                    "render": function (data,type,post) {
-                        return (post.IsCommon)? "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' class='btn btn-default btn-small' data-post-id=" + post.Id + " ><i class='fa fa-eye'></i> التفاصيل </a>" + " " + "<span id='display' data-post-id=" + post.Id + "  class='btn btn-default btn-small'><i class='fa fa-eye'></i> عرض كشائعة</span>" + " " + "<button class='btn btn-danger btn-small' id='delete' data-post-id=" + post.Id + " >حذف</button>":"<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' class='btn btn-default btn-small' data-post-id=" + post.Id + " ><i class='fa fa-eye'></i> التفاصيل </a>" + " " + "<span id='display' data-post-id=" + post.Id + "  class='btn btn-default btn-small'><i class='fa fa-eye'></i> معروضة كشائعة</span>" + " " + "<button class='btn btn-danger btn-small' id='delete' data-post-id=" + post.Id + " >حذف</button>" ;
+                    "data": "Title",
+                    "render": function (data, type, post) {
+                        return (post.IsCommon) ? "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + post.Id + "' class='btn btn-default btn-small' data-post-id=" + post.Id + " ><i class='fa fa-eye'></i> التفاصيل </a>" + " " + "<span id='display' data-post-id=" + post.Id + "  class='btn btn-default btn-small'><i class='fa fa-eye'></i>معروضة كشائعة </span>" + " " + "<button class='btn btn-danger btn-small' id='delete' data-post-id=" + post.Id + " >حذف</button>" : "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + post.Id + "' class='btn btn-default btn-small' data-post-id=" + post.Id + " ><i class='fa fa-eye'></i> التفاصيل </a>" + " " + "<span id='display' data-post-id=" + post.Id + "  class='btn btn-default btn-small'><i class='fa fa-eye'></i>عرض كشائعة </span>" + " " + "<button class='btn btn-danger btn-small' id='delete' data-post-id=" + post.Id + " >حذف</button>";
 
                     }
 

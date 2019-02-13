@@ -36,11 +36,19 @@ namespace Nop.Services.Z_Consultant.SubCategory
 
         public PagedList<Z_Consultant_SubCategory> GetSubCategoriesByCategoryId(PagingParams pagingParams, int categoryId)
         {
-            var query = _subCategoryRepository.TableNoTracking
-                .Where(s => s.CategoryId == categoryId);
+            var query = _subCategoryRepository.TableNoTracking.Where(s => s.CategoryId == categoryId);
+                
 
             return new PagedList<Z_Consultant_SubCategory>(
                 query, pagingParams.PageNumber, pagingParams.PageSize,false);
+        }
+        public List<Z_Consultant_SubCategory> GetSubCategoriesByCategory( int categoryId)
+        {
+            var query = _subCategoryRepository.TableNoTracking.Where(s => s.CategoryId == categoryId);
+
+
+            return query.ToList();
+                 
         }
 
 

@@ -13,5 +13,6 @@ namespace Nop.Services.Z_Consultant.SubCategory
         PagedList<Z_Consultant_SubCategory> GetSubCategories(PagingParams pagingParams);
         Z_Consultant_SubCategory GetSubCategory(int subCategoryId);
         PagedList<Z_Consultant_SubCategory> GetSubCategoriesByCategoryId(PagingParams pagingParams, int categoryId);
+        List<Z_Consultant_SubCategory> GetSubCategoriesByCategory(int categoryId);
     }
 }

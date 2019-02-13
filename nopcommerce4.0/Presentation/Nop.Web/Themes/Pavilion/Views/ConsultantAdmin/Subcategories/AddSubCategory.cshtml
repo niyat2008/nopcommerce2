@@ -10,13 +10,19 @@
 <div class="page-title">اضف صنف فرعى</div>
 
 <form id="addSubCategory">
-    <div class="form-group">
-        <label class="form-lbl">الصنف الرئيسى</label>
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.CategoryId,new SelectList(Model.Categories,"Id","Name"),"اختر الصنف الرئيسى", new { @class = "form-control detailsDropDown" })
-            @Html.ValidationMessageFor(m => m.Name)
+  
+    
+
+        <div class="form-group">
+            <label class="form-lbl">الصنف الرئيسى</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "اختر الصنف الرئيسى", new { @class = "form-control detailsDropDown" })
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
         </div>
-    </div>
+
+
+    
 
     <div class="form-group">
         <label class="form-lbl">الصنف الفرعى</label>
@@ -41,6 +47,11 @@
 <script src="~/js/ConsultantAdmin/notify.js"></script>
 <script>
     $(document).ready(function () {
+        
+        if ($(".detailsDropDown").val() !== "" ) {
+
+            $(".detailsDropDown").prop('disabled', true)
+        }
         $("#addSubCategory").submit(function (event) {
             var ajaxRequest;
             event.preventDefault();

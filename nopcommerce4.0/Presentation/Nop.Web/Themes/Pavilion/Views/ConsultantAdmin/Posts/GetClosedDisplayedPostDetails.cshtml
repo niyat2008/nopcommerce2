@@ -142,13 +142,15 @@
     @*<span  class="btn btn-success detailsEdit">تعديل</span>
     <a href="@ViewBag.url" class="btn btn-info">حفظ</a>*@
 }
-@foreach (var photo in Model.Files)
-{
-    <div>
-        <img src="@photo" style="width:100px;height:100px;" />
-    </div>
+<div class="row">
+    @foreach (var photo in Model.Files)
+    {
+        <div class="col-md-2">
+            <img src="@photo" class="img-responsive" style="width:200px;height:200px;  margin-bottom:10px;margin-top:20px;" />
+        </div>
 
-}
+    }
+</div>
 @*<div id="comment">
         <h5></h5>
         <div class="text">
