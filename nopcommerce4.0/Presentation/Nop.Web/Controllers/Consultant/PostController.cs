@@ -1011,12 +1011,31 @@ namespace Nop.Web.Controllers.Consultant
             return PartialView("~/Themes/Pavilion/Views/Consultant/Post/ChangeCatAndSub.cshtml", outputModel);
         }
 
+        [HttpGet]
+        public IActionResult GetCategory(int categoryId)
+        {
+
+
+            var subCategories = _subCategoryService.GetSubCategoriesByCategory(categoryId);
+
+            var sub = new SubCategoryOutputModel
+            {
+                Items = subCategories.Select(m => new SubCategoryModel {
+                    Id=m.Id,
+                    Name=m.Name
+                }).ToList()
+            };
+           // return Json(new { data = sub.Items });
+            return View("~/Themes/Pavilion/Views/Consultant/Post/ChangeCatAndSub.cshtml", sub.Items);
+        }
+
 
 
         [HttpGet]
-        public IActionResult GetSubCategoriesByCategoryId(PagingParams pagingParams, int categoryId)
+        public IActionResult GetSubCategoriesByCategoryId(PagingParams pagingParams,int categoryId)
         {
-            var model = _subCategoryService.GetSubCategoriesByCategoryId(pagingParams, categoryId);
+           var model = _subCategoryService.GetSubCategoriesByCategoryId(pagingParams, categoryId);
+            
 
             Response.Headers.Add("X-Pagination", model.GetHeader().ToJson());
 

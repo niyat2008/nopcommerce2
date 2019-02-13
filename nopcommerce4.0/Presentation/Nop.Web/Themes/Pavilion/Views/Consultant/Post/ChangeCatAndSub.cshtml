@@ -1,5 +1,6 @@
-﻿@using Nop.Web.Models.Consultant.Category;
-@model CategoryOutputModel
+﻿@model IEnumerable<Nop.Web.Models.Consultant.SubCategory.SubCategoryModel>
+
+
 
 <div class="modal" tabindex="-1" role="dialog" Style="display:block" id="changeCatAndSubDiv">
     @*changeCatModal*@
@@ -11,7 +12,7 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <select id="CategorySelectList" onchange="GetSubCategories()" name=""
+                    @*<select id="CategorySelectList" onchange="GetSubCategories()" name=""
                             required
                             class="form-control"
                             placeholder="التصنيف الاساسي">
@@ -28,7 +29,7 @@
                         }
 
 
-                    </select>
+                    </select>*@
 
                     <select id="subCategoriesSelectList" name=""
                             required
@@ -38,7 +39,12 @@
                                 value="0">
                             التصنيف الفرعى
                         </option>
-                        
+                        @foreach (var cat in Model)
+                        {
+                            <option value="@cat.Id">
+                                @cat.Name
+                            </option>
+                        }
                     </select>
 
                     <div class="modal-footer">
@@ -53,10 +59,24 @@
 
 
 <script type="text/javascript">
+    $(document).ready(function () {
 
+
+        var CategoryId = @ViewBag.CategoryId;
+        console.log("cate " + CategoryId);
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Consultant.Post.GetSubCategoriesByCategoryId")',
+            data: { CategoryId: CategoryId },
+            success: function (data) {
+                $("#subCategoriesSelectList").html(data);
+
+            }
+        });
     function GetSubCategories() {
-        
-        var CategoryId = $('#CategorySelectList').find(":selected").val();
+
+        var CategoryId = @ViewBag.CategoryId;
 
 
         $.ajax({
@@ -65,7 +85,7 @@
             data: { CategoryId: CategoryId },
             success: function (data) {
                 $("#subCategoriesSelectList").html(data);
-               
+
             }
         });
     }
@@ -73,5 +93,5 @@
     function closePopupModel() {
         $("#changeCatAndSubDiv").css("display","none");
     }
-
+    });
 </script>

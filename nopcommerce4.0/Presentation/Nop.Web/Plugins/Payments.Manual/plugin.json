@@ -1,6 +1,6 @@
 {
   "Group": "Payment methods",
-  "FriendlyName": "بطاقه إئتمانيه",
+  "FriendlyName": "البطاقة الائتمانية",
   "SystemName": "Payments.Manual",
   "Version": "1.42",
   "SupportedVersions": [

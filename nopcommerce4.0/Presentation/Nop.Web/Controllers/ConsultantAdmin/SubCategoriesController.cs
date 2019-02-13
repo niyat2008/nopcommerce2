@@ -135,15 +135,16 @@ namespace Nop.Web.Controllers.ConsultantAdmin
                 }).ToList()
             };
 
-            return Json(new { data = subCategory.SubCategories });
+            return Json(new { data = subCategory.SubCategories});
         }
         //Add SubCategory
-        public ActionResult AddSubCategory()
+        public ActionResult AddSubCategory(int categoryId=0)
         {
             var allCategories = _subCategory.GetAllCategor();
             var subCategoryViewModel = new SubCategoryForPost
             {
-                Categories=allCategories
+                Categories=allCategories,
+                CategoryId=categoryId
             };
             
             return View("~/Themes/Pavilion/Views/ConsultantAdmin/Subcategories/AddSubCategory.cshtml", subCategoryViewModel);

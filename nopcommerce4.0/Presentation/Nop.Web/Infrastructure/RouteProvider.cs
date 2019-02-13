@@ -80,6 +80,8 @@ namespace Nop.Web.Infrastructure
             new { controller = "Post", action = "UnReservePost" });
             routeBuilder.MapRoute("Consultant.Post.ChangeCatAndSub", "Consultations/Post/ChangeCatAndSub",
             new { controller = "Post", action = "ChangeCatAndSub" });
+            routeBuilder.MapRoute("Consultant.Post.GetCategory", "Consultations/Post/GetCategory",
+           new { controller = "Post", action = "GetCategory" });
             routeBuilder.MapRoute("Consultant.Post.GetSubCategoriesByCategoryId", "Consultations/Post/GetSubCategoriesByCategoryId",
             new { controller = "Post", action = "GetSubCategoriesByCategoryId" });
             routeBuilder.MapRoute("Consultant.Post.SetPostToCategoryAndSubCategory", "Consultations/Post/SetPostToCategoryAndSubCategory",
