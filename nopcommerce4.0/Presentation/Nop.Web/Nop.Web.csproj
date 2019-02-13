@@ -65,7 +65,9 @@
     <Content Include="Logs\**" CopyToPublishDirectory="PreserveNewest" />
     <Content Remove="wwwroot\css\Consultant\imageResponsive.css" />
     <Content Remove="wwwroot\fonts\fonts\Home.cshtml" />
+    <None Remove="Themes\Pavilion\Content\img\google-plus.png" />
     <None Remove="Themes\Pavilion\Content\img\New folder\ma3roof.png" />
+    <None Remove="Themes\Pavilion\Content\img\whatsapp-image.png" />
     <EmbeddedResource Include="wwwroot\css\Consultant\imageResponsive.css">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
@@ -123,6 +125,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Themes\Pavilion\Content\img\_ShareButton.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Themes\Pavilion\Views\ConsultantAdmin\Categories\AddCategory.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

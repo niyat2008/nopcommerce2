@@ -58,12 +58,7 @@
                                                 <span>@item.FaxNumber</span>
                                             </li>
                                         }
-                                        @if (item.CompanyEnabled && !string.IsNullOrEmpty(item.Company))
-                                        {
-                                            <li class="company">
-                                                @item.Company
-                                            </li>
-                                        }
+
                                         @if (item.StreetAddressEnabled)
                                         {
                                             <li class="address1">
@@ -76,25 +71,31 @@
                                                 @item.Address2
                                             </li>
                                         }
-                                        @if (item.CityEnabled || item.StateProvinceEnabled || item.ZipPostalCodeEnabled)
+                                        @*@if (item.CityEnabled || item.StateProvinceEnabled || item.ZipPostalCodeEnabled)
+        {
+            <li class="city-state-zip">
+                @if (item.CityEnabled)
+                {
+                    @item.City
+                }
+                @if (item.CityEnabled && (item.StateProvinceEnabled || item.ZipPostalCodeEnabled))
+                {
+                    <text>,</text>
+                }
+                @if (item.StateProvinceEnabled)
+                {
+                    @item.StateProvinceName
+                }
+                @if (item.ZipPostalCodeEnabled)
+                {
+                    @item.ZipPostalCode
+                }
+            </li>
+        }*@
+                                        @if (item.CityEnabled)
                                         {
-                                            <li class="city-state-zip">
-                                                @if (item.CityEnabled)
-                                                {
-                                                    @item.City
-                                                }
-                                                @if (item.CityEnabled && (item.StateProvinceEnabled || item.ZipPostalCodeEnabled))
-                                                {
-                                                    <text>,</text>
-                                                }
-                                                @if (item.StateProvinceEnabled)
-                                                {
-                                                    @item.StateProvinceName
-                                                }
-                                                @if (item.ZipPostalCodeEnabled)
-                                                {
-                                                    @item.ZipPostalCode
-                                                }
+                                            <li class="company">
+                                                @item.City
                                             </li>
                                         }
                                         @if (item.CountryEnabled && !string.IsNullOrEmpty(item.CountryName))

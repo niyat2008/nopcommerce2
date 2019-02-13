@@ -86,6 +86,6 @@ namespace Nop.Services.Z_Consultant.Post
         PagedList<Z_Consultant_Post> GetCommonPostsForCustomer(PagingParams pagingParams, int currentUserId);
 
         List<City> GetCities();
-        List<Neighbohood> GetCityNeighborhood(int cityId);
+        List<Neighborhood> GetCityNeighborhood(int cityId);
     }
 }

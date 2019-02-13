@@ -23,58 +23,77 @@
     .inputActive:focus {
         border: 2px solid green;
     }
-    .inputActive{
-        color:black;
-        font-size:larger;
+
+    .inputActive {
+        color: black;
+        font-size: larger;
     }
 </style>
 
 
 @if (ViewBag.UserRole == "Registered")
 {
-    <!-- Add Post -->
-    <div id="AddPost">
+    if (@ViewBag.CanAddNewPost == true)
+    {
+        <div id="AddPost">
 
-        <div class="row">
-            <div class="col-md-9 col-lg-offset-2">
-                <form id="addPostForm">
-                    <div class="form-group" style="margin-bottom:5%;">
-                        <h3 >اسأل استشارى</h3>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom:3%;">
-                        <select class="form-control   inputActive" id="categoryList" style="border:1px solid green;width:60%;">
-                            <option disabled value="">اختر التصنيف</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom:3%;clear:both;">
-                        <input class="form-control form-control-lg inputActive" id="postTitle" style="border:1px solid green;width:80%" type="text" placeholder="عنوان الاستشارة">
-                    </div>
-                    <div class="form-group" style="margin-bottom:3%;">
-                        <textarea class="form-control inputActive" id="postText" style="border:1px solid green;width:100%;" rows="8" placeholder="اشرح المشكلة الخاصة بك"></textarea>
-                    </div>
-                    <div class="form-group" style="margin-bottom:3%">
-                        <p class="file">
-                            <input class="form-control-file" id="file" name="file" type="file" style="display:none" value="تحميل صورة">
-                            <label for="file">تحميل صورة</label>
-                        </p>
-                    </div>
-                    <div class="form-group" style="margin-bottom:3%;">
-                        <button class="form-control" style="text-align:center;background-color:#4da74d;color:white;width:100%" type="submit">نشر</button>
-                    </div>
-                    <div class="form-group bordering">
-                        <div class="images" id="images">
-                            
+            <div class="row">
+                <div class="col-md-9 col-lg-offset-2">
+                    <form id="addPostForm">
+                        <div class="form-group" style="margin-bottom:5%;">
+                            <h3>اسأل استشارى</h3>
                         </div>
-                    </div>
 
-                </form>
+                        <div class="form-group" style="margin-bottom:3%;">
+                            <select class="form-control   inputActive" id="categoryList" style="border:1px solid green;width:60%;">
+                                <option disabled value="">اختر التصنيف</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom:3%;clear:both;">
+                            <input class="form-control form-control-lg inputActive" id="postTitle" style="border:1px solid green;width:80%" type="text" placeholder="عنوان الاستشارة">
+                        </div>
+                        <div class="form-group" style="margin-bottom:3%;">
+                            <textarea class="form-control inputActive" id="postText" style="border:1px solid green;width:100%;" rows="8" placeholder="اشرح المشكلة الخاصة بك"></textarea>
+                        </div>
+                        <div class="form-group" style="margin-bottom:3%">
+                            <p class="file">
+                                <input class="form-control-file" id="file" name="file" type="file" style="display:none" value="تحميل صورة">
+                                <label for="file">تحميل صورة</label>
+                            </p>
+                        </div>
+                        <div class="form-group" style="margin-bottom:3%;">
+                            <button class="form-control" style="text-align:center;background-color:#4da74d;color:white;width:100%" type="submit">نشر</button>
+                        </div>
+                        <div class="form-group bordering">
+                            <div class="images" id="images">
+
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
             </div>
-           
         </div>
-    </div>
+    }
+    else
+    {
+        <div id="AddPost">
 
+            <div class="row">
+                <div class="col-md-9 col-lg-offset-2">
+                    <form id="addPostForm">
+                        <div class="form-group" style="margin-bottom:5%;">
+                            <h3>لا يمكنك اضافه استشاره الا بعد اغلاق جميع الاستشارات المفتوحه.</h3>
+                        </div> 
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    }
+    <!-- Add Post -->
 }
 
 

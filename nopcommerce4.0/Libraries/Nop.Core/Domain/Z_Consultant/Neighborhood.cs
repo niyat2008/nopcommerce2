@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Nop.Core.Domain.Z_Consultant
 {
-    public class Neighbohood : BaseEntity
+    public class Neighborhood : BaseEntity
     {
         public int Id { get; set; }
         public int CityId { get; set; }

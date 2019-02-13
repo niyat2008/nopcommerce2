@@ -5,19 +5,22 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-             var selectedItem = $(this).val();
-            var ddlStates = $("#@Html.IdFor(model => model.StateProvinceId)");
+
+         var ddlStates = $("#city-js-ajax");
             var statesProgress = $("#states-loading-progress");
             statesProgress.show();
+
             $.ajax({
                 cache: false,
                     type: "GET",
-                    url: "@(Url.RouteUrl("Consultant.Address.GetAllCitiesAjax"))", 
+                    url: "@(Url.RouteUrl("Consultant.Comment.GetCities"))",
                     success: function (data) {
                     ddlStates.html('');
                         $.each(data, function (id, option) {
-                            ddlStates.append($('<option></option>').val(option.ArName).html(option.ArName));
-                    });
+                            ddlStates.append($('<option></option>').val(option.Id).html(option.ArName));
+
+
+                        }); 
                     statesProgress.hide();
                 },
                     error: function (xhr, ajaxOptions, thrownError) {
@@ -25,23 +28,24 @@
                     statesProgress.hide();
                 }
             });
+             
+            $("#neighbohod-js-ajax").change(function () { 
+                $("#city-data-info-js").val($("#city-js-ajax").find(":selected").text() + ", " + $(this).find(":selected").text());
+            });
 
 
-            $("#@Html.IdFor(model => model.StateProvinceId)").change(function () {
-           
-                          var selectedItem = $(this).val();
-            var ddlStates = $("#@Html.IdFor(model => model.StateProvinceId)");
-            var statesProgress = $("#states-loading-progress");
-            statesProgress.show();
+            $("#city-js-ajax").change(function () {
+            var selectedItem = $(this).val();
+            var ddlStates = $("#neighbohod-js-ajax");
             $.ajax({
                 cache: false,
                     type: "GET",
-                    url: "@(Url.RouteUrl("Consultant.Address.GetAllCityNeighborhoodAjax"))", 
+                    url: "@(Url.RouteUrl("Consultant.Comment.GetNeighbohoods"))",
                     data: { "cityId": selectedItem  },
                     success: function (data) {
                     ddlStates.html('');
                         $.each(data, function (id, option) {
-                        ddlStates.append($('<option></option>').val(option.id).html(option.name));
+                        ddlStates.append($('<option></option>').val(option.ArName).html(option.ArName));
                     });
                     statesProgress.hide();
                 },
@@ -49,12 +53,21 @@
                     alert('Failed to retrieve states.');
                     statesProgress.hide();
                 }
-            });
+                });
+
+                $("#city-data-info-js").val($(this).find(":selected").text());
         });
-    });
+        });
+
+
+
+
+
+
+
     </script>
 }
-<input asp-for="Id" type="hidden"/>
+<input asp-for="Id" type="hidden" />
 <div class="edit-address">
     <div class="inputs">
         <label asp-for="Mobile" asp-postfix=":"></label>
@@ -99,33 +112,34 @@
             <label asp-for="CountryId" asp-postfix=":"></label>
             <select name="CountryId" disabled>
                 <option value="@Model.AvailableCountries.ElementAt(1).Value">@Model.AvailableCountries.ElementAt(1).Text</option>
-            </select>
-            <nop-required />
+            </select> 
             <span asp-validation-for="CountryId"></span>
         </div>
     }
 
-    @if (Model.CountryEnabled && Model.StateProvinceEnabled)
-    {
-        <div class="inputs">
-            <label asp-for="StateProvinceId" asp-postfix=":"></label>
-            <select asp-for="StateProvinceId" asp-items="Model.AvailableStates"></select>
-            <span id="states-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait...")</span>
-            <span asp-validation-for="StateProvinceId"></span>
-        </div>
-    }
+    @*@if (Model.CountryEnabled && Model.StateProvinceEnabled)
+        {
+            <div class="inputs">
+                <label asp-for="StateProvinceId" asp-postfix=":"></label>
+                <select asp-for="StateProvinceId" asp-items="Model.AvailableStates"></select>
+                <span id="states-loading-progress" style="display: none;" class="please-wait">@T("Common.Wait...")</span>
+                <span asp-validation-for="StateProvinceId"></span>
+            </div>
+        }*@
+
+    <div class="inputs">
+        <input hidden asp-for="City" id="city-data-info-js" />
+    </div>
+
     @if (Model.CityEnabled)
     {
         <div class="inputs">
-            <label asp-for="City" asp-postfix=":">مدينه</label>
-            <input asp-for="City" />
-            @if (Model.CityRequired)
-            {
-                <nop-required />
-            }
-            <span asp-validation-for="City"></span>
+            <div class="inputs">
+                <label>مدينه</label>
+                <select id="city-js-ajax"> </select>
+            </div>
         </div>
-    } 
+    }
     @if (Model.CityEnabled)
     {
         // add neighborhood

@@ -31,15 +31,15 @@ namespace Nop.Web.Validators.Common
                 .NotEmpty()
                 .WithMessage(localizationService.GetResource("address.fields.mobile.required"));
 
-            if (addressSettings.CountryEnabled)
-            {
-                RuleFor(x => x.CountryId)
-                    .NotNull()
-                    .WithMessage(localizationService.GetResource("Address.Fields.Country.Required"));
-                RuleFor(x => x.CountryId)
-                    .NotEqual(0)
-                    .WithMessage(localizationService.GetResource("Address.Fields.Country.Required"));
-            }
+            //if (addressSettings.CountryEnabled)
+            //{
+            //    RuleFor(x => x.CountryId)
+            //        .NotNull()
+            //        .WithMessage(localizationService.GetResource("Address.Fields.Country.Required"));
+            //    RuleFor(x => x.CountryId)
+            //        .NotEqual(0)
+            //        .WithMessage(localizationService.GetResource("Address.Fields.Country.Required"));
+            //}
             if (addressSettings.CountryEnabled && addressSettings.StateProvinceEnabled)
             {
                 RuleFor(x => x.StateProvinceId).Must((x, context) =>

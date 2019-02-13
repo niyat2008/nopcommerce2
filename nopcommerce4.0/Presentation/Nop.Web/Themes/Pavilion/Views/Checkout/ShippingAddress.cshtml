@@ -323,7 +323,7 @@
                         }
                     </div>
                     <div class="buttons">
-                        <input type="submit" name="nextstep" value="@T("Checkout.NextButton")" class="button-1 new-address-next-step-button" />
+                        <input type="submit" id="submit-new-address-js" name="nextstep" value="@T("Checkout.NextButton")" class="button-1 new-address-next-step-button" />
                     </div>
                 </div>
                 @await Component.InvokeAsync("Widget", new { widgetZone = "checkout_shipping_address_bottom" })
@@ -337,3 +337,13 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $("#submit-new-address-js").click(function () {
+        alert("hello");
+        if ($("#neighbohod-js-ajax").val() == "") {
+            alert("من فضلك قم باختيار الحي");
+        }
+        $("#city-data-info-js").val($("#city-js-ajax").find(":selected").text() + ", " + $("#neighbohod-js-ajax").find(":selected").text());
+    });
+</script>

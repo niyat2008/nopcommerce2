@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Nop.Data.Mapping.Z_Consultant
 {
-    public class Z_Consultant_NeighborhoodMap : NopEntityTypeConfiguration<Neighbohood>
+    public class Z_Consultant_NeighborhoodMap : NopEntityTypeConfiguration<Neighborhood>
     {
         public Z_Consultant_NeighborhoodMap()
         {
-            this.ToTable("Neighbohood");
+            this.ToTable("Neighborhood");
             this.HasKey(c => c.Id);
 
             this.Property(c => c.ArName).IsRequired().HasMaxLength(400);

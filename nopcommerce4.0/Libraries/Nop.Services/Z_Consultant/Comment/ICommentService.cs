@@ -15,8 +15,8 @@ namespace Nop.Services.Z_Consultant.Comment
         Z_Consultant_Comment GetCommentByCommentIdAndCustomerId(int commentId, int customerId);
         Z_Consultant_Comment GetCommentByCommentIdAndConsultantId(int commentId, int consultantId);
         Z_Consultant_Comment GetComment(int commentId);
-        Z_Consultant_Comment AddCommentByCustomer(CommentForPostModel CommentForPostDto, int customerId);
-        Z_Consultant_Comment AddCommentByConsultant(CommentForPostModel CommentForPostDto, int consultantId);
+        Z_Consultant_Comment AddCommentByCustomer(CommentForPostModel CommentForPostDto, int customerId, IList<string> files, List<string> errors);
+        Z_Consultant_Comment AddCommentByConsultant(CommentForPostModel CommentForPostDto, int consultantId, IList<string> files, List<string> errors);
         Z_Consultant_Comment UpdateComment(UpdateCommentModel UpdateCommentModel);
         void DeleteComment(DeleteCommentModel DeleteCommentModel);
         bool IsCustomerAuthToComment(int CommentId,int CustomerId);

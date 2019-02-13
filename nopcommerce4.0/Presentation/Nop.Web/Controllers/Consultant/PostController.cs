@@ -1101,12 +1101,33 @@ namespace Nop.Web.Controllers.Consultant
                     ViewBag.UserRole = RolesType.Consultant;
                 else if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
                     ViewBag.UserRole = RolesType.Registered;
+                if (_postService.GetOpenPostsForCustomer(new PagingParams(), _workContext.CurrentCustomer.Id).List.Count > 0)
+                {
+                    ViewBag.CanAddNewPost = false;
+                }
+                else
+                {
+                    ViewBag.CanAddNewPost = true;
 
+                }
                 return View("~/Themes/Pavilion/Views/Consultant/Post/AddPost.cshtml");
             }
             else
             {
                 return RedirectToRoute("Login", new { returnUrl = "consultations" });
+            }
+        }
+
+        [HttpGet]
+        public IActionResult HasOpenedConsultationAnCanAdd(int userId)
+        {
+            if (_postService.GetOpenPostsForCustomer(new PagingParams(), userId).List.Count > 0)
+            {
+                return Ok(false);
+            }
+            else
+            {
+                return Ok(true);
             }
         }
 

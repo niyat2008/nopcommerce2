@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nop.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,9 @@ namespace Nop.Core.Domain.Z_Consultant
 
         public int PostId { get; set; }
 
-        public Z_Consultant_Post Post { get; set; }
+        public Z_Consultant_Post Post { get; set; } 
     }
 }
+ 
+ 
+ 

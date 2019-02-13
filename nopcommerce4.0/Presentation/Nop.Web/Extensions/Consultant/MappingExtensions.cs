@@ -130,7 +130,9 @@ namespace Nop.Web.Extensions.Consultant
         #region Post
         public static CommentModel ToCommentModel(this Z_Consultant_Comment entity)
         {
-            return entity.MapTo<Z_Consultant_Comment, CommentModel>();
+            var model =  entity.MapTo<Z_Consultant_Comment, CommentModel>();
+            model.Photos =  entity.Photos.Select(b => b.Url).ToList();
+            return model;
         }
 
         public static Z_Consultant_Comment ToEntity(this CommentModel model)

@@ -1,0 +1,54 @@
+﻿@*@model ProductDetailsModel
+
+@using Nop.Core;
+
+@inject IWebHelper webHelper
+
+@{
+    var shareUrl = webHelper.GetStoreLocation() + Model.SeName;
+}
+
+<div class="product-social-buttons">
+    <label>@T("sevenspikes.themes.pavilion.products.sharing.text"):</label>
+    <ul class="social-sharing">
+        <li class="twitter">
+            <!-- Twitter -->
+            <a href="javascript:openShareWindow('https://twitter.com/share?url=@shareUrl')">
+                <span class="flip"></span>
+                <span class="flop"></span>
+            </a>
+        </li>
+        <li class="facebook">
+            <!-- Facebook -->
+            <a href="javascript:openShareWindow('https://www.facebook.com/sharer.php?u=@shareUrl')">
+                <span class="flip"></span>
+                <span class="flop"></span>
+            </a>
+        </li>
+        <li class="share-whatsapp">
+            <!-- Google+ -->
+            <a href="javascript:openShareWindow('https://api.whatsapp.com/send?text=@shareUrl')">
+                <span class="flip"></span>
+                <span class="flop"></span>
+            </a>
+        </li>
+        <li class="share-googleplus">
+            <!-- Google+ -->
+            <a href="javascript:openShareWindow('https://plus.google.com/share?url=@shareUrl')">
+                <span class="flip"></span>
+                <span class="flop"></span>
+            </a>
+        </li>
+    </ul>
+
+    <script type="text/javascript" asp-location="Footer">
+        function openShareWindow(url) {
+            var winWidth = 520;
+            var winHeight = 400;
+            var winTop = (screen.height / 2) - (winHeight / 2);
+            var winLeft = (screen.width / 2) - (winWidth / 2);
+
+            window.open(url, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+        }
+    </script>
+</div>*@

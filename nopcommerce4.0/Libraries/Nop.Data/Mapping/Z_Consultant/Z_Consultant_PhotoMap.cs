@@ -18,7 +18,7 @@ namespace Nop.Data.Mapping.Z_Consultant
 
             this.HasRequired(p => p.Post)
                 .WithMany(p => p.Photos)
-                .HasForeignKey(p => p.PostId);
+                .HasForeignKey(p => p.PostId); 
         }
     }
 }

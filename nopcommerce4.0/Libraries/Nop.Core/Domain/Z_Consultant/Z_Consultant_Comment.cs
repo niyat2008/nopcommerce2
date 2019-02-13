@@ -1,6 +1,7 @@
 ﻿using Nop.Core.Domain.Customers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -11,7 +12,11 @@ namespace Nop.Core.Domain.Z_Consultant
 {
     public class Z_Consultant_Comment : BaseEntity
     {
-        
+        public Z_Consultant_Comment()
+        {
+            Photos = new Collection<Z_Consultant_CommentPhoto>();
+
+        }
 
         //[Required]
         public string Text { get; set; }
@@ -38,5 +43,7 @@ namespace Nop.Core.Domain.Z_Consultant
         //[InverseProperty("ConsultantsComments")]
         public Customer Consultant { get; set; }
         public Z_Consultant_Post Post { get; set; }
+        public virtual ICollection<Z_Consultant_CommentPhoto> Photos { get; set; }
+
     }
 }

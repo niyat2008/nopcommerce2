@@ -144,7 +144,8 @@ namespace Nop.Web.Controllers.Consultant
                     DateCreated = m.DateCreated,
                     DateUpdated = m.DateUpdated,
                     CommentedBy = m.CommentedBy,
-                    CommentOwner = (m.Customer == null) ? m.Consultant.Username : m.Customer.Username
+                    CommentOwner = (m.Customer == null) ? m.Consultant.Username : m.Customer.Username,
+                    Photos = m.Photos.Select(p => p.Url).ToList()
                 }).ToList(),
             };
 
@@ -158,12 +159,32 @@ namespace Nop.Web.Controllers.Consultant
             }
         }
 
+        [HttpGet]
+        public IActionResult GetCities()
+        {
 
+            var cities = _postService.GetCities();
+
+            return Ok(cities);
+        }
+
+
+        [HttpGet]
+        public IActionResult GetNeighbohoods(int cityId)
+        {
+
+            var cities = _postService.GetCityNeighborhood(cityId);
+
+            return Ok(cities);
+        }
 
 
         [HttpPost]
         public IActionResult AddComment([FromBody]CommentForPostModel model)
         {
+
+            var cities = _postService.GetCities();
+
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Unauthorized();
 
@@ -186,7 +207,8 @@ namespace Nop.Web.Controllers.Consultant
                 {
                     if (_postService.IsConsultantAuthToPost(model.PostId, currentUserId))
                     {
-                        var commentCreated = _commentService.AddCommentByConsultant(model, currentUserId);
+                        List<string> errors = new List<string>();
+                        var commentCreated = _commentService.AddCommentByConsultant(model, currentUserId, model.Files, errors);
                         _postService.SetPostAnsweredByConsultant(model.PostId, currentUserId);
                         string userName = _workContext.CurrentCustomer.Username;
                         var commentToReturn = commentCreated.ToCommentModel();
@@ -200,12 +222,14 @@ namespace Nop.Web.Controllers.Consultant
                 }
                 else
                 {
-                    var commentCreated = _commentService.AddCommentByConsultant(model, currentUserId);
+                    List<string> errors = new List<string>();
+
+                    var commentCreated = _commentService.AddCommentByConsultant(model, currentUserId, model.Files, errors);
                     _postService.SetPostAnsweredByConsultant(model.PostId, currentUserId);
                     string userName = _workContext.CurrentCustomer.Username;
                     var commentToReturn = commentCreated.ToCommentModel();
                     commentToReturn.CommentOwner = userName;
-                    return CreatedAtRoute("Consultant.Comment.GetComment", new { CommentId = commentToReturn.Id }, commentToReturn);
+                    return GetComment(commentToReturn.Id);
                 }
 
             }
@@ -221,11 +245,12 @@ namespace Nop.Web.Controllers.Consultant
 
                 if (_postService.IsCustomerAuthToPost(model.PostId, currentUserId))
                 {
-                    var commentCreated = _commentService.AddCommentByCustomer(model, currentUserId);
+                    List<string> errors = new List<string>();
+                    var commentCreated = _commentService.AddCommentByCustomer(model, currentUserId, model.Files, errors);
                     string userName = _workContext.CurrentCustomer.Username;
                     var commentToReturn = commentCreated.ToCommentModel();
                     commentToReturn.CommentOwner = userName;
-                    return CreatedAtRoute("Consultant.Comment.GetComment", new { CommentId = commentToReturn.Id }, commentToReturn);
+                    return GetComment(commentToReturn.Id);
                 }
                 else
                 {
@@ -301,7 +326,8 @@ namespace Nop.Web.Controllers.Consultant
             var modelToReturn = model.ToCommentModel();
             modelToReturn.CommentOwner = commentOwner;
 
-            return Ok(modelToReturn);
+            return PartialView("~/Themes/Pavilion/Views/Consultant/Comment/_CommentTemplatePartial.cshtml", modelToReturn);
+
         }
 
 

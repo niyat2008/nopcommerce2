@@ -20,6 +20,7 @@ html {
 ol, ul {
 	list-style: none;
 }
+
 em {
 	font-style: normal;
 }
@@ -1840,9 +1841,10 @@ label, label + * {
 	display: inline-block;
 	max-width: 100%;
 }
-.gallery .picture img {
-	max-width: 100%;
-}
+    .gallery .picture img {
+        max-width: 100%;
+        min-height: 447px;
+    }
 .gallery .picture-thumbs {
 	margin: 20px 0 0;
 	font-size: 0;
@@ -5653,3 +5655,15 @@ label, label + * {
 .profile-page .topic-data span {
 	display: inline-block;
 }
+.share-whatsapp > a {
+    background-image: url('../img/whatsapp-image.png') !important;
+    background-position: 0;
+    background-color: #11ed18 !important;
+}
+
+.share-googleplus > a {
+    background-position: 0 !important;
+    background-color: #f74258 !important;
+    background-image: url('../img/google-plus.png') !important;
+}
+

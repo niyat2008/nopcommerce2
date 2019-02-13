@@ -24,7 +24,7 @@ namespace Nop.Services.Z_Consultant.Post
         private readonly IRepository<Z_Consultant_Post> _postRepository;
         private readonly IRepository<Z_Consultant_Category> _categoryRepository;
         private readonly IRepository<City> _cityRepository;
-        private readonly IRepository<Neighbohood> _neighborhoodRepository;
+        private readonly IRepository<Neighborhood> _neighborhoodRepository;
         private readonly IEventPublisher _eventPublisher;
         private readonly IHostingEnvironment _env;
         ILocalizationService _localizationService;
@@ -33,7 +33,8 @@ namespace Nop.Services.Z_Consultant.Post
         public PostService(IRepository<Z_Consultant_Post> postRepository,
             IRepository<Z_Consultant_Category> categoryRepository,
             ILocalizationService localizationService,
-            IHostingEnvironment env,
+            IHostingEnvironment env, IRepository<City> _cityRepository,
+            IRepository<Neighborhood> _neighborhoodRepository,
         IEventPublisher eventPublisher)
         {
             this._postRepository = postRepository;
@@ -41,6 +42,8 @@ namespace Nop.Services.Z_Consultant.Post
             this._eventPublisher = eventPublisher;
             this._env = env;
             this._localizationService = localizationService;
+            this._cityRepository = _cityRepository;
+            this._neighborhoodRepository = _neighborhoodRepository;
         }
 
 
@@ -76,7 +79,8 @@ namespace Nop.Services.Z_Consultant.Post
                 IsAnswered = false,
                 IsClosed = false,
                 IsDispayed=false,
-                IsReserved=false
+                IsReserved=false,
+                IsCommon = false
             };
             foreach (var item in filesUrl)
             {
@@ -1043,7 +1047,7 @@ namespace Nop.Services.Z_Consultant.Post
             return query.ToList();
         }
 
-        public List<Neighbohood> GetCityNeighborhood(int cityId)
+        public List<Neighborhood> GetCityNeighborhood(int cityId)
         {
             var query = _neighborhoodRepository.TableNoTracking;
 

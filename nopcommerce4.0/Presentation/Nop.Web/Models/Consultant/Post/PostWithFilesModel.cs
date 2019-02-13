@@ -1,4 +1,5 @@
 ﻿using Nop.Web.Framework.Mvc.Models;
+using Nop.Web.Models.Consultant.Comment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace Nop.Web.Models.Consultant.Post
         public string PostOwner { get; set; }
 
         public IList<string> Files { get; set; }
-
+        public CommentOutputModel CommentOutputModel { get; set; }
         public PostWithFilesModel()
         {
             Files = new List<string>();

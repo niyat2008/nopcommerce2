@@ -79,6 +79,18 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapRoute("Consultant.Comment.GetCommentsByPostId", "Consultations/PostComments",
             new { controller = "Comment", action = "GetCommentsByPostId" });
 
+
+            /////////////////
+            ///
+            routeBuilder.MapRoute("Consultant.Comment.GetCities", "Consultations/AddressCities",
+new { controller = "Comment", action = "GetCities" });
+            routeBuilder.MapRoute("Consultant.Comment.GetNeighbohoods", "Consultations/AddressNeighbohoods",
+new { controller = "Comment", action = "GetNeighbohoods" });
+
+            /////////////////
+            ///
+            routeBuilder.MapRoute("Consultant.Post.HasOpenedConsultationAnCanAdd", "Consultations/Post/CanAddNewPost",
+new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
             routeBuilder.MapRoute("Consultant.Post.ClosePost", "Consultations/Post/ClosePost",
             new { controller = "Post", action = "ClosePost" });
             routeBuilder.MapRoute("Consultant.Post.RatePost", "Consultations/Post/RatePost",

@@ -15,42 +15,13 @@
 
 @if (Model.Items != null)
 {
-    <div id="commentDivToAppending">
-        @foreach (var comment in Model.Items)
-        {
-            <!-- Comments -->
-            <div class="comments">
-                <!-- Comment -->
-                <div class="comment">
-                    <div class="row">
-                        @if (comment.CommentedBy == "Registered")
-                        {
-                            <div class="col-xs-2 text-center">
-                                <img class="userimagelarge" src="~/images/Consultant/images/no-img.png" />
-                                <img class="userimagemedium" src="~/images/Consultant/images/no-img-mobile.png" style="width:50px;height:50px;" />
-                                <img class="userimagesmall" src="~/images/Consultant/images/no-img-mobile.png" style="width:35px;height:35px;" />
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="col-xs-2 text-center">
-                                <img class="userimagelarge" src="~/images/Consultant/images/no-img-consultant.png" />
-                                <img class="userimagemedium" src="~/images/Consultant/images/no-img-mobile-consultant.png" style="width:50px;height:50px;" />
-                                <img class="userimagesmall" src="~/images/Consultant/images/no-img-mobile-consultant.png" style="width:35px;height:35px;" />
-                            </div>
-                        }
-                        <div class="col-xs-10">
-                            <h4>@comment.CommentOwner</h4>
-                            <span>@comment.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @comment.DateCreated.ToString("hh:mm:ss")</span>
-                            <p style="width:fit-content;clear:both;"> @comment.Text </p>
-                            
-                        </div>
-                    </div>
-                </div><hr />
-            </div>
-
-        }
-    </div>
+<div id="commentDivToAppending">
+    @foreach (var comment in Model.Items)
+    {
+        <!-- Comments -->
+        @Html.Partial("~/Themes/Pavilion/Views/Consultant/Comment/_CommentTemplatePartial.cshtml", comment)
+    }
+</div>
 }
 <div class="add-comment">
     <div class="row">
@@ -70,24 +41,38 @@
                 <img class="userimagesmall" src="~/images/Consultant/images/no-img-mobile-consultant.png" style="width:35px;height:35px;" />
             </div>
         }
-        <div class="col-xs-10">
-            <h4>@ViewBag.UserName</h4>
-            <div class="reply">
-                <textarea class="form-control" id="CommentText" placeholder="اكتب تعليقا"></textarea>
-            </div><br /><br />
-            @if (ViewBag.UserRole == "Registered")
-            {
+            <div class="col-xs-10">
+                <h4>@ViewBag.UserName</h4>
                 <div class="reply">
-                    <button onclick="addComment()" class="btndarckgreen">تعليق</button>
+                    <textarea class="form-control" id="CommentText" placeholder="اكتب تعليقا"></textarea>
                 </div>
-            }
-            else if (ViewBag.UserRole == "Consultant")
-            {
-                <div class="reply">
-                    <button onclick="addCommentConsultant()" class="btndarckgreen">تعليق</button>
+                <div class="form-group bordering">
+                    <div class="images" id="images">
+
+                    </div>
                 </div>
-            }
-        </div>
+                <br /><br />
+                @if (ViewBag.UserRole == "Registered")
+                {
+                    <div class="reply">
+                        <p class="file">
+                            <input class="form-control-file" id="file" name="file" type="file" style="display:none" value="تحميل صورة">
+                            <label for="file">تحميل صورة</label>
+                        </p>
+                        <button onclick="addComment()" class="btndarckgreen">تعليق</button>
+                    </div>
+                }
+                else if (ViewBag.UserRole == "Consultant")
+                {
+                    <div class="reply">
+                        <p class="file">
+                            <input onchange="onFileChange(event)" class="form-control-file" id="file" name="file" type="file" style="display:none" value="تحميل صورة">
+                            <label for="file">تحميل صورة</label>
+                        </p>
+                        <button  class="btn btn-success" onclick="addCommentConsultant()">تعليق</button>
+                    </div>
+                }
+            </div>
     </div>
 </div>
 
@@ -162,7 +147,23 @@
 <script type="text/javascript">
 
 
+    $(document).ready(function () {
+        $("#file").change(function (event) {
 
+            if (Files.length >= 5) {
+                alert("لقد تجاوزت العدد المسموح من الصور ,مسموح بخمس صور فقط");
+            }
+            else {
+
+                if (event.target.files && event.target.files[0]) {
+                    for (var i = 0; i < event.target.files.length; i++) {
+                        convertToBase64(event.target.files[i]);
+                        console.log(i)
+                    }
+                }
+            }
+        });
+    });
 
 
 
@@ -180,6 +181,9 @@
             }
         });
     }
+
+
+
 
 </script>
 

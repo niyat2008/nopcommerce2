@@ -120,6 +120,7 @@ namespace Nop.Web.Infrastructure.Consultant
                     mo => mo.MapFrom(src => src.CommentedBy))
                     .ForMember(dest => dest.PostId,
                     mo => mo.MapFrom(src => src.PostId));
+                    //.ForMember(m => m.Photos, mm => mm.MapFrom(c => c.Photos.Select(dsc => dsc.Url)));
 
         }
 

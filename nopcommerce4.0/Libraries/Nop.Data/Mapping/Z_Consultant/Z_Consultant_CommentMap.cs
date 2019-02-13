@@ -30,6 +30,7 @@ namespace Nop.Data.Mapping.Z_Consultant
             this.HasOptional(c => c.Consultant)
                 .WithMany(p => p.ConsultantsComments)
                 .HasForeignKey(c => c.ConsultantId);
+             
 
         }
     }
