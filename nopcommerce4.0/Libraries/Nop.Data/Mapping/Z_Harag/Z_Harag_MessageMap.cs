@@ -15,7 +15,7 @@ namespace Nop.Data.Mapping.Z_Harag
             this.HasKey(m => m.Id);
             this.Property(m => m.Message).IsOptional().HasMaxLength(1200);
             this.Property(m => m.CreatedTime).IsOptional();
-            this.HasOptional(m => m.Z_Harag_Post).WithMany(p => p.Z_Harag_Message).HasForeignKey(m => m.Z_Harag_Post);
+            this.HasOptional(m => m.Z_Harag_Post).WithMany(p => p.Z_Harag_Message).HasForeignKey(m => m.PostId);
             this.HasOptional(m => m.Customer).WithMany(c => c.Z_Harag_Message).HasForeignKey(m => m.CustomerId);
         }
     }
