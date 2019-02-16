@@ -66,6 +66,8 @@
     <Content Include="Logs\**" CopyToPublishDirectory="PreserveNewest" />
     <Content Remove="wwwroot\css\Consultant\imageResponsive.css" />
     <Content Remove="wwwroot\fonts\fonts\Home.cshtml" />
+    <None Remove="Themes\Pavilion\Content\css\pages.css" />
+    <None Remove="Themes\Pavilion\Content\css\style.css" />
     <None Remove="Themes\Pavilion\Content\img\google-plus.png" />
     <None Remove="Themes\Pavilion\Content\img\New folder\ma3roof.png" />
     <None Remove="Themes\Pavilion\Content\img\whatsapp-image.png" />
@@ -80,15 +82,11 @@
 
   <ItemGroup>
     <Folder Include="Models\ConsultantAdmin\" />
-    <Folder Include="Themes\Pavilion\Views\Harag\Comment\" />
-    <Folder Include="Themes\Pavilion\Views\Harag\Home\" />
-    <Folder Include="Themes\Pavilion\Views\Harag\User\" />
-    <Folder Include="Themes\Pavilion\Views\Harag\Shared\" />
-    <Folder Include="Themes\Pavilion\Views\Harag\Post\" />
     <Folder Include="Validators\ConsultantAdmin\" />
     <Folder Include="wwwroot\ConsultantAdmin\" />
     <Folder Include="wwwroot\ConsultantApi\Uploads\Images\" />
     <Folder Include="wwwroot\HaragApi\Uploads\Images\" />
+    <Folder Include="wwwroot\NewFolder\" />
     <Folder Include="wwwroot\Shared\" />
   </ItemGroup>
 
@@ -213,6 +211,72 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Consultant\User\_AdminLink.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Comment\CommentsOnClosedPost.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Comment\CommentsOnOpenPost.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Comment\_CommentTemplatePartial.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Home\Home.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\AddPost.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\ChangeCatAndSub.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\ConsultantClosedConsultations.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\ConsultantNotAnswerdConsultations.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\ConsultantOpenConsultations.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\ConsultantReservedConsultations.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\CustomerClosedConsultations.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\CustomerOpenConsultations.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\ListOfCategory.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\ListOfSubCategories.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\PostDetails.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\Posts.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\PostsAjax.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Shared\_Header.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Shared\_Navbar.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\User\_AdminLink.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\User\_UserInfo.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\User\_UserRolesAndThreeButtons.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Shared\Components\OrderSummar\Default.cshtml">

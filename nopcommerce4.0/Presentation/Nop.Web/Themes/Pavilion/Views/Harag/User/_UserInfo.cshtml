@@ -1,0 +1,47 @@
+﻿@using Nop.Web.Models.Consultant.User;
+@model UserModel
+
+@if (string.IsNullOrEmpty(Model.UserRole))
+{
+
+    <div class="header-links-wrapper" style="height: 23px;">
+        <label style="  color: white; font-size:100% !important;">حسابي</label>
+        <div style="margin-top: -10px;margin-left: 20px !important; " class="header-links">
+            <ul>
+
+                <li>
+                    @Html.RouteLink("سجل الآن", "register", new { returnUrl = "consultations" }, new { @class = "ico-register" })
+                </li>
+                <li> @Html.RouteLink("دخول", "login", new { returnUrl = "consultations" }, new { @class = "ico-login" })  </li>
+                <li>
+                    <a href="/wishlist" class="ico-wishlist">
+                        <p class="wishlist-label">قائمة الملاحظة</p>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+
+    
+}
+else
+{
+    <div class="header-links-wrapper" style="height: 23px;">
+        <label style="  color: white; font-size:100% !important;">حسابي</label>
+        <div style="margin-top: -10px;margin-left: 20px !important; " class="header-links">
+            <ul>
+                <li class="name"><a class="ico-register">@Model.Username</a></li>
+                <li class="link" (click)="logout()">@Html.RouteLink("تسجيل  خروج", "logout", new { returnUrl = "consultations" })</li>
+                <li>
+                    <a href="/wishlist" class="ico-wishlist">
+                        قائمة الملاحظة
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+}

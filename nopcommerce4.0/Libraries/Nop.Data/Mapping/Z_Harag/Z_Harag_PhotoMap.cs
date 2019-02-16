@@ -1,4 +1,4 @@
-﻿using Nop.Core.Domain.Z_Consultant;
+﻿using Nop.Core.Domain.Z_Harag;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Nop.Data.Mapping.Z_Harag
 {
-    public class Z_Harag_PhotoMap : NopEntityTypeConfiguration<Z_Consultant_Photo>
+    public class Z_Harag_PhotoMap : NopEntityTypeConfiguration<Z_Harag_Photo>
     {
         public Z_Harag_PhotoMap()
         {
@@ -17,7 +17,7 @@ namespace Nop.Data.Mapping.Z_Harag
             this.Property(p => p.Url).IsRequired();
 
             this.HasRequired(p => p.Post)
-                .WithMany(p => p.Photos)
+                .WithMany(p => p.Z_Harag_Photo)
                 .HasForeignKey(p => p.PostId);
         }
     }

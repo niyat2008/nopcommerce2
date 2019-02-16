@@ -43,7 +43,7 @@ namespace Nop.Core.Domain.Z_Harag
         public System.DateTime DateCreated { get; set; }
         public System.DateTime DateUpdated { get; set; }
 
-        public virtual City City { get; set; }
+        public virtual HaragCity City { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Z_Harag_Comment> Z_Harag_Comment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

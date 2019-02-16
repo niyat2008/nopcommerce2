@@ -18,7 +18,7 @@ namespace Nop.Web.Infrastructure.Harag
 
         public virtual void Register(ContainerBuilder builder, ITypeFinder typeFinder, NopConfig config)
         {
-            //register SquarePaymentManager
+            //register SquarePaymentManager 
             builder.RegisterType<CategoryService>().As<ICategoryService>().InstancePerLifetimeScope();
            // builder.RegisterType<SubCategoryService>().As<ISubCategoryService>().InstancePerLifetimeScope();
             builder.RegisterType<PostService>().As<IPostService>().InstancePerLifetimeScope();

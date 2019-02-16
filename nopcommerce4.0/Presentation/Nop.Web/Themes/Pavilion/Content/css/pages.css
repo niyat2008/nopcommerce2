@@ -1,0 +1,205 @@
+﻿ 
+.disTable {
+    display: table
+}
+
+.content .choices2 {
+    margin-bottom: 20px
+}
+
+/* Commission */
+.cont {
+    margin: 0 18px;
+    width: 90%
+}
+
+form.commission {
+    margin: 18px 0
+}
+
+/* Add Advertise */
+.content .form-control.txtArea {
+    height: auto;
+}
+
+.file {
+    position: relative;
+    cursor: pointer;
+    margin-top: 25px;
+}
+
+    .file label {
+        padding: 5px 20px;
+        color: #479a47;
+        font-weight: bold;
+        transition: all .4s;
+        cursor: pointer;
+        background: #eee;
+        border: 1px solid #ccc;
+        border-bottom: 3px solid #ccc;
+    }
+
+    .file input {
+        position: absolute;
+        display: inline-block;
+        left: 0;
+        top: 0;
+        opacity: 0.01;
+        cursor: pointer;
+    }
+/* .file input:hover + label,.file input:focus + label { background:#479a47; color:#fff; cursor: pointer; } */
+
+/* Advertise Details */
+.content .det-block {
+    display: table;
+    border-radius: 4px;
+    min-height: 50px;
+    background: #f3f9f7;
+    width: 95%;
+    border: 1px solid #ddd;
+}
+
+    .content .det-block .det-top {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+        .content .det-block .det-top h4 {
+            margin-top: 0;
+            font-weight: bold;
+            color: #4da74d !important
+        }
+
+        .content .det-block .det-top small {
+            color: #777;
+            line-height: 42px;
+        }
+
+        .content .det-block .det-top span {
+            padding-left: 30px;
+        }
+
+            .content .det-block .det-top span:hover {
+                color: #4da74d
+            }
+
+    .content .det-block .det-bottom {
+        padding: 10px;
+    }
+
+        .content .det-block .det-bottom img {
+            width: 47%;
+            float: right;
+            margin-left: 15px;
+            margin-bottom: 10px;
+        }
+
+        .content .det-block .det-bottom p.phone {
+            font-size: 18px;
+            color: #4da74d
+        }
+
+.content .social-contact {
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 4px 18px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 30px
+}
+
+    .content .social-contact a {
+        cursor: pointer;
+        color: #777
+    }
+
+        .content .social-contact a:hover {
+            color: #4da74d
+        }
+
+.content .follow button i {
+    color: #777
+}
+
+.content .advBox {
+    width: 100%;
+    min-height: 200px;
+    padding: 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 25px;
+}
+
+.content .adv-images img {
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 10px
+}
+
+@media(max-width:597px) {
+    .content .det-block .det-bottom img {
+        width: 100%;
+        float: none
+    }
+}
+
+/* Featured Advertise */
+.content .feat-adv-blck {
+    margin-bottom: 30px
+}
+
+    .content .feat-adv-blck h3 {
+        font-weight: bold;
+        margin-top: 0;
+        color: #4da74d
+    }
+
+    /* Notifications */
+    .content .feat-adv-blck ul {
+        list-style-type: circle;
+    }
+
+        .content .feat-adv-blck ul li {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+/* Add Rate */
+.content .addRate {
+    font-size: 16px;
+    margin-right: 15px;
+}
+
+    .content .addRate ul {
+        list-style-type: disc;
+        margin-top: 12px
+    }
+
+        .content .addRate ul li {
+            margin-bottom: 5px
+        }
+
+.content .rateSlct {
+    width: 30%;
+    margin-bottom: 20px
+}
+
+@media(max-width:1000px) {
+    .content .rateSlct {
+        width: 50%;
+    }
+}
+
+/* Profile */
+.content .profile_info {
+    margin: 25px 15px;
+}
+
+    .content .profile_info button.full {
+        width: 100%
+    }
+
+.content .all-rates {
+    margin-right: 15px;
+}

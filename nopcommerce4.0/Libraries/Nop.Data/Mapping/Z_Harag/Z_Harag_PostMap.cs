@@ -1,4 +1,4 @@
-﻿using Nop.Core.Domain.Z_Consultant;
+﻿using Nop.Core.Domain.Z_Harag;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Nop.Data.Mapping.Z_Harag
 {
-    public class Z_Harag_PostMap: NopEntityTypeConfiguration<Z_Consultant_Post>
+    public class Z_Harag_PostMap: NopEntityTypeConfiguration<Z_Harag_Post>
     {
         public Z_Harag_PostMap()
         {
@@ -28,21 +28,18 @@ namespace Nop.Data.Mapping.Z_Harag
             this.Property(p => p.LastCommentTime).IsOptional();
             this.Property(p => p.IsCommon).IsOptional();
 
-            this.HasRequired(p => p.Customer)
-                .WithMany(c => c.CustomersPosts)
-                .HasForeignKey(p => p.CustomerId);
+            //this.HasRequired(p => p.Customer)
+            //    .WithMany(c => c.CustomersPosts)
+            //    .HasForeignKey(p => p.CustomerId);
 
-            this.HasOptional(p => p.Consultant)
-                .WithMany(c => c.ConsultantsPosts)
-                .HasForeignKey(p => p.ConsultantId);
+         
+            //this.HasRequired(p => p.Category)
+            //    .WithMany(c => c.Posts)
+            //    .HasForeignKey(p => p.CategoryId);
 
-            this.HasRequired(p => p.Category)
-                .WithMany(c => c.Posts)
-                .HasForeignKey(p => p.CategoryId);
-
-            this.HasOptional(p => p.SubCategory)
-                .WithMany(s => s.Posts)
-                .HasForeignKey(p => p.SubCategoryId);
+            //this.HasOptional(p => p.SubCategory)
+            //    .WithMany(s => s.Posts)
+            //    .HasForeignKey(p => p.SubCategoryId);
              
         }
     }
