@@ -1,4 +1,4 @@
-﻿using Nop.Core.Domain.Z_Consultant;
+﻿using Nop.Core.Domain.Z_Harag;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Nop.Data.Mapping.Z_Harag
 {
-    public class Z_Harag_CommentMap : NopEntityTypeConfiguration<Z_Consultant_Comment>
+    public class Z_Harag_CommentMap : NopEntityTypeConfiguration<Z_Harag_Comment>
     {
         public Z_Harag_CommentMap()
         {
@@ -19,17 +19,15 @@ namespace Nop.Data.Mapping.Z_Harag
             this.Property(c => c.DateUpdated).IsOptional();
             this.Property(c => c.CommentedBy).IsRequired().HasMaxLength(100);
 
-            this.HasRequired(c => c.Post)
-                .WithMany(p => p.Comments)
+            this.HasRequired(c => c.Z_Harag_Post)
+                .WithMany(p => p.Z_Harag_Comment)
                 .HasForeignKey(c => c.PostId);
 
             this.HasOptional(c => c.Customer)
-                .WithMany(p => p.CustomersComments)
+                .WithMany(p => p.Z_Harag_Comment)
                 .HasForeignKey(c => c.CustomerId);
 
-            this.HasOptional(c => c.Consultant)
-                .WithMany(p => p.ConsultantsComments)
-                .HasForeignKey(c => c.ConsultantId);
+           
 
         }
     }

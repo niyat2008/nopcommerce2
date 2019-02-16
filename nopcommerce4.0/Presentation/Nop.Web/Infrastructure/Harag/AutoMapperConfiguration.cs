@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Nop.Core.Domain.Z_Consultant;
+using Nop.Core.Domain.Z_Harag;
 using Nop.Core.Infrastructure.Mapper;
 using Nop.Web.Models.Harag.Category;
 using Nop.Web.Models.Harag.Comment;
@@ -16,7 +16,7 @@ namespace Nop.Web.Infrastructure.Harag
     {
         public AutoMapperConfiguration()
         {
-            CreateMap<Z_Consultant_Category, CategoryModel>()
+            CreateMap<Z_Harag_Category, CategoryModel>()
                 .ForMember(dest => dest.CustomProperties, mo => mo.Ignore())
                 .ForMember(dest => dest.Id,
                     mo => mo.MapFrom(src => src.Id))
@@ -24,7 +24,7 @@ namespace Nop.Web.Infrastructure.Harag
                     mo => mo.MapFrom(src => src.Name));
 
 
-            //CreateMap<Z_Consultant_Category, CategoryWithSubCategoriesModel>()
+            //CreateMap<Z_Harag_Category, CategoryWithSubCategoriesModel>()
             //    .ForMember(dest => dest.CustomProperties, mo => mo.Ignore())
             //    .ForMember(dest => dest.Id,
             //        mo => mo.MapFrom(src => src.Id))
@@ -34,14 +34,14 @@ namespace Nop.Web.Infrastructure.Harag
             //        mo => mo.MapFrom(src => src.SubCategories));
 
 
-            //CreateMap<Z_Consultant_SubCategory, SubCategoryModel>()
+            //CreateMap<Z_Harag_SubCategory, SubCategoryModel>()
                 //.ForMember(dest => dest.CustomProperties, mo => mo.Ignore())
                 //.ForMember(dest => dest.Id,
                 //    mo => mo.MapFrom(src => src.Id))
                 //.ForMember(dest => dest.Name,
                 //    mo => mo.MapFrom(src => src.Name));
 
-            CreateMap<Z_Consultant_Post, PostModel>()
+            CreateMap<Z_Harag_Post, PostModel>()
                    .ForMember(dest => dest.CustomProperties, mo => mo.Ignore())
                    .ForMember(dest => dest.Id,
                     mo => mo.MapFrom(src => src.Id))
@@ -61,19 +61,19 @@ namespace Nop.Web.Infrastructure.Harag
                     mo => mo.MapFrom(src => src.IsDispayed))
                     .ForMember(dest => dest.IsReserved,
                     mo => mo.MapFrom(src => src.IsReserved))
-                    .ForMember(dest => dest.IsSetToSubCategory,
-                    mo => mo.MapFrom(src => src.IsSetToSubCategory))
+             
                     .ForMember(dest => dest.Text,
                     mo => mo.MapFrom(src => src.Text))
                     .ForMember(dest => dest.Title,
                     mo => mo.MapFrom(src => src.Title))
-                    .ForMember(dest => dest.SubCategoryId,
-                    mo => mo.MapFrom(src => src.SubCategoryId))
                     .ForMember(dest => dest.PostOwner,
                     mo => mo.MapFrom(src => src.Customer.Username));
 
+            //.ForMember(dest => dest.SubCategoryId,
+            //        mo => mo.MapFrom(src => src.SubCategoryId))
 
-            CreateMap<Z_Consultant_Post, PostWithFilesModel>()
+
+            CreateMap<Z_Harag_Post, PostWithFilesModel>()
                    .ForMember(dest => dest.CustomProperties, mo => mo.Ignore())
                    .ForMember(dest => dest.Id,
                     mo => mo.MapFrom(src => src.Id))
@@ -93,20 +93,19 @@ namespace Nop.Web.Infrastructure.Harag
                     mo => mo.MapFrom(src => src.IsDispayed))
                     .ForMember(dest => dest.IsReserved,
                     mo => mo.MapFrom(src => src.IsReserved))
-                    .ForMember(dest => dest.IsSetToSubCategory,
-                    mo => mo.MapFrom(src => src.IsSetToSubCategory))
+                   
                     .ForMember(dest => dest.Text,
                     mo => mo.MapFrom(src => src.Text))
                     .ForMember(dest => dest.Title,
                     mo => mo.MapFrom(src => src.Title))
-                    .ForMember(dest => dest.SubCategoryId,
-                    mo => mo.MapFrom(src => src.SubCategoryId))
                     .ForMember(dest => dest.PostOwner,
                     mo => mo.MapFrom(src => src.Customer.Username));
 
 
+            //.ForMember(dest => dest.SubCategoryId,
+            //        mo => mo.MapFrom(src => src.SubCategoryId))
 
-            CreateMap<Z_Consultant_Comment, CommentModel>()
+            CreateMap<Z_Harag_Comment, CommentModel>()
                    .ForMember(dest => dest.CustomProperties, mo => mo.Ignore())
                    .ForMember(dest => dest.Id,
                     mo => mo.MapFrom(src => src.Id))

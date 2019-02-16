@@ -13,6 +13,9 @@ namespace Nop.Data.Mapping.Z_Harag
         {
             this.ToTable("Z_Harag_BlackList");
             this.HasKey(b => b.Id);
+            this.HasOptional(b => b.Customer).WithMany(c => c.Z_Harag_BlackList)
+                .HasForeignKey(b => b.CustomerId);
+            this.Property(b => b.Phone).IsOptional().HasMaxLength(50);
             
         }
     }

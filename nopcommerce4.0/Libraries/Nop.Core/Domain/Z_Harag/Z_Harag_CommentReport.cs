@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nop.Core.Domain.Customers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,8 @@ namespace Nop.Core.Domain.Z_Harag
         public Nullable<int> CommentId { get; set; }
         public string ReportTitle { get; set; }
         public Nullable<byte> ReportCategory { get; set; }
+        public Customer Z_Harag_Customer { get; set; }
+        public Z_Harag_Comment Z_Harag_Comment { get; set; }
 
     }
 }
