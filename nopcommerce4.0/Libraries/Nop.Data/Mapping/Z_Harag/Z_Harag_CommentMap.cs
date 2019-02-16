@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nop.Data.Mapping.Z_Consultant
+namespace Nop.Data.Mapping.Z_Harag
 {
     public class Z_Harag_CommentMap : NopEntityTypeConfiguration<Z_Consultant_Comment>
     {
         public Z_Harag_CommentMap()
         {
-            this.ToTable("Z_Consultant_Comment");
+            this.ToTable("Z_Harag_Comment");
             this.HasKey(c => c.Id);
 
             this.Property(c => c.Text).IsRequired().HasMaxLength(4000);
@@ -30,7 +30,6 @@ namespace Nop.Data.Mapping.Z_Consultant
             this.HasOptional(c => c.Consultant)
                 .WithMany(p => p.ConsultantsComments)
                 .HasForeignKey(c => c.ConsultantId);
-             
 
         }
     }

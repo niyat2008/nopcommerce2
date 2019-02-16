@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using Nop.Core.Domain.Common;
 using Nop.Core.Domain.Orders;
 using Nop.Core.Domain.Z_Consultant;
+using Nop.Core.Domain.Z_Harag;
 
 namespace Nop.Core.Domain.Customers
 {
@@ -28,6 +29,7 @@ namespace Nop.Core.Domain.Customers
             ConsultantsComments = new Collection<Z_Consultant_Comment>();
             ConsultantsPosts = new Collection<Z_Consultant_Post>();
             CustomersPosts = new Collection<Z_Consultant_Post>();
+            CustomerReports = new Collection<Z_Harag_Reports>();
         }
 
         /// <summary>
@@ -195,7 +197,7 @@ namespace Nop.Core.Domain.Customers
         public ICollection<Z_Consultant_Comment> ConsultantsComments { get; set; }
         public ICollection<Z_Consultant_Post> CustomersPosts { get; set; }
         public ICollection<Z_Consultant_Post> ConsultantsPosts { get; set; }
-
+        public ICollection<Z_Harag_Reports> CustomerReports { get; set; }
 
 
         /// <summary>

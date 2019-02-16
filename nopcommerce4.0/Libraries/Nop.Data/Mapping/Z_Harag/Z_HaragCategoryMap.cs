@@ -1,17 +1,18 @@
 ﻿using Nop.Core.Domain.Z_Consultant;
+using Nop.Core.Domain.Z_Harag;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nop.Data.Mapping.Z_Consultant
+namespace Nop.Data.Mapping.Z_Harag
 {
-    public class Z_HaragCategoryMap: NopEntityTypeConfiguration<Z_Consultant_Category>
+    public class Z_HaragCategoryMap: NopEntityTypeConfiguration<Z_Harag_Category>
     {
         public Z_HaragCategoryMap()
         {
-            this.ToTable("Z_Consultant_Category");
+            this.ToTable("Z_Harag_Category");
             this.HasKey(c => c.Id);
 
             this.Property(c => c.Name).IsRequired().HasMaxLength(400);

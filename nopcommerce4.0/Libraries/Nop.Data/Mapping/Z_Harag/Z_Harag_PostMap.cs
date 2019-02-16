@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nop.Data.Mapping.Z_Consultant
+namespace Nop.Data.Mapping.Z_Harag
 {
     public class Z_Harag_PostMap: NopEntityTypeConfiguration<Z_Consultant_Post>
     {
         public Z_Harag_PostMap()
         {
-            this.ToTable("Z_Consultant_Post");
+            this.ToTable("Z_Harag_Post");
             this.HasKey(p => p.Id);
 
             this.Property(p => p.Text).IsRequired().HasMaxLength(4000);
