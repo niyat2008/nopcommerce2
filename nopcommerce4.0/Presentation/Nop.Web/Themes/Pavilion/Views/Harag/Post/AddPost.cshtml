@@ -1,0 +1,221 @@
+﻿@{
+    Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
+}
+
+
+@{
+    string getCustomerPosts = "";
+    if (@ViewBag.UserRole == "Registered")
+    {
+        getCustomerPosts = "getCustomerPosts()";
+    }
+    else if (@ViewBag.UserRole == "Consultant")
+    {
+        getCustomerPosts = "getConsultantPosts()";
+    }
+    else if (@ViewBag.UserRole == "vistor")
+    {
+        getCustomerPosts = "login()";
+    }
+}
+ 
+
+
+@*@if (ViewBag.UserRole == "Registered")
+{
+    if (@ViewBag.CanAddNewPost == true)
+    {*@ 
+            <h3>اضافه اعلان جديد</h3>
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="add-adverse">
+                        <div class="col-md-3">
+                            <label>عنوان الاعلان</label> <br>
+                            <input type="text" class="form-control" placeholder="العنوان">
+                        </div>
+                        <div class="col-md-3">
+                            <label> اختر ..... </label> <br>
+                            <select class="form-control" placeholder="اختر ..... ">
+                                <option>اختيار 1 </option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label> اختر ..... </label> <br>
+                            <select class="form-control" placeholder="اختر ..... ">
+                                <option>اختيار 1 </option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>وسيلة الاتصال</label> <br>
+                            <input type="text" class="form-control" placeholder="0134578888">
+                        </div>
+                        <div class="col-md-6">
+                            <label>نص الاعلان</label> <br>
+                            <textarea class="form-control txtArea" placeholder="نص الاعلان" rows="7"></textarea>
+                        </div>
+                        <div class="col-xs-12">
+                            <p class="file">
+                                <input type="file" name="file" accept="image/*" id="file">
+                                <label for="file">تحميل الصور</label>
+                            </p>
+                        </div>
+                    </form>
+                    <div class="col-md-12">
+                        <button class="btn btn-default add" type="button">اضافة الاعلان للموقع</button>
+                    </div>
+                </div>
+            </div>
+       
+    @*}
+    else
+    {
+        <div id="AddPost">
+
+            <div class="row">
+                <div class="col-md-9 col-lg-offset-2">
+                    <form id="addPostForm">
+                        <div class="form-group" style="margin-bottom:5%;">
+                            <h3>لا يمكنك اضافه استشاره الا بعد اغلاق جميع الاستشارات المفتوحه.</h3>
+                        </div> 
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    } 
+}*@
+
+
+
+@*<script type="text/javascript">
+
+
+        function deleteFile(index) {
+
+            Files.splice(+index, 1);
+            $("#imgno" + index).remove();
+        }
+
+
+        $(document).ready(function () {
+
+            $.ajax({
+                type: 'GET',
+                url: '@Url.RouteUrl("Consultant.Post.GetCategories")',
+
+                success: function (data) {
+                    $("#categoryList").html(data);
+                }
+
+            });
+
+
+            function convertToBase64(file) {
+                var image;
+                var fileReader = new FileReader();
+
+                fileReader.readAsDataURL(file);
+                fileReader.onloadend = (e) => {
+                    image = fileReader.result;
+                    var indexofcomma = image.indexOf(",");
+                    var imagebase64 = image.substring(indexofcomma + 1);
+                    Files.push(imagebase64);
+                    var index = Files.length - 1;
+
+                    $("#images").append("<div  class='col-xs-4 img_blck' style='padding-right:0px' id='imgno" + index + "'>" +
+                        "<img src='" + image + "' width='100' height='60' />" +
+                        "<div class='overlay' onclick='deleteFile(" + index + ")'>" +
+                        "<i class='fa fa-trash imageli' ></i>" +
+                        "</div>");
+                };
+            }
+
+
+
+            $("#file").change(function (event) {
+
+                if (Files.length >= 5) {
+                    alert("لقد تجاوزت العدد المسموح من الصور ,مسموح بخمس صور فقط");
+                }
+                else {
+
+                    if (event.target.files && event.target.files[0]) {
+                        for (var i = 0; i < event.target.files.length; i++) {
+                            convertToBase64(event.target.files[i]);
+                        }
+                    }
+                }
+            });
+
+        });
+
+
+        var Files = [];
+
+
+        $("#addPostForm").submit(function (event) {
+
+            /* stop form from submitting normally */
+            event.preventDefault();
+
+
+            var CategoryId = $('#categoryList').find(":selected").val();
+
+            var Title = $('#postTitle').val();
+            var Text = $('#postText').val();
+
+
+            if (CategoryId <= 0) {
+                alert("فضلا قم باختيار التصنيف");
+            }
+            else if (Title === null || Title === "") {
+                alert("قم بكتابة عنوان الاستشارة");
+            }
+            else if (!Title.replace(/\s/g, '').length) {
+                alert("قم بكتابة عنوان الاستشارة");
+            }
+            else if (Text === null || Text === "") {
+                alert("فضلا قم بشرح المشكلة الخاصة بك ");
+            }
+            else if (!Text.replace(/\s/g, '').length) {
+                alert("فضلا قم بشرح المشكلة الخاصة بك ");
+            }
+            else {
+
+
+                var postForPostModel = {
+                    Text: Text,
+                    Title: Title,
+                    CategoryId: CategoryId,
+                    Files: Files
+                };
+
+
+                $.ajax({
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    type: "POST",
+                    url: '@Url.RouteUrl("Consultant.Post.AddPostAjax")',
+                    dataType: 'json',
+                    data: JSON.stringify(postForPostModel),
+                    complete: function (data) {
+                        if (data.status == 200) {
+                            alert("تمت اضافة الاستئارة بنجاح يمكنك الذهاب الى استشاراتى لرؤية الاستشاراة");
+                        }
+                        else {
+                            alert("حدث خطأ ما تأكد من الاتصال بالانترنت");
+                        }
+                    }
+                });
+
+                event.preventDefault();
+            }
+
+        });
+
+
+
+
+</script>*@

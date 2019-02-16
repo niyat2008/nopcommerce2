@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Nop.Core.Domain.Z_Harag
 {
-    public partial class City:BaseEntity
+    public partial class HaragCity:BaseEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public City()
+        public HaragCity()
         {
             this.Z_Harag_Post = new HashSet<Z_Harag_Post>();
         }

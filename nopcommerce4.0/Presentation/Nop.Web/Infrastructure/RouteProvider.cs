@@ -18,15 +18,23 @@ namespace Nop.Web.Infrastructure
         /// <param name="routeBuilder">Route builder</param>
         public void RegisterRoutes(IRouteBuilder routeBuilder)
         {
+            // ----------------  Harag ------------------------------
+ 
+            routeBuilder.MapRoute("Harag.Home", "Harag",
+            new { controller = "HaragHome", action = "Home" });
 
+            routeBuilder.MapRoute("Harag.Post.AddNewPost", "Harag/Post/New",
+            new { controller = "Post", action = "HaragAddPost" });
 
+            routeBuilder.MapRoute("Harag.Post.PostDetails", "Harag/Post",
+            new { controller = "Post", action = "PostDetails" });
             //----------------- Consultant----------------------------
 
 
             routeBuilder.MapRoute("Consultant.ConsultantHome", "Consultations",
             new { controller = "ConsultantHome", action = "Home" });
-            
 
+            
             routeBuilder.MapRoute("Consultant.Navbar", "Consultations/Consultant/Navbar",
             new { controller = "ConsultantHome", action = "Navbar" });
 

@@ -1,86 +1,63 @@
 ﻿
 
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Tajawal" rel="stylesheet">
-<script src="~/js/Consultant/jquery.min.js"></script>
-<link href="~/css/Consultant/bootstrap.min.css" rel="stylesheet" />
-<script src="~/js/Consultant/bootstrap.min.js"></script>
+<head>
+    <link href="~/css/Consultant/styles.rtl.css" rel="stylesheet" />
+    <link href="~/css/Consultant/1000.rtl.css" rel="stylesheet" />
+
+    <link href="~/css/Consultant/theme.custom-1.css" rel="stylesheet" />
+    <link href="~/css/Consultant/theme.custom-2.css" rel="stylesheet" />
+    <script src="~/js/Consultant/main.js"></script>
+    <script src="~/js/Consultant/jquery.nicescroll.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="~/css/Consultant/mobile.css" rel="stylesheet" />
+
+    <script src="~/js/Consultant/lightbox.js"></script>
+    <link href="~/css/Consultant/lightbox.css" rel="stylesheet" />
+
+    <link href="~/css/Consultant/Header.css" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Tajawal" rel="stylesheet">
+    <script src="~/js/Consultant/jquery.min.js"></script>
+    <link href="~/css/Consultant/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/js/Consultant/bootstrap.min.js"></script>
+     
+    <link href="~/css/Consultant/bootstrap-rtl.min.css" rel="stylesheet" />
+    <link href="~/fonts/Consultant/font-awesome.min.css" rel="stylesheet" />
 
 
-<link href="~/css/Consultant/bootstrap-rtl.min.css" rel="stylesheet" />
-<link href="~/fonts/Consultant/font-awesome.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <title>Harag</title>
+    <link href="~/Themes/Pavilion/Content/css/pages.css" rel="stylesheet" />
 
-
-<link href="~/css/Consultant/ConsultantCss.css" rel="stylesheet" />
-<link href="~/css/Consultant/styles.rtl.css" rel="stylesheet" />
-<link href="~/css/Consultant/1000.rtl.css" rel="stylesheet" /> 
-
-<link href="~/css/Consultant/Home.css" rel="stylesheet" />
-<link href="~/css/Consultant/theme.custom-1.css" rel="stylesheet" />
-<link href="~/css/Consultant/theme.custom-2.css" rel="stylesheet" />
-<script src="~/js/Consultant/main.js"></script>
-<script src="~/js/Consultant/jquery.nicescroll.min.js"></script>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link href="~/css/Consultant/mobile.css" rel="stylesheet" />
-
-<script src="~/js/Consultant/lightbox.js"></script>
-<link href="~/css/Consultant/lightbox.css" rel="stylesheet" />
-
-<link href="~/css/Consultant/Header.css" rel="stylesheet" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Consultations</title>
-
-<style type="text/css">
-    .register {
-        color: green !important;
-    }
-
-    ul {
-        display: block;
-        list-style-type: none !important;
-    }
-
-    .consultantlink:hover {
-        text-decoration: none;
-    }
-
-    .btndarckgreen:hover {
-        background-color: darkgreen !important;
-    }
-</style>
-
-
+    @*<link href="~/Themes/Pavilion/Content/css/style.css" rel="stylesheet" />*@
+</head>
 <!-- Header -->
 <!-- Top Bar -->
 <section class="top_bar">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3"></div>
-                <div class="col-md-1">
-                    <div id="admin-link-js-ajax" style="color: white"></div>
-                    @*<a href="/Consultations/Admin">اداره الاستشارات</a>*@
-                </div>
-                <div class="col-md-4">
-                    <div class="text-center">
-                        <span>@Html.RouteLink("سوق", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-                        <span class="active">@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-                        <span  >@Html.RouteLink("حراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-
-                    </div>
-                </div>
-                <div class="col-md-2" id="userInfo"> </div>
-                <div class="col-md-2"> </div>
+            <div class="col-md-1">
+                <div id="admin-link-js-ajax" style="color: white"></div>
+                @*<a href="/Consultations/Admin">اداره الاستشارات</a>*@
             </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <span>@Html.RouteLink("سوق", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                    <span>@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                    <span class="active">@Html.RouteLink("حراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                    @*<span>حراج</span>*@
+                </div>
+            </div>
+            <div class="col-md-2" id="userInfo"></div>
+            <div class="col-md-2"> </div>
         </div>
+    </div>
 </section>
-
-
-<div style="background-color:#e8ebee;padding:0.3px;padding-top:6px;"><p id="messagep" style="text-align:center;">خدمة الاستشارات هى خدمة مجانية تقدم من قبل موقع المزراع لمساعدة حل المشاكل الزراعية بواسطة مستشارين مختصين فى هذا المجال.</p></div>
-
 
 <!-- Search -->
 <section class="search">
@@ -110,26 +87,19 @@
 <div id="Nav"></div>
 
 
-
+<link href="~/Themes/Pavilion/Content/css/pages.css" rel="stylesheet" />
 <div class="home" id="homeBody">
     <div class="container-fluid">
-        <div class="col-md-2"></div>
-
-        <div class="col-md-2" id="threebuttons" style="margin-bottom:5%;">
-
-        </div>
-
-        <div class="col-md-6">
+        @*<div class="col-md-2"></div>
+            <div class="col-md-2" id="threebuttons" style="margin-bottom:5%;">
+            </div>*@
+        <div class="col-md-12">
             <div class="allPage" id="allpage">
                 @RenderBody()
                 <div id="posts"></div>
-                <not-found *ngIf="!posts.length"></not-found>
-                <tw-pagination *ngIf="posts?.length" [numberOfPages]="totalNumberOfPages" (pageChanged)="getClosedPost($event)"></tw-pagination>
             </div>
         </div>
-        <div class="col-md-2"></div>
-
-
+        @*<div class="col-md-2"></div>*@
     </div>
 </div>
 <div class="footer">
@@ -222,7 +192,7 @@
             }
         });
 
-        
+
         $.ajax({
             type: 'GET',
             url: '@Url.RouteUrl("Consultant.User.GetAdminLink")',
