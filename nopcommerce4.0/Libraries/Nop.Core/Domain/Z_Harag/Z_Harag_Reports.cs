@@ -14,8 +14,8 @@ namespace Nop.Core.Domain.Z_Harag
         public Nullable<int> PostId { get; set; }
         public string ReportTitle { get; set; }
 
-        public virtual Customer Customer { get; set; }
-        public virtual Z_Harag_Post Z_Harag_Post { get; set; }
+        public  Customer Customer { get; set; }
+        public  Z_Harag_Post Z_Harag_Post { get; set; }
 
     }
 }
