@@ -59,19 +59,21 @@
 <section class="top_bar">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4">
-
-            </div>
-            <div class="col-md-4">
-                <div class="text-center">
-                    <span>@Html.RouteLink("سوق", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-                    <span class="active">@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-                    @*<span>حراج</span>*@
+            <div class="col-md-3"></div>
+                <div class="col-md-1">
+                    <div id="admin-link-js-ajax" style="color: white"></div>
+                    @*<a href="/Consultations/Admin">اداره الاستشارات</a>*@
                 </div>
-            </div> 
-            <div class="col-md-2" id="userInfo"> </div>
-            <div class="col-md-2"> </div>
-        </div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <span>@Html.RouteLink("سوق", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                        <span class="active">@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                        @*<span>حراج</span>*@
+                    </div>
+                </div>
+                <div class="col-md-2" id="userInfo"> </div>
+                <div class="col-md-2"> </div>
+            </div>
         </div>
 </section>
 
@@ -219,6 +221,15 @@
             }
         });
 
+        
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Consultant.User.GetAdminLink")',
+
+            success: function (data) {
+                $("#admin-link-js-ajax").html(data);
+            }
+        });
 
         $.ajax({
             type: 'GET',

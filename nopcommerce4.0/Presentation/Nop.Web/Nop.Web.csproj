@@ -206,6 +206,9 @@
     <Content Update="Themes\Pavilion\Views\Consultant\Post\PostsAjax.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Themes\Pavilion\Views\Consultant\User\_AdminLink.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Themes\Pavilion\Views\Shared\Components\OrderSummar\Default.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

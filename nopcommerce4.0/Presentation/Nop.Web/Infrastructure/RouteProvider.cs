@@ -29,8 +29,13 @@ namespace Nop.Web.Infrastructure
 
             routeBuilder.MapRoute("Consultant.Navbar", "Consultations/Consultant/Navbar",
             new { controller = "ConsultantHome", action = "Navbar" });
+
             routeBuilder.MapRoute("Consultant.User.GetUserInfo", "Consultations/User/GetUserInfo",
             new { controller = "User", action = "GetUserInfo" });
+
+            routeBuilder.MapRoute("Consultant.User.GetAdminLink", "Consultations/User/GetAdminLink",
+            new { controller = "User", action = "GetAdminLink" });
+
             routeBuilder.MapRoute("Consultant.User.GetUserRoles", "Consultations/User/GetUserRoles",
             new { controller = "User", action = "GetUserRoles" });
             
@@ -145,7 +150,7 @@ new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
             routeBuilder.MapRoute("Consultant.Admin.GetCustomers", "Consultations/Admin/Customer/GetCustomers",
                new { controller = "Customer", action = "GetMembers" });
 
-            //Get Members Ajax
+            //Get Members Ajax Consultant.User.GetAdminLink
             routeBuilder.MapRoute("Consultant.Admin.GetCustomersAjax", "Consultations/Admin/Customer/GetCustomersAjax",
                new { controller = "Customer", action = "GetMembersAjax" });
             //Get GetOnline Members 

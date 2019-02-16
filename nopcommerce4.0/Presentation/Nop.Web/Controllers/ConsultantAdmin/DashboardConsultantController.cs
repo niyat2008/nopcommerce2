@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Nop.Core.Domain.Customers;
+using Nop.Services.Z_Consultant.Helpers;
 using Nop.Services.Z_ConsultantAdmin;
 using Nop.Services.Z_ConsultantAdmin.Customers;
 using Nop.Services.Z_ConsultantAdmin.Post;
@@ -37,6 +39,12 @@ namespace Nop.Web.Controllers.ConsultantِAdmin
 
         public virtual IActionResult Home()
         {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+                return Forbid();
             var posts = _postService.GetPostsNumber();
             var members = _customer.GetMembersNumber();
             var consultants = _customer.GetConsultantsNumber();

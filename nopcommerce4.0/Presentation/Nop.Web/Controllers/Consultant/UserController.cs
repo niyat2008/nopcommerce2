@@ -44,7 +44,21 @@ namespace Nop.Web.Controllers.Consultant
         }
 
 
+        [HttpGet]
+        public IActionResult GetAdminLink()
+        {
+            UserModel model = new UserModel();
 
+            if (_workContext.CurrentCustomer.IsRegistered())
+            {
+                if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+                    return PartialView("~/Themes/Pavilion/Views/Consultant/User/_AdminLink.cshtml", 1);
+            }
+            return PartialView("~/Themes/Pavilion/Views/Consultant/User/_AdminLink.cshtml", 0);
+        }
+
+
+        
         [HttpGet]
         public IActionResult GetUserRoles()
         {

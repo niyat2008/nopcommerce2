@@ -1,0 +1,1402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_A409B4_nop4Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="EnName" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="ProvinceId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerGuid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Email" Type="nvarchar" MaxLength="1000" />
+          <Property Name="EmailToRevalidate" Type="nvarchar" MaxLength="1000" />
+          <Property Name="AdminComment" Type="nvarchar(max)" />
+          <Property Name="IsTaxExempt" Type="bit" Nullable="false" />
+          <Property Name="AffiliateId" Type="int" Nullable="false" />
+          <Property Name="VendorId" Type="int" Nullable="false" />
+          <Property Name="HasShoppingCartItems" Type="bit" Nullable="false" />
+          <Property Name="RequireReLogin" Type="bit" Nullable="false" />
+          <Property Name="FailedLoginAttempts" Type="int" Nullable="false" />
+          <Property Name="CannotLoginUntilDateUtc" Type="datetime" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
+          <Property Name="IsSystemAccount" Type="bit" Nullable="false" />
+          <Property Name="SystemName" Type="nvarchar" MaxLength="400" />
+          <Property Name="LastIpAddress" Type="nvarchar(max)" />
+          <Property Name="CreatedOnUtc" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginDateUtc" Type="datetime" />
+          <Property Name="LastActivityDateUtc" Type="datetime" Nullable="false" />
+          <Property Name="RegisteredInStoreId" Type="int" Nullable="false" />
+          <Property Name="BillingAddress_Id" Type="int" />
+          <Property Name="ShippingAddress_Id" Type="int" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Neighborhood">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArName" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="EnName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CityId" Type="int" Nullable="false" />
+          <Property Name="neCoordinates" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="swCoordinates" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Z_Harag_BlackList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Z_Harag_Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime2" Precision="7" />
+          <Property Name="Description" Type="nvarchar" MaxLength="4000" />
+        </EntityType>
+        <EntityType Name="Z_Harag_Comment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="DateCreated" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="PostId" Type="int" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="CommentedBy" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A409B4_nop4.dbo.Z_Harag_CommentReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Z_Harag_CommentReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ReportDescription" Type="nvarchar" MaxLength="550" />
+          <Property Name="ReporterUser" Type="int" />
+          <Property Name="CommentId" Type="int" />
+          <Property Name="ReportTitle" Type="nvarchar" MaxLength="250" />
+          <Property Name="ReportCategory" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Z_Harag_Favorite">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+        </EntityType>
+        <EntityType Name="Z_Harag_Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostId" Type="int" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="Message" Type="nvarchar" MaxLength="1200" />
+          <Property Name="CreatedTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Z_Harag_Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NotificationType" Type="tinyint" />
+          <Property Name="NotificationTime" Type="datetime" />
+          <Property Name="NotificationContent" Type="nvarchar" MaxLength="550" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="PostId" Type="int" />
+          <Property Name="OwnerId" Type="int" />
+        </EntityType>
+        <EntityType Name="Z_Harag_Photo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostId" Type="int" Nullable="false" />
+          <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Z_Harag_Post">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="CityId" Type="int" />
+          <Property Name="NeighborhoodId" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="PaymentMethod" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="100" />
+          <Property Name="Rate" Type="int" />
+          <Property Name="IsSetToSubCategory" Type="bit" Nullable="false" />
+          <Property Name="IsDispayed" Type="bit" Nullable="false" />
+          <Property Name="IsReserved" Type="bit" Nullable="false" />
+          <Property Name="IsCommon" Type="bit" />
+          <Property Name="IsClosed" Type="bit" Nullable="false" />
+          <Property Name="IsAnswered" Type="bit" Nullable="false" />
+          <Property Name="LastCommentTime" Type="datetime2" Precision="7" />
+          <Property Name="DateCreated" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="DateUpdated" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Z_Harag_Rate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="AdviceDeal" Type="bit" />
+          <Property Name="IsBuyDone" Type="bit" />
+          <Property Name="BuyTime" Type="date" />
+          <Property Name="PostId" Type="int" />
+        </EntityType>
+        <EntityType Name="Z_Harag_Reports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportDescription" Type="nvarchar" MaxLength="550" />
+          <Property Name="ReporterUser" Type="int" />
+          <Property Name="PostId" Type="int" />
+          <Property Name="ReportTitle" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="FK_Z_Harag_BlackList_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_BlackList" Type="Self.Z_Harag_BlackList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_BlackList">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Comment_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_Comment" Type="Self.Z_Harag_Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Comment">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Comment_Customer1">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_Comment" Type="Self.Z_Harag_Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Comment">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Comment_Customer2">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_Comment" Type="Self.Z_Harag_Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Comment">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Comment_Z_Harag_Post">
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="1" />
+          <End Role="Z_Harag_Comment" Type="Self.Z_Harag_Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Comment">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_CommentReport_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_CommentReport" Type="Self.Z_Harag_CommentReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_CommentReport">
+              <PropertyRef Name="ReporterUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_CommentReport_Z_Harag_Comment">
+          <End Role="Z_Harag_Comment" Type="Self.Z_Harag_Comment" Multiplicity="0..1" />
+          <End Role="Z_Harag_CommentReport" Type="Self.Z_Harag_CommentReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Comment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_CommentReport">
+              <PropertyRef Name="CommentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Favorite_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_Favorite" Type="Self.Z_Harag_Favorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Favorite">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Favorite_Z_Harag_Post">
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="1" />
+          <End Role="Z_Harag_Favorite" Type="Self.Z_Harag_Favorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Favorite">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Favorite_Z_Harag_Post1">
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="1" />
+          <End Role="Z_Harag_Favorite" Type="Self.Z_Harag_Favorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Favorite">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Message_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_Message" Type="Self.Z_Harag_Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Message">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Message_Z_Harag_Message">
+          <End Role="Z_Harag_Message" Type="Self.Z_Harag_Message" Multiplicity="1" />
+          <End Role="Z_Harag_Message1" Type="Self.Z_Harag_Message" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Message">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Message1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Message_Z_Harag_Post">
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="0..1" />
+          <End Role="Z_Harag_Message" Type="Self.Z_Harag_Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Message">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Notification_Customer2">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_Notification" Type="Self.Z_Harag_Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Notification">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Notification_Customer3">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_Notification" Type="Self.Z_Harag_Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Notification">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Notification_Z_Harag_Post">
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="0..1" />
+          <End Role="Z_Harag_Notification" Type="Self.Z_Harag_Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Notification">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Photo_Z_Harag_Post">
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="1" />
+          <End Role="Z_Harag_Photo" Type="Self.Z_Harag_Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Photo">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Post_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Post">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Post_Neighborhood">
+          <End Role="Neighborhood" Type="Self.Neighborhood" Multiplicity="0..1" />
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Neighborhood">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Post">
+              <PropertyRef Name="NeighborhoodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Rate_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_Rate" Type="Self.Z_Harag_Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Rate">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Rate_Z_Harag_Post">
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="0..1" />
+          <End Role="Z_Harag_Rate" Type="Self.Z_Harag_Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Rate">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Reports_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_Reports" Type="Self.Z_Harag_Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Reports">
+              <PropertyRef Name="ReporterUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Reports_Z_Harag_Post">
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="0..1" />
+          <End Role="Z_Harag_Reports" Type="Self.Z_Harag_Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Reports">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_A409B4_nop4ModelStoreContainer">
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Neighborhood" EntityType="Self.Neighborhood" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Z_Harag_BlackList" EntityType="Self.Z_Harag_BlackList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Z_Harag_Category" EntityType="Self.Z_Harag_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Z_Harag_Comment" EntityType="Self.Z_Harag_Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Z_Harag_Favorite" EntityType="Self.Z_Harag_Favorite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Z_Harag_Message" EntityType="Self.Z_Harag_Message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Z_Harag_Notification" EntityType="Self.Z_Harag_Notification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Z_Harag_Photo" EntityType="Self.Z_Harag_Photo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Z_Harag_Post" EntityType="Self.Z_Harag_Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Z_Harag_Rate" EntityType="Self.Z_Harag_Rate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Z_Harag_Reports" EntityType="Self.Z_Harag_Reports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Z_Harag_CommentReport" EntityType="Self.Z_Harag_CommentReport" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Z_Harag_CommentReport].[Id] AS [Id], 
+    [Z_Harag_CommentReport].[ReportDescription] AS [ReportDescription], 
+    [Z_Harag_CommentReport].[ReporterUser] AS [ReporterUser], 
+    [Z_Harag_CommentReport].[CommentId] AS [CommentId], 
+    [Z_Harag_CommentReport].[ReportTitle] AS [ReportTitle], 
+    [Z_Harag_CommentReport].[ReportCategory] AS [ReportCategory]
+    FROM [dbo].[Z_Harag_CommentReport] AS [Z_Harag_CommentReport]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Z_Harag_BlackList_Customer" Association="Self.FK_Z_Harag_BlackList_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_BlackList" EntitySet="Z_Harag_BlackList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Comment_Customer" Association="Self.FK_Z_Harag_Comment_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_Comment" EntitySet="Z_Harag_Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Comment_Customer1" Association="Self.FK_Z_Harag_Comment_Customer1">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_Comment" EntitySet="Z_Harag_Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Comment_Customer2" Association="Self.FK_Z_Harag_Comment_Customer2">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_Comment" EntitySet="Z_Harag_Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Comment_Z_Harag_Post" Association="Self.FK_Z_Harag_Comment_Z_Harag_Post">
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+            <End Role="Z_Harag_Comment" EntitySet="Z_Harag_Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_CommentReport_Customer" Association="Self.FK_Z_Harag_CommentReport_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_CommentReport" EntitySet="Z_Harag_CommentReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_CommentReport_Z_Harag_Comment" Association="Self.FK_Z_Harag_CommentReport_Z_Harag_Comment">
+            <End Role="Z_Harag_Comment" EntitySet="Z_Harag_Comment" />
+            <End Role="Z_Harag_CommentReport" EntitySet="Z_Harag_CommentReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Favorite_Customer" Association="Self.FK_Z_Harag_Favorite_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_Favorite" EntitySet="Z_Harag_Favorite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Favorite_Z_Harag_Post" Association="Self.FK_Z_Harag_Favorite_Z_Harag_Post">
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+            <End Role="Z_Harag_Favorite" EntitySet="Z_Harag_Favorite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Favorite_Z_Harag_Post1" Association="Self.FK_Z_Harag_Favorite_Z_Harag_Post1">
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+            <End Role="Z_Harag_Favorite" EntitySet="Z_Harag_Favorite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Message_Customer" Association="Self.FK_Z_Harag_Message_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_Message" EntitySet="Z_Harag_Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Message_Z_Harag_Message" Association="Self.FK_Z_Harag_Message_Z_Harag_Message">
+            <End Role="Z_Harag_Message" EntitySet="Z_Harag_Message" />
+            <End Role="Z_Harag_Message1" EntitySet="Z_Harag_Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Message_Z_Harag_Post" Association="Self.FK_Z_Harag_Message_Z_Harag_Post">
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+            <End Role="Z_Harag_Message" EntitySet="Z_Harag_Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Notification_Customer2" Association="Self.FK_Z_Harag_Notification_Customer2">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_Notification" EntitySet="Z_Harag_Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Notification_Customer3" Association="Self.FK_Z_Harag_Notification_Customer3">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_Notification" EntitySet="Z_Harag_Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Notification_Z_Harag_Post" Association="Self.FK_Z_Harag_Notification_Z_Harag_Post">
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+            <End Role="Z_Harag_Notification" EntitySet="Z_Harag_Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Photo_Z_Harag_Post" Association="Self.FK_Z_Harag_Photo_Z_Harag_Post">
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+            <End Role="Z_Harag_Photo" EntitySet="Z_Harag_Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Post_City" Association="Self.FK_Z_Harag_Post_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Post_Neighborhood" Association="Self.FK_Z_Harag_Post_Neighborhood">
+            <End Role="Neighborhood" EntitySet="Neighborhood" />
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Rate_Customer" Association="Self.FK_Z_Harag_Rate_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_Rate" EntitySet="Z_Harag_Rate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Rate_Z_Harag_Post" Association="Self.FK_Z_Harag_Rate_Z_Harag_Post">
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+            <End Role="Z_Harag_Rate" EntitySet="Z_Harag_Rate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Reports_Customer" Association="Self.FK_Z_Harag_Reports_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_Reports" EntitySet="Z_Harag_Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Reports_Z_Harag_Post" Association="Self.FK_Z_Harag_Reports_Z_Harag_Post">
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+            <End Role="Z_Harag_Reports" EntitySet="Z_Harag_Reports" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_A409B4_nop4Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EnName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProvinceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Z_Harag_Post" Relationship="Self.FK_Z_Harag_Post_City" FromRole="City" ToRole="Z_Harag_Post" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerGuid" Type="Guid" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="EmailToRevalidate" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="AdminComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsTaxExempt" Type="Boolean" Nullable="false" />
+          <Property Name="AffiliateId" Type="Int32" Nullable="false" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" />
+          <Property Name="HasShoppingCartItems" Type="Boolean" Nullable="false" />
+          <Property Name="RequireReLogin" Type="Boolean" Nullable="false" />
+          <Property Name="FailedLoginAttempts" Type="Int32" Nullable="false" />
+          <Property Name="CannotLoginUntilDateUtc" Type="DateTime" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
+          <Property Name="IsSystemAccount" Type="Boolean" Nullable="false" />
+          <Property Name="SystemName" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="LastIpAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOnUtc" Type="DateTime" Nullable="false" />
+          <Property Name="LastLoginDateUtc" Type="DateTime" />
+          <Property Name="LastActivityDateUtc" Type="DateTime" Nullable="false" />
+          <Property Name="RegisteredInStoreId" Type="Int32" Nullable="false" />
+          <Property Name="BillingAddress_Id" Type="Int32" />
+          <Property Name="ShippingAddress_Id" Type="Int32" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Z_Harag_BlackList" Relationship="Self.FK_Z_Harag_BlackList_Customer" FromRole="Customer" ToRole="Z_Harag_BlackList" />
+          <NavigationProperty Name="Z_Harag_Comment" Relationship="Self.FK_Z_Harag_Comment_Customer" FromRole="Customer" ToRole="Z_Harag_Comment" />
+          <NavigationProperty Name="Z_Harag_Comment1" Relationship="Self.FK_Z_Harag_Comment_Customer1" FromRole="Customer" ToRole="Z_Harag_Comment" />
+          <NavigationProperty Name="Z_Harag_Comment2" Relationship="Self.FK_Z_Harag_Comment_Customer2" FromRole="Customer" ToRole="Z_Harag_Comment" />
+          <NavigationProperty Name="Z_Harag_CommentReport" Relationship="Self.FK_Z_Harag_CommentReport_Customer" FromRole="Customer" ToRole="Z_Harag_CommentReport" />
+          <NavigationProperty Name="Z_Harag_Favorite" Relationship="Self.FK_Z_Harag_Favorite_Customer" FromRole="Customer" ToRole="Z_Harag_Favorite" />
+          <NavigationProperty Name="Z_Harag_Message" Relationship="Self.FK_Z_Harag_Message_Customer" FromRole="Customer" ToRole="Z_Harag_Message" />
+          <NavigationProperty Name="Z_Harag_Notification" Relationship="Self.FK_Z_Harag_Notification_Customer2" FromRole="Customer" ToRole="Z_Harag_Notification" />
+          <NavigationProperty Name="Z_Harag_Notification1" Relationship="Self.FK_Z_Harag_Notification_Customer3" FromRole="Customer" ToRole="Z_Harag_Notification" />
+          <NavigationProperty Name="Z_Harag_Rate" Relationship="Self.FK_Z_Harag_Rate_Customer" FromRole="Customer" ToRole="Z_Harag_Rate" />
+          <NavigationProperty Name="Z_Harag_Reports" Relationship="Self.FK_Z_Harag_Reports_Customer" FromRole="Customer" ToRole="Z_Harag_Reports" />
+        </EntityType>
+        <EntityType Name="Neighborhood">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArName" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EnName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <Property Name="neCoordinates" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="swCoordinates" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Z_Harag_Post" Relationship="Self.FK_Z_Harag_Post_Neighborhood" FromRole="Neighborhood" ToRole="Z_Harag_Post" />
+        </EntityType>
+        <EntityType Name="Z_Harag_BlackList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Z_Harag_BlackList_Customer" FromRole="Z_Harag_BlackList" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Z_Harag_Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" />
+          <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Z_Harag_Comment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <Property Name="PostId" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CommentedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Z_Harag_Comment_Customer" FromRole="Z_Harag_Comment" ToRole="Customer" />
+          <NavigationProperty Name="Customer1" Relationship="Self.FK_Z_Harag_Comment_Customer1" FromRole="Z_Harag_Comment" ToRole="Customer" />
+          <NavigationProperty Name="Customer2" Relationship="Self.FK_Z_Harag_Comment_Customer2" FromRole="Z_Harag_Comment" ToRole="Customer" />
+          <NavigationProperty Name="Z_Harag_Post" Relationship="Self.FK_Z_Harag_Comment_Z_Harag_Post" FromRole="Z_Harag_Comment" ToRole="Z_Harag_Post" />
+          <NavigationProperty Name="Z_Harag_CommentReport" Relationship="Self.FK_Z_Harag_CommentReport_Z_Harag_Comment" FromRole="Z_Harag_Comment" ToRole="Z_Harag_CommentReport" />
+        </EntityType>
+        <EntityType Name="Z_Harag_Favorite">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Z_Harag_Favorite_Customer" FromRole="Z_Harag_Favorite" ToRole="Customer" />
+          <NavigationProperty Name="Z_Harag_Post" Relationship="Self.FK_Z_Harag_Favorite_Z_Harag_Post" FromRole="Z_Harag_Favorite" ToRole="Z_Harag_Post" />
+          <NavigationProperty Name="Z_Harag_Post1" Relationship="Self.FK_Z_Harag_Favorite_Z_Harag_Post1" FromRole="Z_Harag_Favorite" ToRole="Z_Harag_Post" />
+        </EntityType>
+        <EntityType Name="Z_Harag_Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostId" Type="Int32" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="Message" Type="String" MaxLength="1200" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedTime" Type="DateTime" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Z_Harag_Message_Customer" FromRole="Z_Harag_Message" ToRole="Customer" />
+          <NavigationProperty Name="Z_Harag_Message1" Relationship="Self.FK_Z_Harag_Message_Z_Harag_Message" FromRole="Z_Harag_Message" ToRole="Z_Harag_Message1" />
+          <NavigationProperty Name="Z_Harag_Message2" Relationship="Self.FK_Z_Harag_Message_Z_Harag_Message" FromRole="Z_Harag_Message1" ToRole="Z_Harag_Message" />
+          <NavigationProperty Name="Z_Harag_Post" Relationship="Self.FK_Z_Harag_Message_Z_Harag_Post" FromRole="Z_Harag_Message" ToRole="Z_Harag_Post" />
+        </EntityType>
+        <EntityType Name="Z_Harag_Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NotificationType" Type="Byte" />
+          <Property Name="NotificationTime" Type="DateTime" />
+          <Property Name="NotificationContent" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="PostId" Type="Int32" />
+          <Property Name="OwnerId" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Z_Harag_Notification_Customer2" FromRole="Z_Harag_Notification" ToRole="Customer" />
+          <NavigationProperty Name="Customer1" Relationship="Self.FK_Z_Harag_Notification_Customer3" FromRole="Z_Harag_Notification" ToRole="Customer" />
+          <NavigationProperty Name="Z_Harag_Post" Relationship="Self.FK_Z_Harag_Notification_Z_Harag_Post" FromRole="Z_Harag_Notification" ToRole="Z_Harag_Post" />
+        </EntityType>
+        <EntityType Name="Z_Harag_Photo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostId" Type="Int32" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Z_Harag_Post" Relationship="Self.FK_Z_Harag_Photo_Z_Harag_Post" FromRole="Z_Harag_Photo" ToRole="Z_Harag_Post" />
+        </EntityType>
+        <EntityType Name="Z_Harag_Post">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="NeighborhoodId" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PaymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Rate" Type="Int32" />
+          <Property Name="IsSetToSubCategory" Type="Boolean" Nullable="false" />
+          <Property Name="IsDispayed" Type="Boolean" Nullable="false" />
+          <Property Name="IsReserved" Type="Boolean" Nullable="false" />
+          <Property Name="IsCommon" Type="Boolean" />
+          <Property Name="IsClosed" Type="Boolean" Nullable="false" />
+          <Property Name="IsAnswered" Type="Boolean" Nullable="false" />
+          <Property Name="LastCommentTime" Type="DateTime" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="DateUpdated" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Self.FK_Z_Harag_Post_City" FromRole="Z_Harag_Post" ToRole="City" />
+          <NavigationProperty Name="Neighborhood" Relationship="Self.FK_Z_Harag_Post_Neighborhood" FromRole="Z_Harag_Post" ToRole="Neighborhood" />
+          <NavigationProperty Name="Z_Harag_Comment" Relationship="Self.FK_Z_Harag_Comment_Z_Harag_Post" FromRole="Z_Harag_Post" ToRole="Z_Harag_Comment" />
+          <NavigationProperty Name="Z_Harag_Favorite" Relationship="Self.FK_Z_Harag_Favorite_Z_Harag_Post" FromRole="Z_Harag_Post" ToRole="Z_Harag_Favorite" />
+          <NavigationProperty Name="Z_Harag_Favorite1" Relationship="Self.FK_Z_Harag_Favorite_Z_Harag_Post1" FromRole="Z_Harag_Post" ToRole="Z_Harag_Favorite" />
+          <NavigationProperty Name="Z_Harag_Message" Relationship="Self.FK_Z_Harag_Message_Z_Harag_Post" FromRole="Z_Harag_Post" ToRole="Z_Harag_Message" />
+          <NavigationProperty Name="Z_Harag_Notification" Relationship="Self.FK_Z_Harag_Notification_Z_Harag_Post" FromRole="Z_Harag_Post" ToRole="Z_Harag_Notification" />
+          <NavigationProperty Name="Z_Harag_Photo" Relationship="Self.FK_Z_Harag_Photo_Z_Harag_Post" FromRole="Z_Harag_Post" ToRole="Z_Harag_Photo" />
+          <NavigationProperty Name="Z_Harag_Rate" Relationship="Self.FK_Z_Harag_Rate_Z_Harag_Post" FromRole="Z_Harag_Post" ToRole="Z_Harag_Rate" />
+          <NavigationProperty Name="Z_Harag_Reports" Relationship="Self.FK_Z_Harag_Reports_Z_Harag_Post" FromRole="Z_Harag_Post" ToRole="Z_Harag_Reports" />
+        </EntityType>
+        <EntityType Name="Z_Harag_Rate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="AdviceDeal" Type="Boolean" />
+          <Property Name="IsBuyDone" Type="Boolean" />
+          <Property Name="BuyTime" Type="DateTime" />
+          <Property Name="PostId" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Z_Harag_Rate_Customer" FromRole="Z_Harag_Rate" ToRole="Customer" />
+          <NavigationProperty Name="Z_Harag_Post" Relationship="Self.FK_Z_Harag_Rate_Z_Harag_Post" FromRole="Z_Harag_Rate" ToRole="Z_Harag_Post" />
+        </EntityType>
+        <EntityType Name="Z_Harag_Reports">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportDescription" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="ReporterUser" Type="Int32" />
+          <Property Name="PostId" Type="Int32" />
+          <Property Name="ReportTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Z_Harag_Reports_Customer" FromRole="Z_Harag_Reports" ToRole="Customer" />
+          <NavigationProperty Name="Z_Harag_Post" Relationship="Self.FK_Z_Harag_Reports_Z_Harag_Post" FromRole="Z_Harag_Reports" ToRole="Z_Harag_Post" />
+        </EntityType>
+        <EntityType Name="Z_Harag_CommentReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ReportDescription" Type="String" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Name="ReporterUser" Type="Int32" />
+          <Property Name="CommentId" Type="Int32" />
+          <Property Name="ReportTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ReportCategory" Type="Byte" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Z_Harag_CommentReport_Customer" FromRole="Z_Harag_CommentReport" ToRole="Customer" />
+          <NavigationProperty Name="Z_Harag_Comment" Relationship="Self.FK_Z_Harag_CommentReport_Z_Harag_Comment" FromRole="Z_Harag_CommentReport" ToRole="Z_Harag_Comment" />
+        </EntityType>
+        <Association Name="FK_Z_Harag_Post_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Post">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_BlackList_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_BlackList" Type="Self.Z_Harag_BlackList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_BlackList">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Comment_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_Comment" Type="Self.Z_Harag_Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Comment">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Comment_Customer1">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_Comment" Type="Self.Z_Harag_Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Comment">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Comment_Customer2">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_Comment" Type="Self.Z_Harag_Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Comment">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_CommentReport_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_CommentReport" Type="Self.Z_Harag_CommentReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_CommentReport">
+              <PropertyRef Name="ReporterUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Favorite_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_Favorite" Type="Self.Z_Harag_Favorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Favorite">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Message_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_Message" Type="Self.Z_Harag_Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Message">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Notification_Customer2">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_Notification" Type="Self.Z_Harag_Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Notification">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Notification_Customer3">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_Notification" Type="Self.Z_Harag_Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Notification">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Rate_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_Rate" Type="Self.Z_Harag_Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Rate">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Reports_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Z_Harag_Reports" Type="Self.Z_Harag_Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Reports">
+              <PropertyRef Name="ReporterUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Post_Neighborhood">
+          <End Role="Neighborhood" Type="Self.Neighborhood" Multiplicity="0..1" />
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Neighborhood">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Post">
+              <PropertyRef Name="NeighborhoodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Comment_Z_Harag_Post">
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="1" />
+          <End Role="Z_Harag_Comment" Type="Self.Z_Harag_Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Comment">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_CommentReport_Z_Harag_Comment">
+          <End Role="Z_Harag_Comment" Type="Self.Z_Harag_Comment" Multiplicity="0..1" />
+          <End Role="Z_Harag_CommentReport" Type="Self.Z_Harag_CommentReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Comment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_CommentReport">
+              <PropertyRef Name="CommentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Favorite_Z_Harag_Post">
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="1" />
+          <End Role="Z_Harag_Favorite" Type="Self.Z_Harag_Favorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Favorite">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Favorite_Z_Harag_Post1">
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="1" />
+          <End Role="Z_Harag_Favorite" Type="Self.Z_Harag_Favorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Favorite">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Message_Z_Harag_Message">
+          <End Role="Z_Harag_Message" Type="Self.Z_Harag_Message" Multiplicity="1" />
+          <End Role="Z_Harag_Message1" Type="Self.Z_Harag_Message" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Message">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Message1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Message_Z_Harag_Post">
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="0..1" />
+          <End Role="Z_Harag_Message" Type="Self.Z_Harag_Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Message">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Notification_Z_Harag_Post">
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="0..1" />
+          <End Role="Z_Harag_Notification" Type="Self.Z_Harag_Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Notification">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Photo_Z_Harag_Post">
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="1" />
+          <End Role="Z_Harag_Photo" Type="Self.Z_Harag_Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Photo">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Rate_Z_Harag_Post">
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="0..1" />
+          <End Role="Z_Harag_Rate" Type="Self.Z_Harag_Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Rate">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Z_Harag_Reports_Z_Harag_Post">
+          <End Role="Z_Harag_Post" Type="Self.Z_Harag_Post" Multiplicity="0..1" />
+          <End Role="Z_Harag_Reports" Type="Self.Z_Harag_Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Z_Harag_Post">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Z_Harag_Reports">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="City" EntityType="Self.City" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" />
+          <EntitySet Name="Neighborhood" EntityType="Self.Neighborhood" />
+          <EntitySet Name="Z_Harag_BlackList" EntityType="Self.Z_Harag_BlackList" />
+          <EntitySet Name="Z_Harag_Category" EntityType="Self.Z_Harag_Category" />
+          <EntitySet Name="Z_Harag_Comment" EntityType="Self.Z_Harag_Comment" />
+          <EntitySet Name="Z_Harag_Favorite" EntityType="Self.Z_Harag_Favorite" />
+          <EntitySet Name="Z_Harag_Message" EntityType="Self.Z_Harag_Message" />
+          <EntitySet Name="Z_Harag_Notification" EntityType="Self.Z_Harag_Notification" />
+          <EntitySet Name="Z_Harag_Photo" EntityType="Self.Z_Harag_Photo" />
+          <EntitySet Name="Z_Harag_Post" EntityType="Self.Z_Harag_Post" />
+          <EntitySet Name="Z_Harag_Rate" EntityType="Self.Z_Harag_Rate" />
+          <EntitySet Name="Z_Harag_Reports" EntityType="Self.Z_Harag_Reports" />
+          <EntitySet Name="Z_Harag_CommentReport" EntityType="Self.Z_Harag_CommentReport" />
+          <AssociationSet Name="FK_Z_Harag_Post_City" Association="Self.FK_Z_Harag_Post_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_BlackList_Customer" Association="Self.FK_Z_Harag_BlackList_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_BlackList" EntitySet="Z_Harag_BlackList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Comment_Customer" Association="Self.FK_Z_Harag_Comment_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_Comment" EntitySet="Z_Harag_Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Comment_Customer1" Association="Self.FK_Z_Harag_Comment_Customer1">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_Comment" EntitySet="Z_Harag_Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Comment_Customer2" Association="Self.FK_Z_Harag_Comment_Customer2">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_Comment" EntitySet="Z_Harag_Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_CommentReport_Customer" Association="Self.FK_Z_Harag_CommentReport_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_CommentReport" EntitySet="Z_Harag_CommentReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Favorite_Customer" Association="Self.FK_Z_Harag_Favorite_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_Favorite" EntitySet="Z_Harag_Favorite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Message_Customer" Association="Self.FK_Z_Harag_Message_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_Message" EntitySet="Z_Harag_Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Notification_Customer2" Association="Self.FK_Z_Harag_Notification_Customer2">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_Notification" EntitySet="Z_Harag_Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Notification_Customer3" Association="Self.FK_Z_Harag_Notification_Customer3">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_Notification" EntitySet="Z_Harag_Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Rate_Customer" Association="Self.FK_Z_Harag_Rate_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_Rate" EntitySet="Z_Harag_Rate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Reports_Customer" Association="Self.FK_Z_Harag_Reports_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Z_Harag_Reports" EntitySet="Z_Harag_Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Post_Neighborhood" Association="Self.FK_Z_Harag_Post_Neighborhood">
+            <End Role="Neighborhood" EntitySet="Neighborhood" />
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Comment_Z_Harag_Post" Association="Self.FK_Z_Harag_Comment_Z_Harag_Post">
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+            <End Role="Z_Harag_Comment" EntitySet="Z_Harag_Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_CommentReport_Z_Harag_Comment" Association="Self.FK_Z_Harag_CommentReport_Z_Harag_Comment">
+            <End Role="Z_Harag_Comment" EntitySet="Z_Harag_Comment" />
+            <End Role="Z_Harag_CommentReport" EntitySet="Z_Harag_CommentReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Favorite_Z_Harag_Post" Association="Self.FK_Z_Harag_Favorite_Z_Harag_Post">
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+            <End Role="Z_Harag_Favorite" EntitySet="Z_Harag_Favorite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Favorite_Z_Harag_Post1" Association="Self.FK_Z_Harag_Favorite_Z_Harag_Post1">
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+            <End Role="Z_Harag_Favorite" EntitySet="Z_Harag_Favorite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Message_Z_Harag_Message" Association="Self.FK_Z_Harag_Message_Z_Harag_Message">
+            <End Role="Z_Harag_Message" EntitySet="Z_Harag_Message" />
+            <End Role="Z_Harag_Message1" EntitySet="Z_Harag_Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Message_Z_Harag_Post" Association="Self.FK_Z_Harag_Message_Z_Harag_Post">
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+            <End Role="Z_Harag_Message" EntitySet="Z_Harag_Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Notification_Z_Harag_Post" Association="Self.FK_Z_Harag_Notification_Z_Harag_Post">
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+            <End Role="Z_Harag_Notification" EntitySet="Z_Harag_Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Photo_Z_Harag_Post" Association="Self.FK_Z_Harag_Photo_Z_Harag_Post">
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+            <End Role="Z_Harag_Photo" EntitySet="Z_Harag_Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Rate_Z_Harag_Post" Association="Self.FK_Z_Harag_Rate_Z_Harag_Post">
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+            <End Role="Z_Harag_Rate" EntitySet="Z_Harag_Rate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Z_Harag_Reports_Z_Harag_Post" Association="Self.FK_Z_Harag_Reports_Z_Harag_Post">
+            <End Role="Z_Harag_Post" EntitySet="Z_Harag_Post" />
+            <End Role="Z_Harag_Reports" EntitySet="Z_Harag_Reports" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_A409B4_nop4ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="City">
+            <EntityTypeMapping TypeName="DB_A409B4_nop4Model.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ArName" ColumnName="ArName" />
+                <ScalarProperty Name="EnName" ColumnName="EnName" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="DB_A409B4_nop4Model.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerGuid" ColumnName="CustomerGuid" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailToRevalidate" ColumnName="EmailToRevalidate" />
+                <ScalarProperty Name="AdminComment" ColumnName="AdminComment" />
+                <ScalarProperty Name="IsTaxExempt" ColumnName="IsTaxExempt" />
+                <ScalarProperty Name="AffiliateId" ColumnName="AffiliateId" />
+                <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+                <ScalarProperty Name="HasShoppingCartItems" ColumnName="HasShoppingCartItems" />
+                <ScalarProperty Name="RequireReLogin" ColumnName="RequireReLogin" />
+                <ScalarProperty Name="FailedLoginAttempts" ColumnName="FailedLoginAttempts" />
+                <ScalarProperty Name="CannotLoginUntilDateUtc" ColumnName="CannotLoginUntilDateUtc" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+                <ScalarProperty Name="IsSystemAccount" ColumnName="IsSystemAccount" />
+                <ScalarProperty Name="SystemName" ColumnName="SystemName" />
+                <ScalarProperty Name="LastIpAddress" ColumnName="LastIpAddress" />
+                <ScalarProperty Name="CreatedOnUtc" ColumnName="CreatedOnUtc" />
+                <ScalarProperty Name="LastLoginDateUtc" ColumnName="LastLoginDateUtc" />
+                <ScalarProperty Name="LastActivityDateUtc" ColumnName="LastActivityDateUtc" />
+                <ScalarProperty Name="RegisteredInStoreId" ColumnName="RegisteredInStoreId" />
+                <ScalarProperty Name="BillingAddress_Id" ColumnName="BillingAddress_Id" />
+                <ScalarProperty Name="ShippingAddress_Id" ColumnName="ShippingAddress_Id" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Neighborhood">
+            <EntityTypeMapping TypeName="DB_A409B4_nop4Model.Neighborhood">
+              <MappingFragment StoreEntitySet="Neighborhood">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ArName" ColumnName="ArName" />
+                <ScalarProperty Name="EnName" ColumnName="EnName" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="neCoordinates" ColumnName="neCoordinates" />
+                <ScalarProperty Name="swCoordinates" ColumnName="swCoordinates" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Z_Harag_BlackList">
+            <EntityTypeMapping TypeName="DB_A409B4_nop4Model.Z_Harag_BlackList">
+              <MappingFragment StoreEntitySet="Z_Harag_BlackList">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Z_Harag_Category">
+            <EntityTypeMapping TypeName="DB_A409B4_nop4Model.Z_Harag_Category">
+              <MappingFragment StoreEntitySet="Z_Harag_Category">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Z_Harag_Comment">
+            <EntityTypeMapping TypeName="DB_A409B4_nop4Model.Z_Harag_Comment">
+              <MappingFragment StoreEntitySet="Z_Harag_Comment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="CommentedBy" ColumnName="CommentedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Z_Harag_Favorite">
+            <EntityTypeMapping TypeName="DB_A409B4_nop4Model.Z_Harag_Favorite">
+              <MappingFragment StoreEntitySet="Z_Harag_Favorite">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Z_Harag_Message">
+            <EntityTypeMapping TypeName="DB_A409B4_nop4Model.Z_Harag_Message">
+              <MappingFragment StoreEntitySet="Z_Harag_Message">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Z_Harag_Notification">
+            <EntityTypeMapping TypeName="DB_A409B4_nop4Model.Z_Harag_Notification">
+              <MappingFragment StoreEntitySet="Z_Harag_Notification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NotificationType" ColumnName="NotificationType" />
+                <ScalarProperty Name="NotificationTime" ColumnName="NotificationTime" />
+                <ScalarProperty Name="NotificationContent" ColumnName="NotificationContent" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Z_Harag_Photo">
+            <EntityTypeMapping TypeName="DB_A409B4_nop4Model.Z_Harag_Photo">
+              <MappingFragment StoreEntitySet="Z_Harag_Photo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Z_Harag_Post">
+            <EntityTypeMapping TypeName="DB_A409B4_nop4Model.Z_Harag_Post">
+              <MappingFragment StoreEntitySet="Z_Harag_Post">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="NeighborhoodId" ColumnName="NeighborhoodId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="IsSetToSubCategory" ColumnName="IsSetToSubCategory" />
+                <ScalarProperty Name="IsDispayed" ColumnName="IsDispayed" />
+                <ScalarProperty Name="IsReserved" ColumnName="IsReserved" />
+                <ScalarProperty Name="IsCommon" ColumnName="IsCommon" />
+                <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
+                <ScalarProperty Name="IsAnswered" ColumnName="IsAnswered" />
+                <ScalarProperty Name="LastCommentTime" ColumnName="LastCommentTime" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Z_Harag_Rate">
+            <EntityTypeMapping TypeName="DB_A409B4_nop4Model.Z_Harag_Rate">
+              <MappingFragment StoreEntitySet="Z_Harag_Rate">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="AdviceDeal" ColumnName="AdviceDeal" />
+                <ScalarProperty Name="IsBuyDone" ColumnName="IsBuyDone" />
+                <ScalarProperty Name="BuyTime" ColumnName="BuyTime" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Z_Harag_Reports">
+            <EntityTypeMapping TypeName="DB_A409B4_nop4Model.Z_Harag_Reports">
+              <MappingFragment StoreEntitySet="Z_Harag_Reports">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ReportDescription" ColumnName="ReportDescription" />
+                <ScalarProperty Name="ReporterUser" ColumnName="ReporterUser" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="ReportTitle" ColumnName="ReportTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Z_Harag_CommentReport">
+            <EntityTypeMapping TypeName="DB_A409B4_nop4Model.Z_Harag_CommentReport">
+              <MappingFragment StoreEntitySet="Z_Harag_CommentReport">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ReportDescription" ColumnName="ReportDescription" />
+                <ScalarProperty Name="ReporterUser" ColumnName="ReporterUser" />
+                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+                <ScalarProperty Name="ReportTitle" ColumnName="ReportTitle" />
+                <ScalarProperty Name="ReportCategory" ColumnName="ReportCategory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
