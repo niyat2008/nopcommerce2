@@ -37,8 +37,4 @@
     <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Z_Harag\" />
-  </ItemGroup>
-
 </Project>

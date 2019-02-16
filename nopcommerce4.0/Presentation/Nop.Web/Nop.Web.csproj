@@ -35,6 +35,7 @@
     <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="2.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
+    <PackageReference Include="Swagger" Version="1.0.0" />
     <PackageReference Include="System.Linq.Dynamic" Version="1.0.7" />
   </ItemGroup>
 
@@ -77,6 +78,11 @@
 
   <ItemGroup>
     <Folder Include="Models\ConsultantAdmin\" />
+    <Folder Include="Themes\Pavilion\Views\Harag\Comment\" />
+    <Folder Include="Themes\Pavilion\Views\Harag\Home\" />
+    <Folder Include="Themes\Pavilion\Views\Harag\User\" />
+    <Folder Include="Themes\Pavilion\Views\Harag\Shared\" />
+    <Folder Include="Themes\Pavilion\Views\Harag\Post\" />
     <Folder Include="Validators\ConsultantAdmin\" />
     <Folder Include="wwwroot\ConsultantAdmin\" />
     <Folder Include="wwwroot\ConsultantApi\Uploads\Images\" />
