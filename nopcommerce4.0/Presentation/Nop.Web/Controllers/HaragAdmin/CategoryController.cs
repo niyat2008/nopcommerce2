@@ -83,7 +83,10 @@ namespace Nop.Web.Controllers.HaragAdmin
             {
                 Items = categoriesInDb.Select(c => new CategoryModel
                 {
-                    Name = c.Name
+                    Id=c.Id,
+                    Name = c.Name,
+                    Description=c.Description,
+                    IsActive=c.IsActive
                 }).ToList()
             };
 

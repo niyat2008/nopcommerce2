@@ -6,10 +6,13 @@
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
 
 <div class="table-responsive">
-    <table id="categories">
+    <table id="categories" class="display">
         <thead>
             <tr>
+                <th>رقم القسم</th>
                 <th>الاسم</th>
+                <th>الملاحظات</th>
+                <th>نشط</th>
             </tr>
         </thead>
     </table>
@@ -41,7 +44,24 @@
 
             },
             "columns": [
-                {"data":"Name"}
+                { "data": "Name" },
+                { "data": "Description" },
+                {
+            "data": "IsActive",
+            "render": function (data,type,row) {
+                return (data) ? '<input type="checkbox" checked disabled  />' : '<input type="checkbox"   disabled />';
+
+            }
+                },
+                {
+                    "data": "Id",
+                    "render": function (data) {
+                        return "<a href='#' class='btn btn-default'>تعديل</a> ";
+
+                    }
+
+
+                }
             ],
             "language": {
                 "sProcessing": "جارٍ التحميل...",
