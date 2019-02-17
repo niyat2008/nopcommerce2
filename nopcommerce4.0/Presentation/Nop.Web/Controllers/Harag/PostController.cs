@@ -5,18 +5,14 @@ using System.Text;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Nop.Core.Domain.Customers;
-using Nop.Core.Domain.Z_Consultant;
-using Nop.Services.Z_Consultant.Category;
-using Nop.Services.Z_Consultant.Comment;
-using Nop.Services.Z_Consultant.Helpers;
-using Nop.Services.Z_Consultant.Post;
-using Nop.Services.Z_Consultant.SubCategory;
-using Nop.Web.Extensions.Consultant;
-using Nop.Web.Models.Consultant.Category;
-using Nop.Web.Models.Consultant.Comment;
+using Nop.Core.Domain.Z_Harag;
+using Nop.Services.Z_Harag.Category;
+using Nop.Services.Z_Harag.Comment;
+using Nop.Services.Z_Harag.Helpers;
+using Nop.Services.Z_Harag.Post;
 using Nop.Web.Models.Consultant.Post;
-using Nop.Web.Models.Consultant.SubCategory;
-using Nop.Web.Models.Consultant.User;
+using Nop.Web.Models.Harag.Category;
+using Nop.Web.Models.Harag.Post;
 
 namespace Nop.Web.Controllers.Harag
 {
@@ -29,8 +25,7 @@ namespace Nop.Web.Controllers.Harag
         private readonly IPostService _postService;
         private readonly Core.IWorkContext _workContext;
         private readonly IHostingEnvironment _env;
-        private readonly ICommentService _commentService;
-        private readonly ISubCategoryService _subCategoryService;
+        private readonly ICommentService _commentService; 
 
         #endregion
 
@@ -42,8 +37,7 @@ namespace Nop.Web.Controllers.Harag
             IPostService postService,
             Core.IWorkContext workContext,
             IHostingEnvironment env,
-            ICommentService commentService,
-            ISubCategoryService subCategoryService
+            ICommentService commentService
             )
         {
             this._categoryService = categoryService;
@@ -51,15 +45,14 @@ namespace Nop.Web.Controllers.Harag
             this._postService = postService;
             this._workContext = workContext;
             this._env = env;
-            this._commentService = commentService;
-            this._subCategoryService = subCategoryService;
+            this._commentService = commentService; 
         }
         #endregion
 
 
         #region helpers
 
-        private List<LinkInfo> GetLinksForCatPosts(PagedList<Z_Consultant_Post> list, string routName, int CategoryId)
+        private List<LinkInfo> GetLinksForCatPosts(PagedList<Z_Harag_Post> list, string routName, int CategoryId)
         {
             var links = new List<LinkInfo>();
 
@@ -92,7 +85,7 @@ namespace Nop.Web.Controllers.Harag
 
 
 
-        private List<LinkInfo> GetLinks(PagedList<Z_Consultant_Post> list, string routName)
+        private List<LinkInfo> GetLinks(PagedList<Z_Harag_Post> list, string routName)
         {
             var links = new List<LinkInfo>();
 
@@ -123,7 +116,7 @@ namespace Nop.Web.Controllers.Harag
             };
         }
 
-        private List<LinkInfo> GetLinksForSubCatPosts(PagedList<Z_Consultant_Post> list, string routName, int SubCategoryId)
+        private List<LinkInfo> GetLinksForSubCatPosts(PagedList<Z_Harag_Post> list, string routName, int SubCategoryId)
         {
             var links = new List<LinkInfo>();
 
@@ -156,7 +149,7 @@ namespace Nop.Web.Controllers.Harag
         }
 
 
-        private List<LinkInfo> GetLinks(PagedList<Z_Consultant_Category> list, string routName)
+        private List<LinkInfo> GetLinks(PagedList<Z_Harag_Category> list, string routName)
         {
             var links = new List<LinkInfo>();
 
@@ -174,27 +167,10 @@ namespace Nop.Web.Controllers.Harag
             return links;
         }
 
-
-        private List<LinkInfo> GetLinks(PagedList<Z_Consultant_SubCategory> list, string routName)
-        {
-            var links = new List<LinkInfo>();
-
-            if (list.HasPreviousPage)
-                links.Add(CreateLink(routName, list.PreviousPageNumber,
-                           list.PageSize, "previousPage", "GET"));
-
-            links.Add(CreateLink(routName, list.PageNumber,
-                           list.PageSize, "self", "GET"));
-
-            if (list.HasNextPage)
-                links.Add(CreateLink(routName, list.NextPageNumber,
-                           list.PageSize, "nextPage", "GET"));
-
-            return links;
-        }
+ 
 
 
-        private List<LinkInfo> GetLinksForSearch(PagedList<Z_Consultant_Post> list, string routName, string Term)
+        private List<LinkInfo> GetLinksForSearch(PagedList<Z_Harag_Post> list, string routName, string Term)
         {
             var links = new List<LinkInfo>();
 
@@ -241,16 +217,8 @@ namespace Nop.Web.Controllers.Harag
                     ViewBag.UserRole = RolesType.Consultant;
                 else if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
                     ViewBag.UserRole = RolesType.Registered;
-                if (_postService.GetOpenPostsForCustomer(new PagingParams(), _workContext.CurrentCustomer.Id).List.Count > 0)
-                {
-                    ViewBag.CanAddNewPost = false;
-                }
-                else
-                {
-                    ViewBag.CanAddNewPost = true;
-
-                }
-                return View("~/Themes/Pavilion/Views/Harag/Post/AddPost.cshtml");
+               
+                return View("~/Themes/Pavilion/Views/Harag/Post/AddPost.cshtml", new PostForPostListModel());
             }
             else
             {
@@ -258,15 +226,228 @@ namespace Nop.Web.Controllers.Harag
             }
         }
 
+        [HttpPost]
+        public IActionResult AddNewPostAjax([FromBody]PostForPostListModel postForPostModel)
+        {
+
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
+                return Forbid();
+
+
+            var currentUserId = _workContext.CurrentCustomer.Id;
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+
+            if (postForPostModel.CategoryId <= 0)
+                return BadRequest("Post must be belong to Category");
+
+            List<string> errors = new List<string>();
+
+            var post = _postService.AddNewPost(postForPostModel, currentUserId, postForPostModel.Files, errors);
+
+            if (post == null)
+            {
+                StringBuilder err = new StringBuilder();
+
+                foreach (var item in errors)
+                {
+                    err.AppendFormat(" {0} ", item);
+                    err.AppendLine();
+                }
+                return BadRequest(err.ToString());
+            }
+
+
+
+
+            string userName = _workContext.CurrentCustomer.Username;
+
+            //var postToReturn = post.ToPostModel();
+            //postToReturn.PostOwner = userName;
+            //return CreatedAtRoute("Consultant.Api.Post.GetPost", new { PostId = postToReturn.Id }, postToReturn);
+            return Ok();
+        }
+
+
+        [HttpGet]
         public ActionResult PostDetails()
         {
-            return View("~/Themes/Pavilion/Views/Harag/Post/PostDetails.cshtml" , new PostWithFilesModel());
+            return View("~/Themes/Pavilion/Views/Harag/Post/PostDetails.cshtml");
 
+        }
+
+        [HttpGet]
+        public ActionResult GetHaragCategories()
+        {
+            var categories = _categoryService.GetCategories();
+
+
+            var categoriesOutput = new CategoryOutputModel
+            {
+                Items = categories.Select(m => new CategoryModel
+                {
+                    Id = m.Id,
+                    Name = m.Name
+                }).ToList()
+            };
+            return View("~/Themes/Pavilion/Views/Harag/Post/ListOfCategory.cshtml", categoriesOutput); 
         }
         //#region methods
 
 
+        [HttpGet]
+        public IActionResult GetHaragPost(int PostId)
+        {
+            if (!_postService.IsExists(PostId))
+                return NotFound();
+            string UserRole = "Vistor";
 
+            Nop.Web.Models.Harag.Post.PostWithFilesModel model = new Nop.Web.Models.Harag.Post.PostWithFilesModel();
+
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+            var currentUserId = _workContext.CurrentCustomer.Id;
+            ViewBag.UserName = _workContext.CurrentCustomer.Username;
+
+            if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
+            {
+                var post = this._postService.GetPost(PostId, "");
+                if (post != null)
+                {
+                    model = new Models.Harag.Post.PostWithFilesModel
+                    {
+                        CategoryId = post.CategoryId,
+                        CategoryName = post.Category.Name,
+                        Text = post.Text,
+                        Title = post.Title,
+                        DateCreated = post.DateCreated,
+                        Files = post.Z_Harag_Photo.Select(p => p.Url).ToList(),
+                        Rate = post.Rate,
+                        DateUpdated = post.DateUpdated,
+                        IsDispayed = post.IsDispayed,
+                        PostOwner = post.Customer.Username
+                    };
+                }
+
+
+            }
+            else
+            {
+                return Unauthorized();
+            }
+
+            ViewBag.UserRole = UserRole;
+
+            return View("~/Themes/Pavilion/Views/Harag/Post/PostDetails.cshtml", model);
+        }
+
+        [HttpGet]
+        public IActionResult GetHaragNavbar()
+        {
+            var categories = _categoryService.GetCategories();
+            var model = new CategoryWithSubCategoriesOutputModel();
+            if (categories != null)
+            {
+                model.Items = categories.Select(m => new CategoryWithSubCategoriesModel
+                {
+                    Id = m.Id,
+                    Name = m.Name
+                }).ToList();
+                return PartialView("~/Themes/Pavilion/Views/Harag/Shared/_Navbar.cshtml", model);
+            }
+            return PartialView("~/Themes/Pavilion/Views/Harag/Shared/_Navbar.cshtml", model);
+        }
+
+        [HttpGet]
+        public IActionResult GetAllFeaturedPosts()
+        {
+            return null;
+        }
+
+        [HttpGet]
+        public IActionResult GetAllHaragPostsAjax()
+        {
+            var posts = _postService.GetFeaturedPosts();
+
+            var modelOutput = new Models.Harag.Post.PostOutputModel();
+            
+                modelOutput.Items = posts.Select(p => new Models.Harag.Post.PostModel
+                {
+                    CategoryId = p.CategoryId,
+                    CategoryName = p.Category.Name,
+                    Text = p.Text,
+                    Title = p.Title,
+                    City = p.City.ArName,
+                    DateCreated = p.DateCreated,
+                    Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
+                    Rate = p.Rate,
+                    DateUpdated = p.DateUpdated,
+                    IsDispayed = p.IsDispayed,
+                    PostOwner = p.Customer.Username
+                }).ToList();
+
+                return View("~/Themes/Pavilion/Views/Harag/Post/PostsAjax.cshtml", modelOutput);
+    
+        }
+
+        [HttpGet]
+        public IActionResult GetNextPostsAjax(int pageId)
+        {
+            var posts = _postService.GetFeaturedPosts();
+
+            var modelOutput = new Models.Harag.Post.PostOutputModel();
+
+            if (posts.Count <= 0)
+            {
+                modelOutput.Items = posts.Select(p => new Models.Harag.Post.PostModel
+                {
+                    CategoryId = p.CategoryId,
+                    CategoryName = p.Category.Name,
+                    Text = p.Text,
+                    Title = p.Title,
+                    DateCreated = p.DateCreated,
+                    Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
+                    Rate = p.Rate,
+                    DateUpdated = p.DateUpdated,
+                    IsDispayed = p.IsDispayed,
+                    PostOwner = p.Customer.Username
+                }).ToList();
+
+                return View("~/Themes/Pavilion/Views/Harag/Shared/_Navbar.cshtml", posts);
+            }
+            return null;
+        }
+
+        [HttpGet]
+        public IActionResult GetAllSideBarTags()
+        {
+            return null;
+        } 
+
+        [HttpGet]
+        public IActionResult GetAllTopBarTags()
+        {
+            return null;
+        }
+
+        [HttpGet]
+        public IActionResult GetHaragCities()
+        {
+            var cities = _postService.GetCities();
+            var model = cities.Select(m => new CityOutputModel
+            {
+                Id = m.Id,
+                Name = m.ArName
+            }).ToList();
+            return PartialView("~/Themes/Pavilion/Views/Harag/Post/ListOfCities.cshtml", model);
+        }
 
 
 

@@ -10,13 +10,13 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">
-                <select class="form-control">
+                <select id="search-category-js-ajax" class="form-control">
                     <option>الاختيار 1</option>
                 </select>
-                <select class="form-control">
+                <select id="search-city-js-ajax" class="form-control">
                     <option>الاختيار 1</option>
                 </select>
-                <select class="form-control">
+                <select id="search-date-js-ajax" class="form-control">
                     <option>الاختيار 1</option>
                 </select>
                 <button class="btn btn-default srchBtn" type="button"><i class="fa fa-search"></i></button>
@@ -31,7 +31,8 @@
             <div class="col-md-9">
                 <!-- أضف اعلانك -->
                 <div>
-                    <button class="btn btn-default add" type="button"> <a href="commission.html"> أضف اعلانك <i class="fa fa-plus"></i></a></button>
+                    <button class="btn btn-default add" type="button">
+                    <a href="@Url.RouteUrl("Harag.Post.AddNewPost")"> أضف اعلانك <i class="fa fa-plus"></i></a></button>
                 </div>
                 <!-- كل الاختيارات -->
                 <div class="choices">
@@ -42,13 +43,13 @@
                 </div>
                 <!-- Select Search -->
                 <div class="">
-                    <select class="form-control" style="width:20%">
+                    <select id="category-js-ajax" class="form-control" style="width:20%">
                         <option>الاختيار 1</option>
                     </select>
                 </div>
                 <!-- List -->
-                <div class="items">
-                    <div class="item">
+                <div id="posts" class="items">
+                    @*<div class="item">
                         <div class="det">
                             <h3>عنوان</h3>
                             <small>منذ 4 دقيقة</small>
@@ -99,7 +100,7 @@
                         <div class="det-img">
                             <img src="images/x.jpg">
                         </div>
-                    </div>
+                    </div>*@
                 </div>
                 <div>
                     <button class="btn btn-default add" type="button">مشاهدة المزيد</button>
@@ -109,19 +110,34 @@
     </div>
 </div>
 
-@*<script type="text/javascript">
+<script type="text/javascript">
     
     $(document).ready(function () {
         
         $.ajax({
             type: 'GET',
-            url: '@Url.RouteUrl("Consultant.Post.GetAllClosedPostsAjax")', 
+            url: '@Url.RouteUrl("Harag.Post.GetAllHaragPostsAjax")',
+            complete: function (data) {
                 $("#posts").html(data);
             }
         });
 
-        
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetCategories")',
+            complete: function (data) {
+                $("#category-js-ajax").html(data);
+            }
+        });
+
+         $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetHaragCities")',
+            complete: function (data) {
+                $("#search-city-js-ajax").html(data);
+            }
+        });
     });
     
-</script>*@
+</script>
 

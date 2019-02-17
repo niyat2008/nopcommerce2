@@ -10,15 +10,14 @@ using System.Threading.Tasks;
 
 namespace Nop.Web.Validators.Harag.Post
 {
-    public class PostValidator : BaseNopValidator<PostForPostModel>
+    public class PostValidator : BaseNopValidator<PostForPostListModel>
     {
         public PostValidator(ILocalizationService localizationService, IDbContext dbContext)
         {
             RuleFor(x => x.Text).NotNull().NotEmpty().WithMessage("Post text is required").MaximumLength(4000);
             RuleFor(x => x.Title).NotNull().NotEmpty().WithMessage("Post Title is required").MaximumLength(4000);
             RuleFor(x => x.CategoryId).NotNull().NotEmpty().WithErrorCode("Category Id is required")
-                .GreaterThan(0).WithErrorCode("Category Id is digit grater than 0");
-
+                .GreaterThan(0).WithErrorCode("Category Id is digit grater than 0"); 
         }
     }
 }

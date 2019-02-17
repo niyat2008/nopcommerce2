@@ -1,4 +1,4 @@
-﻿@using Nop.Web.Models.Consultant.Category;
+﻿@using Nop.Web.Models.Harag.Category;
 @model CategoryWithSubCategoriesOutputModel
 
 
@@ -33,28 +33,8 @@
 
                 @foreach (var item in Model.Items)
                 {
-                <li class="main hasSubMenu">
-                   
-                    @Html.RouteLink(item.Name, "Consultant.GetAllClosedPostsByCategoryId", new { CategoryId = item.Id })
-                    
-                    <div class="subNav">
-
-
-                        <ul class="col-md-3 col-sm-6">
-
-                            @foreach (var subCat in item.SubCategories)
-                            {
-                                <li>
-                                    @Html.RouteLink(subCat.Name, "Consultant.GetAllClosedPostsBySubCategoryId", new { SubCategoryId = subCat.Id })
-                                </li>
-                            }
-
-
-
-                        </ul>
-
-
-                    </div>
+                <li class="main hasSubMenu"> 
+                    @Html.RouteLink(item.Name, "Consultant.GetAllClosedPostsByCategoryId", new { CategoryId = item.Id }) 
                 </li>
                 }
 

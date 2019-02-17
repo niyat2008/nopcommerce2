@@ -1,7 +1,7 @@
 ﻿
 
 <head>
-    <link href="~/css/Consultant/styles.rtl.css" rel="stylesheet" />
+    @*<link href="~/css/Consultant/styles.rtl.css" rel="stylesheet" />
     <link href="~/css/Consultant/1000.rtl.css" rel="stylesheet" />
 
     <link href="~/css/Consultant/theme.custom-1.css" rel="stylesheet" />
@@ -11,12 +11,12 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="~/css/Consultant/mobile.css" rel="stylesheet" />
+    <link href="~/css/Consultant/mobile.css" rel="stylesheet" />*@
 
-    <script src="~/js/Consultant/lightbox.js"></script>
+    @*<script src="~/js/Consultant/lightbox.js"></script>
     <link href="~/css/Consultant/lightbox.css" rel="stylesheet" />
 
-    <link href="~/css/Consultant/Header.css" rel="stylesheet" />
+    <link href="~/css/Consultant/Header.css" rel="stylesheet" />*@
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Tajawal" rel="stylesheet">
@@ -33,7 +33,7 @@
     <title>Harag</title>
     <link href="~/Themes/Pavilion/Content/css/pages.css" rel="stylesheet" />
 
-    @*<link href="~/Themes/Pavilion/Content/css/style.css" rel="stylesheet" />*@
+    <link href="~/Themes/Pavilion/Content/css/style.css" rel="stylesheet" />
 </head>
 <!-- Header -->
 <!-- Top Bar -->
@@ -204,7 +204,7 @@
 
         $.ajax({
             type: 'GET',
-            url: '@Url.RouteUrl("Consultant.Navbar")',
+            url: '@Url.RouteUrl("Harag.Navbar")',
 
             success: function (data) {
                 $("#Nav").html(data);

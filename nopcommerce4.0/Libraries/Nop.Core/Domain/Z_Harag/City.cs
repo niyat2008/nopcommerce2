@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace Nop.Core.Domain.Z_Harag
 {
-    public partial class HaragCity:BaseEntity
+    public partial class City:BaseEntity
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public HaragCity()
+         public City()
         {
             this.Z_Harag_Post = new HashSet<Z_Harag_Post>();
         }
@@ -18,8 +17,7 @@ namespace Nop.Core.Domain.Z_Harag
         public string ArName { get; set; }
         public string EnName { get; set; }
         public int ProvinceId { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Z_Harag_Post> Z_Harag_Post { get; set; }
+             /// 01067254988
+         public virtual ICollection<Z_Harag_Post> Z_Harag_Post { get; set; }
     }
 }

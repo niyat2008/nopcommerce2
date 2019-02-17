@@ -202,6 +202,9 @@
     <Content Update="Themes\Pavilion\Views\Consultant\Post\ChangeCatAndSub.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Themes\Pavilion\Views\Consultant\Post\ListOfCategory - Copy.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Themes\Pavilion\Views\Consultant\Post\ListOfCategory.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
@@ -253,10 +256,13 @@
     <Content Update="Themes\Pavilion\Views\Harag\Post\ListOfCategory.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Themes\Pavilion\Views\Harag\Post\ListOfSubCategories.cshtml">
+    <Content Update="Themes\Pavilion\Views\Harag\Post\ListOfCities.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Post\PostDetails.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\Posts - Copy.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Post\Posts.cshtml">
