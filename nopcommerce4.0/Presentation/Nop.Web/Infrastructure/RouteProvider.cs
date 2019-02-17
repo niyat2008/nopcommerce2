@@ -154,81 +154,12 @@ new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
 
 
 
-            //Get Members
-            routeBuilder.MapRoute("Consultant.Admin.GetCustomers", "Consultations/Admin/Customer/GetCustomers",
-               new { controller = "Customer", action = "GetMembers" });
-
-            //Get Members Ajax Consultant.User.GetAdminLink
-            routeBuilder.MapRoute("Consultant.Admin.GetCustomersAjax", "Consultations/Admin/Customer/GetCustomersAjax",
-               new { controller = "Customer", action = "GetMembersAjax" });
-            //Get GetOnline Members 
-            routeBuilder.MapRoute("Consultant.Admin.GetOnlineMembers", "Consultations/Admin/Customer/GetOnlineMembers",
-               new { controller = "Customer", action = "GetOnlineMembers" });
-            //Get GetOnline Members Ajax
-            routeBuilder.MapRoute("Consultant.Admin.GetOnlineMembersAjax", "Consultations/Admin/Customer/GetOnlineMembersAjax",
-               new { controller = "Customer", action = "GetOnlineMembersAjax" });
-            //Get Member Details
-            routeBuilder.MapRoute("Consultant.Admin.GetCustomerDetails", "Consultations/Admin/Customer/GetCustomerDetails",
-               new { controller = "Customer", action = "GetMemberDetails" });
-            //Get Member Posts 
-            routeBuilder.MapRoute("Consultant.Admin.GetCustomerPosts", "Consultations/Admin/Customer/GetCustomerPosts",
-               new { controller = "Customer", action = "GetCustomerPosts" });
-            //Get Member Posts In Json
-            routeBuilder.MapRoute("Consultant.Admin.GetCustomerPostsInJson", "Consultations/Admin/Customer/GetCustomerPostsInJson",
-              new { controller = "Customer", action = "GetCustomerPostsInJson" });
-            //Get Member Post By Post Id and Customer Id
-            routeBuilder.MapRoute("Consultant.Admin.GetCustomerPostById", "Consultations/Admin/Customer/GetCustomerPostById",
-              new { controller = "Customer", action = "GetCustomerPostById" });
-            //Get Top 20 Member By Posts Number
-            routeBuilder.MapRoute("Consultant.Admin.GetTop20MemberByPostsNumber", "Consultations/Admin/Customer/GetTop20MemberByPostsNumber",
-              new { controller = "Customer", action = "GetTop20MemberByPostsNumber" });
-            //Get Top 20 Member By Posts Number In Json
-            routeBuilder.MapRoute("Consultant.Admin.GetTop20MemberByPostsNumberInJson", "Consultations/Admin/Customer/GetTop20MemberByPostsNumberInJson",
-              new { controller = "Customer", action = "GetTop20MemberByPostsNumberInJson" });
-            //Delete Customer
-            routeBuilder.MapRoute("Consultant.Admin.DeleteMember", "Consultations/Admin/Customer/DeleteMember",
-              new { controller = "Customer", action = "DeleteMember" });
+            
 
 
 
 
-            //Get Consultants
-            routeBuilder.MapRoute("Consultant.Admin.GetConsultants", "Consultations/Admin/Customer/GetConsultants",
-               new { controller = "Customer", action = "GetConsultants" });
-            //Get Consultants Ajax
-            routeBuilder.MapRoute("Consultant.Admin.GetConsultantsAjax", "Consultations/Admin/Customer/GetConsultantsAjax",
-               new { controller = "Customer", action = "GetConsultantsAjax" });
-            //Get GetOnline Consultants 
-            routeBuilder.MapRoute("Consultant.Admin.GetOnlineConsultants", "Consultations/Admin/Customer/GetOnlineConsultants",
-               new { controller = "Customer", action = "GetOnlineConsultants" });
-            //Get GetOnline Consultants Ajax
-            routeBuilder.MapRoute("Consultant.Admin.GetOnlineConsultantAjax", "Consultations/Admin/Customer/GetOnlineConsultantAjax",
-               new { controller = "Customer", action = "GetOnlineConsultantAjax" });
-            //Get Consultant Details
-            routeBuilder.MapRoute("Consultant.Admin.GetConsultantDetails", "Consultations/Admin/Customer/GetConsultantDetails",
-               new { controller = "Customer", action = "GetConsultantDetails" });
-           
-            //Get Consultant Posts 
-            routeBuilder.MapRoute("Consultant.Admin.GetConsultantPosts", "Consultations/Admin/Customer/GetConsultantPosts",
-               new { controller = "Customer", action = "GetConsultantPosts" });
-            //Get Consultant Posts In Json
-            routeBuilder.MapRoute("Consultant.Admin.GetConsultantPostsInJson", "Consultations/Admin/Customer/GetConsultantPostsInJson",
-              new { controller = "Customer", action = "GetConsultantPostsInJson" });
-            //Get Consultant Post By Post Id and Consultant Id
-            routeBuilder.MapRoute("Consultant.Admin.GetConsultantPostById", "Consultations/Admin/Customer/GetConsultantPostById",
-              new { controller = "Customer", action = "GetConsultantPostById" });
-            //Get Top 20 Consultant By Posts Number
-            routeBuilder.MapRoute("Consultant.Admin.GetTop20ConsultantByPostsNumber", "Consultations/Admin/Customer/GetTop20ConsultantByPostsNumber",
-              new { controller = "Customer", action = "GetTop20ConsultantByPostsNumber" });
-            //Get Top 20 Consultant By Posts Number In Json
-            routeBuilder.MapRoute("Consultant.Admin.GetTop20ConsultantByPostsNumberInJson", "Consultations/Admin/Customer/GetTop20ConsultantByPostsNumberInJson",
-              new { controller = "Customer", action = "GetTop20ConsultantByPostsNumberInJson" });
-            //Get Top 20 Consultant By Posts Evaluation
-            routeBuilder.MapRoute("Consultant.Admin.GetTop20ConsultantByPostsEvaluation", "Consultations/Admin/Customer/GetTop20ConsultantByPostsEvaluation",
-              new { controller = "Customer", action = "GetTop20ConsultantByPostsEvaluation" });
-            //Get Top 20 Consultant By Posts Evaluation In Json
-            routeBuilder.MapRoute("Consultant.Admin.GetTop20ConsultantByPostsEvaluationInJson", "Consultations/Admin/Customer/GetTop20ConsultantByPostsEvaluationInJson",
-              new { controller = "Customer", action = "GetTop20ConsultantByPostsEvaluationInJson" });
+            
 
 
 
@@ -393,9 +324,85 @@ new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
 
 
 
-            
+
+            //Get Members
+            routeBuilder.MapRoute("Consultant.Admin.GetCustomers", "Consultations/Admin/Customer/GetCustomers",
+               new { controller = "Customer", action = "GetMembers" });
+
+            //Get Members Ajax Consultant.User.GetAdminLink
+            routeBuilder.MapRoute("Consultant.Admin.GetCustomersAjax", "Consultations/Admin/Customer/GetCustomersAjax",
+               new { controller = "Customer", action = "GetMembersAjax" });
+            //Get GetOnline Members 
+            routeBuilder.MapRoute("Consultant.Admin.GetOnlineMembers", "Consultations/Admin/Customer/GetOnlineMembers",
+               new { controller = "Customer", action = "GetOnlineMembers" });
+            //Get GetOnline Members Ajax
+            routeBuilder.MapRoute("Consultant.Admin.GetOnlineMembersAjax", "Consultations/Admin/Customer/GetOnlineMembersAjax",
+               new { controller = "Customer", action = "GetOnlineMembersAjax" });
+            //Get Member Details
+            routeBuilder.MapRoute("Consultant.Admin.GetCustomerDetails", "Consultations/Admin/Customer/GetCustomerDetails",
+               new { controller = "Customer", action = "GetMemberDetails" });
+            //Get Member Posts 
+            routeBuilder.MapRoute("Consultant.Admin.GetCustomerPosts", "Consultations/Admin/Customer/GetCustomerPosts",
+               new { controller = "Customer", action = "GetCustomerPosts" });
+            //Get Member Posts In Json
+            routeBuilder.MapRoute("Consultant.Admin.GetCustomerPostsInJson", "Consultations/Admin/Customer/GetCustomerPostsInJson",
+              new { controller = "Customer", action = "GetCustomerPostsInJson" });
+            //Get Member Post By Post Id and Customer Id
+            routeBuilder.MapRoute("Consultant.Admin.GetCustomerPostById", "Consultations/Admin/Customer/GetCustomerPostById",
+              new { controller = "Customer", action = "GetCustomerPostById" });
+            //Get Top 20 Member By Posts Number
+            routeBuilder.MapRoute("Consultant.Admin.GetTop20MemberByPostsNumber", "Consultations/Admin/Customer/GetTop20MemberByPostsNumber",
+              new { controller = "Customer", action = "GetTop20MemberByPostsNumber" });
+            //Get Top 20 Member By Posts Number In Json
+            routeBuilder.MapRoute("Consultant.Admin.GetTop20MemberByPostsNumberInJson", "Consultations/Admin/Customer/GetTop20MemberByPostsNumberInJson",
+              new { controller = "Customer", action = "GetTop20MemberByPostsNumberInJson" });
+            //Delete Customer
+            routeBuilder.MapRoute("Consultant.Admin.DeleteMember", "Consultations/Admin/Customer/DeleteMember",
+              new { controller = "Customer", action = "DeleteMember" });
 
 
+
+
+
+
+
+            //Get Consultants
+            routeBuilder.MapRoute("Consultant.Admin.GetConsultants", "Consultations/Admin/Customer/GetConsultants",
+               new { controller = "Customer", action = "GetConsultants" });
+            //Get Consultants Ajax
+            routeBuilder.MapRoute("Consultant.Admin.GetConsultantsAjax", "Consultations/Admin/Customer/GetConsultantsAjax",
+               new { controller = "Customer", action = "GetConsultantsAjax" });
+            //Get GetOnline Consultants 
+            routeBuilder.MapRoute("Consultant.Admin.GetOnlineConsultants", "Consultations/Admin/Customer/GetOnlineConsultants",
+               new { controller = "Customer", action = "GetOnlineConsultants" });
+            //Get GetOnline Consultants Ajax
+            routeBuilder.MapRoute("Consultant.Admin.GetOnlineConsultantAjax", "Consultations/Admin/Customer/GetOnlineConsultantAjax",
+               new { controller = "Customer", action = "GetOnlineConsultantAjax" });
+            //Get Consultant Details
+            routeBuilder.MapRoute("Consultant.Admin.GetConsultantDetails", "Consultations/Admin/Customer/GetConsultantDetails",
+               new { controller = "Customer", action = "GetConsultantDetails" });
+
+            //Get Consultant Posts 
+            routeBuilder.MapRoute("Consultant.Admin.GetConsultantPosts", "Consultations/Admin/Customer/GetConsultantPosts",
+               new { controller = "Customer", action = "GetConsultantPosts" });
+            //Get Consultant Posts In Json
+            routeBuilder.MapRoute("Consultant.Admin.GetConsultantPostsInJson", "Consultations/Admin/Customer/GetConsultantPostsInJson",
+              new { controller = "Customer", action = "GetConsultantPostsInJson" });
+            //Get Consultant Post By Post Id and Consultant Id
+            routeBuilder.MapRoute("Consultant.Admin.GetConsultantPostById", "Consultations/Admin/Customer/GetConsultantPostById",
+              new { controller = "Customer", action = "GetConsultantPostById" });
+            //Get Top 20 Consultant By Posts Number
+            routeBuilder.MapRoute("Consultant.Admin.GetTop20ConsultantByPostsNumber", "Consultations/Admin/Customer/GetTop20ConsultantByPostsNumber",
+              new { controller = "Customer", action = "GetTop20ConsultantByPostsNumber" });
+            //Get Top 20 Consultant By Posts Number In Json
+            routeBuilder.MapRoute("Consultant.Admin.GetTop20ConsultantByPostsNumberInJson", "Consultations/Admin/Customer/GetTop20ConsultantByPostsNumberInJson",
+              new { controller = "Customer", action = "GetTop20ConsultantByPostsNumberInJson" });
+            //Get Top 20 Consultant By Posts Evaluation
+            routeBuilder.MapRoute("Consultant.Admin.GetTop20ConsultantByPostsEvaluation", "Consultations/Admin/Customer/GetTop20ConsultantByPostsEvaluation",
+              new { controller = "Customer", action = "GetTop20ConsultantByPostsEvaluation" });
+            //Get Top 20 Consultant By Posts Evaluation In Json
+            routeBuilder.MapRoute("Consultant.Admin.GetTop20ConsultantByPostsEvaluationInJson", "Consultations/Admin/Customer/GetTop20ConsultantByPostsEvaluationInJson",
+              new { controller = "Customer", action = "GetTop20ConsultantByPostsEvaluationInJson" });
 
 
 
@@ -406,6 +413,11 @@ new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
 
 
             //-------------------End Admin Consultant-------------------------------
+            //--------------------Harag Admin---------------------------------------
+
+            routeBuilder.MapRoute("Harag.Admin.DAshboard", "Harag/Admin",
+         new { controller = "Dashboard", action = "Home" });
+            //-------------------End HArag Admin------------------------------------
 
 
 

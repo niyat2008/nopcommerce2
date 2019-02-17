@@ -214,6 +214,21 @@
     <Content Update="Themes\Pavilion\Views\Consultant\User\_AdminLink.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Themes\Pavilion\Views\HaragAdmin\Comment\CommentsOnClosedPost.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\HaragAdmin\Comment\CommentsOnOpenPost.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\HaragAdmin\Comment\_CommentTemplatePartial.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\HaragAdmin\Home\Home.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\HaragAdmin\Post\ChangeCatAndSub.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Comment\CommentsOnClosedPost.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
