@@ -415,8 +415,26 @@ new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
             //-------------------End Admin Consultant-------------------------------
             //--------------------Harag Admin---------------------------------------
 
-            routeBuilder.MapRoute("Harag.Admin.DAshboard", "Harag/Admin",
-         new { controller = "Dashboard", action = "Home" });
+
+            //Dashboard
+             routeBuilder.MapRoute("Harag.Admin", "Harag/Admin",
+              new { controller = "Dashboard", action = "Home" });
+
+
+            //Add Category
+            routeBuilder.MapRoute("Harag.Admin.AddHaragCategory", "Harag/Admin/Category/AddHaragCategory", new { controller = "Category", action = "AddHaragCategory" });
+            //Add Category Aajax
+            routeBuilder.MapRoute("Harag.Admin.AddHaragCategoryAjax", "Harag/Admin/Category/AddHaragCategoryAjax", new { controller = "Category", action = "AddHaragCategoryAjax" });
+            //Get Categories 
+            routeBuilder.MapRoute("Harag.Admin.HaragCategories", "Harag/Admin/Category/HaragCategories", new { controller = "Category", action = "GetHaragCategories" });
+            //Get Categories Ajax
+            routeBuilder.MapRoute("Harag.Admin.HaragCategoriesAjax", "Harag/Admin/Category/HaragCategoriesAjax", new { controller = "Category", action = "GetHaragCategoriesAjax" });
+
+
+
+
+
+
             //-------------------End HArag Admin------------------------------------
 
 

@@ -3,7 +3,7 @@ using Nop.Core.Configuration;
 using Nop.Core.Infrastructure;
 using Nop.Core.Infrastructure.DependencyManagement;
 using Nop.Services.Z_Harag.BlackList;
-using Nop.Services.Z_Harag.Category;
+using Nop.Services.Z_HaragAdmin.Categories;
 using Nop.Services.Z_Harag.Comment;
 using Nop.Services.Z_Harag.Message;
 using Nop.Services.Z_Harag.Notification;
