@@ -19,6 +19,7 @@ namespace Nop.Core.Domain.Z_Harag
         public System.DateTime DateCreated { get; set; }
         public Nullable<System.DateTime> DateUpdated { get; set; }
         public string Description { get; set; }
+        public bool IsActive { get; set; }
 
         public ICollection<Z_Harag_Post> Posts { get; set; }
 
