@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Nop.Core.Data;
 using Nop.Core.Domain.Z_Consultant;
+using Nop.Core.Domain.Z_Harag;
 using Nop.Services.Events;
 using Nop.Services.Localization;
 using Nop.Services.Z_Consultant.Helpers;

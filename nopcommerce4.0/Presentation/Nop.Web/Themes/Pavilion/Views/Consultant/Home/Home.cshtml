@@ -11,7 +11,8 @@
         
         $.ajax({
             type: 'GET',
-            url: '@Url.RouteUrl("Consultant.Post.GetAllClosedPostsAjax")', 
+            url: '@Url.RouteUrl("Consultant.Post.GetAllClosedPostsAjax")',
+            complete: function (data) {
                 $("#posts").html(data);
             }
         });

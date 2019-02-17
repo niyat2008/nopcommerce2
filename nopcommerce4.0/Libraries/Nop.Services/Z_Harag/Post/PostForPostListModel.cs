@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Nop.Services.Z_Harag.Post
 {
-    public class PostForPostModel
+    public class PostForPostListModel
     {
-        public PostForPostModel()
+        public PostForPostListModel()
         {
             Files = new List<string>();
         }
@@ -19,7 +19,8 @@ namespace Nop.Services.Z_Harag.Post
         public string Title { get; set; }
 
         public int CategoryId { get; set; }
-
+        public int CityId { get; set; }
+        public string Contact { get; set; }
         public IList<string> Files { get; set; }
 
 

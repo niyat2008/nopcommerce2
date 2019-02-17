@@ -19,5 +19,14 @@ namespace Nop.Services.Z_Harag.Category
             this._categoryRepository = categoryRepository;
             this._eventPublisher = eventPublisher;
         }
+
+        public List<Z_Harag_Category> GetCategories()
+        {
+            var query = _categoryRepository.TableNoTracking;
+            var result = query.ToList(); 
+            return  result;
+        }
+
+     
     }
 }

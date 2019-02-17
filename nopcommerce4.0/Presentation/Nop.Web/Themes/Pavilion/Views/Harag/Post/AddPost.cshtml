@@ -1,7 +1,8 @@
-﻿@{
+﻿@model Nop.Services.Z_Harag.Post.PostForPostListModel
+
+@{
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
 }
-
 
 @{
     string getCustomerPosts = "";
@@ -19,203 +20,355 @@
     }
 }
  
-
-
 @*@if (ViewBag.UserRole == "Registered")
-{
-    if (@ViewBag.CanAddNewPost == true)
-    {*@ 
-            <h3>اضافه اعلان جديد</h3>
-            <div class="row">
-                <div class="col-md-12">
-                    <form class="add-adverse">
-                        <div class="col-md-3">
-                            <label>عنوان الاعلان</label> <br>
-                            <input type="text" class="form-control" placeholder="العنوان">
+    {
+        if (@ViewBag.CanAddNewPost == true)
+        {*@
+<h3>اضافه اعلان جديد</h3>
+<div class="row">
+    <div class="col-md-12">
+        <form id="addPostForm" action="@Url.RouteUrl("Harag.Post.AddNewPostAjax")" method="post" class="add-adverse">
+
+            <div class="col-md-3">
+                <label>عنوان الاعلان</label> <br>
+                @Html.TextBoxFor(m => m.Title, new { id = "Title-js-ajax", @class = "form-control", placeholder = "العنوان", required = "required" })
+            </div>
+            <div class="col-md-3">
+                <label> اختر المدينه </label> <br>
+                <select name="CityId" id="city-js-ajax" class="form-control" required placeholder="اختر المدينه "></select>
+            </div>
+            <div class="col-md-3">
+                <label> اختر القسم </label> <br>
+                <select id="CategoryId-js-ajax" , name="CategoryId" required class="form-control" placeholder="اختر القسم "></select>
+            </div>
+            <div class="col-md-3">
+                <label>وسيلة الاتصال</label> <br>
+                @Html.TextBoxFor(m => m.Contact, new { id = "Contact-js-ajax", required = "required", @class = "form-control", placeholder = "0134578888" })
+
+            </div>
+            <div class="col-md-6">
+                <label>نص الاعلان</label> <br>
+                @Html.TextAreaFor(m => m.Text, new { id = "Text-js-ajax", @class = "form-control txtArea", required = "required", rows = "7", placeholder = "نص الاعلان" })
+
+            </div>
+
+            <div class="col-xs-12">
+                <div class="row">
+                    <br />
+
+                    <div class="form-group bordering">
+                        <div class="images" id="images">
+
                         </div>
-                        <div class="col-md-3">
-                            <label> اختر ..... </label> <br>
-                            <select class="form-control" placeholder="اختر ..... ">
-                                <option>اختيار 1 </option>
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <label> اختر ..... </label> <br>
-                            <select class="form-control" placeholder="اختر ..... ">
-                                <option>اختيار 1 </option>
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <label>وسيلة الاتصال</label> <br>
-                            <input type="text" class="form-control" placeholder="0134578888">
-                        </div>
-                        <div class="col-md-6">
-                            <label>نص الاعلان</label> <br>
-                            <textarea class="form-control txtArea" placeholder="نص الاعلان" rows="7"></textarea>
-                        </div>
-                        <div class="col-xs-12">
-                            <p class="file">
-                                <input type="file" name="file" accept="image/*" id="file">
-                                <label for="file">تحميل الصور</label>
-                            </p>
-                        </div>
-                    </form>
-                    <div class="col-md-12">
-                        <button class="btn btn-default add" type="button">اضافة الاعلان للموقع</button>
+                        <br />
+
                     </div>
                 </div>
-            </div>
-       
-    @*}
-    else
-    {
-        <div id="AddPost">
-
-            <div class="row">
-                <div class="col-md-9 col-lg-offset-2">
-                    <form id="addPostForm">
-                        <div class="form-group" style="margin-bottom:5%;">
-                            <h3>لا يمكنك اضافه استشاره الا بعد اغلاق جميع الاستشارات المفتوحه.</h3>
-                        </div> 
-                    </form>
+                <div class="row">
+                    <p class="file">
+                        <input type="file" name="file" accept="image/*" id="file">
+                        <label for="file">تحميل الصور</label>
+                    </p>
                 </div>
 
+
             </div>
-        </div>
-    } 
-}*@
+            <div class="col-md-12">
+                <button class="btn btn-default add" type="submit">اضافة الاعلان للموقع</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+@*}
+        else
+        {
+            <div id="AddPost">
+
+                <div class="row">
+                    <div class="col-md-9 col-lg-offset-2">
+                        <form id="addPostForm">
+                            <div class="form-group" style="margin-bottom:5%;">
+                                <h3>لا يمكنك اضافه استشاره الا بعد اغلاق جميع الاستشارات المفتوحه.</h3>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        }
+    }*@
+
+<script type="text/javascript">
 
 
+      $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetCategories")',
+
+            success: function (data) {
+                $("#CategoryId-js-ajax").html(data);
+            }
+
+        });
+
+
+    $.ajax({
+        cache: false,
+        type: "GET",
+        url: "@(Url.RouteUrl("Consultant.Comment.GetCities"))",
+        success: function (data) {
+            $("#city-js-ajax").html('');
+            $.each(data, function (id, option) {
+                $("#city-js-ajax").append($('<option></option>').val(option.Id).html(option.ArName));
+            });
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert('Failed to retrieve states.');
+        }
+    });
+
+
+
+
+    function convertToBase64(file) {
+        var image;
+        var fileReader = new FileReader();
+
+        fileReader.readAsDataURL(file);
+        fileReader.onloadend = (e) => {
+            image = fileReader.result;
+            var indexofcomma = image.indexOf(",");
+            var imagebase64 = image.substring(indexofcomma + 1);
+            Files.push(imagebase64);
+            var index = Files.length - 1;
+
+            $("#images").append("<div  class='col-xs-3  img_blck' style='padding-right:0px' id='imgno" + index + "'>" +
+                "<img src='" + image + "' width='100' height='60' />" +
+                "<div class='overlay' onclick='deleteFile(" + index + ")'>" +
+                "<i class='fa fa-trash imageli' ></i>" +
+                "</div>");
+        };
+    }
+
+
+
+    $("#file").change(function (event) {
+
+        if (Files.length >= 5) {
+            alert("لقد تجاوزت العدد المسموح من الصور ,مسموح بخمس صور فقط");
+        }
+        else {
+
+            if (event.target.files && event.target.files[0]) {
+                for (var i = 0; i < event.target.files.length; i++) {
+                    convertToBase64(event.target.files[i]);
+                }
+            }
+        }
+    });
+
+    var Files = [];
+
+    function deleteFile(index) {
+
+        Files.splice(+index, 1);
+        $("#imgno" + index).remove();
+    }
+
+    $("#addPostForm").submit(function (event) {
+
+        /* stop form from submitting normally */
+        event.preventDefault();
+
+
+        var CategoryId = $('#CategoryId-js-ajax').find(":selected").val();
+        var Title = $('#Title-js-ajax').val();
+        var Text = $('#Text-js-ajax').val();
+        var Contact = $('#Contact-js-ajax').val();
+        var CityId = $('#city-js-ajax').val();
+
+
+        if (CategoryId <= 0) {
+            alert("فضلا قم باختيار القسم");
+        } else if (CityId <= 0) {
+            alert("فضلا قم باختيار القسم");
+        }
+        else if (Title === null || Title === "") {
+            alert("قم بكتابة عنوان الاعلان");
+        }
+        else if (Text === null || Text === "") {
+
+            alert("فضلا قم باضافه وصف الاعلان ");
+        }
+        else {
+
+
+            var postForPostModel = {
+                Text: Text,
+                Title: Title,
+                Contact: Contact,
+                CategoryId: CategoryId,
+                CityId: CityId,
+                Files: Files
+            };
+
+
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                type: "POST",
+                url: '@Url.RouteUrl("Harag.Post.AddNewPostAjax")',
+                dataType: 'json',
+                data: JSON.stringify(postForPostModel),
+                complete: function (data) {
+                    if (data.status == 200) {
+                        alert("تمت اضافة الاستئارة بنجاح يمكنك الذهاب الى استشاراتى لرؤية الاستشاراة");
+                    }
+                    else {
+                        alert("حدث خطأ ما تأكد من الاتصال بالانترنت");
+                    }
+                }
+            });
+
+            event.preventDefault();
+        }
+
+    });
+</script>
 
 @*<script type="text/javascript">
 
 
-        function deleteFile(index) {
+            function deleteFile(index) {
 
-            Files.splice(+index, 1);
-            $("#imgno" + index).remove();
-        }
-
-
-        $(document).ready(function () {
-
-            $.ajax({
-                type: 'GET',
-                url: '@Url.RouteUrl("Consultant.Post.GetCategories")',
-
-                success: function (data) {
-                    $("#categoryList").html(data);
-                }
-
-            });
-
-
-            function convertToBase64(file) {
-                var image;
-                var fileReader = new FileReader();
-
-                fileReader.readAsDataURL(file);
-                fileReader.onloadend = (e) => {
-                    image = fileReader.result;
-                    var indexofcomma = image.indexOf(",");
-                    var imagebase64 = image.substring(indexofcomma + 1);
-                    Files.push(imagebase64);
-                    var index = Files.length - 1;
-
-                    $("#images").append("<div  class='col-xs-4 img_blck' style='padding-right:0px' id='imgno" + index + "'>" +
-                        "<img src='" + image + "' width='100' height='60' />" +
-                        "<div class='overlay' onclick='deleteFile(" + index + ")'>" +
-                        "<i class='fa fa-trash imageli' ></i>" +
-                        "</div>");
-                };
+                Files.splice(+index, 1);
+                $("#imgno" + index).remove();
             }
 
 
-
-            $("#file").change(function (event) {
-
-                if (Files.length >= 5) {
-                    alert("لقد تجاوزت العدد المسموح من الصور ,مسموح بخمس صور فقط");
-                }
-                else {
-
-                    if (event.target.files && event.target.files[0]) {
-                        for (var i = 0; i < event.target.files.length; i++) {
-                            convertToBase64(event.target.files[i]);
-                        }
-                    }
-                }
-            });
-
-        });
-
-
-        var Files = [];
-
-
-        $("#addPostForm").submit(function (event) {
-
-            /* stop form from submitting normally */
-            event.preventDefault();
-
-
-            var CategoryId = $('#categoryList').find(":selected").val();
-
-            var Title = $('#postTitle').val();
-            var Text = $('#postText').val();
-
-
-            if (CategoryId <= 0) {
-                alert("فضلا قم باختيار التصنيف");
-            }
-            else if (Title === null || Title === "") {
-                alert("قم بكتابة عنوان الاستشارة");
-            }
-            else if (!Title.replace(/\s/g, '').length) {
-                alert("قم بكتابة عنوان الاستشارة");
-            }
-            else if (Text === null || Text === "") {
-                alert("فضلا قم بشرح المشكلة الخاصة بك ");
-            }
-            else if (!Text.replace(/\s/g, '').length) {
-                alert("فضلا قم بشرح المشكلة الخاصة بك ");
-            }
-            else {
-
-
-                var postForPostModel = {
-                    Text: Text,
-                    Title: Title,
-                    CategoryId: CategoryId,
-                    Files: Files
-                };
-
+            $(document).ready(function () {
 
                 $.ajax({
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    type: "POST",
-                    url: '@Url.RouteUrl("Consultant.Post.AddPostAjax")',
-                    dataType: 'json',
-                    data: JSON.stringify(postForPostModel),
-                    complete: function (data) {
-                        if (data.status == 200) {
-                            alert("تمت اضافة الاستئارة بنجاح يمكنك الذهاب الى استشاراتى لرؤية الاستشاراة");
-                        }
-                        else {
-                            alert("حدث خطأ ما تأكد من الاتصال بالانترنت");
+                    type: 'GET',
+                    url: '@Url.RouteUrl("Consultant.Post.GetCategories")',
+
+                    success: function (data) {
+                        $("#categoryList").html(data);
+                    }
+
+                });
+
+
+                function convertToBase64(file) {
+                    var image;
+                    var fileReader = new FileReader();
+
+                    fileReader.readAsDataURL(file);
+                    fileReader.onloadend = (e) => {
+                        image = fileReader.result;
+                        var indexofcomma = image.indexOf(",");
+                        var imagebase64 = image.substring(indexofcomma + 1);
+                        Files.push(imagebase64);
+                        var index = Files.length - 1;
+
+                        $("#images").append("<div  class='col-xs-4 img_blck' style='padding-right:0px' id='imgno" + index + "'>" +
+                            "<img src='" + image + "' width='100' height='60' />" +
+                            "<div class='overlay' onclick='deleteFile(" + index + ")'>" +
+                            "<i class='fa fa-trash imageli' ></i>" +
+                            "</div>");
+                    };
+                }
+
+
+
+                $("#file").change(function (event) {
+
+                    if (Files.length >= 5) {
+                        alert("لقد تجاوزت العدد المسموح من الصور ,مسموح بخمس صور فقط");
+                    }
+                    else {
+
+                        if (event.target.files && event.target.files[0]) {
+                            for (var i = 0; i < event.target.files.length; i++) {
+                                convertToBase64(event.target.files[i]);
+                            }
                         }
                     }
                 });
 
+            });
+
+
+            var Files = [];
+
+
+            $("#addPostForm").submit(function (event) {
+
+                /* stop form from submitting normally */
                 event.preventDefault();
-            }
-
-        });
 
 
+                var CategoryId = $('#categoryList').find(":selected").val();
+
+                var Title = $('#postTitle').val();
+                var Text = $('#postText').val();
 
 
-</script>*@
+                if (CategoryId <= 0) {
+                    alert("فضلا قم باختيار التصنيف");
+                }
+                else if (Title === null || Title === "") {
+                    alert("قم بكتابة عنوان الاستشارة");
+                }
+                else if (!Title.replace(/\s/g, '').length) {
+                    alert("قم بكتابة عنوان الاستشارة");
+                }
+                else if (Text === null || Text === "") {
+                    alert("فضلا قم بشرح المشكلة الخاصة بك ");
+                }
+                else if (!Text.replace(/\s/g, '').length) {
+                    alert("فضلا قم بشرح المشكلة الخاصة بك ");
+                }
+                else {
+
+
+                    var postForPostModel = {
+                        Text: Text,
+                        Title: Title,
+                        CategoryId: CategoryId,
+                        Files: Files
+                    };
+
+
+                    $.ajax({
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        type: "POST",
+                        url: '@Url.RouteUrl("Consultant.Post.AddPostAjax")',
+                        dataType: 'json',
+                        data: JSON.stringify(postForPostModel),
+                        complete: function (data) {
+                            if (data.status == 200) {
+                                alert("تمت اضافة الاستئارة بنجاح يمكنك الذهاب الى استشاراتى لرؤية الاستشاراة");
+                            }
+                            else {
+                                alert("حدث خطأ ما تأكد من الاتصال بالانترنت");
+                            }
+                        }
+                    });
+
+                    event.preventDefault();
+                }
+
+            });
+
+
+
+
+    </script>*@

@@ -19,15 +19,53 @@ namespace Nop.Web.Infrastructure
         public void RegisterRoutes(IRouteBuilder routeBuilder)
         {
             // ----------------  Harag ------------------------------
- 
+            // done
             routeBuilder.MapRoute("Harag.Home", "Harag",
             new { controller = "HaragHome", action = "Home" });
-
+            // done 
             routeBuilder.MapRoute("Harag.Post.AddNewPost", "Harag/Post/New",
             new { controller = "Post", action = "HaragAddPost" });
+            // done 
+            routeBuilder.MapRoute("Harag.Post.AddNewPostAjax", "Harag/Post/NewAjax",
+            new { controller = "Post", action = "AddNewPostAjax" });
+            // done 
+            routeBuilder.MapRoute("Harag.Post.GetHaragPost", "Harag/Posts",
+            new { controller = "Post", action = "GetHaragPost" });
+            // waiting
+            routeBuilder.MapRoute("Harag.Post.GetAllHaragPostsAjax", "Harag/PostsAjax",
+            new { controller = "Post", action = "GetAllHaragPostsAjax" });
+            // waiting
+            routeBuilder.MapRoute("Harag.Post.GetAllFeaturedPosts", "Harag/FeaturedPostsAjax",
+            new { controller = "Post", action = "GetAllFeaturedPosts" });
+            // waiting
+            routeBuilder.MapRoute("Harag.Home.GetAllSideBarTags", "Harag/TagsAjax",
+            new { controller = "Post", action = "GetAllSideBarTags" });
+            // waiting
+            routeBuilder.MapRoute("Harag.Home.GetAllTopBarTags", "Harag/TopTagsAjax",
+            new { controller = "Post", action = "" });
+            // done
+            routeBuilder.MapRoute("Harag.Post.GetCategories", "Harag/Categories",
+            new { controller = "Post", action = "GetHaragCategories" });
 
-            routeBuilder.MapRoute("Harag.Post.PostDetails", "Harag/Post",
-            new { controller = "Post", action = "PostDetails" });
+            routeBuilder.MapRoute("Harag.Post.GetHaragCities", "Harag/Cities",
+            new { controller = "Post", action = "GetHaragCities" });
+
+            // done
+            routeBuilder.MapRoute("Harag.Navbar", "Harag/NavbarAjax",
+            new { controller = "Post", action = "GetHaragNavbar" });
+
+            //  Harag Comment  
+
+            routeBuilder.MapRoute("Harag.Comment.GetAllPostCommentsAjax", "Harag/AllCommentsAjax",
+            new { controller = "Post", action = "GetAllPostComments" });
+
+            routeBuilder.MapRoute("Harag.Comment.ReportCommentAjax", "Harag/ReportCommentAjax",
+            new { controller = "Post", action = "GetHaragPost" });
+
+
+            //routeBuilder.MapRoute("Harag.Post.GetCities", "Harag/GetCities",
+            //new { controller = "Post", action = "PostDetails" });
+
             //----------------- Consultant----------------------------
 
 

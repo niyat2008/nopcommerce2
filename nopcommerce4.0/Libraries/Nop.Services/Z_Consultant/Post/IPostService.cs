@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Nop.Core.Domain.Z_Consultant;
+using Nop.Core.Domain.Z_Harag;
 using Nop.Services.Z_Consultant.Helpers;
 using System;
 using System.Collections.Generic;

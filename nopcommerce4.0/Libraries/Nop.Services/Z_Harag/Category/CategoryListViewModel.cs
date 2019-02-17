@@ -1,5 +1,4 @@
-﻿using Nop.Core.Domain.Z_Harag;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Nop.Services.Z_Harag.Category
 {
-   public interface ICategoryService
+    public class CategoryListViewModel
     {
-        List<Z_Harag_Category> GetCategories();
+        public int Id { get; set; }
+        public string CategoryName { get; set; } 
     }
 }
