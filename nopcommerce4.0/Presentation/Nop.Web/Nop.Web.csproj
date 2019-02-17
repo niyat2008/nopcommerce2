@@ -81,7 +81,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Harag\" />
     <Folder Include="Models\ConsultantAdmin\" />
     <Folder Include="Models\NewFolder\" />
     <Folder Include="Validators\ConsultantAdmin\" />
