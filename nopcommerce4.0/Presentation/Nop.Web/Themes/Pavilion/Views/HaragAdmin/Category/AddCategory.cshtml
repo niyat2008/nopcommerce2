@@ -1,0 +1,58 @@
+﻿@model Nop.Services.Z_HaragAdmin.Categories.PostCategoryModel
+@{ 
+    Layout = "~/Themes/Pavilion/Views/HaragAdmin/Shared/_Layout.cshtml";
+}
+<form id="addCategory">
+    @Html.ValidationSummary()
+
+    <div class="form-group">
+        <label>الاسم</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(c => c.Name, new { @class = "form-control category-text" })
+            @Html.ValidationMessageFor(c => c.Name)
+        </div>
+
+        <input type="submit" id="add-category-btn" class="btn btn-success" value="اضافة" />
+    </div>
+</form>
+<script src="~/js/ConsultantAdmin/jquery-3.2.1.min.js"></script>
+<script src="~/js/ConsultantAdmin/notify.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#addCategory").submit(function (e) {
+            
+            var ajaxResult;
+            e.preventDefault();
+            var model = {
+                "Name": $(".category-text").val(),
+               
+
+            };
+            var values = JSON.stringify(model);
+            ajaxResult = $.ajax({
+                url: "/Harag/Admin/Category/AddHaragCategoryAjax",
+                contentType: "application/json; charset=utf-8",
+                type: "post",
+                dataType: "json",
+                data: values
+
+            });
+            ajaxResult.done(function (response) {
+                if (response.data == true) {
+                    $(".category-text").val("");
+                    $.notify("تمت الاضافة بنجاح", "success");
+
+                }
+                if (response.data == false)
+                    $.notify(" failed ", "error");
+
+            });
+
+        });
+
+
+        
+
+    });
+</script>

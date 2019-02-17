@@ -81,10 +81,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\Harag\" />
     <Folder Include="Models\ConsultantAdmin\" />
+    <Folder Include="Models\NewFolder\" />
     <Folder Include="Validators\ConsultantAdmin\" />
     <Folder Include="wwwroot\ConsultantAdmin\" />
     <Folder Include="wwwroot\ConsultantApi\Uploads\Images\" />
+    <Folder Include="wwwroot\css\HaragAdmin\" />
     <Folder Include="wwwroot\HaragApi\Uploads\Images\" />
     <Folder Include="wwwroot\Harag\" />
     <Folder Include="wwwroot\NewFolder\" />
@@ -215,6 +218,24 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Consultant\User\_AdminLink.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\HaragAdmin\Category\GetCategories.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\HaragAdmin\Comment\CommentsOnClosedPost.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\HaragAdmin\Comment\CommentsOnOpenPost.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\HaragAdmin\Comment\_CommentTemplatePartial.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\HaragAdmin\Home\Home.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\HaragAdmin\Post\ChangeCatAndSub.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Comment\CommentsOnClosedPost.cshtml">

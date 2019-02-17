@@ -1,0 +1,68 @@
+﻿@model Nop.Web.Models.HaragAdmin.Category.CategoryModel
+@{ 
+    Layout = "~/Themes/Pavilion/Views/HaragAdmin/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+
+<div class="table-responsive">
+    <table id="categories">
+        <thead>
+            <tr>
+                <th>الاسم</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+
+
+<script src="~/js/ConsultantAdmin/jquery-3.2.1.min.js"></script>
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="//cdn.datatables.net/plug-ins/1.10.19/i18n/Arabic.json"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#categories").DataTable({
+            "fixesHeader": {
+                "header": "true",
+                "footer":"true"
+
+            },
+            "serverSide":"true",
+            "responsive": "true",
+            "processing": "true",
+            "responsive": "true",
+            "ajax": {
+                "url": "/Harag/Admin/Category/HaragCategoriesAjax",
+                "dataType": "json",
+                "type":"post"
+
+            },
+            "columns": [
+                {"data":"Name"}
+            ],
+            "language": {
+                "sProcessing": "جارٍ التحميل...",
+                "sLengthMenu": "أظهر _MENU_ مدخلات",
+                "sZeroRecords": "لم يعثر على أية سجلات",
+                "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                "sInfoPostFix": "",
+                "sSearch": "ابحث:",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "الأول",
+                    "sPrevious": "السابق",
+                    "sNext": "التالي",
+                    "sLast": "الأخير"
+                }
+
+            }
+            
+        });
+
+    });
+</script>
