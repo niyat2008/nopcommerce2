@@ -28,8 +28,10 @@ namespace Nop.Data.Mapping.Z_Harag
             this.Property(p => p.IsReserved).IsRequired();
             this.Property(p => p.LastCommentTime).IsOptional();
             this.Property(p => p.IsCommon).IsOptional();
+
+
             this.HasMany(p => p.Z_Harag_Comment);
-            this.HasMany(c => c.Z_Harag_Favorite);
+            //this.HasMany(c => c.Z_Harag_Favorite);
             this.HasMany(c => c.Z_Harag_Message);
             this.HasMany(c => c.Z_Harag_Notification);
             this.HasMany(c => c.Z_Harag_Photo);

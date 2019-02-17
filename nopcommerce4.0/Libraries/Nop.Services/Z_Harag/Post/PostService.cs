@@ -20,13 +20,16 @@ namespace Nop.Services.Z_Harag.Post
 
     public class PostService : IPostService
     {
-
+        #region Fields
         private readonly IRepository<Z_Harag_Post> _postRepository;
         private readonly IRepository<Z_Harag_Category> _categoryRepository;
         private readonly IEventPublisher _eventPublisher;
         private readonly IHostingEnvironment _env;
         ILocalizationService _localizationService;
+        #endregion
 
+
+        #region Ctor
 
         public PostService(IRepository<Z_Harag_Post> postRepository,
             IRepository<Z_Harag_Category> categoryRepository,
@@ -40,7 +43,18 @@ namespace Nop.Services.Z_Harag.Post
             this._env = env;
             this._localizationService = localizationService;
         }
+        #endregion
 
+
+        #region Methods
+        
+      
+       
+
+
+     
+
+        #endregion
 
     }
 }

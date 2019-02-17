@@ -11,6 +11,8 @@ namespace Nop.Services.Z_Harag.Post
 {
     public interface IPostService
     {
-      
+
+       
+       
     }
 }
