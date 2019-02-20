@@ -1,0 +1,45 @@
+﻿
+
+@{
+    Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
+}
+
+
+<!-- Content -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 cont">
+                <div class="feat-adv-blck">
+                    <h3>البحث في القائمة السوداء</h3>
+                    <p>القائمة السوداء هي قائمة بإرقام حسابات وأرقام جوالات من يقومون بإساءة إستخدام الموقع لأغراض ممنوعه مثل الغش أو الأحتيال أو مخالفة قوانين الموقع</p>
+
+                    <p id="message-js-ajax"></p>
+                    <form>
+                        <input id="phone-number" class="form-control" type="text" placeholder="أدخل رقم الحساب أو رقم الجوال هنا" style="width: 20%" />
+                        <button id="check-blacklist" class="btn btn-default add" type="button"> فحص >>  </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $("#check-blacklist").click(function () {
+        var phone = $('#phone-number').val();
+       $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.User.CheckBlackListAjax")?phone=' + phone,
+
+           success: function (data) {
+               alert(data);
+                $("#message-js-ajax").html(data);
+                $('#phone-number').val('');
+            }
+
+        })
+    });
+
+</script>

@@ -1,0 +1,166 @@
+﻿@using Nop.Web.Models.Harag.Comment;
+@model CommentOutputModel
+
+
+<style>
+    .commentHeader {
+        background: #EDEAEA;
+        padding-left: 5px;
+        padding-top: 5px;
+        padding-right: 5px;
+        border-bottom: 1px solid #EBE6CF;
+    }
+
+
+
+    .commentBody {
+        /* background: #F5F5F5;
+                                            border-bottom: 1px solid #EBE6CF;
+                                            */
+        background: #FFFFFF;
+        background: #F5F5F5;
+        color: #454444;
+        padding: 10px;
+        font-size: 1rem;
+        font-size: 1.4rem;
+        font-family: "Times New Roman",Times,serif;
+    }
+
+    .commentFooter {
+        padding: 10px 5px;
+        /* background: #F5F5F5;*/
+        background: #FFFFFF;
+        background: #F5F5F5;
+        border-bottom: 1px solid #EBE6CF;
+    }
+
+        .commentFooter a {
+            color: #919191;
+        }
+
+    .comment {
+        margin: 10px;
+        font-size: 0.8rem;
+        border: 1px solid #EBE6CF;
+        border-radius: 4px;
+        word-wrap: break-word;
+        word-break: break-word;
+    }
+
+    .reportPanel {
+        position: relative;
+        direction: ltr;
+    }
+
+    .reportPanelInfo {
+        display: none;
+        position: absolute;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 2px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        z-index: 9;
+        padding: 10px;
+        background-color: #fff;
+    }
+
+        .reportPanelInfo button {
+            margin: 5px;
+        }
+
+    .adxExtraInfoPart {
+    }
+</style>
+
+
+
+@foreach (var comment in Model.Items)
+{
+    <!-- Comments -->
+@Html.Partial("~/Themes/Pavilion/Views/Harag/Comment/_CommentTemplatePartial.cshtml", comment)
+
+}
+
+
+
+
+@*@if (Model.Paging.PageNumber <= Model.Paging.TotalPages)
+    {
+
+
+    @if (Model.Links.Count == 2)
+        {
+    @if (Model.Paging.PageNumber == 1)
+            {
+                <!-- Pager -->
+    <nav class="pagination-outer" aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" aria-label="Next" onclick="getCommentPaging('@Model.Links[1]?.Href')">
+                    <span aria-hidden="true"> <<< </span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link">@Model.Paging.PageNumber</a>
+            </li>
+
+        </ul>
+    </nav>
+            }
+            else if (Model.Paging.PageNumber == Model.Paging.TotalPages)
+            {
+     <!-- Pager -->
+    <nav class="pagination-outer" aria-label="Page navigation">
+        <ul class="pagination">
+
+            <li class="page-item">
+                <a class="page-link">@Model.Paging.PageNumber</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" aria-label="Previous" onclick="getCommentPaging('@Model.Links[0]?.Href')">
+                    <span aria-hidden="true"> >>> </span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+            }
+        }
+        else if (Model.Links.Count > 2)
+        {
+     <!-- Pager -->
+    <nav class="pagination-outer" aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" aria-label="Next" onclick="getCommentPaging('@Model.Links[2]?.Href')">
+                    <span aria-hidden="true"> <<< </span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link">@Model.Paging.PageNumber</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" aria-label="Previous" onclick="getCommentPaging('@Model.Links[0]?.Href')">
+                    <span aria-hidden="true"> >>> </span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+        }
+    }*@
+
+<script type="text/javascript">
+
+    function getCommentPaging(url) {
+
+        var indexmyurl = url.indexOf("Consultations/Consultations");
+        var myurl = url.substring(indexmyurl);
+
+        $.ajax({
+            type: 'GET',
+            url: myurl,
+
+            success: function (data) {
+                $("#comments").html(data);
+            }
+        });
+    }
+</script>

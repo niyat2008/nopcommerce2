@@ -1,0 +1,125 @@
+﻿@using Nop.Web.Models.Harag.Post;
+@model PostOutputModel
+
+@{
+    Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <select id="search-category-js-ajax" class="form-control">
+                    <option>الاختيار 1</option>
+                </select>
+                <select id="search-city-js-ajax" class="form-control">
+                    <option>الاختيار 1</option>
+                </select>
+                <select id="search-date-js-ajax" class="form-control">
+                    <option>الاختيار 1</option>
+                </select>
+                <button class="btn btn-default srchBtn" type="button"><i class="fa fa-search"></i></button>
+                <hr>
+                <div class="choices">
+                    <a>حراج السيارات</a>
+                    <a>حراج العقارات</a>
+                    <a>حراج العقارات</a>
+                    <a>حراج العقارات</a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <!-- أضف اعلانك -->
+                <div>
+                    <button class="btn btn-default add" type="button">
+                        <a href="@Url.RouteUrl("Harag.Post.AgreementBeforeAddPost")"> أضف اعلانك <i class="fa fa-plus"></i></a>
+                    </button>
+                </div>
+                <!-- كل الاختيارات -->
+                @*<div class="choices">
+                        <a>حراج السيارات</a>
+                        <a>حراج العقارات</a>
+                        <a>حراج العقارات</a>
+                        <a>حراج العقارات</a>
+                    </div>*@
+                <!-- Select Search -->
+                @*<div class="">
+                        <select id="category-js-ajax" class="form-control" style="width:20%">
+                            <option>الاختيار 1</option>
+                        </select>
+                    </div>*@
+                <!-- List -->
+                <div id="posts" class="items">
+
+                    @if (Model.Items.Count() <= 0)
+{
+                    <div id="tabpanelPosts" style="text-align:center"><b>لا يوجد</b></div>
+}
+else
+{
+                    @foreach (var post in Model.Items)
+    {
+                    <div class="item">
+                        <div class="det">
+                            <a href="/Harag/Post?postId=@post.Id"><h3>@post.Title</h3></a>
+                            <small>منذ 4 دقيقة</small>
+                            <div class="det-det">
+                                <a href="/Harag/City/1">
+                                    <span><i class="fa fa-map-marker"></i> @post.City </span>
+                                </a>
+                                <a href="/Harag/user/@post.PostOwner">
+                                    <span><i class="fa fa-user"></i> @post.PostOwner </span>
+                                </a></div>
+                        </div>
+                        <div class="det-img">
+                            <img src="/HaragApi/Uploads/Images/@post.Photo">
+                        </div>
+                    </div>
+    }
+}
+                </div>
+                <div>
+                    <button class="btn btn-default add" type="button">مشاهدة المزيد</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        @*$.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetAllHaragPostsAjax")',
+            complete: function (data) {
+                $("#posts").html(data.responseText);
+            }
+        });*@
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetCategories")',
+            complete: function (data) {
+                $("#category-js-ajax").html(data.responseText);
+            }
+        });
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetCategories")',
+            complete: function (data) {
+                $("#search-category-js-ajax").html(data.responseText);
+            }
+        });
+
+         $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetHaragCities")',
+            complete: function (data) {
+                $("#search-city-js-ajax").html(data.responseText);
+            }
+        });
+    });
+
+</script>
+

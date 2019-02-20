@@ -8,5 +8,7 @@ namespace Nop.Services.Z_Harag.BlackList
 {
    public interface IBlackListService
     {
+        bool checkIfUserInBlackList(string phone);
+        List<Nop.Core.Domain.Z_Harag.Z_Harag_BlackList> GetAllUserInBlackList();
     }
 }

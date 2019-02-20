@@ -1,11 +1,7 @@
 ﻿@{
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
 }
-
-
-
-
-
+ 
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -32,21 +28,21 @@
                 <!-- أضف اعلانك -->
                 <div>
                     <button class="btn btn-default add" type="button">
-                    <a href="@Url.RouteUrl("Harag.Post.AddNewPost")"> أضف اعلانك <i class="fa fa-plus"></i></a></button>
+                    <a href="@Url.RouteUrl("Harag.Post.AgreementBeforeAddPost")"> أضف اعلانك <i class="fa fa-plus"></i></a></button>
                 </div>
                 <!-- كل الاختيارات -->
-                <div class="choices">
+                @*<div class="choices">
                     <a>حراج السيارات</a>
                     <a>حراج العقارات</a>
                     <a>حراج العقارات</a>
                     <a>حراج العقارات</a>
-                </div>
+                </div>*@
                 <!-- Select Search -->
-                <div class="">
+                @*<div class="">
                     <select id="category-js-ajax" class="form-control" style="width:20%">
                         <option>الاختيار 1</option>
                     </select>
-                </div>
+                </div>*@
                 <!-- List -->
                 <div id="posts" class="items">
                     @*<div class="item">
@@ -117,8 +113,7 @@
         $.ajax({
             type: 'GET',
             url: '@Url.RouteUrl("Harag.Post.GetAllHaragPostsAjax")',
-            complete: function (data) {
-                alert(data)
+            complete: function (data) { 
                 $("#posts").html(data.responseText);
             }
         }); 
@@ -126,7 +121,15 @@
             type: 'GET',
             url: '@Url.RouteUrl("Harag.Post.GetCategories")',
             complete: function (data) {
-                $("#category-js-ajax").html(data);
+                $("#category-js-ajax").html(data.responseText);
+            }
+        });
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetCategories")',
+            complete: function (data) {
+                $("#search-category-js-ajax").html(data.responseText);
             }
         });
 
@@ -134,7 +137,7 @@
             type: 'GET',
             url: '@Url.RouteUrl("Harag.Post.GetHaragCities")',
             complete: function (data) {
-                $("#search-city-js-ajax").html(data);
+                $("#search-city-js-ajax").html(data.responseText);
             }
         });
     });

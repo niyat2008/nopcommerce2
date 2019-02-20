@@ -34,13 +34,9 @@
                 @foreach (var item in Model.Items)
                 {
                 <li class="main hasSubMenu"> 
-                    @Html.RouteLink(item.Name, "Consultant.GetAllClosedPostsByCategoryId", new { CategoryId = item.Id }) 
+                     <a href="/Harag/Cat/@item.Id">@item.Name</a> 
                 </li>
-                }
-
-
-
-               
+                } 
             </ul>
         </div><!-- /.navbar-collapse -->
         

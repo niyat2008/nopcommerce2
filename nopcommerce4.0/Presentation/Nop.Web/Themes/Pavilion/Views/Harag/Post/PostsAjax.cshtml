@@ -22,12 +22,15 @@ else
     {
         <div class="item">
             <div class="det">
-                <h3>@post.Title</h3>
+                <a href="/Harag/Post?postId=@post.Id"><h3>@post.Title</h3></a>
                 <small>منذ 4 دقيقة</small>
                 <div class="det-det">
-                    <span><i class="fa fa-map-marker"></i> @post.City </span>
-                    <span><i class="fa fa-user"></i> @post.PostOwner </span>
-                </div>
+                    <a href="/Harag/Post?postId=@post.Id">
+                        <span><i class="fa fa-map-marker"></i> @post.City </span>
+                    </a>
+                    <a href="/Harag/User/@post.PostOwner">
+                        <span><i class="fa fa-user"></i> @post.PostOwner </span>
+                    </a></div>
             </div>
             <div class="det-img">
                 <img src="/HaragApi/Uploads/Images/@post.Photo">

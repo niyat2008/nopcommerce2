@@ -14,14 +14,15 @@ namespace Nop.Services.Z_Harag.Post
             Files = new List<string>();
         }
 
-        public string Text { get; set; }
-
-        public string Title { get; set; }
-
+        public int Id { get; set; }
+        public string Text { get; set; } 
+        public string Title { get; set; } 
         public int CategoryId { get; set; }
         public int CityId { get; set; }
         public string Contact { get; set; }
-        public IList<string> Files { get; set; }
+        public IList<string> Files { get; set; } 
+        public double Len { get; set; }
+        public double Lat { get; set; }
 
 
     }

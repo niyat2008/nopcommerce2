@@ -22,5 +22,20 @@ namespace Nop.Services.Z_Harag.BlackList
             this._eventPublisher = eventPublisher;
             this._env = env;
         }
+
+        public bool checkIfUserInBlackList(string phone)
+        {
+            var query = _blackListService.TableNoTracking.Where(c => c.Phone == phone).FirstOrDefault();
+
+            if (query == null)
+                return false;
+
+            return true;
+        }
+
+        public List<Z_Harag_BlackList> GetAllUserInBlackList()
+        {
+            return _blackListService.TableNoTracking.ToList();
+        }
     }
 }

@@ -22,52 +22,153 @@ namespace Nop.Web.Infrastructure
             // done
             routeBuilder.MapRoute("Harag.Home", "Harag",
             new { controller = "HaragHome", action = "Home" });
-            // done 
+            // Add New Post  
             routeBuilder.MapRoute("Harag.Post.AddNewPost", "Harag/Post/New",
             new { controller = "Post", action = "HaragAddPost" });
             // done 
             routeBuilder.MapRoute("Harag.Post.AddNewPostAjax", "Harag/Post/NewAjax",
             new { controller = "Post", action = "AddNewPostAjax" });
-            // done 
-            routeBuilder.MapRoute("Harag.Post.GetHaragPost", "Harag/Posts",
+            // Get POst
+            routeBuilder.MapRoute("Harag.Post.GetHaragPost", "Harag/Post/{postId?}",
             new { controller = "Post", action = "GetHaragPost" });
-            // waiting
+             
+            // update the location 
+            routeBuilder.MapRoute("Harag.Post.UpdatePostLocation", "Harag/UpdateLocation/{postId?}",
+            new { controller = "Post", action = "UpdatePostLocation" });
+
+            // update location ajax
+            routeBuilder.MapRoute("Harag.Post.UpdatePostLocationAjax", "Harag/UpdateLocationAjax",
+            new { controller = "Post", action = "UpdatePostLocationAjax" });
+
+
+            // done get all posts home 
             routeBuilder.MapRoute("Harag.Post.GetAllHaragPostsAjax", "Harag/PostsAjax",
             new { controller = "Post", action = "GetAllHaragPostsAjax" });
+
+            
+
+          
+
+
+            // add to favorite
+            routeBuilder.MapRoute("Harag.Post.AddPostToFavorite", "Harag/AddPostToFavorite",
+            new { controller = "Post", action = "AddPostToFavorite" });
+
+
             // waiting
             routeBuilder.MapRoute("Harag.Post.GetAllFeaturedPosts", "Harag/FeaturedPostsAjax",
             new { controller = "Post", action = "GetAllFeaturedPosts" });
             // waiting
             routeBuilder.MapRoute("Harag.Home.GetAllSideBarTags", "Harag/TagsAjax",
             new { controller = "Post", action = "GetAllSideBarTags" });
-            // waiting
-            routeBuilder.MapRoute("Harag.Home.GetAllTopBarTags", "Harag/TopTagsAjax",
-            new { controller = "Post", action = "" });
+            
             // done
             routeBuilder.MapRoute("Harag.Post.GetCategories", "Harag/Categories",
             new { controller = "Post", action = "GetHaragCategories" });
-
+            
+            // Cities
             routeBuilder.MapRoute("Harag.Post.GetHaragCities", "Harag/Cities",
             new { controller = "Post", action = "GetHaragCities" });
-
-            // done
+            
+            // HaragNeighborhood
+            routeBuilder.MapRoute("Harag.Post.GetHaragNeighborhoods", "Harag/HaragNeighborhood",
+            new { controller = "Post", action = "GetHaragNeighborhoods" }); 
+            
+            // NavbarAjax
             routeBuilder.MapRoute("Harag.Navbar", "Harag/NavbarAjax",
             new { controller = "Post", action = "GetHaragNavbar" });
+             
+            // Harag Post Report
+            routeBuilder.MapRoute("Harag.Post.ReportPostAjax", "Harag/ReportPost",
+            new { controller = "Post", action = "ReportPostAjax" });
+
+            routeBuilder.MapRoute("Harag.Post.ReportPost", "Harag/ReportPost",
+new { controller = "Post", action = "ReportPost" });
+            // Comment 
+
+            //  Harag all Comment  
+            routeBuilder.MapRoute("Harag.Comment.GetAllPostCommentsAjax", "Harag/AllCommentsAjax",
+            new { controller = "Comment", action = "GetAllPostComments" });
 
             //  Harag Comment  
+            routeBuilder.MapRoute("Harag.Comment.AddHaragComment", "Harag/AddComment",
+            new { controller = "Comment", action = "AddHaragComment" });
 
-            routeBuilder.MapRoute("Harag.Comment.GetAllPostCommentsAjax", "Harag/AllCommentsAjax",
-            new { controller = "Post", action = "GetAllPostComments" });
-
+            // Harag Comment Report
             routeBuilder.MapRoute("Harag.Comment.ReportCommentAjax", "Harag/ReportCommentAjax",
-            new { controller = "Post", action = "GetHaragPost" });
+           new { controller = "Comment", action = "ReportCommentAjax" });
+
+            //////////
+            ////
+            ///
+                      // chceck black list
+            routeBuilder.MapRoute("Harag.Post.AgreementBeforeAddPost", "Harag/Agreement",
+            new { controller = "Post", action = "AgreementBeforeAddPost" });
 
 
-            //routeBuilder.MapRoute("Harag.Post.GetCities", "Harag/GetCities",
-            //new { controller = "Post", action = "PostDetails" });
+            ///
+            /// Harag Messages
+            ///
 
-            //----------------- Consultant----------------------------
+            //  Harag all Messages  
+            routeBuilder.MapRoute("Harag.Message.GetUserMessageThreads", "Harag/Messages",
+            new { controller = "Message", action = "GetUserMessageThreads" });
 
+            //  Harag Get Post Messages  
+            routeBuilder.MapRoute("Harag.Message.GetAllPostMessages", "Harag/Messages/Post/{postId?}",
+            new { controller = "Message", action = "GetAllPostMessages" });
+
+            // Harag New Message
+            routeBuilder.MapRoute("Harag.Message.AddPostMessage", "Harag/NewPostMessage",
+           new { controller = "Message", action = "AddPostMessage" });
+
+ 
+            ///
+            /// HARAG USER
+            /// 
+
+            // check black list 
+            routeBuilder.MapRoute("Harag.User.CheckBlackList", "Harag/CheckBlackList",
+            new { controller = "User", action = "CheckBlackList" });
+
+            // chceck black list
+            routeBuilder.MapRoute("Harag.User.CheckBlackListAjax", "Harag/CheckBlackListAjax",
+            new { controller = "User", action = "CheckBlackListAjax" });
+             
+            // profile
+            routeBuilder.MapRoute("Harag.User.Profile", "Harag/profile",
+            new { controller = "User", action = "Profile" });
+
+            // user profile
+            routeBuilder.MapRoute("Harag.User.UserProfile", "Harag/user/{username?}",
+            new { controller = "User", action = "UserProfile" });
+
+            // user posts
+            routeBuilder.MapRoute("Harag.User.GetUserPostsByUserId", "Harag/user/posts/{userId?}",
+            new { controller = "User", action = "GetUserPostsByUserId" });
+
+
+
+            ///
+            // Search
+            ///
+
+            // done search by cat
+            routeBuilder.MapRoute("Harag.Post.GetHaragCatPosts", "Harag/Cat/{catId?}",
+            new { controller = "Post", action = "GetHaragCatPosts" });
+  
+            // done search by cat
+            routeBuilder.MapRoute("Harag.Post.GetHaragCityPosts", "Harag/City/{CityId?}",
+            new { controller = "Post", action = "GetHaragCatPosts" });
+
+            // done search by user
+            routeBuilder.MapRoute("Harag.Post.GetHaragUserPosts", "Harag/{userId}/Posts",
+            new { controller = "Post", action = "GetHaragUserPosts" });
+
+
+
+
+            // ------------------------ Consultant ------------------------- 
 
             routeBuilder.MapRoute("Consultant.ConsultantHome", "Consultations",
             new { controller = "ConsultantHome", action = "Home" });
