@@ -172,7 +172,8 @@
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    $("#exampleModal").hide();
+                    $("#exampleModal").modal().hide();
+                    $(".modal-backdrop").removeClass('show');
                     $.ajax({
                         "url": "/Harag/Admin/Comment/HaragRateDelete?rateId=" + button.attr("data-rate-id") + "",
                         "method": "DELETE",

@@ -241,7 +241,7 @@ namespace Nop.Web.Controllers.HaragAdmin
             if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
                 return Forbid();
 
-            if (commentId == null || commentId == 0)
+            if (commentId == 0)
                 return NotFound();
 
             return View("~/Themes/Pavilion/Views/HaragAdmin/Post/CommentReports.cshtml", commentId);
@@ -265,7 +265,7 @@ namespace Nop.Web.Controllers.HaragAdmin
                 Items = reportInDb.Select(m => new ReportModel
                 {
                     Id = m.Id,
-                    
+                    Category=m.ReportCategory,
                     ReportDescription = m.ReportDescription,
                     CustomerName = m.Z_Harag_Customer?.Username,
                     Comment = m.Z_Harag_Comment?.Text,

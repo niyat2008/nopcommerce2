@@ -12,7 +12,7 @@ namespace Nop.Web.Models.HaragAdmin.Rate
         public string RatedUser { get; set; }
         public bool AdviceDeal { get; set; }
         public bool IsBuyDone { get; set; }
-        public DateTime? BuyTime { get; set; }
+        public int BuyTime { get; set; }
         public string RateComment { get; set; }
     }
 }

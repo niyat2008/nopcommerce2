@@ -1,5 +1,5 @@
 ﻿@model Nop.Services.Z_HaragAdmin.Categories.PostCategoryModel
-@{ 
+@{
     Layout = "~/Themes/Pavilion/Views/HaragAdmin/Shared/_Layout.cshtml";
 }
 <link href="~/css/ConsultantAdmin/MyCss.css" rel="stylesheet" />
@@ -7,15 +7,15 @@
 
 <form id="addCategory">
     @Html.ValidationSummary()
-    @Html.HiddenFor(c=>c.Id,new { @class="categoryId"})
+    @Html.HiddenFor(c => c.Id, new { @class = "categoryId" })
     <div class="form-group">
-        <label class="form-lbl" >الاسم</label>
+        <label class="form-lbl">الاسم</label>
         <div class="col-md-10 ">
             @Html.TextBoxFor(c => c.Name, new { @class = "form-control category-text detailsTextBox" })
             @Html.ValidationMessageFor(c => c.Name)
         </div>
 
-        
+
     </div>
     <div class="form-group">
         <label class="form-lbl">الملاحظات</label>
@@ -24,11 +24,11 @@
             @Html.ValidationMessageFor(c => c.Description)
         </div>
 
-       
+
     </div>
 
     <div class="form-group">
-        <label class="form-lbl" >نشط @Html.CheckBoxFor(c => c.IsActive,new {@class="categoryIsActive" }) </label>
+        <label class="form-lbl">نشط @Html.CheckBoxFor(c => c.IsActive, new { @class = "categoryIsActive" }) </label>
 
     </div>
 
@@ -41,66 +41,93 @@
 <script>
     $(document).ready(function () {
         $("#addCategory").submit(function (e) {
-           
-            if ($(".categoryIsActive").is(":checked")) {
-                $(".categoryIsActive").val(true);
 
-            } else {
 
-                $(".categoryIsActive").val(false);
-            }
-            console.log("id " + $(".categoryId").val())
-            console.log("name " + $(".category-text").val())
-            console.log("id " + $(".categoryId").val())
-            console.log("active " + $(".categoryIsActive").val())
+
             var ajaxResult;
             e.preventDefault();
-            if ($(".categoryId").val() === "" || $(".categoryId").val() === 0 || $(".categoryId").val() === null) {
-                $(".categoryId").val(0);
-                var model = {
+            var text = $(".category-text").val();
+            var description = $(".category-description").val();
 
-                    "Name": $(".category-text").val(),
-                    "Description": $(".category-description").val(),
-                    "IsActive": $(".categoryIsActive").val(),
-                };
+            if (description === "" && text === "") {
+                alert("ادخل الاسم والملاحظات");
+
+            } else if (description === "") {
+                alert("ادخل الملاحظات");
+
+            } else if (text === "") {
+                alert("ادخل الاسم")
+
             } else {
-                var model = {
-                    "Id": $(".categoryId").val(),
-                    "Name": $(".category-text").val(),
-                    "Description": $(".category-description").val(),
-                    "IsActive": $(".categoryIsActive").val(),
-                };
 
-
-            }
-            
-            var values = JSON.stringify(model);
-            ajaxResult = $.ajax({
-                url: "/Harag/Admin/Category/AddHaragCategoryAjax",
-                contentType: "application/json; charset=utf-8",
-                type: "post",
-                dataType: "json",
-                data: values
-
-            });
-            ajaxResult.done(function (response) {
-                if (response.data == true) {
-
-                    $(".category-text").val("");
-                    $(".category-description").val("");
-                    $(".categoryIsActive").val("");
-                    $.notify("تمت العملية بنجاح", "success");
+                if ($(".categoryIsActive").is(":checked")) {
+                    $(".categoryIsActive").val(true);
 
                 }
-                if (response.data == false)
-                    $.notify(" failed ", "error");
+                else {
 
-            });
+                    $(".categoryIsActive").val(false);
+                }
+
+
+
+
+                if ($(".categoryId").val() === "" || $(".categoryId").val() === 0 || $(".categoryId").val() === null) {
+                    $(".categoryId").val(0);
+                    var model = {
+
+                        "Name": $(".category-text").val(),
+                        "Description": $(".category-description").val(),
+                        "IsActive": $(".categoryIsActive").val(),
+                    };
+                } else {
+                    var model = {
+                        "Id": $(".categoryId").val(),
+                        "Name": $(".category-text").val(),
+                        "Description": $(".category-description").val(),
+                        "IsActive": $(".categoryIsActive").val(),
+                    };
+
+
+                }
+
+
+
+
+
+                var values = JSON.stringify(model);
+                ajaxResult = $.ajax({
+                    url: "/Harag/Admin/Category/AddHaragCategoryAjax",
+                    contentType: "application/json; charset=utf-8",
+                    type: "post",
+                    dataType: "json",
+                    data: values
+
+                });
+                ajaxResult.done(function (response) {
+                    if (response.data == true) {
+
+                        $(".category-text").val("");
+                        $(".category-description").val("");
+                        $(".categoryIsActive").val("");
+                        $.notify("تمت العملية بنجاح", "success");
+
+                    }
+                    if (response.data == false)
+                        $.notify(" failed ", "error");
+
+                });
+            }
+                
+
+
+
+           
 
         });
 
 
-        
+
 
     });
 </script>

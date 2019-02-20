@@ -73,7 +73,7 @@ namespace Nop.Web.Controllers.HaragAdmin
                 {
                     Id=r.Id,
                     RaterUser=r.Customer?.Username,
-                    RatedUser=r.User?.Username,
+                    RatedUser=r.UserId.ToString(),
                     AdviceDeal=r.AdviceDeal,
                     IsBuyDone=r.IsBuyDone,
                     BuyTime=r.BuyTime,

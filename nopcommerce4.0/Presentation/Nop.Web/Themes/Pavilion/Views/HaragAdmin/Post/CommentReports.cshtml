@@ -27,6 +27,16 @@
 
 
                 $.each(data.data, function (key, value) {
+                    console.log(value);
+
+                    if (value.Category == 1) {
+                        value.Category = "رد غير لائق"
+
+                    } else if (value.Category == 2){
+
+                        value.Category="بخس السلعة"
+                    }
+
                     $("<div id='comment'></div>")
                         .append($("<div class='text'>" + value.ReportDescription + "</div>"))
                         .append($("<hr/>")).append($("<span class='commentedBy'>  العنوان : " + value.ReportTitle + "</span>"))

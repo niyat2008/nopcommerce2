@@ -13,7 +13,7 @@ namespace Nop.Core.Domain.Z_Harag
         public string RateComment { get; set; }
         public bool AdviceDeal { get; set; }
         public bool IsBuyDone { get; set; }
-        public Nullable<System.DateTime> BuyTime { get; set; }
+        public int BuyTime { get; set; }
         public Nullable<int> UserId { get; set; }
 
         public virtual Customer Customer { get; set; }

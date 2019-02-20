@@ -16,7 +16,7 @@ namespace Nop.Web.Models.HaragAdmin.Reports
         public string CommentTitle { get; set; }
         public int CommentId { get; set; }
         public string Comment { get; set; }
-        public string Category { get; set; }
+        public byte? Category { get; set; }
 
 
 
