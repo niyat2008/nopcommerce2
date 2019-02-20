@@ -14,6 +14,11 @@ namespace Nop.Services.Z_HaragAdmin.Categories
 
         //Get Categories
         List<Z_Harag_Category> GetCategories(int start, int length, string searchValue, string sortColumnName, string sortDirection);
+        //Update Category
+        bool UpdateCategory(PostCategoryModel category);
+        //Get Category By Id
+        Z_Harag_Category GetCategoryById(int id);
+
         
     }
 }

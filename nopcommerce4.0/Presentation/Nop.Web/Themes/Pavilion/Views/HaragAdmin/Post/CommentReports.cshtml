@@ -1,0 +1,53 @@
+﻿@model int
+
+
+
+
+@{
+    Layout = "~/Themes/Pavilion/Views/HaragAdmin/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Themes/Pavilion/Views/HaragAdmin/Shared/_DataTable.cshtml")
+
+<div class="page-title">بلاغات التعليقات</div>
+
+<div id="comments"></div>
+
+
+
+
+
+<script>
+        $(document).ready(function () {
+
+        $.ajax({
+            type: "GET",
+            url: "/Harag/Admin/Comment/HaragPostReportAjax?commentId=" +@Model+"",
+            success: function (data) {
+
+
+                $.each(data.data, function (key, value) {
+                    $("<div id='comment'></div>")
+                        .append($("<div class='text'>" + value.ReportDescription + "</div>"))
+                        .append($("<hr/>")).append($("<span class='commentedBy'>  العنوان : " + value.ReportTitle + "</span>"))
+                        .append($("<br/>"))
+                        .append($("<span class='commentOwner'>  التصنيف : " + value.Category + "</span>"))
+                        .append($("<br/>"))
+                        .append($("<span class='dateCreated'> صاحب البلاغ : " + value.CustomerName + "</span>"))
+                        
+                        .appendTo('#comments');
+
+
+                    //$('#comment').find('h5').html(value.Text);
+                    //$('#comment').find('.text').html(value.CommentedBy);
+                });
+
+            }
+
+            });
+        $(".ref").on("click", function () {
+            window.location.href = document.referrer;
+
+        });
+        });
+</script>

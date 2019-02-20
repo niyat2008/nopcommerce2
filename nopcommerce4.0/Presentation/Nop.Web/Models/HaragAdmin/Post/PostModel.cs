@@ -8,22 +8,29 @@ namespace Nop.Web.Models.HaragAdmin.Post
 {
     public class PostModel : BaseNopEntityModel
     {
-        public string Text { get; set; }
+        public int Id { get; set; }
+
+
         public string Title { get; set; }
-        public DateTime DateCreated { get; set; }
-        public DateTime DateUpdated { get; set; }
-        public bool IsClosed { get; set; }
-        public bool IsAnswered { get; set; }
-        public int? Rate { get; set; }
+        public string Text { get; set; }
+        public string PaymentMethod { get; set; }
+        public string Contact { get; set; }
+
+
         public bool IsDispayed { get; set; }
         public bool IsReserved { get; set; }
-        public bool IsSetToSubCategory { get; set; }
-        public int? SubCategoryId { get; set; }
-        public string CategoryName { get; set; }
-        public string SubCategoryName { get; set; }
-        public int CategoryId { get; set; }
-        public string PostOwner { get; set; }
-        public string Photo { get; set; }
-        public bool IsCommon { get; set; }
+        public Nullable<bool> IsCommon { get; set; }
+        public bool IsClosed { get; set; }
+        public bool IsAnswered { get; set; }
+
+        public System.DateTime DateCreated { get; set; }
+        public System.DateTime DateUpdated { get; set; }
+
+        public string City { get; set; }
+
+
+        public string Customer { get; set; }
+        public string Category { get; set; }
+
     }
 }

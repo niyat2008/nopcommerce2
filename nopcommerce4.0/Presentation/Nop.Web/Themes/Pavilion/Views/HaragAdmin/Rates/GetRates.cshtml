@@ -1,0 +1,211 @@
+﻿
+
+
+@{
+    Layout = "~/Themes/Pavilion/Views/HaragAdmin/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Themes/Pavilion/Views/HaragAdmin/Shared/_DataTable.cshtml")
+
+
+<!-- Button trigger modal -->
+@*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+</button>*@
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">عرض</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label>التجربة مع البائع</label>
+                <div class="form-group">
+                    <textarea id="rateComment" class="form-control" cols="60" rows="7"></textarea>
+                    
+                </div>
+                <div id="rateLbl"></div>
+              
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">غلق</button>
+                <button type="button" id="delete" class="btn btn-danger">حذف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="table-responsive">
+    <table id="rates" class="table table-bordered table-hover">
+        <thead>
+            <tr class="table-active">
+                <th>رقم التقييم</th>
+                <th>صاحب التقيم</th>
+                <th>العضو المقيم</th>
+                <th>نوع التقييم</th>
+
+                <th>عمليات</th>
+
+
+            </tr>
+        </thead>
+    </table>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+
+
+        var dataTable = $("#rates").DataTable({
+            "serverSide": "true",
+            "responsive": "true",
+            "processing": "true",
+            "autoWidth": "true",
+
+            "ajax": {
+
+                "url": "/Harag/Admin/Comment/HaragRatesAjax",
+                "dataType": "json",
+
+                "type": "post"
+            },
+
+            "columns": [
+
+                { "data": "Id", "name": "Id", "width": "10%" },
+                { "data": "RaterUser" },
+                { "data": "RatedUser" },
+                {
+                    "data": "AdviceDeal",
+                    "render": function (data) {
+                        return (data) ? "<label>ايجابى</label>" : "<span>سلبى</span>"
+
+                    }
+                },
+
+
+
+                {
+                    "data": "Id", "width": "25%",
+                    "render": function (data) {
+                        return "<button type='button' id='rateDetails' data-rate-id=" + data + " class='btn btn-default' data-toggle='modal' data-target='#exampleModal'  >التفاصيل</button > ";
+                       
+
+
+    }
+
+                    }
+
+
+                ],
+        "language": {
+            "sProcessing": "جارٍ التحميل...",
+            "sLengthMenu": "أظهر _MENU_ مدخلات",
+            "sZeroRecords": "لم يعثر على أية سجلات",
+            "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+            "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+            "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+            "sInfoPostFix": "",
+            "sSearch": "ابحث:",
+            "sUrl": "",
+            "oPaginate": {
+                "sFirst": "الأول",
+                "sPrevious": "السابق",
+                "sNext": "التالي",
+                "sLast": "الأخير"
+            }
+        }
+
+
+            });
+
+
+
+        $("#rates").on("click", "#rateDetails", function (e) {
+            e.preventDefault();
+            var button = $(this);
+            $.ajax({
+                url: "/Harag/Admin/Comment/HaragRateDetails?rateId=" + button.attr("data-rate-id") + "",
+                type: "get",
+                success: function (data) {
+
+                    $("#rateComment").val(data.rate.RateComment);
+                    
+                    if (data.rate.AdviceDeal === true) {
+
+                        $("<input type='checkbox' disabled checked />" + "  " + "<span> تم شراء السلعة</span>").appendTo($("#rateLbl"));
+                    }
+                    else {
+
+                        $("<input type='checkbox' disabled  />" + "  " + "<span> لم يتم شراء السلعة</span>").appendTo($("#rateLbl"));
+                    }
+
+                    $("#exampleModal").show();
+                    $("#delete").attr('data-rate-id', data.rate.Id)
+                },
+                error: function (data) {
+                    alert("error");
+
+                }
+
+            });
+        });
+
+
+
+
+        $("#delete").on("click", function () {
+        var button = $(this);
+        swal({
+            title: "هل انت متاكد؟",
+            text: "هل انت متاكد انك تريد مسح هذه الاستشارة؟",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $("#exampleModal").hide();
+                    $.ajax({
+                        "url": "/Harag/Admin/Comment/HaragRateDelete?rateId=" + button.attr("data-rate-id") + "",
+                        "method": "DELETE",
+                        "success": function (result) {
+                            dataTable.row(button.parents("tr")).remove().draw();
+                            //dataTable.rows().remove().draw();
+                            swal("تم مسح الاستشارة بنجاح", {
+                                icon: "success",
+
+                            });
+
+
+                        }
+                    });
+                } else {
+                    swal("التراجع عن مسح هذه الرسالة؟");
+                }
+            });
+    });
+
+
+
+
+
+
+
+
+
+
+        });
+
+
+          /* href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "'*/
+        /*href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "'*/
+
+</script>

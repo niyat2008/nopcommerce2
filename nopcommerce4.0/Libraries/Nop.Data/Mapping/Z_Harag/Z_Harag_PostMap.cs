@@ -35,7 +35,7 @@ namespace Nop.Data.Mapping.Z_Harag
             this.HasMany(c => c.Z_Harag_Message);
             this.HasMany(c => c.Z_Harag_Notification);
             this.HasMany(c => c.Z_Harag_Photo);
-            this.HasOptional(p => p.Z_Harag_Rate).WithRequired(c => c.Z_Harag_Post);
+            //this.HasOptional(p => p.Z_Harag_Rate).WithRequired(c => c.Z_Harag_Post);
             this.HasMany(c => c.Z_Harag_Reports);
             this.HasOptional(p => p.City).WithMany(c => c.Z_Harag_Post).HasForeignKey(p => p.CityId);
             this.Property(p => p.PaymentMethod).IsOptional().HasMaxLength(50);

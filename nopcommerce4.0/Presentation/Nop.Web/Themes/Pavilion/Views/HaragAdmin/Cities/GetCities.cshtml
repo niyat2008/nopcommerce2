@@ -1,0 +1,118 @@
+﻿
+@{
+    Layout = "~/Themes/Pavilion/Views/HaragAdmin/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Themes/Pavilion/Views/HaragAdmin/Shared/_DataTable.cshtml")
+
+
+<div class="table-responsive">
+    <table id="cities" class="table table-bordered table-hover">
+        <thead>
+            <tr class="table-active">
+                
+                
+                
+                <th>المدينة</th>
+                <th>المنطقة</th>
+                @*<th>عمليات</th>*@
+
+
+            </tr>
+        </thead>
+    </table>
+
+</div>
+
+
+
+
+<script>
+    $(document).ready(function () {
+
+
+        var dataTable = $("#cities").DataTable({
+            
+            "responsive": "true",
+            
+            "autoWidth": "true",
+            
+            "ajax": {
+
+                "url": "/Harag/Admin/Comment/HaragCitiesAjax",
+                
+
+                
+            },
+
+            "columns": [
+
+
+               
+                { "data": "Name" },
+                { "data": "ProvinceId" },
+                //{
+                //    "data": "Id", "width": "25%",
+                //    "render": function (data, type, post) {
+                //        return "<button class='btn btn-danger' id='delete' data-post-id=" + post.Id + " ><i class='fa fa-trash' ></i>حذف</button>";
+
+                //    }
+
+                //}
+
+
+            ],
+            "language": {
+                "sProcessing": "جارٍ التحميل...",
+                "sLengthMenu": "أظهر _MENU_ مدخلات",
+                "sZeroRecords": "لم يعثر على أية سجلات",
+                "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                "sInfoPostFix": "",
+                "sSearch": "ابحث:",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "الأول",
+                    "sPrevious": "السابق",
+                    "sNext": "التالي",
+                    "sLast": "الأخير"
+                }
+            }
+
+
+        });
+
+        $("#cities").on("click", "#delete", function () {
+            var button = $(this);
+            swal({
+                title: "هل انت متاكد؟",
+                text: "هل انت متاكد انك تريد مسح هذه الاستشارة؟",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            "url": "/Consultations/Admin/Posts/RemovePost?postId=" + button.attr("data-post-id") + "",
+                            "method": "DELETE",
+                            "success": function (result) {
+                                dataTable.row(button.parents("tr")).remove().draw();
+                                //dataTable.rows().remove().draw();
+                                swal("تم مسح الاستشارة بنجاح", {
+                                    icon: "success",
+
+                                });
+
+
+                            }
+                        });
+                    } else {
+                        swal("التراجع عن مسح هذه الرسالة؟");
+                    }
+                });
+        });
+
+    });
+</script>

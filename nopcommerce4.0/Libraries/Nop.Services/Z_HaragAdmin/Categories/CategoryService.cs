@@ -23,11 +23,14 @@ namespace Nop.Services.Z_HaragAdmin.Categories
         #endregion
 
         #region Mehtods
+        //Add Category
         public bool AddCategory(PostCategoryModel category)
         {
             var categoryInDb = new Z_Harag_Category
             {
                 Name = category.Name,
+                Description=category.Description,
+                IsActive=category.IsActive,
                 DateCreated = DateTime.Now
             };
 
@@ -38,10 +41,30 @@ namespace Nop.Services.Z_HaragAdmin.Categories
             }
             return false;
         }
+        //Update Category
+       public bool UpdateCategory(PostCategoryModel category)
+        {
+            var categoryInDb = _categoryRepository.Table.Where(c => c.Id == category.Id).FirstOrDefault();
+
+            if(categoryInDb !=null)
+            {
+                categoryInDb.Name = category.Name;
+                categoryInDb.Description = category.Description;
+                categoryInDb.IsActive = category.IsActive;
+                categoryInDb.DateUpdated = DateTime.Now;
+
+                _categoryRepository.Update(categoryInDb);
+                return true;
+            }
+
+            return false;
+
+        }
         //Get Categories
         public List<Z_Harag_Category> GetCategories(int start, int length, string searchValue, string sortColumnName, string sortDirection)
         {
             var categories = _categoryRepository.TableNoTracking;
+            
 
             //search
             if (!string.IsNullOrEmpty(searchValue))
@@ -56,6 +79,17 @@ namespace Nop.Services.Z_HaragAdmin.Categories
 
             return categories.ToList();
 
+        }
+        //Get Category By Id
+       public Z_Harag_Category GetCategoryById(int id=0)
+        {
+            if(id !=0)
+            {
+                var category = _categoryRepository.TableNoTracking.Where(c => c.Id == id).FirstOrDefault();
+
+                return category;
+            }
+            return null;
         }
         #endregion
     }

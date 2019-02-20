@@ -8,8 +8,7 @@ namespace Nop.Web.Models.HaragAdmin.Post
 {
     public class PostOutputModel
     {
-        public PagingHeader Paging { get; set; }
-        public List<LinkInfo> Links { get; set; }
+        
         public List<PostModel> Items { get; set; }
     }
 }

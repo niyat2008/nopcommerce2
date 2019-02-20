@@ -4,7 +4,7 @@
 }
 <form id="addCategory">
     @Html.ValidationSummary()
-
+    @Html.HiddenFor(c=>c.Id,new { @class="categoryId"})
     <div class="form-group">
         <label>الاسم</label>
         <div class="col-md-10">
@@ -12,8 +12,25 @@
             @Html.ValidationMessageFor(c => c.Name)
         </div>
 
-        <input type="submit" id="add-category-btn" class="btn btn-success" value="اضافة" />
+        
     </div>
+    <div class="form-group">
+        <label>الملاحظات</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(c => c.Description, new { @class = "form-control category-description" })
+            @Html.ValidationMessageFor(c => c.Description)
+        </div>
+
+       
+    </div>
+
+    <div class="form-group">
+        <label>نشط @Html.CheckBoxFor(c => c.IsActive,new {@class="categoryIsActive" }) </label>
+
+    </div>
+
+    <input type="submit" id="add-category-btn" class="btn btn-success" value="اضافة" />
+
 </form>
 <script src="~/js/ConsultantAdmin/jquery-3.2.1.min.js"></script>
 <script src="~/js/ConsultantAdmin/notify.js"></script>
@@ -21,14 +38,39 @@
 <script>
     $(document).ready(function () {
         $("#addCategory").submit(function (e) {
-            
+           
+            if ($(".categoryIsActive").is(":checked")) {
+                $(".categoryIsActive").val(true);
+
+            } else {
+
+                $(".categoryIsActive").val(false);
+            }
+            console.log("id " + $(".categoryId").val())
+            console.log("name " + $(".category-text").val())
+            console.log("id " + $(".categoryId").val())
+            console.log("active " + $(".categoryIsActive").val())
             var ajaxResult;
             e.preventDefault();
-            var model = {
-                "Name": $(".category-text").val(),
-               
+            if ($(".categoryId").val() === "" || $(".categoryId").val() === 0 || $(".categoryId").val() === null) {
+                $(".categoryId").val(0);
+                var model = {
 
-            };
+                    "Name": $(".category-text").val(),
+                    "Description": $(".category-description").val(),
+                    "IsActive": $(".categoryIsActive").val(),
+                };
+            } else {
+                var model = {
+                    "Id": $(".categoryId").val(),
+                    "Name": $(".category-text").val(),
+                    "Description": $(".category-description").val(),
+                    "IsActive": $(".categoryIsActive").val(),
+                };
+
+
+            }
+            
             var values = JSON.stringify(model);
             ajaxResult = $.ajax({
                 url: "/Harag/Admin/Category/AddHaragCategoryAjax",
@@ -40,8 +82,11 @@
             });
             ajaxResult.done(function (response) {
                 if (response.data == true) {
+
                     $(".category-text").val("");
-                    $.notify("تمت الاضافة بنجاح", "success");
+                    $(".category-description").val("");
+                    $(".categoryIsActive").val("");
+                    $.notify("تمت العملية بنجاح", "success");
 
                 }
                 if (response.data == false)

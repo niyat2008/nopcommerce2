@@ -471,6 +471,66 @@ new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
 
 
 
+            //Get Customers
+            routeBuilder.MapRoute("Harag.Admin.HaragCustomers", "Harag/Admin/Customer/HaragCustomers", new { controller = "Customer", action = "HaragGetMembers" });
+            //Get Customers Ajax
+            routeBuilder.MapRoute("Harag.Admin.HaragCustomersAjax", "Harag/Admin/Customer/HaragCustomerAjax", new { controller = "Customer", action = "GetHaragCustomerAjax" });
+
+
+            //Add Customer To BlackList
+            routeBuilder.MapRoute("Harag.Admin.AddCustomerToBlackList", "Harag/Admin/Customer/AddToBlacList", new { controller = "BlackList", action = "AddBlackListCustomer" });
+            //Get BlackList Customers
+            routeBuilder.MapRoute("Harag.Admin.BlackListCustomer", "Harag/Admin/Customer/BlackList", new { controller = "BlackList", action = "GetBlackListCustomers" });
+            //Get BlackList Customers Ajax
+            routeBuilder.MapRoute("Harag.Admin.BlackListCustomersAjax", "Harag/Admin/Customer/BlackListAjax", new { controller = "BlackList", action = "GetBlackListCustomersAjax" });
+            //Delet BlackList Customers 
+            routeBuilder.MapRoute("Harag.Admin.BlackListCustomersDelete", "Harag/Admin/Customer/BlackListDelet", new { controller = "BlackList", action = "DeleteBlackListCustomer" });
+
+
+
+
+
+
+            //Get Posts  
+            routeBuilder.MapRoute("Harag.Admin.HaragPosts", "Harag/Admin/Post/HaragPosts", new { controller = "Post", action = "GetHaragPosts" });
+            //Get Posts Ajax 
+            routeBuilder.MapRoute("Harag.Admin.HaragPostAjax", "Harag/Admin/Post/HaragPostsAjax", new { controller = "Post", action = "GetHaragPostsAjax" });
+            //Get Post Details
+            routeBuilder.MapRoute("Harag.Admin.HaragPostDetails", "Harag/Admin/Post/HaragPostsDetails", new { controller = "Post", action = "GetPostDetails" });
+            //Post Comments
+            
+            routeBuilder.MapRoute("Harag.Admin.HaragPostComment", "Harag/Admin/Post/HaragPostsComment", new { controller = "Post", action = "GetPostComments" });
+
+            //post Messages
+            routeBuilder.MapRoute("Harag.Admin.HaragPostMessage", "Harag/Admin/Post/HaragPostMessages", new { controller = "Post", action = "GetPostMessages" });
+            //post Reports
+            routeBuilder.MapRoute("Harag.Admin.HaragPostReport", "Harag/Admin/Post/HaragPostReport", new { controller = "Post", action = "GetPostReports" });
+            //Comment Reports 
+            routeBuilder.MapRoute("Harag.Admin.HaragCommentReport", "Harag/Admin/Comment/HaragPostReport", new { controller = "Post", action = "GetCommentReports" });
+            //Comment Reports Ajax
+            routeBuilder.MapRoute("Harag.Admin.HaragCommentReportAjax", "Harag/Admin/Comment/HaragPostReportAjax", new { controller = "Post", action = "GetCommentReportsAjax" });
+            //Get Cities 
+            routeBuilder.MapRoute("Harag.Admin.HaragCities", "Harag/Admin/Comment/HaragCities", new { controller = "City", action = "GetCities" });
+            //Get Cities Ajax
+            routeBuilder.MapRoute("Harag.Admin.HaragCitiesAjax", "Harag/Admin/Comment/HaragCitiesAjax", new { controller = "City", action = "GetCitiesAjax" });
+            //Get Rates 
+            routeBuilder.MapRoute("Harag.Admin.HaragRates", "Harag/Admin/Comment/HaragRates", new { controller = "Rate", action = "GetRates" });
+            //Get Rates Ajax
+            routeBuilder.MapRoute("Harag.Admin.HaragRatesAjax", "Harag/Admin/Comment/HaragRatesAjax", new { controller = "Rate", action = "GetRatesAjax" });
+            //Get Rate Details
+            routeBuilder.MapRoute("Harag.Admin.HaragRateDetails", "Harag/Admin/Comment/HaragRateDetails", new { controller = "Rate", action = "GetRateDetails" });
+            //Delete Rate
+            routeBuilder.MapRoute("Harag.Admin.HaragRateDelete", "Harag/Admin/Comment/HaragRateDelete", new { controller = "Rate", action = "DeleteRate" });
+
+            ////Post Messages
+
+            //routeBuilder.MapRoute("Harag.Admin.HaragPostMessage", "Harag/Admin/Post/HaragPostsMessage", new { controller = "Post", action = "GetPostMessages" });
+            ////Post Messages Ajax
+
+            //routeBuilder.MapRoute("Harag.Admin.HaragPostMessageAjax", "Harag/Admin/Post/HaragPostsMessageAjax", new { controller = "Post", action = "GetPostMessagesAjax" });
+
+
+
 
 
             //-------------------End HArag Admin------------------------------------

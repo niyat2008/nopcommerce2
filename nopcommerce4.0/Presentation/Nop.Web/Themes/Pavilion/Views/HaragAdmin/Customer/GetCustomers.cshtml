@@ -1,0 +1,140 @@
+﻿ @model Nop.Web.Models.HaragAdmin.Customers.CustomersModel
+
+
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Themes/Pavilion/Views/HaragAdmin/shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Themes/Pavilion/Views/HaragAdmin/Shared/_DataTable.cshtml")
+
+
+<div class="page-title">الاعضاء</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover" id="customers">
+        <thead>
+            <tr>
+                <th>رقم العميل</th>
+                <th>الاسم</th>
+                <th>الايميل</th>
+                <th>الموبايل</th>
+                
+               
+                <th>---</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+
+
+
+<script>
+    var dataTable = $("#customers").DataTable({
+    "serverSide":"true",
+    "responsive": "true",
+    "processing":"true",
+    "autoWidth": "true",
+    //"order": [[0, "des"]],
+    "ajax": {
+
+        "url":"/Harag/Admin/Customer/HaragCustomerAjax",
+    "dataType": "json",
+    "type":"post"
+    },
+
+    "columns": [
+        { "data": "Id", "name": "Id", "width": "5%" },
+        { "data": "Username","width":"5%"},
+        { "data": "Email"},
+        { "data": "Mobile", "width": "35%" },
+        
+        //{
+        //    "data": "Active",
+        //    "render": function (data,type,row) {
+        //        return (data) ? '<input type="checkbox" checked disabled  />' : '<input type="checkbox"   disabled />';
+
+        //    }
+        //},
+    
+    {
+        "data": "Id",
+        "render": function (data,type,row) {
+            return "<span id='addToBlackList' class='btn btn-xs btn-danger' data-post-phone="+row.Mobile+"  data-post-id=" +row.Id+ " > اضف الى القائمة السوداء </span>" ;
+
+    }
+
+    }
+
+
+    ],
+    "language": {
+    "sProcessing": "جارٍ التحميل...",
+    "sLengthMenu": "أظهر _MENU_ مدخلات",
+    "sZeroRecords": "لم يعثر على أية سجلات",
+    "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+    "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+    "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+    "sInfoPostFix": "",
+    "sSearch": "ابحث:",
+    "sUrl": "",
+    "oPaginate": {
+    "sFirst": "الأول",
+    "sPrevious": "السابق",
+    "sNext": "التالي",
+    "sLast": "الأخير"
+    }
+    }
+
+
+    });
+
+
+    $("#customers").on("click", "#addToBlackList", function () {
+        var button = $(this);
+       
+       
+        swal({
+            title: "اضافة الى القائمة السوداء؟",
+            text: "هل انت متاكد انك تريد اضافة هذا العضو الى القائمة السوداء ؟",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    var model = {
+                        "CustomerId": parseInt(button.attr("data-post-id")),
+                        "Phone": button.attr("data-post-phone")
+                    };
+                  
+                    var values = JSON.stringify(model);
+                    console.log("values " + values);
+
+                    $.ajax({
+                        url: "/Harag/Admin/Customer/AddToBlacList",
+                        method: "post",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: values ,
+                        success: function (result) {
+                            //dataTable.row(button.parents("tr")).remove().draw();
+                            //dataTable.rows().remove().draw();
+                            swal("تم اضافة هذا العضو الى القائمة السوداء  ", {
+                                icon: "success",
+
+                            });
+
+
+                        }
+                    });
+                } else {
+                    swal("التراجع عن الاضافة الى القائمة السوداء؟");
+                }
+            });
+    });
+
+   
+</script>
+    

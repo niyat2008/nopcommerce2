@@ -3,16 +3,19 @@
     Layout = "~/Themes/Pavilion/Views/HaragAdmin/Shared/_Layout.cshtml";
 }
 
-<link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+@*<link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />*@
+@Html.Partial("~/Themes/Pavilion/Views/HaragAdmin/Shared/_DataTable.cshtml")
 
+<div class="page-title">الاقسام</div>
 <div class="table-responsive">
-    <table id="categories" class="display">
+    <table id="categories" class=" table table-bordered display">
         <thead>
             <tr>
                 <th>رقم القسم</th>
                 <th>الاسم</th>
                 <th>الملاحظات</th>
                 <th>نشط</th>
+                <th>---</th>
             </tr>
         </thead>
     </table>
@@ -44,6 +47,7 @@
 
             },
             "columns": [
+                { "data": "Id" },
                 { "data": "Name" },
                 { "data": "Description" },
                 {
@@ -56,7 +60,7 @@
                 {
                     "data": "Id",
                     "render": function (data) {
-                        return "<a href='#' class='btn btn-default'>تعديل</a> ";
+                        return "<a href='/Harag/Admin/Category/AddHaragCategory?id="+data+"' class='btn btn-default'>تعديل</a> ";
 
                     }
 

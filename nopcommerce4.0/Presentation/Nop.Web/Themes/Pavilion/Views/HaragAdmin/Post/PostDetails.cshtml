@@ -1,0 +1,225 @@
+﻿@model Nop.Web.Models.HaragAdmin.Post.PostWithFilesModel
+
+@{
+    ViewBag.Title = "PostDetails";
+    Layout = "~/Themes/Pavilion/Views/HaragAdmin/shared/_Layout.cshtml";
+}
+
+
+@Html.Partial("~/Themes/Pavilion/Views/HaragAdmin/Shared/_DataTable.cshtml")
+<link href="~/css/HaragAdmin/ekko-lightbox.css" rel="stylesheet" />
+<div class="post-title">تفاصيل الاعلان</div>
+
+
+
+
+
+@using (Html.BeginForm())
+{
+    
+        <div class="row">
+            
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-lbl">العنوان</label>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(p => p.Title, new { @class = "form-control detailsTextBox" , @readonly="readonly" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-lbl">الصنف </label>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(p => p.Category, new { @class = "form-control detailsTextBox ", @readonly = "readonly" })
+                            </div>
+                        </div>
+
+                    </div>
+               
+        </div>
+        <div class="row">
+           
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-lbl">الوصف</label>
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(p => p.Text, new { @class = "form-control detailsTextBox", @readonly = "readonly", @rows = "7" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-lbl">صاحب الاستشارة</label>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(p => p.Customer, new { @class = "form-control detailsTextBox", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-lbl">المدينة</label>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(p => p.City, new { @class = "form-control detailsTextBox", @readonly = "readonly" })
+                            </div>
+                        </div>
+
+                    </div>
+               
+        </div>
+        <div class="row">
+           
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-lbl">تاريخ الانشاء</label>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(p => p.DateCreated, new { @class = "form-control detailsTextBox", @readonly = "readonly" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-lbl">تاريخ التحديث</label>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(p => p.DateUpdated, new { @class = "form-control detailsTextBox", @readonly = "readonly" })
+                            </div>
+                        </div>
+
+                    </div>
+               
+        </div>
+
+       
+
+
+   
+
+    <span  class="btn btn-primary ref">رجوع</span>
+   
+}
+
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        @{ 
+            var url = Model.Photos.FirstOrDefault();
+        }
+@foreach (var photo in Model.Photos)
+{
+        <div class="carousel-item @((photo==url)?Html.Raw("active"):Html.Raw(""))">
+            <img class="d-block w-100 " src="@photo" alt="First slide">
+        </div>
+}
+    </div>
+</div>
+
+
+<a href="@Model.Photos.FirstOrDefault()" data-toggle="lightbox">
+
+
+    <img src="@Model.Photos.FirstOrDefault()" class="img-fluid">
+</a>
+
+
+<div class="row">
+    @foreach (var photo in Model.Photos)
+    {
+        <div class="col-md-2">
+            <img src="@photo" class="img-responsive" style="width:200px;height:200px;  margin-bottom:10px;margin-top:20px;" />
+        </div>
+
+    }
+</div>
+
+<div id="comments" style="margin-top:30px;"><span>التعليقات</span></div>
+<div id="messages"><span>الرسائل</span></div>
+<div id="reports"><span>البلاغات</span></div>
+
+<script src="~/js/HaragAdmin/ekko-lightbox.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+
+
+
+
+        // Post Comments
+
+        $("<div>Comments</div>");
+        $.ajax({
+            type: "GET",
+            url: "/Harag/Admin/Post/HaragPostsComment?postId=" +@Model.Id+"",
+            success: function (data) {
+
+               
+                $.each(data.data, function (key, value) {
+                    $("<div id='comment'></div>").append($("<div class='text'>" + value.Text + "</div>")).append($("<hr/>")).append($("<span class='commentedBy'>تم التعليق بواسطة : " + value.CommentedBy + "</span>")).append($("<br/>")).append($("<span class='commentOwner'>اسم صاحب التعليق : " + value.CommentOwner + "</span>")).append($("<br/>")).append($("<span class='dateCreated'>تاريخ الانشاء : " + value.DateCreated + "</span>")).append($("<br/>")).append($("<span class='dateUpdated'>تاريخ التعديل : " + value.DateUpdated + "</span>")).append($("<br/>")).append($("<a href='/Harag/Admin/Comment/HaragPostReport?commentId=" + value.Id + "'>بلاغات هذا التعليق </a>")).appendTo('#comments');
+
+
+                    //$('#comment').find('h5').html(value.Text);
+                    //$('#comment').find('.text').html(value.CommentedBy);
+                });
+
+            }
+
+            });
+
+
+
+        //Post Messages
+        $("<div>Messages</div>");
+             $.ajax({
+            type: "GET",
+            url: "/Harag/Admin/Post/HaragPostMessages?postId=" +@Model.Id+"",
+            success: function (data) {
+
+
+                $.each(data.data, function (key, value) {
+                    $("<div id='message'></div>").append($("<div class='text'> نص الرسالة : " + value.Message + "</div>")).append($("<hr/>")).append($("<br/>")).append($("<span class='commentOwner'>عنوان الاعلان  : " + value.Post + "</span>")).append($("<br/>")).append($("<span class='dateUpdated'>صاحب الاعلان  : " + value.Customer + "</span>")).append($("<br/>")).append($("<span class='dateCreated'>تاريخ الانشاء : " + value.DateCreated + "</span>")).appendTo('#messages');
+
+
+
+                });
+
+            }
+
+            });
+
+
+        //Post Reports
+
+             $("<div>Reports</div>");
+             $.ajax({
+            type: "GET",
+            url: "/Harag/Admin/Post/HaragPostReport?postId=" +@Model.Id+"",
+            success: function (data) {
+
+
+                $.each(data.data, function (key, value) {
+                    $("<div id='report'></div>").append($("<span class='postTitle'>عنوان الاعلان  : " + value.PostTitle + "</span>")).append($("<br/>")).append($("<span class='reportTitle'>عنوان البلاغ : " + value.ReportTitle + "</span>")).append($("<br/>")).append($("<div class='text'>نص البلاغ  : " + value.ReportDescription + "</div>")).append($("<br/>")).append($("<span class='reportOwner'>صاحب البلاغ : " + value.CustomerName + "</span>")).appendTo('#reports');
+
+
+
+                });
+
+            }
+
+            });
+
+
+        $(".ref").on("click", function () {
+            window.location.href = document.referrer;
+
+             });
+
+        $('[data-toggle="lightbox"]').on('click', function (event) {
+            var button = $(this);
+            event.preventDefault();
+            $(this).ekkoLightbox();
+        });
+
+        });
+</script>
+
+
+
+
+

@@ -1,0 +1,109 @@
+﻿@model Nop.Web.Models.HaragAdmin.BlackList.BlackListModel
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Themes/Pavilion/Views/HaragAdmin/shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Themes/Pavilion/Views/HaragAdmin/Shared/_DataTable.cshtml")
+
+<div>القائمة السوداء</div>
+
+
+<div class="table-responsive display">
+    <table class="table table-bordered table-hover display" id="blackList">
+        <thead>
+            <tr>
+                <th>رقم العميل</th>
+                <th>الاسم</th>
+                <th>الموبايل</th>
+                <th>الايميل</th>
+                <th>---</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+
+
+
+<script>
+    var dataTable = $("#blackList").DataTable({
+            
+            "responsive": "true",
+           
+            //"order": [[0, "des"]],
+            "ajax": {
+
+                "url": "/Harag/Admin/Customer/BlackListAjax",
+                
+            },
+
+            "columns": [
+
+                { "data": "CustomerId", "width": "10%" },
+                { "data": "Name", "width": "35%" },
+                { "data": "Phone" },
+                { "data": "Email" },
+                {
+                    "data": "Id",
+                    "render": function (data) {
+                        return "<button class='btn btn-xs btn-danger' id='delete' data-post-id=" + data + "><i class='fa fa-trash' ></i> حذف</button>";
+
+                    }
+
+                }
+
+
+            ],
+            "language": {
+                "sProcessing": "جارٍ التحميل...",
+                "sLengthMenu": "أظهر _MENU_ مدخلات",
+                "sZeroRecords": "لم يعثر على أية سجلات",
+                "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                "sInfoPostFix": "",
+                "sSearch": "ابحث:",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "الأول",
+                    "sPrevious": "السابق",
+                    "sNext": "التالي",
+                    "sLast": "الأخير"
+                }
+            }
+
+
+        });
+
+    $("#blackList").on("click", "#delete", function () {
+            var button = $(this);
+            swal({
+                title: "هل انت متاكد؟حذف",
+                text: "هل انت متاكد انك تريد مسح هذا العميل من القائمة السوداء ؟",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            "url": "/Harag/Admin/Customer/BlackListDelet?id=" + button.attr("data-post-id") + "",
+                            "method": "DELETE",
+                            "success": function (result) {
+                                dataTable.row(button.parents("tr")).remove().draw();
+                                //dataTable.rows().remove().draw();
+                                swal("تم حذف هذا العضو من القائمة السوداء بنجاح", {
+                                    icon: "success",
+
+                                });
+
+
+                            }
+                        });
+                    } else {
+                        swal("التراجع عن الحذف؟");
+                    }
+                });
+        });
+</script>

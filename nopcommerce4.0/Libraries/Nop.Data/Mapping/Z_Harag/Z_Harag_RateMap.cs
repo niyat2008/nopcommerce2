@@ -16,7 +16,9 @@ namespace Nop.Data.Mapping.Z_Harag
             this.Property(r => r.IsBuyDone);
             this.Property(r => r.AdviceDeal);
             this.HasOptional(r => r.Customer).WithMany(c => c.Z_Harag_Rate).HasForeignKey(r => r.CustomerId);
-            this.HasRequired(r => r.Z_Harag_Post).WithOptional(p => p.Z_Harag_Rate);
+            this.HasOptional(r => r.User).WithMany(u => u.Z_Harag_User_Rate).HasForeignKey(r => r.UserId);
+            this.Property(r => r.RateComment).IsOptional().HasMaxLength(4000);
+                
 
         }
     }

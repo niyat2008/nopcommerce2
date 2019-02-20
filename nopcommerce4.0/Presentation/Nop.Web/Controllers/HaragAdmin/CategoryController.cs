@@ -31,13 +31,34 @@ namespace Nop.Web.Controllers.HaragAdmin
         #region Actions
 
         //Add Category
-        public IActionResult AddHaragCategory()
+        public IActionResult AddHaragCategory(int id=0)
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Unauthorized();
 
             if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
                 return Forbid();
+
+            if(id !=null || id !=0)
+            {
+
+                var categoryInDb = _categoryService.GetCategoryById(id);
+
+                if(categoryInDb==null)
+                     return View("~/Themes/Pavilion/Views/HaragAdmin/Category/AddCategory.cshtml");
+
+                var category = new PostCategoryModel
+                {
+                    Id=categoryInDb.Id,
+                    Name=categoryInDb.Name,
+                    Description=categoryInDb.Description,
+                    IsActive=categoryInDb.IsActive
+                };
+
+                return View("~/Themes/Pavilion/Views/HaragAdmin/Category/AddCategory.cshtml", category);
+            }
+
+
 
             return View("~/Themes/Pavilion/Views/HaragAdmin/Category/AddCategory.cshtml");
         }
@@ -53,6 +74,12 @@ namespace Nop.Web.Controllers.HaragAdmin
 
             if (!ModelState.IsValid)
                 return View("~/Themes/Pavilion/Views/HaragAdmin/Category/AddCategory.cshtml", category);
+
+            if(category.Id !=0 )
+            {
+                var response = _categoryService.UpdateCategory(category);
+                return Json(new { data = response });
+            }
 
             var result = _categoryService.AddCategory(category);
 

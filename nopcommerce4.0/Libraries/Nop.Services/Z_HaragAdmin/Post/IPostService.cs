@@ -10,6 +10,14 @@ namespace Nop.Services.Z_HaragAdmin.Post
    public interface IPostService
     {
         //Get All Posts
-        List<Z_Harag_Post> GetAllPosts();
+        List<Z_Harag_Post> GetAllPosts(int start, int length, string searchValue, string sortColumnName, string sortDirection);
+        //Delete Post
+        void DeletePost(int id);
+        //post Details
+        Z_Harag_Post PostDetails(int postId);
+        //post Message
+        List<Z_Harag_Message> GetPostMessage(int postId);
+        //Post Reports
+        List<Z_Harag_Reports> GetPostReports(int postId);
     }
 }

@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
     <link href="~/lib/adminLTE/AdminLTE-2.3.0.css" rel="stylesheet" />
     @*<link href="~/css/ConsultantAdmin/MyCss.css" rel="stylesheet" />*@
+    <link href="~/css/HaragAdmin/ekko-lightbox.css" rel="stylesheet" />
 
 </head>
 <body class="app sidebar-mini rtl">
@@ -127,40 +128,32 @@
                 </div>
             </div>*@
         <ul class="app-menu">
-            <li><a class="app-menu__item active" href="/Consultations/Admin"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">لوحة التحكم الرئيسية</span></a></li>
+            <li><a class="app-menu__item active" href="/Harag/Admin"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">لوحة التحكم الرئيسية</span></a></li>
             <li class="treeview">
                 <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">الاعلانات</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu" id="allPosts">
-                    <li><a id="closedDisplayedPost" href="/Consultations/Admin/Posts/ClosedDisplayed" class="treeview-item"><i class="icon fa fa-circle-o"></i> المعروضة</a></li>
-                    <li><a class="treeview-item" href="/Consultations/Admin/Posts/ClosedNotDisplayed" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> مغلقة غير معروضة</a></li>
+                    <li><a id="closedDisplayedPost" href="/Harag/Admin/Post/HaragPosts" class="treeview-item"><i class="icon fa fa-circle-o"></i> الاعلانات</a></li>
+                    @*<li><a class="treeview-item" href="/Consultations/Admin/Posts/ClosedNotDisplayed" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> مغلقة غير معروضة</a></li>
                     <li><a class="treeview-item" href="/Consultations/Admin/Posts/GetAllNotRepliedPosts"><i class="icon fa fa-circle-o"></i> لم يرد عليها</a></li>
                     <li><a class="treeview-item" href="/Consultations/Admin/Posts/GetAllReservedPosts"><i class="icon fa fa-circle-o"></i> محجوزة للرد</a></li>
-                    <li><a class="treeview-item" href="/Consultations/Admin/Posts/GetAllOpenPosts"><i class="icon fa fa-circle-o"></i> مفتوحة</a></li>
+                    <li><a class="treeview-item" href="/Consultations/Admin/Posts/GetAllOpenPosts"><i class="icon fa fa-circle-o"></i> مفتوحة</a></li>*@
                 </ul>
             </li>
 
             <li class="treeview">
                 <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">الاعضاء</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="/Consultations/Admin/Customer/GetCustomers"><i class="icon fa fa-circle-o"></i>الاعضاء</a></li>
-                    <li><a class="treeview-item" href="/Consultations/Admin/Customer/GetTop20MemberByPostsNumber"><i class="icon fa fa-circle-o"></i> اعلى عشرين عضو بعدد الاشتشارات</a></li>
+                    <li><a class="treeview-item" href="/Harag/Admin/Customer/HaragCustomers"><i class="icon fa fa-circle-o"></i>الاعضاء</a></li>
+                    @*<li><a class="treeview-item" href="/Consultations/Admin/Customer/GetTop20MemberByPostsNumber"><i class="icon fa fa-circle-o"></i> اعلى عشرين عضو بعدد الاشتشارات</a></li>*@
                     @*<li><a class="treeview-item" href="form-samples.html"><i class="icon fa fa-circle-o"></i> Form Samples</a></li>
                         <li><a class="treeview-item" href="form-notifications.html"><i class="icon fa fa-circle-o"></i> Form Notifications</a></li>*@
                 </ul>
             </li>
             <li class="treeview">
-                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">المدن</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="/Consultations/Admin/Customer/GetConsultants"><i class="icon fa fa-circle-o"></i> المستشارين</a></li>
-                    <li><a class="treeview-item" href="/Consultations/Admin/Customer/GetTop20ConsultantByPostsNumber"><i class="icon fa fa-circle-o"></i> اعلى 20 مستشار بعدد الاستشارات</a></li>
-                    <li><a class="treeview-item" href="/Consultations/Admin/Customer/GetTop20ConsultantByPostsEvaluation"><i class="icon fa fa-circle-o"></i> اعلى 20 مستشار بعدد التقيمات</a></li>
-                </ul>
-            </li>
-            <li class="treeview">
                 <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">الاقسام</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="/Consultations/Admin/Categories/GetCategories"><i class="icon fa fa-circle-o"></i> الاصناف الرئيسية</a></li>
-                    <li><a class="treeview-item" href="/Consultations/Admin/SubCategories/GetSubCategories"><i class="icon fa fa-circle-o"></i>الاصناف الفرعية</a></li>
+                    <li><a class="treeview-item" href="/Harag/Admin/Category/HaragCategories"><i class="icon fa fa-circle-o"></i> الاقسام </a></li>
+                    <li><a class="treeview-item" href="/Harag/Admin/Category/AddHaragCategory"><i class="icon fa fa-circle-o"></i> أضف قسم</a></li>
 
                     @*<li><a class="treeview-item" href="page-lockscreen.html"><i class="icon fa fa-circle-o"></i> Lockscreen Page</a></li>
                         <li><a class="treeview-item" href="page-user.html"><i class="icon fa fa-circle-o"></i> User Page</a></li>
@@ -170,6 +163,35 @@
                         <li><a class="treeview-item" href="page-error.html"><i class="icon fa fa-circle-o"></i> Error Page</a></li>*@
                 </ul>
             </li>
+            <li class="treeview">
+                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label">القائمة السوداء</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="/Harag/Admin/Customer/BlackList"><i class="icon fa fa-circle-o"></i> القائمة السوداء </a></li>
+                    @*<li><a class="treeview-item" href="/Harag/Admin/Category/AddHaragCategory"><i class="icon fa fa-circle-o"></i> أضف قسم</a></li>*@
+
+                   
+                </ul>
+            </li>
+            <li class="treeview">
+                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label"> المدن</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="/Harag/Admin/Comment/HaragCities"><i class="icon fa fa-circle-o"></i> المدن </a></li>
+                    @*<li><a class="treeview-item" href="/Harag/Admin/Category/AddHaragCategory"><i class="icon fa fa-circle-o"></i> أضف قسم</a></li>*@
+
+
+                </ul>
+            </li>
+            <li class="treeview">
+                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-file-text"></i><span class="app-menu__label"> التقييم</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="/Harag/Admin/Comment/HaragRates"><i class="icon fa fa-circle-o"></i> التقييم </a></li>
+                    @*<li><a class="treeview-item" href="/Harag/Admin/Category/AddHaragCategory"><i class="icon fa fa-circle-o"></i> أضف قسم</a></li>*@
+
+
+                </ul>
+            </li>
+
+
         </ul>
     </aside>
 
@@ -257,6 +279,7 @@
          }
     </script>
     <script src="~/js/ConsultantAdmin/notify.js"></script>
-   
+    <script src="~/js/HaragAdmin/ekko-lightbox.min.js"></script>
+
 </body>
 </html>

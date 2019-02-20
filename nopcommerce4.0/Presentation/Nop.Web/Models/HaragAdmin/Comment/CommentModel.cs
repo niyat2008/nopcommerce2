@@ -8,6 +8,7 @@ namespace Nop.Web.Models.HaragAdmin.Comment
 {
     public class CommentModel : BaseNopEntityModel
     {
+        public int Id { get; set; }
         public string Text { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
