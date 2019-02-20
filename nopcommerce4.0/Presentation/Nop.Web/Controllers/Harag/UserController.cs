@@ -90,11 +90,11 @@ namespace Nop.Web.Controllers.Harag
         }
 
         [HttpGet]
-        public IActionResult RateUserView(int userId)
+        public IActionResult RateUserView(string username)
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Redirect("Login");
-            var user = _customerContext.GetCustomerById(userId);
+            var user = _customerContext.GetCustomerByUsername(username);
 
             if (user == null)
             {
@@ -112,7 +112,7 @@ namespace Nop.Web.Controllers.Harag
             return View("~/Themes/Pavilion/Views/Harag/Rate/RateUser.cshtml", model); 
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult RateUserAjax( RateModel model)
         { 
 
@@ -121,13 +121,17 @@ namespace Nop.Web.Controllers.Harag
 
             if(!ModelState.IsValid)
                 return View("~/Themes/Pavilion/Views/Harag/Rate/RateUser.cshtml", model);
+            var user = _customerContext.GetCustomerByUsername(model.Username);
+
+            if (user == null)
+                return NotFound();
 
             var rate = new Z_Harag_Rate {
                 AdviceDeal = model.AdviceDeal,
                 IsBuyDone = model.IsBuyDone,
                 RateComment = model.RateComment,
                 CustomerId = _workContext.CurrentCustomer.Id,
-                UserId = model.UserId,
+                UserId = user.Id,
                 BuyTime = model.WhenBuyDone
             };
 
@@ -140,21 +144,30 @@ namespace Nop.Web.Controllers.Harag
 
 
         [HttpGet]
-        public IActionResult GetUserRates(int userId)
+        public IActionResult GetUserRates(string userId)
         {
             var userRates = new UserRateOutList();
 
+            var user = _customerContext.GetCustomerByUsername(userId);
 
-            var rates = _rateRepository.GetUserRates(userId);
+            if (user == null)
+                return NotFound();
+
+            var rates = _rateRepository.GetUserRates(user.Id);
 
             userRates.Rates = rates.Select(m => new RateModel
             {
                 AdviceDeal = m.AdviceDeal,
+                
                 IsBuyDone = m.IsBuyDone,
                 RateComment = m.RateComment,
                 Username = m.Customer.Username
             }).ToList();
-              
+
+            userRates.ConfirmedUserDownRateCount = 0;
+            userRates.ConfirmedUserUpRateCount = 0;
+            userRates.UpRateCount = userRates.Rates.Where(m => m.AdviceDeal == true).ToList().Count; ;
+            userRates.DownRateCount = userRates.Rates.Where(m => m.AdviceDeal == false).ToList().Count; 
             ViewBag.Added = true;
 
             return View("~/Themes/Pavilion/Views/Harag/Rate/AllUserRates.cshtml", userRates);

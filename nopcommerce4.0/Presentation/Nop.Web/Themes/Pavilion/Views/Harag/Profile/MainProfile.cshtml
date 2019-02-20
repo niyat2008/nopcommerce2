@@ -16,13 +16,13 @@
                     <hr />
                     @*<p><a href="add-message.html"><i class="fa fa-envelope-o"></i> مراسلة </a></p>*@
                     <hr />
-                    <p><a href="all-rates.html">مشاهدة كل التقييمات</a></p>
+                    <p><a href="/Harag/User/@Model.UserName/Rates">مشاهدة كل التقييمات</a></p>
                     <div class="col-xs-12" style="padding:0">
-                        <button class="btn btn-default add" type="button"> <i class="fa fa-thumbs-o-up"></i> <span> @Model.UpRating </span> تقييم ايجابى</button>
-                        <button class="btn btn-default add" type="button"> <i class="fa fa-thumbs-o-down" style="color:#d03333"></i> <span> @Model.DownRating </span> تقييم سلبى</button>
+                        <a href="/Harag/User/@Model.UserName/Rates" class="btn btn-default add"  > <i class="fa fa-thumbs-o-up"></i> <span> @Model.UpRating </span> تقييم ايجابى</a>
+                        <a href="/Harag/User/@Model.UserName/Rates" class="btn btn-default add" > <i class="fa fa-thumbs-o-down" style="color:#d03333"></i> <span> @Model.DownRating </span> تقييم سلبى</a>
                     </div>
                     <hr />
-                    <p><a href="add-rate.html"> <i class="fa fa-thumbs-o-up"></i> اضافة تقييم </a></p>
+                    <p><a href="/Harag/Rate/@Model.UserName"> <i class="fa fa-thumbs-o-up"></i> اضافة تقييم </a></p>
                     <hr />
                     <p><i class="fa fa-user-o"></i> <span> @Model.FollowerCount </span> متابع </p>
                     <hr />

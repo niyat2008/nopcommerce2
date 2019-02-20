@@ -13,5 +13,6 @@ namespace Nop.Services.Z_Harag.Comment
         List<Z_Harag_Comment> GetCommentsByPostId( int postId);
         Z_Harag_Comment AddComment(CommentForPostModel model, int currentUserId);
         Z_Harag_CommentReport ReportComment(Z_Harag_CommentReport model);
+        Z_Harag_Comment GetCommentById(int id);
     }
 }

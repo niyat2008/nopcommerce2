@@ -37,8 +37,7 @@
         }
 
     .comment {
-        margin: 10px;
-        font-size: 0.8rem;
+        margin: 10px; 
         border: 1px solid #EBE6CF;
         border-radius: 4px;
         word-wrap: break-word;
@@ -60,8 +59,9 @@
         padding: 10px;
         background-color: #fff;
     }
-    .reportToggle{
-        display:block;
+    .reportToggle {
+        display: block;
+        width: 146px;
     }
 
         .reportPanelInfo button {
@@ -81,44 +81,44 @@
 
 } 
 <script type="text/javascript">
-
-    function getCommentPaging(url) {
-
-        var indexmyurl = url.indexOf("Consultations/Consultations");
-
-        var myurl = url.substring(indexmyurl); 
-
+     
+    function ratecomment(id, commentId, postId, type) {
         $.ajax({
             type: 'GET',
-            url: myurl,
-
-            success: function (data) {
-                $("#comments").html(data);
-            }
-        });
-    }
-
-    function ratecomment(event, commentId, postId, type) {
-        $.ajax({
-            type: 'GET',
-            url: '/Harag/Comment/RateComment/' + commentId + '/' + postId + '/' + type,
+            url: '/Harag/Comment/ReportCommentAjax/' + postId + '/' + commentId  + '/' + type,
             complete: function (data) {
                 if (data.status == 200)
-                    event.parent().parent().html(data);
+                    id.html("<p class='alert alert-success'>تم اضافه الابلاغ</p>");
+                else
+                    alert("لم يتم اضافه الابلاغ تاكد من اتصال انترنت")
             }
         });
     }
+    $(".uprate").on("click", function () {
+        var upRate = $(this);
 
+        var commentId = upRate.attr("data-commentId");
+        var postId = upRate.attr("data-postId"); 
+
+        var btn = $(this).attr("data-report");
+        ratecomment($("#id-" + btn + ""), commentId, postId, 1);
+    });
+
+    $(".downrate").on("click", function () {
+        var downRate = $(this);
+
+        var commentId = downRate.attr("data-commentId");
+        var postId = downRate.attr("data-postId");
+
+        var btn = $(this).attr("data-report");
+        ratecomment($("#id-" + btn + ""), commentId, postId, 2);
+    });
+ 
     $(".report").on("click", function () {
         var btn = $(this).attr("data-report");
-        $("#"+btn).toggleClass('reportToggle');
-        console.log("#"+btn);
-        
-        //console.log("#" + id);
-        //$("#"+id).css("display","block");
+        console.log(btn);
+        $("#" + btn +"").toggleClass('reportToggle');  
     });
-    //$(document).on("click", function () {
 
-    //    $(".reportPanelInfo").removeClass('reportToggle');
-    //});
+   
 </script>

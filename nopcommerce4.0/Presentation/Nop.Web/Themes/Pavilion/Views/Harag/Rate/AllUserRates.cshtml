@@ -11,48 +11,67 @@
             <div class="col-md-10">
                 <div class="all-rates">
                     <div class="">
-                        @if (Model.Rates.Count == 0)
+                        @if (Model.Rates.Count >= 0)
                         {
-                            <p class="text-success lead">
-                                @for (int i = 0; i < Model.UpRateCount; i++)
-                                {
-                                    <i class="fa  fa-thumbs-up"></i>
-                                }
-                                يوجد @Model.UpRateCount أعضاء ينصحون بالتعامل معه
-                                <br />
-                                لديه @Model.ConfirmedUserUpRateCount تقييمات ايجابية من اعضاء دفعوا عمولة للموقع
-                            </p>
-                            <p class="text-danger lead">
-                                @for (int i = 0; i < Model.DownRateCount; i++)
-                                {
-                                    <i class="fa  fa-thumbs-down"></i>
-                                }
-                                يوجد @Model.UpRateCount أعضاء ينصحون بالتعامل معه
-                                <br />
-                                لديه @Model.ConfirmedUserDownRateCount تقييمات ايجابية من اعضاء دفعوا عمولة للموقع
-                            </p>
+                            if (Model.UpRateCount > 0)
+                            {
+                                <p class="alert alert-success lead">
+                                    @for (int i = 0; i < Model.UpRateCount; i++)
+                                    {
+                                        <i class="fa  fa-thumbs-up"></i>
+                                    }
+                                    يوجد @Model.UpRateCount أعضاء ينصحون بالتعامل معه
+                                    <br />
+                                    لديه @Model.ConfirmedUserUpRateCount تقييمات ايجابية من اعضاء دفعوا عمولة للموقع
+                                </p>
+                            }
+
+                            if (Model.DownRateCount > 0)
+                            { 
+                                <p class="alert alert-danger lead">
+                                    @for (int i = 0; i < Model.DownRateCount; i++)
+                                    {
+                                        <i class="fa  fa-thumbs-down"></i>
+                                    }
+                                    يوجد @Model.DownRateCount أعضاء لا ينصحون بالتعامل معه
+                                    <br />
+                                    لديه @Model.ConfirmedUserDownRateCount تقييمات سلبيه من اعضاء دفعوا عمولة للموقع
+                                </p>
+                            }
+
+
                         }
                         else
                         {
                             <p class="text-success lead">لا يوجد تقييمات لهذا العضو</p>
                         }
 
-                    </div> 
+                    </div>
 
                     @foreach (var item in Model.Rates)
                     {
                         if (item.AdviceDeal)
                         {
-                            <div class="alert alert-primary" role="alert">
+                            <div class="alert alert-success" role="alert">
                                 <p>
                                     تقييم من العضو @item.Username قبل 3 شهر : <br /><br />
                                     <i class="fa fa-quote-right"></i>   @item.RateComment <i class="fa fa-quote-left"></i> <br /><br />
-                                    <strong><i class="fa fa-thumbs-o-up"></i> أنصح بالتعامل معه</strong>
+                                    <strong class="text-success"><i class="fa fa-thumbs-o-up"></i> أنصح بالتعامل معه</strong>
+                                </p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                <p>
+                                    تقييم من العضو @item.Username قبل 3 شهر : <br /><br />
+                                    <i class="fa fa-quote-right"></i>   @item.RateComment <i class="fa fa-quote-left"></i> <br /><br />
+                                    <strong class="text-danger"><i class="fa fa-thumbs-o-down"></i>  لا أنصح بالتعامل معه</strong>
                                 </p>
                             </div>
                         }
 
-                    } 
+                    }
                 </div>
             </div>
         </div>

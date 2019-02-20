@@ -9,7 +9,7 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-            @if (ViewBag.Added)
+            @if (!ViewBag.Added)
             {<div class="col-md-10">
                     <div class="alert alert-success addRate" role="alert">
                         عميلنا العزيز <br />
@@ -20,13 +20,14 @@
                             <li>لايمكن تغيير التقييم.</li>
                         </ul>
                     </div>
-                    <form action="" class="add-adverse">
+                    <form action="/Harag/RateAjax" method="post" class="add-adverse">
                         <div class="col-md-12">
                             <input id="" type="checkbox" /> أتعهد وأقسم بالله أنا العضو شركة نياط أنني قمت بشراء سلعة من العضو dr.rare وأن المعلومات التي أقدمها في التقييم هي معلومات صحيحة ودقيقة وأتحمل مسؤولية صحة هذه المعلومات
                             <br /> <br />
+                            @Html.HiddenFor(m => m.Username, new { value=Model.Username})
                             <p>هل تنصح الأعضاء الآخرين بالتعامل مع البائع @Model.Username </p>
-                            @Html.RadioButtonFor(m => m.IsBuyDone, true, new { @checked = "checked" })نعم ، أنصح الأعضاء بالتعامل معه <br />
-                            @Html.RadioButtonFor(m => m.IsBuyDone, false) لا ، لا أنصح بالتعامل معه <br /> <br />
+                            @Html.RadioButtonFor(m => m.AdviceDeal, true, new { @checked = "checked" })نعم ، أنصح الأعضاء بالتعامل معه <br />
+                            @Html.RadioButtonFor(m => m.AdviceDeal, false) لا ، لا أنصح بالتعامل معه <br /> <br />
 
                         </div>
                         <div class="col-md-6">

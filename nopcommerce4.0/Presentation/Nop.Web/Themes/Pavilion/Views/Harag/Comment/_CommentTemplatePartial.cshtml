@@ -3,27 +3,27 @@
 
 <div class="comment">
     <div class="commentHeader"> 
-        <div class="pull-left adxExtraInfo">
+        <div class=" adxExtraInfo">
             <div class="adxExtraInfoPart"> 
                 ››
-                &nbsp;  <a href="" class="username">@Model.CommentOwner</a>   
+                &nbsp;  <a href="/Harag/User/@Model.CommentOwner" class="username">@Model.CommentOwner</a>   
             </div> 
             <div  class="pull-left adxExtraInfoPart"> 
-                <div class="moveLeft">
+                @*<div class="moveLeft">
                     ››
                     <a href="#1" name="1">1</a>
-                </div> 
+                </div>*@ 
             </div>
         </div> 
         ››
         &nbsp;  قبل 0 دقيقه
          
-        <div class="pull-left reportPanel" >
-            <span class="report" data-report="@Model.PostId"><i class="fa fa-flag"></i>  إبلاغ  </span>
-            <div class=" report reportPanelInfo" id="@Model.PostId">
+        <div class="pull-left reportPanel" id="id-@Model.Id" >
+            <span class="report" data-report="@Model.Id"><i class="fa fa-flag"></i>  إبلاغ  </span>
+            <div class=" report reportPanelInfo" id="@Model.Id">
                 إبلاغ عن العضو: <br> <a href="@Model.CommentOwner" class="username">@Model.CommentOwner</a> <br> <br> 
-                <button data-modelId="" data-postId="" data-reportType="1"   class="btn btn-primary btn-xs">بخس السلعة</button><br>
-                <button id="sendReport"  data-modelId="@Model.Id" data-postId="@Model.PostId" data-reportType="2"  class="btn btn-primary btn-xs">رد غير لائق</button><br>
+                <button data-report="@Model.Id" data-commentId="@Model.Id" data-postId="@Model.PostId" class="uprate btn btn-danger btn-xs">بخس السلعة</button><br>
+                <button data-report="@Model.Id" data-commentId="@Model.Id" data-postId="@Model.PostId" class="downrate btn btn-danger btn-xs">رد غير لائق</button><br>
             </div>
         </div> 
     </div> 
