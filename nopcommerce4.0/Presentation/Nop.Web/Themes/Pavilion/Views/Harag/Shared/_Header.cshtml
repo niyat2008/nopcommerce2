@@ -16,7 +16,15 @@
 
     @*
         <link href="~/css/Consultant/Header.css" rel="stylesheet" />*@
-
+    <style>
+        .top-user-menu{
+            padding: 20px;
+        }
+        .top-user-menu > span {
+            padding: 9px;
+            font-weight: bold;
+        }
+    </style>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Tajawal" rel="stylesheet">
     <script src="~/js/Consultant/jquery.min.js"></script>
@@ -52,7 +60,7 @@
                     <span>@Html.RouteLink("سوق", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
                     <span>@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
                     <span class="active">@Html.RouteLink("حراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-                    @*<span>حراج</span>*@
+
                 </div>
             </div>
             <div class="col-md-2" id="userInfo"></div>
@@ -60,6 +68,24 @@
         </div>
     </div>
 </section>
+
+<div class="text-center top-user-menu" style="background-color:#e8ebee;padding:0.3px;padding-top:6px;"> 
+    <span>
+        <a href="/Harag/Profile">الملف الشخصي</a>
+    </span>
+    <span>
+        <a href="/Harag/Profile">حساب عمولات الموقع</a>
+    </span>
+    <span>
+        <a href="/Harag/Favorites">المفضله </a>
+    </span>
+    @*<span>
+        <a href="/Harag/Notifications">الاشعارات </a>
+    </span>*@
+    <span>
+        <a href="/Harag/Messages">الرسائل </a>
+    </span>
+</div> 
 
 <!-- Search -->
 <section class="search">
@@ -104,6 +130,17 @@
     </div>
 </div>
 <div class="footer">
+    <link href="~/css/Consultant/styles.rtl.css" rel="stylesheet" />
+    <link href="~/css/Consultant/1000.rtl.css" rel="stylesheet" />
+
+    <link href="~/css/Consultant/theme.custom-1.css" rel="stylesheet" />
+    <link href="~/css/Consultant/theme.custom-2.css" rel="stylesheet" />
+
+    <script src="~/js/Consultant/jquery.nicescroll.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="~/css/Consultant/mobile.css" rel="stylesheet" />
     <div class="footer-upper">
         <div class="center">
             <ul class="social-sharing">
@@ -249,5 +286,5 @@
     }
 
 
-    </script>
+</script>
 

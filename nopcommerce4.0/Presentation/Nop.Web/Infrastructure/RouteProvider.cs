@@ -44,12 +44,7 @@ namespace Nop.Web.Infrastructure
             // done get all posts home 
             routeBuilder.MapRoute("Harag.Post.GetAllHaragPostsAjax", "Harag/PostsAjax",
             new { controller = "Post", action = "GetAllHaragPostsAjax" });
-
-            
-
-          
-
-
+              
             // add to favorite
             routeBuilder.MapRoute("Harag.Post.AddPostToFavorite", "Harag/AddPostToFavorite",
             new { controller = "Post", action = "AddPostToFavorite" });
@@ -71,7 +66,7 @@ namespace Nop.Web.Infrastructure
             new { controller = "Post", action = "GetHaragCities" });
             
             // HaragNeighborhood
-            routeBuilder.MapRoute("Harag.Post.GetHaragNeighborhoods", "Harag/HaragNeighborhood",
+            routeBuilder.MapRoute("Harag.Post.GetHaragNeighborhoods", "Harag/HaragNeighborhood/{cityId?}",
             new { controller = "Post", action = "GetHaragNeighborhoods" }); 
             
             // NavbarAjax
@@ -82,8 +77,8 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapRoute("Harag.Post.ReportPostAjax", "Harag/ReportPost",
             new { controller = "Post", action = "ReportPostAjax" });
 
-            routeBuilder.MapRoute("Harag.Post.ReportPost", "Harag/ReportPost",
-new { controller = "Post", action = "ReportPost" });
+            routeBuilder.MapRoute("Harag.Post.ReportPost", "Harag/ReportPost/{postId}",
+            new { controller = "Post", action = "ReportPost" });
             // Comment 
 
             //  Harag all Comment  
@@ -95,7 +90,7 @@ new { controller = "Post", action = "ReportPost" });
             new { controller = "Comment", action = "AddHaragComment" });
 
             // Harag Comment Report
-            routeBuilder.MapRoute("Harag.Comment.ReportCommentAjax", "Harag/ReportCommentAjax",
+            routeBuilder.MapRoute("Harag.Comment.ReportCommentAjax", "Harag/Comment/ReportCommentAjax/{postId?}/{commentId?}/{type?}",
            new { controller = "Comment", action = "ReportCommentAjax" });
 
             //////////
@@ -147,8 +142,23 @@ new { controller = "Post", action = "ReportPost" });
             routeBuilder.MapRoute("Harag.User.GetUserPostsByUserId", "Harag/user/posts/{userId?}",
             new { controller = "User", action = "GetUserPostsByUserId" });
 
+            // user rate
+            routeBuilder.MapRoute("Harag.User.RateUserView", "Harag/Rate/{username}",
+            new { controller = "User", action = "RateUserView" });
+
+            // user rate ajax
+            routeBuilder.MapRoute("Harag.User.RateUserAjax", "Harag/RateAjax",
+            new { controller = "User", action = "RateUserAjax" });
 
 
+            // all user rate
+            routeBuilder.MapRoute("Harag.User.GetUserRates", "Harag/User/{userId}/Rates",
+            new { controller = "User", action = "GetUserRates" });
+             
+            // user favorite posts
+            routeBuilder.MapRoute("Harag.User.GetHaragFavoritesPosts", "Harag/Favorites",
+            new { controller = "Post", action = "GetHaragFavoritesPosts" });
+            
             ///
             // Search
             ///
@@ -165,7 +175,9 @@ new { controller = "Post", action = "ReportPost" });
             routeBuilder.MapRoute("Harag.Post.GetHaragUserPosts", "Harag/{userId}/Posts",
             new { controller = "Post", action = "GetHaragUserPosts" });
 
-
+            // done search by cat and city and neighborhood
+            routeBuilder.MapRoute("Harag.Post.GetHaragSearchPostsPosts", "Harag/City/{CityId?}",
+            new { controller = "Post", action = "GetHaragCatPosts" });
 
 
             // ------------------------ Consultant ------------------------- 

@@ -532,9 +532,9 @@ namespace Nop.Services.Z_Harag.Post
             }
         }
 
-        public List<Neighborhood> GetNeighborhoods()
+        public List<Neighborhood> GetNeighborhoods(int cityId)
         {
-            var query = _neighborhoodRepository.TableNoTracking.ToList();
+            var query = _neighborhoodRepository.TableNoTracking.Where(n => n.CityId == cityId).ToList();
             return query;
         }
 
@@ -568,6 +568,27 @@ namespace Nop.Services.Z_Harag.Post
             var cityEn = _cityRepository.TableNoTracking.Where(m => m.ArName == city).FirstOrDefault();
 
             return cityEn;
+        }
+          
+        List<Z_Harag_Post> IPostService.GetFavoritesPosts(int id)
+        {
+            var posts = _favRepository.Table.Include(m => m.Customer).Include(m => m.Z_Harag_Post).Where(m => m.CustomerId == id).ToList();
+
+            List<Z_Harag_Post> postsFav = new List<Z_Harag_Post>();
+
+            foreach (var item in posts)
+            {
+                try
+                {
+                   postsFav.Add(this.GetPost(item.PostId, ""));
+                }
+                catch (Exception eee)
+                { 
+                } 
+            }
+            
+            return postsFav;
+
         }
         #endregion
     }

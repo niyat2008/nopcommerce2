@@ -15,14 +15,14 @@
                 <select id="search-date-js-ajax" class="form-control">
                     <option>الاختيار 1</option>
                 </select>
-                <button class="btn btn-default srchBtn" type="button"><i class="fa fa-search"></i></button>
+                <button id="search-cat-city-js" class="btn btn-default srchBtn" type="button"><i class="fa fa-search"></i></button>
                 <hr>
-                <div class="choices">
+                @*<div class="choices">
                     <a>حراج السيارات</a>
                     <a>حراج العقارات</a>
                     <a>حراج العقارات</a>
                     <a>حراج العقارات</a>
-                </div>
+                </div>*@
             </div>
             <div class="col-md-9">
                 <!-- أضف اعلانك -->
@@ -141,6 +141,17 @@
             }
         });
     });
-    
+
+    $("#search-cat-city-js").on('click', function () {
+        var cityId = $("#");
+        var catId = $("#");
+         $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetHaragCities")',
+            complete: function (data) {
+                $("#search-city-js-ajax").html(data.responseText);
+            }
+        });
+    });
 </script>
 

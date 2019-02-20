@@ -45,6 +45,13 @@ namespace Nop.Services.Z_Harag.Comment
             return entityModel;
         }
 
+        public Z_Harag_Comment GetCommentById(int id)
+        {
+            var query = _commentRepository.Table.Where(m => m.Id == id).FirstOrDefault();
+
+            return query;
+        }
+
         public List<Z_Harag_Comment> GetCommentsByPostId(int postId)
         {
             var query = _commentRepository.TableNoTracking.Where(m => m.PostId == postId);

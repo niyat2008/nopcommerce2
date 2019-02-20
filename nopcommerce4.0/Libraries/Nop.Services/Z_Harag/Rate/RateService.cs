@@ -22,5 +22,16 @@ namespace Nop.Services.Z_Harag.Rate
             this._eventPublisher = eventPublisher;
             this._env = env;
         }
+
+        public bool AddUserRate(Z_Harag_Rate rate)
+        {
+            _rateService.Insert(rate);
+            return true;
+        }
+
+        public List<Z_Harag_Rate> GetUserRates(int userId)
+        {
+            return _rateService.TableNoTracking.Where(m => m.UserId == userId).ToList();
+        }
     }
 }

@@ -22,10 +22,10 @@ else
     {
         <div class="item">
             <div class="det">
-                <a href="/Harag/Post?postId=@post.Id"><h3>@post.Title</h3></a>
+                <a href="/Harag/Post/@post.Id"><h3>@post.Title</h3></a>
                 <small>منذ 4 دقيقة</small>
                 <div class="det-det">
-                    <a href="/Harag/Post?postId=@post.Id">
+                    <a href="/Harag/City/@post.City">
                         <span><i class="fa fa-map-marker"></i> @post.City </span>
                     </a>
                     <a href="/Harag/User/@post.PostOwner">

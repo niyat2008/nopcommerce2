@@ -134,7 +134,6 @@ namespace Nop.Web.Controllers.Harag
                 commentToReturn.CommentOwner = userName;
 
                 return PartialView("~/Themes/Pavilion/Views/Harag/Comment/_CommentTemplatePartial.cshtml", commentToReturn);
-
             }
             else
             {
@@ -143,18 +142,30 @@ namespace Nop.Web.Controllers.Harag
         }
 
         [HttpGet]
-        public IActionResult ReportCommentAjax([FromBody] CommentReport model)
+        public IActionResult ReportCommentAjax(int postId, int commentId, int type)
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Unauthorized();
+            var post = _postService.GetPost(postId, "");
 
+            if (post == null)
+                return BadRequest();
+
+            var comment = _commentService.GetCommentById(commentId);
+
+            if (comment == null)
+                return BadRequest();
+
+            if(type <= 0)
+            {
+                return BadRequest();
+            }
+             
             var report = new Z_Harag_CommentReport
             {
-                CommentId = model.CommentId,
-                ReportDescription = model.ReportMessage,
-                ReportCategory = (byte) model.ReportType,
-                ReportTitle = model.ReportTitle,
-                ReporterUser = model.UserId
+                CommentId = commentId, 
+                ReportCategory = (byte) type, 
+                ReporterUser = _workContext.CurrentCustomer.Id
             };
 
             var result = _commentService.ReportComment(report);
@@ -162,11 +173,8 @@ namespace Nop.Web.Controllers.Harag
             if (result != null)
             {
                 Ok(new { stat = true });
-            }
-            else
-            {
-                Ok(new { stat = false });
-            }
+            } 
+
             return Ok(new { stat = false });
         }
 

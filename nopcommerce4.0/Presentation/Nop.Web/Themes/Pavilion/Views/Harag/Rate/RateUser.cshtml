@@ -1,0 +1,114 @@
+﻿@using Nop.Web.Models.Harag.Rate;
+@model RateModel
+
+@{
+    Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
+}
+
+<!-- Content -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            @if (!ViewBag.Added)
+            {<div class="col-md-10">
+                    <div class="alert alert-success addRate" role="alert">
+                        عميلنا العزيز <br />
+                        نرجو ملاحظة النقاط التالية : <br />
+                        <ul>
+                            <li>نحن نثق بك!</li>
+                            <li>المشرف سوف يقوم بمراجعة التقييم.</li>
+                            <li>لايمكن تغيير التقييم.</li>
+                        </ul>
+                    </div>
+                    <form action="/Harag/RateAjax" method="post" class="add-adverse">
+                        <div class="col-md-12">
+                            <input id="" type="checkbox" /> أتعهد وأقسم بالله أنا العضو شركة نياط أنني قمت بشراء سلعة من العضو dr.rare وأن المعلومات التي أقدمها في التقييم هي معلومات صحيحة ودقيقة وأتحمل مسؤولية صحة هذه المعلومات
+                            <br /> <br />
+                            @Html.HiddenFor(m => m.Username, new { value=Model.Username})
+                            <p>هل تنصح الأعضاء الآخرين بالتعامل مع البائع @Model.Username </p>
+                            @Html.RadioButtonFor(m => m.AdviceDeal, true, new { @checked = "checked" })نعم ، أنصح الأعضاء بالتعامل معه <br />
+                            @Html.RadioButtonFor(m => m.AdviceDeal, false) لا ، لا أنصح بالتعامل معه <br /> <br />
+
+                        </div>
+                        <div class="col-md-6">
+                            @Html.TextAreaFor(m => m.RateComment, new { @class = "form-control txtArea", required = "required", placeholder = "نرجو ذكر تجربتك فى التعامل مع البائع مع ذكر السلعة", rows = "7" })
+                            <br />
+                        </div>
+                        <div class="col-md-12">
+                            <p>هل تم الشراء</p>
+                            @Html.RadioButtonFor(m => m.IsBuyDone, true, new { @checked = "checked" })نعم ، تم الشراء <br />
+                            @Html.RadioButtonFor(m => m.IsBuyDone, true, new { @checked = "checked" })  لا لم يتم الشراء <br /><br />
+                        </div>
+
+                        <div class="col-md-12">
+                            <p>متى تم الشراء ؟</p>
+                            <select name="WhenBuyDone" class="form-control rateSlct">
+                                <option value="1"> قبل أقل من شهر </option>
+                                <option value="2"> قبل أقل من شهرين </option>
+                                <option value="3"> قبل أقل من ثلاث شهور  </option>
+                                <option value="4">قبل أكثر من ثلاث شهور </option>
+                                <option value="5"> لم يتم الشراء </option>
+                            </select>
+                        </div>
+                        @*<div class="col-md-12">
+                                <p>إذا كانت السلعة سيارة ، هل قمت بفحص السياراة قبل الشراء؟ </p>
+                                <input type="radio" name="value" /> السلعة ليست سياره <br />
+                                <input type="radio" name="value" /> نعم، قمت بفحص السيارة لدى مركز فحص متخصص <br />
+                                <input type="radio" name="value" /> لا ، لم أقوم بفحص السيارة لدى مركز فحص متخصص <br /><br />
+                            </div>*@
+                        <div class="col-xs-12">
+                            <button class="btn btn-default add" type="submit">ارسال التقييم >> </button>
+                        </div>
+                    </form>
+                </div>}
+            else
+            {
+                <div class="col-md-10">
+                    <div class="alert alert-success addRate" role="alert">
+                        تم اضافه التقييم بنجاح  <br /> 
+                    </div>
+                </div>     
+            }
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        @*$.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetAllHaragPostsAjax")',
+            complete: function (data) {
+                $("#posts").html(data.responseText);
+            }
+        });*@
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetCategories")',
+            complete: function (data) {
+                $("#category-js-ajax").html(data.responseText);
+            }
+        });
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetCategories")',
+            complete: function (data) {
+                $("#search-category-js-ajax").html(data.responseText);
+            }
+        });
+
+         $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetHaragCities")',
+            complete: function (data) {
+                $("#search-city-js-ajax").html(data.responseText);
+            }
+        });
+    });
+
+</script>
+

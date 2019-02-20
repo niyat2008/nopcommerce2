@@ -10,9 +10,7 @@
         padding-right: 5px;
         border-bottom: 1px solid #EBE6CF;
     }
-
-
-
+      
     .commentBody {
         /* background: #F5F5F5;
                                             border-bottom: 1px solid #EBE6CF;
@@ -39,8 +37,7 @@
         }
 
     .comment {
-        margin: 10px;
-        font-size: 0.8rem;
+        margin: 10px; 
         border: 1px solid #EBE6CF;
         border-radius: 4px;
         word-wrap: break-word;
@@ -62,8 +59,9 @@
         padding: 10px;
         background-color: #fff;
     }
-    .reportToggle{
-        display:block;
+    .reportToggle {
+        display: block;
+        width: 146px;
     }
 
         .reportPanelInfo button {
@@ -79,104 +77,48 @@
 @foreach (var comment in Model.Items)
 {
     <!-- Comments -->
-@Html.Partial("~/Themes/Pavilion/Views/Harag/Comment/_CommentTemplatePartial.cshtml", comment)
+    @Html.Partial("~/Themes/Pavilion/Views/Harag/Comment/_CommentTemplatePartial.cshtml", comment)
 
-}
-
-
-
-
-@*@if (Model.Paging.PageNumber <= Model.Paging.TotalPages)
-    {
-
-
-    @if (Model.Links.Count == 2)
-        {
-    @if (Model.Paging.PageNumber == 1)
-            {
-                <!-- Pager -->
-    <nav class="pagination-outer" aria-label="Page navigation">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" aria-label="Next" onclick="getCommentPaging('@Model.Links[1]?.Href')">
-                    <span aria-hidden="true"> <<< </span>
-                </a>
-            </li>
-            <li class="page-item">
-                <a class="page-link">@Model.Paging.PageNumber</a>
-            </li>
-
-        </ul>
-    </nav>
-            }
-            else if (Model.Paging.PageNumber == Model.Paging.TotalPages)
-            {
-     <!-- Pager -->
-    <nav class="pagination-outer" aria-label="Page navigation">
-        <ul class="pagination">
-
-            <li class="page-item">
-                <a class="page-link">@Model.Paging.PageNumber</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" aria-label="Previous" onclick="getCommentPaging('@Model.Links[0]?.Href')">
-                    <span aria-hidden="true"> >>> </span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-            }
-        }
-        else if (Model.Links.Count > 2)
-        {
-     <!-- Pager -->
-    <nav class="pagination-outer" aria-label="Page navigation">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" aria-label="Next" onclick="getCommentPaging('@Model.Links[2]?.Href')">
-                    <span aria-hidden="true"> <<< </span>
-                </a>
-            </li>
-            <li class="page-item">
-                <a class="page-link">@Model.Paging.PageNumber</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" aria-label="Previous" onclick="getCommentPaging('@Model.Links[0]?.Href')">
-                    <span aria-hidden="true"> >>> </span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-        }
-    }*@
-
+} 
 <script type="text/javascript">
-
-    function getCommentPaging(url) {
-
-        var indexmyurl = url.indexOf("Consultations/Consultations");
-        var myurl = url.substring(indexmyurl);
-
+     
+    function ratecomment(id, commentId, postId, type) {
         $.ajax({
             type: 'GET',
-            url: myurl,
-
-            success: function (data) {
-                $("#comments").html(data);
+            url: '/Harag/Comment/ReportCommentAjax/' + postId + '/' + commentId  + '/' + type,
+            complete: function (data) {
+                if (data.status == 200)
+                    id.html("<p class='alert alert-success'>تم اضافه الابلاغ</p>");
+                else
+                    alert("لم يتم اضافه الابلاغ تاكد من اتصال انترنت")
             }
         });
     }
+    $(".uprate").on("click", function () {
+        var upRate = $(this);
 
+        var commentId = upRate.attr("data-commentId");
+        var postId = upRate.attr("data-postId"); 
+
+        var btn = $(this).attr("data-report");
+        ratecomment($("#id-" + btn + ""), commentId, postId, 1);
+    });
+
+    $(".downrate").on("click", function () {
+        var downRate = $(this);
+
+        var commentId = downRate.attr("data-commentId");
+        var postId = downRate.attr("data-postId");
+
+        var btn = $(this).attr("data-report");
+        ratecomment($("#id-" + btn + ""), commentId, postId, 2);
+    });
+ 
     $(".report").on("click", function () {
         var btn = $(this).attr("data-report");
-        $("#"+btn).toggleClass('reportToggle');
-        console.log("#"+btn);
-        
-        //console.log("#" + id);
-        //$("#"+id).css("display","block");
+        console.log(btn);
+        $("#" + btn +"").toggleClass('reportToggle');  
     });
-    //$(document).on("click", function () {
 
-    //    $(".reportPanelInfo").removeClass('reportToggle');
-    //});
+   
 </script>

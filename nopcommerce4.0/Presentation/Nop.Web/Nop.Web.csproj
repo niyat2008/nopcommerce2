@@ -83,7 +83,6 @@
   <ItemGroup>
     <Folder Include="Models\ConsultantAdmin\" />
     <Folder Include="Models\Harag\BlackList\" />
-    <Folder Include="Models\Harag\Rate\" />
     <Folder Include="Models\NewFolder\" />
     <Folder Include="Themes\Pavilion\Views\Harag\GeneralPages\" />
     <Folder Include="Validators\ConsultantAdmin\" />
@@ -244,8 +243,7 @@
     </Content>
     <Content Update="Themes\Pavilion\Views\HaragAdmin\Post\ChangeCatAndSub.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    
+    </Content> 
     <Content Update="Themes\Pavilion\Views\HaragAdmin\Post\PostDetails.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
@@ -322,6 +320,12 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Profile\MainProfile.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Rate\AllUserRates.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Rate\RateUser.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Report\_PostAddedSuccessfully.cshtml">

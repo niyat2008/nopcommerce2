@@ -19,7 +19,7 @@ namespace Nop.Services.Z_Harag.Post
         List<Z_Harag_Post> GetFeaturedPosts();
         // get Cities
         List<City> GetCities();
-        List<Neighborhood> GetNeighborhoods();
+        List<Neighborhood> GetNeighborhoods(int cityId);
         // can add post
         bool CanAddNewPost(int userId);
         bool EditHaragPost(int postId, Z_Harag_Post post);
@@ -37,5 +37,6 @@ namespace Nop.Services.Z_Harag.Post
         Z_Harag_Reports ReportPost(Z_Harag_Reports report);
         bool RemovePostFromFavorite(int postId, int id);
         City GetCity(string city);
+        List<Z_Harag_Post> GetFavoritesPosts(int id);
     }
 }
