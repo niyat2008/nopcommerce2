@@ -217,6 +217,32 @@
                 }
             }
         });
+
+        $("#sendReport").on("click", function () {
+            var button = $(this);
+            var model = {
+                Id: button.attr("data-modelId"),
+                PostId: button.attr("data-postId"),
+                ReportType: button.attr("data-reportType")
+
+            }
+            var values = JSON.stringify(model);
+            $.ajax({
+                url: "",
+                type: "post",
+                dataType: "json",
+                contentType:"application/json; charset=utf-8",
+                data: values,
+                success: function (data) {
+                    alert("success");
+
+                },
+                error: function (request, status, error) {
+                    alert(request.responseText);
+
+                }
+            });
+        });
     });
 
 

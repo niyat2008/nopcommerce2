@@ -14,6 +14,17 @@ namespace Nop.Services.Z_HaragAdmin.Categories
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated{ get; set; }
         public bool IsActive { get; set; }
+        public string Title
+        {
+            get
+            {
+                return Id != 0 ? "   تعديل قسم" : "اضافة قسم";
+            }
+        }
+        public PostCategoryModel()
+        {
+            Id = 0;
+        }
 
     }
 }

@@ -243,7 +243,8 @@
     </Content>
     <Content Update="Themes\Pavilion\Views\HaragAdmin\Post\ChangeCatAndSub.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content> 
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Comment\CommentsOnPost.cshtml">
     <Content Update="Themes\Pavilion\Views\HaragAdmin\Post\PostDetails.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

@@ -31,7 +31,7 @@ namespace Nop.Core.Domain.Z_Harag
         public string Text { get; set; }
         public string PaymentMethod { get; set; }
         public string Contact { get; set; }
-        public Nullable<int> Rate { get; set; }
+        //public Nullable<int> Rate { get; set; }
        // public bool IsSetToSubCategory { get; set; }
         public bool IsDispayed { get; set; }
         public bool IsReserved { get; set; }
@@ -60,8 +60,8 @@ namespace Nop.Core.Domain.Z_Harag
         public virtual ICollection<Z_Harag_Notification> Z_Harag_Notification { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public  ICollection<Z_Harag_Photo> Z_Harag_Photo { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-   
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public  Z_Harag_Rate Z_Harag_Rate { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public  ICollection<Z_Harag_Reports> Z_Harag_Reports { get; set; }
     }

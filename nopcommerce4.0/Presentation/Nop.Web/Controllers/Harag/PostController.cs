@@ -432,7 +432,7 @@ namespace Nop.Web.Controllers.Harag
                         Title = post.Title,
                         DateCreated = post.DateCreated,
                         Files = post.Z_Harag_Photo.Select(p => p.Url).ToList(),
-                        Rate = post.Rate,
+                        //Rate = post.Rate,
                         Len = (double)(post.Longtiude??0),
                         Lat = (double)(post.Lattiude??0),
                         userId = post.CustomerId,
@@ -498,7 +498,7 @@ namespace Nop.Web.Controllers.Harag
                     City = p.City.ArName,
                     DateCreated = p.DateCreated,
                     Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
-                    Rate = p.Rate,
+                   // Rate = p.Rate,
                     DateUpdated = p.DateUpdated,
                     IsDispayed = p.IsDispayed,
                     PostOwner = p.Customer.Username
@@ -526,7 +526,7 @@ namespace Nop.Web.Controllers.Harag
                 City = p.City.ArName,
                 DateCreated = p.DateCreated,
                 Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
-                Rate = p.Rate,
+                //Rate = p.Rate,
                 DateUpdated = p.DateUpdated,
                 IsDispayed = p.IsDispayed,
                 PostOwner = p.Customer.Username
@@ -560,7 +560,7 @@ namespace Nop.Web.Controllers.Harag
                 City = p.City.ArName,
                 DateCreated = p.DateCreated,
                 Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
-                Rate = p.Rate,
+               // Rate = p.Rate,
                 DateUpdated = p.DateUpdated,
                 IsDispayed = p.IsDispayed,
                 PostOwner = p.Customer.Username
@@ -589,7 +589,7 @@ namespace Nop.Web.Controllers.Harag
                 City = p.City.ArName,
                 DateCreated = p.DateCreated,
                 Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
-                Rate = p.Rate,
+               // Rate = p.Rate,
                 DateUpdated = p.DateUpdated,
                 IsDispayed = p.IsDispayed,
                 PostOwner = p.Customer.Username
@@ -652,7 +652,7 @@ namespace Nop.Web.Controllers.Harag
                 City = p.City.ArName,
                 DateCreated = p.DateCreated,
                 Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
-                Rate = p.Rate,
+                //Rate = p.Rate,
                 DateUpdated = p.DateUpdated,
                 IsDispayed = p.IsDispayed,
                 PostOwner = p.Customer.Username
@@ -682,7 +682,7 @@ namespace Nop.Web.Controllers.Harag
                     Title = p.Title,
                     DateCreated = p.DateCreated,
                     Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
-                    Rate = p.Rate,
+                   // Rate = p.Rate,
                     DateUpdated = p.DateUpdated,
                     IsDispayed = p.IsDispayed,
                     PostOwner = p.Customer.Username
