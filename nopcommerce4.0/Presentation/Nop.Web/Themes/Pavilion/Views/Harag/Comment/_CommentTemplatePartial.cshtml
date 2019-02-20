@@ -8,7 +8,7 @@
                 ››
                 &nbsp;  <a href="" class="username">@Model.CommentOwner</a>   
             </div> 
-            <div class="adxExtraInfoPart"> 
+            <div  class="pull-left adxExtraInfoPart"> 
                 <div class="moveLeft">
                     ››
                     <a href="#1" name="1">1</a>
@@ -18,12 +18,13 @@
         ››
         &nbsp;  قبل 0 دقيقه
          
-        <div class="reportPanel">
+        <div class="reportPanel pull-left">
             <span class="report"><i class="fa fa-flag"></i>  إبلاغ  </span>
             <div class=" report reportPanelInfo">
                 إبلاغ عن العضو: <br> <a href="@Model.CommentOwner" class="username">@Model.CommentOwner</a> <br> <br> 
-                <button    class="btn btn-primary btn-xs">بخس السلعة</button><br>
-                <button   class="btn btn-primary btn-xs">رد غير لائق</button><br>
+                
+                <button onclick="ratecomment(event, @Model.Id,@Model.PostId, 1)" class="btn btn-primary btn-xs">بخس السلعة</button><br>
+                <button onclick="ratecomment(event, @Model.Id,@Model.PostId, 2)" class="btn btn-primary btn-xs">رد غير لائق</button><br>
             </div>
         </div> 
     </div> 
@@ -33,3 +34,4 @@
     <div class="commentFooter"> 
     </div> 
 </div>
+

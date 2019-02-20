@@ -154,6 +154,15 @@
         $("#City-js-ajax").change(function () {
             geocoder = new google.maps.Geocoder();
             var address = $("#City-js-ajax option:selected").text();
+
+            $.ajax({
+                type: 'GET',
+                url: '@Url.RouteUrl("Harag.Post.GetHaragNeighborhoods")?cityId=' + $("#City-js-ajax option:selected").val(),
+            complete: function (data) {
+                $("#Neighbohood-js-ajax").html(data.responseText);
+            }
+          });
+           
             geocoder.geocode({ 'address': address }, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     map.setCenter(results[0].geometry.location);
@@ -165,9 +174,7 @@
                     //  alert('Geocode was not successful for the following reason: ' + status);
                 }
             });
-        });
-        console.log(map);
-
+        }); 
 
     $("#add-update-location-js").click(function (event) {
         var lat = marker.getPosition().lat();
@@ -175,8 +182,8 @@
 
         var postLocationModel = {
             PostId: '@Model.Id',
-            Lat: lat,
-            Lng: lng
+            Lat: lat + "",
+            Lng: lng + ""
         };
 
         alert(JSON.stringify(postLocationModel));
@@ -224,7 +231,7 @@
     });
      $.ajax({
             type: 'GET',
-            url: '@Url.RouteUrl("Harag.Post.GetHaragNeighborhoods")',
+            url: '@Url.RouteUrl("Harag.Post.GetHaragNeighborhoods")?cityId=1',
             complete: function (data) {
                 $("#Neighbohood-js-ajax").html(data.responseText);
             }

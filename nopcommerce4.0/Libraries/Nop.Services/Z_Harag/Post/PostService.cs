@@ -569,6 +569,11 @@ namespace Nop.Services.Z_Harag.Post
 
             return cityEn;
         }
+
+        public object GetFavoritesPosts(int id)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

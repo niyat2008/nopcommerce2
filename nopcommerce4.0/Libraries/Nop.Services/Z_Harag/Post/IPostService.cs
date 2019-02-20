@@ -37,5 +37,6 @@ namespace Nop.Services.Z_Harag.Post
         Z_Harag_Reports ReportPost(Z_Harag_Reports report);
         bool RemovePostFromFavorite(int postId, int id);
         City GetCity(string city);
+        object GetFavoritesPosts(int id);
     }
 }

@@ -352,7 +352,7 @@ namespace Nop.Web.Controllers.Harag
 
 
         [HttpPost]
-        public ActionResult UpdatePostLocationAjax(PostForPostListModel post)
+        public ActionResult UpdatePostLocationAjax([FromBody] PostForPostListModel post)
         {
             if (_workContext.CurrentCustomer.IsRegistered())
             {
@@ -361,15 +361,16 @@ namespace Nop.Web.Controllers.Harag
                 else if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Consultant, true))
                     ViewBag.UserRole = RolesType.Consultant;
                 else if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
-                    ViewBag.UserRole = RolesType.Registered;  
-                 
+                    ViewBag.UserRole = RolesType.Registered;
+
                 var model = new Z_Harag_Post
                 {
                     Id = post.Id,
                     CategoryId = post.CategoryId,
                     CityId = (int)post.CityId,
                     Lattiude = (Decimal)post.Lat,
-                    Longtiude = (Decimal)post.Len
+                    Longtiude = (Decimal)post.Len,
+                    NeighborhoodId = post.NeighborhoodId
                 };
 
                 return Ok(new { status = true, postId = model.Id});
@@ -567,8 +568,7 @@ namespace Nop.Web.Controllers.Harag
 
             return View("~/Themes/Pavilion/Views/Harag/Post/PostsForSearch.cshtml", modelOutput); 
         }
-
-
+         
         [HttpGet]
         public IActionResult GetHaragCatPosts(int catId)
         {
@@ -598,6 +598,39 @@ namespace Nop.Web.Controllers.Harag
             return View("~/Themes/Pavilion/Views/Harag/Post/PostsForSearch.cshtml", modelOutput);
 
         }
+
+        [HttpGet]
+        public IActionResult GetHaragFavoritesPosts()
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return RedirectToRoute("Login", new { returnUrl = "Harag" });
+
+            var user = _workContext.CurrentCustomer;
+
+            var posts = _postService.GetFavoritesPosts(user.Id);
+
+            var modelOutput = new Models.Harag.Post.PostOutputModel();
+
+            //modelOutput.Items = posts.Select(p => new Models.Harag.Post.PostModel
+            //{
+            //    CategoryId = p.CategoryId,
+            //    CategoryName = p.Category.Name,
+            //    Text = p.Text,
+            //    Id = p.Id,
+            //    Title = p.Title,
+            //    City = p.City.ArName,
+            //    DateCreated = p.DateCreated,
+            //    Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
+            //    Rate = p.Rate,
+            //    DateUpdated = p.DateUpdated,
+            //    IsDispayed = p.IsDispayed,
+            //    PostOwner = p.Customer.Username
+            //}).ToList();
+
+            return View("~/Themes/Pavilion/Views/Harag/Post/PostsForSearch.cshtml", modelOutput);
+
+        }
+
         [HttpGet]
         public IActionResult GetHaragUserPosts(int userId)
         {
@@ -630,7 +663,7 @@ namespace Nop.Web.Controllers.Harag
         }
 
         [HttpGet]
-        public IActionResult GetNextPostsAjax(int pageId)
+        public IActionResult GetNextPostsAjax(int pageId, int type)
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return RedirectToRoute("Login", new { returnUrl = "Harag" });

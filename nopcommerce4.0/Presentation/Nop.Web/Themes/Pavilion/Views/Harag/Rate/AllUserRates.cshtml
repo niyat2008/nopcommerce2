@@ -1,0 +1,99 @@
+﻿@using Nop.Web.Models.Harag.Rate;
+@model UserRateOutList
+
+@{
+    Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
+}
+<!-- Content -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="all-rates">
+                    <div class="">
+                        @if (Model.Rates.Count == 0)
+                        {
+                            <p class="text-success lead">
+                                @for (int i = 0; i < Model.UpRateCount; i++)
+                                {
+                                    <i class="fa  fa-thumbs-up"></i>
+                                }
+                                يوجد @Model.UpRateCount أعضاء ينصحون بالتعامل معه
+                                <br />
+                                لديه @Model.ConfirmedUserUpRateCount تقييمات ايجابية من اعضاء دفعوا عمولة للموقع
+                            </p>
+                            <p class="text-danger lead">
+                                @for (int i = 0; i < Model.DownRateCount; i++)
+                                {
+                                    <i class="fa  fa-thumbs-down"></i>
+                                }
+                                يوجد @Model.UpRateCount أعضاء ينصحون بالتعامل معه
+                                <br />
+                                لديه @Model.ConfirmedUserDownRateCount تقييمات ايجابية من اعضاء دفعوا عمولة للموقع
+                            </p>
+                        }
+                        else
+                        {
+                            <p class="text-success lead">لا يوجد تقييمات لهذا العضو</p>
+                        }
+
+                    </div> 
+
+                    @foreach (var item in Model.Rates)
+                    {
+                        if (item.AdviceDeal)
+                        {
+                            <div class="alert alert-primary" role="alert">
+                                <p>
+                                    تقييم من العضو @item.Username قبل 3 شهر : <br /><br />
+                                    <i class="fa fa-quote-right"></i>   @item.RateComment <i class="fa fa-quote-left"></i> <br /><br />
+                                    <strong><i class="fa fa-thumbs-o-up"></i> أنصح بالتعامل معه</strong>
+                                </p>
+                            </div>
+                        }
+
+                    } 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        @*$.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetAllHaragPostsAjax")',
+            complete: function (data) {
+                $("#posts").html(data.responseText);
+            }
+        });*@
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetCategories")',
+            complete: function (data) {
+                $("#category-js-ajax").html(data.responseText);
+            }
+        });
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetCategories")',
+            complete: function (data) {
+                $("#search-category-js-ajax").html(data.responseText);
+            }
+        });
+
+         $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetHaragCities")',
+            complete: function (data) {
+                $("#search-city-js-ajax").html(data.responseText);
+            }
+        });
+    });
+
+</script>
+

@@ -61,7 +61,7 @@ namespace Nop.Core.Domain.Z_Harag
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public  ICollection<Z_Harag_Photo> Z_Harag_Photo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public  Z_Harag_Rate Z_Harag_Rate { get; set; }
+   
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public  ICollection<Z_Harag_Reports> Z_Harag_Reports { get; set; }
     }

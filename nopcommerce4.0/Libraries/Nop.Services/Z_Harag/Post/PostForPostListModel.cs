@@ -19,6 +19,7 @@ namespace Nop.Services.Z_Harag.Post
         public string Title { get; set; } 
         public int CategoryId { get; set; }
         public int CityId { get; set; }
+        public int NeighborhoodId { get; set; }
         public string Contact { get; set; }
         public IList<string> Files { get; set; } 
         public double Len { get; set; }
