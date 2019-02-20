@@ -39,28 +39,30 @@ namespace Nop.Web.Controllers.HaragAdmin
             if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
                 return Forbid();
 
-            if(id !=null || id !=0)
+            var category = new PostCategoryModel();
+
+            if (id !=0)
             {
 
                 var categoryInDb = _categoryService.GetCategoryById(id);
 
                 if(categoryInDb==null)
-                     return View("~/Themes/Pavilion/Views/HaragAdmin/Category/AddCategory.cshtml");
+                     return View("~/Themes/Pavilion/Views/HaragAdmin/Category/AddCategory.cshtml",category);
 
-                var category = new PostCategoryModel
-                {
-                    Id=categoryInDb.Id,
-                    Name=categoryInDb.Name,
-                    Description=categoryInDb.Description,
-                    IsActive=categoryInDb.IsActive
-                };
+                //var category = new PostCategoryModel
+                //{
+                category.Id = categoryInDb.Id;
+                category.Name = categoryInDb.Name;
+                category.Description = categoryInDb.Description;
+                category.IsActive = categoryInDb.IsActive;
+                //};
 
                 return View("~/Themes/Pavilion/Views/HaragAdmin/Category/AddCategory.cshtml", category);
             }
 
 
 
-            return View("~/Themes/Pavilion/Views/HaragAdmin/Category/AddCategory.cshtml");
+            return View("~/Themes/Pavilion/Views/HaragAdmin/Category/AddCategory.cshtml", category);
         }
         //Add Category Ajax
         [HttpPost]

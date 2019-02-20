@@ -23,7 +23,7 @@ namespace Nop.Data.Mapping.Z_Harag
             this.Property(p => p.IsAnswered).IsRequired();
             this.Property(p => p.IsCommon).IsRequired();
             //this.Property(p => p.IsSetToSubCategory).IsRequired();
-            this.Property(p => p.Rate).IsOptional();
+            //this.Property(p => p.Rate).IsOptional();
             this.Property(p => p.IsDispayed).IsRequired();
             this.Property(p => p.IsReserved).IsRequired();
             this.Property(p => p.LastCommentTime).IsOptional();

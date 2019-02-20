@@ -2,22 +2,25 @@
 @{ 
     Layout = "~/Themes/Pavilion/Views/HaragAdmin/Shared/_Layout.cshtml";
 }
+<link href="~/css/ConsultantAdmin/MyCss.css" rel="stylesheet" />
+<div class="page-title">@Model.Title : @Model.Name </div>
+
 <form id="addCategory">
     @Html.ValidationSummary()
     @Html.HiddenFor(c=>c.Id,new { @class="categoryId"})
     <div class="form-group">
-        <label>الاسم</label>
-        <div class="col-md-10">
-            @Html.TextBoxFor(c => c.Name, new { @class = "form-control category-text" })
+        <label class="form-lbl" >الاسم</label>
+        <div class="col-md-10 ">
+            @Html.TextBoxFor(c => c.Name, new { @class = "form-control category-text detailsTextBox" })
             @Html.ValidationMessageFor(c => c.Name)
         </div>
 
         
     </div>
     <div class="form-group">
-        <label>الملاحظات</label>
+        <label class="form-lbl">الملاحظات</label>
         <div class="col-md-10">
-            @Html.TextBoxFor(c => c.Description, new { @class = "form-control category-description" })
+            @Html.TextBoxFor(c => c.Description, new { @class = "form-control  category-description detailsTextBox" })
             @Html.ValidationMessageFor(c => c.Description)
         </div>
 
@@ -25,11 +28,11 @@
     </div>
 
     <div class="form-group">
-        <label>نشط @Html.CheckBoxFor(c => c.IsActive,new {@class="categoryIsActive" }) </label>
+        <label class="form-lbl" >نشط @Html.CheckBoxFor(c => c.IsActive,new {@class="categoryIsActive" }) </label>
 
     </div>
 
-    <input type="submit" id="add-category-btn" class="btn btn-success" value="اضافة" />
+    <input type="submit" id="add-category-btn" class="btn btn-success form-lbl" value="اضافة" />
 
 </form>
 <script src="~/js/ConsultantAdmin/jquery-3.2.1.min.js"></script>

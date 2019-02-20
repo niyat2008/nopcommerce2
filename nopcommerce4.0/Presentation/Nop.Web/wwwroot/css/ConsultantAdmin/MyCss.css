@@ -61,6 +61,7 @@
     margin-bottom: 22px;
     font-size: 25px;
     font-family: 'El Messiri', sans-serif;
+   
 }
 .customer-search,.posts-search {
     background-color: #fff !important;
@@ -99,9 +100,9 @@
         font-family: unset;
         margin-right: 18px;
     }
-#comments , #messages  , #reports  {
+/*#comments , #messages  , #reports  {
   
-}
+}*/
 
 #comments > span, #messages > span, #reports > span {
     font-size: 20px;
@@ -124,10 +125,11 @@
 
 #carouselExampleSlidesOnly {
     width: 600px;
-    height: 300px !important;
+   max-height: 300px !important;
     text-align: center;
     background-size: cover !important;
     margin-top: 20px;
     margin-bottom: 20px;
 }
+    
     /*******front end**********/

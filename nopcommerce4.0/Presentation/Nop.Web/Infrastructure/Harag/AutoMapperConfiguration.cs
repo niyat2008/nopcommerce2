@@ -55,8 +55,7 @@ namespace Nop.Web.Infrastructure.Harag
                     mo => mo.MapFrom(src => src.IsAnswered))
                     .ForMember(dest => dest.IsClosed,
                     mo => mo.MapFrom(src => src.IsClosed))
-                    .ForMember(dest => dest.Rate,
-                    mo => mo.MapFrom(src => src.Rate))
+                   
                     .ForMember(dest => dest.IsDispayed,
                     mo => mo.MapFrom(src => src.IsDispayed))
                     .ForMember(dest => dest.IsReserved,
@@ -72,7 +71,8 @@ namespace Nop.Web.Infrastructure.Harag
             //.ForMember(dest => dest.SubCategoryId,
             //        mo => mo.MapFrom(src => src.SubCategoryId))
 
-
+            //.ForMember(dest => dest.Rate,
+            //mo => mo.MapFrom(src => src.Rate))
             CreateMap<Z_Harag_Post, PostWithFilesModel>()
                    .ForMember(dest => dest.CustomProperties, mo => mo.Ignore())
                    .ForMember(dest => dest.Id,
@@ -87,8 +87,7 @@ namespace Nop.Web.Infrastructure.Harag
                     mo => mo.MapFrom(src => src.IsAnswered))
                     .ForMember(dest => dest.IsClosed,
                     mo => mo.MapFrom(src => src.IsClosed))
-                    .ForMember(dest => dest.Rate,
-                    mo => mo.MapFrom(src => src.Rate))
+                   
                     .ForMember(dest => dest.IsDispayed,
                     mo => mo.MapFrom(src => src.IsDispayed))
                     .ForMember(dest => dest.IsReserved,
@@ -104,7 +103,8 @@ namespace Nop.Web.Infrastructure.Harag
 
             //.ForMember(dest => dest.SubCategoryId,
             //        mo => mo.MapFrom(src => src.SubCategoryId))
-
+            //.ForMember(dest => dest.Rate,
+            //mo => mo.MapFrom(src => src.Rate))
             CreateMap<Z_Harag_Comment, CommentModel>()
                    .ForMember(dest => dest.CustomProperties, mo => mo.Ignore())
                    .ForMember(dest => dest.Id,
