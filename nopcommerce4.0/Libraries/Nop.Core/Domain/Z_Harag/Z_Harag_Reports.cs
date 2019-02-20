@@ -13,7 +13,7 @@ namespace Nop.Core.Domain.Z_Harag
         public Nullable<int> ReporterUser { get; set; }
         public Nullable<int> PostId { get; set; }
         public string ReportTitle { get; set; }
-
+        public bool IsIllegal { get; set; }
         public  Customer Customer { get; set; }
         public  Z_Harag_Post Z_Harag_Post { get; set; }
 

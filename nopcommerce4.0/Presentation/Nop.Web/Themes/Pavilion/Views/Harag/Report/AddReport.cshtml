@@ -1,0 +1,43 @@
+﻿@model Nop.Web.Models.Harag.Report.PostReport
+
+@{
+    Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
+}
+@if (ViewBag.ReportAdded)
+{
+    <div class="alert alert-info" role="alert">تم أضافه الابلاغ جزاك الله خيرا</div>
+
+}
+else
+{
+    <!-- Content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="alert alert-warning" role="alert">حذير:هذا النموذج مخصص فقط للإبلاغ عن الاعلانات المخالفه وليس للتواصل مع صاحب الاعلان</div>
+                    <div class="alert alert-info" role="alert">الرسائل المرسلة عبر هذا النموذج لن تصل إلى صاحب الإعلان!</div>
+
+                    <form action="@Url.RouteUrl("Harag.Post.ReportPostAjax")" method="post" class="add-adverse">
+                        @Html.HiddenFor(m => m.PostId);
+                        @Html.HiddenFor(m => m.UserId);
+                        <div class="col-md-12">
+                            <p>هل هذا الاعلان مخالف ؟ </p>
+                            @Html.RadioButtonFor(m => m.IsIllegal, true, new { })  نعم <br />
+                            @Html.RadioButtonFor(m => m.IsIllegal, false, new { })   لا <br /><br />
+                        </div>
+                        <div class="col-md-6">
+                            <label>نص الابلاغ</label> <br />
+                            @Html.TextAreaFor(m => m.ReportMessage, new { @class = "form-control txtArea", placeholder = "نص الابلاغ", rows = "7" })
+                            <br />
+                            <button class="btn btn-default add" type="submit">ارسال</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+

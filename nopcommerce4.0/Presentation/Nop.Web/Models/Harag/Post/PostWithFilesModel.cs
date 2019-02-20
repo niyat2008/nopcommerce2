@@ -17,12 +17,16 @@ namespace Nop.Web.Models.Harag.Post
         public bool IsAnswered { get; set; }
         public int SubCategoryId { get; set; }
         public bool IsDispayed { get; set; }
+        public double Len { get; set; }
+        public double Lat { get; set; }
         public bool IsReserved { get; set; }
-        public int CategoryId { get; set; }
-        public bool IsSetToSubCategory { get; set; }
+        public int CategoryId { get; set; } 
         public string CategoryName { get; set; }
-        public string SubCategoryName { get; set; }
+        public string CityName { get; set; }
+        public int CityId { get; set; } 
+        public int userId { get; set; } 
         public string PostOwner { get; set; }
+        public string Contact { get; set; }
 
         public IList<string> Files { get; set; }
 

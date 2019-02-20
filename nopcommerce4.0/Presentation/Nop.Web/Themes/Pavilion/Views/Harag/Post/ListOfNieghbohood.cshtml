@@ -1,0 +1,16 @@
+﻿@using Nop.Web.Models.Harag.Post;
+@model List<NeighbohoodOutputModel>
+
+
+ 
+    <option selected disabled
+            value="0">
+        اختر الحي
+    </option>
+    @foreach (var SubCat in Model)
+    {
+
+    <option value="@SubCat.Id">
+        @SubCat.Name
+    </option>
+    } 

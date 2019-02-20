@@ -38,6 +38,8 @@ namespace Nop.Core.Domain.Z_Harag
         public Nullable<bool> IsCommon { get; set; }
         public bool IsClosed { get; set; }
         public bool IsAnswered { get; set; }
+        public Nullable<Decimal> Longtiude { get; set; }
+        public Nullable<Decimal> Lattiude { get; set; }
         public Nullable<System.DateTime> LastCommentTime { get; set; }
         public System.DateTime DateCreated { get; set; }
         public System.DateTime DateUpdated { get; set; }

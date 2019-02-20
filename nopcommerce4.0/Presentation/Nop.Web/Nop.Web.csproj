@@ -82,7 +82,10 @@
 
   <ItemGroup>
     <Folder Include="Models\ConsultantAdmin\" />
+    <Folder Include="Models\Harag\BlackList\" />
+    <Folder Include="Models\Harag\Rate\" />
     <Folder Include="Models\NewFolder\" />
+    <Folder Include="Themes\Pavilion\Views\Harag\GeneralPages\" />
     <Folder Include="Validators\ConsultantAdmin\" />
     <Folder Include="wwwroot\ConsultantAdmin\" />
     <Folder Include="wwwroot\ConsultantApi\Uploads\Images\" />
@@ -242,6 +245,7 @@
     <Content Update="Themes\Pavilion\Views\HaragAdmin\Post\ChangeCatAndSub.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Comment\CommentsOnPost.cshtml">
     <Content Update="Themes\Pavilion\Views\HaragAdmin\Post\PostDetails.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
@@ -260,13 +264,28 @@
     <Content Update="Themes\Pavilion\Views\Harag\Home\Home.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Message\PostMessageList.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Message\_MessageTemplatePartial.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Message\UserMessageList.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Post\AddPost.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Post\ChangeCatAndSub.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Themes\Pavilion\Views\Harag\Post\ConsultantClosedConsultations.cshtml">
+    <Content Update="Themes\Pavilion\Views\Harag\Post\ListOfNieghbohood.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\UpdatePostLocation.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\AgreementBeforeAddPost.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Post\ConsultantNotAnswerdConsultations.cshtml">
@@ -293,13 +312,19 @@
     <Content Update="Themes\Pavilion\Views\Harag\Post\PostDetails.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Themes\Pavilion\Views\Harag\Post\Posts - Copy.cshtml">
+    <Content Update="Themes\Pavilion\Views\Harag\Post\PostsForSearch.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Post\Posts.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Post\PostsAjax.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Profile\MainProfile.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Report\_PostAddedSuccessfully.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Shared\_Header.cshtml">

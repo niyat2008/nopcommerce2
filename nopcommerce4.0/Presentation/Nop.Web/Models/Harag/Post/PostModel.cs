@@ -25,6 +25,8 @@ namespace Nop.Web.Models.Harag.Post
         public string PostOwner { get; set; }
         public string City { get; set; }
         public string Photo { get; set; }
+        public double Len { get; set; }
+        public double Lat { get; set; }
         public bool IsCommon { get; set; }
     }
 }

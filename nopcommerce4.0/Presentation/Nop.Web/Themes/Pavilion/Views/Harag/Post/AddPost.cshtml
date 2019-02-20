@@ -224,9 +224,10 @@
                 url: '@Url.RouteUrl("Harag.Post.AddNewPostAjax")',
                 dataType: 'json',
                 data: JSON.stringify(postForPostModel),
-                complete: function (data) {
-                    if (data.status == 200) {
-                        alert("تمت اضافة الاستئارة بنجاح يمكنك الذهاب الى استشاراتى لرؤية الاستشاراة");
+                success: function (data) {
+                    if (data.postId != 0) {
+                        alert("تمت اضافة الاعلان بنجاح يمكنك سيتم تحويلك الي تحديث العنوان");
+                        window.location = "/Harag/UpdateLocation/" + data.postId;
                     }
                     else {
                         alert("حدث خطأ ما تأكد من الاتصال بالانترنت");

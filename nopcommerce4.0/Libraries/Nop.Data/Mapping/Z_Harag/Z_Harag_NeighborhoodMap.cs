@@ -1,15 +1,15 @@
-﻿using Nop.Core.Domain.Z_Consultant;
+﻿using Nop.Core.Domain.Z_Harag;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nop.Data.Mapping.Z_Consultant
+namespace Nop.Data.Mapping.Z_Harag
 {
-    public class Z_Consultant_NeighborhoodMap : NopEntityTypeConfiguration<Neighborhood>
+    public class Z_Harag_NeighborhoodMap : NopEntityTypeConfiguration<Neighborhood>
     {
-        public Z_Consultant_NeighborhoodMap()
+        public Z_Harag_NeighborhoodMap()
         {
             this.ToTable("Neighborhood");
             this.HasKey(c => c.Id);

@@ -1,140 +1,185 @@
-﻿@using Nop.Web.Models.Consultant.Post;
+﻿@using Nop.Web.Models.Harag.Post;
 @model PostWithFilesModel
 
 @{
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
 }
- 
+
+<link href="~/css/Consultant/PostDetails.css" rel="stylesheet" />
 
 @{
     var PostId = Model.Id;
     var PostOwner = ViewBag.UserName;
 }
 
+<!-- Content -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="disTable advBox">
+                    <div class="choices choices2 disTable">
+                        <div class="col-xs-12">
+                            <a>قسم غير مصنف فى الشرقية</a>
+                        </div>
+                    </div>
+                    <div class="adv-images">
+                        @foreach (var item in Model.Files)
+                        {
+                            @foreach (var image in Model.Files)
+                            {
+                                <div style="width:160px; display:inline;">
+                                    <a href="~/HaragApi/Uploads/Images/@image" data-lightbox="image2-@Model.Id" data-title="My caption">
+                                        <img src="~/HaragApi/Uploads/Images/@image" alt="Single Image" style="width:150px;height:150px;" />
+                                    </a>
+                                </div>
+                                @*<div class="col-xs-6">
+                    <img src="~/HaragApi/Uploads/Images/@image" />
+                </div>*@
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="disTable advBox">
+                    <div class="choices choices2 disTable">
+                        <div class="col-xs-12">
+                            <a>قسم غير مصنف فى الشرقية</a>
+                        </div>
+                    </div>
+                    <div class="adv-images">
+                        @foreach (var image in Model.Files)
+                        {
+                            <div style="width:230px; display:inline;">
+                                <a href="~/HaragApi/Uploads/Images/@image" data-lightbox="image1-@Model.Id" data-title="My caption">
+                                    <img src="~/HaragApi/Uploads/Images/@image" alt="Single Image" style="width:250px;height:250px;" />
+                                </a>
+                            </div>
+                            @*<div class="col-xs-6">
+                                    <img src="~/HaragApi/Uploads/Images/@image" />
+                                </div>*@
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="cont det-block">
+                    <div class="det-top">
+                        <h4>@Model.Title</h4>
+                        <small>منذ 4 دقيقة (اخر تحديث قبل ثانية)</small>
 
-<style type="text/css">
-    .orange-star { 
-        color: orange !important;
-    }
+                        <div class="det-det">
+                            <a href="@Model.CityId"><span><i class="fa fa-map-marker"></i> @Model.CityName </span></a>
+                            <a href="@Model.userId"><span><i class="fa fa-user"></i> @Model.PostOwner </span></a>
+                        </div>
+                    </div>
+                    <div class="det-bottom">
+                        <p>@Model.Text</p>
+                        @foreach (var image in Model.Files)
+                        {
+                            <div style="width:160px; display:inline;">
+                                <a href="~/HaragApi/Uploads/Images/@image" data-lightbox="image-1@Model.Id" data-title="My caption">
+                                    <img src="~/HaragApi/Uploads/Images/@image" alt="Single Image" style="width:150px;height:150px;" />
+                                </a>
+                            </div>
+                            @*<div class="col-xs-6">
+                <img src="~/HaragApi/Uploads/Images/@image" />
+            </div>*@
+                        }
+                        <br>
+                        <p>وسيلة الاتصال</p>
+                        @if (String.IsNullOrEmpty(Model.Contact))
+                        {
+                            <p class="phone"> الخاض </p>
+                        }
+                        else
+                        {
+                            <p class="phone">@Model.Contact<i class="fa fa-phone"></i></p>
+                        }
 
-    .btndarckgreen:hover {
-        background-color: darkgreen !important;
-    }
-</style>
+                    </div>
+                </div>
+                <div class="social-contact">
+                    <div class="col-xs-2 text-center">
+                        <a href="/Harag/Messages/Post/@Model.Id"><i class="fa fa-envelope-o fa-2x"></i></a>
+                    </div>
+                    <div class="col-xs-2 text-center">
+                        <a id="add-post-to-favorite"><i class="fa fa-heart-o fa-2x"></i></a>
+                        <sub>(12)</sub>
+                    </div>
+                    <div class="col-xs-2 text-center">
+                        <a href="@Url.RouteUrl("Harag.Post.ReportPost")?postId=@Model.Id"><i class="fa fa-flag-o fa-2x"></i></a>
+                    </div>
+                    <div class="col-xs-2 text-center">
+                        <a href="javascript:openShareWindow('https://api.whatsapp.com/send?text=')"><i class="fa fa-whatsapp fa-2x"></i></a>
+                    </div>
+                    <div class="col-xs-2 text-center">
+                        <a href="javascript:openShareWindow('https://twitter.com/share?url=')"><i class="fa fa-twitter fa-2x"></i></a>
+                    </div>
+                </div>
+                <div class="choices disTable">
+                    <div class="col-xs-12">
+                        <a>قسم غير مصنف فى الشرقية</a>
+                        <a>قسم غير مصنف </a>
+                    </div>
+                </div>
+                <div>
+                    <div class="col-xs-12">
+                        <div class="alert alert-warning" role="alert">إحذر من التعامل غير المباشر.  استخدم <a href="@Url.RouteUrl("Harag.User.CheckBlackList")"><strong> القائمة السوداء </strong></a> قبل أى تحويل </div>
+                    </div>
+                </div>
 
-<!-- Details -->
-
-<div class="row">
-    <div class="col-sm-3">
-        <div class="disTable advBox">
-            <div class="choices choices2 disTable">
-                <div class="col-xs-12">
-                    <a>قسم غير مصنف فى الشرقية</a>
+                <div>
+                    <div id="comments" class="col-xs-12">
+                    </div>
                 </div>
-            </div>
-            <div class="adv-images">
-                <div class="col-xs-6">
-                    <img src="~/Themes/Pavilion/Content/img/adimage.jpg">
+                <div class="follow">
+                    <div class="col-xs-12">
+                        <button class="btn btn-default add" type="button"> متابعة الردود <i class="fa fa-feed"></i></button>
+                    </div>
                 </div>
-                <div class="col-xs-6">
-                    <img src="~/Themes/Pavilion/Content/img/adimage.jpg">
+                <div>
+                    <div class="col-sm-12">
+                        <p>تذكر قول الله تعالى: ( مَا يَلْفِظُ مِن قَوْلٍ إِلا لَدَيْهِ رَقِيبٌ عَتِيدٌ ) </p>
+                        <form>
+                            <textarea id="CommentText" class="form-control txtArea" placeholder="أكتب سؤالك للمعلن هنا" rows="7"></textarea>
+                            <button id="add-comment-post-js-ajax" class="btn btn-default add" type="button"> ارسال &gt;&gt;  </button>
+                        </form>
+                    </div>
                 </div>
-                <div class="col-xs-6">
-                    <img src="~/Themes/Pavilion/Content/img/adimage.jpg">
-                </div>
-                <div class="col-xs-6">
-                    <img src="~/Themes/Pavilion/Content/img/adimage.jpg">
-                </div>
-            </div>
-        </div>
-
-        <div class="disTable advBox">
-            <div class="choices choices2 disTable">
-                <div class="col-xs-12">
-                    <a>قسم غير مصنف فى الشرقية</a>
-                </div>
-            </div>
-            <div class="adv-images">
-                <div class="col-xs-6">
-                    <img src="~/Themes/Pavilion/Content/img/adimage.jpg">
-                </div>
-                <div class="col-xs-6">
-                    <img src="~/Themes/Pavilion/Content/img/adimage.jpg">
-                </div>
-                <div class="col-xs-6">
-                    <img src="~/Themes/Pavilion/Content/img/adimage.jpg">
-                </div>
-                <div class="col-xs-6">
-                    <img src="~/Themes/Pavilion/Content/img/adimage.jpg">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-9">
-        <div class="cont det-block">
-            <div class="det-top">
-                <h4>عنوان</h4>
-                <small>منذ 4 دقيقة (اخر تحديث قبل ثانية)</small>
-                <div class="det-det">
-                    <a href="#"><span><i class="fa fa-map-marker"></i> الرياض </span></a>
-                    <a href="#"><span><i class="fa fa-user"></i> احمد على (#123456) </span></a>
-                </div>
-            </div>
-            <div class="det-bottom">
-                <p>تفاصيل العرض</p>
-                <img src="~/Themes/Pavilion/Content/img/adimage.jpg">
-                <img src="~/Themes/Pavilion/Content/img/adimage.jpg">
-                <br>
-                <p>وسيلة الاتصال</p>
-                <p class="phone">02342332424 <i class="fa fa-phone"></i></p>
-            </div>
-        </div>
-        <div class="social-contact">
-            <div class="col-xs-2 text-center">
-                <a href="#"><i class="fa fa-envelope-o fa-2x"></i></a>
-            </div>
-            <div class="col-xs-2 text-center">
-                <a><i class="fa fa-heart-o fa-2x"></i></a>
-                <sub>(12)</sub>
-            </div>
-            <div class="col-xs-2 text-center">
-                <a href="report.html"><i class="fa fa-flag-o fa-2x"></i></a>
-            </div>
-            <div class="col-xs-2 text-center">
-                <a><i class="fa fa-whatsapp fa-2x"></i></a>
-            </div>
-            <div class="col-xs-2 text-center">
-                <a><i class="fa fa-twitter fa-2x"></i></a>
-            </div>
-        </div>
-        <div class="choices disTable">
-            <div class="col-xs-12">
-                <a>قسم غير مصنف فى الشرقية</a>
-                <a>قسم غير مصنف </a>
-            </div>
-        </div>
-        <div>
-            <div class="col-xs-12">
-                <div class="alert alert-warning" role="alert">إحذر من التعامل غير المباشر.  استخدم <a href=""><strong> القائمة السوداء </strong></a> قبل أى تحويل </div>
-            </div>
-        </div>
-        <div class="follow">
-            <div class="col-xs-12">
-                <button class="btn btn-default add" type="button"> متابعة الردود <i class="fa fa-feed"></i></button>
-            </div>
-        </div>
-        <div>
-            <div class="col-sm-12">
-                <p>تذكر قول الله تعالى: ( مَا يَلْفِظُ مِن قَوْلٍ إِلا لَدَيْهِ رَقِيبٌ عَتِيدٌ ) </p>
-                <form>
-                    <textarea class="form-control txtArea" placeholder="أكتب سؤالك للمعلن هنا" rows="7"></textarea>
-                    <button class="btn btn-default add" type="button"> ارسال &gt;&gt;  </button>
-                </form>
             </div>
         </div>
     </div>
 </div>
+<!-- Details -->
+@*<div class="product-social-buttons">
+        <label>@T("sevenspikes.themes.pavilion.products.sharing.text"):</label>
+        <ul class="social-sharing">
 
+            <li class="facebook">
+                <!-- Facebook -->
+                <a href="javascript:openShareWindow('https://www.facebook.com/sharer.php?u=@shareUrl')">
+                    <span class="flip"></span>
+                    <span class="flop"></span>
+                </a>
+            </li>
+            <li class="share-whatsapp">
+                <!-- Google+ -->
+                <a href="">
+                    <span class="flip"></span>
+                    <span class="flop"></span>
+                </a>
+            </li>
+            <li class="share-googleplus">
+                <!-- Google+ -->
+                <a href="javascript:openShareWindow('https://plus.google.com/share?url=@shareUrl')">
+                    <span class="flip"></span>
+                    <span class="flop"></span>
+                </a>
+            </li>
+        </ul>
+
+    </div>*@
+  
 <div id="changeCatAndSubDiv" class="modal" tabindex="-1" role="dialog" Style="display:none">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -167,7 +212,14 @@
 
 <script type="text/javascript">
 
+    function openShareWindow(url) {
+        var winWidth = 520;
+        var winHeight = 400;
+        var winTop = (screen.height / 2) - (winHeight / 2);
+        var winLeft = (screen.width / 2) - (winWidth / 2);
 
+        window.open(url + window.location, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+    }
 
     function deleteFile(index) {
 
@@ -175,363 +227,73 @@
         $("#imgno" + index).remove();
     }
 
-
-    $.ajax({
+     $.ajax({
         type: 'GET',
-        url: '@Url.RouteUrl("Consultant.Comment.GetCommentsByPostId")',
-        data: { PostId: @Model.Id },
-        success: function (data) {
+        url: '@Url.RouteUrl("Harag.Comment.GetAllPostCommentsAjax")?postId=@Model.Id', 
+        success: function (data) { 
             $("#comments").html(data);
         }
     });
 
+    $("#add-post-to-favorite").click(function () {
+    $.ajax({
+        type: 'GET',
+        url: '@Url.RouteUrl("Harag.Post.AddPostToFavorite")?postid=@Model.Id', 
+        success: function (data) { 
 
+            if (data.stat === true) {
+                console.log(data.ok);
 
-    function closePost(Id) {
-
-        var closePostModel = {
-            Id: Id
-        };
-
-        $.ajax({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            type: "POST",
-            url: '@Url.RouteUrl("Consultant.Post.ClosePost")',
-            dataType: 'json',
-            data: JSON.stringify(closePostModel),
-            complete: function (data) {
-                if (data.status == 200) {
-                    alert("تمت غلق الاستئارة بنجاح");
-                    window.location.reload();
+                if (data.ok == 1) {
+                    $("#add-post-to-favorite i").addClass("text-danger");
+                } else {
+                    $("#add-post-to-favorite i").removeClass("text-danger"); 
                 }
-                else {
-                    alert(" لا يمكن غلق الاستشارة قبل الرد عليها من قبل المستشار ومن ثم تقييم المستشار");
-                }
+            } else {
+                alert("تاكد من الاتصال بالانترنت");
             }
-        });
-    }
-
-
-
-    function RatePost(Id, Rate,element) {
-
-        var RatePostModel = {
-            Id: Id,
-            Rate: Rate
-        };
-
-        $.ajax({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            type: "POST",
-            url: '@Url.RouteUrl("Consultant.Post.RatePost")',
-            dataType: 'json',
-            data: JSON.stringify(RatePostModel),
-            complete: function (data) {
-                if (data.status == 200) {
-                    alert(" تمت نقييم الاستشارة بنجاح , التقييم " + Rate);
-                    window.location.reload();
-                }
-                else {
-                    alert(" لا يمكن تقييم الاستشارة قبل الرد عليها من قبل المستشار");
-                }
-            }
-        });
-    }
-
-
-
-
-    function ReservePost(PostId) {
-
-        var reservePost = {
-            PostId: PostId
-        };
-
-        $.ajax({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            type: "POST",
-            url: '@Url.RouteUrl("Consultant.Post.ReservePost")',
-            dataType: 'json',
-            data: JSON.stringify(reservePost),
-            complete: function (data) {
-                if (data.status == 200) {
-                    alert("تمت حجز الاستئارة بنجاح");
-                    window.location.reload();
-                }
-                else {
-                    alert("حدث خطأ ما");
-                }
-            }
-        });
-    }
-
-
-
-    function UnReservePost(PostId) {
-
-        var reservePost = {
-            PostId: PostId
-        };
-
-        $.ajax({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            type: "POST",
-            url: '@Url.RouteUrl("Consultant.Post.UnReservePost")',
-            dataType: 'json',
-            data: JSON.stringify(reservePost),
-            complete: function (data) {
-                if (data.status == 200) {
-                    alert("تمت فك حجز الاستئارة بنجاح");
-                    window.location.reload();
-                }
-                else {
-                    alert("حدث خطأ ما");
-                }
-            }
-        });
-    }
-
-
-
-
-    function changeCatAndSub() {
-        $.ajax({
-        type: "GET",
-        url: "/Consultations/Post/GetCategory?categoryId="+@Model.CategoryId+"",
-
-        success: function (data) {
-            $("#changeCatAndSubDiv").html(data);
-
-            console.log("cate " +@Model.CategoryId);
-            $("#changeCatAndSubDiv").css("display","block");
+           
         }
-    });
-
-    }
-
-    //$('#CategorySelectList').find(":selected").val();
-    //$('#CategorySelectList').find(":selected").text()
-
-    function submitChangeCatAndSub()
-    {
-        var CategoryId =@Model.CategoryId;
-        var SelectedCategoryName ='@Model.CategoryName';
-
-        var SubCategoryId = $('#subCategoriesSelectList').find(":selected").val();
-
-
-        var SelectedSubCategoryName = $('#subCategoriesSelectList').find(":selected").text();
-
-        var PostId = @Model.Id;
-
-        var model = {
-            PostId: PostId,
-            CategoryId: CategoryId,
-            SubCategoryId: SubCategoryId
-        }
-
-        $.ajax({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            type: "POST",
-            url: '@Url.RouteUrl("Consultant.Post.SetPostToCategoryAndSubCategory")',
-            dataType: 'json',
-            data: JSON.stringify(model),
-            complete: function (data) {
-                if (data.status == 200) {
-                    $("#changeCatAndSubDiv").css("display", "none");
-                    alert("تمت التغيير  بنجاح");
-                    @*$("#CategoryNameSpan").text('@Model.CategoryName');*@
-                    $("#SubCategoryNameSpan").text(SelectedSubCategoryName);
-                }
-                else {
-                    alert("حدث خطأ ما");
-                    $("#changeCatAndSubDiv").css("display", "none");
-                }
-            }
-        });
-    }
+    });});
+ 
+   
     function closePopupModel() {
         $("#changeCatAndSubDiv").css("display", "none");
     }
-
-    var Files = [];
-
-    function addCommentConsultant() {
-        var Text = $("#CommentText").val();
-
-        if (Text === null || Text === '') {
-            alert("فضلا قم بكتابة التعليق اولا");
-        }
-        else if (!Text.replace(/\s/g, '').length) {
-            alert("فضلا قم بكتابة التعليق اولا");
-        }
-        else {
-
-            var width = window.innerWidth;
-            var imagehtml = "<img src='/images/Consultant/images/no-img-consultant.png' />";
-            if (width <= 400) {
-                imagehtml = "<img src='/images/Consultant/images/no-img-consultant.png' style='width:35px; height:35px;'/>";
-            }
-            else if (width > 400 && width <= 600) {
-                imagehtml = "<img src='/images/Consultant/images/no-img-consultant.png' style='width:50px; height:50px;'/>";
-            }
-            else if (width > 600){
-                imagehtml = "<img src='/images/Consultant/images/no-img-consultant.png' />";
-            }
-
-            var PostOwner = '@PostOwner';
-            var datetimenow = new Date().toLocaleString();
-
-            var CommentForPostModel = {
-                PostId: @PostId,
-                Text: Text,
-                Files: Files
-            };
-
-
-            $.ajax({
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                type: "POST",
-                url: '@Url.RouteUrl("Consultant.Comment.AddComment")',
-                dataType: 'json',
-                data: JSON.stringify(CommentForPostModel),
-                complete: function (data) {
-                    console.log($("#commentDivToAppending"));
-                    appendComment(data);
-                    $("#CommentText").val("");
-                    var i = 0;
-                    Files.forEach(function (d) {
-                        deleteFile(i++);
-                    })
-                }
-            });
-            window.location = window.location;
-
-
-            $.ajax({
-        type: 'GET',
-        url: '@Url.RouteUrl("Consultant.Comment.GetCommentsByPostId")',
-        data: { PostId: @Model.Id },
-        success: function (data) {
-            $("#comments").html(data);
-        }
-    });
-
-        }
-
-    }
-
     function appendComment(data) {
-        $("#commentDivToAppending").append(data);
+        $("#comments").append(data);
     }
 
-    function addComment() {
+    $("#add-comment-post-js-ajax").click(function () {
 
         var Text = $("#CommentText").val();
 
         if (Text === null || Text === '') {
-            alert("فضلا قم بكتابة التعليق اولا");
+            alert("فضلا قم بكتابة الرد اولا");
         }
         else if (!Text.replace(/\s/g, '').length) {
-            alert("فضلا قم بكتابة التعليق اولا");
+            alert("فضلا قم بكتابة الرد اولا");
         }
         else {
-
-            var width = window.innerWidth;
-            var imagehtml = "<img src='/images/Consultant/images/no-img.png' />";
-            if (width <= 400) {
-                imagehtml = "<img src='/images/Consultant/images/no-img.png' style='width:35px; height:35px;'/>";
-            }
-            else if (width > 400 && width <= 600) {
-                imagehtml = "<img src='/images/Consultant/images/no-img.png' style='width:50px; height:50px;'/>";
-            }
-            else if (width > 600) {
-                imagehtml = "<img src='/images/Consultant/images/no-img.png' />";
-            }
-
-            var PostOwner = '@PostOwner';
-            var datetimenow = new Date().toLocaleString();
-
             var CommentForPostModel = {
-                PostId: @PostId,
-                Text: Text,
-                Files: Files
+                PostId: @Model.Id,
+                Text: Text
             };
-
-
             $.ajax({
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
                 type: "POST",
-                url: '@Url.RouteUrl("Consultant.Comment.AddComment")',
+                url: '@Url.RouteUrl("Harag.Comment.AddHaragComment")',
                 dataType: 'json',
                 data: JSON.stringify(CommentForPostModel),
                 complete: function (data) {
                     console.log(appendComment(data));
-                    appendComment(data);
-
+                    appendComment(data.responseText);
                     $("#CommentText").val("");
-                        var i = 0;
-                    Files.forEach(function (d) {
-                        deleteFile(i++);
-                    })
                 }
             });
-
-
-
-
-            $.ajax({
-            type: 'GET',
-            url: '@Url.RouteUrl("Consultant.Comment.GetCommentsByPostId")',
-            data: { PostId: @Model.Id },
-            success: function (data) {
-                $("#comments").html(data);
-                } // window.location = window.location;
-    });
-
         }
-    }
-    function convertToBase64(file) {
-        var image;
-        var fileReader = new FileReader();
-
-        fileReader.readAsDataURL(file);
-        fileReader.onloadend = (e) => {
-            image = fileReader.result;
-            var indexofcomma = image.indexOf(",");
-            var imagebase64 = image.substring(indexofcomma + 1);
-            Files.push(imagebase64);
-            var index = Files.length - 1;
-
-            $("#images").append("<div  class='col-xs-4 img_blck' style='padding-right:0px' id='imgno" + index + "'>" +
-                "<img src='" + image + "' width='100' height='60' />" +
-                "<div class='overlay' onclick='deleteFile(" + index + ")'>" +
-                "<i class='fa fa-trash imageli' ></i>" +
-                "</div>");
-        };
-    }
-
-
-
-</script>  
+    });
+</script>

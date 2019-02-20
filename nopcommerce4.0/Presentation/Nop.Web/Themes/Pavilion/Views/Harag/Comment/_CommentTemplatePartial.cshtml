@@ -1,60 +1,35 @@
 ﻿
-@model Nop.Web.Models.Consultant.Comment.CommentModel
+@model Nop.Web.Models.Harag.Comment.CommentModel
 
-
- 
-
-<div class="comments">
-    <!-- Comment -->
-    <div class="comment">
-        <div class="row">
-            @if (Model.CommentedBy == "Registered")
-            {
-                <div class="col-xs-2 text-center">
-                    <img class="userimagelarge" src="~/images/Consultant/images/no-img.png" />
-                    <img class="userimagemedium" src="~/images/Consultant/images/no-img-mobile.png" style="width:50px;height:50px;" />
-                    <img class="userimagesmall" src="~/images/Consultant/images/no-img-mobile.png" style="width:35px;height:35px;" />
-                </div>
-            }
-            else
-            {
-                <div class="col-xs-2 text-center">
-                    <img class="userimagelarge" src="~/images/Consultant/images/no-img-consultant.png" />
-                    <img class="userimagemedium" src="~/images/Consultant/images/no-img-mobile-consultant.png" style="width:50px;height:50px;" />
-                    <img class="userimagesmall" src="~/images/Consultant/images/no-img-mobile-consultant.png" style="width:35px;height:35px;" />
-                </div>
-            }
-                <div class="col-xs-10">
-                    @if (ViewBag.UserRole == "Consultant")
-                    {
-                        <h4 class="text-danger">@Model.CommentOwner</h4>
-                    }
-                    else
-                    {
-                        <h4>@Model.CommentOwner</h4>
-
-                    }
-
-                    <span>@Model.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @Model.DateCreated.ToString("hh:mm:ss")</span>
-                    <p style="width:fit-content;">
-                        @Model.Text
-                    </p>
-                    <div class="row" style="padding-right: 20px;  ">
-                        @foreach (var image in Model.Photos)
-                        {
-                            <div style="width:60px;display:inline;">
-                                <a href="/Consultations/Imgs/@image" data-lightbox="image-@Model.Id" data-title="My caption">
-                                    <img src="/Consultations/Imgs/@image" alt="Single Image" style="width:50px;height:50px;" />
-                                </a>
-                            </div>
-                        }
-                    </div>
-
-                    @*<a>رد</a>*@
-
-
-                </div>
-        </div>
-       
-    </div><hr />
+<div class="comment">
+    <div class="commentHeader"> 
+        <div class="adxExtraInfo">
+            <div class="adxExtraInfoPart"> 
+                ››
+                &nbsp;  <a href="" class="username">@Model.CommentOwner</a>   
+            </div> 
+            <div class="adxExtraInfoPart"> 
+                <div class="moveLeft">
+                    ››
+                    <a href="#1" name="1">1</a>
+                </div> 
+            </div>
+        </div> 
+        ››
+        &nbsp;  قبل 0 دقيقه
+         
+        <div class="reportPanel">
+            <span class="report"><i class="fa fa-flag"></i>  إبلاغ  </span>
+            <div class=" report reportPanelInfo">
+                إبلاغ عن العضو: <br> <a href="@Model.CommentOwner" class="username">@Model.CommentOwner</a> <br> <br> 
+                <button    class="btn btn-primary btn-xs">بخس السلعة</button><br>
+                <button   class="btn btn-primary btn-xs">رد غير لائق</button><br>
+            </div>
+        </div> 
+    </div> 
+    <div class="commentBody">  
+        @Model.Text 
+    </div> 
+    <div class="commentFooter"> 
+    </div> 
 </div>

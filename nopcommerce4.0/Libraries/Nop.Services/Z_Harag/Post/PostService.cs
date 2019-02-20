@@ -23,12 +23,17 @@ namespace Nop.Services.Z_Harag.Post
     {
         #region Fields
         private readonly IRepository<Z_Harag_Post> _postRepository;
+        private readonly IRepository<Z_Harag_BlackList> _blacklistRepository;
         private readonly IRepository<Z_Harag_Category> _categoryRepository;
         private readonly IRepository<Z_Harag_Photo> _photoRepository;
+        private readonly IRepository<Z_Harag_Favorite> _favRepository;
         private readonly IRepository<City> _cityRepository;
+        private readonly IRepository<Neighborhood> _neighborhoodRepository;
         private readonly IRepository<Z_Harag_Comment> _commentRepository;
         private readonly IEventPublisher _eventPublisher;
         private readonly IHostingEnvironment _env;
+        private readonly IRepository<Z_Harag_Reports> _reportRepository;
+
         ILocalizationService _localizationService;
         #endregion
 
@@ -38,17 +43,26 @@ namespace Nop.Services.Z_Harag.Post
         public PostService(IRepository<Z_Harag_Post> postRepository,
             IRepository<Z_Harag_Category> categoryRepository, IRepository<Z_Harag_Comment> _commentRepository,
              IRepository<Z_Harag_Photo> _photoRepository,
+             IRepository<Z_Harag_BlackList> _blacklistRepository,
              IRepository<City> _cityRepository,
+             IRepository<Z_Harag_Reports> _reportRepository,
+             IRepository<Neighborhood> _neighborhoodRepository,
+             IRepository<Z_Harag_Favorite> _favRepository,
+
             ILocalizationService localizationService,
             IHostingEnvironment env,
         IEventPublisher eventPublisher)
         {
+            this._blacklistRepository = _blacklistRepository;
             this._postRepository = postRepository;
+            this._favRepository = _favRepository;
+            this._neighborhoodRepository = _neighborhoodRepository;
             this._cityRepository = _cityRepository;
             this._categoryRepository = categoryRepository;
             this._eventPublisher = eventPublisher;
             this._commentRepository = _commentRepository;
             this._photoRepository = _photoRepository; 
+            this._reportRepository = _reportRepository;
             this._env = env;
             this._localizationService = localizationService;
         }
@@ -307,16 +321,13 @@ namespace Nop.Services.Z_Harag.Post
 
         public Z_Harag_Post GetPost(int postId, string type)
         {
-            var post = _postRepository.Table.Where(p => p.Id == postId).FirstOrDefault();
-            if (post != null)
-            {
-
-                return _postRepository.TableNoTracking
-                    .Include(p => p.Z_Harag_Photo)
+            var post = _postRepository.Table.Include(p => p.Z_Harag_Photo)
                     .Include(p => p.Customer)
                     .Include(p => p.Category)
-                    .Include(p => p.City)
-                    .Where(p => p.Id == postId && p.IsDispayed == true).FirstOrDefault(); 
+                    .Include(p => p.City).Where(p => p.Id == postId).FirstOrDefault();
+            if (post != null)
+            { 
+                return post;
             }
             return null;
         }
@@ -324,10 +335,11 @@ namespace Nop.Services.Z_Harag.Post
         public List<Z_Harag_Post> GetFeaturedPosts()
         { 
                 return _postRepository.TableNoTracking
-                    .Include(p => p.Z_Harag_Photo)
-                    .Include(p => p.Customer)
-                    .Include(p => p.Category)
-                    .Include(p => p.City)
+                .Include(m => m.Category)
+                .Include(m => m.Customer)
+                .Include(m => m.City)
+                .Include(m => m.Z_Harag_Photo)
+                .Include(m => m.Z_Harag_Comment)
                     .Where(p => p.IsDispayed == true).OrderBy(r => r.DateCreated).ToList();
             
         }
@@ -338,13 +350,225 @@ namespace Nop.Services.Z_Harag.Post
             return query;
         }
 
+        public bool CanAddNewPost(int userId)
+        {
+            var query = _postRepository.TableNoTracking;
+            var result = query.OrderByDescending(m => m.DateCreated).FirstOrDefault();
+            if(result == null)
+            {
+                return true;
+            }
+            else if( (DateTime.Now - result.DateCreated) < new TimeSpan(1, 0, 0 ))
+            {
+                return false;
+            }
+            return true;
+        }
 
+        public bool EditHaragPost(int postId, Z_Harag_Post post)
+        {
+            var isExists =  this.IsExists(postId);
+
+            if (!isExists)
+                return false;
+
+            _postRepository.Update(post);
+
+            return true;
+        }
+
+        public List<Z_Harag_Post> SearchByCategory(int catId)
+        {
+            var query = _postRepository.TableNoTracking
+                .Include(m => m.Category)
+                .Include(m => m.Customer)
+                .Include(m => m.City)
+                .Include(m => m.Z_Harag_Photo)
+                .Include(m => m.Z_Harag_Comment)
+                .Where(c => c.CategoryId == catId).ToList();
+
+            return query;
+        }
+
+        public List<Z_Harag_Post> SearchByCity(int catId)
+        {
+            var query = _postRepository.TableNoTracking
+                .Include(m => m.Category)
+                .Include(m => m.Customer)
+                .Include(m => m.City)
+                .Include(m => m.Z_Harag_Photo)
+                .Include(m => m.Z_Harag_Comment)
+                .Where(c => c.CategoryId == catId).ToList();
+
+            return query;
+        }
+
+        public List<Z_Harag_Post> SearchByDate(DateTime date)
+        {
+            var query = _postRepository.TableNoTracking
+                .Include(m => m.Category)
+                .Include(m => m.Customer)
+                .Include(m => m.City)
+                .Include(m => m.Z_Harag_Photo)
+                .Include(m => m.Z_Harag_Comment)
+                 .Where(c => c.DateCreated == date).ToList();
+
+            return query;
+        }
+
+        public List<Z_Harag_Post> SearchByNeighborhood(int id)
+        {
+            var query = _postRepository.TableNoTracking
+                .Include(m => m.Category)
+                .Include(m => m.Customer)
+                .Include(m => m.City)
+                .Include(m => m.Z_Harag_Photo)
+                .Include(m => m.Z_Harag_Comment)
+                .Where(c => c.NeighborhoodId == id).ToList();
+
+            return query;
+        }
+
+        public List<Z_Harag_Post> GetUserPosts(int userId)
+        {
+            var query = _postRepository.TableNoTracking
+                .Include(m => m.Category)
+                .Include(m => m.Customer)
+                .Include(m => m.City)
+                .Include(m => m.Z_Harag_Photo)
+                .Include(m => m.Z_Harag_Comment)
+                 .Where(c => c.CustomerId == userId).ToList();
+
+            return query;
+        }
+
+        public List<Z_Harag_Post> GetCurrentUserPosts(int userId)
+        {
+            var query = _postRepository.TableNoTracking
+                .Include(m=> m.Category)
+                .Include(m => m.Customer)
+                .Include(m => m.City)
+                .Include(m => m.Z_Harag_Photo)
+                .Include(m => m.Z_Harag_Comment)
+                .Where(c => c.CustomerId == userId).ToList();
+
+            return query;
+        }
+
+        public bool UpdatePostLocation(int postId, Z_Harag_Post post)
+        {
+            var isExists = this.IsExists(postId);
+
+            if (!isExists)
+                return false;
+
+            _postRepository.Update(post);
+
+            return true;
+            
+        }
+
+        public bool AddPostToFavorite(int postId, int userId)
+        {
+            var query = _postRepository.TableNoTracking.Where(p => p.Id == postId).FirstOrDefault();
+
+            if (query == null)
+            {
+                return false;
+            }
+
+            if (this.IsPostAddedToFavorite(postId, userId))
+            {
+                return false;
+            }
+
+            _favRepository.Insert(new Z_Harag_Favorite
+            {
+                CustomerId = userId,
+                PostId = postId
+            });
+
+            return true;
+        }
+
+        
+        public bool AddPostToBlackList(int postId, int userId)
+        {
+            var isExists = this.IsExists(postId);
+
+            if (!isExists)
+            {
+                return false;
+            }
+
+            var post = GetPost(postId, "");
+
+            return true;
+        }
+
+        public bool FollowReplysOnPost(int postId, int userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Z_Harag_Post> SearchByDate(int catId)
+        {
+            throw new NotImplementedException();
+        }
+
+        
+
+        public bool IsPostAddedToFavorite(int postId, int userId)
+        {
+            var query = _favRepository.TableNoTracking.Where(p => p.PostId == postId && p.CustomerId == userId).FirstOrDefault();
+
+            if (query == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public List<Neighborhood> GetNeighborhoods()
+        {
+            var query = _neighborhoodRepository.TableNoTracking.ToList();
+            return query;
+        }
+
+        public Z_Harag_Reports ReportPost( Z_Harag_Reports report )
+        {
+            _reportRepository.Insert(report);
+            return report;
+        }
+
+        public bool RemovePostFromFavorite(int postId, int userId)
+        {
+
+            var query = _postRepository.Table.Where(p => p.Id == postId).FirstOrDefault();
+
+            if (query == null)
+            {
+                return false;
+            }
+            var fav = _favRepository.Table.Where(m => m.CustomerId == userId && m.PostId == postId).FirstOrDefault();
+
+            if (fav != null)
+            {
+                _favRepository.Delete(fav);
+                return true;
+            } 
+            return false;
+        }
+
+        public City GetCity(string city)
+        {
+            var cityEn = _cityRepository.TableNoTracking.Where(m => m.ArName == city).FirstOrDefault();
+
+            return cityEn;
+        }
         #endregion
-
-
-
-
-
-
     }
 }

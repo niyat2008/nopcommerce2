@@ -1,25 +1,79 @@
-﻿@using Nop.Web.Models.Consultant.Comment;
+﻿@using Nop.Web.Models.Harag.Comment;
 @model CommentOutputModel
-
-
-
-<link href="~/css/Consultant/pagination.css" rel="stylesheet" />
-
-<style type="text/css">
-    .btndarckgreen:hover {
-        background-color: darkgreen !important;
+ 
+<style>
+    .commentHeader {
+        background: #EDEAEA;
+        padding-left: 5px;
+        padding-top: 5px;
+        padding-right: 5px;
+        border-bottom: 1px solid #EBE6CF;
     }
+
+
+
+    .commentBody {
+        /* background: #F5F5F5;
+										    border-bottom: 1px solid #EBE6CF;
+										    */
+        background: #FFFFFF;
+        background: #F5F5F5;
+        color: #454444;
+        padding: 10px; 
+        font-size: 1.4rem; 
+    }
+
+    .commentFooter {
+        padding: 10px 5px;
+        /* background: #F5F5F5;*/
+        background: #FFFFFF;
+        background: #F5F5F5;
+        border-bottom: 1px solid #EBE6CF;
+    }
+
+        .commentFooter a {
+            color: #919191;
+        }
+
+    .comment {
+        margin: 10px; 
+        border: 1px solid #EBE6CF;
+        border-radius: 4px;
+        word-wrap: break-word;
+        word-break: break-word;
+    }
+
+    .reportPanel {
+        position: relative;
+        direction: ltr;
+    }
+
+    .reportPanelInfo {
+        display: none;
+        position: absolute;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 2px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        z-index: 9;
+        padding: 10px;
+        background-color: #fff;
+    }
+
+        .reportPanelInfo button {
+            margin: 5px;
+        }
+
+    .adxExtraInfoPart {
+    }
+
 </style>
-
-
-
 @if (Model.Items != null)
 {
 <div id="commentDivToAppending">
     @foreach (var comment in Model.Items)
     {
         <!-- Comments -->
-        @Html.Partial("~/Themes/Pavilion/Views/Consultant/Comment/_CommentTemplatePartial.cshtml", comment)
+        @Html.Partial("~/Themes/Pavilion/Views/Harag/Comment/_CommentTemplatePartial.cshtml", comment)
     }
 </div>
 }
