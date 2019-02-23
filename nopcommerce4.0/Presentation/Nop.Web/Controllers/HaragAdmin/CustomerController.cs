@@ -86,25 +86,25 @@ namespace Nop.Web.Controllers.HaragAdmin
         }
 
         //Get Member Details
-        public ActionResult GetMemberDetails(int id)
-        {
-            if (id==null || id==0)
-            {
-                return NotFound();
-            }
-            var customerInDb = _customerService.GetMemberDetails(id);
-            var customer = new CustomersModel
-            {
-                //Id=customerInDb.Id,
-                Id = customerInDb.Id,
-                Username = customerInDb.Username,
-                Email = customerInDb.Email,
-                Mobile = customerInDb.Mobile
+        //public ActionResult HaragGetMemberDetails(int id)
+        //{
+        //    if (id==null || id==0)
+        //    {
+        //        return NotFound();
+        //    }
+        //    var customerInDb = _customerService.GetMemberDetails(id);
+        //    var customer = new CustomersModel
+        //    {
+        //        //Id=customerInDb.Id,
+        //        Id = customerInDb.Id,
+        //        Username = customerInDb.Username,
+        //        Email = customerInDb.Email,
+        //        Mobile = customerInDb.Mobile
                
-            };
+        //    };
 
-            return View("~/Themes/Pavilion/Views/ConsultantAdmin/Customers/GetCustomerDetails.cshtml", customer);
-        }
+        //    return View("~/Themes/Pavilion/Views/ConsultantAdmin/Customers/GetCustomerDetails.cshtml", customer);
+        //}
 
         //Get Online Members
         //public ActionResult GetOnlineMembers()
