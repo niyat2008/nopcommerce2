@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Nop.Data.Mapping.Z_Harag
 {
-    class SettingsMap: NopEntityTypeConfiguration<Settings>
+    class SettingsMap: NopEntityTypeConfiguration<Z_Harag_Settings>
     {
         public SettingsMap()
         {
-            this.ToTable("Settings");
+            this.ToTable("Z_Harag_Settings");
             this.HasKey(s => s.Id);
             this.Property(s => s.Key).IsOptional();
             this.Property(s => s.Value).IsRequired().HasMaxLength(4000);

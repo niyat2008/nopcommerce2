@@ -9,7 +9,7 @@ using Nop.Services.Z_Harag.Message;
 using Nop.Services.Z_Harag.Notification;
 using Nop.Services.Z_HaragAdmin.Post;
 using Nop.Services.Z_HaragAdmin.Rate;
-using Nop.Services.Z_Harag.Reports;
+using Nop.Services.Z_HaragAdmin.Report;
 //using Nop.Services.Z_Harag.SubCategory;
 using System;
 using System.Collections.Generic;
@@ -17,6 +17,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Nop.Services.Z_HaragAdmin.Customers;
 using Nop.Services.Z_HaragAdmin.Cities;
+using Nop.Core.Domain.Z_Harag;
+using Nop.Services.Z_HaragAdmin.Setting;
 
 namespace Nop.Web.Infrastructure.HaragAdmin
 {
@@ -36,6 +38,8 @@ namespace Nop.Web.Infrastructure.HaragAdmin
             builder.RegisterType<ReportService>().As<IReportService>().InstancePerLifetimeScope();
             builder.RegisterType<CustomerService>().As<ICustomerService>().InstancePerLifetimeScope();
             builder.RegisterType<CityService>().As<ICityService>().InstancePerLifetimeScope();
+            builder.RegisterType<SettingService>().As<ISettingService>().InstancePerLifetimeScope();
+
         }
 
         /// <summary>

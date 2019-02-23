@@ -123,13 +123,18 @@
     margin-bottom: 20px;
 }
 
-#carouselExampleSlidesOnly {
-    width: 600px;
-   max-height: 300px !important;
+/*#carouselExampleControls {
+    
+ max-height: 400px !important;
     text-align: center;
     background-size: cover !important;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+}*/
+#carouselExampleControls img{
+    /*max-height:500px!important;*/
+    width:100%!important;
+    height:350px!important;
+    background-size:cover!important;
 }
-    
     /*******front end**********/

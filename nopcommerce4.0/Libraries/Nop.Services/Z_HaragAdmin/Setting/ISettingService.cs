@@ -9,6 +9,10 @@ namespace Nop.Services.Z_HaragAdmin.Setting
 {
    public interface ISettingService
     {
-        Settings GetValue(string key);
+        //Update Settings
+        bool UpdateSettings(SettingsModel settingsModel);
+
+        //Get Settings
+        SettingsModel GetSettings();
     }
 }

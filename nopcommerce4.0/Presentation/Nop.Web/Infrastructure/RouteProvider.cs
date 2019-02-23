@@ -635,6 +635,27 @@ new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
             //Delete Rate
             routeBuilder.MapRoute("Harag.Admin.HaragRateDelete", "Harag/Admin/Comment/HaragRateDelete", new { controller = "Rate", action = "DeleteRate" });
 
+
+
+            //Post Reports
+            routeBuilder.MapRoute("Harag.Admin.HaragPostReports", "Harag/Admin/Comment/HaragPostReports", new { controller = "Report", action = "GetPostReports" });
+            //Post Reports Ajax
+            routeBuilder.MapRoute("Harag.Admin.HaragPostReportsAjax", "Harag/Admin/Comment/HaragPostReportsAjax", new { controller = "Report", action = "GetPostReportsAjax" });
+
+            //Comment Reports
+            routeBuilder.MapRoute("Harag.Admin.HaragCommentReports", "Harag/Admin/Comment/HaragCommentReports", new { controller = "Report", action = "GetCommentReports" });
+            //Comment Reports Ajax
+            routeBuilder.MapRoute("Harag.Admin.HaragCommentReportsAjax", "Harag/Admin/Comment/HaragCommentReportsAjax", new { controller = "Report", action = "GetCommentReportsAjax" });
+
+
+
+
+
+            //Update Settings
+            routeBuilder.MapRoute("Harag.Admin.HaragSettings", "Harag/Admin/Comment/HaragSettings", new { controller = "Settings", action = "UpdateSettings" });
+            //Update Settings Ajax
+            routeBuilder.MapRoute("Harag.Admin.HaragSettingsAjax", "Harag/Admin/Comment/HaragSettingsAjax", new { controller = "Settings", action = "UpdateSettingsAjax" });
+
             ////Post Messages
 
             //routeBuilder.MapRoute("Harag.Admin.HaragPostMessage", "Harag/Admin/Post/HaragPostsMessage", new { controller = "Post", action = "GetPostMessages" });

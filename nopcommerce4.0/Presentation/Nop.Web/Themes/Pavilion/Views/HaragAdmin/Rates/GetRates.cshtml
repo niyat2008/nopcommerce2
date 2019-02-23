@@ -7,37 +7,40 @@
 
 @Html.Partial("~/Themes/Pavilion/Views/HaragAdmin/Shared/_DataTable.cshtml")
 
-
+<div class="page-title">التقييمات</div>
 <!-- Button trigger modal -->
 @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
     Launch demo modal
 </button>*@
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">عرض</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <label>التجربة مع البائع</label>
-                <div class="form-group">
-                    <textarea id="rateComment" class="form-control" cols="60" rows="7"></textarea>
-                    
+<div class="rate-modal">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">عرض</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div id="rateLbl"></div>
-              
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">غلق</button>
-                <button type="button" id="delete" class="btn btn-danger">حذف</button>
+                <div class="modal-body">
+                    <label>التجربة مع البائع</label>
+                    <div class="form-group">
+                        <textarea id="rateComment" class="form-control" cols="60" rows="7"></textarea>
+
+                    </div>
+                    <div id="rateLbl"></div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">غلق</button>
+                    <button type="button" id="delete" class="btn btn-danger">حذف</button>
+                </div>
             </div>
         </div>
     </div>
+
 </div>
 
 
@@ -61,7 +64,7 @@
 
 <script>
     $(document).ready(function () {
-
+        $("#rate-modal").hide();
 
         var dataTable = $("#rates").DataTable({
             "serverSide": "true",
@@ -135,19 +138,20 @@
                 url: "/Harag/Admin/Comment/HaragRateDetails?rateId=" + button.attr("data-rate-id") + "",
                 type: "get",
                 success: function (data) {
-
+                    $("#buy-check").remove();
+                    $("#buy-span").remove();
                     $("#rateComment").val(data.rate.RateComment);
                     
-                    if (data.rate.AdviceDeal === true) {
+                    if (data.rate.IsBuyDone === true) {
 
-                        $("<input type='checkbox' disabled checked />" + "  " + "<span> تم شراء السلعة</span>").appendTo($("#rateLbl"));
+                        $("<input id='buy-check' type='checkbox' disabled checked />" + "  " + "<span id='buy-span'> تم شراء السلعة</span>").appendTo($("#rateLbl"));
                     }
                     else {
 
-                        $("<input type='checkbox' disabled  />" + "  " + "<span> لم يتم شراء السلعة</span>").appendTo($("#rateLbl"));
+                        $("<input id='buy-check' type='checkbox' disabled  />" + "  " + "<span> لم يتم شراء السلعة</span>").appendTo($("#rateLbl"));
                     }
 
-                    $("#exampleModal").show();
+                    $("#rate-modal").show();
                     $("#delete").attr('data-rate-id', data.rate.Id)
                 },
                 error: function (data) {
@@ -165,14 +169,14 @@
         var button = $(this);
         swal({
             title: "هل انت متاكد؟",
-            text: "هل انت متاكد انك تريد مسح هذه الاستشارة؟",
+            text: "هل انت متاكد انك تريد مسح هذا التقييم؟",
             icon: "warning",
             buttons: true,
             dangerMode: true,
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    $("#exampleModal").modal().hide();
+                    $("#rate-modal").hide();
                     $(".modal-backdrop").removeClass('show');
                     $.ajax({
                         "url": "/Harag/Admin/Comment/HaragRateDelete?rateId=" + button.attr("data-rate-id") + "",
@@ -180,7 +184,7 @@
                         "success": function (result) {
                             dataTable.row(button.parents("tr")).remove().draw();
                             //dataTable.rows().remove().draw();
-                            swal("تم مسح الاستشارة بنجاح", {
+                            swal("تم مسح التقييم بنجاح", {
                                 icon: "success",
 
                             });
@@ -189,7 +193,7 @@
                         }
                     });
                 } else {
-                    swal("التراجع عن مسح هذه الرسالة؟");
+                    swal("التراجع عن مسح هذا التقييم؟");
                 }
             });
     });

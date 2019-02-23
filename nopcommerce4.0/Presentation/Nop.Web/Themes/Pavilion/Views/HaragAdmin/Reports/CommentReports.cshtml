@@ -1,0 +1,96 @@
+﻿@model Nop.Web.Models.HaragAdmin.Reports.ReportModel
+
+    @{ 
+        Layout = "~/Themes/Pavilion/Views/HaragAdmin/Shared/_Layout.cshtml";
+    }
+
+
+@Html.Partial("~/Themes/Pavilion/Views/HaragAdmin/Shared/_DataTable.cshtml")
+
+<div class="page-title">بلاغات التعليقات</div>
+
+
+<div class="table-responsive">
+    <table id="reports" class="table table-bordered table-hover">
+        <thead>
+            <tr class="table-active">
+               
+                <th>العنوان</th>
+                
+                
+                <th>النوع</th>
+               
+
+
+            </tr>
+        </thead>
+    </table>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+
+
+        var dataTable = $("#reports").DataTable({
+            "serverSide": "true",
+            "responsive": "true",
+            "processing": "true",
+            "autoWidth": "true",
+            //"order": [[0, "asc"]],
+            "ajax": {
+
+                "url": "/Harag/Admin/Comment/HaragCommentReportsAjax",
+                "dataType": "json",
+
+                "type": "post"
+            },
+
+            "columns": [
+
+                { "data": "ReportTitle", "name": "ReportTitle" },
+                //{ "data": "ReportDescription", "name": "ReportDescription", "width": "10%" },
+                
+               
+               
+                {
+                    "data": "Category",
+                    "render": function (data) {
+                        return (data == 1) ? "رد غير لائق" : "بخس السلعة";
+
+                    }
+                },
+                
+                //{
+                //    "data": "Id", "width": "25%",
+                //    "render": function (data, type, post) {
+                //        return "<a id='details' href='#' class='btn btn-xs btn-default btn-small' data-post-id=" + post.Id + " ><i class='fa fa-eye' ></i> التفاصيل </a>" ;
+
+                //    }
+
+                //}
+
+
+            ],
+            "language": {
+                "sProcessing": "جارٍ التحميل...",
+                "sLengthMenu": "أظهر _MENU_ مدخلات",
+                "sZeroRecords": "لم يعثر على أية سجلات",
+                "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                "sInfoPostFix": "",
+                "sSearch": "ابحث:",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "الأول",
+                    "sPrevious": "السابق",
+                    "sNext": "التالي",
+                    "sLast": "الأخير"
+                }
+            }
+
+
+        });
+    });
+ </script>

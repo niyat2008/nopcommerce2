@@ -41,8 +41,4 @@
     <Folder Include="Z_Harag\User\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="Z_HaragAdmin\Setting\ISettingRepository.cs" />
-  </ItemGroup>
-
 </Project>

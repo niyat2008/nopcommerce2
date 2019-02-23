@@ -1,0 +1,109 @@
+﻿@model Nop.Services.Z_HaragAdmin.Setting.SettingsModel
+
+@{
+    Layout = "~/Themes/Pavilion/Views/HaragAdmin/Shared/_Layout.cshtml";
+}
+
+
+@Html.Partial("~/Themes/Pavilion/Views/HaragAdmin/Shared/_DataTable.cshtml")
+
+<div class="page-title">الاعدادات</div>
+
+
+   <form id="settingsForm">
+
+    <div class="form-group">
+        <label class="form-lbl"> مدة تثبيت الاعلان </label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.DeletePost,new {@class= "form-control delete-settings detailsTextBox" })
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="form-lbl"> ارسال تنبيه بتحديث الاعلان بعد</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.UpdatePostAfter, new { @class = "form-control notify-settings detailsTextBox" })
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="form-lbl"> لا يمكن تحديث الاعلان قبل</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.UpdatePostBefor, new { @class = "form-control updateBefor-settings detailsTextBox" })
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="form-lbl"> عدد مرات العمولة لتقييم عضو اخر</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.RateCommissionNumber, new { @class = "form-control rateCommissionNum detailsTextBox" })
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="form-lbl"> مجموع العمولة لتقييم عضو اخر</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.RateCommissionSum, new { @class = "form-control rateCommissionSum detailsTextBox" })
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="form-lbl"> عدد مرات العمولة لرتبة العضو المميز</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.RateCommissionNumber, new { @class = "form-control featuredCommissionNum detailsTextBox" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-lbl"> مجموع العمولة لرتبة العضو المميز</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.FeaturedMemberCommissionSum, new { @class = "form-control featuredCommissionSum detailsTextBox" })
+
+        </div>
+    </div>
+
+    <input type="submit" class="btn btn-success" value="تحديث" />
+
+</form>
+
+<script>
+    $(document).ready(function () {
+        $("#settingsForm").submit(function (e) {
+            var ajaxRequest;
+            e.preventDefault();
+            var model = {
+                "DeletePost": $(".delete-settings").val(),
+                "UpdatePostAfter": $(".notify-settings").val(),
+                "UpdatePostBefor": $(".updateBefor-settings").val(),
+                "RateCommissionNumber": $(".rateCommissionNum").val(),
+                "RateCommissionSum": $(".rateCommissionSum").val(),
+                "FeaturedMemberCommissionNumber": $(".featuredCommissionNum").val(),
+                "FeaturedMemberCommissionSum": $(".featuredCommissionSum").val(),
+
+
+            }
+            var value = JSON.stringify(model);
+            ajaxRequest = $.ajax({
+                url: "/Harag/Admin/Comment/HaragSettingsAjax",
+                type: "post",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: value
+
+            });
+            ajaxRequest.done(function (response) {
+                if (response.result == true) {
+                    $.notify("تمت العملية بنجاح", "success");
+                } else  {
+
+                    $.notify("failed", "error");
+                }
+               
+
+            });
+
+        });
+
+    });
+</script>

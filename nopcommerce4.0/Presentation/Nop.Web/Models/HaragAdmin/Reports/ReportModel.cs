@@ -17,6 +17,8 @@ namespace Nop.Web.Models.HaragAdmin.Reports
         public int CommentId { get; set; }
         public string Comment { get; set; }
         public byte? Category { get; set; }
+        public bool IsIllegal { get; set; }
+        public int? PostId { get; set; }
 
 
 

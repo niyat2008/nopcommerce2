@@ -11,23 +11,55 @@ namespace Nop.Services.Z_HaragAdmin.Setting
    public class SettingService:ISettingService
     {
         #region Fields
-        private readonly IRepository<Settings> _settingRepository;
+        private readonly IRepository<Z_Harag_Settings> _settingRepository;
         #endregion
 
         #region Ctor
-        public SettingService(IRepository<Settings> settingRepository)
+        public SettingService(IRepository<Z_Harag_Settings> settingRepository)
         {
             this._settingRepository = settingRepository;
         }
         #endregion
 
         #region Methods
-        //Get Value
-        public Settings GetValue(string key)
+        
+
+        //Update Settings
+        public bool UpdateSettings(SettingsModel model)
         {
-            var settings = _settingRepository.TableNoTracking.Where(s => s.Key == key).FirstOrDefault();
-            return settings;
+
+
+
+            var settingsmodel = new SettingsModel();
+            var parsedSettings = settingsmodel.SetSettings(model);
+            UpdateSetting(parsedSettings);
+            return true;
+        }  
+        // Get Settings
+        public SettingsModel GetSettings()
+        {
+            var settings = _settingRepository.TableNoTracking.ToList();
+            var settingsmodel = new SettingsModel(settings);
+            var parsedSettings = settingsmodel.GetSettings();
+
+            return parsedSettings;
         }
+
         #endregion
+
+        #region Helpers
+        private void UpdateSetting(List<TempModel> model)
+        {
+            foreach(var set in model)
+            {
+                var setting = _settingRepository.TableNoTracking.FirstOrDefault(s => s.Key == set.Key);
+                setting.Value = set.Value;
+                setting.LastUpdated = DateTime.Now;
+                _settingRepository.Update(setting);
+
+            }
+        }
+
+        #endregion 
     }
 }

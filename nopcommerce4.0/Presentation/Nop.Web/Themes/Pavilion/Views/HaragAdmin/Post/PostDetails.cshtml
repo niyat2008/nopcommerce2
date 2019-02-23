@@ -97,27 +97,41 @@
     <span  class="btn btn-primary ref">رجوع</span>
    
 }
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-0" style="max-height:300px!important;margin-bottom:60px;margin-top:40px;margin-right:0px!important;padding-right:0px!important">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
+                <div class="carousel-inner">
+                    @{
+                        var url = Model.Photos.FirstOrDefault();
+                    }
+                    @foreach (var photo in Model.Photos)
+            {
+                        <div class="carousel-item  @((photo==url)?Html.Raw("active"):Html.Raw(""))">
+                            <a href="@photo" data-toggle="lightbox">
 
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-        @{ 
-            var url = Model.Photos.FirstOrDefault();
-        }
-@foreach (var photo in Model.Photos)
-{
-        <div class="carousel-item img-responsive @((photo==url)?Html.Raw("active"):Html.Raw(""))" style="max-height:300px;">
-            <a href="@photo" data-toggle="lightbox">
+                                <img class="img-responsive" src="@photo">
 
-                <img class="img-responsive" src="@photo" style="background-size:cover!important;height:100%!important;" >
+                            </a>
 
-            </a>
 
-            
+                        </div>
+                    }
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
         </div>
-}
     </div>
 </div>
-
+@*style="max-height:300px;padding:0!important;"*@
 
 <a href="@Model.Photos.FirstOrDefault()" data-toggle="lightbox">
 
@@ -231,3 +245,25 @@
 
 
 
+@*<div class="col-md-4" style="max-height:300px!important;">
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @{
+                var url = Model.Photos.FirstOrDefault();
+            }
+            @foreach (var photo in Model.Photos)
+            {
+                <div class="carousel-item  @((photo==url)?Html.Raw("active"):Html.Raw(""))">
+                    <a href="@photo" data-toggle="lightbox">
+
+                        <img class="img-responsive" src="@photo">
+
+                    </a>
+
+
+                </div>
+            }
+        </div>
+    </div>
+
+</div>*@
