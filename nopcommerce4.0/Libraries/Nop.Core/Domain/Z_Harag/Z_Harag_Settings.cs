@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Nop.Core.Domain.Z_Harag
 {
-    public class Settings:BaseEntity
+    public class Z_Harag_Settings:BaseEntity
     {
         public string Key { get; set; }
         public string Value { get; set; }

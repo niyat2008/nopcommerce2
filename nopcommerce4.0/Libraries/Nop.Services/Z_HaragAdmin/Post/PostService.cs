@@ -77,6 +77,28 @@ namespace Nop.Services.Z_HaragAdmin.Post
             return query.ToList();
         }
 
+        //Get Post Reports
+        public List<Z_Harag_Reports> GetPostReports(int start, int length, string searchValue, string sortColumnName, string sortDirection)
+        {
+            var query = _reportRepository.TableNoTracking;
+
+            //search
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                query = query.Where(r => r.ReportDescription.Contains(searchValue) || r.ReportTitle.Contains(searchValue));
+            }
+            //sort
+            if (!string.IsNullOrEmpty(sortColumnName) || !string.IsNullOrEmpty(sortDirection))
+            {
+                query = query.OrderBy(sortColumnName + " " + sortDirection);
+            }
+            //pagining
+            query = query.OrderByDescending(r => r.ReportTitle).Skip(start).Take(length);
+
+            return query.ToList();
+
+        }
+
 
         ////Post Comments
         //public List<Z_Harag_Comment> GetPostComments(int postId)

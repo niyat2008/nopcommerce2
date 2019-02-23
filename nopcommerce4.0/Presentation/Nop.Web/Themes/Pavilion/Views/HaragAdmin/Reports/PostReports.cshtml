@@ -1,0 +1,97 @@
+﻿@model Nop.Web.Models.HaragAdmin.Reports.ReportModel
+
+    @{ 
+        Layout = "~/Themes/Pavilion/Views/HaragAdmin/Shared/_Layout.cshtml";
+    }
+
+
+@Html.Partial("~/Themes/Pavilion/Views/HaragAdmin/Shared/_DataTable.cshtml")
+
+<div class="page-title">بلاغات الاعلانات</div>
+
+
+<div class="table-responsive">
+    <table id="reports" class="table table-bordered table-hover">
+        <thead>
+            <tr class="table-active">
+               
+                <th>العنوان</th>
+                <th>الوصف</th>
+                <th>النوع</th>
+                
+                <th>عمليات</th>
+
+
+            </tr>
+        </thead>
+    </table>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+
+
+        var dataTable = $("#reports").DataTable({
+            "serverSide": "true",
+            "responsive": "true",
+            "processing": "true",
+            "autoWidth": "true",
+            "order": [[3, "des"]],
+            "ajax": {
+
+                "url": "/Harag/Admin/Comment/HaragPostReportsAjax",
+                "dataType": "json",
+
+                "type": "post"
+            },
+
+            "columns": [
+
+
+               
+                { "data": "ReportTitle", "width": "10%" },
+                { "data": "ReportDescription", "width": "35%" },
+               
+                {
+                    "data": "IsIllegal",
+                    "render": function (data) {
+                        return data ? "مخالف" : "غير مخالف";
+
+                    }
+
+                },
+                
+                {
+                    "data": "PostId", "width": "25%",
+                    "render": function (data, type, post) {
+                        return "<a id='details' href='/Harag/Admin/Post/HaragPostsDetails?postId="+post.PostId+"' class='btn btn-xs btn-default btn-small' data-post-id=" + post.PostId + " ><i class='fa fa-eye' ></i> التفاصيل </a>" ;
+
+                    }
+
+                }
+
+
+            ],
+            "language": {
+                "sProcessing": "جارٍ التحميل...",
+                "sLengthMenu": "أظهر _MENU_ مدخلات",
+                "sZeroRecords": "لم يعثر على أية سجلات",
+                "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                "sInfoPostFix": "",
+                "sSearch": "ابحث:",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "الأول",
+                    "sPrevious": "السابق",
+                    "sNext": "التالي",
+                    "sLast": "الأخير"
+                }
+            }
+
+
+        });
+    });
+ </script>
