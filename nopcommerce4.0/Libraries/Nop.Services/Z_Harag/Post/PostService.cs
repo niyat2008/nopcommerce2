@@ -667,7 +667,7 @@ namespace Nop.Services.Z_Harag.Post
             .Include(m => m.Z_Harag_Photo)
             .Include(m => m.Z_Harag_Comment)
             .Where(c => c.CityId == city
-            || c.CategoryId == cat).ToList();
+            && c.CategoryId == cat).ToList();
 
             return query;
         }

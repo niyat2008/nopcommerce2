@@ -40,7 +40,7 @@ namespace Nop.Web.Controllers.Harag
         }
          
  
-        [HttpPost]
+        [HttpGet]
         public IActionResult AddPostMessage(int postId, string Message)
         {
 

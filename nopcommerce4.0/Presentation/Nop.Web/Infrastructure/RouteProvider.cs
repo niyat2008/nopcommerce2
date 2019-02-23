@@ -180,17 +180,14 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapRoute("Harag.Post.GetHaragCatPosts", "Harag/Cat/{catId?}",
             new { controller = "Post", action = "GetHaragCatPosts" });
   
-            // done search by cat
-            routeBuilder.MapRoute("Harag.Post.GetHaragCityPosts", "Harag/City/{CityId?}",
-            new { controller = "Post", action = "GetHaragCatPosts" });
-
+ 
             // done search by user
             routeBuilder.MapRoute("Harag.Post.GetHaragUserPosts", "Harag/{userId}/Posts",
             new { controller = "Post", action = "GetHaragUserPosts" });
 
             // done search by cat and city and neighborhood
-            routeBuilder.MapRoute("Harag.Post.GetHaragSearchPostsPosts", "Harag/City/{CityId?}",
-            new { controller = "Post", action = "GetHaragCatPosts" });
+            routeBuilder.MapRoute("Harag.Post.GetHaragSearchPostsPosts", "Harag/City/{city?}",
+            new { controller = "Post", action = "GetHaragCityPosts" });
 
             // done search by cat and city and neighborhood
             routeBuilder.MapRoute("Harag.Post.HaragSearch", "Harag/Search/{Term?}",

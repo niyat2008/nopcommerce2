@@ -148,7 +148,7 @@
         
          $.ajax({
              type: 'GET',
-             url: 'Harag/HaragSearchCatCity/' + cityId + '/' + catId,
+             url: '/Harag/HaragSearchCatCity/' + catId + '/' + cityId,
             complete: function (data) {
                 $("#posts").html(data.responseText);
             }
