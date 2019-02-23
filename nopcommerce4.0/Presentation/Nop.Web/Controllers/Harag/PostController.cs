@@ -15,6 +15,7 @@ using Nop.Web.Models.Consultant.Post;
 using Nop.Web.Models.Harag.Category;
 using Nop.Web.Models.Harag.Post;
 using Nop.Web.Models.Harag.Report;
+using PostOutputModel = Nop.Web.Models.Harag.Post.PostOutputModel;
 
 namespace Nop.Web.Controllers.Harag
 {
@@ -421,6 +422,9 @@ namespace Nop.Web.Controllers.Harag
             if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
             {
                 var post = this._postService.GetPost(PostId, "");
+                var relatedPosts = _postService.SearchByCategory(post.CategoryId, 8);
+                var sameCityPosts = _postService.SearchByCity((int)post.CityId, 8);
+
                 if (post != null)
                 {
                     model = new Models.Harag.Post.PostWithFilesModel
@@ -441,7 +445,18 @@ namespace Nop.Web.Controllers.Harag
                         Id = post.Id,
                         DateUpdated = post.DateUpdated,
                         IsDispayed = post.IsDispayed,
-                        PostOwner = post.Customer.Username
+                        PostOwner = post.Customer.Username,
+                        RelatedPosts = relatedPosts.Select(m => new Models.Harag.Post.PostModel
+                        {
+                            Photo = m.Z_Harag_Photo.FirstOrDefault() == null ? "" : m.Z_Harag_Photo.FirstOrDefault().Url,
+                            Id = m.Id
+                        }).ToList(),
+
+                        SameCityPosts = sameCityPosts.Select(m => new Models.Harag.Post.PostModel
+                        {
+                            Photo = m.Z_Harag_Photo.FirstOrDefault() == null ? "" : m.Z_Harag_Photo.FirstOrDefault().Url,
+                            Id = m.Id
+                        }).ToList()
                     };
                 }
 
@@ -1751,46 +1766,69 @@ namespace Nop.Web.Controllers.Harag
 
 
 
+        [HttpGet]
+        public IActionResult HaragSearch(string Term)
+        {
+            if (string.IsNullOrEmpty(Term))
+                return BadRequest(ModelState);
 
-        //public IActionResult Search(string Term, PagingParams pagingParams)
-        //{
-        //    if (string.IsNullOrEmpty(Term))
-        //        return BadRequest(ModelState);
+            SearchModel SearchModel = new SearchModel() { Term = Term };
 
-        //    SearchModel SearchModel = new SearchModel() { Term = Term };
+            var model = _postService.SearchPosts(SearchModel);
+             
+            var outputModel = new PostOutputModel
+            {  
+                Items = model.Select(m => new Models.Harag.Post.PostModel()
+                {
+                    Id = m.Id,
+                    Text = m.Text,
+                    Title = m.Title,
+                    CategoryId = m.CategoryId, 
+                    PostOwner = m.Customer.Username, 
+                    DateCreated = m.DateCreated,
+                    DateUpdated = m.DateUpdated,
+                    IsAnswered = m.IsAnswered,
+                    IsClosed = m.IsClosed,
+                    IsDispayed = m.IsDispayed,
+                    IsReserved = m.IsReserved, 
+                    City = m.City.ArName,
+                    CategoryName = m.Category.Name, 
+                    Photo = m.Z_Harag_Photo?.FirstOrDefault()?.Url
+                }).ToList(),
+            };
+             
+            return View("~/Themes/Pavilion/Views/Harag/Search/searchPage.cshtml", outputModel);
+        }
 
-        //    var model = _postService.SearchPosts(pagingParams, SearchModel);
+        [HttpGet]
+        public IActionResult HaragSearchCatCity(int Cat, int City)
+        {
+  
+            var model = _postService.SearchPostsCatCity(Cat, City);
 
-        //    Response.Headers.Add("X-Pagination", model.GetHeader().ToJson());
+            var outputModel = new PostOutputModel
+            {
+                Items = model.Select(m => new Models.Harag.Post.PostModel()
+                {
+                    Id = m.Id,
+                    Text = m.Text,
+                    Title = m.Title,
+                    CategoryId = m.CategoryId,
+                    PostOwner = m.Customer.Username,
+                    DateCreated = m.DateCreated,
+                    DateUpdated = m.DateUpdated,
+                    IsAnswered = m.IsAnswered,
+                    IsClosed = m.IsClosed,
+                    IsDispayed = m.IsDispayed,
+                    IsReserved = m.IsReserved,
+                    City = m.City.ArName,
+                    CategoryName = m.Category.Name,
+                    Photo = m.Z_Harag_Photo?.FirstOrDefault()?.Url
+                }).ToList(),
+            };
 
-        //    var outputModel = new PostOutputModel
-        //    {
-        //        Paging = model.GetHeader(),
-        //        Links = GetLinksForSearch(model, "Consultant.Post.Search", Term),
-        //        Items = model.List.Select(m => new PostModel()
-        //        {
-        //            Id = m.Id,
-        //            Text = m.Text,
-        //            Title = m.Title,
-        //            CategoryId = m.CategoryId,
-        //            IsSetToSubCategory = m.IsSetToSubCategory,
-        //            PostOwner = m.Customer.Username,
-        //            SubCategoryId = m.SubCategoryId,
-        //            DateCreated = m.DateCreated,
-        //            DateUpdated = m.DateUpdated,
-        //            IsAnswered = m.IsAnswered,
-        //            IsClosed = m.IsClosed,
-        //            IsDispayed = m.IsDispayed,
-        //            IsReserved = m.IsReserved,
-        //            Rate = m.Rate,
-        //            CategoryName = m.Category.Name,
-        //            SubCategoryName = m.SubCategory?.Name,
-        //            Photo = GetPostPhoto(m.Photos?.FirstOrDefault()?.Url)
-        //        }).ToList(),
-        //    };
-        //    ViewBag.UserRole = "Vistor";
-        //    return View("~/Themes/Pavilion/Views/Consultant/Post/Posts.cshtml", outputModel);
-        //}
+            return View("~/Themes/Pavilion/Views/Harag/Post/PostsAjax.cshtml", outputModel);
+        }
 
         #endregion
 

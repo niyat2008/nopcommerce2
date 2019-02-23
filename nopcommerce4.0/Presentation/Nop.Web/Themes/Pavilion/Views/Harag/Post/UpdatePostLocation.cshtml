@@ -166,7 +166,7 @@
             geocoder.geocode({ 'address': address }, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     map.setCenter(results[0].geometry.location);
-                    var marker = new google.maps.Marker({
+                     marker = new google.maps.Marker({
                         map: map,
                         position: results[0].geometry.location
                     });
@@ -179,14 +179,16 @@
     $("#add-update-location-js").click(function (event) {
         var lat = marker.getPosition().lat();
         var lng = marker.getPosition().lng();
-
+        var city = $("#City-js-ajax option:selected").val();
+        var neighb = $("#Neighbohood-js-ajax option:selected").val();
         var postLocationModel = {
-            PostId: '@Model.Id',
+            PostId: '@Model.Id', 
             Lat: lat + "",
-            Lng: lng + ""
+            Lng: lng + "",
+            CityId: city + "",
+            NeighbId: neighb + ""
         };
-
-        alert(JSON.stringify(postLocationModel));
+         
         // update the location
         $.ajax({
         headers: {
@@ -199,9 +201,10 @@
             data: JSON.stringify(postLocationModel),
         complete: function (data) {
             if (data.satat == true) {
-                window.location = '@Url.RouteUrl("Harag.Post.GetHaragPost")' + "?postId=" + data;
+                window.location = '/Harag/Post/' + data;
             } else {
-                alert("تاكد من الاتصال بالانترنت وعاود المحاوله");
+                window.location = '/Harag/Post/' + data;
+                //alert("تاكد من الاتصال بالانترنت وعاود المحاوله");
             }
         }
     });

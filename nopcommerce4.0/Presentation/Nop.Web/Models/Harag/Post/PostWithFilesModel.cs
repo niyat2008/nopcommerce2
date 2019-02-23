@@ -29,10 +29,76 @@ namespace Nop.Web.Models.Harag.Post
         public string Contact { get; set; }
 
         public IList<string> Files { get; set; }
+        public List<PostModel> RelatedPosts { get;  set; }
+        public List<PostModel> SameCityPosts { get; set; }
 
         public PostWithFilesModel()
         {
             Files = new List<string>();
+        }
+
+
+        public string DateDescription
+        {
+            get
+            {
+                return GetDateDescrition(this.DateCreated);
+            }
+            set { }
+        }
+
+        private string GetDateDescrition(DateTime dateCreated)
+        {
+            if (dateCreated == null)
+                return "";
+
+            var diff = DateTime.Now - dateCreated;
+
+            double s = diff.Milliseconds/1000;
+
+           
+            double m = 0;
+            double h = 0;
+            double d = 0;
+            double mo = 0;
+            double y = 0;
+
+            if ( s < 60)
+            {
+                return "حالا";
+            }
+             
+            m = s / 60;
+ 
+            if(m < 60)
+            {
+                return "قبل " + m + "دقيقه";
+            }
+
+            h = m / 60;
+
+            if (h < 24)
+            {
+                return "قبل " + h + "ساعه";
+            }
+
+            d = h / 24;
+
+            if (d < 30)
+            {
+                return "قبل " + d + "يوم";
+            }
+
+            mo = d / 30;
+
+            if (mo < 12)
+            {
+                return "قبل " + mo + "شهر";
+            }
+
+            y = mo / 12;
+             
+            return "قبل " + y + "سنه"; 
         }
     }
 }

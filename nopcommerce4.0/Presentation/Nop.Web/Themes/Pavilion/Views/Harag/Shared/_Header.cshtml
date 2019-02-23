@@ -74,7 +74,7 @@
         <a href="/Harag/Profile">الملف الشخصي</a>
     </span>
     <span>
-        <a href="/Harag/Profile">حساب عمولات الموقع</a>
+        <a href="/Harag/Payment/Banks">حساب عمولات الموقع</a>
     </span>
     <span>
         <a href="/Harag/Favorites">المفضله </a>
@@ -101,7 +101,7 @@
                 <div class="form-group">
                     <input id="searchText" type="text" style="height:44px;"
                            class="form-control" placeholder="ابحث عن ...">
-                    <button onclick="filterWithText()" style="height:44px;" class="btndarckgreen">
+                    <button id="search-js"  style="height:44px;" class="btndarckgreen">
                         <i class="fa fa-search"></i>
                     </button>
                 </div>
@@ -158,9 +158,9 @@
                     <strong>معلومات</strong>
                 </div>
                 <ul class="list">
-                    <li><a href="/%D8%A7%D9%84%D8%B4%D8%AD%D9%86-%D9%88%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B1%D8%AC%D8%A7%D8%B9">	الشحن والاسترجاع</a></li>
-                    <li><a href="/%D8%A7%D9%84%D8%AE%D8%B5%D9%88%D8%B5%D9%8A%D8%A9">	الخصوصية</a></li>
-                    <li><a href="/%D8%B4%D8%B1%D9%88%D8%B7-%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85">شروط الاستخدام</a></li>
+                    <li><a href="/Harag/FeaturedProducts">الاعلانات المميزه</a></li>
+                    <li><a href="/Harag/NotAllowed">	المنتجات الممنوعه</a></li>
+                    <li><a href="/Harag/Terms">شروط الاستخدام</a></li>
                     <li><a href="/%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA-%D8%B9%D9%86%D8%A7">معلومات عنا</a></li>
                 </ul>
             </div>
@@ -269,21 +269,21 @@
 
 
     function goToHome() {
-        window.location.href = '@Url.RouteUrl("Consultant.ConsultantHome")';
+        window.location.href = '@Url.RouteUrl("Harag.Home")';
     }
 
 
-    function filterWithText() {
+    $("#search-js").on('click', function () {
         var Term = $("#searchText").val();
 
         if (Term) {
 
-            window.location.href = '@Url.RouteUrl("Consultant.Post.Search")'+"?Term=" + Term;
+            window.location = '/Harag/Search/' + Term;
         }
         else {
             alert("ادخل كلمات للبحث");
         }
-    }
+    });
 
 
 </script>

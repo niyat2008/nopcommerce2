@@ -12,9 +12,9 @@
                 <select id="search-city-js-ajax" class="form-control">
                     <option>الاختيار 1</option>
                 </select>
-                <select id="search-date-js-ajax" class="form-control">
+                @*<select id="search-date-js-ajax" class="form-control">
                     <option>الاختيار 1</option>
-                </select>
+                </select>*@
                 <button id="search-cat-city-js" class="btn btn-default srchBtn" type="button"><i class="fa fa-search"></i></button>
                 <hr>
                 @*<div class="choices">
@@ -143,13 +143,14 @@
     });
 
     $("#search-cat-city-js").on('click', function () {
-        var cityId = $("#");
-        var catId = $("#");
+        var cityId = $("#search-city-js-ajax option:selected").val();
+        var catId = $("#search-category-js-ajax option:selected").val();
+        
          $.ajax({
-            type: 'GET',
-            url: '@Url.RouteUrl("Harag.Post.GetHaragCities")',
+             type: 'GET',
+             url: 'Harag/HaragSearchCatCity/' + cityId + '/' + catId,
             complete: function (data) {
-                $("#search-city-js-ajax").html(data.responseText);
+                $("#posts").html(data.responseText);
             }
         });
     });

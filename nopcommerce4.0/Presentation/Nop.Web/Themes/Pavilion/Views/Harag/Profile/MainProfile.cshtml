@@ -12,7 +12,7 @@
                 <div class="profile_info">
                     <p><i class="fa fa-user-o"></i> @Model.UserName</p>
                     <hr />
-                    <p> @Model.LastSeen آخر ظهور قبل 45 دقيقه</p>
+                    <p> @Model.LastSeen </p>
                     <hr />
                     @*<p><a href="add-message.html"><i class="fa fa-envelope-o"></i> مراسلة </a></p>*@
                     <hr />
@@ -22,6 +22,7 @@
                         <a href="/Harag/User/@Model.UserName/Rates" class="btn btn-default add" > <i class="fa fa-thumbs-o-down" style="color:#d03333"></i> <span> @Model.DownRating </span> تقييم سلبى</a>
                     </div>
                     <hr />
+
                     <p><a href="/Harag/Rate/@Model.UserName"> <i class="fa fa-thumbs-o-up"></i> اضافة تقييم </a></p>
                     <hr />
                     <p><i class="fa fa-user-o"></i> <span> @Model.FollowerCount </span> متابع </p>
@@ -36,10 +37,12 @@
                     {
                         <div class="item">
                             <div class="det">
-                                <h3>@item.Title</h3>
-                                <small>منذ 4 دقيقة</small>
+                                <a href="/Harag/Post/@item.Id">
+                                    <h3>@item.Title</h3>
+                                </a>
+                                <small>@item.DateDescription</small>
                                  <div class="det-det">
-                                <a href="/Harag/City/1">
+                                <a href="/Harag/City/@item.City">
                                     <span><i class="fa fa-map-marker"></i> @item.City </span>
                                 </a>
                                 <a href="/Harag/user/@item.PostOwner">
