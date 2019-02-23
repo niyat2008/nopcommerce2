@@ -4,21 +4,17 @@ a:hover {
 }
 
 /*top-bar*/
-.top_bar {
-    background: #333;
-    padding: 9px 0
-}
+.top_bar { background: #333; padding: 10px 0; text-align: center; height: 43px; }
 
     .top_bar span {
         cursor: pointer;
         color: #fff;
         font-size: 17px;
-        padding: 10px 30px
+        padding: 9px 30px; padding-top:10px
     }
 
-        .top_bar span.active {
-            background: #4da74d
-        }
+    .top_bar span.active { background: #4da74d }
+    .top_bar span a, .top_bar span:hover a, .top_bar span a:hover, .top_bar span:focus a, .top_bar span a:focus { text-decoration: none }
 
 .logo {
     width: 116px;
@@ -27,7 +23,8 @@ a:hover {
 }
 /*Search*/
 .search {
-    padding: 5px 0
+    padding: 2px 0;
+    background: #f6f6f6;
 }
 
 .form-group {
@@ -222,7 +219,6 @@ a:hover {
         color: #4da74d;
         font-weight: bold;
         background: #fff;
-        border-top: 2px solid #4da74d;
     }
 
 .subNav {
