@@ -19,57 +19,71 @@
             <div class="col-sm-3">
                 <div class="disTable advBox">
                     <div class="choices choices2 disTable">
-                        <div class="col-xs-12">
-                            <a>قسم غير مصنف فى الشرقية</a>
-                        </div>
+
                     </div>
                     <div class="adv-images">
                         @foreach (var item in Model.Files)
                         {
-                            @foreach (var image in Model.Files)
+                            @foreach (var image in Model.RelatedPosts)
                             {
                                 <div style="width:160px; display:inline;">
-                                    <a href="~/HaragApi/Uploads/Images/@image" data-lightbox="image2-@Model.Id" data-title="My caption">
-                                        <img src="~/HaragApi/Uploads/Images/@image" alt="Single Image" style="width:150px;height:150px;" />
+                                    <a href="/Harag/Post/@image.Id">
+                                        <img src="~/HaragApi/Uploads/Images/@image.Photo" style="width:150px;height:150px;" />
                                     </a>
                                 </div>
-                                @*<div class="col-xs-6">
-                    <img src="~/HaragApi/Uploads/Images/@image" />
-                </div>*@
                             }
                         }
                     </div>
                 </div>
                 <div class="disTable advBox">
                     <div class="choices choices2 disTable">
-                        <div class="col-xs-12">
-                            <a>قسم غير مصنف فى الشرقية</a>
-                        </div>
+                        في نفس المدينه
                     </div>
                     <div class="adv-images">
-                        @foreach (var image in Model.Files)
+                        @foreach (var item in Model.Files)
                         {
-                            <div style="width:230px; display:inline;">
-                                <a href="~/HaragApi/Uploads/Images/@image" data-lightbox="image1-@Model.Id" data-title="My caption">
-                                    <img src="~/HaragApi/Uploads/Images/@image" alt="Single Image" style="width:250px;height:250px;" />
-                                </a>
-                            </div>
-                            @*<div class="col-xs-6">
-                                    <img src="~/HaragApi/Uploads/Images/@image" />
-                                </div>*@
+                            @foreach (var image in Model.SameCityPosts)
+                            {
+                                <div style="width:160px; display:inline;">
+                                    <a href="/Harag/Post/@image.Id">
+                                        <img src="~/HaragApi/Uploads/Images/@image.Photo" style="width:150px;height:150px;" />
+                                    </a>
+                                </div>
+                            }
                         }
                     </div>
                 </div>
+                @*<div class="disTable advBox">
+            <div class="choices choices2 disTable">
+
+            </div>
+            <div class="adv-images">
+                @foreach (var item in Model.Files)
+                {
+                    @foreach (var image in Model.Files)
+                    {
+                        <div style="width:160px; display:inline;">
+                            <a href="~/HaragApi/Uploads/Images/@image" data-lightbox="image2-@Model.Id" data-title="My caption">
+                                <img src="~/HaragApi/Uploads/Images/@image" alt="Single Image" style="width:150px;height:150px;" />
+                            </a>
+                        </div>
+                    }
+                }
+            </div>
+        </div>*@
             </div>
             <div class="col-sm-9">
                 <div class="cont det-block">
                     <div class="det-top">
                         <h4>@Model.Title</h4>
-                        <small>منذ 4 دقيقة (اخر تحديث قبل ثانية)</small>
+                        <small>
+                            @Model.DateDescription
+                        </small>
 
                         <div class="det-det">
-                            <a href="@Model.CityId"><span><i class="fa fa-map-marker"></i> @Model.CityName </span></a>
-                            <a href="@Model.userId"><span><i class="fa fa-user"></i> @Model.PostOwner </span></a>
+                            <a href="/Harag/City/@Model.CityId"><span><i class="fa fa-map-marker"></i> @Model.CityName </span></a>
+                            <a href="/Harag/City/@Model.CategoryId"><span><i class="fa fa-address-book"></i> @Model.CategoryName </span></a>
+                            <a href="/Harag/user/@Model.PostOwner"><span><i class="fa fa-user"></i> @Model.PostOwner </span></a>
                         </div>
                     </div>
                     <div class="det-bottom">
@@ -85,16 +99,19 @@
                 <img src="~/HaragApi/Uploads/Images/@image" />
             </div>*@
                         }
-                        <br>
-                        <p>وسيلة الاتصال</p>
-                        @if (String.IsNullOrEmpty(Model.Contact))
-                        {
-                            <p class="phone"> الخاض </p>
-                        }
-                        else
-                        {
-                            <p class="phone">@Model.Contact<i class="fa fa-phone"></i></p>
-                        }
+                        <br />
+                        <div class="row">
+                            <p>وسيلة الاتصال</p>
+                            @if (String.IsNullOrEmpty(Model.Contact))
+                            {
+                                <p class="phone"> الخاض </p>
+                            }
+                            else
+                            {
+                                <p class="phone">@Model.Contact<i class="fa fa-phone"></i></p>
+                            }
+                        </div>
+                      
 
                     </div>
                 </div>
@@ -104,10 +121,10 @@
                     </div>
                     <div class="col-xs-2 text-center">
                         <a id="add-post-to-favorite"><i class="fa fa-heart-o fa-2x"></i></a>
-                        <sub>(12)</sub>
+                        <sub></sub>
                     </div>
                     <div class="col-xs-2 text-center">
-                        <a href="@Url.RouteUrl("Harag.Post.ReportPost")?postId=@Model.Id"><i class="fa fa-flag-o fa-2x"></i></a>
+                        <a href="/Harag/ReportPost/@Model.Id"><i class="fa fa-flag-o fa-2x"></i></a>
                     </div>
                     <div class="col-xs-2 text-center">
                         <a href="javascript:openShareWindow('https://api.whatsapp.com/send?text=')"><i class="fa fa-whatsapp fa-2x"></i></a>
@@ -118,8 +135,7 @@
                 </div>
                 <div class="choices disTable">
                     <div class="col-xs-12">
-                        <a>قسم غير مصنف فى الشرقية</a>
-                        <a>قسم غير مصنف </a>
+                        <a href="/Harag/Cat/@Model.CategoryId">@Model.CategoryName</a> 
                     </div>
                 </div>
                 <div>

@@ -40,9 +40,16 @@ namespace Nop.Web.Controllers.Harag
         }
          
  
-        [HttpPost]
-        public IActionResult AddPostMessage([FromBody] MessageModel message)
+        [HttpGet]
+        public IActionResult AddPostMessage(int postId, string Message)
         {
+
+            MessageModel message = new MessageModel
+            {
+                Message = Message,
+                postId = postId
+            };
+
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return RedirectToRoute("Login", new { returnUrl = "Harag" });
 

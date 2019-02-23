@@ -398,7 +398,7 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                .Where(c => c.CategoryId == catId).ToList();
+                .Where(c => c.CityId == catId).ToList();
 
             return query;
         }
@@ -589,6 +589,87 @@ namespace Nop.Services.Z_Harag.Post
             
             return postsFav;
 
+        }
+
+        public List<Z_Harag_Post> SearchByCategory(int catId, int count)
+        {
+            var query = _postRepository.TableNoTracking
+              .Include(m => m.Category)
+              .Include(m => m.Customer)
+              .Include(m => m.City)
+              .Include(m => m.Z_Harag_Photo)
+              .Include(m => m.Z_Harag_Comment) .Take(count).ToList();
+
+            return query;
+        }
+
+        public List<Z_Harag_Post> SearchByCity(int catId, int count)
+        {
+            var query = _postRepository.TableNoTracking
+              .Include(m => m.Category)
+              .Include(m => m.Customer)
+              .Include(m => m.City)
+              .Include(m => m.Z_Harag_Photo)
+              .Include(m => m.Z_Harag_Comment)
+              .Where(c => c.CityId == catId) .Take(count).ToList();
+
+            return query;
+        }
+
+        public List<Z_Harag_Post> SearchByCategoryPage(int catId, int page)
+        {
+            var query = _postRepository.TableNoTracking
+              .Include(m => m.Category)
+              .Include(m => m.Customer)
+              .Include(m => m.City)
+              .Include(m => m.Z_Harag_Photo)
+              .Include(m => m.Z_Harag_Comment)
+              .Where(c => c.CategoryId == catId).Skip(page * 10).Take(10).ToList();
+
+            return query;
+        }
+
+        public List<Z_Harag_Post> SearchByCityPage(int catId,  int page)
+        {
+            var query = _postRepository.TableNoTracking
+              .Include(m => m.Category)
+              .Include(m => m.Customer)
+              .Include(m => m.City)
+              .Include(m => m.Z_Harag_Photo)
+              .Include(m => m.Z_Harag_Comment)
+              .Where(c => c.CityId == catId)
+              .Skip(page * 10).Take(10).ToList();
+
+            return query;
+        }
+        public List<Z_Harag_Post> SearchPosts(SearchModel searchModel)
+        {
+            var query = _postRepository.TableNoTracking
+              .Include(m => m.Category)
+              .Include(m => m.Customer)
+              .Include(m => m.City)
+              .Include(m => m.Z_Harag_Photo)
+              .Include(m => m.Z_Harag_Comment)
+              .Where(c => c.Text.Contains(searchModel.Term) 
+              || c.Title.Contains(searchModel.Term) 
+              || c.City.ArName.Contains(searchModel.Term) 
+              || c.Category.Name.Contains(searchModel.Term) ).ToList();
+
+            return query;
+        }
+
+        public List<Z_Harag_Post> SearchPostsCatCity(int cat, int city)
+        {
+            var query = _postRepository.TableNoTracking
+            .Include(m => m.Category)
+            .Include(m => m.Customer)
+            .Include(m => m.City)
+            .Include(m => m.Z_Harag_Photo)
+            .Include(m => m.Z_Harag_Comment)
+            .Where(c => c.CityId == city
+            && c.CategoryId == cat).ToList();
+
+            return query;
         }
         #endregion
     }

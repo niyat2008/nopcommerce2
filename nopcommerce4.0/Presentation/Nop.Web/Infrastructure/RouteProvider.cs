@@ -22,6 +22,20 @@ namespace Nop.Web.Infrastructure
             // done
             routeBuilder.MapRoute("Harag.Home", "Harag",
             new { controller = "HaragHome", action = "Home" });
+
+            // done
+            routeBuilder.MapRoute("Harag.User.GetAdminLink", "GetAdminLink",
+            new { controller = "User", action = "GetHaragAdminLink" });
+
+            routeBuilder.MapRoute("Harag.DisallaowedProducts", "Harag/NotAllowed",
+            new { controller = "HaragHome", action = "DisallaowedProducts" });
+             
+            routeBuilder.MapRoute("Harag.FeaturedProducts", "Harag/FeaturedProducts",
+            new { controller = "HaragHome", action = "FeaturedProducts" });
+             
+            routeBuilder.MapRoute("Harag.Agrement", "Harag/Terms",
+            new { controller = "HaragHome", action = "Agrement" });
+              
             // Add New Post  
             routeBuilder.MapRoute("Harag.Post.AddNewPost", "Harag/Post/New",
             new { controller = "Post", action = "HaragAddPost" });
@@ -114,7 +128,7 @@ namespace Nop.Web.Infrastructure
             new { controller = "Message", action = "GetAllPostMessages" });
 
             // Harag New Message
-            routeBuilder.MapRoute("Harag.Message.AddPostMessage", "Harag/NewPostMessage",
+            routeBuilder.MapRoute("Harag.Message.AddPostMessage", "Harag/NewPostMessage/{postId?}/{Message?}",
            new { controller = "Message", action = "AddPostMessage" });
 
  
@@ -167,18 +181,38 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapRoute("Harag.Post.GetHaragCatPosts", "Harag/Cat/{catId?}",
             new { controller = "Post", action = "GetHaragCatPosts" });
   
-            // done search by cat
-            routeBuilder.MapRoute("Harag.Post.GetHaragCityPosts", "Harag/City/{CityId?}",
-            new { controller = "Post", action = "GetHaragCatPosts" });
-
+ 
             // done search by user
             routeBuilder.MapRoute("Harag.Post.GetHaragUserPosts", "Harag/{userId}/Posts",
             new { controller = "Post", action = "GetHaragUserPosts" });
 
             // done search by cat and city and neighborhood
-            routeBuilder.MapRoute("Harag.Post.GetHaragSearchPostsPosts", "Harag/City/{CityId?}",
-            new { controller = "Post", action = "GetHaragCatPosts" });
+            routeBuilder.MapRoute("Harag.Post.GetHaragSearchPostsPosts", "Harag/City/{city?}",
+            new { controller = "Post", action = "GetHaragCityPosts" });
 
+            // done search by cat and city and neighborhood
+            routeBuilder.MapRoute("Harag.Post.HaragSearch", "Harag/Search/{Term?}",
+            new { controller = "Post", action = "HaragSearch" });
+
+
+            // done search by cat and city and neighborhood
+            routeBuilder.MapRoute("Harag.Post.HaragSearchCatCity", "Harag/HaragSearchCatCity/{Cat?}/{City?}",
+            new { controller = "Post", action = "HaragSearchCatCity" });
+
+
+            ///
+            /// Harag Payment
+            ///
+
+            // pqyment banks
+            routeBuilder.MapRoute("Harag.Payment.PaymentBanks", "Harag/Payment/Banks",
+            new { controller = "Payment", action = "PaymentBanks" });
+
+
+            // payment sadad
+            routeBuilder.MapRoute("Harag.Payment.PaymentSadad", "Harag/Payment/Sadad",
+            new { controller = "Payment", action = "PaymentSadad" });
+             
 
             // ------------------------ Consultant ------------------------- 
 
@@ -1176,3 +1210,4 @@ new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
         #endregion
     }
 }
+ 

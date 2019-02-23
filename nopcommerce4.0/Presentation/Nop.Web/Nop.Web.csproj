@@ -64,6 +64,11 @@
 
     <!-- We copy the \Logs directory -->
     <Content Include="Logs\**" CopyToPublishDirectory="PreserveNewest" />
+    <Content Remove="Themes\Pavilion\Views\Harag\GeneralPages\featuredproducts.cshtml" />
+    <Content Remove="Themes\Pavilion\Views\Harag\GeneralPages\notallowed.cshtml" />
+    <Content Remove="Themes\Pavilion\Views\Harag\GeneralPages\terms.cshtml" />
+    <Content Remove="Themes\Pavilion\Views\Harag\Payment\sadadpayment.cshtml" />
+    <Content Remove="Themes\Pavilion\Views\Harag\Search\searchPage.cshtml" />
     <Content Remove="wwwroot\css\Consultant\imageResponsive.css" />
     <Content Remove="wwwroot\fonts\fonts\Home.cshtml" />
     <None Remove="Themes\Pavilion\Content\css\pages.css" />
@@ -71,6 +76,19 @@
     <None Remove="Themes\Pavilion\Content\img\google-plus.png" />
     <None Remove="Themes\Pavilion\Content\img\New folder\ma3roof.png" />
     <None Remove="Themes\Pavilion\Content\img\whatsapp-image.png" />
+    <EmbeddedResource Include="Themes\Pavilion\Views\Harag\GeneralPages\featuredproducts.cshtml" />
+    <EmbeddedResource Include="Themes\Pavilion\Views\Harag\GeneralPages\terms.cshtml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Pavilion\Views\Harag\GeneralPages\notallowed.cshtml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Pavilion\Views\Harag\Payment\sadadpayment.cshtml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Pavilion\Views\Harag\Search\searchPage.cshtml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="wwwroot\css\Consultant\imageResponsive.css">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
@@ -84,7 +102,6 @@
     <Folder Include="Models\ConsultantAdmin\" />
     <Folder Include="Models\Harag\BlackList\" />
     <Folder Include="Models\NewFolder\" />
-    <Folder Include="Themes\Pavilion\Views\Harag\GeneralPages\" />
     <Folder Include="Validators\ConsultantAdmin\" />
     <Folder Include="wwwroot\ConsultantAdmin\" />
     <Folder Include="wwwroot\ConsultantApi\Uploads\Images\" />
@@ -289,7 +306,7 @@
     <Content Update="Themes\Pavilion\Views\Harag\Post\AgreementBeforeAddPost.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Themes\Pavilion\Views\Harag\Post\ConsultantNotAnswerdConsultations.cshtml">
+    <Content Update="Themes\Pavilion\Views\Harag\Post\SameCityPosts.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Post\ConsultantOpenConsultations.cshtml">
@@ -298,7 +315,7 @@
     <Content Update="Themes\Pavilion\Views\Harag\Post\ConsultantReservedConsultations.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Themes\Pavilion\Views\Harag\Post\CustomerClosedConsultations.cshtml">
+    <Content Update="Themes\Pavilion\Views\Harag\Post\RelatedPosts.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Post\CustomerOpenConsultations.cshtml">
@@ -352,6 +369,12 @@
     <Content Update="Themes\Pavilion\Views\Shared\Components\OrderSummar\Default.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Themes\Pavilion\Views\Harag\GeneralPages\featuredproducts.cshtml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
   <!-- This target execute after "Build" target.

@@ -124,6 +124,22 @@ namespace Nop.Web.Controllers.Harag
         }
 
 
+        public virtual IActionResult DisallaowedProducts()
+        { 
+            return View("~/Themes/Pavilion/Views/Harag/GeneralPages/notallowed.cshtml");
+        }
+
+        public virtual IActionResult Agrement()
+        {
+            return View("~/Themes/Pavilion/Views/Harag/GeneralPages/terms.cshtml");
+        }
+
+        public virtual IActionResult FeaturedProducts()
+        {
+            return View("~/Themes/Pavilion/Views/Harag/GeneralPages/featuredproducts.cshtml");
+        }
+
+
         public virtual IActionResult Navbar(PagingParams pagingParams)
         {
 

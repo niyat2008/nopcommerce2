@@ -1,9 +1,13 @@
-﻿ 
-  
-            <div class="row">
-                <div class="col-md-10">
-                    <div class="alert alert-info" role="alert">تم أضافه الابلاغ جزاك الله خيرا</div>
-                    <a href="@ViewBag.PostId">العوده للاعلان</a>
-                    <a href="@ViewBag.PostId">العوده للصفحه الرئيسيه</a>
-                </div>
-            </div> 
+﻿@model Nop.Web.Models.Harag.Report.PostReport
+
+@{
+    Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <div class="alert alert-info" role="alert">تم أضافه الابلاغ جزاك الله خيرا</div>
+        <a href="/Harag/Post/@ViewBag.PostId">العوده للاعلان</a>
+        <a href="/Harag">العوده للصفحه الرئيسيه</a>
+    </div>
+</div>
