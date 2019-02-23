@@ -23,18 +23,19 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapRoute("Harag.Home", "Harag",
             new { controller = "HaragHome", action = "Home" });
 
+            // done
+            routeBuilder.MapRoute("Harag.User.GetAdminLink", "GetAdminLink",
+            new { controller = "User", action = "GetHaragAdminLink" });
+
             routeBuilder.MapRoute("Harag.DisallaowedProducts", "Harag/NotAllowed",
             new { controller = "HaragHome", action = "DisallaowedProducts" });
-
-
+             
             routeBuilder.MapRoute("Harag.FeaturedProducts", "Harag/FeaturedProducts",
             new { controller = "HaragHome", action = "FeaturedProducts" });
-
-
+             
             routeBuilder.MapRoute("Harag.Agrement", "Harag/Terms",
             new { controller = "HaragHome", action = "Agrement" });
-             
-
+              
             // Add New Post  
             routeBuilder.MapRoute("Harag.Post.AddNewPost", "Harag/Post/New",
             new { controller = "Post", action = "HaragAddPost" });

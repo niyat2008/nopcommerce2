@@ -89,6 +89,21 @@ namespace Nop.Web.Controllers.Harag
             return View("~/Themes/Pavilion/Views/Harag/Profile/MainProfile.cshtml", model);
         }
 
+
+
+        [HttpGet]
+        public IActionResult GetHaragAdminLink()
+        {
+            UserModel model = new UserModel();
+
+            if (_workContext.CurrentCustomer.IsRegistered())
+            {
+                if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+                    return PartialView("~/Themes/Pavilion/Views/Harag/User/_AdminLink.cshtml", 1);
+            }
+            return PartialView("~/Themes/Pavilion/Views/Harag/User/_AdminLink.cshtml", 0);
+        }
+
         [HttpGet]
         public IActionResult RateUserView(string username)
         {
