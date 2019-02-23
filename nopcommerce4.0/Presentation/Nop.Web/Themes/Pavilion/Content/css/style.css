@@ -11,13 +11,22 @@ input.form-control { border: 1px solid #ddd }
 ::-webkit-selection { background:#4da74d; color:#fff }
 
 /*top-bar*/
-.top_bar { background:#333; padding: 10px 0 }
-.top_bar span { cursor: pointer; color:#fff; font-size: 17px; padding: 11px 30px }
+.top_bar { background: #333; padding: 10px 0; text-align: center; height: 43px; }
+    .top_bar span {
+        cursor: pointer;
+        color: #fff;
+        font-size: 17px;
+        padding: 9px 30px;
+        padding-top: 10px
+    }
 .top_bar span.active { background:#4da74d }
-.logo { width: 100%; height: 45px; cursor: pointer; }
+    .top_bar span a, .top_bar span:hover a, .top_bar span a:hover, .top_bar span:focus a, .top_bar span a:focus {
+        text-decoration: none
+    }
+.logo { width: 116px; height: 64px; cursor: pointer; }
 
 /*Search*/
-.search { padding: 20px 0 }
+.search { padding: 2px 0; background: #f6f6f6; }
 .form-group { margin-bottom: 0; position: relative; }
 .form-control { height: 44px; }
 .search input { box-shadow: 0 1px 2px 0 rgba(0,0,0,.08); border:1px solid #ddd; margin-bottom: 10px }
@@ -55,7 +64,7 @@ input.form-control { border: 1px solid #ddd }
 .navbar-collapse { padding: 0; position: relative; background:#e8ebee }
 .navbar-default { border-color:#ededed; background:#e8ebee }
 .navbar-default .navbar-nav>li>a, .subNav li a { color:#000; font-size: 16px; cursor: pointer; text-decoration: none }
-.navbar-default .navbar-nav>li.main >a.active , .navbar-default .navbar-nav>li.main:hover > a { color:#4da74d; font-weight: bold; background:#fff; border-top: 2px solid #4da74d; }
+.navbar-default .navbar-nav>li.main >a.active , .navbar-default .navbar-nav>li.main:hover > a { color:#4da74d; font-weight: bold; background:#fff; }
 .subNav { display: none; min-height: 100px; padding: 10px 0; background:#fff; border:1px solid #ddd; position: absolute; top: 51px; z-index: 9999; min-width: 1000px; box-shadow: 0 1px 2px 0 rgba(0,0,0,.08); -ms-transition: all 3s ease-in-out; -o-transition: all 3s ease-in-out; -webkit-transition: all 3s ease-in-out; transition: all 3s ease-in-out; }
 /* .subNav { display: none; min-height: 100px; padding: 10px 0; background:#fff; border:1px solid #ddd; position: absolute; top: 51px; right: -292px; z-index: 9999; width: 1518px; box-shadow: 0 1px 2px 0 rgba(0,0,0,.08); -ms-transition: all 3s ease-in-out; -o-transition: all 3s ease-in-out; -webkit-transition: all 3s ease-in-out; transition: all 3s ease-in-out; } */
 /* .navbar-default .navbar-nav>li.hasSubMenu :hover { background:#fff; border-top:1px solid #4da74d } */
@@ -82,7 +91,7 @@ input.form-control { border: 1px solid #ddd }
 .content .choices a { background:#eee; padding:5px; border-radius:3px; cursor: pointer; line-height: 35px; }
 .content .choices a:hover { color:#0473c0; background:#e6f1f9; font-weight:bold; }
 .content .items { margin: 25px 0 }
-.content .items .item { display:table; border-bottom: 1px solid #ddd; cursor: pointer; padding: 5px 10px }
+.content .items .item { display:table; border-bottom: 1px solid #ddd; cursor: pointer; padding: 5px 10px; width:100% }
 .content .items .item:nth-child(odd) { background:#f3f9f7 }
 .content .items .item .det { width:87%; float:right }
 .content .items .item .det .det-det { margin: 10px 0 }
