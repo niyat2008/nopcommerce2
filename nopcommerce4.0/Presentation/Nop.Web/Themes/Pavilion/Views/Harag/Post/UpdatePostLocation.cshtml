@@ -201,9 +201,9 @@
             data: JSON.stringify(postLocationModel),
         complete: function (data) {
             if (data.satat == true) {
-                window.location = '/Harag/Post/' + data;
+                window.location = '/Harag/Post/' + @Model.Id;
             } else {
-                window.location = '/Harag/Post/' + data;
+                window.location = '/Harag/Post/' + @Model.Id;
                 //alert("تاكد من الاتصال بالانترنت وعاود المحاوله");
             }
         }
