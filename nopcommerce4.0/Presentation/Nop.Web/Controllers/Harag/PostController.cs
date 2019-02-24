@@ -1769,9 +1769,6 @@ namespace Nop.Web.Controllers.Harag
         [HttpGet]
         public IActionResult HaragSearch(string Term)
         {
-            if (string.IsNullOrEmpty(Term))
-                return BadRequest(ModelState);
-
             SearchModel SearchModel = new SearchModel() { Term = Term };
 
             var model = _postService.SearchPosts(SearchModel);

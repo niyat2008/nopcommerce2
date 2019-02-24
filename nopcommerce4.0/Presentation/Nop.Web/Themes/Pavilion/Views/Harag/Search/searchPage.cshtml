@@ -37,12 +37,12 @@
                 </div>
                 *@
                 <!-- Select Search -->
-                
-                <div class="">
+                <h3>نتيجه البحث</h3>
+                @*<div class="">
                     <select id="category-js-ajax" class="form-control" style="width:20%">
                         <option></option>
                     </select>
-                </div>
+                </div>*@
                 
                 <!-- List -->
                 <div id="posts" class="items">
@@ -69,7 +69,10 @@
                             </div>
                         </div>
                         <div class="det-img">
-                            <img src="/HaragApi/Uploads/Images/@post.Photo">
+                            @if (!String.IsNullOrEmpty(post.Photo))
+                            {
+                                <img src="/HaragApi/Uploads/Images/@post.Photo">
+                            }
                         </div>
                     </div>
                     }
@@ -103,6 +106,31 @@
                 $("#category-js-ajax").html(data.responseText);
             }
         }); 
+
+
+           $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetCategories")',
+            complete: function (data) {
+                $("#category-js-ajax").html(data.responseText);
+            }
+        });
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetCategories")',
+            complete: function (data) {
+                $("#search-category-js-ajax").html(data.responseText);
+            }
+        });
+
+         $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetHaragCities")',
+            complete: function (data) {
+                $("#search-city-js-ajax").html(data.responseText);
+            }
+        });
    
     });
 
