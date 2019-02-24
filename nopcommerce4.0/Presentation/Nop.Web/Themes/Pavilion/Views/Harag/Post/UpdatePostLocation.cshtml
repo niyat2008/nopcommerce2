@@ -160,7 +160,7 @@
                 $("#Neighbohood-js-ajax").html(data.responseText);
             }
           });
-
+           
             geocoder.geocode({ 'address': address }, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     map.setCenter(results[0].geometry.location);
@@ -199,9 +199,9 @@
             data: JSON.stringify(postLocationModel),
         complete: function (data) {
             if (data.satat == true) {
-                window.location = '/Harag/Post/' + '@Model.Id';
+                window.location = '/Harag/Post/' + @Model.Id;
             } else {
-                window.location = '/Harag/Post/' + '@Model.Id';
+                window.location = '/Harag/Post/' + @Model.Id;
                 //alert("تاكد من الاتصال بالانترنت وعاود المحاوله");
             }
         }
