@@ -501,13 +501,8 @@ namespace Nop.Web.Controllers.Consultant
 
         [HttpGet]
         public IActionResult GetCustomerCommonPosts(PagingParams pagingParams)
-        {
-            if (!_workContext.CurrentCustomer.IsRegistered())
-                return Unauthorized();
+        {  
 
-
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
-                return Forbid();
             ViewBag.UserRole = RolesType.Registered;
 
             var currentUserId = _workContext.CurrentCustomer.Id;
