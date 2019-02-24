@@ -52,7 +52,7 @@
     {
         "data": "Id",
     "render": function (data) {
-        return "<a id='details' href='/Consultations/Admin/Customer/GetConsultantDetails?email=" + data + "' class='btn btn-default btn-small' data-post-id=" + data + "><i class='fa fa-eye'></i> التفاصيل </a>" + " " + "<a class='btn btn-default btn-small' href='/Consultations/Admin/Customer/GetConsultantPosts?consultantId=" + data + "'  data-post-id=" + data + ">الاستشارات</a>"  + " " + "<button class='btn btn-danger' id='delete' data-post-id=" + data + "><i class='fa fa-trash'></i>حذف</button>" ;
+        return "<a id='details' href='/Consultations/Admin/Customer/GetConsultantDetails?email=" + data + "' class='btn btn-default btn-small' data-post-id=" + data + "><i class='fa fa-eye'></i> التفاصيل </a>" + " " + "<a class='btn btn-default btn-small' href='/Consultations/Admin/Customer/GetConsultantPosts?consultantId=" + data + "'  data-post-id=" + data + ">الاستشارات</a>"  /*+ " " + "<button class='btn btn-danger' id='delete' data-post-id=" + data + "><i class='fa fa-trash'></i>حذف</button>" ;*/
 
     }
 
@@ -61,7 +61,7 @@
 
     ],
     "language": {
-    "sProcessing": "جارٍ التحميل...",
+    "sProcessing" : "جارٍ التحميل...",
     "sLengthMenu": "أظهر _MENU_ مدخلات",
     "sZeroRecords": "لم يعثر على أية سجلات",
     "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
