@@ -19,6 +19,7 @@ using Nop.Services.Z_HaragAdmin.Customers;
 using Nop.Services.Z_HaragAdmin.Cities;
 using Nop.Core.Domain.Z_Harag;
 using Nop.Services.Z_HaragAdmin.Setting;
+using Nop.Services.Z_HaragAdmin.BankAccount;
 
 namespace Nop.Web.Infrastructure.HaragAdmin
 {
@@ -39,6 +40,7 @@ namespace Nop.Web.Infrastructure.HaragAdmin
             builder.RegisterType<CustomerService>().As<ICustomerService>().InstancePerLifetimeScope();
             builder.RegisterType<CityService>().As<ICityService>().InstancePerLifetimeScope();
             builder.RegisterType<SettingService>().As<ISettingService>().InstancePerLifetimeScope();
+            builder.RegisterType<BankAccountService>().As<IBankAccountService>().InstancePerLifetimeScope();
 
         }
 

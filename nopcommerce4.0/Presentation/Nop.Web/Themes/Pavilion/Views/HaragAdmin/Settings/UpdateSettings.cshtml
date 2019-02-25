@@ -6,6 +6,13 @@
 
 
 @Html.Partial("~/Themes/Pavilion/Views/HaragAdmin/Shared/_DataTable.cshtml")
+@*<link href="../css/froala_style.min.css" rel="stylesheet" type="text/css" />*@
+
+
+
+
+
+
 
 <div class="page-title">الاعدادات</div>
 
@@ -62,16 +69,58 @@
 
         </div>
     </div>
+       @*<div class="form-group">
+           <label class="form-lbl"> معاهدة استخدام الموقع</label>
+           <div class="col-md-10">
+              <textarea id="compact" class="detailsTextBox"></textarea>
+               @Html.TextAreaFor(m => m.UseWebsiteCompact, new { @id= "compact", @class = "detailsTextBox" })
+           </div>
+       </div>*@
 
+       <div class="" style="max-width:300px!important;">
+           <textarea id="compact" style="width:50%!important;"></textarea>
+       </div>
+       <textarea id="notAllowedProduct"></textarea>
+       <textarea id="a"></textarea>
+       @*<div class="fr-view">
+         
+       </div>*@
     <input type="submit" class="btn btn-success" value="تحديث" />
 
 </form>
 
+
+
+
+
+           
+<script src="~/js/ConsultantAdmin/notify.js"></script>
 <script>
     $(document).ready(function () {
+        var h = $('#compact').froalaEditor(
+             {
+                toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough',  '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'inlineClass', 'clearFormatting', '|', 'emoticons', 'fontAwesome', 'specialCharacters', '-', 'paragraphFormat', 'lineHeight', 'paragraphStyle', 'align', 'formatOL', 'formatUL',]
+
+            });
+       
+        var x = $('#compact').froalaEditor('html.get');
+        console.log("dtd " + x);
+        console.log("escape " + escape(x));
+        console.log("unescape " + unescape(x));
+        var y = escape(x);
+
+
+        
+        
         $("#settingsForm").submit(function (e) {
             var ajaxRequest;
             e.preventDefault();
+            var x = $('#compact').froalaEditor('html.get');
+            console.log("dtd " +x);
+            console.log("escape " + escape(x));
+            console.log("unescape " + unescape(x));
+            var y = escape(x);
+
             var model = {
                 "DeletePost": $(".delete-settings").val(),
                 "UpdatePostAfter": $(".notify-settings").val(),
@@ -80,9 +129,13 @@
                 "RateCommissionSum": $(".rateCommissionSum").val(),
                 "FeaturedMemberCommissionNumber": $(".featuredCommissionNum").val(),
                 "FeaturedMemberCommissionSum": $(".featuredCommissionSum").val(),
+                //"UseWebsiteCompact": 5,
 
 
             }
+
+
+
             var value = JSON.stringify(model);
             ajaxRequest = $.ajax({
                 url: "/Harag/Admin/Comment/HaragSettingsAjax",
