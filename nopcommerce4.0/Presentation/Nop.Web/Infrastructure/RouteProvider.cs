@@ -690,6 +690,25 @@ new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
             //Update Settings Ajax
             routeBuilder.MapRoute("Harag.Admin.HaragSettingsAjax", "Harag/Admin/Comment/HaragSettingsAjax", new { controller = "Settings", action = "UpdateSettingsAjax" });
 
+
+
+
+
+            //Add Bank
+            routeBuilder.MapRoute("Harag.Admin.AddBank", "Harag/Admin/Comment/AddBank", new { controller = "BankAccount", action = "AddBankAccount" });
+            //Add Bank Ajax
+            routeBuilder.MapRoute("Harag.Admin.AddBankAjax", "Harag/Admin/Comment/AddBankAjax", new { controller = "BankAccount", action = "AddBankAccountAjax" });
+
+            //Delete Bank 
+            routeBuilder.MapRoute("Harag.Admin.DeleteBank", "Harag/Admin/Comment/DeleteBank", new { controller = "BankAccount", action = "DeleteBankAccount" });
+
+
+
+            //Get All Bank Accounts
+            routeBuilder.MapRoute("Harag.Admin.GetAllBank", "Harag/Admin/GetAllBank", new { controller = "BankAccount", action = "GetBankAccounts" });
+            //Get All Bank Accounts Ajax
+            routeBuilder.MapRoute("Harag.Admin.GetAllBankAjax", "Harag/Admin/GetAllBankAjax", new { controller = "BankAccount", action = "GetBankAccountsAjax" });
+
             ////Post Messages
 
             //routeBuilder.MapRoute("Harag.Admin.HaragPostMessage", "Harag/Admin/Post/HaragPostsMessage", new { controller = "Post", action = "GetPostMessages" });

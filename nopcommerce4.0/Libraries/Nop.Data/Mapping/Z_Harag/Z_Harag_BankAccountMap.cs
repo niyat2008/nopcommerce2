@@ -17,6 +17,7 @@ namespace Nop.Data.Mapping.Z_Harag
             this.Property(b => b.IBANNumber).IsOptional().HasMaxLength(4000);
             this.Property(b => b.AccountNo).IsOptional().HasMaxLength(4000);
             this.Property(b => b.AddedBy);
+            
         }
     }
 }

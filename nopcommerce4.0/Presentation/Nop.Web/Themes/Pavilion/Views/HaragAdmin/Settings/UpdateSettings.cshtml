@@ -69,13 +69,13 @@
 
         </div>
     </div>
-       @*<div class="form-group">
+       <div class="form-group">
            <label class="form-lbl"> معاهدة استخدام الموقع</label>
            <div class="col-md-10">
-              <textarea id="compact" class="detailsTextBox"></textarea>
+              @*<textarea id="compact" class="detailsTextBox"></textarea>*@
                @Html.TextAreaFor(m => m.UseWebsiteCompact, new { @id= "compact", @class = "detailsTextBox" })
            </div>
-       </div>*@
+       </div>
 
        <div class="" style="max-width:300px!important;">
            <textarea id="compact" style="width:50%!important;"></textarea>
@@ -129,7 +129,7 @@
                 "RateCommissionSum": $(".rateCommissionSum").val(),
                 "FeaturedMemberCommissionNumber": $(".featuredCommissionNum").val(),
                 "FeaturedMemberCommissionSum": $(".featuredCommissionSum").val(),
-                //"UseWebsiteCompact": 5,
+                "UseWebsiteCompact": y,
 
 
             }

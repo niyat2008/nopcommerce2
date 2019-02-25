@@ -59,6 +59,7 @@ namespace Nop.Web.Controllers.HaragAdmin
                 return Forbid();
 
             var setting = _settingService.GetSettings();
+            setting.UseWebsiteCompact = System.Uri.UnescapeDataString(setting.UseWebsiteCompact);
 
             return View("~/Themes/Pavilion/Views/HaragAdmin/Settings/UpdateSettings.cshtml",setting);
         }
