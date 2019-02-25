@@ -71,7 +71,7 @@ namespace Nop.Services.Z_HaragAdmin.Setting
             this.FeaturedMemberCommissionNumber = int.Parse(this.GetValue("FeaturedMemberCommissionNumber"));
             this.FeaturedMemberCommissionSum = int.Parse(this.GetValue("FeaturedMemberCommissionSum"));
             this.UseWebsiteCompact = this.GetValue("UseWebsiteCompact");
-
+            
 
             return this;
 
@@ -104,8 +104,8 @@ namespace Nop.Services.Z_HaragAdmin.Setting
             settingModel = new TempModel { Key = "FeaturedMemberCommissionSum", Value = model.FeaturedMemberCommissionSum.ToString() };
             settings.Add(settingModel);
 
-            settingModel = new TempModel { Key = "UseWebsiteCompact", Value = model.UseWebsiteCompact };
-            settings.Add(settingModel);
+            //settingModel = new TempModel { Key = "UseWebsiteCompact", Value = model.UseWebsiteCompact };
+            //settings.Add(settingModel);
 
             return settings;
 

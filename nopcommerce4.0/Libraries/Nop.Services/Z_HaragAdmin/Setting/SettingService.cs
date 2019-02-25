@@ -48,16 +48,17 @@ namespace Nop.Services.Z_HaragAdmin.Setting
         #endregion
 
         #region Helpers
-        private void UpdateSetting(List<TempModel> model)
+        private bool UpdateSetting(List<TempModel> model)
         {
             foreach(var set in model)
             {
-                var setting = _settingRepository.TableNoTracking.FirstOrDefault(s => s.Key == set.Key);
+                var setting = _settingRepository.Table.FirstOrDefault(s => s.Key == set.Key);
                 setting.Value = set.Value;
                 setting.LastUpdated = DateTime.Now;
                 _settingRepository.Update(setting);
 
             }
+            return true;
         }
 
         #endregion 

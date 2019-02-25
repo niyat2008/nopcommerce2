@@ -33,6 +33,21 @@ namespace Nop.Web.Controllers.HaragAdmin
         #endregion
 
         #region Actions
+
+        //Get Settings
+        public ActionResult GetSettings()
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+                return Forbid();
+
+            var setting = _settingService.GetSettings();
+            return null;
+            
+        }
         //Update Settings
         public IActionResult UpdateSettings()
         {
@@ -43,9 +58,9 @@ namespace Nop.Web.Controllers.HaragAdmin
             if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
                 return Forbid();
 
+            var setting = _settingService.GetSettings();
 
-
-            return View("~/Themes/Pavilion/Views/HaragAdmin/Settings/UpdateSettings.cshtml");
+            return View("~/Themes/Pavilion/Views/HaragAdmin/Settings/UpdateSettings.cshtml",setting);
         }
 
         //Update Settings Ajax
