@@ -103,8 +103,8 @@ namespace Nop.Services.Z_HaragAdmin.Setting
             settingModel = new TempModel { Key = "FeaturedMemberCommissionSum", Value = model.FeaturedMemberCommissionSum.ToString() };
             settings.Add(settingModel);
 
-            //settingModel = new TempModel { Key = "UseWebsiteCompact", Value = model.UseWebsiteCompact };
-            //settings.Add(settingModel);
+            settingModel = new TempModel { Key = "UseWebsiteCompact", Value = model.UseWebsiteCompact };
+            settings.Add(settingModel);
 
             return settings;
 

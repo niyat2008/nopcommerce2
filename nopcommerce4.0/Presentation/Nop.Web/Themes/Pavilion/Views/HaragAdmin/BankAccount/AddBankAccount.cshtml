@@ -1,0 +1,105 @@
+﻿@model Nop.Services.Z_HaragAdmin.BankAccount.PostBankAccount
+@{
+    Layout = "~/Themes/Pavilion/Views/HaragAdmin/Shared/_Layout.cshtml";
+}
+<link href="~/css/ConsultantAdmin/MyCss.css" rel="stylesheet" />
+
+
+
+<form id="addBank">
+
+    @Html.HiddenFor(c => c.Id, new { @class = "bankId" })
+    <div class="form-group">
+        <label class="form-lbl">الاسم</label>
+        <div class="col-md-10 ">
+            @Html.TextBoxFor(c => c.BankName, new { @class = "form-control bankname detailsTextBox" })
+            @Html.ValidationMessageFor(c => c.BankName)
+        </div>
+
+
+    </div>
+    <div class="form-group">
+        <label class="form-lbl">الرقم</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(c => c.IBANNumber, new { @class = "form-control  bankNum detailsTextBox" })
+            @Html.ValidationMessageFor(c => c.IBANNumber)
+        </div>
+
+
+    </div>
+    <div class="form-group">
+        <label class="form-lbl">الحساب</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(c => c.AccountNo, new { @class = "form-control  bankAccount detailsTextBox" })
+            @Html.ValidationMessageFor(c => c.AccountNo)
+        </div>
+
+
+    </div>
+
+
+    <input type="submit" id="add-category-btn" class="btn btn-success form-lbl" value="اضافة" />
+
+</form>
+<script src="~/js/ConsultantAdmin/jquery-3.2.1.min.js"></script>
+<script src="~/js/ConsultantAdmin/notify.js"></script>
+
+
+
+<script>
+    $(document).ready(function () {
+
+        $("#addBank").submit(function (e) {
+            var ajaxResult;
+            e.preventDefault();
+            var id =@Model.Id
+;
+            var name = $('.bankname').val();
+            var num = $('.bankNum').val();
+            var accountNum = $('.bankAccount').val();
+
+
+            console.log(id);
+            console.log(name);
+            console.log(num); console.log(accountNum);
+
+            var model = {
+                "Id": id,
+                "BankName": name,
+                "IBANNumber": num,
+                "AccountNo": accountNum,
+
+            }
+            var values = JSON.stringify(model);
+
+            ajaxResult = $.ajax({
+                url: "/Harag/Admin/Comment/AddBankAjax",
+                type: "post",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: values
+
+            });
+            ajaxResult.done(function (response) {
+                if (response.data === true) {
+                    name="";
+                    num="";
+                    accountNum="";
+                    $.notify("تمت العملية بنجاح", "success");
+
+                } else {
+                    $.notify("failed", "error");
+
+                }
+
+            });
+        });
+
+
+
+    });
+</script>
+
+
+
+

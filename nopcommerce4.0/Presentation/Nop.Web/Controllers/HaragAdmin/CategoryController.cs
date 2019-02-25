@@ -98,6 +98,12 @@ namespace Nop.Web.Controllers.HaragAdmin
         public IActionResult GetHaragCategoriesAjax()
         {
 
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+                return Forbid();
+
             //Server Side Parameters
             var start = Convert.ToInt32(Request.Form["start"].FirstOrDefault());
             
