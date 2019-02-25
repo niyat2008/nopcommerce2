@@ -26,6 +26,7 @@ namespace Nop.Data.Mapping.Z_Harag
 
             this.HasRequired(p => p.User).WithMany(m => m.CustomersHaragPayment).HasForeignKey(r => r.UserId);
             this.HasRequired(p => p.Post).WithMany(m => m.HaragPostsPayment).HasForeignKey(r => r.PostId); 
+            this.HasRequired(p => p.BankAccount).WithMany(m => m.HaragBankPayments).HasForeignKey(r => r.BankId); 
         }
     }
 }

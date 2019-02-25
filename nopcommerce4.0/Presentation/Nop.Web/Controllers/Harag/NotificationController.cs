@@ -17,7 +17,7 @@ using Nop.Core.Domain.Z_Harag;
 
 namespace Nop.Web.Controllers.Harag
 {
-    public class PaymentController : BasePublicController
+    public class NotificationController : BasePublicController
     {
         private readonly Core.IWorkContext _workContext;
         private readonly  ICustomerService _customerContext;
@@ -26,7 +26,7 @@ namespace Nop.Web.Controllers.Harag
         private readonly  IBlackListService _blackListService;
         private readonly  IPostService _postService;
 
-        public PaymentController(Core.IWorkContext workContext, IRateSrevice _rateRepository,
+        public NotificationController(Core.IWorkContext workContext,IRateSrevice _rateRepository,
              IBlackListService _blackListService, IPostService _postService,ICustomerService _customerContext)
         {
             this._workContext = workContext;
@@ -55,6 +55,8 @@ namespace Nop.Web.Controllers.Harag
         { 
             return View("~/Themes/Pavilion/Views/Harag/Payment/sadadpayment.cshtml"); 
         }
+
+   
          
         //[HttpGet]
         //public IActionResult GetUserInfo()
@@ -75,10 +77,13 @@ namespace Nop.Web.Controllers.Harag
         //    }
         //    else
         //        model.UserRole = null;
-        
+
+
+
         //    return PartialView("~/Themes/Pavilion/Views/Consultant/User/_UserInfo.cshtml", model);
         //}
-        
+
+
         //[HttpGet]
         //public IActionResult GetAdminLink()
         //{
@@ -91,7 +96,9 @@ namespace Nop.Web.Controllers.Harag
         //    }
         //    return PartialView("~/Themes/Pavilion/Views/Consultant/User/_AdminLink.cshtml", 0);
         //}
-        
+
+
+
         //[HttpGet]
         //public IActionResult GetUserRoles()
         //{
@@ -106,7 +113,11 @@ namespace Nop.Web.Controllers.Harag
         //    }
         //    else
         //        ViewBag.UserRole = "vistor";
+
         //    return PartialView("~/Themes/Pavilion/Views/Consultant/User/_UserRolesAndThreeButtons.cshtml");
         //}
+
+
+
     }
 }

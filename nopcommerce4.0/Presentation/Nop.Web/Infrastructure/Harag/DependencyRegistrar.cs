@@ -10,6 +10,9 @@ using Nop.Services.Z_Harag.Notification;
 using Nop.Services.Z_Harag.Post;
 using Nop.Services.Z_Harag.Rate;
 using Nop.Services.Z_Harag.Reports;
+
+using Nop.Services.Z_Harag.Payment;
+
 //using Nop.Services.Z_Harag.SubCategory;
 using System;
 using System.Collections.Generic;
@@ -33,6 +36,9 @@ namespace Nop.Web.Infrastructure.Harag
             builder.RegisterType<NotificationService>().As<INotificationService>().InstancePerLifetimeScope();
             builder.RegisterType<RateService>().As<IRateSrevice>().InstancePerLifetimeScope();
             builder.RegisterType<ReportService>().As<IReportService>().InstancePerLifetimeScope();
+
+            // Harag Payment Form
+            builder.RegisterType<PaymentService>().As<IPaymentService>().InstancePerLifetimeScope();
         }
 
         /// <summary>

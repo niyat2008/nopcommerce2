@@ -20,5 +20,6 @@ namespace Nop.Core.Domain.Z_Harag
 
         public Z_Harag_Post Post { get; set; }
         public Customer User { get; set; } 
+        public Z_Harag_BankAccount BankAccount { get; set; }
     }
 }
