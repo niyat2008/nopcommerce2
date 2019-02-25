@@ -14,6 +14,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Nop.Core.Domain.Z_Harag;
+using Nop.Web.Models.Harag;
+using Nop.Services.Z_Harag.Payment;
 
 namespace Nop.Web.Controllers.Harag
 {
@@ -25,10 +27,13 @@ namespace Nop.Web.Controllers.Harag
             ;
         private readonly  IBlackListService _blackListService;
         private readonly  IPostService _postService;
+        private readonly  IPaymentService _paymentService;
 
         public PaymentController(Core.IWorkContext workContext, IRateSrevice _rateRepository,
+             IPaymentService _paymentService,
              IBlackListService _blackListService, IPostService _postService,ICustomerService _customerContext)
         {
+            this._paymentService = _paymentService;
             this._workContext = workContext;
             this._rateRepository = _rateRepository;
             this._customerContext = _customerContext;
@@ -42,12 +47,40 @@ namespace Nop.Web.Controllers.Harag
         [HttpGet]
         public IActionResult PaymentBanks()
         {
-            //if (!_workContext.CurrentCustomer.IsRegistered())
-            //    return Redirect("Login");
+            ViewBag.Added = false;
+            var banks = _paymentService.GetBaknAccountsDetails().Select(m => new BankAccountModel
+            {
+                AccountNumber = m.AccountNo,
+                BankId = m.Id,
+                IBANNumber = m.IBANNumber,
+                BankName = m.BankName
+            }).ToList();
 
-            // var result = _workContext.CurrentCustomer;
-  
-            return View("~/Themes/Pavilion/Views/Harag/Payment/bankpayment.cshtml");
+            var model = new PaymentModel { Banks = banks};
+            return View("~/Themes/Pavilion/Views/Harag/Payment/bankpayment.cshtml", model);
+        }
+
+        [HttpPost]
+        public IActionResult AddPaymentBankAjax(PaymentModel payment)
+        {
+
+            if(!ModelState.IsValid)
+                return View("~/Themes/Pavilion/Views/Harag/Payment/bankpayment.cshtml", payment);
+            var model = new Z_Harag_BankPayment
+            {
+                SiteAmount = payment.SiteAmount,
+                BankId = payment.BankId,
+                Notes = payment.Notes,
+                PostId = payment.PostId,
+                TransatctorUser = payment.TransatctorUser,
+                TransactionDate = payment.TransactionDate,
+                UserName = payment.UserName,
+                UserId = payment.UserId
+            };
+
+            ViewBag.Added = true;
+
+            return View("~/Themes/Pavilion/Views/Harag/Payment/bankpayment.cshtml", payment);
         }
 
         [HttpGet]
@@ -55,7 +88,22 @@ namespace Nop.Web.Controllers.Harag
         { 
             return View("~/Themes/Pavilion/Views/Harag/Payment/sadadpayment.cshtml"); 
         }
-         
+
+        [HttpGet]
+        public IActionResult GetBaksAccountsDetails()
+        { 
+            var banks = _paymentService.GetBaknAccountsDetails();
+
+            var model = banks.Select(m => new BankAccountModel
+            {
+                AccountNumber = m.AccountNo,
+                BankId = m.Id,
+                IBANNumber = m.IBANNumber,
+                BankName = m.BankName
+            }).ToList();
+
+            return PartialView("~/Themes/Pavilion/Views/Harag/Payment/_BanksList.cshtml", model);
+        }
         //[HttpGet]
         //public IActionResult GetUserInfo()
         //{
@@ -75,10 +123,10 @@ namespace Nop.Web.Controllers.Harag
         //    }
         //    else
         //        model.UserRole = null;
-        
+
         //    return PartialView("~/Themes/Pavilion/Views/Consultant/User/_UserInfo.cshtml", model);
         //}
-        
+
         //[HttpGet]
         //public IActionResult GetAdminLink()
         //{
@@ -91,7 +139,7 @@ namespace Nop.Web.Controllers.Harag
         //    }
         //    return PartialView("~/Themes/Pavilion/Views/Consultant/User/_AdminLink.cshtml", 0);
         //}
-        
+
         //[HttpGet]
         //public IActionResult GetUserRoles()
         //{

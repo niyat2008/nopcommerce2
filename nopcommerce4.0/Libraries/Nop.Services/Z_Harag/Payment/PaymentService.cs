@@ -3,6 +3,7 @@ using Nop.Core.Domain.Z_Harag;
 using Nop.Services.Events; 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,20 +12,31 @@ namespace Nop.Services.Z_Harag.Payment
 {
    public class PaymentService: IPaymentService
     {
-        private readonly IRepository<Z_Harag_Category> _categoryRepository;
+        private readonly IRepository<Z_Harag_BankAccount> _bankAccountRepository;
+        private readonly IRepository<Z_Harag_BankPayment> _paymentRepository;
         private readonly IEventPublisher _eventPublisher;
 
-        public PaymentService(IRepository<Z_Harag_Category> categoryRepository, IEventPublisher eventPublisher)
+        public PaymentService(IRepository<Z_Harag_BankPayment> _paymentRepository, IRepository<Z_Harag_BankAccount> _bankAccountRepository , IEventPublisher eventPublisher)
         {
-            this._categoryRepository = categoryRepository;
+            this._bankAccountRepository = _bankAccountRepository;
+            this._paymentRepository = _paymentRepository;
             this._eventPublisher = eventPublisher;
         }
 
-        public List<Z_Harag_Category> GetCategories()
+        public Z_Harag_BankPayment AddNewPaymentDetails(Z_Harag_BankPayment payment)
         {
-            var query = _categoryRepository.TableNoTracking;
-            var result = query.ToList(); 
-            return  result;
-        } 
+            _paymentRepository.Insert(payment);
+
+            return payment;
+        }
+
+        public List<Z_Harag_BankAccount> GetBaknAccountsDetails()
+        {
+            var bankAccounts = _bankAccountRepository.TableNoTracking.ToList();
+
+            return bankAccounts;
+        }
+
+      
     }
 }

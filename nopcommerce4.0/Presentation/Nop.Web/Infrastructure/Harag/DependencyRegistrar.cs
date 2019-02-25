@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Nop.Services.Z_Harag.Follow;
 
 namespace Nop.Web.Infrastructure.Harag
 {
@@ -39,6 +40,7 @@ namespace Nop.Web.Infrastructure.Harag
 
             // Harag Payment Form
             builder.RegisterType<PaymentService>().As<IPaymentService>().InstancePerLifetimeScope();
+            builder.RegisterType<FollowService>().As<IFollowService>().InstancePerLifetimeScope();
         }
 
         /// <summary>

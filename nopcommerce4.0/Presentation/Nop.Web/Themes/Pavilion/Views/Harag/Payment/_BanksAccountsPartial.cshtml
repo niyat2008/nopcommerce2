@@ -1,0 +1,17 @@
+﻿@model List<Nop.Web.Models.Harag.BankAccountModel>
+
+@foreach (var item in Model)
+{
+
+    <hr />
+
+    <p>
+        @item.BankName <br />
+        مؤسسة موقع حراج للتجارة <br />
+        رقم الحساب <span style="color:blue"> @item.AccountNumber </span> <br />
+        الايبان @item.IBANNumber
+    </p>
+
+    <button class="btn btn-default add" type="button"> ارسل رقم الحساب لجوالك SMS  </button>
+
+}

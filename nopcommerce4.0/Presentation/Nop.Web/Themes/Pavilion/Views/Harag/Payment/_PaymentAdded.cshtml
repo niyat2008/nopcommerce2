@@ -1,4 +1,4 @@
-﻿ @model Nop.Web.Models.Harag.PaymentModel
+﻿ 
 @{
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
 }
@@ -67,8 +67,28 @@
                     <h3>الطريقة الأولى</h3>
                     <p>يمكنك استخدام التحويل البنكي لدفع العموله عن طريق إرسال حواله إلى حساباتنا في البنوك المحليه.</p>
 
-                     @Html.Partial("~/Themes/Pavilion/Views/Harag/Payment/_BanksAccountsPartial.cshtml", Model.Banks)
-                    
+                    <hr />
+
+                    <p>
+                        البنك الأهلي التجاري <br />
+                        مؤسسة موقع حراج للتجارة <br />
+                        رقم الحساب <span style="color:blue"> 26463101000104 </span> <br />
+                        الايبان SA69 1000 0026 4631 0100 0104
+                    </p>
+
+                    <button class="btn btn-default add" type="button"> ارسل رقم الحساب لجوالك SMS  </button>
+
+                    <hr />
+
+                    <p>
+                        البنك الأهلي التجاري <br />
+                        مؤسسة موقع حراج للتجارة <br />
+                        رقم الحساب <span style="color:blue"> 26463101000104 </span> <br />
+                        الايبان SA69 1000 0026 4631 0100 0104
+                    </p>
+
+                    <button class="btn btn-default add" type="button"> ارسل رقم الحساب لجوالك SMS  </button>
+
                     <hr />
 
                 </div>
@@ -89,44 +109,38 @@
         </div>
         <div class="row">
             <div class="col-md-9">
-                <form class="add-adverse" action="/Harag/Payment/BanksJ" method="post">
+                <form class="add-adverse">
                     <div class="col-md-4">
                         <label>اسم المستخدم</label> <br />
-                        @Html.TextBoxFor(m => m.UserName, new {  @class="form-control", placeholder="اسم المستخدم" })
-                        
+                        <input type="text" class="form-control" placeholder="اسم المستخدم" />
                     </div>
                     <div class="col-md-4">
                         <label>مبلغ العمولة</label> <br />
-                        @Html.TextBoxFor(m => m.SiteAmount, new { @class = "form-control", placeholder = "مبلغ العموله " })
-                         
+                        <input type="text" class="form-control" />
                     </div>
                     <div class="col-md-4">
                         <label> البنك الذى تم التحويل اليه </label> <br />
-                        <select id="banks-js" name="BankId" class="form-control" placeholder="اختر اسم البنك ">
-                            <option>اختر البنك  </option>
+                        <select class="form-control" placeholder="اختر اسم البنك ">
+                            <option>اختيار 1 </option>
                         </select>
                     </div>
                     <div class="col-md-4">
                         <label> متى تم التحويل ؟ </label> <br />
-                        <select name="TransactionDate" class="form-control" placeholder="اختر متي تم التحويل ">
-                            <option value="1">1</option>
-                            <option value="2"> 2 </option>
-                            <option value="3">  3</option>
-                            <option value="4">  4</option> 
+                        <select class="form-control" placeholder="اختر ..... ">
+                            <option>اختيار 1 </option>
                         </select>
                     </div>
                     <div class="col-md-4">
                         <label>اسم المحول</label> <br />
-                        @Html.TextBoxFor(m => m.TransatctorUser, new { @class = "form-control", placeholder = "اسم المحول"})
+                        <input type="text" class="form-control" placeholder="اسم المحول" />
                     </div>
                     <div class="col-md-4">
                         <label>رقم الاعلان</label> <br />
-                        @Html.TextBoxFor(m => m.PostId, new { @class = "form-control", placeholder = " رقم الاعلان " })
-      
+                        <input type="text" class="form-control" placeholder="رقم الاعلان" />
                     </div>
                     <div class="col-md-12">
                         <label>ملاحظات</label> <br />
-                        @Html.TextAreaFor(m => m.Notes, new { @class = "form-control txtArea", placeholder = " ملاحظات   " , rows = "7" })
+                        <textarea class="form-control txtArea" placeholder="ملاحظات" rows="7"></textarea>
                     </div>
                     <div class="col-md-12">
                         <p style="margin-top:15px"> نرجو الحرص على أن تكون معلومات التحويل صحيحة ودقيقه </p>
@@ -140,19 +154,3 @@
         </div>
     </div>
 </div>
-
-
-<script type="text/javascript">
-
-    $.ajax({
-        method: 'GET',
-        url: '/Harag/Payment/BanksList',
-        complete: function (data) {
-            if (data.status == 200) {
-                $('#banks-js').html(data.responseText);
-            }
-        }
-
-    });
-    $(document).ready();
-</script>

@@ -64,9 +64,11 @@
 
     <!-- We copy the \Logs directory -->
     <Content Include="Logs\**" CopyToPublishDirectory="PreserveNewest" />
+    <Content Remove="Themes\Pavilion\Views\Harag\Follow\Follow.cshtml" />
     <Content Remove="Themes\Pavilion\Views\Harag\GeneralPages\featuredproducts.cshtml" />
     <Content Remove="Themes\Pavilion\Views\Harag\GeneralPages\notallowed.cshtml" />
     <Content Remove="Themes\Pavilion\Views\Harag\GeneralPages\terms.cshtml" />
+    <Content Remove="Themes\Pavilion\Views\Harag\Notification\Notifications.cshtml" />
     <Content Remove="Themes\Pavilion\Views\Harag\Payment\sadadpayment.cshtml" />
     <Content Remove="Themes\Pavilion\Views\Harag\Search\searchPage.cshtml" />
     <Content Remove="wwwroot\css\Consultant\imageResponsive.css" />
@@ -76,11 +78,17 @@
     <None Remove="Themes\Pavilion\Content\img\google-plus.png" />
     <None Remove="Themes\Pavilion\Content\img\New folder\ma3roof.png" />
     <None Remove="Themes\Pavilion\Content\img\whatsapp-image.png" />
+    <EmbeddedResource Include="Themes\Pavilion\Views\Harag\Follow\Follow.cshtml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="Themes\Pavilion\Views\Harag\GeneralPages\featuredproducts.cshtml" />
     <EmbeddedResource Include="Themes\Pavilion\Views\Harag\GeneralPages\terms.cshtml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Themes\Pavilion\Views\Harag\GeneralPages\notallowed.cshtml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Themes\Pavilion\Views\Harag\Notification\Notifications.cshtml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Themes\Pavilion\Views\Harag\Payment\sadadpayment.cshtml">
@@ -101,6 +109,8 @@
   <ItemGroup>
     <Folder Include="Models\ConsultantAdmin\" />
     <Folder Include="Models\Harag\BlackList\" />
+    <Folder Include="Models\Harag\Follow\" />
+    <Folder Include="Models\Harag\Notification\" />
     <Folder Include="Models\NewFolder\" />
     <Folder Include="Validators\ConsultantAdmin\" />
     <Folder Include="wwwroot\ConsultantAdmin\" />
@@ -289,6 +299,15 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Message\UserMessageList.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Payment\_BanksList.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Payment\_PaymentAdded.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Payment\_BanksAccountsPartial.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Post\AddPost.cshtml">

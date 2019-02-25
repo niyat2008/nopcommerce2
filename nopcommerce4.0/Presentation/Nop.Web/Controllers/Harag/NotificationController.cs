@@ -35,10 +35,7 @@ namespace Nop.Web.Controllers.Harag
             this._postService = _postService;
             this._blackListService = _blackListService;
         }
-
-  
-
-        
+          
         [HttpGet]
         public IActionResult PaymentBanks()
         {

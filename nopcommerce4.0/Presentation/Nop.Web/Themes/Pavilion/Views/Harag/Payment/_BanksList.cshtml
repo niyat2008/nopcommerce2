@@ -1,0 +1,7 @@
+﻿@model List<Nop.Web.Models.Harag.BankAccountModel>
+
+<option>اختيار 1 </option>
+@foreach (var item in Model)
+{
+<option value="@item.BankId">@item.BankName </option>
+}

@@ -13,8 +13,11 @@ namespace Nop.Core.Domain.Z_Harag
         {
            
             Posts = new Collection<Z_Harag_Post>();
+            this.FollowdCategory = new HashSet<Z_Harag_Follow>();
+            this.NotificationCategories = new HashSet<Z_Harag_Notification>();
+
         }
-         
+
         public string Name { get; set; }
         public System.DateTime DateCreated { get; set; }
         public Nullable<System.DateTime> DateUpdated { get; set; }
@@ -22,7 +25,7 @@ namespace Nop.Core.Domain.Z_Harag
         public bool IsActive { get; set; }
 
         public ICollection<Z_Harag_Post> Posts { get; set; }
-
-       
+        public ICollection<Z_Harag_Follow> FollowdCategory { get; set; }
+        public ICollection<Z_Harag_Notification> NotificationCategories { get; set; }
     }
 }

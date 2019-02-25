@@ -204,7 +204,15 @@ namespace Nop.Web.Infrastructure
             // pqyment banks
             routeBuilder.MapRoute("Harag.Payment.PaymentBanks", "Harag/Payment/Banks",
             new { controller = "Payment", action = "PaymentBanks" });
-             
+
+            // pqyment banks
+            routeBuilder.MapRoute("Harag.Payment.AddPaymentBankAjax", "Harag/Payment/BanksJ",
+            new { controller = "Payment", action = "AddPaymentBankAjax" });
+
+            // list of banks
+            routeBuilder.MapRoute("Harag.Payment.GetBaksAccountsDetails", "Harag/Payment/BanksList",
+            new { controller = "Payment", action = "GetBaksAccountsDetails" });
+
             // payment sadad
             routeBuilder.MapRoute("Harag.Payment.PaymentSadad", "Harag/Payment/Sadad",
             new { controller = "Payment", action = "PaymentSadad" });

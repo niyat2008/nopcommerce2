@@ -21,6 +21,7 @@ namespace Nop.Core.Domain.Z_Harag
             this.Z_Harag_Photo = new HashSet<Z_Harag_Photo>(); 
             this.Z_Harag_Reports = new HashSet<Z_Harag_Reports>();
             this.HaragPostsPayment = new HashSet<Z_Harag_BankPayment>();
+            this.FollowdPosts = new HashSet<Z_Harag_Follow>();
             //this.Customer = new HashSet<Customer>();
         }
          
@@ -66,5 +67,6 @@ namespace Nop.Core.Domain.Z_Harag
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public  ICollection<Z_Harag_Reports> Z_Harag_Reports { get; set; }
         public ICollection<Z_Harag_BankPayment> HaragPostsPayment { get; set; }
+        public ICollection<Z_Harag_Follow> FollowdPosts { get; set; }
     }
 }

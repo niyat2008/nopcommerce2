@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace Nop.Services.Z_Harag.Payment
 {
    public interface IPaymentService
-    {
-        List<Z_Harag_Category> GetCategories();
+    { 
+        Z_Harag_BankPayment AddNewPaymentDetails(Z_Harag_BankPayment payment);
+        List<Z_Harag_BankAccount> GetBaknAccountsDetails();
     }
 }

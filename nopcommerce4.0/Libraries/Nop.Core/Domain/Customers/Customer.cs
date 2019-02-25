@@ -41,6 +41,10 @@ namespace Nop.Core.Domain.Customers
             this.Z_Harag_Reports = new HashSet<Z_Harag_Reports>();
             this.Z_Harag_Posts = new HashSet<Z_Harag_Post>();
             this.CustomersHaragPayment = new HashSet<Z_Harag_BankPayment>();
+            this.HaragFollowingUsers = new HashSet<Z_Harag_Follow>();
+            this.HaragFollowedUsers = new HashSet<Z_Harag_Follow>();
+            this.HaragCustomerNotification = new HashSet<Z_Harag_Notification>();
+
         }
 
         /// <summary>
@@ -245,6 +249,10 @@ namespace Nop.Core.Domain.Customers
             get { return _addresses ?? (_addresses = new List<Address>()); }
             protected set { _addresses = value; }
         }
+
+        public ICollection<Z_Harag_Follow> HaragFollowingUsers { get; set; }
+        public ICollection<Z_Harag_Follow> HaragFollowedUsers { get; set; }
+        public ICollection<Z_Harag_Notification> HaragCustomerNotification { get; set; }
 
         #endregion
     }
