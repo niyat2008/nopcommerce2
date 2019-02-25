@@ -63,8 +63,7 @@ namespace Nop.Services.Z_HaragAdmin.Setting
         public SettingsModel GetSettings()
         {
             this.DeletePost = int.Parse(this.GetValue("DeletePost"));
-            this.UpdatePostAfter = int.Parse(this.GetValue("UpdatePostAfter"));
-
+            this.UpdatePostAfter = int.Parse(this.GetValue("UpdatePostAfter")); 
             this.UpdatePostBefor = int.Parse(this.GetValue("UpdatePostBefor"));
             this.RateCommissionNumber = int.Parse(this.GetValue("RateCommissionNumber"));
             this.RateCommissionSum = int.Parse(this.GetValue("RateCommissionSum"));

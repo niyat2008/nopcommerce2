@@ -33,7 +33,11 @@ else
                     </a></div>
             </div>
             <div class="det-img">
-                <img src="/HaragApi/Uploads/Images/@post.Photo">
+                @if (!String.IsNullOrEmpty(post.Photo))
+                {
+                    <img src="/HaragApi/Uploads/Images/@post.Photo">
+                }
+
             </div>
         </div>
     }

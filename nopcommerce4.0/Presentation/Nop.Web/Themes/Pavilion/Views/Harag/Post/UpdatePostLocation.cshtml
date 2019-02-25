@@ -63,8 +63,6 @@
                         draggable: true
                     });
 
-                    alert(JSON.stringify(pos));
-
                 }, function () {
                     handleNoGeolocation(true);
                 });
@@ -174,7 +172,7 @@
                     //  alert('Geocode was not successful for the following reason: ' + status);
                 }
             });
-        }); 
+        });
 
     $("#add-update-location-js").click(function (event) {
         var lat = marker.getPosition().lat();
@@ -182,13 +180,13 @@
         var city = $("#City-js-ajax option:selected").val();
         var neighb = $("#Neighbohood-js-ajax option:selected").val();
         var postLocationModel = {
-            PostId: '@Model.Id', 
+            PostId: '@Model.Id',
             Lat: lat + "",
             Lng: lng + "",
             CityId: city + "",
             NeighbId: neighb + ""
         };
-         
+
         // update the location
         $.ajax({
         headers: {

@@ -130,8 +130,7 @@ namespace Nop.Web.Infrastructure
             // Harag New Message
             routeBuilder.MapRoute("Harag.Message.AddPostMessage", "Harag/NewPostMessage/{postId?}/{Message?}",
            new { controller = "Message", action = "AddPostMessage" });
-
- 
+             
             ///
             /// HARAG USER
             /// 
@@ -180,8 +179,7 @@ namespace Nop.Web.Infrastructure
             // done search by cat
             routeBuilder.MapRoute("Harag.Post.GetHaragCatPosts", "Harag/Cat/{catId?}",
             new { controller = "Post", action = "GetHaragCatPosts" });
-  
- 
+   
             // done search by user
             routeBuilder.MapRoute("Harag.Post.GetHaragUserPosts", "Harag/{userId}/Posts",
             new { controller = "Post", action = "GetHaragUserPosts" });
@@ -193,8 +191,7 @@ namespace Nop.Web.Infrastructure
             // done search by cat and city and neighborhood
             routeBuilder.MapRoute("Harag.Post.HaragSearch", "Harag/Search/{Term?}",
             new { controller = "Post", action = "HaragSearch" });
-
-
+             
             // done search by cat and city and neighborhood
             routeBuilder.MapRoute("Harag.Post.HaragSearchCatCity", "Harag/HaragSearchCatCity/{Cat?}/{City?}",
             new { controller = "Post", action = "HaragSearchCatCity" });
@@ -207,12 +204,19 @@ namespace Nop.Web.Infrastructure
             // pqyment banks
             routeBuilder.MapRoute("Harag.Payment.PaymentBanks", "Harag/Payment/Banks",
             new { controller = "Payment", action = "PaymentBanks" });
-
-
+             
             // payment sadad
             routeBuilder.MapRoute("Harag.Payment.PaymentSadad", "Harag/Payment/Sadad",
             new { controller = "Payment", action = "PaymentSadad" });
+              
+            ///
+            /// Harag Following
+            ///
              
+            ///
+            /// Harag Notification
+            ///
+
 
             // ------------------------ Consultant ------------------------- 
 

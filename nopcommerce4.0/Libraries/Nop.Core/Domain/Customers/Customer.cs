@@ -40,6 +40,7 @@ namespace Nop.Core.Domain.Customers
             this.Z_Harag_Rate = new HashSet<Z_Harag_Rate>();
             this.Z_Harag_Reports = new HashSet<Z_Harag_Reports>();
             this.Z_Harag_Posts = new HashSet<Z_Harag_Post>();
+            this.CustomersHaragPayment = new HashSet<Z_Harag_BankPayment>();
         }
 
         /// <summary>
@@ -206,6 +207,7 @@ namespace Nop.Core.Domain.Customers
         public ICollection<Z_Consultant_Comment> CustomersComments { get; set; }
         public ICollection<Z_Consultant_Comment> ConsultantsComments { get; set; }
         public ICollection<Z_Consultant_Post> CustomersPosts { get; set; }
+        public ICollection<Z_Harag_BankPayment> CustomersHaragPayment { get; set; }
         public ICollection<Z_Consultant_Post> ConsultantsPosts { get; set; }
         // public ICollection<Z_Harag_Reports> CustomerReports { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
