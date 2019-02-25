@@ -767,7 +767,7 @@ namespace Nop.Web.Controllers.Harag
             var report = new Z_Harag_Reports
             {
                 ReportDescription = model.ReportMessage,
-                PostId = (byte)model.PostId,
+                PostId = model.PostId,
                 IsIllegal = model.IsIllegal,
                 ReporterUser = _workContext.CurrentCustomer.Id
             };

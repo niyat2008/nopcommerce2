@@ -32,14 +32,14 @@ namespace Nop.Web.Models.Harag.Comment
 
             var diff = DateTime.Now - dateCreated;
 
-            double s = diff.Milliseconds / 1000;
+            int s = diff.Milliseconds / 1000;
 
 
-            double m = 0;
-            double h = 0;
-            double d = 0;
-            double mo = 0;
-            double y = 0;
+            int m = 0;
+            int h = 0;
+            int d = 0;
+            int mo = 0;
+            int y = 0;
 
             if (s < 60)
             {
