@@ -22,7 +22,7 @@ namespace Nop.Data.Mapping.Z_Harag
              
             this.HasOptional(m => m.Post).WithMany(p => p.FollowdPosts).HasForeignKey(m => m.PostId);
             this.HasOptional(m => m.Followed).WithMany(p => p.HaragFollowedUsers).HasForeignKey(m => m.FollowedId);
-            this.HasOptional(m => m.User).WithMany(p => p.HaragFollowingUsers).HasForeignKey(m => m.UserId);
+            this.HasRequired(m => m.User).WithMany(p => p.HaragFollowingUsers).HasForeignKey(m => m.UserId);
             this.HasOptional(m => m.Category).WithMany(p => p.FollowdCategory).HasForeignKey(m => m.CategoryId);
         }
     }
