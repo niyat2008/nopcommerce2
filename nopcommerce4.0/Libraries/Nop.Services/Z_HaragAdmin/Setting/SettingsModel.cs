@@ -40,7 +40,9 @@ namespace Nop.Services.Z_HaragAdmin.Setting
         public int FeaturedMemberCommissionSum { get; set; }
         //Use Website compact
         public string UseWebsiteCompact { get; set; }
-        
+        // Not Allowed Products
+        public string NotAllowedProducts { get; set; }
+
         public SettingsModel(){}
         
         List<Z_Harag_Settings> settings;
@@ -70,7 +72,7 @@ namespace Nop.Services.Z_HaragAdmin.Setting
             this.FeaturedMemberCommissionNumber = int.Parse(this.GetValue("FeaturedMemberCommissionNumber"));
             this.FeaturedMemberCommissionSum = int.Parse(this.GetValue("FeaturedMemberCommissionSum"));
             this.UseWebsiteCompact = this.GetValue("UseWebsiteCompact");
-            
+            this.NotAllowedProducts = this.GetValue("NotAllowedProducts");
 
             return this;
 
@@ -104,6 +106,8 @@ namespace Nop.Services.Z_HaragAdmin.Setting
             settings.Add(settingModel);
 
             settingModel = new TempModel { Key = "UseWebsiteCompact", Value = model.UseWebsiteCompact };
+            settings.Add(settingModel);
+            settingModel = new TempModel { Key = "NotAllowedProducts", Value = model.NotAllowedProducts };
             settings.Add(settingModel);
 
             return settings;

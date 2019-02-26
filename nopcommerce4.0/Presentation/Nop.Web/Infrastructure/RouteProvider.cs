@@ -42,7 +42,7 @@ namespace Nop.Web.Infrastructure
             // done 
             routeBuilder.MapRoute("Harag.Post.AddNewPostAjax", "Harag/Post/NewAjax",
             new { controller = "Post", action = "AddNewPostAjax" });
-            // Get POst
+            // Get Post
             routeBuilder.MapRoute("Harag.Post.GetHaragPost", "Harag/Post/{postId?}",
             new { controller = "Post", action = "GetHaragPost" });
              
@@ -656,8 +656,12 @@ new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
             routeBuilder.MapRoute("Harag.Admin.HaragPostAjax", "Harag/Admin/Post/HaragPostsAjax", new { controller = "Post", action = "GetHaragPostsAjax" });
             //Get Post Details
             routeBuilder.MapRoute("Harag.Admin.HaragPostDetails", "Harag/Admin/Post/HaragPostsDetails", new { controller = "Post", action = "GetPostDetails" });
+
+            //Post By Id
+            routeBuilder.MapRoute("Harag.Admin.PostById", "Harag/Admin/Post/PostById", new { controller = "Post", action = "GetPostById" });
+
             //Post Comments
-            
+
             routeBuilder.MapRoute("Harag.Admin.HaragPostComment", "Harag/Admin/Post/HaragPostsComment", new { controller = "Post", action = "GetPostComments" });
 
             //post Messages

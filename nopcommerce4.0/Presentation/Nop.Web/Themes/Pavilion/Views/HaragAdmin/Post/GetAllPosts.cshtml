@@ -10,6 +10,15 @@
 <div class="page-title">الاعلانات</div>
 
 @*_SearchSection.cshtml*@
+
+
+<div id="inputGroup" class="input-group">
+
+    <input class="form-control" id="postId" type="text" placeholder="">
+    <button id="postById" class="input-group-append btn btn-info">بحث</button>
+</div>
+
+
 <div class="table-responsive">
     <table id="posts" class="table table-bordered table-hover">
         <thead>
@@ -99,92 +108,13 @@
             //    });
             //});
 
-            $("#posts").on("click", "#display", function () {
-                var button = $(this);
-                swal({
-                    title: "  عرض الاستشارة كشائعة",
-                    text: "هل انت متاكد انك تريد عرض هذه الاستشارة كشائعة ؟",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            $.ajax({
-                                url: "/Consultations/Admin/Posts/SetPostToCommon?id=" + button.attr("data-post-id") + "",
-                                "type": "post",
-                                "dataType": "json",
-
-                                "success": function (result) {
-                                    button.html('معروضة كشائعة');
-                                    swal("تم عرض هذه الاستشارة كشائعة بنجاح", {
-                                        icon: "success",
-
-                                    });
-
-
-                                }
-                            });
-                        } else {
-                            swal("التراجع عن عرض هذه الرسالة؟");
-                        }
-                    });
-            });
+           
 
 
             $("#postById").on("click", function (e) {
                 e.preventDefault();
-                dataTable.destroy();
-                dataTable = $("#posts").DataTable({
-                    "paging": "false",
-                    "searching":"false",
-                    "responsive": "true",
-                    "ajax": {
 
-                        "url": "/Consultations/Admin/Posts/GetPostById?postId=" + $('#postId').val() + "&type=ClosedDisplayed",
-
-                    },
-
-                    "columns":[
-
-
-                        { "data": "Id","width":"5%" },
-                        { "data": "Title" },
-                        { "data": "Text","width":"35%" },
-                        { "data": "DateCreated" },
-                        { "data": "CategoryName" },
-                        { "data": "SubCategoryName" },
-                        {
-                            "data": "Id",
-                            "render": function (data) {
-                                return "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' class='btn btn-info btn-small' data-post-id=" + data + " > التفاصيل </a>" + "  " + "<button class='btn btn-danger' id='delete' data-post-id=" + data + ">حذف</button>";
-
-                            }
-
-                        }
-
-                    ],
-                    "language": {
-                        "sProcessing": "جارٍ التحميل...",
-                        "sLengthMenu": "أظهر _MENU_ مدخلات",
-                        "sZeroRecords": "لم يعثر على أية سجلات",
-                        "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
-                        "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
-                        "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
-                        "sInfoPostFix": "",
-                        "sSearch": "ابحث:",
-                        "sUrl": "",
-                        "oPaginate": {
-                            "sFirst": "الأول",
-                            "sPrevious": "السابق",
-                            "sNext": "التالي",
-                            "sLast": "الأخير"
-                        }
-                    }
-
-
-                });
-
+                dataTable.ajax.url("/Harag/Admin/Post/PostById?postId=" + $('#').val() + "").load();
 
 
             });
@@ -225,59 +155,7 @@
 
 
 
-            $("#sear").on("click", function (e) {
-                e.preventDefault();
-                dataTable.ajax.url("/Consultations/Admin/Posts/GetPostsByDate?firstDate=" + $('#dateFrom').val() + "&secondDate=" + $('#dateTo').val() + "&type=ClosedDisplayed").load();
-                //dataTable.destroy();
-                //dataTable = $("#posts").DataTable({
-                //    "responsive": "true",
-                //    "order": [[3, "des"]],
-                //    "ajax": {
-
-                //        "url": "/Consultations/Admin/Posts/GetPostsByDate?firstDate=" + $('#dateFrom').val() + "&secondDate=" + $('#dateTo').val() + "&type=ClosedDisplayed",
-
-                //    },
-
-                //    "columns": [
-
-                //        { "data": "Id","width":"5%" },
-                //        { "data": "Title" },
-                //        { "data": "Text","width":"35%" },
-                //        { "data": "DateCreated" },
-                //        { "data": "CategoryName" },
-                //        { "data": "SubCategoryName" },
-                //        {
-                //            "data": "Id",
-                //            "render": function (data) {
-                //                return "<a id='details' href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "' class='btn btn-info btn-small' data-post-id=" + data + " > التفاصيل </a>" + "  " + "<button class='btn btn-danger' id='delete' data-post-id=" + data + " >حذف</button>";
-
-                //            }
-
-                //        }
-
-                //    ],
-                //    "language": {
-                //        "sProcessing": "جارٍ التحميل...",
-                //        "sLengthMenu": "أظهر _MENU_ مدخلات",
-                //        "sZeroRecords": "لم يعثر على أية سجلات",
-                //        "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
-                //        "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
-                //        "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
-                //        "sInfoPostFix": "",
-                //        "sSearch": "ابحث:",
-                //        "sUrl": "",
-                //        "oPaginate": {
-                //            "sFirst": "الأول",
-                //            "sPrevious": "السابق",
-                //            "sNext": "التالي",
-                //            "sLast": "الأخير"
-                //        }
-                //    }
-
-
-                //});
-                console.log("datefr= " + $('#dateFrom').val()+"to"+$('#dateTo').val());
-            });
+           
 
 
 
