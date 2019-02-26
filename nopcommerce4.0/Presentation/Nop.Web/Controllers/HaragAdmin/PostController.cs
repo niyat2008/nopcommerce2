@@ -50,8 +50,8 @@ namespace Nop.Web.Controllers.HaragAdmin
             if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
                 return Forbid();
 
-            
-          
+
+
             return View("~/Themes/Pavilion/Views/HaragAdmin/Post/GetAllPosts.cshtml");
         }
         //Get All Posts Ajax
@@ -87,15 +87,15 @@ namespace Nop.Web.Controllers.HaragAdmin
                     DateUpdated = m.DateUpdated,
                     IsClosed = m.IsClosed,
                     IsAnswered = m.IsAnswered,
-                    City=m.City?.ArName,
-                   
+                    City = m.City?.ArName,
+
                     IsDispayed = m.IsDispayed,
                     IsReserved = m.IsReserved,
-                    
-                   
+
+
                     Customer = m.Customer.Username,
                     Category = m.Category.Name,
-                    
+
 
                 }).ToList()
             };
@@ -137,14 +137,14 @@ namespace Nop.Web.Controllers.HaragAdmin
                 DateUpdated = postDetailsInDb.DateUpdated,
                 IsClosed = postDetailsInDb.IsClosed,
                 IsAnswered = postDetailsInDb.IsAnswered,
-               City=postDetailsInDb.City?.ArName,
+                City = postDetailsInDb.City?.ArName,
                 IsDispayed = postDetailsInDb.IsDispayed,
                 IsReserved = postDetailsInDb.IsReserved,
-               
-                
+
+
                 Customer = postDetailsInDb.Customer?.Username,
                 Category = postDetailsInDb.Category?.Name,
-               
+
                 Photos = files
             };
 
@@ -166,7 +166,7 @@ namespace Nop.Web.Controllers.HaragAdmin
             {
                 Items = commentsInDb.Select(m => new CommentModel
                 {
-                    Id=m.Id,
+                    Id = m.Id,
                     PostId = m.PostId,
                     Text = m.Text,
                     CommentedBy = m.CommentedBy,
@@ -232,7 +232,7 @@ namespace Nop.Web.Controllers.HaragAdmin
             return Json(new { data = messages.Items });
         }
         //Get Comment Reports Ajax
-        
+
         public ActionResult GetCommentReports(int commentId)
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
@@ -248,7 +248,7 @@ namespace Nop.Web.Controllers.HaragAdmin
 
         }
         //Get Comment Reports Ajax
-       
+
         public ActionResult GetCommentReportsAjax(int commentId)
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
@@ -265,7 +265,7 @@ namespace Nop.Web.Controllers.HaragAdmin
                 Items = reportInDb.Select(m => new ReportModel
                 {
                     Id = m.Id,
-                    Category=m.ReportCategory,
+                    Category = m.ReportCategory,
                     ReportDescription = m.ReportDescription,
                     CustomerName = m.Z_Harag_Customer?.Username,
                     Comment = m.Z_Harag_Comment?.Text,
@@ -273,9 +273,37 @@ namespace Nop.Web.Controllers.HaragAdmin
                 }).ToList()
             };
 
-            return Json(new { data = messages.Items,CommentId=commentId });
+            return Json(new { data = messages.Items, CommentId = commentId });
         }
 
+        //Get Post By Id
+        public ActionResult GetPostById(int postId)
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+                return Forbid();
+
+            if (postId == 0)
+                return NotFound();
+
+            var postInDb = _postService.GetPostById(postId);
+            var post = new PostModel
+            {
+              Id=postInDb.Id,
+              Title= postInDb.Title,
+              Text= postInDb.Text,
+              DateCreated= postInDb.DateCreated,
+              Category= postInDb.Category?.Name,
+              City= postInDb.City?.ArName,
+              Customer= postInDb.Customer?.Username,
+
+
+            };
+
+            return Json(new { data = post });
+        }
 
         ////Get Post Messages
         //public IActionResult GetPostMessages(int postId)

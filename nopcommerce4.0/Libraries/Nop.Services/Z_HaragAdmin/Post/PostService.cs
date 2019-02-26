@@ -99,6 +99,20 @@ namespace Nop.Services.Z_HaragAdmin.Post
 
         }
 
+        //Get Posts By Date
+        //public List<Z_Harag_Post> GetPostsByDate(DateTime date)
+        //{
+        //    var query = _postRepository.TableNoTracking.FirstOrDefault(p => p.DateCreated == date);
+        //}
+
+        //Get Post By ID
+        public Z_Harag_Post GetPostById(int postId)
+        {
+            var post = _postRepository.TableNoTracking.FirstOrDefault(p=>p.Id==postId);
+
+            return post;
+        }
+         
 
         ////Post Comments
         //public List<Z_Harag_Comment> GetPostComments(int postId)
