@@ -3,7 +3,7 @@
 @{
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
 }
- 
+
 <!-- Content -->
 <div class="content">
     <div class="container-fluid">
@@ -18,16 +18,22 @@
                     <hr />
                     <p><a href="/Harag/User/@Model.UserName/Rates">مشاهدة كل التقييمات</a></p>
                     <div class="col-xs-12" style="padding:0">
-                        <a href="/Harag/User/@Model.UserName/Rates" class="btn btn-default add"  > <i class="fa fa-thumbs-o-up"></i> <span> @Model.UpRating </span> تقييم ايجابى</a>
-                        <a href="/Harag/User/@Model.UserName/Rates" class="btn btn-default add" > <i class="fa fa-thumbs-o-down" style="color:#d03333"></i> <span> @Model.DownRating </span> تقييم سلبى</a>
+                        <a href="/Harag/User/@Model.UserName/Rates" class="btn btn-default add"> <i class="fa fa-thumbs-o-up"></i> <span> @Model.UpRating </span> تقييم ايجابى</a>
+                        <a href="/Harag/User/@Model.UserName/Rates" class="btn btn-default add"> <i class="fa fa-thumbs-o-down" style="color:#d03333"></i> <span> @Model.DownRating </span> تقييم سلبى</a>
                     </div>
                     <hr />
+                    @if (!ViewBag.SameUser)
+                        {
+                            <p><a href="/Harag/Rate/@Model.UserName"> <i class="fa fa-thumbs-o-up"></i> اضافة تقييم </a></p>
+                        }
 
-                    <p><a href="/Harag/Rate/@Model.UserName"> <i class="fa fa-thumbs-o-up"></i> اضافة تقييم </a></p>
                     <hr />
                     <p><i class="fa fa-user-o"></i> <span> @Model.FollowerCount </span> متابع </p>
                     <hr />
-                    <button class="btn btn-default add full" type="button"> متابعة >>  </button>
+                    @if (!ViewBag.SameUser)
+                        {
+                            <button id="follow-user-js" class="btn btn-default add full" type="button"> متابعة >>  </button>
+                        } 
                 </div>
             </div>
             <div class="col-md-9">
@@ -41,13 +47,14 @@
                                     <h3>@item.Title</h3>
                                 </a>
                                 <small>@item.DateDescription</small>
-                                 <div class="det-det">
-                                <a href="/Harag/City/@item.City">
-                                    <span><i class="fa fa-map-marker"></i> @item.City </span>
-                                </a>
-                                <a href="/Harag/user/@item.PostOwner">
-                                    <span><i class="fa fa-user"></i> @item.PostOwner </span>
-                                </a></div>
+                                <div class="det-det">
+                                    <a href="/Harag/City/@item.City">
+                                        <span><i class="fa fa-map-marker"></i> @item.City </span>
+                                    </a>
+                                    <a href="/Harag/user/@item.PostOwner">
+                                        <span><i class="fa fa-user"></i> @item.PostOwner </span>
+                                    </a>
+                                </div>
                             </div>
                             <div class="det-img">
                                 @if (!String.IsNullOrEmpty(item.Photo))
@@ -56,8 +63,8 @@
                                 }
                             </div>
                         </div>
-                    } 
-                   
+                    }
+
                 </div>
             </div>
         </div>
@@ -72,7 +79,7 @@
     @*$.ajax({
             type: 'GET',
         url: '/Harag/@Model.userId/Posts',
-            complete: function (data) { 
+            complete: function (data) {
                 $("#posts").html(data.responseText);
             }
     });*@
@@ -208,6 +215,7 @@
         console.log(map);
 
 
+
     $("#add-update-location-js").click(function (event) {
         var lat = marker.getPosition().lat();
         var lng = marker.getPosition().lng();
@@ -237,7 +245,9 @@
             }
         }
     });
-    });
+        });
+
+
     });
 
 
@@ -245,7 +255,26 @@
 </script>
 
 <script type="text/javascript">
+    $("#follow-user-js").click(function () {
+        $.ajax({
+            type: 'GET',
+            url: '/Harag/Follow/User/@Model.Id',
+            success: function (data) {
+                if (data.status === true) {
+                    if (data.added == true) {
+                        $("#add-follow-js").addClass("text-danger"); 
+                    } else {
+                        $("#add-follow-js").removeClass("text-danger");
+                    } 
+                } else {
+                    alert("تاكد من الاتصال بالانترنت");
+                }
 
+
+
+            }
+        });
+    });
     function getPostPaging(url) {
 
         var indexmyurl = url.indexOf("Consultations/Consultations");

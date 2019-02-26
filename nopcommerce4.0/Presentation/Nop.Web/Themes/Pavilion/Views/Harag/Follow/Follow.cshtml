@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Nop.Web.Models.Harag.User.UserOutputModel
+
+@{
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
 }
 
@@ -7,24 +9,65 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12 cont">
-                <div class="feat-adv-blck">
-                    <h3><i class="fa fa-star"></i> الإعلانات المميزة "المثبتة" </h3>
-                    <p>هي خدمة تتيح للتاجر تثبيت إعلانه في القسم ليظهر بشكل مميز ممايؤدي الى زيادة المبيعات. </p>
-                    <p>هي خدمة تتيح للتاجر تثبيت إعلانه في القسم ليظهر بشكل مميز ممايؤدي الى زيادة المبيعات. </p>
+            <div class="col-md-3">
+                <div class="choices">
                 </div>
-                <div class="feat-adv-blck">
-                    <h3><i class="fa fa-star"></i> الإعلانات المميزة "المثبتة" </h3>
-                    <p>هي خدمة تتيح للتاجر تثبيت إعلانه في القسم ليظهر بشكل مميز ممايؤدي الى زيادة المبيعات. </p>
+            </div>
+            <div class="col-md-9 cont">
+                <h3 class="text-bold green">الاعلانات المتابعة</h3>
+
+                @if (Model.Posts.Count() <= 0)
+                {
+                    <div id="tabpanelPosts" style="text-align:center"><b>لا يوجد</b></div>
+                }
+                else
+                {
+                    @foreach (var post in Model.Posts)
+                    {
+                        <div class="item">
+                            <div class="det">
+                                <a href="/Harag/Post/@post.Id"><h3>@post.Title</h3></a>
+                                <small>@post.DateDescription</small>
+                                <div class="det-det">
+                                    <a href="/Harag/City/@post.City">
+                                        <span><i class="fa fa-map-marker"></i> @post.City </span>
+                                    </a>
+                                    <a href="/Harag/User/@post.PostOwner">
+                                        <span><i class="fa fa-user"></i> @post.PostOwner </span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="det-img">
+                              @post.CreationTime.ToLongDateString() 
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="choices">
                 </div>
-                <div class="feat-adv-blck">
-                    <h3><i class="fa fa-star"></i> الإعلانات المميزة "المثبتة" </h3>
-                    <p>هي خدمة تتيح للتاجر تثبيت إعلانه في القسم ليظهر بشكل مميز ممايؤدي الى زيادة المبيعات. </p>
-                </div>
-                <div class="feat-adv-blck">
-                    <h3><i class="fa fa-star"></i> الإعلانات المميزة "المثبتة" </h3>
-                    <p>هي خدمة تتيح للتاجر تثبيت إعلانه في القسم ليظهر بشكل مميز ممايؤدي الى زيادة المبيعات. </p>
-                </div>
+            </div>
+            <div class="col-md-9 cont">
+                <h3 class="green">العملاء المتابعة</h3>
+                @if (Model.Posts.Count() <= 0)
+                {
+                    <div id="tabpanelPosts" style="text-align:center"><b>لا يوجد</b></div>
+                }
+                else
+                {
+                    @foreach (var post in Model.Users)
+                    {
+                        <div class="item">
+                            <div class="det">
+                                <a href="/Harag/User/@post.Username"><h3>@post.Username</h3></a>
+                                <small>@post.CreationTime</small>
+                            </div>
+                        </div>
+                    }
+                }
             </div>
         </div>
     </div>

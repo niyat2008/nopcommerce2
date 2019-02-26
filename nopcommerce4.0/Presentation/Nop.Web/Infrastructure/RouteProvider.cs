@@ -171,7 +171,12 @@ namespace Nop.Web.Infrastructure
             // user favorite posts
             routeBuilder.MapRoute("Harag.User.GetHaragFavoritesPosts", "Harag/Favorites",
             new { controller = "Post", action = "GetHaragFavoritesPosts" });
-            
+
+            // get the user data using ajax
+            routeBuilder.MapRoute("Harag.User.GetUserSummaryInfo", "Harag/User/GetUser/{userId}",
+            new { controller = "User", action = "GetUserSummaryInfo" });
+
+
             ///
             // Search
             ///
@@ -216,11 +221,24 @@ namespace Nop.Web.Infrastructure
             // payment sadad
             routeBuilder.MapRoute("Harag.Payment.PaymentSadad", "Harag/Payment/Sadad",
             new { controller = "Payment", action = "PaymentSadad" });
-              
+
             ///
             /// Harag Following
             ///
-             
+            routeBuilder.MapRoute("Harag.Follow.AddPostToFollow", "Harag/Follow/Post/{postId?}",
+            new { controller = "Follow", action = "AddPostToFollow" });
+
+            routeBuilder.MapRoute("Harag.Follow.RemovePostFromFollow", "Harag/Follow/Post/Remove/{postId?}",
+            new { controller = "Follow", action = "RemovePostFromFollow" });
+            
+            routeBuilder.MapRoute("Harag.Follow.AddUserToFollow", "Harag/Follow/User/{userId?}",
+            new { controller = "Follow", action = "AddUserToFollow" });
+
+            routeBuilder.MapRoute("Harag.Follow.RemoveUserFromFollow", "Harag/Follow/User/{userId?}",
+            new { controller = "Follow", action = "RemoveUserFromFollow" });
+
+            routeBuilder.MapRoute("Harag.Follow.GetFollowedUsersPosts", "Harag/Follow",
+            new { controller = "Follow", action = "GetFollowedUsersPosts" });
             ///
             /// Harag Notification
             ///

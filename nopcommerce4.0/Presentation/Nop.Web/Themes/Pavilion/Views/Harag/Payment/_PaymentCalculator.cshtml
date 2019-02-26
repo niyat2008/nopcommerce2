@@ -1,0 +1,40 @@
+﻿<p>
+    اذا تم بيع السلعة بسعر
+    <input id="total-amount-total-js" class="form-control" type="text" placeholder="0" style="width:115px; display: inline-block" />
+    ريال فأن المبلغ المستحق دفعه هو : <span style="border-radius:4px; background:#d9edf7; padding:4px" id="total-commission-amount-total-js">  0  </span>  ريال
+</p>
+<p>التفاصيل: </p>
+<p>
+    عمولة الموقع هي: <span id="commission-amount-total-js"> 0 </span> ريال <br />
+    ضريبة القيمة المضافة هي:  <span id="tax-amount-total-js"> 0 </span> ريال
+</p>
+<p>
+    - عمولة الموقع هي 1 % من سعر السلعة. <br />
+    - ضريبة القيمة المضافة هي 5 % من عمولة الموقع.
+</p>
+
+<hr />
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#total-amount-total-js").keyup(function () {
+            var totalAmount = $("#total-amount-total-js").val();
+            var commissionAmount = $("#commission-amount-total-js");
+            var totalcommissionAmount = $("#total-commission-amount-total-js");
+            var taxAmount = $("#tax-amount-total-js");
+
+            var commissionCalculated = totalAmount * 0.01;
+            var totalWithCommission = parseFloat(commissionCalculated) + parseFloat(totalAmount) *1;
+            var taxCalculated = commissionCalculated * 0.05;
+
+            totalcommissionAmount.html(parseFloat(totalWithCommission));
+            taxAmount.html(taxCalculated);
+            commissionAmount.html(commissionCalculated);
+        });
+    });
+   
+
+</script>

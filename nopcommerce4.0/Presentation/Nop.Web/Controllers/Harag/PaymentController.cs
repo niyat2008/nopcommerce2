@@ -64,8 +64,13 @@ namespace Nop.Web.Controllers.Harag
         public IActionResult AddPaymentBankAjax(PaymentModel payment)
         {
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Added = false;
+
                 return View("~/Themes/Pavilion/Views/Harag/Payment/bankpayment.cshtml", payment);
+
+            }
             var model = new Z_Harag_BankPayment
             {
                 SiteAmount = payment.SiteAmount,
@@ -78,8 +83,17 @@ namespace Nop.Web.Controllers.Harag
                 UserId = payment.UserId
             };
 
-            ViewBag.Added = true;
+            var banks = _paymentService.GetBaknAccountsDetails().Select(m => new BankAccountModel
+            {
+                AccountNumber = m.AccountNo,
+                BankId = m.Id,
+                IBANNumber = m.IBANNumber,
+                BankName = m.BankName
+            }).ToList();
 
+              payment.Banks = banks ;
+            _paymentService.AddNewPaymentDetails(model);
+            ViewBag.Added = true;
             return View("~/Themes/Pavilion/Views/Harag/Payment/bankpayment.cshtml", payment);
         }
 
