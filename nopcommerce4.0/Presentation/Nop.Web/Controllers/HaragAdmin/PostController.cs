@@ -83,7 +83,7 @@ namespace Nop.Web.Controllers.HaragAdmin
                     Id = m.Id,
                     Text = m.Text,
                     Title = m.Title,
-                    DateCreated = m.DateCreated,
+                    DateCreated = m.DateCreated.Date,
                     DateUpdated = m.DateUpdated,
                     IsClosed = m.IsClosed,
                     IsAnswered = m.IsAnswered,
@@ -269,6 +269,7 @@ namespace Nop.Web.Controllers.HaragAdmin
                     ReportDescription = m.ReportDescription,
                     CustomerName = m.Z_Harag_Customer?.Username,
                     Comment = m.Z_Harag_Comment?.Text,
+                    CommentId=m.CommentId,
                     ReportTitle = m.ReportTitle
                 }).ToList()
             };
@@ -289,22 +290,193 @@ namespace Nop.Web.Controllers.HaragAdmin
                 return NotFound();
 
             var postInDb = _postService.GetPostById(postId);
-            var post = new PostModel
+            var outputModel = new PostOutputModel
             {
-              Id=postInDb.Id,
-              Title= postInDb.Title,
-              Text= postInDb.Text,
-              DateCreated= postInDb.DateCreated,
-              Category= postInDb.Category?.Name,
-              City= postInDb.City?.ArName,
-              Customer= postInDb.Customer?.Username,
+                Items = postInDb.Select(m => new PostModel()
+                {
+                    Id = m.Id,
+                    Text = m.Text,
+                    Title = m.Title,
+                    DateCreated = m.DateCreated,
+                    DateUpdated = m.DateUpdated,
+                    IsClosed = m.IsClosed,
+                    IsAnswered = m.IsAnswered,
+                    City = m.City?.ArName,
+
+                    IsDispayed = m.IsDispayed,
+                    IsReserved = m.IsReserved,
 
 
+                    Customer = m.Customer.Username,
+                    Category = m.Category.Name,
+
+
+                }).ToList()
             };
 
-            return Json(new { data = post });
+            return Json(new { data = outputModel.Items });
+
+           
         }
 
+        //Get Posts By Category
+        public IActionResult GetPostsByCategory(int categoryId)
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+                return Forbid();
+
+            if (categoryId == 0)
+                return NotFound();
+
+            return View("~/Themes/Pavilion/Views/HaragAdmin/Category/GetCategoryPosts.cshtml",categoryId);
+        }
+
+
+        //Get Posts By Category Ajax
+        [HttpPost]
+        public IActionResult GetPostsByCategoryAjax(int categoryId)
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+                return Forbid();
+
+            //Server Side Parameters
+            var start = Convert.ToInt32(Request.Form["start"].FirstOrDefault());
+            //int startRec = Request.Form.GetValues("start").First;
+            //int start = Convert.ToInt32(Request.Form.GetValues("start")[0]);
+            int length = Convert.ToInt32(Request.Form["length"]);
+            string searchValue = Request.Form["search[value]"];
+            string sortColumnName = Request.Form["columns[" + Request.Form["order[0][column]"] + "][name]"];
+            string sortDirection = Request.Form["order[0][dir]"];
+            var posts = _postService.GetPostsByCategory(categoryId,start, length, searchValue, sortColumnName, sortDirection);
+
+
+            var outputModel = new PostOutputModel
+            {
+                Items = posts.Select(m => new PostModel()
+                {
+                    Id = m.Id,
+                    Text = m.Text,
+                    Title = m.Title,
+                    DateCreated = m.DateCreated,
+                    DateUpdated = m.DateUpdated,
+                    IsClosed = m.IsClosed,
+                    IsAnswered = m.IsAnswered,
+                    City = m.City?.ArName,
+
+                    IsDispayed = m.IsDispayed,
+                    IsReserved = m.IsReserved,
+
+
+                    Customer = m.Customer.Username,
+                    Category = m.Category.Name,
+
+
+                }).ToList()
+            };
+
+            return Json(new { data = outputModel.Items });
+        }
+
+        //Get Posts By City
+      
+        public IActionResult GetPostsByCity(int cityId)
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+                return Forbid();
+
+            if (cityId == 0)
+                return NotFound();
+
+            return View("~/Themes/Pavilion/Views/HaragAdmin/Cities/GetCityPosts.cshtml", cityId);
+        }
+
+        //Get Posts By City
+        [HttpPost]
+        public IActionResult GetPostsByCityAjax(int cityId)
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+                return Forbid();
+
+            //Server Side Parameters
+            var start = Convert.ToInt32(Request.Form["start"].FirstOrDefault());
+            //int startRec = Request.Form.GetValues("start").First;
+            //int start = Convert.ToInt32(Request.Form.GetValues("start")[0]);
+            int length = Convert.ToInt32(Request.Form["length"]);
+            string searchValue = Request.Form["search[value]"];
+            string sortColumnName = Request.Form["columns[" + Request.Form["order[0][column]"] + "][name]"];
+            string sortDirection = Request.Form["order[0][dir]"];
+            var posts = _postService.GetPostsByCity(cityId, start, length, searchValue, sortColumnName, sortDirection);
+
+
+            var outputModel = new PostOutputModel
+            {
+                Items = posts.Select(m => new PostModel()
+                {
+                    Id = m.Id,
+                    Text = m.Text,
+                    Title = m.Title,
+                    DateCreated = m.DateCreated,
+                    DateUpdated = m.DateUpdated,
+                    IsClosed = m.IsClosed,
+                    IsAnswered = m.IsAnswered,
+                    City = m.City?.ArName,
+
+                    IsDispayed = m.IsDispayed,
+                    IsReserved = m.IsReserved,
+
+
+                    Customer = m.Customer.Username,
+                    Category = m.Category.Name,
+
+
+                }).ToList()
+            };
+
+            return Json(new { data = outputModel.Items });
+        }
+
+        //Get Comment By Id
+        public IActionResult GetComment(int commentId=0)
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+                return Forbid();
+
+            if (commentId == 0)
+                return NotFound();
+
+            var commentInDb = _commentService.GetComment(commentId);
+
+            var model = new CommentModel
+            {
+                Id = commentInDb.Id,
+                PostId = commentInDb.PostId,
+                Text = commentInDb.Text,
+                CommentedBy = commentInDb.CommentedBy,
+                CommentOwner = commentInDb.Customer?.Username,
+                DateCreated = commentInDb.DateCreated,
+                DateUpdated = commentInDb.DateUpdated == null ? commentInDb.DateCreated : commentInDb.DateUpdated
+            };
+
+            return Json(new { data = model });
+        }
         ////Get Post Messages
         //public IActionResult GetPostMessages(int postId)
         //{

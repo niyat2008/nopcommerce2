@@ -125,7 +125,7 @@ namespace Nop.Web.Controllers.HaragAdmin
                 Items = postReportInDb.Select(r => new ReportModel
                 {
                     Id = r.Id,
-                    
+                    CommentId=r.CommentId,
                     ReportTitle = r.ReportTitle,
                     ReportDescription = r.ReportDescription,
                    Category=r.ReportCategory

@@ -149,7 +149,9 @@
 
     }
 </div>*@
-
+@*<div id="comments" class="alert alert-primary" role="alert">
+    A simple primary alert—check it out!
+</div>*@
 <div id="comments" style="margin-top:30px;"><span>التعليقات</span></div>
 <div id="messages"><span>الرسائل</span></div>
 <div id="reports"><span>البلاغات</span></div>
@@ -173,7 +175,7 @@
 
                
                 $.each(data.data, function (key, value) {
-                    $("<div id='comment'></div>").append($("<div class='text'>" + value.Text + "</div>")).append($("<hr/>")).append($("<span class='commentedBy'>تم التعليق بواسطة : " + value.CommentedBy + "</span>")).append($("<br/>")).append($("<span class='commentOwner'>اسم صاحب التعليق : " + value.CommentOwner + "</span>")).append($("<br/>")).append($("<span class='dateCreated'>تاريخ الانشاء : " + value.DateCreated + "</span>")).append($("<br/>")).append($("<span class='dateUpdated'>تاريخ التعديل : " + value.DateUpdated + "</span>")).append($("<br/>")).append($("<a href='/Harag/Admin/Comment/HaragPostReport?commentId=" + value.Id + "'>بلاغات هذا التعليق </a>")).appendTo('#comments');
+                    $("<div id='comment' ></div>").append($("<div class='text'>" + value.Text + "</div>")).append($("<hr/>")).append($("<span class='commentedBy'>تم التعليق بواسطة : " + value.CommentedBy + "</span>")).append($("<br/>")).append($("<span class='commentOwner'>اسم صاحب التعليق : " + value.CommentOwner + "</span>")).append($("<br/>")).append($("<span class='dateCreated'>تاريخ الانشاء : " + value.DateCreated + "</span>")).append($("<br/>")).append($("<span class='dateUpdated'>تاريخ التعديل : " + value.DateUpdated + "</span>")).append($("<br/>")).append($("<a href='/Harag/Admin/Comment/HaragPostReport?commentId=" + value.Id + "'>بلاغات هذا التعليق </a>")).appendTo('#comments');
 
 
                     //$('#comment').find('h5').html(value.Text);

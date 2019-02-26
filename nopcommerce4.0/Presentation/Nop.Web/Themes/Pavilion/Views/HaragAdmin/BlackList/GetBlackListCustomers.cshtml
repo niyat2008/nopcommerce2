@@ -10,9 +10,9 @@
 
 
 <div class="table-responsive display">
-    <table class="table table-bordered table-hover display" id="blackList">
+    <table id="blackList" class="table table-bordered table-striped  table-condensed table-hover  table-light" cellspacing="5">
         <thead>
-            <tr>
+            <tr class="table-light">
                 <th>رقم العميل</th>
                 <th>الاسم</th>
                 <th>الموبايل</th>
@@ -46,8 +46,8 @@
                 { "data": "Email" },
                 {
                     "data": "Id",
-                    "render": function (data) {
-                        return "<button class='btn btn-xs btn-danger' id='delete' data-post-id=" + data + "><i class='fa fa-trash' ></i> حذف</button>";
+                    "render": function (data,type,row) {
+                        return "<button class='btn btn-xs btn-danger' id='delete' data-post-id=" + row.Id + " data-black-id=" + row.CustomerId+"><i class='fa fa-trash' ></i> حذف</button>";
 
                     }
 
@@ -88,7 +88,7 @@
                 .then((willDelete) => {
                     if (willDelete) {
                         $.ajax({
-                            "url": "/Harag/Admin/Customer/BlackListDelet?id=" + button.attr("data-post-id") + "",
+                            "url": "/Harag/Admin/Customer/BlackListDelet?id=" + button.attr("data-post-id") + "&blackId=" + button.attr("data-black-id")+"",
                             "method": "DELETE",
                             "success": function (result) {
                                 dataTable.row(button.parents("tr")).remove().draw();

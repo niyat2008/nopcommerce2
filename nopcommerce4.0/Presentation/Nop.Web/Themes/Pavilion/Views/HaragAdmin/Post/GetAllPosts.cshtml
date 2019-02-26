@@ -11,66 +11,73 @@
 
 @*_SearchSection.cshtml*@
 
+<div class="posts-search">
+    <div class="row">
+        <div class="col-md-1" style="margin-top:6px;font-size:17px;">
+            رقم الاعلان
+        </div>
+        <div class="col-md-3">
+            <div id="inputGroup" class="input-group">
 
-<div id="inputGroup" class="input-group">
-
-    <input class="form-control" id="postId" type="text" placeholder="">
-    <button id="postById" class="input-group-append btn btn-info">بحث</button>
+                <input class="form-control" id="postId" type="text" placeholder="">
+                <button id="postById" class="input-group-append btn btn-info">بحث</button>
+            </div>
+        </div>
+    </div>
 </div>
 
+    <div class="table-responsive">
+        <table id="posts" class="table table-bordered table-striped  table-condensed table-hover  table-light" cellspacing="5">
+            <thead>
+                <tr class="table-light">
+                    <th>رقم </th>
+                    <th>العنوان</th>
+                    <th>الوصف</th>
+                    <th>التاريخ</th>
+                    <th>الصنف </th>
+                    <th>المدينة</th>
+                    <th>صاحب الاعلان</th>
+                    <th>عمليات</th>
 
-<div class="table-responsive">
-    <table id="posts" class="table table-bordered table-hover">
-        <thead>
-            <tr class="table-active">
-                <th>رقم الاستشارة</th>
-                <th>العنوان</th>
-                <th>الوصف</th>
-                <th>التاريخ</th>
-                <th>الصنف </th>
-               <th>المدينة</th>
-                <th>صاحب الاعلان</th>
-                <th>عمليات</th>
 
+                </tr>
+            </thead>
+        </table>
 
-            </tr>
-        </thead>
-    </table>
+    </div>
 
-</div>
-
-<script>
+    <script>
         $(document).ready(function () {
 
-            
+
             var dataTable = $("#posts").DataTable({
-                "serverSide":"true",
+                "serverSide": "true",
                 "responsive": "true",
-                "processing":"true",
+                "processing": "true",
                 "autoWidth": "true",
                 "order": [[3, "des"]],
                 "ajax": {
 
-                    "url":"/Harag/Admin/Post/HaragPostsAjax",
+                    "url": "/Harag/Admin/Post/HaragPostsAjax",
                     "dataType": "json",
 
-                    "type":"post"
-                    },
+                    "type": "post"
+                },
 
                 "columns": [
 
 
-                    { "data": "Id","name":"Id","width":"10%"},
-                    { "data": "Title","width":"10%"},
-                    { "data": "Text","width":"35%"},
-                    { "data": "DateCreated"},
-                    { "data": "Category"},
-                    { "data": "City" },
-                    { "data": "Customer" },
+                    { "data": "Id", "name": "Id" },
+                    { "data": "Title", "width": "10%" },
+                    { "data": "Text", "width": "35%" },
+                    { "data": "DateCreated", "width": "13%" },
+                    { "data": "Category", "width": "10%" },
+                    { "data": "City", "width": "10%" },
+                    { "data": "Customer", "width": "15%" },
                     {
-                        "data": "Title","width":"25%",
-                        "render": function (data,type,post) {
-                            return "<a id='details' href='/Harag/Admin/Post/HaragPostsDetails?postId=" + post.Id + "' class='btn btn-xs btn-default btn-small' data-post-id=" + post.Id + " ><i class='fa fa-eye' ></i> التفاصيل </a>" /*+ " " + "<button class='btn btn-danger' id='delete' data-post-id=" + post.Id + " ><i class='fa fa-trash' ></i>حذف</button>"*/ ;
+                        "data": "Title", "width": "25%",
+                        "render": function (data, type, post) {
+                            return "<a id='details' href='/Harag/Admin/Post/HaragPostsDetails?postId=" + post.Id + "' class='btn btn-xs btn-hover btn-small' data-post-id=" + post.Id + " ><i class='fa fa-eye' ></i> التفاصيل </a>" /*+ " " + "<button class='btn btn-danger' id='delete' data-post-id=" + post.Id + " ><i class='fa fa-trash' ></i>حذف</button>"*/;
 
                         }
 
@@ -108,13 +115,13 @@
             //    });
             //});
 
-           
+
 
 
             $("#postById").on("click", function (e) {
                 e.preventDefault();
 
-                dataTable.ajax.url("/Harag/Admin/Post/PostById?postId=" + $('#').val() + "").load();
+                dataTable.ajax.url("/Harag/Admin/Post/PostById?postId=" + $('#postId').val() + "").load();
 
 
             });
@@ -155,7 +162,7 @@
 
 
 
-           
+
 
 
 
@@ -168,4 +175,4 @@
           /* href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "'*/
         /*href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "'*/
 
-</script>
+    </script>

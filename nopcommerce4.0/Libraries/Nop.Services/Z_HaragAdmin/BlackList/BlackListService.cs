@@ -1,4 +1,5 @@
 ﻿using Nop.Core.Data;
+using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Z_Harag;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,14 @@ namespace Nop.Services.Z_HaragAdmin.BlackList
     {
         #region Fields
         private readonly IRepository<Z_Harag_BlackList> _blackListRepository;
+        private readonly IRepository<Customer> _customerRepository;
         #endregion
 
         #region Ctor
-        public BlackListService(IRepository<Z_Harag_BlackList> blackListService)
+        public BlackListService(IRepository<Z_Harag_BlackList> blackListService, IRepository<Customer> customerRepository)
         {
             this._blackListRepository = blackListService;
+            this._customerRepository = customerRepository;
         }
         #endregion
 
@@ -36,8 +39,21 @@ namespace Nop.Services.Z_HaragAdmin.BlackList
 
             if(blacklistInDb !=null)
             {
-                _blackListRepository.Insert(blacklistInDb);
-                return true;
+               
+
+
+                var customer = _customerRepository.Table.FirstOrDefault(c=>c.Id==model.CustomerId);
+
+                if(customer !=null)
+                {
+                    customer.Blocked = true;
+                    _customerRepository.Update(customer);
+                    _blackListRepository.Insert(blacklistInDb);
+                    return true;
+                }
+
+
+               
 
             }
 
@@ -52,11 +68,32 @@ namespace Nop.Services.Z_HaragAdmin.BlackList
         }
 
         //Delete Blackk List Customer
-       public void DeleteBlackListCustomer(int id)
+       public void DeleteBlackListCustomer(int id,int blackId)
         {
-            var customer = _blackListRepository.Table.Where(c => c.Id == id).FirstOrDefault();
+            var query = _blackListRepository.Table.Include(b=>b.Customer).Where(c => c.Id == id).FirstOrDefault();
 
-            _blackListRepository.Delete(customer);
+
+            if (query != null)
+            {
+              
+
+
+                var customer = _customerRepository.Table.FirstOrDefault(c => c.Id ==  blackId);
+
+                if (customer != null)
+                {
+                    customer.Blocked = false;
+                    _customerRepository.Update(customer);
+                    _blackListRepository.Delete(query);
+
+                }
+
+
+
+
+            }
+
+           
         }
         #endregion
     }

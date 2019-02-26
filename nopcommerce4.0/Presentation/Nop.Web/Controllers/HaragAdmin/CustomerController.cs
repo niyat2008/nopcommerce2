@@ -73,8 +73,8 @@ namespace Nop.Web.Controllers.HaragAdmin
                     Id=m.Id,
                     Username = m.Username,
                     Email = m.Email,
-                    Mobile = m.Mobile
-                    
+                    Mobile = m.Mobile,
+                    Blocked=m.Blocked
                     
 
 

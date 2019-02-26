@@ -137,4 +137,17 @@
     height:350px!important;
     background-size:cover!important;
 }
+.table.dataTable tbody tr {
+    background-color: #fff!important;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #dcdcdc55!important;
+}
+.table-responsive {
+    font-family: 'Cairo', sans-serif;
+    font-size: 17px;
+}
+table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
+    border-bottom-width: 16px!important;
+}
     /*******front end**********/

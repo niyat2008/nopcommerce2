@@ -2,6 +2,7 @@
 using Nop.Core.Domain.Z_Harag;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,8 +35,16 @@ namespace Nop.Services.Z_HaragAdmin.Comment
         //Comment Reports
         public List<Z_Harag_CommentReport> GetCommentReports(int commentId)
         {
-            var query = _commentReportRepository.TableNoTracking.Where(m => m.CommentId == commentId);
+            var query = _commentReportRepository.TableNoTracking.Include(c=>c.Z_Harag_Comment).Where(m => m.CommentId == commentId);
             return query.ToList();
+        }
+
+        //Get Comment By Id
+        public Z_Harag_Comment GetComment(int commentId)
+        {
+            var comment = _commentRepository.TableNoTracking.Include(p=>p.Z_Harag_Post).FirstOrDefault(c => c.Id == commentId);
+
+            return comment;
         }
         #endregion
     }

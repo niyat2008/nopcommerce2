@@ -12,15 +12,15 @@
 <div class="page-title">الاعضاء</div>
 
 <div class="table-responsive">
-    <table class="table table-bordered table-hover" id="customers">
+    <table id="customers" class="table table-bordered table-striped  table-condensed table-hover  table-light" cellspacing="5">
         <thead>
-            <tr>
+            <tr class="table-light">
                 <th>رقم العميل</th>
                 <th>الاسم</th>
                 <th>الايميل</th>
                 <th>الموبايل</th>
-                
-               
+
+
                 <th>---</th>
             </tr>
         </thead>
@@ -61,7 +61,7 @@
     {
         "data": "Id",
         "render": function (data,type,row) {
-            return "<span id='addToBlackList' class='btn btn-xs btn-danger' data-post-phone="+row.Mobile+"  data-post-id=" +row.Id+ " > اضف الى القائمة السوداء </span>" ;
+            return (row.Blocked) ? "<span  id='added' class='btn btn-xs btn-default' data-post-phone=" + row.Mobile + "  data-post-id=" + row.Id + " > مضاف الى القائمة السوداء </span>" : "<span id='addToBlackList' class='btn btn-xs btn-default' data-post-phone=" + row.Mobile + "  data-post-id=" + row.Id + " > اضف الى القائمة السوداء </span>" ;
 
     }
 
@@ -129,6 +129,7 @@
 
                         }
                     });
+                    button.html("مضاف الى القائمة السوداء");
                 } else {
                     swal("التراجع عن الاضافة الى القائمة السوداء؟");
                 }
