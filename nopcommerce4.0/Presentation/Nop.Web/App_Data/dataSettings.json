@@ -2,7 +2,7 @@
   "DataProvider": "sqlserver",
   //"DataConnectionString": "Data Source=SQL6004.site4now.net;Initial Catalog=DB_A409B4_nop4;Integrated Security=False;Persist Security Info=False;User ID=DB_A409B4_nop4_admin;Password=assam123",
   //"DataConnectionString": "Data Source=DESKTOP-6A85539\\SQLEXPRESS;Initial Catalog=DB_A409B4_nop4;Integrated Security=True;",
-  //"DataConnectionString": "Data Source=68.66.228.7;Initial Catalog=niyatcom_nop_farmsstore_db;Integrated Security=false;MultipleActiveResultSets=true;uid=niyatcom_niyat_db_user1;password=Ali123;",
-  "DataConnectionString": "Data Source=10.2.2.105;Initial Catalog=DB_A409B4_nop4;Integrated Security=false;MultipleActiveResultSets=true;uid=sa;password=123;",
+  "DataConnectionString": "Data Source=68.66.228.7;Initial Catalog=niyatcom_nopcommerce2;Integrated Security=false;MultipleActiveResultSets=true;uid=niyatcom_nopcommerce2;password=A.123123;",
+  //"DataConnectionString": "Data Source=10.2.2.105;Initial Catalog=DB_A409B4_nop4;Integrated Security=false;MultipleActiveResultSets=true;uid=sa;password=123;",
   "RawDataSettings": {}
 }
