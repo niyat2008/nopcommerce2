@@ -18,7 +18,8 @@
 
                 @if (Model.Posts.Count() <= 0)
                 {
-                    <div id="tabpanelPosts" style="text-align:center"><b>لا يوجد</b></div>
+                    <h4 class="text-danger"><b>لا يوجد</b></h4>
+
                 }
                 else
                 {
@@ -38,7 +39,7 @@
                                 </div>
                             </div>
                             <div class="det-img">
-                              @post.CreationTime.ToLongDateString() 
+                                @post.CreationTime.ToLongDateString()
                             </div>
                         </div>
                     }
@@ -52,9 +53,9 @@
             </div>
             <div class="col-md-9 cont">
                 <h3 class="green">العملاء المتابعة</h3>
-                @if (Model.Posts.Count() <= 0)
+                @if (Model.Users.Count() <= 0)
                 {
-                    <div id="tabpanelPosts" style="text-align:center"><b>لا يوجد</b></div>
+                    <h4 class="text-danger" ><b>لا يوجد</b></h4>
                 }
                 else
                 {

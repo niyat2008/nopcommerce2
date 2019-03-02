@@ -12,6 +12,20 @@
     var PostOwner = ViewBag.UserName;
 }
 
+<style>
+    .followed:hover {
+        border: solid #ecd6d6 4px;
+        background: red;
+        color: white;
+    }
+
+    .followed {
+        border: solid #ecd6d6 4px !important;
+        background: red !important;
+        color: white !important;
+    }
+
+</style>
 <!-- Content -->
 <div class="content">
     <div class="container-fluid">
@@ -150,7 +164,7 @@
                 </div>
                 <div class="follow">
                     <div class="col-xs-12">
-                        <button id="add-follow-js" class="btn btn-default add" type="button"> متابعة الردود <i class="fa fa-feed"></i></button>
+                        <button id="add-follow-js" class="btn btn-default add " type="button">  <span>متابعة الردود </span><i class="fa fa-feed"></i></button>
                     </div>
                 </div>
                 <div>
@@ -280,9 +294,12 @@
             success: function (data) {
                 if (data.status === true) {
                     if (data.added == true) {
-                        $("#add-follow-js").addClass("text-danger"); 
+                        $("#add-follow-js").addClass("followed");
+                        $("#add-follow-js span").html("الغاء المتابعه");
                     } else {
-                        $("#add-follow-js").removeClass("text-danger");
+                        $("#add-follow-js").removeClass("followed");
+                        $("#add-follow-js   span").html("متابعه الردود");
+
                     }
                     
                 } else {

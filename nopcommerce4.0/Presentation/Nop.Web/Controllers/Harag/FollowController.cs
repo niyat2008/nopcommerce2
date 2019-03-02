@@ -111,7 +111,7 @@ namespace Nop.Web.Controllers.Harag
                 };
 
                 // check if user exists
-                var exists = _followRepository.IsUserFollowed(user.Id, userId);
+                var exists = _followRepository.IsUserFollowed(user.Id, _workContext.CurrentCustomer.Id);
 
                 if (exists)
                 {
@@ -119,7 +119,7 @@ namespace Nop.Web.Controllers.Harag
                     return Ok(new { status = true, added = false });
 
                 }
-                var follow = _followRepository.AddPostToFollow(postFollow);
+                var follow = _followRepository.AddUserToFollow(postFollow);
                 return Ok(new { status = true, added = true });
                  
             }
@@ -190,7 +190,7 @@ namespace Nop.Web.Controllers.Harag
 
                 foreach (var follow in users)
                 {
-                    var u = _customerContext.GetCustomerById((int)follow.UserId);
+                    var u = _customerContext.GetCustomerById((int)follow.FollowedId);
 
                     modelUsersList.Add(new UserModel
                     {

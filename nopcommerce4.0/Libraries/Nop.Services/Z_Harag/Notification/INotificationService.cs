@@ -12,8 +12,10 @@ namespace Nop.Services.Z_Harag.Notification
         List<Z_Harag_Notification> GetUserNotifications(int userId);
 
         Z_Harag_Notification AddPostNotification(Z_Harag_Notification n);
+        Z_Harag_Notification AddCommentNotification(Z_Harag_Notification n);
         Z_Harag_Notification AddUserNotification(Z_Harag_Notification n);
         Z_Harag_Notification AddGeneralNotification(Z_Harag_Notification n);
-        Z_Harag_Notification AddCategoryNotification(Z_Harag_Notification n); 
+        Z_Harag_Notification AddCategoryNotification(Z_Harag_Notification n);
+        bool PushPostCommentNotification(Comment.CommentForNotifyModel notifyModel);
     }
 }

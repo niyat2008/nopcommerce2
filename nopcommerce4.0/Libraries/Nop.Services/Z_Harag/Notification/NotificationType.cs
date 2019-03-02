@@ -6,6 +6,7 @@
         User = 2,
         Category = 3,
         General = 4,
-        Note = 5
+        Note = 5,
+        Comment = 6
     }
 }

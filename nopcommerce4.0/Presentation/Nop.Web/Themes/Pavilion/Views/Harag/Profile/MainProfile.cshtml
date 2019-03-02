@@ -4,6 +4,21 @@
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
 }
 
+
+<style>
+    .followed:hover {
+        border: solid #ecd6d6 4px;
+        background: red;
+        color: white;
+    }
+
+    .followed {
+        border: solid #ecd6d6 4px !important;
+        background: red !important;
+        color: white !important;
+    }
+</style>
+
 <!-- Content -->
 <div class="content">
     <div class="container-fluid">
@@ -258,13 +273,15 @@
     $("#follow-user-js").click(function () {
         $.ajax({
             type: 'GET',
-            url: '/Harag/Follow/User/@Model.Id',
+            url: '/Harag/Follow/User/@Model.userId',
             success: function (data) {
                 if (data.status === true) {
                     if (data.added == true) {
-                        $("#add-follow-js").addClass("text-danger"); 
+                        $("#follow-user-js").addClass("followed");
+                        $("#follow-user-js").html("الغاء المتابعه"); 
                     } else {
-                        $("#add-follow-js").removeClass("text-danger");
+                        $("#follow-user-js").removeClass("followed");
+                        $("#follow-user-js").html("متابعه");
                     } 
                 } else {
                     alert("تاكد من الاتصال بالانترنت");
