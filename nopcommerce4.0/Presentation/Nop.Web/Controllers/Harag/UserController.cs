@@ -4,8 +4,7 @@ using Nop.Services.Customers;
 using Nop.Services.Z_Consultant.Helpers;
 using Nop.Services.Z_Harag.BlackList;
 using Nop.Services.Z_Harag.Rate;
-using Nop.Services.Z_Harag.Post;
-using Nop.Web.Models.Consultant.User;
+using Nop.Services.Z_Harag.Post; 
 using Nop.Web.Models.Harag.Post;
 using Nop.Web.Models.Harag.Profile;
 using Nop.Web.Models.Harag.Rate;
@@ -14,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Nop.Core.Domain.Z_Harag;
+using Nop.Web.Models.Harag.User;
 
 namespace Nop.Web.Controllers.Harag
 {
@@ -57,7 +57,8 @@ namespace Nop.Web.Controllers.Harag
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Redirect("Login");
 
-            var result = _workContext.CurrentCustomer;
+            var result = _workContext.CurrentCustomer; 
+                ViewBag.SameUser = true; 
 
             var posts = _postService.GetCurrentUserPosts(result.Id).Select(p => new PostModel
             {
@@ -194,10 +195,14 @@ namespace Nop.Web.Controllers.Harag
             if (username == null)
                 return NotFound();
 
-            var result = _customerContext.GetCustomerByUsername(username); 
+            var result = _customerContext.GetCustomerByUsername(username);
 
             if(result == null)
                 return NotFound();
+
+          
+                ViewBag.SameUser = false;
+            
 
             var posts = _postService.GetCurrentUserPosts(result.Id).Select(p => new PostModel
             {
@@ -230,31 +235,31 @@ namespace Nop.Web.Controllers.Harag
         }
 
 
-        //[HttpGet]
-        //public IActionResult GetUserInfo()
-        //{
-        //    UserModel model = new UserModel();
+        [HttpGet]
+        public IActionResult GetUserSummaryInfo(string userId)
+        {
+            var id = 0;
+            var user = _customerContext.GetCustomerByUsername(userId);
 
-        //    if (_workContext.CurrentCustomer.IsRegistered())
-        //    {
-        //        if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
-        //            model.UserRole = RolesType.Administrators;
-        //        else if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Consultant, true))
-        //            model.UserRole = RolesType.Consultant;
-        //        else if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
-        //            model.UserRole = RolesType.Registered;
+            if (user == null)
+            { 
+                    user = _customerContext.GetCustomerByMobile(userId);
 
-        //        model.Id = _workContext.CurrentCustomer.Id;
-        //        model.Username = _workContext.CurrentCustomer.Username;
-        //    }
-        //    else
-        //        model.UserRole = null;
+                    if (user == null)
+                    {
+                        return Ok(new { Status = false , d = userId});
+                    } 
 
+            }
 
+            UserModel model = new UserModel();
+             
+            model.Id = user.Id;
+            model.Username = user.Username;
+            model.Phone = user.Mobile;
 
-        //    return PartialView("~/Themes/Pavilion/Views/Consultant/User/_UserInfo.cshtml", model);
-        //}
-
+            return Ok(new { Status = true, Data = model }); 
+        }
 
         //[HttpGet]
         //public IActionResult GetAdminLink()

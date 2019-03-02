@@ -1,4 +1,4 @@
-﻿ @model Nop.Web.Models.Harag.PaymentModel
+﻿@model Nop.Web.Models.Harag.PaymentModel
 @{
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
 }
@@ -31,23 +31,7 @@
             <div class="col-md-12 cont">
                 <div class="feat-adv-blck">
                     <h3>حساب العمولة</h3>
-                    <p>
-                        اذا تم بيع السلعة بسعر
-                        <input class="form-control" type="text" placeholder="0" style="width:115px; display: inline-block" />
-                        ريال فأن المبلغ المستحق دفعه هو : <span style="border-radius:4px; background:#d9edf7; padding:4px">  0  </span>  ريال
-                    </p>
-                    <p>التفاصيل: </p>
-                    <p>
-                        عمولة الموقع هي: <span> 0 </span> ريال <br />
-                        ضريبة القيمة المضافة هي:  <span> 0 </span> ريال
-                    </p>
-                    <p>
-                        - عمولة الموقع هي 1 % من سعر السلعة. <br />
-                        - ضريبة القيمة المضافة هي 5 % من عمولة الموقع.
-                    </p>
-
-                    <hr />
-
+                    @Html.Partial("~/Themes/Pavilion/Views/Harag/Payment/_PaymentCalculator.cshtml")
                     <p>
                         مؤسسة موقع حراج للتجارة  <br />
                         سجل تجاري رقم: 1010283122 <br />
@@ -67,8 +51,8 @@
                     <h3>الطريقة الأولى</h3>
                     <p>يمكنك استخدام التحويل البنكي لدفع العموله عن طريق إرسال حواله إلى حساباتنا في البنوك المحليه.</p>
 
-                     @Html.Partial("~/Themes/Pavilion/Views/Harag/Payment/_BanksAccountsPartial.cshtml", Model.Banks)
-                    
+                    @Html.Partial("~/Themes/Pavilion/Views/Harag/Payment/_BanksAccountsPartial.cshtml", Model.Banks)
+
                     <hr />
 
                 </div>
@@ -81,62 +65,70 @@
                     <p>بإمكانك سداد العمولة عن طريق <a href="/Harag/Payment/Sadad"> نظام سداد </a></p><br />
                     <p>بعد إرسال المبلغ،يجب مراسلتنا عبر النموذج التالي لأجل تسجيل العمولة بأسم عضويتك ثم الحصول على مميزات الموقع الخاصة بالعملاء:</p>
                     <form>
-                        <input class="form-control" type="text" placeholder="أدخل رقم الحساب أو رقم الجوال هنا" style="width: 20%" />
-                        <button class="btn btn-default add" type="button"> فحص >>  </button>
+                        <input id="user-phone-js" class="form-control" type="text" placeholder="أدخل رقم الحساب أو رقم الجوال هنا" style="width: 20%" />
+                        <button id="check-userdata-js" class="btn btn-default add" type="button"> فحص >>  </button>
                     </form>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-9">
-                <form class="add-adverse" action="/Harag/Payment/BanksJ" method="post">
-                    <div class="col-md-4">
-                        <label>اسم المستخدم</label> <br />
-                        @Html.TextBoxFor(m => m.UserName, new {  @class="form-control", placeholder="اسم المستخدم" })
-                        
-                    </div>
-                    <div class="col-md-4">
-                        <label>مبلغ العمولة</label> <br />
-                        @Html.TextBoxFor(m => m.SiteAmount, new { @class = "form-control", placeholder = "مبلغ العموله " })
-                         
-                    </div>
-                    <div class="col-md-4">
-                        <label> البنك الذى تم التحويل اليه </label> <br />
-                        <select id="banks-js" name="BankId" class="form-control" placeholder="اختر اسم البنك ">
-                            <option>اختر البنك  </option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label> متى تم التحويل ؟ </label> <br />
-                        <select name="TransactionDate" class="form-control" placeholder="اختر متي تم التحويل ">
-                            <option value="1">1</option>
-                            <option value="2"> 2 </option>
-                            <option value="3">  3</option>
-                            <option value="4">  4</option> 
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label>اسم المحول</label> <br />
-                        @Html.TextBoxFor(m => m.TransatctorUser, new { @class = "form-control", placeholder = "اسم المحول"})
-                    </div>
-                    <div class="col-md-4">
-                        <label>رقم الاعلان</label> <br />
-                        @Html.TextBoxFor(m => m.PostId, new { @class = "form-control", placeholder = " رقم الاعلان " })
-      
-                    </div>
-                    <div class="col-md-12">
-                        <label>ملاحظات</label> <br />
-                        @Html.TextAreaFor(m => m.Notes, new { @class = "form-control txtArea", placeholder = " ملاحظات   " , rows = "7" })
-                    </div>
-                    <div class="col-md-12">
-                        <p style="margin-top:15px"> نرجو الحرص على أن تكون معلومات التحويل صحيحة ودقيقه </p>
-                    </div> 
-                    <div class="col-md-12">
-                        <button class="btn btn-default add" type="submit">ارسال</button>
-                    </div>
-                </form>
-         
-            </div>
+            @if (ViewBag.Added == true)
+            {
+                <div class="col-md-9">
+                    <p class="alert alert-info">
+                        تم اضافه عمليه الدفع شكرا لك
+                    </p>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-9">
+                    <form class="add-adverse" action="/Harag/Payment/BanksJ" method="post">
+                        <div class="col-md-4">
+                            <label>اسم المستخدم</label> <br />
+                            @Html.TextBoxFor(m => m.UserName, new { id = "username-js", @class = "form-control", placeholder = "اسم المستخدم", required = "required" })
+                        </div>
+                        <div class="col-md-4">
+                            <label>مبلغ العمولة</label> <br />
+                            @Html.TextBoxFor(m => m.SiteAmount, new { @class = "form-control", placeholder = "مبلغ العموله ", required = "required" })
+
+                        </div>
+                        <div class="col-md-4">
+                            <label> البنك الذى تم التحويل اليه </label> <br />
+                            <select id="banks-js" name="BankId" class="form-control" required="required" placeholder="اختر اسم البنك ">
+                                <option>اختر البنك  </option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label> متى تم التحويل ؟ </label> <br />
+                            <select name="TransactionDate" class="form-control" placeholder="اختر متي تم التحويل" required="required">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label>اسم المحول</label> <br />
+                            @Html.TextBoxFor(m => m.TransatctorUser, new { @class = "form-control", placeholder = "اسم المحول", required = "required" })
+                        </div>
+                        <div class="col-md-4">
+                            <label>رقم الاعلان</label> <br />
+                            @Html.TextBoxFor(m => m.PostId, new { @class = "form-control", placeholder = " رقم الاعلان ", required = "required" }) 
+                        </div>
+                        <div class="col-md-12">
+                            <label>ملاحظات</label> <br />
+                            @Html.TextAreaFor(m => m.Notes, new { @class = "form-control txtArea", placeholder = " ملاحظات   ", rows = "7", required = "required" })
+                        </div>
+                        <div class="col-md-12">
+                            <p style="margin-top:15px"> نرجو الحرص على أن تكون معلومات التحويل صحيحة ودقيقه </p>
+                        </div>
+                        <div class="col-md-12">
+                            <button class="btn btn-default add" type="submit">ارسال</button>
+                        </div>
+                    </form> 
+                </div>
+            } 
         </div>
     </div>
 </div>
@@ -144,6 +136,24 @@
 
 <script type="text/javascript">
 
+    $("#check-userdata-js").click(function () {
+
+        var userphone = $("#user-phone-js");
+
+        $.ajax({
+            method: 'GET',
+            url: '/Harag/User/GetUser/' + userphone.val(),
+            success: function (data) {
+                if (data.Status == true) {
+                    $("#username-js").val(data.Data.Username);
+                } else {
+                    alert("لا يوجد هذا المستخدم");
+                }
+            }
+        });
+    });
+
+    // get the banks accounts
     $.ajax({
         method: 'GET',
         url: '/Harag/Payment/BanksList',
@@ -152,7 +162,8 @@
                 $('#banks-js').html(data.responseText);
             }
         }
-
     });
-    $(document).ready();
+
+
+
 </script>

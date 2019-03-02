@@ -10,6 +10,7 @@ using Nop.Core.Domain.Z_Harag;
 using Nop.Services.Z_Harag.Category;
 using Nop.Services.Z_Harag.Comment;
 using Nop.Services.Z_Harag.Helpers;
+using Nop.Services.Z_Harag.Notification;
 using Nop.Services.Z_Harag.Post;
 using Nop.Web.Models.Consultant.Post;
 using Nop.Web.Models.Harag.Category;
@@ -24,6 +25,7 @@ namespace Nop.Web.Controllers.Harag
         #region Fields
 
         private readonly ICategoryService _categoryService;
+        private readonly INotificationService _notificationService;
         private readonly IUrlHelper _urlHelper;
         private readonly IPostService _postService;
         private readonly Core.IWorkContext _workContext;
@@ -38,6 +40,7 @@ namespace Nop.Web.Controllers.Harag
             IUrlHelper urlHelper,
             IPostService postService,
             Core.IWorkContext workContext,
+            INotificationService _notificationService,
             IHostingEnvironment env,
             ICommentService commentService
             )
@@ -46,6 +49,7 @@ namespace Nop.Web.Controllers.Harag
             this._urlHelper = urlHelper;
             this._postService = postService;
             this._workContext = workContext;
+            this._notificationService = _notificationService;
             this._env = env;
             this._commentService = commentService;
         }
@@ -291,6 +295,7 @@ namespace Nop.Web.Controllers.Harag
 
             var post = _postService.AddNewPost(postForPostModel, currentUserId, postForPostModel.Files, errors);
 
+            var notifications = _notificationService.PushPostCommentNotification(new CommentForNotifyModel { });
             if (post == null)
             {
                 StringBuilder err = new StringBuilder();

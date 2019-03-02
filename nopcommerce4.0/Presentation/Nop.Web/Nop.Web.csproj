@@ -301,6 +301,9 @@
     <Content Update="Themes\Pavilion\Views\Harag\Message\UserMessageList.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Payment\_PaymentCalculator.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Payment\_BanksList.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

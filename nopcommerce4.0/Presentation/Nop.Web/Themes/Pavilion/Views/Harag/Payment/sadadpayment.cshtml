@@ -20,11 +20,7 @@
             <div class="col-md-12 cont">
                 <div class="feat-adv-blck">
                     <h3>حساب العمولة</h3>
-                    <p>
-                        اذا تم بيع السلعة بسعر
-                        <input class="form-control" type="text" placeholder="0" style="width:115px; display: inline-block" />
-                        ريال فأن المبلغ المستحق دفعه هو : <span style="border-radius:4px; background:#d9edf7; padding:4px">  0  </span>  ريال
-                    </p>
+                    @Html.Partial("~/Themes/Pavilion/Views/Harag/Payment/_PaymentCalculator.cshtml") 
                 </div>
             </div>
         </div>

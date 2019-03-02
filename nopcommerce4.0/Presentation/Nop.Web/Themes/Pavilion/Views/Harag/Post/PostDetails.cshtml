@@ -12,6 +12,20 @@
     var PostOwner = ViewBag.UserName;
 }
 
+<style>
+    .followed:hover {
+        border: solid #ecd6d6 4px;
+        background: red;
+        color: white;
+    }
+
+    .followed {
+        border: solid #ecd6d6 4px !important;
+        background: red !important;
+        color: white !important;
+    }
+
+</style>
 <!-- Content -->
 <div class="content">
     <div class="container-fluid">
@@ -150,7 +164,7 @@
                 </div>
                 <div class="follow">
                     <div class="col-xs-12">
-                        <button class="btn btn-default add" type="button"> متابعة الردود <i class="fa fa-feed"></i></button>
+                        <button id="add-follow-js" class="btn btn-default add " type="button">  <span>متابعة الردود </span><i class="fa fa-feed"></i></button>
                     </div>
                 </div>
                 <div>
@@ -245,34 +259,57 @@
 
      $.ajax({
         type: 'GET',
-        url: '@Url.RouteUrl("Harag.Comment.GetAllPostCommentsAjax")?postId=@Model.Id', 
-        success: function (data) { 
+        url: '@Url.RouteUrl("Harag.Comment.GetAllPostCommentsAjax")?postId=@Model.Id',
+        success: function (data) {
             $("#comments").html(data);
         }
     });
 
     $("#add-post-to-favorite").click(function () {
-    $.ajax({
-        type: 'GET',
-        url: '@Url.RouteUrl("Harag.Post.AddPostToFavorite")?postid=@Model.Id', 
-        success: function (data) { 
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.AddPostToFavorite")?postid=@Model.Id',
+            success: function (data) {
 
-            if (data.stat === true) {
-                console.log(data.ok);
+                if (data.stat === true) {
+                    console.log(data.ok);
 
-                if (data.ok == 1) {
-                    $("#add-post-to-favorite i").addClass("text-danger");
+                    if (data.ok == 1) {
+                        $("#add-post-to-favorite i").addClass("text-danger");
+                    } else {
+                        $("#add-post-to-favorite i").removeClass("text-danger");
+                    }
                 } else {
-                    $("#add-post-to-favorite i").removeClass("text-danger"); 
+                    alert("تاكد من الاتصال بالانترنت");
                 }
-            } else {
-                alert("تاكد من الاتصال بالانترنت");
+
             }
-           
-        }
-    });});
- 
-   
+        });
+    });
+
+    $("#add-follow-js").click(function () {
+        $.ajax({
+            type: 'GET',
+            url: '/Harag/Follow/Post/@Model.Id',
+            success: function (data) {
+                if (data.status === true) {
+                    if (data.added == true) {
+                        $("#add-follow-js").addClass("followed");
+                        $("#add-follow-js span").html("الغاء المتابعه");
+                    } else {
+                        $("#add-follow-js").removeClass("followed");
+                        $("#add-follow-js   span").html("متابعه الردود");
+
+                    }
+                    
+                } else {
+                    alert("تاكد من الاتصال بالانترنت");
+                } 
+            }
+        });
+    });
+
+
     function closePopupModel() {
         $("#changeCatAndSubDiv").css("display", "none");
     }

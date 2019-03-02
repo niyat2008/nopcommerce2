@@ -22,7 +22,7 @@ namespace Nop.Services.Z_Harag.Post
     public class PostService : IPostService
     {
         #region Fields
-        private readonly IRepository<Z_Harag_Post> _postRepository;
+        private readonly IRepository<Z_Harag_Post> _postRepository; 
         private readonly IRepository<Z_Harag_BlackList> _blacklistRepository;
         private readonly IRepository<Z_Harag_Category> _categoryRepository;
         private readonly IRepository<Z_Harag_Photo> _photoRepository;
@@ -107,9 +107,12 @@ namespace Nop.Services.Z_Harag.Post
             }
              
             _postRepository.Insert(post);
+             
+
             return post;
         }
 
+        
         public bool IsDisplayed(int postId)
         {
             var query = _postRepository.TableNoTracking;

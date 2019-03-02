@@ -28,8 +28,12 @@ namespace Nop.Web.Models.Harag.Post
         public double Len { get; set; }
         public double Lat { get; set; }
         public bool IsCommon { get; set; }
-
-
+         
+        /// <summary>
+        /// Following Data
+        /// </summary>
+        public DateTime CreationTime { get; set; }
+         
         public string DateDescription
         {
             get
