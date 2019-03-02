@@ -106,13 +106,57 @@ namespace Nop.Services.Z_HaragAdmin.Post
         //}
 
         //Get Post By ID
-        public Z_Harag_Post GetPostById(int postId)
+        public List<Z_Harag_Post> GetPostById(int postId)
         {
-            var post = _postRepository.TableNoTracking.FirstOrDefault(p=>p.Id==postId);
+            var post = _postRepository.TableNoTracking.Include(p => p.Customer).Include(p => p.Category).Include(p => p.City).Where(p=>p.Id==postId);
 
-            return post;
+            return post.ToList();
         }
          
+
+        //Get Posts By CategoryId
+        public List<Z_Harag_Post> GetPostsByCategory(int categoryId, int start, int length, string searchValue, string sortColumnName, string sortDirection)
+        {
+            var query = _postRepository.TableNoTracking.Include(p=>p.Customer).Include(p=>p.Category).Include(p=>p.City).Where(p => p.CategoryId == categoryId);
+
+            //search
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                query = query.Where(r => r.Text.Contains(searchValue) && r.Title.Contains(searchValue));
+            }
+            //sort
+            if (!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
+            {
+                query = query.OrderBy(sortColumnName + " " + sortDirection);
+            }
+            //pagining
+            query = query.OrderByDescending(r => r.Text).Skip(start).Take(length);
+
+            return query.ToList();
+
+        }
+
+        //Get Posts By City Id
+        public List<Z_Harag_Post> GetPostsByCity(int cityId, int start, int length, string searchValue, string sortColumnName, string sortDirection)
+        {
+            var query = _postRepository.TableNoTracking.Include(p => p.Customer).Include(p => p.Category).Include(p => p.City).Where(p => p.CityId == cityId);
+
+            //search
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                query = query.Where(r => r.Text.Contains(searchValue) && r.Title.Contains(searchValue));
+            }
+            //sort
+            if (!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
+            {
+                query = query.OrderBy(sortColumnName + " " + sortDirection);
+            }
+            //pagining
+            query = query.OrderByDescending(r => r.Text).Skip(start).Take(length);
+
+            return query.ToList();
+        }
+
 
         ////Post Comments
         //public List<Z_Harag_Comment> GetPostComments(int postId)

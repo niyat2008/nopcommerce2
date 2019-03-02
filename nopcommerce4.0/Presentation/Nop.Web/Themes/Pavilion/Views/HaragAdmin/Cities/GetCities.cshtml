@@ -7,15 +7,15 @@
 
 
 <div class="table-responsive">
-    <table id="cities" class="table table-bordered table-hover">
+    <table id="cities" class="table table-bordered table-striped  table-condensed table-hover  table-light" cellspacing="5">
         <thead>
-            <tr class="table-active">
-                
-                
-                
+            <tr class="table-light">
+
+
+
                 <th>المدينة</th>
                 <th>المنطقة</th>
-                @*<th>عمليات</th>*@
+                <th>عمليات</th>
 
 
             </tr>
@@ -51,6 +51,13 @@
                
                 { "data": "Name" },
                 { "data": "ProvinceId" },
+                {
+                    "data": "Name",
+                    "render": function (data, type, city) {
+                        return "<a href='/Harag/Admin/City/HaragCityPosts?cityId=" + city.Id + "' class='btn btn-default'>الاعلانات</a> "
+
+                    }
+                }
                 //{
                 //    "data": "Id", "width": "25%",
                 //    "render": function (data, type, post) {

@@ -644,6 +644,10 @@ new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
             routeBuilder.MapRoute("Harag.Admin.HaragCategories", "Harag/Admin/Category/HaragCategories", new { controller = "Category", action = "GetHaragCategories" });
             //Get Categories Ajax
             routeBuilder.MapRoute("Harag.Admin.HaragCategoriesAjax", "Harag/Admin/Category/HaragCategoriesAjax", new { controller = "Category", action = "GetHaragCategoriesAjax" });
+            //Get Category Posts
+            routeBuilder.MapRoute("Harag.Admin.HaragCategoryPosts", "Harag/Admin/Category/HaragCategoryPosts", new { controller = "Post", action = "GetPostsByCategory" });
+            //Get Category Posts Ajax
+            routeBuilder.MapRoute("Harag.Admin.HaragCategoriesPostsAjax", "Harag/Admin/Category/HaragCategoriesPostsAjax", new { controller = "Post", action = "GetPostsByCategoryAjax" });
 
 
 
@@ -694,6 +698,16 @@ new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
             routeBuilder.MapRoute("Harag.Admin.HaragCities", "Harag/Admin/Comment/HaragCities", new { controller = "City", action = "GetCities" });
             //Get Cities Ajax
             routeBuilder.MapRoute("Harag.Admin.HaragCitiesAjax", "Harag/Admin/Comment/HaragCitiesAjax", new { controller = "City", action = "GetCitiesAjax" });
+            //Get City Posts
+            routeBuilder.MapRoute("Harag.Admin.HaragCityPosts", "Harag/Admin/City/HaragCityPosts", new { controller = "Post", action = "GetPostsByCity" });
+            //Get City Posts Ajax
+            routeBuilder.MapRoute("Harag.Admin.HaragHaragCityPostsAjax", "Harag/Admin/City/HaragCityPostsAjax", new { controller = "Post", action = "GetPostsByCityAjax" });
+
+
+
+
+
+
             //Get Rates 
             routeBuilder.MapRoute("Harag.Admin.HaragRates", "Harag/Admin/Comment/HaragRates", new { controller = "Rate", action = "GetRates" });
             //Get Rates Ajax
@@ -715,7 +729,8 @@ new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
             //Comment Reports Ajax
             routeBuilder.MapRoute("Harag.Admin.HaragCommentReportsAjax", "Harag/Admin/Comment/HaragCommentReportsAjax", new { controller = "Report", action = "GetCommentReportsAjax" });
 
-
+            //Get Comment 
+            routeBuilder.MapRoute("Harag.Admin.HaragComment", "Harag/Admin/Comment/HaragComment", new { controller = "Post", action = "GetComment" });
 
 
 

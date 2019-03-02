@@ -8,9 +8,9 @@
 
 <div class="page-title">الاقسام</div>
 <div class="table-responsive">
-    <table id="categories" class=" table table-bordered display">
+    <table id="categories" class="table table-bordered table-striped  table-condensed table-hover  table-light" cellspacing="5">
         <thead>
-            <tr>
+            <tr class="table-light">
                 <th>رقم القسم</th>
                 <th>الاسم</th>
                 <th>الملاحظات</th>
@@ -60,7 +60,7 @@
                 {
                     "data": "Id",
                     "render": function (data) {
-                        return "<a href='/Harag/Admin/Category/AddHaragCategory?id="+data+"' class='btn btn-default'>تعديل</a> ";
+                        return "<a href='/Harag/Admin/Category/AddHaragCategory?id=" + data + "' class='btn btn-default'>تعديل</a>" + " " + "<a href='/Harag/Admin/Category/HaragCategoryPosts?categoryId=" + data +"' class='btn btn-default'>الاعلانات</a> ";
 
                     }
 

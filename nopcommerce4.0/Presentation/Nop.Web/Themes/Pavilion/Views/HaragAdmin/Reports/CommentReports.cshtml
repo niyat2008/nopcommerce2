@@ -10,17 +10,56 @@
 <div class="page-title">بلاغات التعليقات</div>
 
 
-<div class="table-responsive">
-    <table id="reports" class="table table-bordered table-hover">
-        <thead>
-            <tr class="table-active">
-               
-                <th>العنوان</th>
-                
-                
-                <th>النوع</th>
-               
 
+
+
+
+<!-- Button trigger modal -->
+@*<button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModal">
+    التعليق
+</button>*@
+
+<!-- Modal -->
+<div id="comment-modal">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="modalBody" class="modal-body">
+                    <div class="form-group">
+                        <textarea id="rateComment" class="form-control" cols="60" rows="7"></textarea>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<div class="table-responsive">
+    <table id="reports" class="table table-bordered table-striped  table-condensed table-hover  table-light" cellspacing="5">
+        <thead>
+            <tr class="table-light">
+
+                @*<th>العنوان</th>*@
+
+
+                <th>النوع</th>
+
+                <th>----</th>
 
             </tr>
         </thead>
@@ -48,7 +87,7 @@
 
             "columns": [
 
-                { "data": "ReportTitle", "name": "ReportTitle" },
+                //{ "data": "ReportTitle", "name": "ReportTitle" },
                 //{ "data": "ReportDescription", "name": "ReportDescription", "width": "10%" },
                 
                
@@ -60,7 +99,17 @@
 
                     }
                 },
-                
+                {
+                    "data": "CommentId",
+                    "render": function (data) {
+                        return "<button  id='commentModel' data-comment-id=" + data+" class='btn btn-default' data-toggle='modal' data-target='#exampleModal'>التعليق</button >"
+    
+
+
+
+                    }
+
+                }
                 //{
                 //    "data": "Id", "width": "25%",
                 //    "render": function (data, type, post) {
@@ -92,5 +141,22 @@
 
 
         });
+
+        $("#reports").on("click","#commentModel", function (e) {
+            var button = $(this);
+            e.preventDefault();
+            $.ajax({
+                url: "/Harag/Admin/Comment/HaragComment?commentId=" + button.attr("data-comment-id") + "",
+                type: "get",
+                dataType:"json",
+                success: function (data) {
+                    $("#rateComment").val(data.data.Text);
+                    console.log("data " + data.data.Text);
+                }
+
+            });
+
+        });
+
     });
  </script>

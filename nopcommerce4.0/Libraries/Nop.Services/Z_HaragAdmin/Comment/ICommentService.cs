@@ -13,5 +13,7 @@ namespace Nop.Services.Z_HaragAdmin.Comment
         List<Z_Harag_Comment> GetPostComments(int postId);
         //Comment Reports
         List<Z_Harag_CommentReport> GetCommentReports(int commentId);
+        //Get Comment By Id
+        Z_Harag_Comment GetComment(int commentId);
     }
 }

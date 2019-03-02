@@ -17,8 +17,10 @@ namespace Nop.Web.Models.HaragAdmin.Customers
         public string Mobile { get; set; }
          
         public string CustomerRole { get; set; }
-      
-       
-       
+
+        public bool Blocked { get; set; }
+
+
+
     }
 }

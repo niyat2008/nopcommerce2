@@ -15,6 +15,6 @@ namespace Nop.Services.Z_HaragAdmin.BlackList
         //Get All Customer in BlackList
         List<Z_Harag_BlackList> GetBlackListCustomers();
         //Delete Blackk List Customer
-        void DeleteBlackListCustomer(int id);
+        void DeleteBlackListCustomer(int id, int blackId);
     }
 }

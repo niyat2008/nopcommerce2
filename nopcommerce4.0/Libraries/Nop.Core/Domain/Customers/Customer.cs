@@ -159,6 +159,7 @@ namespace Nop.Core.Domain.Customers
         ///  Gets or sets the store identifier in which customer registered
         /// </summary>
         public int RegisteredInStoreId { get; set; }
+        public bool Blocked { get; set; }
 
         #region Navigation properties
 

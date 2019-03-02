@@ -81,11 +81,11 @@ namespace Nop.Web.Controllers.HaragAdmin
 
         //DElete BlackList Customer
         [HttpDelete]
-        public IActionResult DeleteBlackListCustomer(int id=0)
+        public IActionResult DeleteBlackListCustomer(int id=0,int blackId=0)
         {
-            if (id == 0)
+            if (id == 0 || blackId==0)
                 return NotFound();
-            _blackListService.DeleteBlackListCustomer(id);
+            _blackListService.DeleteBlackListCustomer(id,blackId);
 
             return Json(new { result = true });
 
