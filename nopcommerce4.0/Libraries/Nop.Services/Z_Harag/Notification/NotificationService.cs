@@ -21,9 +21,12 @@ namespace Nop.Services.Z_Harag.Notification
         private readonly IEventPublisher _eventPublisher;
         private readonly IHostingEnvironment _env;
 
-        public NotificationService(IRepository<Z_Harag_Notification> notificationService, IEventPublisher eventPublisher, IHostingEnvironment env)
+        public NotificationService(IRepository<Z_Harag_Notification> notificationService,
+            IRepository<Z_Harag_Follow> _followRepository,
+        IEventPublisher eventPublisher, IHostingEnvironment env)
         {
             this._notificationService = notificationService;
+            this._followRepository = _followRepository;
             this._eventPublisher = eventPublisher;
             this._env = env;
         }
@@ -86,7 +89,7 @@ namespace Nop.Services.Z_Harag.Notification
 
             return list;
         }
-
+         
         public bool PushPostCommentNotification(Comment.CommentForNotifyModel notifyModel)
         {
             var postFollowers = this.GetPostFollowNotification(notifyModel.PostId);
@@ -97,30 +100,48 @@ namespace Nop.Services.Z_Harag.Notification
                 {
                     NotificationType = (int)NotificationType.Comment,
                     OwnerId = item,
-                    NotificationTime = notifyModel.CommentTime,
-                    PostId = notifyModel.PostId,
-                    CustomerId = notifyModel.CommentId
-                });
-            }
-            return true;
-        }
-
-        public bool PushUserCommentNotification(Comment.UserForNotifyModel notifyModel)
-        {
-            var postFollowers = this.GetUsersFollowNotification(notifyModel.PostId);
-
-            foreach (var item in postFollowers)
-            {
-                this.AddCommentNotification(new Z_Harag_Notification
-                {
-                    NotificationType = (int)NotificationType.User,
-                    OwnerId = notifyModel.OwnerId,
-                    NotificationTime = notifyModel.CommentTime,
+                    NotificationTime = notifyModel.Time,
                     PostId = notifyModel.PostId,
                     CustomerId = notifyModel.CustomerId
                 });
             }
             return true;
-        } 
+        }
+
+        public bool PushUserPostsNotification(Comment.UserForNotifyModel notifyModel)
+        {
+            var postFollowers = this.GetUsersFollowNotification(notifyModel.CustomerId);
+
+            foreach (var item in postFollowers)
+            {
+                this.AddCommentNotification(new Z_Harag_Notification
+                {
+                    NotificationType = (int)NotificationType.Post,
+                    OwnerId = item,
+                    NotificationTime = notifyModel.Time,
+                    PostId = notifyModel.PostId,
+                    CustomerId = notifyModel.CustomerId
+                });
+            }
+            return true;
+        }
+
+        public int GetUnSeenNotificationCount(int id)
+        {
+            return _notificationService.TableNoTracking.Where(m => m.OwnerId == id && m.IsRead == false).ToList().Count;
+        }
+
+        public bool SetUserNotificationsSeen(int id)
+        {
+            var nots =  _notificationService.Table.Where(m => m.OwnerId == id && m.IsRead == false).ToList();
+
+            foreach (var item in nots)
+            {
+                item.IsRead = true;
+                _notificationService.Update(item);
+            }
+
+            return true;
+        }
     }
 }

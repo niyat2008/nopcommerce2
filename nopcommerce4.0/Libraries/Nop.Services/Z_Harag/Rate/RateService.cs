@@ -33,5 +33,13 @@ namespace Nop.Services.Z_Harag.Rate
         {
             return _rateService.TableNoTracking.Where(m => m.UserId == userId).ToList();
         }
+        public List<Z_Harag_Rate> GetUserUpRates(int userId)
+        {
+            return _rateService.TableNoTracking.Where(m => m.UserId == userId && m.AdviceDeal == true).ToList();
+        }
+        public List<Z_Harag_Rate> GetUserDownRates(int userId)
+        {
+            return _rateService.TableNoTracking.Where(m => m.UserId == userId && m.AdviceDeal == false).ToList();
+        }
     }
 }

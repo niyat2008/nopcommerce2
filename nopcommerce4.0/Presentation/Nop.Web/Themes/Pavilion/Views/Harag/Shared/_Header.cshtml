@@ -25,6 +25,9 @@
                 padding: 9px;
                 font-weight: bold;
             }
+        .badge-danger {
+            background-color: red !important;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Tajawal" rel="stylesheet">
@@ -83,7 +86,12 @@
         <a href="/Harag/Follow">المتابعه </a>
     </span>
     <span>
-        <a href="/Harag/Notifications">الاشعارات </a>
+        <a href="/Harag/Notifications">   
+            <span id="notification-count-js" class="badge badge-danger"></span>
+            الاشعارات      
+
+        
+        </a>
     </span>
     <span>
         <a href="/Harag/Messages">الرسائل </a>
@@ -252,12 +260,20 @@
             }
         });
 
-        $.ajax({
+         $.ajax({
             type: 'GET',
             url: '@Url.RouteUrl("Consultant.User.GetUserRoles")',
 
             success: function (data) {
                 $("#threebuttons").html(data);
+            }
+        });
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Notification.NotificationsCount")',
+
+            success: function (data) {
+                $("#notification-count-js").html(data);
             }
         });
 

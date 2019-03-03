@@ -242,6 +242,14 @@ namespace Nop.Web.Infrastructure
             ///
             /// Harag Notification
             ///
+            routeBuilder.MapRoute("Harag.Follow.Notifications", "Harag/Notifications",
+         new { controller = "Notification", action = "Notifications" });
+
+            routeBuilder.MapRoute("Harag.Notification.NotificationsCount", "Harag/Notifications/Unseen",
+   new { controller = "Notification", action = "NotificationsCount" });
+
+
+
 
 
             // ------------------------ Consultant ------------------------- 

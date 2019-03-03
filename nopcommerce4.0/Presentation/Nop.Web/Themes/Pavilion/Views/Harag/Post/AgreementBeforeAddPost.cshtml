@@ -27,10 +27,35 @@
                 </form>
 
                 <div> 
-                    <a class="btn btn-default add" href="@Url.RouteUrl("Harag.Post.AddNewPost")">استمرار</a> 
+                    <a class="btn btn-default add" id="agreement-js" >استمرار</a> 
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+
+
+<script type="text/javascript">
+
+    $("#agreement-js").click(function (event) {
+
+        var agreementItems = $(".commission > input");
+        var agreed = false;
+
+        for (var i = 0; i < agreementItems.length; i++) {
+            if (agreementItems[i].checked == false) {
+                agreed = false;
+            } else {
+                agreed = true;
+            }
+        }
+        if (!agreed) {
+            alert("لابد من الموافقه علي جميع الشروط");
+            return false;
+        } else {
+            window.location = '@Url.RouteUrl("Harag.Post.AddNewPost")';
+        }
+    
+    });
+</script>

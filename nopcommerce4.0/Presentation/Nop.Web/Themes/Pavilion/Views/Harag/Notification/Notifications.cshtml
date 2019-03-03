@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Nop.Services.Z_Harag.Notification
+@model Nop.Web.Models.Harag.Notification.NotificationListModel
+
+@{ 
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
 }
 
@@ -7,25 +10,55 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12 cont">
-                <div class="feat-adv-blck">
-                    <h3><i class="fa fa-star"></i> الإعلانات المميزة "المثبتة" </h3>
-                    <p>هي خدمة تتيح للتاجر تثبيت إعلانه في القسم ليظهر بشكل مميز ممايؤدي الى زيادة المبيعات. </p>
-                    <p>هي خدمة تتيح للتاجر تثبيت إعلانه في القسم ليظهر بشكل مميز ممايؤدي الى زيادة المبيعات. </p>
-                </div>
-                <div class="feat-adv-blck">
-                    <h3><i class="fa fa-star"></i> الإعلانات المميزة "المثبتة" </h3>
-                    <p>هي خدمة تتيح للتاجر تثبيت إعلانه في القسم ليظهر بشكل مميز ممايؤدي الى زيادة المبيعات. </p>
-                </div>
-                <div class="feat-adv-blck">
-                    <h3><i class="fa fa-star"></i> الإعلانات المميزة "المثبتة" </h3>
-                    <p>هي خدمة تتيح للتاجر تثبيت إعلانه في القسم ليظهر بشكل مميز ممايؤدي الى زيادة المبيعات. </p>
-                </div>
-                <div class="feat-adv-blck">
-                    <h3><i class="fa fa-star"></i> الإعلانات المميزة "المثبتة" </h3>
-                    <p>هي خدمة تتيح للتاجر تثبيت إعلانه في القسم ليظهر بشكل مميز ممايؤدي الى زيادة المبيعات. </p>
-                </div>
+            <h3>الاشعارات</h3>
+            <div class="col-md-3 cont"></div>
+            <div class="col-md-9 cont">
+                @foreach (var n in Model.Notifications)
+                {
+                    if (n.Type == NotificationType.OwnnerComment)
+                    {
+                        <div class=" ">
+                            <h3 dir="rtl">
+                                <a href="/Harag/User/@n.Username">@n.CustomerName</a>  تم التعليق علي اعلانك بواسطه  <a href="#">@n.PostTitle</a> @n.DateDescription  :
+                            </h3>
+                        </div>
+                    }
+                    else if (n.Type == NotificationType.Comment)
+                    {
+                        <div class=" ">
+                            <h3>
+                                <strong>@n.DateDescription :</strong>  تم التعليق علي: <a class="text-danger" href="/Harag/Post/@n.PostId">@n.PostTitle</a> بواسطه   <a href="/Harag/User/@n.Username">  <strong> @n.CustomerName</strong> </a>
+                            </h3>
+                        </div>
+                    }
+                    else if (n.Type == NotificationType.Post)
+                    {
+                        <div class="feat- adv-blck">
+                            <h3>
+                                <strong>@n.DateDescription :</strong>  تم نشر اعلان  <a class="text-danger" href="/Harag/Post/@n.PostId">@n.PostTitle</a>  بواسطه <a href="/Harag/User/@n.Username"> @n.CustomerName </a>
+                            </h3>
+                        </div>
+                    }
+                    else if (n.Type == NotificationType.UpdatePost)
+                    {
+                        <div class="feat- adv-blck">
+                            <h3 >
+                                ملاحظه: قم بتحديث اعلانك<a class="text-danger" href="/Harag/Post/@n.PostId"> @n.PostTitle</a> قبل @n.Time.ToLongDateString()
+                            </h3>
+                        </div>
+                    }
+                    else if (n.Type == NotificationType.Note)
+                    {
+                        <div class="feat- adv-blck">
+                            <h3 class="text-danger">
+                                @n.DateDescription: @n.Note
+                            </h3>
+                        </div>
+
+                    }
+                }
+
             </div>
-        </div>
+            </div>
     </div>
 </div>

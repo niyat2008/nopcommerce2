@@ -11,5 +11,6 @@ namespace Nop.Services.Z_Harag.Payment
     { 
         Z_Harag_BankPayment AddNewPaymentDetails(Z_Harag_BankPayment payment);
         List<Z_Harag_BankAccount> GetBaknAccountsDetails();
+        List<Z_Harag_BankPayment> GetUserPayments(int id);
     }
 }
