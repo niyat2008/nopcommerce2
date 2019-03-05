@@ -30,71 +30,6 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-3">
-                <div class="disTable advBox">
-                    <div class="choices choices2 disTable">
-
-                    </div>
-                    @if (Model.RelatedPosts.Count > 0)
-                    {
-                    <div class="adv-images">
-                        <h4>ذات صله بـ @Model.CategoryName</h4>
-                        @foreach (var image in Model.RelatedPosts)
-                        {
-                            if (!String.IsNullOrEmpty(image.Photo))
-                            {
-                                <div style="width:160px; display:inline;">
-                                    <a href="/Harag/Post/@image.Id">
-                                        <img src="~/HaragApi/Uploads/Images/@image.Photo" style="width:150px;height:150px;" />
-                                    </a>
-                                </div>
-                            }
-
-                        }
-                    </div>
-                    }
-                    
-                </div>
-                @if (Model.SameCityPosts.Count > 0)
-                {
-                <div class="disTable advBox">
-                    <h4>اعلانات  يمدينه  @Model.CityName</h4>
-                    <div class="adv-images">
-
-                        @foreach (var image in Model.SameCityPosts)
-                        {
-                            if (!String.IsNullOrEmpty(image.Photo))
-                            {
-                                <div style="width:160px; display:inline;">
-                                    <a href="/Harag/Post/@image.Id">
-                                        <img src="~/HaragApi/Uploads/Images/@image.Photo" style="width:150px;height:150px;" />
-                                    </a>
-                                </div>
-                            }
-                        }
-                    </div>
-                </div>
-                }
-                
-                @*<div class="disTable advBox">
-            <div class="choices choices2 disTable">
-
-            </div>
-            <div class="adv-images">
-                @foreach (var item in Model.Files)
-                {
-                    @foreach (var image in Model.Files)
-                    {
-                        <div style="width:160px; display:inline;">
-                            <a href="~/HaragApi/Uploads/Images/@image" data-lightbox="image2-@Model.Id" data-title="My caption">
-                                <img src="~/HaragApi/Uploads/Images/@image" alt="Single Image" style="width:150px;height:150px;" />
-                            </a>
-                        </div>
-                    }
-                }
-            </div>
-        </div>*@
-            </div>
             <div class="col-sm-9">
                 <div class="cont det-block">
                     <div class="det-top">
@@ -107,19 +42,20 @@
                             <a href="/Harag/City/@Model.CityName"><span><i class="fa fa-map-marker"></i> @Model.CityName </span></a>
                             <a href="/Harag/Cat/@Model.CategoryId"><span><i class="fa fa-address-book"></i> @Model.CategoryName </span></a>
                             <a href="/Harag/user/@Model.PostOwner"><span><i class="fa fa-user"></i> @Model.PostOwnerFullName </span></a>
+                            <a><span> رقم الاعلان:  @Model.Id </span></a>
                         </div>
                     </div>
                     <div class="det-bottom">
                         <p>@Model.Text</p>
                         @foreach (var image in Model.Files)
-                        { 
-                        <div class="row">
-                            <a href="~/HaragApi/Uploads/Images/@image" data-lightbox="image-1@Model.Id" data-title="My caption">
-                                <img src="~/HaragApi/Uploads/Images/@image" alt="Single Image" />
-                            </a>
-                        </div>
-                              
-                              
+                        {
+                            <div class="row">
+                                <a href="~/HaragApi/Uploads/Images/@image" data-lightbox="image-1@Model.Id" data-title="My caption">
+                                    <img src="~/HaragApi/Uploads/Images/@image" alt="Single Image" />
+                                </a>
+                            </div>
+
+
                         }
                         <br />
                         <div class="row">
@@ -162,7 +98,7 @@
                     </div>
 
                 </div>
-                
+
                 <div>
                     <div class="col-xs-12">
                         <div class="alert alert-warning" role="alert">إحذر من التعامل غير المباشر.  استخدم <a href="@Url.RouteUrl("Harag.User.CheckBlackList")"><strong> القائمة السوداء </strong></a> قبل أى تحويل </div>
@@ -201,6 +137,72 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-3">
+                <div class="disTable advBox">
+                    <div class="choices choices2 disTable">
+
+                    </div>
+                    @if (Model.RelatedPosts.Count > 0)
+                    {
+                        <div class="adv-images">
+                            <h4>ذات صله بـ @Model.CategoryName</h4>
+                            @foreach (var image in Model.RelatedPosts)
+                            {
+                                if (!String.IsNullOrEmpty(image.Photo))
+                                {
+                                    <div style="width:160px; display:inline;">
+                                        <a href="/Harag/Post/@image.Id">
+                                            <img src="~/HaragApi/Uploads/Images/@image.Photo" style="width:150px;height:150px;" />
+                                        </a>
+                                    </div>
+                                }
+
+                            }
+                        </div>
+                    }
+
+                </div>
+                @if (Model.SameCityPosts.Count > 0)
+                {
+                    <div class="disTable advBox">
+                        <h4>اعلانات  يمدينه  @Model.CityName</h4>
+                        <div class="adv-images">
+
+                            @foreach (var image in Model.SameCityPosts)
+                            {
+                                if (!String.IsNullOrEmpty(image.Photo))
+                                {
+                                    <div style="width:160px; display:inline;">
+                                        <a href="/Harag/Post/@image.Id">
+                                            <img src="~/HaragApi/Uploads/Images/@image.Photo" style="width:150px;height:150px;" />
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+
+                @*<div class="disTable advBox">
+                <div class="choices choices2 disTable">
+
+                </div>
+                <div class="adv-images">
+                    @foreach (var item in Model.Files)
+                    {
+                        @foreach (var image in Model.Files)
+                        {
+                            <div style="width:160px; display:inline;">
+                                <a href="~/HaragApi/Uploads/Images/@image" data-lightbox="image2-@Model.Id" data-title="My caption">
+                                    <img src="~/HaragApi/Uploads/Images/@image" alt="Single Image" style="width:150px;height:150px;" />
+                                </a>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>*@
+            </div>
+
         </div>
     </div>
 </div>

@@ -34,7 +34,7 @@ namespace Nop.Web.Controllers.Harag
         private readonly IFollowService _followService; 
         private readonly IHostingEnvironment _env;
         private readonly ICommentService _commentService;
-
+        public PagingParams PagingParams { get; set; }
         #endregion 
 
         #region ctor
@@ -57,6 +57,8 @@ namespace Nop.Web.Controllers.Harag
             this._notificationService = _notificationService;
             this._env = env;
             this._commentService = commentService;
+
+            PagingParams = new PagingParams();
         }
         #endregion
          
@@ -438,8 +440,8 @@ namespace Nop.Web.Controllers.Harag
             if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
             {
                 var post = this._postService.GetPost(PostId, "");
-                var relatedPosts = _postService.SearchByCategory(post.CategoryId, 8);
-                var sameCityPosts = _postService.SearchByCity((int)post.CityId, 8);
+                var relatedPosts = _postService.SearchByCategory(post.CategoryId, PagingParams);
+                var sameCityPosts = _postService.SearchByCity((int)post.CityId, PagingParams);
 
                 if (post != null)
                 {
@@ -492,6 +494,7 @@ namespace Nop.Web.Controllers.Harag
 
             return View("~/Themes/Pavilion/Views/Harag/Post/PostDetails.cshtml", model);
         }
+ 
 
         [HttpGet]
         public IActionResult GetHaragNavbar()
@@ -511,15 +514,63 @@ namespace Nop.Web.Controllers.Harag
         }
 
         [HttpGet]
-        public IActionResult GetAllFeaturedPosts()
+        public IActionResult GetAllFeaturedPosts(int postId)
         {
-            return null;
+            var posts = _postService.SearchByCategoryPage(postId, PagingParams);
+
+            var modelOutput = new Models.Harag.Post.PostOutputModel();
+
+            modelOutput.Items = posts.Select(p => new Models.Harag.Post.PostModel
+            {
+                CategoryId = p.CategoryId,
+                CategoryName = p.Category.Name,
+                Text = p.Text,
+                Id = p.Id,
+                Title = p.Title,
+                City = p.City.ArName,
+                DateCreated = p.DateCreated,
+                Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
+                // Rate = p.Rate,
+                DateUpdated = p.DateUpdated,
+                IsDispayed = p.IsDispayed,
+                PostOwner = p.Customer.Username,
+                PostOwnerFullName = p.Customer.GetFullName()
+            }).ToList();
+
+            return View("~/Themes/Pavilion/Views/Harag/Post/RelatedPosts.cshtml", modelOutput);
         }
+
+        [HttpGet]
+        public IActionResult GetLeatestPosts()
+        {
+            var posts = _postService.GetLatestPosts(PagingParams);
+
+            var modelOutput = new Models.Harag.Post.PostOutputModel();
+
+            modelOutput.Items = posts.Select(p => new Models.Harag.Post.PostModel
+            {
+                CategoryId = p.CategoryId,
+                CategoryName = p.Category.Name,
+                Text = p.Text,
+                Id = p.Id,
+                Title = p.Title,
+                City = p.City.ArName,
+                DateCreated = p.DateCreated,
+                Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(), 
+                DateUpdated = p.DateUpdated,
+                IsDispayed = p.IsDispayed,
+                PostOwner = p.Customer.Username,
+                PostOwnerFullName = p.Customer.GetFullName()
+            }).ToList();
+
+            return View("~/Themes/Pavilion/Views/Harag/Post/PostsAjax.cshtml", modelOutput);
+        }
+
 
         [HttpGet]
         public IActionResult GetAllHaragPostsAjax()
         {
-            var posts = _postService.GetFeaturedPosts();
+            var posts = _postService.GetFeaturedPosts(PagingParams);
 
             var modelOutput = new Models.Harag.Post.PostOutputModel();
 
@@ -548,7 +599,7 @@ namespace Nop.Web.Controllers.Harag
         public IActionResult GetUserPostsByUserId(int userId)
         {
 
-            var posts = _postService.GetCurrentUserPosts(userId);
+            var posts = _postService.GetCurrentUserPosts(userId, PagingParams);
 
             var modelOutput = new Models.Harag.Post.PostOutputModel();
 
@@ -583,7 +634,7 @@ namespace Nop.Web.Controllers.Harag
             if (cityO == null)
                 return NotFound();
 
-            var posts = _postService.SearchByCity(cityO.Id);
+            var posts = _postService.SearchByCity(cityO.Id, PagingParams);
 
             var modelOutput = new Models.Harag.Post.PostOutputModel();
 
@@ -613,7 +664,7 @@ namespace Nop.Web.Controllers.Harag
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return RedirectToRoute("Login", new { returnUrl = "Harag" });
 
-            var posts = _postService.SearchByCategory(catId);
+            var posts = _postService.SearchByCategory(catId, PagingParams);
 
             var modelOutput = new Models.Harag.Post.PostOutputModel();
 
@@ -646,7 +697,7 @@ namespace Nop.Web.Controllers.Harag
 
             var user = _workContext.CurrentCustomer;
 
-            var posts = _postService.GetFavoritesPosts(user.Id);
+            var posts = _postService.GetFavoritesPosts(user.Id, PagingParams);
 
             var modelOutput = new Models.Harag.Post.PostOutputModel();
 
@@ -677,7 +728,7 @@ namespace Nop.Web.Controllers.Harag
                 return RedirectToRoute("Login", new { returnUrl = "Harag" });
 
 
-            var posts = _postService.GetCurrentUserPosts(_workContext.CurrentCustomer.Id);
+            var posts = _postService.GetCurrentUserPosts(_workContext.CurrentCustomer.Id, PagingParams);
 
             var modelOutput = new Models.Harag.Post.PostOutputModel();
 
@@ -708,7 +759,7 @@ namespace Nop.Web.Controllers.Harag
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return RedirectToRoute("Login", new { returnUrl = "Harag" });
 
-            var posts = _postService.GetFeaturedPosts();
+            var posts = _postService.GetFeaturedPosts(PagingParams);
 
             var modelOutput = new Models.Harag.Post.PostOutputModel();
 
@@ -1799,7 +1850,7 @@ namespace Nop.Web.Controllers.Harag
         {
             SearchModel SearchModel = new SearchModel() { Term = Term };
 
-            var model = _postService.SearchPosts(SearchModel);
+            var model = _postService.SearchPosts(SearchModel, PagingParams);
              
             var outputModel = new PostOutputModel
             {  
@@ -1830,7 +1881,7 @@ namespace Nop.Web.Controllers.Harag
         public IActionResult HaragSearchCatCity(int Cat, int City)
         {
   
-            var model = _postService.SearchPostsCatCity(Cat, City);
+            var model = _postService.SearchPostsCatCity(Cat, City, PagingParams);
 
             var outputModel = new PostOutputModel
             {

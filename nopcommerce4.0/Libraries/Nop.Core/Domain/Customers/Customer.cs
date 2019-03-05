@@ -34,7 +34,8 @@ namespace Nop.Core.Domain.Customers
            
             this.Z_Harag_CommentReport = new HashSet<Z_Harag_CommentReport>();
             this.Z_Harag_Favorite = new HashSet<Z_Harag_Favorite>();
-            this.Z_Harag_Message = new HashSet<Z_Harag_Message>();
+            this.PostsMessages = new HashSet<Z_Harag_Message>();
+            this.UserMessages = new HashSet<Z_Harag_Message>();
             this.Z_Harag_Notification = new HashSet<Z_Harag_Notification>();
             this.Z_Harag_User_Rate = new HashSet<Z_Harag_Rate>();
             this.Z_Harag_Rate = new HashSet<Z_Harag_Rate>();
@@ -208,7 +209,7 @@ namespace Nop.Core.Domain.Customers
         /// <summary>
         /// Default shipping address
         /// </summary>
-        public virtual Address ShippingAddress { get; set; }
+        public virtual Address ShippingAddress { get; set; } 
 
 
         public ICollection<Z_Consultant_Comment> CustomersComments { get; set; }
@@ -230,7 +231,8 @@ namespace Nop.Core.Domain.Customers
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Z_Harag_Favorite> Z_Harag_Favorite { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Z_Harag_Message> Z_Harag_Message { get; set; }
+        public virtual ICollection<Z_Harag_Message> PostsMessages { get; set; }
+        public virtual ICollection<Z_Harag_Message> UserMessages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Z_Harag_Notification> Z_Harag_Notification { get; set; }
         //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

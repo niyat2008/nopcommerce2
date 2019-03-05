@@ -30,7 +30,11 @@ else
                     </a>
                     <a href="/Harag/User/@post.PostOwner">
                         <span><i class="fa fa-user"></i> @post.PostOwnerFullName </span>
-                    </a></div>
+                    </a>               
+                    <a><span> رقم الاعلان:  @post.Id </span></a>
+
+                </div>
+
             </div>
             <div class="det-img">
                 @if (!String.IsNullOrEmpty(post.Photo))
