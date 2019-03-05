@@ -12,78 +12,111 @@
 <div class="page-title">الاعدادات</div>
 
 
-   <form id="settingsForm">
+    <form id="settingsForm" style="font-family:'Cairo',sans-serif;">
 
-    <div class="form-group">
-        <label class="form-lbl"> مدة تثبيت الاعلان </label>
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.DeletePost,new {@class= "form-control delete-settings detailsTextBox" })
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-lbl"> مدة تثبيت الاعلان </label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.DeletePost, new { @class = "form-control delete-settings detailsTextBox" })
 
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="form-lbl"> ارسال تنبيه بتحديث الاعلان بعد</label>
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.UpdatePostAfter, new { @class = "form-control notify-settings detailsTextBox" })
+                    </div>
+                </div>
 
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="form-lbl"> لا يمكن تحديث الاعلان قبل</label>
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.UpdatePostBefor, new { @class = "form-control updateBefor-settings detailsTextBox" })
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-lbl"> ارسال تنبيه بتحديث الاعلان بعد</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.UpdatePostAfter, new { @class = "form-control notify-settings detailsTextBox" })
 
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="form-lbl"> عدد مرات العمولة لتقييم عضو اخر</label>
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.RateCommissionNumber, new { @class = "form-control rateCommissionNum detailsTextBox" })
+                    </div>
+                </div>
 
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="form-lbl"> مجموع العمولة لتقييم عضو اخر</label>
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.RateCommissionSum, new { @class = "form-control rateCommissionSum detailsTextBox" })
+            </div>
 
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="form-lbl"> عدد مرات العمولة لرتبة العضو المميز</label>
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.RateCommissionNumber, new { @class = "form-control featuredCommissionNum detailsTextBox" })
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-lbl"> لا يمكن تحديث الاعلان قبل</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.UpdatePostBefor, new { @class = "form-control updateBefor-settings detailsTextBox" })
 
-        </div>
-    </div>
+                    </div>
+                </div>
 
-    <div class="form-group">
-        <label class="form-lbl"> مجموع العمولة لرتبة العضو المميز</label>
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.FeaturedMemberCommissionSum, new { @class = "form-control featuredCommissionSum detailsTextBox" })
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-lbl"> عدد مرات العمولة لتقييم عضو اخر</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.RateCommissionNumber, new { @class = "form-control rateCommissionNum detailsTextBox" })
+
+                    </div>
+                </div>
+
+            </div>
 
         </div>
-    </div>
-       <div class="form-group">
-           <label class="form-lbl"> معاهدة استخدام الموقع</label>
-           <div class="col-md-10">
-              @*<textarea id="compact" class="detailsTextBox"></textarea>*@
-               @Html.TextAreaFor(m => m.UseWebsiteCompact, new { @id= "compact", @class = "detailsTextBox" })
-           </div>
-       </div>
-       <div class="form-group">
-           <label class="form-lbl"> السلع الممنوعة</label>
-           <div class="col-md-10">
-               @*<textarea id="compact" class="detailsTextBox"></textarea>*@
-               @Html.TextAreaFor(m => m.NotAllowedProducts, new { @id = "NotAllowed", @class = "detailsTextBox" })
-           </div>
-       </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-lbl"> مجموع العمولة لتقييم عضو اخر</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.RateCommissionSum, new { @class = "form-control rateCommissionSum detailsTextBox" })
 
-      
-      
-    <input type="submit" class="btn btn-success" value="تحديث" />
+                    </div>
+                </div>
 
-</form>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-lbl"> عدد مرات العمولة لرتبة العضو المميز</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.RateCommissionNumber, new { @class = "form-control featuredCommissionNum detailsTextBox" })
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-lbl"> مجموع العمولة لرتبة العضو المميز</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.FeaturedMemberCommissionSum, new { @class = "form-control featuredCommissionSum detailsTextBox" })
+
+                    </div>
+                </div>
+
+            </div>
+
+          
+
+        </div>
+
+
+        <div class="form-group">
+            <label class="form-lbl"> معاهدة استخدام الموقع</label>
+            <div class="col-md-10">
+                @*<textarea id="compact" class="detailsTextBox"></textarea>*@
+                @Html.TextAreaFor(m => m.UseWebsiteCompact, new { @id= "compact", @class = "detailsTextBox" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-lbl"> السلع الممنوعة</label>
+            <div class="col-md-10">
+                @*<textarea id="compact" class="detailsTextBox"></textarea>*@
+                @Html.TextAreaFor(m => m.NotAllowedProducts, new { @id = "NotAllowed", @class = "detailsTextBox" })
+            </div>
+        </div>
+
+
+
+        <input type="submit" class="btn btn-success" value="تحديث" />
+
+    </form>
 
 
 
@@ -159,3 +192,65 @@
 
     });
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="form-group">
+    <label class="form-lbl"> مدة تثبيت الاعلان </label>
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.DeletePost, new { @class = "form-control delete-settings detailsTextBox" })
+
+    </div>
+</div>
+<div class="form-group">
+    <label class="form-lbl"> ارسال تنبيه بتحديث الاعلان بعد</label>
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.UpdatePostAfter, new { @class = "form-control notify-settings detailsTextBox" })
+
+    </div>
+</div>
+<div class="form-group">
+    <label class="form-lbl"> لا يمكن تحديث الاعلان قبل</label>
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.UpdatePostBefor, new { @class = "form-control updateBefor-settings detailsTextBox" })
+
+    </div>
+</div>
+<div class="form-group">
+    <label class="form-lbl"> عدد مرات العمولة لتقييم عضو اخر</label>
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.RateCommissionNumber, new { @class = "form-control rateCommissionNum detailsTextBox" })
+
+    </div>
+</div>
+<div class="form-group">
+    <label class="form-lbl"> مجموع العمولة لتقييم عضو اخر</label>
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.RateCommissionSum, new { @class = "form-control rateCommissionSum detailsTextBox" })
+
+    </div>
+</div>
+<div class="form-group">
+    <label class="form-lbl"> عدد مرات العمولة لرتبة العضو المميز</label>
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.RateCommissionNumber, new { @class = "form-control featuredCommissionNum detailsTextBox" })
+
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="form-lbl"> مجموع العمولة لرتبة العضو المميز</label>
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.FeaturedMemberCommissionSum, new { @class = "form-control featuredCommissionSum detailsTextBox" })
+
+    </div>
+</div>*@

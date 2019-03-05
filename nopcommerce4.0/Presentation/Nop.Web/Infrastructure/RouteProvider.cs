@@ -248,6 +248,23 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapRoute("Consultant.Post.GetAllClosedPostsAjax", "Consultations/GetAllClosedPostsAjax",
             new { controller = "Post", action = "GetAllClosedPostsAjax" });
 
+
+            //Notifications
+            routeBuilder.MapRoute("Consultant.Notifications.GetAllNotification","Consultant/Notifications",
+
+            new { controller = "Notification", action = "GetNotifications" });
+
+            //UnRaed Notifications
+            routeBuilder.MapRoute("Consultant.Notifications.UnReadNotification", "Consultant/UnReadNotifications",
+
+            new { controller = "Notification", action = "GetUnReadNotifications" });
+
+
+            //update notification
+            routeBuilder.MapRoute("Consultant.Notifications.updateNotification", "Consultant/UpdateNotifications",
+
+           new { controller = "Notification", action = "UpdateNotification" });
+
             ///
             /*
              * Ali Edits on Consultant
@@ -739,6 +756,12 @@ new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
             routeBuilder.MapRoute("Harag.Admin.GetAllBank", "Harag/Admin/GetAllBank", new { controller = "BankAccount", action = "GetBankAccounts" });
             //Get All Bank Accounts Ajax
             routeBuilder.MapRoute("Harag.Admin.GetAllBankAjax", "Harag/Admin/GetAllBankAjax", new { controller = "BankAccount", action = "GetBankAccountsAjax" });
+
+            //Get Payments
+            routeBuilder.MapRoute("Harag.Admin.GetAllBankPayments", "Harag/Admin/GetAllBankPayments", new { controller = "BankAccount", action = "GetPayments" });
+
+            //Get Payments Ajax
+            routeBuilder.MapRoute("Harag.Admin.GetAllBankPaymentsAjax", "Harag/Admin/GetAllBankPaymentsAjax", new { controller = "BankAccount", action = "GetPaymentsAjax" });
 
             ////Post Messages
 

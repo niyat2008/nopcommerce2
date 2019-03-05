@@ -23,5 +23,7 @@ namespace Nop.Services.Z_Consultant.Comment
         bool IsConsultantAuthToComment(int CommentId, int ConsultantId);
         bool IsExist(int CommentId);
         bool IsCommentPostClosed(int CommentId);
+        // Get Comments By PostId
+        //List<Z_Consultant_Comment> GetcommentsByPOstId(int postId);
     }
 }

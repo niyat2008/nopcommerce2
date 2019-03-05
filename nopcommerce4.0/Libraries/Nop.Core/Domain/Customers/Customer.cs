@@ -44,6 +44,8 @@ namespace Nop.Core.Domain.Customers
             this.HaragFollowingUsers = new HashSet<Z_Harag_Follow>();
             this.HaragFollowedUsers = new HashSet<Z_Harag_Follow>();
             this.HaragCustomerNotification = new HashSet<Z_Harag_Notification>();
+            this.OwnerNotification = new Collection<Z_Consultant_Notification>();
+            this.UserNotification = new Collection<Z_Consultant_Notification>();
 
         }
 
@@ -240,6 +242,8 @@ namespace Nop.Core.Domain.Customers
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Z_Harag_Reports> Z_Harag_Reports { get; set; }
         public  ICollection<Z_Harag_Post> Z_Harag_Posts { get; set; }
+        public ICollection<Z_Consultant_Notification> OwnerNotification { get; set; }
+        public ICollection<Z_Consultant_Notification> UserNotification { get; set; }
 
 
         /// <summary>

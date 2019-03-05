@@ -42,7 +42,7 @@ namespace Nop.Services.Z_HaragAdmin.Comment
         //Get Comment By Id
         public Z_Harag_Comment GetComment(int commentId)
         {
-            var comment = _commentRepository.TableNoTracking.Include(p=>p.Z_Harag_Post).FirstOrDefault(c => c.Id == commentId);
+            var comment = _commentRepository.TableNoTracking.Include(p=>p.Z_Harag_Post).Include(c=>c.Customer).FirstOrDefault(c => c.Id == commentId);
 
             return comment;
         }

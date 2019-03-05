@@ -932,6 +932,34 @@ namespace Nop.Services.Z_Consultant.Post
                 query, pagingParams.PageNumber, pagingParams.PageSize,false);
         }
 
+        //Get Post By Id
+        public Z_Consultant_Post GetPostById(int postId)
+        {
+            if(postId !=0)
+            {
+                var post = _postRepository.TableNoTracking.Include(p => p.Customer).Include(p=>p.Consultant).FirstOrDefault(p=>p.Id==postId);
+
+                return post;
+
+               
+            }
+            return null;
+        }
+
+        ////Get Reserved Post By Id
+        //public Z_Consultant_Post GetReservedPostById(int postId)
+        //{
+        //    if (postId != 0)
+        //    {
+        //        var post = _postRepository.TableNoTracking.Include(p => p.Customer).Include(p=>p.Consultant).FirstOrDefault(p=>p.IsReserved==true);
+
+        //        return post;
+
+
+        //    }
+        //    return null;
+        //}
+
         public bool ClosePost(ClosePostModel closePostDto, int customerId)
         {
             var atLeastSingleChange = false;

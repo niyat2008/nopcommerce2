@@ -471,8 +471,8 @@ namespace Nop.Web.Controllers.HaragAdmin
                 Text = commentInDb.Text,
                 CommentedBy = commentInDb.CommentedBy,
                 CommentOwner = commentInDb.Customer?.Username,
-                DateCreated = commentInDb.DateCreated,
-                DateUpdated = commentInDb.DateUpdated == null ? commentInDb.DateCreated : commentInDb.DateUpdated
+                DateCreated = commentInDb.DateCreated.Date,
+                DateUpdated = commentInDb.DateUpdated == null ? commentInDb.DateCreated.Date : commentInDb.DateUpdated.Date
             };
 
             return Json(new { data = model });

@@ -64,6 +64,7 @@ namespace Nop.Services.Z_Consultant.Post
         void SetPostAnsweredByConsultant(int postId, int consultantId);
 
         PagedList<Z_Consultant_Post> SearchPosts(PagingParams pagingParams, SearchModel searchModel);
+        Z_Consultant_Post GetPostById(int postId);
 
         //admin
 
@@ -88,5 +89,9 @@ namespace Nop.Services.Z_Consultant.Post
 
         List<City> GetCities();
         List<Neighborhood> GetCityNeighborhood(int cityId);
+
+
+        //Get Reserved Post By Id
+         //Z_Consultant_Post GetReservedPostById(int postId);
     }
 }

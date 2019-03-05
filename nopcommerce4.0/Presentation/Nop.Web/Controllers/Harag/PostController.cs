@@ -16,6 +16,7 @@ using Nop.Web.Models.Harag.Category;
 using Nop.Web.Models.Harag.Post;
 using Nop.Web.Models.Harag.Report;
 using PostOutputModel = Nop.Web.Models.Harag.Post.PostOutputModel;
+using Nop.Services.Z_ConsultantAdmin.Customers;
 
 namespace Nop.Web.Controllers.Harag
 {
@@ -29,6 +30,7 @@ namespace Nop.Web.Controllers.Harag
         private readonly Core.IWorkContext _workContext;
         private readonly IHostingEnvironment _env;
         private readonly ICommentService _commentService;
+        //private readonly ICustomerService _consultantService;
 
         #endregion 
 
@@ -40,6 +42,7 @@ namespace Nop.Web.Controllers.Harag
             Core.IWorkContext workContext,
             IHostingEnvironment env,
             ICommentService commentService
+            //ICustomerService consultantService
             )
         {
             this._categoryService = categoryService;
@@ -48,6 +51,7 @@ namespace Nop.Web.Controllers.Harag
             this._workContext = workContext;
             this._env = env;
             this._commentService = commentService;
+            //this._consultantService = consultantService;
         }
         #endregion
          
@@ -303,6 +307,19 @@ namespace Nop.Web.Controllers.Harag
                 return BadRequest(err.ToString());
             }
 
+            //var consultants = _consultantService.GetConsultants();
+
+            //var postNotification = new PostNotification
+            //{
+            //    PostId = post.Id,
+            //    NotificationDate = DateTime.Now,
+            //    IsRead = false
+            //};
+
+            //foreach (var con in consultants)
+            //{
+            //    postNotification.ConsultantId.Add(con.Id);
+            //}
 
 
 

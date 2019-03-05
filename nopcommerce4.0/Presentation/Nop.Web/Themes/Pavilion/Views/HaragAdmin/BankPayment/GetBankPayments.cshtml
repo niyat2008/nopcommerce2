@@ -1,4 +1,4 @@
-﻿@model Nop.Web.Models.HaragAdmin.BankAccount.BankAccountModel
+﻿@*@model Nop.Web.Models.HaragAdmin.BankAccount.BankAccountModel*@
 
 @{
     Layout = "~/Themes/Pavilion/Views/HaragAdmin/Shared/_Layout.cshtml";
@@ -6,18 +6,20 @@
 
 @Html.Partial("~/Themes/Pavilion/Views/HaragAdmin/Shared/_DataTable.cshtml")
 
-<div class="page-title">الحساب البنكى</div>
+<div class="page-title">الدفع</div>
 
-@*_SearchSection.cshtml*@
+
 <div class="table-responsive">
-    <table id="bankAccounts" class="table table-bordered table-striped  table-condensed table-hover  table-light" cellspacing="5">
+    <table id="bankPayment" class="table table-bordered table-striped  table-condensed table-hover  table-light" cellspacing="5">
         <thead>
             <tr class="table-light">
-                <th>رقم </th>
-                <th>الاسم</th>
-                <th>الرقم</th>
+                
+                <th>البنك</th>
                 <th>الحساب</th>
-
+                <th>اسم المستخدم</th>
+                <th> الدافع</th>
+                <th> العمولة </th>
+                <th> الملاحظات</th>
                 <th>عمليات</th>
 
 
@@ -31,7 +33,7 @@
         $(document).ready(function () {
 
 
-            var dataTable = $("#bankAccounts").DataTable({
+            var dataTable = $("#bankPayment").DataTable({
                 "serverSide":"true",
                 "responsive": "true",
                 "processing":"true",
@@ -39,7 +41,7 @@
                 "order": [[3, "des"]],
                 "ajax": {
 
-                    "url":"/Harag/Admin/GetAllBankAjax",
+                    "url":"/Harag/Admin/GetAllBankPaymentsAjax",
                     "dataType": "json",
 
                     "type":"post"
@@ -48,15 +50,16 @@
                 "columns": [
 
 
-                    { "data": "Id","name":"Id","width":"10%"},
                     { "data": "BankName","width":"10%"},
-                    { "data": "IBANNumber","width":"35%"},
-                    { "data": "AccountNo"},
-                    
+                    { "data": "BankAccount","width":"15%"},
+                    { "data": "UserName","width":"13%"},
+                    { "data": "TransatctorUser", "width": "13%"},
+                    { "data": "SiteAmount" },
+                    { "data": "Notes" },
                     {
-                        "data": "Id","width":"25%",
-                        "render": function (data,type,account) {
-                            return "<button class='btn btn-danger' id='delete' data-post-id=" + account.Id + " ><i class='fa fa-trash' ></i>حذف</button>" ;
+                        "data": "PostId","width":"10%",
+                        "render": function (data) {
+                            return "<a href='/Harag/Admin/Post/HaragPostsDetails?postId=" + data +"' class='btn btn-xs btn-hover btn-small'   >الاعلان</a>" ;
 
                         }
 
@@ -85,14 +88,14 @@
 
             });
 
-           
 
 
 
 
 
 
-            $("#bankAccounts").on("click", "#delete", function () {
+
+            $("#bankPayment").on("click", "#delete", function () {
                 var button = $(this);
                 swal({
                     title: "هل انت متاكد؟",
@@ -136,6 +139,6 @@
         });
 
 
-         
+
 
 </script>

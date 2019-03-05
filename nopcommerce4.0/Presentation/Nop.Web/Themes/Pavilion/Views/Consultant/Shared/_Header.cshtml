@@ -51,6 +51,21 @@
     .btndarckgreen:hover {
         background-color: darkgreen !important;
     }
+    .consult:hover {
+        color: #4da74d !important;
+    }
+    .consult .cart-label:hover, .consult .cart-qty:hover {
+        color: #4da74d;
+    }
+    #flyout-cart:hover {
+        color: #4da74d !important;
+    } 
+    #flyout-cart a:hover {
+        color: #4da74d !important;
+    } 
+    .badge {
+        background-color: red !important;
+    }
 </style>
 
 
@@ -99,11 +114,22 @@
                     <button onclick="filterWithText()" style="height:44px;" class="btndarckgreen">
                         <i class="fa fa-search"></i>
                     </button>
+                   
+
                 </div>
             </div>
-
+            <div class="col-md-3 consult " style="padding-top:25px;">
+                <div class="flyout-cart-wrapper" id="flyout-cart">
+                    <a href="/Consultant/Notifications" >
+                        <span class="cart-qty badge NotificationNum"></span>
+                        <span class="cart-label ">الاشعارات</span>
+                    </a>
+                   
+                </div>
+            </div>
         </div>
     </div>
+   
 </section>
 
 <!--<!-- Nav -->
@@ -212,6 +238,18 @@
 <script>
 
     $(document).ready(function () {
+
+
+        $.ajax({
+            url: "/Consultant/UnReadNotifications",
+            type: "get",
+            success: function (data) {
+                console.log("data " + data.query);
+                $(".NotificationNum").html(data.query);
+
+            }
+
+        });
 
         $.ajax({
             type: 'GET',

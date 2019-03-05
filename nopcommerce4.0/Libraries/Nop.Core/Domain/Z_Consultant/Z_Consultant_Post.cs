@@ -17,6 +17,7 @@ namespace Nop.Core.Domain.Z_Consultant
             Comments = new Collection<Z_Consultant_Comment>();
             Photos = new Collection<Z_Consultant_Photo>();
             Videos = new Collection<Z_Consultant_Video>();
+            Notification = new Collection<Z_Consultant_Notification>();
         }
 
 
@@ -67,6 +68,7 @@ namespace Nop.Core.Domain.Z_Consultant
         public Z_Consultant_Category Category { get; set; }
 
         public virtual ICollection<Z_Consultant_Comment> Comments { get; set; }
+        public ICollection<Z_Consultant_Notification> Notification { get; set; }
 
     }
 }

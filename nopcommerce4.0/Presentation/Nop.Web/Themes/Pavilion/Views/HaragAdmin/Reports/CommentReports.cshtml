@@ -20,25 +20,34 @@
 </button>*@
 
 <!-- Modal -->
-<div id="comment-modal">
+<div id="comment-modal" style="font-family:'Cairo', sans-serif;" >
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">تعليق</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div id="modalBody" class="modal-body">
                     <div class="form-group">
-                        <textarea id="rateComment" class="form-control" cols="60" rows="7"></textarea>
+                        <textarea id="rateComment" class="form-control" cols="60" rows="5"></textarea>
 
+                    </div>
+                    <div id="commentOwner" class="form-group">
+                      
+                    </div>
+                    <div id="comment-date" class="form-group">
+                        
+                    </div>
+                    <div id="post-id" class="form-group">
+                       
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+                   
                 </div>
             </div>
         </div>
@@ -151,7 +160,9 @@
                 dataType:"json",
                 success: function (data) {
                     $("#rateComment").val(data.data.Text);
-                    console.log("data " + data.data.Text);
+                    $("#commentOwner").append($("<span>تم التعليق بواسطة : </span><span>" + data.data.CommentOwner + "</span>"));
+                    $("#comment-date").append($("<span>تاريخ الانشاء : </span><span >" + data.data.DateCreated+"</span>"));
+                    $("#post-id").append($("<a  href='/Harag/Admin/Post/HaragPostsDetails?postId=" + data.data.PostId + "'>الذهاب للاعلان</a>"));
                 }
 
             });

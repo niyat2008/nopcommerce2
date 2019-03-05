@@ -23,6 +23,8 @@ namespace Nop.Services.Z_ConsultantAdmin.Customers
 
         //Get Consultants
         List<Customer> GetConsultants(int start, int length, string searchValue, string sortColumnName, string sortDirection);
+        //Get Consultants for Notifications
+         List<Customer> GetConsultants();
 
         //Get Consultant Details
         Customer GetConsultantDetails(int id);

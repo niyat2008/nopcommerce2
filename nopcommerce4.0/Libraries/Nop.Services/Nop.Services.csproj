@@ -38,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Z_Harag\NewFolder\" />
     <Folder Include="Z_Harag\User\" />
   </ItemGroup>
 
