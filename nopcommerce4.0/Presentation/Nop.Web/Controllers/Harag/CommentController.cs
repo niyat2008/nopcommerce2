@@ -128,8 +128,7 @@ namespace Nop.Web.Controllers.Harag
             {
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
-
-
+                 
                 List<string> errors = new List<string>();
                 var commentCreated = _commentService.AddComment(model, currentUserId);
                 var post = _postService.GetPost(model.PostId, "");
@@ -141,8 +140,13 @@ namespace Nop.Web.Controllers.Harag
                         CustomerId = currentUserId,
                         Text = commentCreated.Text,
                         PostId = model.PostId,
-                        Time = DateTime.Now
+                        Time = DateTime.Now,
+                        PostOwner = post.CustomerId
                     });
+                }
+                else
+                {
+
                 }
                  
                 string userName = _workContext.CurrentCustomer.Username;

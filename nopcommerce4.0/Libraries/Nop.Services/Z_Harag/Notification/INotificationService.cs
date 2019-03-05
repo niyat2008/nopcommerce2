@@ -20,5 +20,9 @@ namespace Nop.Services.Z_Harag.Notification
         bool PushUserPostsNotification(Comment.UserForNotifyModel notifyModel);
         int GetUnSeenNotificationCount(int id);
         bool SetUserNotificationsSeen(int id);
+        bool PushRateNotification(int id, bool adviceDeal);
+        bool PushSiteToUserNotification(SiteToUserNotificationModel notificationModel);
+        bool PushSiteToAllUserNotification(SiteToUserNotificationModel notificationModel);
+
     }
 }

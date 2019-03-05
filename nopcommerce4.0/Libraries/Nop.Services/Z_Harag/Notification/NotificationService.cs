@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Nop.Core.Data;
 using Nop.Core.Domain.Z_Harag;
+using Nop.Services.Customers;
 using Nop.Services.Events;
 using Nop.Services.Z_Harag.Follow;
+using Nop.Services.Z_Harag.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -16,6 +18,7 @@ namespace Nop.Services.Z_Harag.Notification
     {
         private readonly IRepository<Z_Harag_Notification> _notificationService;
         private readonly IRepository<Z_Harag_Post> _postRepository;
+        private readonly ICustomerService _userRepository; 
         private readonly IRepository<Z_Harag_Follow> _followRepository; 
 
         private readonly IEventPublisher _eventPublisher;
@@ -96,14 +99,28 @@ namespace Nop.Services.Z_Harag.Notification
 
             foreach (var item in postFollowers)
             {
-                this.AddCommentNotification(new Z_Harag_Notification
+               if(item == notifyModel.PostOwner)
                 {
-                    NotificationType = (int)NotificationType.Comment,
-                    OwnerId = item,
-                    NotificationTime = notifyModel.Time,
-                    PostId = notifyModel.PostId,
-                    CustomerId = notifyModel.CustomerId
-                });
+                    this.AddCommentNotification(new Z_Harag_Notification
+                    {
+                        NotificationType = (int)NotificationType.PostOwnnerComment,
+                        OwnerId = item,
+                        NotificationTime = notifyModel.Time,
+                        PostId = notifyModel.PostId,
+                        CustomerId = notifyModel.CustomerId
+                    });
+                }
+                else
+                {
+                    this.AddCommentNotification(new Z_Harag_Notification
+                    {
+                        NotificationType = (int)NotificationType.Comment,
+                        OwnerId = item,
+                        NotificationTime = notifyModel.Time,
+                        PostId = notifyModel.PostId,
+                        CustomerId = notifyModel.CustomerId
+                    });
+                }
             }
             return true;
         }
@@ -141,6 +158,78 @@ namespace Nop.Services.Z_Harag.Notification
                 _notificationService.Update(item);
             }
 
+            return true;
+        }
+
+        public bool PushRateNotification(int id, bool adviceDeal)
+        {
+            this.AddCommentNotification(new Z_Harag_Notification
+            {
+                NotificationType = (int)NotificationType.Rate,
+                OwnerId = id,
+                NotificationTime = DateTime.Now,
+                PostId = 1,
+                NotificationContent = adviceDeal.ToString(),
+                CustomerId =1
+            });
+
+            return true;
+        }
+
+        public bool PushRateNotification(UserPostCommentModel postCommentModel)
+        {
+            this.AddCommentNotification(new Z_Harag_Notification
+            {
+                NotificationType = (int)NotificationType.PostOwnnerComment,
+                OwnerId = postCommentModel.UserId,
+                NotificationTime = DateTime.Now,
+                PostId = postCommentModel.PostId, 
+                CustomerId = postCommentModel.CustomerId
+            });
+
+            return true;
+        }
+
+        public bool PushSiteToUserNotification(SiteToUserNotificationModel notificationModel)
+        {
+            var notification = new Z_Harag_Notification
+            {
+                NotificationType = (int)NotificationType.General,
+                OwnerId = notificationModel.UserId,
+                NotificationTime = DateTime.Now, 
+                CustomerId = notificationModel.AdminId
+            };
+
+            try
+            {
+                this.AddGeneralNotification(notification);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        public bool PushSiteToAllUserNotification(SiteToUserNotificationModel notificationModel)
+        {
+            // registered users
+            var users = _userRepository.GetAllCustomers(customerRoleIds: new int [3]);
+
+            foreach (var user in users)
+            {
+
+                var notification = new Z_Harag_Notification
+                {
+                    NotificationType = (int)NotificationType.General,
+                    OwnerId = user.Id,
+                    NotificationTime = DateTime.Now,
+                    NotificationContent = notificationModel.Content,
+                    CustomerId = notificationModel.AdminId
+                }; 
+                this.AddGeneralNotification(notification);
+                     
+            }
             return true;
         }
     }

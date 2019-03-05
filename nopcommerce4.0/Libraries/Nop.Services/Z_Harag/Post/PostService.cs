@@ -335,7 +335,7 @@ namespace Nop.Services.Z_Harag.Post
             return null;
         }
 
-        public List<Z_Harag_Post> GetFeaturedPosts()
+        public List<Z_Harag_Post> GetFeaturedPosts(PagingParams pagingParams)
         { 
                 return _postRepository.TableNoTracking
                 .Include(m => m.Category)
@@ -343,8 +343,9 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                    .Where(p => p.IsDispayed == true).OrderBy(r => r.DateCreated).ToList();
-            
+                    .Where(p => p.IsDispayed == true).OrderBy(r => r.DateCreated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+            .Take(pagingParams.PageSize).ToList();
+
         }
 
         public List<City> GetCities()
@@ -380,7 +381,7 @@ namespace Nop.Services.Z_Harag.Post
             return true;
         }
 
-        public List<Z_Harag_Post> SearchByCategory(int catId)
+        public List<Z_Harag_Post> SearchByCategory(int catId, PagingParams pagingParams)
         {
             var query = _postRepository.TableNoTracking
                 .Include(m => m.Category)
@@ -388,12 +389,13 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                .Where(c => c.CategoryId == catId).ToList();
+                .Where(c => c.CategoryId == catId).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+            .Take(pagingParams.PageSize).ToList();
 
             return query;
         }
 
-        public List<Z_Harag_Post> SearchByCity(int catId)
+        public List<Z_Harag_Post> SearchByCity(int catId, PagingParams pagingParams)
         {
             var query = _postRepository.TableNoTracking
                 .Include(m => m.Category)
@@ -401,12 +403,13 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                .Where(c => c.CityId == catId).ToList();
+                .Where(c => c.CityId == catId).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+            .Take(pagingParams.PageSize).ToList();
 
             return query;
         }
 
-        public List<Z_Harag_Post> SearchByDate(DateTime date)
+        public List<Z_Harag_Post> SearchByDate(DateTime date, PagingParams pagingParams)
         {
             var query = _postRepository.TableNoTracking
                 .Include(m => m.Category)
@@ -414,12 +417,14 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                 .Where(c => c.DateCreated == date).ToList();
+                 .Where(c => c.DateCreated.Day == date.Day)
+                 .Skip(pagingParams.PageNumber * pagingParams.PageSize)
+            .Take(pagingParams.PageSize).ToList();
 
             return query;
         }
 
-        public List<Z_Harag_Post> SearchByNeighborhood(int id)
+        public List<Z_Harag_Post> SearchByNeighborhood(int id, PagingParams pagingParams)
         {
             var query = _postRepository.TableNoTracking
                 .Include(m => m.Category)
@@ -427,12 +432,13 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                .Where(c => c.NeighborhoodId == id).ToList();
+                .Where(c => c.NeighborhoodId == id).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+            .Take(pagingParams.PageSize).ToList();
 
             return query;
         }
 
-        public List<Z_Harag_Post> GetUserPosts(int userId)
+        public List<Z_Harag_Post> GetUserPosts(int userId, PagingParams pagingParams)
         {
             var query = _postRepository.TableNoTracking
                 .Include(m => m.Category)
@@ -440,12 +446,13 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                 .Where(c => c.CustomerId == userId).ToList();
+                 .Where(c => c.CustomerId == userId).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+            .Take(pagingParams.PageSize).ToList();
 
             return query;
         }
 
-        public List<Z_Harag_Post> GetCurrentUserPosts(int userId)
+        public List<Z_Harag_Post> GetCurrentUserPosts(int userId, PagingParams pagingParams)
         {
             var query = _postRepository.TableNoTracking
                 .Include(m=> m.Category)
@@ -453,7 +460,9 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                .Where(c => c.CustomerId == userId).ToList();
+                .Where(c => c.CustomerId == userId)
+                  .Skip(pagingParams.PageNumber * pagingParams.PageSize)
+            .Take(pagingParams.PageSize).ToList();
 
             return query;
         }
@@ -573,9 +582,11 @@ namespace Nop.Services.Z_Harag.Post
             return cityEn;
         }
           
-        List<Z_Harag_Post> IPostService.GetFavoritesPosts(int id)
+        List<Z_Harag_Post> IPostService.GetFavoritesPosts(int id, PagingParams pagingParams)
         {
-            var posts = _favRepository.Table.Include(m => m.Customer).Include(m => m.Z_Harag_Post).Where(m => m.CustomerId == id).ToList();
+            var posts = _favRepository.Table.Include(m => m.Customer).Include(m => m.Z_Harag_Post).Where(m => m.CustomerId == id)
+                  .Skip(pagingParams.PageNumber * pagingParams.PageSize)
+            .Take(pagingParams.PageSize).ToList();
 
             List<Z_Harag_Post> postsFav = new List<Z_Harag_Post>();
 
@@ -593,20 +604,8 @@ namespace Nop.Services.Z_Harag.Post
             return postsFav;
 
         }
-
-        public List<Z_Harag_Post> SearchByCategory(int catId, int count)
-        {
-            var query = _postRepository.TableNoTracking
-              .Include(m => m.Category)
-              .Include(m => m.Customer)
-              .Include(m => m.City)
-              .Include(m => m.Z_Harag_Photo)
-              .Include(m => m.Z_Harag_Comment) .Take(count).ToList();
-
-            return query;
-        }
-
-        public List<Z_Harag_Post> SearchByCity(int catId, int count)
+  
+        public List<Z_Harag_Post> SearchByCategoryPage(int catId, PagingParams pagingParams)
         {
             var query = _postRepository.TableNoTracking
               .Include(m => m.Category)
@@ -614,25 +613,14 @@ namespace Nop.Services.Z_Harag.Post
               .Include(m => m.City)
               .Include(m => m.Z_Harag_Photo)
               .Include(m => m.Z_Harag_Comment)
-              .Where(c => c.CityId == catId) .Take(count).ToList();
+              .Where(c => c.CategoryId == catId)
+                         .Skip(pagingParams.PageNumber * pagingParams.PageSize)
+            .Take(pagingParams.PageSize).ToList();
 
             return query;
         }
 
-        public List<Z_Harag_Post> SearchByCategoryPage(int catId, int page)
-        {
-            var query = _postRepository.TableNoTracking
-              .Include(m => m.Category)
-              .Include(m => m.Customer)
-              .Include(m => m.City)
-              .Include(m => m.Z_Harag_Photo)
-              .Include(m => m.Z_Harag_Comment)
-              .Where(c => c.CategoryId == catId).Skip(page * 10).Take(10).ToList();
-
-            return query;
-        }
-
-        public List<Z_Harag_Post> SearchByCityPage(int catId,  int page)
+        public List<Z_Harag_Post> SearchByCityPage(int catId,  PagingParams pagingParams)
         {
             var query = _postRepository.TableNoTracking
               .Include(m => m.Category)
@@ -641,11 +629,12 @@ namespace Nop.Services.Z_Harag.Post
               .Include(m => m.Z_Harag_Photo)
               .Include(m => m.Z_Harag_Comment)
               .Where(c => c.CityId == catId)
-              .Skip(page * 10).Take(10).ToList();
+           .Skip(pagingParams.PageNumber * pagingParams.PageSize)
+            .Take(pagingParams.PageSize).ToList();
 
             return query;
         }
-        public List<Z_Harag_Post> SearchPosts(SearchModel searchModel)
+        public List<Z_Harag_Post> SearchPosts(SearchModel searchModel, PagingParams pagingParams)
         {
             var query = _postRepository.TableNoTracking
               .Include(m => m.Category)
@@ -656,12 +645,14 @@ namespace Nop.Services.Z_Harag.Post
               .Where(c => c.Text.Contains(searchModel.Term) 
               || c.Title.Contains(searchModel.Term) 
               || c.City.ArName.Contains(searchModel.Term) 
-              || c.Category.Name.Contains(searchModel.Term) ).ToList();
+              || c.Category.Name.Contains(searchModel.Term))
+              .Skip(pagingParams.PageNumber * pagingParams.PageSize)
+            .Take(pagingParams.PageSize).ToList();
 
             return query;
         }
 
-        public List<Z_Harag_Post> SearchPostsCatCity(int cat, int city)
+        public List<Z_Harag_Post> SearchPostsCatCity(int cat, int city, PagingParams pagingParams)
         {
             var query = _postRepository.TableNoTracking
             .Include(m => m.Category)
@@ -670,9 +661,23 @@ namespace Nop.Services.Z_Harag.Post
             .Include(m => m.Z_Harag_Photo)
             .Include(m => m.Z_Harag_Comment)
             .Where(c => c.CityId == city
-            && c.CategoryId == cat).ToList();
+            && c.CategoryId == cat)
+            .Skip(pagingParams.PageNumber * pagingParams.PageSize)
+            .Take(pagingParams.PageSize).ToList();
 
             return query;
+        }
+
+        public List<Z_Harag_Post> GetLatestPosts(PagingParams pagingParams)
+        {
+            return _postRepository.TableNoTracking
+               .Include(m => m.Category)
+               .Include(m => m.Customer)
+               .Include(m => m.City)
+               .Include(m => m.Z_Harag_Photo)
+               .Include(m => m.Z_Harag_Comment).OrderByDescending(r => r.DateCreated)
+               .Skip(pagingParams.PageNumber* pagingParams.PageSize)
+               .Take(pagingParams.PageSize).ToList();
         }
         #endregion
     }

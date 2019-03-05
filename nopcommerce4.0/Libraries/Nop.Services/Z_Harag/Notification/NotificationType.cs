@@ -9,6 +9,7 @@
         Note = 5,
         Comment = 6,
         UpdatePost = 7,
-        OwnnerComment = 8
+        PostOwnnerComment = 8,
+        Rate = 9
     }
 }

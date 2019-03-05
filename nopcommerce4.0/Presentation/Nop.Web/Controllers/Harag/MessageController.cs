@@ -126,11 +126,10 @@ namespace Nop.Web.Controllers.Harag
 
             var model = messages.Select(m => new MessageThreadsModel
             {
-                LastMessageText = m.Message,
-                Id = (int)m.Id,
-                SenderName = m.Customer.Username,
+                LastMessageText = m.Message, 
+                SenderName = m.SentFromName,
                 postId = (int)m.PostId,
-                title = m.Z_Harag_Post.Title, 
+                title = m.PostTitle, 
                 LastMessageTime = (DateTime)m.CreatedTime
             }).ToList();
 

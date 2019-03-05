@@ -16,23 +16,21 @@ namespace Nop.Services.Z_Harag.Post
         bool IsExists(int postId);
         bool IsDisplayed(int postId); 
         Z_Harag_Post AddNewPost(PostForPostListModel postForPostModel, int currentUserId, IList<string> files, List<string> errors);
-        List<Z_Harag_Post> GetFeaturedPosts();
+        List<Z_Harag_Post> GetFeaturedPosts( PagingParams pagingParams);
         // get Cities
         List<City> GetCities();
         List<Neighborhood> GetNeighborhoods(int cityId);
         // can add post
         bool CanAddNewPost(int userId);
         bool EditHaragPost(int postId, Z_Harag_Post post);
-        List<Z_Harag_Post> SearchByCategory(int catId);
-        List<Z_Harag_Post> SearchByCategory(int catId, int count);
-        List<Z_Harag_Post> SearchByCategoryPage(int catId, int count);
-        List<Z_Harag_Post> SearchByCity(int catId);
-        List<Z_Harag_Post> SearchByCity(int catId, int count); 
-        List<Z_Harag_Post> SearchByCityPage(int catId, int count);
-        List<Z_Harag_Post> SearchByDate(int catId);
-        List<Z_Harag_Post> SearchByNeighborhood(int catId);
-        List<Z_Harag_Post> GetUserPosts(int catId);
-        List<Z_Harag_Post> GetCurrentUserPosts(int catId);
+        List<Z_Harag_Post> SearchByCategory(int catId, PagingParams pagingParams); 
+        List<Z_Harag_Post> SearchByCategoryPage(int catId, PagingParams pagingParams);
+        List<Z_Harag_Post> SearchByCity(int catId, PagingParams pagingParams); 
+        List<Z_Harag_Post> SearchByCityPage(int catId, PagingParams pagingParams);
+        List<Z_Harag_Post> SearchByDate(DateTime date, PagingParams pagingParams);
+        List<Z_Harag_Post> SearchByNeighborhood(int catId, PagingParams pagingParams);
+        List<Z_Harag_Post> GetUserPosts(int catId, PagingParams pagingParams);
+        List<Z_Harag_Post> GetCurrentUserPosts(int catId, PagingParams pagingParams);
         bool UpdatePostLocation(int postId, Z_Harag_Post post);
         bool AddPostToFavorite(int postId, int userId);
         bool AddPostToBlackList(int postId, int userId);
@@ -41,10 +39,9 @@ namespace Nop.Services.Z_Harag.Post
         Z_Harag_Reports ReportPost(Z_Harag_Reports report);
         bool RemovePostFromFavorite(int postId, int id);
         City GetCity(string city);
-        List<Z_Harag_Post> GetFavoritesPosts(int id);
-        List<Z_Harag_Post> SearchPosts(SearchModel searchModel);
-         List<Z_Harag_Post> SearchPostsCatCity(int cat, int city);
-
-        
+        List<Z_Harag_Post> GetFavoritesPosts(int id, PagingParams pagingParams);
+        List<Z_Harag_Post> SearchPosts(SearchModel searchModel, PagingParams pagingParams);
+         List<Z_Harag_Post> SearchPostsCatCity(int cat, int city, PagingParams pagingParams);
+        List<Z_Harag_Post> GetLatestPosts(PagingParams pagingParams);
     }
 }

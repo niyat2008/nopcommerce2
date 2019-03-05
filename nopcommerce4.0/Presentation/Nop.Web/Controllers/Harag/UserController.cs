@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Nop.Core.Domain.Customers;
 using Nop.Services.Customers;
-using Nop.Services.Z_Consultant.Helpers;
+using Nop.Services.Z_Harag.Helpers;
 using Nop.Services.Z_Harag.BlackList;
 using Nop.Services.Z_Harag.Rate;
 using Nop.Services.Z_Harag.Post; 
@@ -17,6 +17,7 @@ using Nop.Web.Models.Harag.User;
 using Nop.Services.Z_Harag.Follow;
 using Nop.Services.Z_Harag.Payment;
 using Nop.Services.Z_HaragAdmin.Setting;
+using Nop.Services.Z_Harag.Notification;
 
 namespace Nop.Web.Controllers.Harag
 {
@@ -26,6 +27,7 @@ namespace Nop.Web.Controllers.Harag
         private readonly Core.IWorkContext _workContext;
         private readonly  ICustomerService _customerContext;
         private readonly IRateSrevice _rateRepository;
+        private readonly INotificationService _notificationService;
         private readonly IPaymentService _paymentRepository;
         private readonly ISettingService _settingRepository;
 
@@ -33,9 +35,12 @@ namespace Nop.Web.Controllers.Harag
         private readonly  IBlackListService _blackListService;
         private readonly  IPostService _postService;
 
+        public PagingParams PagingParams { get; set; }
+
         public UserController(Core.IWorkContext workContext,IRateSrevice _rateRepository, IFollowService _followRepository, IPaymentService _paymentRepository,
-             IBlackListService _blackListService, IPostService _postService,ICustomerService _customerContext, ISettingService _settingRepository)
+             IBlackListService _blackListService, IPostService _postService,ICustomerService _customerContext, ISettingService _settingRepository, INotificationService _notificationService)
         {
+            this._notificationService = _notificationService;
             this._paymentRepository = _paymentRepository;
             this._settingRepository = _settingRepository;
             this._followRepository = _followRepository;
@@ -46,6 +51,7 @@ namespace Nop.Web.Controllers.Harag
             this._blackListService = _blackListService;
 
             Settings = _settingRepository.GetSettings();
+            PagingParams = new PagingParams();
         }
 
         [HttpGet]
@@ -73,7 +79,7 @@ namespace Nop.Web.Controllers.Harag
             ViewBag.SameUser = true; 
             ViewBag.CanRateOtherUsers = false;
 
-            var posts = _postService.GetCurrentUserPosts(result.Id).Select(p => new PostModel
+            var posts = _postService.GetCurrentUserPosts(result.Id, PagingParams).Select(p => new PostModel
             {
                 CategoryId = p.CategoryId,
                 CategoryName = p.Category.Name,
@@ -138,7 +144,7 @@ namespace Nop.Web.Controllers.Harag
         public IActionResult RateUserView(string username)
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
-                return Redirect("Login");
+                return Redirect("/Login");
             var user = _customerContext.GetCustomerByUsername(username);
 
  
@@ -172,11 +178,11 @@ namespace Nop.Web.Controllers.Harag
         }
 
         [HttpPost]
-        public IActionResult RateUserAjax( RateModel model)
+        public IActionResult RateUserAjax(RateModel model)
         { 
 
             if (!_workContext.CurrentCustomer.IsRegistered())
-                return Redirect("Login");
+                return Redirect("/Login");
 
             if(!ModelState.IsValid)
                 return View("~/Themes/Pavilion/Views/Harag/Rate/RateUser.cshtml", model);
@@ -195,6 +201,7 @@ namespace Nop.Web.Controllers.Harag
             };
 
             var posts = _rateRepository.AddUserRate(rate);
+            var notification = _notificationService.PushRateNotification(_workContext.CurrentCustomer.Id,  model.AdviceDeal);
 
             ViewBag.Added = true;
 
@@ -247,7 +254,8 @@ namespace Nop.Web.Controllers.Harag
             ViewBag.SameUser = (result.Username == _workContext.CurrentCustomer.Username); 
             ViewBag.CanRateOtherUsers = this.CanRateOtherUsers();   
 
-            var posts = _postService.GetCurrentUserPosts(result.Id).Select(p => new PostModel
+            var posts = _postService.GetCurrentUserPosts(result.Id, PagingParams)
+                .Select(p => new PostModel
             {
                 CategoryId = p.CategoryId,
                 CategoryName = p.Category.Name,

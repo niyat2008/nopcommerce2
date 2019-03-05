@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Nop.Services.Z_Harag.Message
 {
-   public class MessageService:IMessageService
+    public class MessageService:IMessageService
     {
         private readonly IRepository<Z_Harag_Message> _messageRepository ;
         
@@ -25,10 +25,16 @@ namespace Nop.Services.Z_Harag.Message
             this._env = env;
         }
 
+        public Z_Harag_Message AddCommentMessage(CommentMessageModel messageModel)
+        {
+            throw new NotImplementedException();
+        }
+
         public Z_Harag_Message AddMessage(Z_Harag_Message message)
         {
             if (message == null)
                 return null; 
+
             _messageRepository.Insert(message);
             return message;
         }
@@ -68,17 +74,29 @@ namespace Nop.Services.Z_Harag.Message
             return query;
         }
 
-        public List<Z_Harag_Message> GetMessagesByUser(int userId)
+        public List<MessageThreadModel> GetMessagesByUser(int userId)
         {
             var query = _messageRepository.TableNoTracking
                 .Include(mbox => mbox.Customer) 
                 .Include(mbox => mbox.Z_Harag_Post)
-                .Where(m => m.CustomerId == userId)
-                
-                .Distinct()
+                .Where(m => m.CustomerId == userId) 
                 .OrderByDescending(m => m.CreatedTime)
+                .Select(m => m.PostId)
+                .Distinct()
                 .ToList();
-            return query;
+
+
+            var messagesthread = new List<MessageThreadModel>();
+            foreach (var post in query)
+            {
+                messagesthread.Add(new MessageThreadModel
+                {
+                    
+                });
+            }
+            return messagesthread;
         }
+
+      
     }
 }

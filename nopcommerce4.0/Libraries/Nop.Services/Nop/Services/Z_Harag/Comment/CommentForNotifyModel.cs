@@ -9,5 +9,6 @@ namespace Nop.Services.Z_Harag.Comment
         public DateTime Time { get; set; }
         public int PostId { get; set; } 
         public int OwnerId { get; set; }
+        public int PostOwner { get; set; }
     }
 }
