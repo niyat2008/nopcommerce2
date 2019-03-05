@@ -57,19 +57,82 @@ namespace Nop.Services.Z_Harag.Follow
         public List<Z_Harag_Follow> GetFollowedPosts(int userId)
         {
             var followList = _followService.TableNoTracking
-                .Include(m => m.User) 
-                .Include(m => m.Followed)
-                .Include(m => m.Post)
-                .Include(m => m.Category).Where(m => m.FollowType == (int)FollowType.Post 
+                .Include(m => m.User)  
+                .Include(m => m.Post) .Where(m => m.FollowType == (int)FollowType.Post 
             && m.UserId == userId).ToList();
+ 
             return followList;
         }
 
         public List<Z_Harag_Follow> GetFollowedUsers(int userId)
         {
-            var followList = _followService.TableNoTracking.Where(m => m.FollowType == (int)FollowType.User
+            var followList = _followService.TableNoTracking.Include(m => m.User)
+                .Include(m => m.Followed).Where(m => m.FollowType == (int)FollowType.User
             && m.UserId == userId).ToList();
             return followList;
+        }
+
+        public bool IsCatFollowed(int id, int uid)
+        {
+            var followList = _followService.TableNoTracking.Where(m => m.FollowType == (int)FollowType.Category
+             && m.CategoryId == id && m.UserId == uid).FirstOrDefault();
+             
+            return followList == null? false : true;
+        }
+
+        public bool IsPostFollowed(int id, int uid)
+        {
+            var followList = _followService.TableNoTracking.Where(m => m.FollowType == (int)FollowType.Post
+                && m.PostId == id && m.UserId == uid).FirstOrDefault();
+
+            return followList == null ? false : true;
+        }
+
+        public bool IsUserFollowed(int id, int uid)
+        {
+            var followList = _followService.TableNoTracking.Where(m => m.FollowType == (int)FollowType.User
+                && m.FollowedId == id && m.UserId == uid).FirstOrDefault();
+
+            return followList == null ? false : true;
+        }
+
+        public bool RemoveCategoryFromFollow(int catId, int userId)
+        {
+            var followList = _followService.Table.Where(m => m.FollowType == (int)FollowType.Category
+              && m.CategoryId == catId && m.UserId == userId).FirstOrDefault();
+
+            if (followList == null)
+                return false;
+
+            _followService.Delete(followList);
+
+            return  true;
+        }
+
+        public bool RemovePostFromFollow(int postId, int userId)
+        {
+            var followList = _followService.Table.Where(m => m.FollowType == (int)FollowType.Post
+                 && m.PostId == postId && m.UserId == userId).FirstOrDefault();
+
+            if (followList == null)
+                return false;
+
+            _followService.Delete(followList);
+
+            return true;
+        }
+
+        public bool RemoveUserFromFollow(int id, int userId)
+        {
+            var followList = _followService.Table.Where(m => m.FollowType == (int)FollowType.User
+               && m.FollowedId == id && m.UserId == userId).FirstOrDefault();
+
+            if (followList == null)
+                return false;
+
+            _followService.Delete(followList);
+
+            return true;
         }
     }
 }

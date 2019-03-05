@@ -17,12 +17,16 @@
     @*
         <link href="~/css/Consultant/Header.css" rel="stylesheet" />*@
     <style>
-        .top-user-menu{
+        .top-user-menu {
             padding: 20px;
         }
-        .top-user-menu > span {
-            padding: 9px;
-            font-weight: bold;
+
+            .top-user-menu > span {
+                padding: 9px;
+                font-weight: bold;
+            }
+        .badge-danger {
+            background-color: red !important;
         }
     </style>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
@@ -68,7 +72,7 @@
     </div>
 </section>
 
-<div class="text-center top-user-menu" style="background-color:#e8ebee;padding:0.3px;padding-top:6px;"> 
+<div class="text-center top-user-menu" style="background-color:#e8ebee;padding:0.3px;padding-top:6px;">
     <span>
         <a href="/Harag/Profile">الملف الشخصي</a>
     </span>
@@ -78,13 +82,21 @@
     <span>
         <a href="/Harag/Favorites">المفضله </a>
     </span>
-    @*<span>
-        <a href="/Harag/Notifications">الاشعارات </a>
-    </span>*@
+    <span>
+        <a href="/Harag/Follow">المتابعه </a>
+    </span>
+    <span>
+        <a href="/Harag/Notifications">   
+            <span id="notification-count-js" class="badge badge-danger"></span>
+            الاشعارات      
+
+        
+        </a>
+    </span>
     <span>
         <a href="/Harag/Messages">الرسائل </a>
     </span>
-</div> 
+</div>
 
 <!-- Search -->
 <section class="search">
@@ -100,7 +112,7 @@
                 <div class="form-group">
                     <input id="searchText" type="text" style="height:44px;"
                            class="form-control" placeholder="ابحث عن ...">
-                    <button id="search-js"  style="height:44px;" class="btndarckgreen">
+                    <button id="search-js" style="height:44px;" class="btndarckgreen">
                         <i class="fa fa-search"></i>
                     </button>
                 </div>
@@ -248,12 +260,20 @@
             }
         });
 
-        $.ajax({
+         $.ajax({
             type: 'GET',
             url: '@Url.RouteUrl("Consultant.User.GetUserRoles")',
 
             success: function (data) {
                 $("#threebuttons").html(data);
+            }
+        });
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Notification.NotificationsCount")',
+
+            success: function (data) {
+                $("#notification-count-js").html(data);
             }
         });
 

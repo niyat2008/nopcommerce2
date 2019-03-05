@@ -14,6 +14,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Nop.Core.Domain.Z_Harag;
+using Nop.Services.Z_Harag.Notification;
+using Nop.Web.Models.Harag.Notification;
 
 namespace Nop.Web.Controllers.Harag
 {
@@ -24,12 +26,15 @@ namespace Nop.Web.Controllers.Harag
         private readonly  IRateSrevice _rateRepository
             ;
         private readonly  IBlackListService _blackListService;
+        private readonly  INotificationService _notificationsService;
         private readonly  IPostService _postService;
 
         public NotificationController(Core.IWorkContext workContext,IRateSrevice _rateRepository,
+            INotificationService _notificationsService,
              IBlackListService _blackListService, IPostService _postService,ICustomerService _customerContext)
         {
             this._workContext = workContext;
+            this._notificationsService = _notificationsService;
             this._rateRepository = _rateRepository;
             this._customerContext = _customerContext;
             this._postService = _postService;
@@ -37,20 +42,43 @@ namespace Nop.Web.Controllers.Harag
         }
           
         [HttpGet]
-        public IActionResult PaymentBanks()
+        public IActionResult Notifications()
         {
-            //if (!_workContext.CurrentCustomer.IsRegistered())
-            //    return Redirect("Login");
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Redirect("/Login");
 
-            // var result = _workContext.CurrentCustomer;
-  
-            return View("~/Themes/Pavilion/Views/Harag/Payment/bankpayment.cshtml");
+            var currentUser = _workContext.CurrentCustomer;
+
+            var Notifications = _notificationsService.GetUserNotifications(currentUser.Id);
+            _notificationsService.SetUserNotificationsSeen(currentUser.Id);
+
+            var notificationsModels = Notifications.Select(m => new NotificationModel
+            {
+                CustomerId = (int)m?.Customer?.Id,
+                CustomerName = m?.Customer?.GetFullName(),
+                Type = (NotificationType)m.NotificationType,
+                Note = m.NotificationContent,
+                OwnerId = (int)m?.Owner?.Id,
+                OwnerName = m?.Owner?.GetFullName(),
+                PostId =  (int)m?.Z_Harag_Post?.Id,
+                PostTitle =  m?.Z_Harag_Post?.Title,
+                Time = (DateTime)m.NotificationTime,
+                Username = m?.Customer?.Username
+            }).ToList();
+
+            var outputModel = new NotificationListModel { Notifications = notificationsModels };
+
+            return View("~/Themes/Pavilion/Views/Harag/Notification/Notifications.cshtml", outputModel);
         }
 
         [HttpGet]
-        public IActionResult PaymentSadad()
-        { 
-            return View("~/Themes/Pavilion/Views/Harag/Payment/sadadpayment.cshtml"); 
+        public IActionResult NotificationsCount()
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Ok(0);
+
+            var count = _notificationsService.GetUnSeenNotificationCount(_workContext.CurrentCustomer.Id);
+            return Ok(count);
         }
 
    

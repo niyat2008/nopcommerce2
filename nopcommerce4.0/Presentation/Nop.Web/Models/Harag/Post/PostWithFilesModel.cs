@@ -13,7 +13,9 @@ namespace Nop.Web.Models.Harag.Post
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
         public bool IsClosed { get; set; }
+        public bool Following { get; set; }
         public int? Rate { get; set; }
+        public string PostOwnerFullName { get; set; }
         public bool IsAnswered { get; set; }
         public int SubCategoryId { get; set; }
         public bool IsDispayed { get; set; }
@@ -47,6 +49,8 @@ namespace Nop.Web.Models.Harag.Post
             set { }
         }
 
+        public bool IsPostOwner { get; set; }
+
         private string GetDateDescrition(DateTime dateCreated)
         {
             if (dateCreated == null)
@@ -54,14 +58,14 @@ namespace Nop.Web.Models.Harag.Post
 
             var diff = DateTime.Now - dateCreated;
 
-            double s = diff.Milliseconds/1000;
+            int s = diff.Milliseconds/1000;
 
            
-            double m = 0;
-            double h = 0;
-            double d = 0;
-            double mo = 0;
-            double y = 0;
+            int m = 0;
+            int h = 0;
+            int d = 0;
+            int mo = 0;
+            int y = 0;
 
             if ( s < 60)
             {

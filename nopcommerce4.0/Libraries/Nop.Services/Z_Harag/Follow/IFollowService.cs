@@ -16,6 +16,15 @@ namespace Nop.Services.Z_Harag.Follow
         // 
         Z_Harag_Follow AddPostToFollow(Z_Harag_Follow postId); 
         Z_Harag_Follow AddUserToFollow(Z_Harag_Follow userId); 
-        Z_Harag_Follow AddCategoryToFollow(Z_Harag_Follow categoryId);  
+        Z_Harag_Follow AddCategoryToFollow(Z_Harag_Follow categoryId);
+
+        bool RemovePostFromFollow(int postId, int id);
+        bool RemoveUserFromFollow(int userId, int id);
+        bool RemoveCategoryFromFollow(int catId, int id);
+
+        bool IsPostFollowed (int id, int userId);
+        bool IsUserFollowed (int id, int userId);
+        bool IsCatFollowed (int id, int userId);
+
     }
 }

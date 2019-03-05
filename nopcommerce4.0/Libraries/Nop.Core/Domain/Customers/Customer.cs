@@ -104,6 +104,7 @@ namespace Nop.Core.Domain.Customers
         /// <summary>
         /// Gets or sets a value indicating whether the customer is required to re-login
         /// </summary>
+        public bool Blocked { get; set; }
         public bool RequireReLogin { get; set; }
 
         /// <summary>
@@ -160,7 +161,6 @@ namespace Nop.Core.Domain.Customers
         ///  Gets or sets the store identifier in which customer registered
         /// </summary>
         public int RegisteredInStoreId { get; set; }
-        public bool Blocked { get; set; }
 
         #region Navigation properties
 

@@ -10,13 +10,15 @@ using Nop.Core.Domain.Z_Harag;
 using Nop.Services.Z_Harag.Category;
 using Nop.Services.Z_Harag.Comment;
 using Nop.Services.Z_Harag.Helpers;
+using Nop.Services.Z_Harag.Notification;
 using Nop.Services.Z_Harag.Post;
 using Nop.Web.Models.Consultant.Post;
 using Nop.Web.Models.Harag.Category;
 using Nop.Web.Models.Harag.Post;
+using Nop.Services.Customers;
 using Nop.Web.Models.Harag.Report;
 using PostOutputModel = Nop.Web.Models.Harag.Post.PostOutputModel;
-using Nop.Services.Z_ConsultantAdmin.Customers;
+using Nop.Services.Z_Harag.Follow;
 
 namespace Nop.Web.Controllers.Harag
 {
@@ -25,12 +27,13 @@ namespace Nop.Web.Controllers.Harag
         #region Fields
 
         private readonly ICategoryService _categoryService;
+        private readonly INotificationService _notificationService;
         private readonly IUrlHelper _urlHelper;
         private readonly IPostService _postService;
         private readonly Core.IWorkContext _workContext;
+        private readonly IFollowService _followService; 
         private readonly IHostingEnvironment _env;
         private readonly ICommentService _commentService;
-        //private readonly ICustomerService _consultantService;
 
         #endregion 
 
@@ -38,20 +41,22 @@ namespace Nop.Web.Controllers.Harag
         public PostController(
             ICategoryService categoryService,
             IUrlHelper urlHelper,
+             IFollowService _followService,
             IPostService postService,
             Core.IWorkContext workContext,
+            INotificationService _notificationService,
             IHostingEnvironment env,
             ICommentService commentService
-            //ICustomerService consultantService
             )
         {
+            this._followService = _followService;
             this._categoryService = categoryService;
             this._urlHelper = urlHelper;
             this._postService = postService;
             this._workContext = workContext;
+            this._notificationService = _notificationService;
             this._env = env;
             this._commentService = commentService;
-            //this._consultantService = consultantService;
         }
         #endregion
          
@@ -295,6 +300,8 @@ namespace Nop.Web.Controllers.Harag
 
             var post = _postService.AddNewPost(postForPostModel, currentUserId, postForPostModel.Files, errors);
 
+          
+
             if (post == null)
             {
                 StringBuilder err = new StringBuilder();
@@ -306,22 +313,14 @@ namespace Nop.Web.Controllers.Harag
                 }
                 return BadRequest(err.ToString());
             }
-
-            //var consultants = _consultantService.GetConsultants();
-
-            //var postNotification = new PostNotification
-            //{
-            //    PostId = post.Id,
-            //    NotificationDate = DateTime.Now,
-            //    IsRead = false
-            //};
-
-            //foreach (var con in consultants)
-            //{
-            //    postNotification.ConsultantId.Add(con.Id);
-            //}
-
-
+             
+           var notifications = _notificationService.PushUserPostsNotification(new UserForNotifyModel
+            {
+                CustomerId = currentUserId,
+                Text = post.Title,
+                PostId = post.Id,
+                Time = DateTime.Now
+            });
 
             string userName = _workContext.CurrentCustomer.Username;
 
@@ -444,8 +443,12 @@ namespace Nop.Web.Controllers.Harag
 
                 if (post != null)
                 {
+                    var Following = _followService.IsPostFollowed(post.Id, currentUserId);
+                    var isPostOwner = (post.CustomerId == currentUserId);
                     model = new Models.Harag.Post.PostWithFilesModel
                     {
+                        Following = Following,
+                        IsPostOwner = isPostOwner,
                         CategoryId = post.CategoryId,
                         CategoryName = post.Category.Name,
                         Text = post.Text,
@@ -463,6 +466,7 @@ namespace Nop.Web.Controllers.Harag
                         DateUpdated = post.DateUpdated,
                         IsDispayed = post.IsDispayed,
                         PostOwner = post.Customer.Username,
+                        PostOwnerFullName = post.Customer.GetFullName(),
                         RelatedPosts = relatedPosts.Select(m => new Models.Harag.Post.PostModel
                         {
                             Photo = m.Z_Harag_Photo.FirstOrDefault() == null ? "" : m.Z_Harag_Photo.FirstOrDefault().Url,
@@ -532,7 +536,8 @@ namespace Nop.Web.Controllers.Harag
                 // Rate = p.Rate,
                 DateUpdated = p.DateUpdated,
                 IsDispayed = p.IsDispayed,
-                PostOwner = p.Customer.Username
+                PostOwner = p.Customer.Username,
+                PostOwnerFullName = p.Customer.GetFullName()
             }).ToList();
 
             return View("~/Themes/Pavilion/Views/Harag/Post/PostsAjax.cshtml", modelOutput);
@@ -560,7 +565,8 @@ namespace Nop.Web.Controllers.Harag
                 //Rate = p.Rate,
                 DateUpdated = p.DateUpdated,
                 IsDispayed = p.IsDispayed,
-                PostOwner = p.Customer.Username
+                PostOwner = p.Customer.Username,
+                PostOwnerFullName = p.Customer.GetFullName()
             }).ToList();
 
             return View("~/Themes/Pavilion/Views/Harag/Post/PostsAjax.cshtml", modelOutput);
@@ -594,7 +600,8 @@ namespace Nop.Web.Controllers.Harag
                 // Rate = p.Rate,
                 DateUpdated = p.DateUpdated,
                 IsDispayed = p.IsDispayed,
-                PostOwner = p.Customer.Username
+                PostOwner = p.Customer.Username,
+                PostOwnerFullName = p.Customer.GetFullName()
             }).ToList();
 
             return View("~/Themes/Pavilion/Views/Harag/Post/PostsForSearch.cshtml", modelOutput);
@@ -623,7 +630,8 @@ namespace Nop.Web.Controllers.Harag
                 // Rate = p.Rate,
                 DateUpdated = p.DateUpdated,
                 IsDispayed = p.IsDispayed,
-                PostOwner = p.Customer.Username
+                PostOwner = p.Customer.Username,
+                PostOwnerFullName = p.Customer.GetFullName()
             }).ToList();
 
             return View("~/Themes/Pavilion/Views/Harag/Post/PostsForSearch.cshtml", modelOutput);
@@ -654,7 +662,8 @@ namespace Nop.Web.Controllers.Harag
                 Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
                 DateUpdated = p.DateUpdated,
                 IsDispayed = p.IsDispayed,
-                PostOwner = p.Customer.Username
+                PostOwner = p.Customer.Username,
+                PostOwnerFullName = p.Customer.GetFullName()
             }).ToList();
 
             return View("~/Themes/Pavilion/Views/Harag/Post/Posts.cshtml", modelOutput);
@@ -685,7 +694,8 @@ namespace Nop.Web.Controllers.Harag
                 //Rate = p.Rate,
                 DateUpdated = p.DateUpdated,
                 IsDispayed = p.IsDispayed,
-                PostOwner = p.Customer.Username
+                PostOwner = p.Customer.Username,
+                PostOwnerFullName = p.Customer.GetFullName()
             }).ToList();
 
             return View("~/Themes/Pavilion/Views/Harag/Post/PostsForSearch.cshtml", modelOutput);
@@ -715,7 +725,8 @@ namespace Nop.Web.Controllers.Harag
                     // Rate = p.Rate,
                     DateUpdated = p.DateUpdated,
                     IsDispayed = p.IsDispayed,
-                    PostOwner = p.Customer.Username
+                    PostOwner = p.Customer.Username,
+                    PostOwnerFullName = p.Customer.GetFullName()
                 }).ToList();
 
                 return View("~/Themes/Pavilion/Views/Harag/Shared/_Navbar.cshtml", posts);
@@ -1798,7 +1809,8 @@ namespace Nop.Web.Controllers.Harag
                     Text = m.Text,
                     Title = m.Title,
                     CategoryId = m.CategoryId, 
-                    PostOwner = m.Customer.Username, 
+                    PostOwner = m.Customer.Username,
+                    PostOwnerFullName = m.Customer.GetFullName(), 
                     DateCreated = m.DateCreated,
                     DateUpdated = m.DateUpdated,
                     IsAnswered = m.IsAnswered,
@@ -1829,6 +1841,7 @@ namespace Nop.Web.Controllers.Harag
                     Title = m.Title,
                     CategoryId = m.CategoryId,
                     PostOwner = m.Customer.Username,
+                    PostOwnerFullName = m.Customer.GetFullName(),
                     DateCreated = m.DateCreated,
                     DateUpdated = m.DateUpdated,
                     IsAnswered = m.IsAnswered,

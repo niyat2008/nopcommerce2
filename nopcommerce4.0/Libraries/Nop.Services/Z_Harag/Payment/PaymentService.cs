@@ -37,6 +37,10 @@ namespace Nop.Services.Z_Harag.Payment
             return bankAccounts;
         }
 
-      
+        public List<Z_Harag_BankPayment> GetUserPayments(int id)
+        {
+            var payments = _paymentRepository.Table.Where(m => m.UserId == id);
+            return payments.ToList();
+        }
     }
 }

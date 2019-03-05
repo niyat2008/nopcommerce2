@@ -110,7 +110,6 @@
     <Folder Include="Models\ConsultantAdmin\" />
     <Folder Include="Models\Harag\BlackList\" />
     <Folder Include="Models\Harag\Follow\" />
-    <Folder Include="Models\Harag\Notification\" />
     <Folder Include="Models\NewFolder\" />
     <Folder Include="Validators\ConsultantAdmin\" />
     <Folder Include="wwwroot\ConsultantAdmin\" />
@@ -301,6 +300,9 @@
     <Content Update="Themes\Pavilion\Views\Harag\Message\UserMessageList.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Payment\_PaymentCalculator.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Payment\_BanksList.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
@@ -359,6 +361,9 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Profile\MainProfile.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Rate\RateNote.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Rate\AllUserRates.cshtml">

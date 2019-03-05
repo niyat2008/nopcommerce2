@@ -44,5 +44,7 @@ namespace Nop.Services.Z_Harag.Post
         List<Z_Harag_Post> GetFavoritesPosts(int id);
         List<Z_Harag_Post> SearchPosts(SearchModel searchModel);
          List<Z_Harag_Post> SearchPostsCatCity(int cat, int city);
+
+        
     }
 }
