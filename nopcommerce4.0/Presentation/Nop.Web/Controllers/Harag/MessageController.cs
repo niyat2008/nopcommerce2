@@ -12,6 +12,7 @@ using Nop.Services.Z_Harag.Helpers;
 using Nop.Services.Z_Harag.Message;
 using Nop.Services.Z_Harag.Post;
 using Nop.Web.Models.Harag.Message;
+using Nop.Services.Customers;
 
 namespace Nop.Web.Controllers.Harag
 {
@@ -19,6 +20,7 @@ namespace Nop.Web.Controllers.Harag
     {
         private readonly IUrlHelper _urlHelper;
         private readonly IPostService _postService;
+        private readonly ICustomerService _cusService;
         private readonly IMessageService _messageService;
         private readonly Core.IWorkContext _workContext;
         private readonly IHostingEnvironment _env;
@@ -27,31 +29,26 @@ namespace Nop.Web.Controllers.Harag
         public MessageController(
          IUrlHelper urlHelper,
          IPostService postService,
+         ICustomerService _cusService,
          IMessageService _messageService,
          Core.IWorkContext workContext,
          IHostingEnvironment env
          )
         {
+             this._cusService =  _cusService;
             this._urlHelper = urlHelper;
             this._postService = postService;
             this._messageService = _messageService;
             this._workContext = workContext;
             this._env = env;
-        }
-         
- 
-        [HttpGet]
-        public IActionResult AddPostMessage(int postId, string Message)
+        } 
+
+        [HttpPost]
+        public IActionResult AddPostMessage([FromBody] MessageModel message)
         {
-
-            MessageModel message = new MessageModel
-            {
-                Message = Message,
-                postId = postId
-            };
-
+  
             if (!_workContext.CurrentCustomer.IsRegistered())
-                return RedirectToRoute("Login", new { returnUrl = "Harag" });
+                return RedirectToRoute("/Login", new { returnUrl = "Harag" });
 
             if (!ModelState.IsValid )
                 return Ok(new { stat = false, errors = ModelState.Values});
@@ -63,18 +60,22 @@ namespace Nop.Web.Controllers.Harag
             {
                 Message = message.Message,
                 CreatedTime = DateTime.Now,
-                CustomerId = currentUserId,
-                PostId = message.postId
+                ToUserId = message.FromUserId,
+                PostId = message.PostId,
+                FromUserId = currentUserId
             };
                  
             var mes = _messageService.AddMessage(msg);
+
+            var messageType = (MessageType) message.Type;
 
             var model = new MessageOutputModel{
                 Message = mes.Message,
                 DateTime = (DateTime) mes.CreatedTime,
                 postId = (int)mes.PostId,
-                User = mes.Customer.Username,
-                userId = (int)mes.CustomerId
+                FromUser = mes.Customer.Username,
+                FromUserId = (int)mes.ToUserId,
+                Type = (MessageType)mes.MessageType
             };
 
             if (mes != null)
@@ -83,33 +84,41 @@ namespace Nop.Web.Controllers.Harag
             return BadRequest(); 
         }
 
-        public IActionResult GetAllPostMessages(int postId)
+        public IActionResult GetAllPostMessages(int userId, int postId = 0, int type = 1)
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return RedirectToRoute("Login", new { returnUrl = "Harag" });
 
             var currentUserId = _workContext.CurrentCustomer.Id;
             ViewBag.UserName = _workContext.CurrentCustomer.Username;
+            var user = _cusService.GetCustomerById(userId);
 
-            var post = _postService.GetPost(postId, "");
-
-            if (postId == null)
+            if (user == null)
                 return NotFound();
-
-            var messages = _messageService.GetMessagesByPost(post.Id);
-
+             
+            var messages = _messageService.GetUserMessages(currentUserId, userId);
+            var post = _postService.GetPost(postId, "");
+             
             var model = new MessageListModel
             {
-                Post = post.ToPostModel(),
+                MessageType = (MessageType)type, 
                 Messages = messages.Select(m => new MessageOutputModel
                 {
                     Message = m.Message,
-                    postId = (int)m.PostId,
-                    userId = (int)m.CustomerId,
-                    User = m.Customer.Username,
+                    postId = (int)m.PostId, 
+                    ToUser = m.User.GetFullName(),
+                    ToUserId = m.ToUserId,
+                    FromUserId = (int)m.FromUserId,
+                    FromUser = m.Customer.GetFullName(),
+                    Type = (MessageType) m.MessageType,
                     DateTime = (DateTime)m.CreatedTime
                 }).ToList()
             };
+
+            if (post != null)
+            {
+                model.Post = post.ToPostModel();
+            }
 
             return  View("~/Themes/Pavilion/Views/Harag/Message/PostMessageList.cshtml", model); 
         }
@@ -117,7 +126,7 @@ namespace Nop.Web.Controllers.Harag
         public IActionResult GetUserMessageThreads()
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
-                return RedirectToRoute("Login", new { returnUrl = "Harag" });
+                return RedirectToRoute("Login", new { returnUrl = "Harag/Messages" });
 
             var currentUserId = _workContext.CurrentCustomer.Id;
             ViewBag.UserName = _workContext.CurrentCustomer.Username; 

@@ -3,6 +3,7 @@ using Nop.Core.Data;
 using Nop.Core.Domain.Z_Harag;
 using Nop.Services.Customers;
 using Nop.Services.Events;
+using Nop.Services.Z_Harag.Comment;
 using Nop.Services.Z_Harag.Follow;
 using Nop.Services.Z_Harag.Helpers;
 using System;
@@ -176,12 +177,12 @@ namespace Nop.Services.Z_Harag.Notification
             return true;
         }
 
-        public bool PushRateNotification(UserPostCommentModel postCommentModel)
+        public bool PushPostOwnerNotification(CommentForNotifyModel postCommentModel)
         {
             this.AddCommentNotification(new Z_Harag_Notification
             {
                 NotificationType = (int)NotificationType.PostOwnnerComment,
-                OwnerId = postCommentModel.UserId,
+                OwnerId = postCommentModel.PostOwner,
                 NotificationTime = DateTime.Now,
                 PostId = postCommentModel.PostId, 
                 CustomerId = postCommentModel.CustomerId

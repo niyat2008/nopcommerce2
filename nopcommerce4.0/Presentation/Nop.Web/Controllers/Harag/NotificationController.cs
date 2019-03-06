@@ -52,18 +52,19 @@ namespace Nop.Web.Controllers.Harag
             var Notifications = _notificationsService.GetUserNotifications(currentUser.Id);
             _notificationsService.SetUserNotificationsSeen(currentUser.Id);
 
+             
             var notificationsModels = Notifications.Select(m => new NotificationModel
             {
-                CustomerId = (int)m?.Customer?.Id,
-                CustomerName = m?.Customer?.GetFullName(),
+                CustomerId = (int)m.CustomerId,
+                CustomerName = m.Customer == null ? "" : m?.Customer.GetFullName(),
                 Type = (NotificationType)m.NotificationType,
                 Note = m.NotificationContent,
-                OwnerId = (int)m?.Owner?.Id,
-                OwnerName = m?.Owner?.GetFullName(),
-                PostId =  (int)m?.Z_Harag_Post?.Id,
-                PostTitle =  m?.Z_Harag_Post?.Title,
+                OwnerId = (int)m.OwnerId,
+                OwnerName =  m.Owner == null ?"": m?.Owner.GetFullName(),
+                PostId =  (m.PostId== null ?0:(int)m.PostId),
+                PostTitle = (m.Z_Harag_Post == null ? "" : m?.Z_Harag_Post.Title),
                 Time = (DateTime)m.NotificationTime,
-                Username = m?.Customer?.Username
+                Username =( m.Customer== null?"":m?.Customer?.Username)
             }).ToList();
 
             var outputModel = new NotificationListModel { Notifications = notificationsModels };

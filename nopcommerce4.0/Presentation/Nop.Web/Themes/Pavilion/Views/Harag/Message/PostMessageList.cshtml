@@ -11,7 +11,7 @@
             <div class="col-sm-3">
             </div>
             <div class="col-sm-9">
-                <h4>@Model.Post.Title</h4>
+                <h4>الرسائل</h4>
 
                 <div id="messages">
                     @foreach (var item in Model.Messages)
@@ -29,10 +29,8 @@
                 </div>
                 <div>
                     <div class="col-sm-12">
-                        <form>
-                            <textarea id="add-message-js-ajax" class="form-control txtArea" placeholder="أكتب ردك هنا" rows="7"></textarea>
-                            <button id="add-message-btn-js" class="btn btn-default add" type="button"> ارسال >>  </button>
-                        </form>
+                        <textarea id="add-message-js-ajax" class="form-control txtArea" placeholder="أكتب ردك هنا" rows="7"></textarea>
+                        <button id="add-message-btn-js" class="btn btn-default add" type="button"> ارسال >>  </button>
                     </div>
                 </div>
             </div>
@@ -60,7 +58,10 @@
 
         var messageModel = {
             Message: text + "",
-            postId: '@Model.Post.Id' 
+            PostId: '@Model.Post.Id',
+            FromUserId: '@Model.ToUserId',
+            ToUserId: '',
+            Type: '@Model.MessageType'
         };
          
         $.ajax({
@@ -68,9 +69,10 @@
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            type: "GET",
-            url: '/Harag/NewPostMessage/' + messageModel.postId + '/' + messageModel.Message,
-            dataType: 'json', 
+            type: "POST",
+            url: '/Harag/NewPostMessageAjax/',
+            dataType: 'json',
+            data: JSON.stringify(messageModel),
             complete: function (data) {
                 $("#messages").append(data.responseText);
                 $("#add-message-js-ajax").val("");

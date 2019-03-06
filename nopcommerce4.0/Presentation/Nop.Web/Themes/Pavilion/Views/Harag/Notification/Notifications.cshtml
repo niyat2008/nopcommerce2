@@ -15,7 +15,7 @@
             <div class="col-md-9 cont">
                 @foreach (var n in Model.Notifications)
                 {
-                    if (n.Type == NotificationType.OwnnerComment)
+                    if (n.Type == NotificationType.PostOwnnerComment)
                     {
                         <div class=" ">
                             <h3 dir="rtl">
@@ -47,7 +47,7 @@
                             </h3>
                         </div>
                     }
-                    else if (n.Type == NotificationType.Note)
+                    else if (n.Type == NotificationType.General)
                     {
                         <div class="feat- adv-blck">
                             <h3 class="text-danger">

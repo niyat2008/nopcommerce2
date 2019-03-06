@@ -143,6 +143,15 @@ namespace Nop.Web.Controllers.Harag
                         Time = DateTime.Now,
                         PostOwner = post.CustomerId
                     });
+
+                    var d = _notificationService.PushPostOwnerNotification(new CommentForNotifyModel
+                    {
+                        CustomerId = currentUserId,
+                        Text = commentCreated.Text,
+                        PostId = model.PostId,
+                        Time = DateTime.Now,
+                        PostOwner = post.CustomerId
+                    });
                 }
                 else
                 {
