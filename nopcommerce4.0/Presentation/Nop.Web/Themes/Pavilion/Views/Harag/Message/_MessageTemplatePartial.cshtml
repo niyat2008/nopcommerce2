@@ -6,7 +6,22 @@
         <small> @Model.DateDescription </small>
         <div class="det-det">
             <a href="@Model.FromUserId"><span><i class="fa fa-user"></i> @Model.FromUser </span></a>
-        </div>
+
+
+
+        </div> 
+        @if (Model.Type == Nop.Web.Controllers.Harag.MessageType.Post)
+        {
+            <a href="/Harag/Post/@Model.postId" class="text-danger">
+                هذه الرساله علي اعلانك رقم   @Model.postId
+            </a>
+        }
+        else if (Model.Type == Nop.Web.Controllers.Harag.MessageType.Comment)
+        {
+            <a href="/Harag/Post/@Model.postId" class="text-danger">
+                هذه الرساله بخصوص ردك علي اعلان رقم @Model.postId
+            </a>
+        }
     </div>
     <div class="det-bottom">
         <p>@Model.Message</p>

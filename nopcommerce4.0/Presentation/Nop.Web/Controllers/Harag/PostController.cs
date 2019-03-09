@@ -276,6 +276,102 @@ namespace Nop.Web.Controllers.Harag
             }
         }
 
+        [HttpGet]
+        public IActionResult HaragUpdatePost(int postId)
+        {
+
+            if (_workContext.CurrentCustomer.IsRegistered())
+            {
+                if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+                    ViewBag.UserRole = RolesType.Administrators;
+                else if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Consultant, true))
+                    ViewBag.UserRole = RolesType.Consultant;
+                else if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
+                    ViewBag.UserRole = RolesType.Registered;
+
+                //if (_postService.CanAddNewPost(_workContext.CurrentCustomer.Id))
+                //{
+                //    ViewBag.CanAddNewPost = true;
+                //}
+                //else
+                {
+                    ViewBag.CanAddNewPost = false;
+                }
+
+                var post = _postService.GetPost(postId, "");
+
+                var postModel = new PostForPostListModel
+                {
+                    CategoryId = post.CategoryId,
+                    CityId = (int)post.CityId,
+                    Contact = post.Contact,
+                    Files = post.Z_Harag_Photo.Select(m => m.Url).ToList(),
+                    NeighborhoodId = post.NeighborhoodId == null? 0 : (int) post.NeighborhoodId,
+                    Id = post.Id,
+                    Title = post.Title,
+                    Text = post.Text
+                };
+
+                return View("~/Themes/Pavilion/Views/Harag/Post/UpdatePost.cshtml", postModel);
+            }
+            else
+            {
+                return RedirectToRoute("Login", new { returnUrl = "Harag" });
+            }
+        }
+        [HttpPost]
+        public IActionResult UpdatePostAjax([FromBody]PostForPostListModel postForPostModel)
+        {
+
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+             
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
+                return Forbid();
+             
+            var currentUserId = _workContext.CurrentCustomer.Id;
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+
+            if (postForPostModel.CategoryId <= 0)
+                return BadRequest("Post must be belong to Category");
+
+            List<string> errors = new List<string>();
+
+            var post = _postService.UpdatePost(postForPostModel, currentUserId, postForPostModel.Files, errors);
+             
+            if (post == null)
+            {
+                StringBuilder err = new StringBuilder();
+
+                foreach (var item in errors)
+                {
+                    err.AppendFormat(" {0} ", item);
+                    err.AppendLine();
+                } 
+
+                return BadRequest(err.ToString());
+            }
+
+            var notifications = _notificationService.PushUserPostsNotification(new UserForNotifyModel
+            {
+                CustomerId = currentUserId,
+                Text = post.Title,
+                PostId = post.Id,
+                Time = DateTime.Now
+            });
+
+            string userName = _workContext.CurrentCustomer.Username;
+
+            //var postToReturn = post.ToPostModel();
+            //postToReturn.PostOwner = userName;
+            //return CreatedAtRoute("Consultant.Api.Post.GetPost", new { PostId = postToReturn.Id }, postToReturn);
+            return Ok(new { postId = post.Id });
+        }
+
+
         [HttpPost]
         public IActionResult AddNewPostAjax([FromBody]PostForPostListModel postForPostModel)
         {

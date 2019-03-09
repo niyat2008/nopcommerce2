@@ -81,14 +81,15 @@ namespace Nop.Services.Z_Harag.Message
                 .Include(mbox => mbox.Customer)
                 .Include(mbox => mbox.User)
                 .Include(mbox => mbox.Z_Harag_Post) 
-                .Where(m => m.FromUserId == FromUserId && m.ToUserId == toUserId).ToList();
+                .Where(m => m.FromUserId == FromUserId && m.ToUserId == toUserId ||
+                 m.FromUserId == toUserId && m.ToUserId ==FromUserId ).ToList();
             return query;
         }
 
         public List<MessageThreadModel> GetMessagesByUser(int userId)
         {
             var users = _messageRepository.TableNoTracking 
-                .Where(m => m.ToUserId == userId) 
+                .Where(m => m.ToUserId == userId || m.FromUserId == userId)
                 .Select(n => n.FromUserId)
                 .Distinct()
                 .ToList(); 
@@ -96,7 +97,10 @@ namespace Nop.Services.Z_Harag.Message
             var messagesthread = new List<MessageThreadModel>();
             foreach (var user in users)
             {
-
+                if (user == userId)
+                {
+                    continue;
+                }
                 var message = _messageRepository.TableNoTracking.Where(m => m.FromUserId == user)
                     .Include(mbox => mbox.Customer)
                     .Include(mbox => mbox.Z_Harag_Post)

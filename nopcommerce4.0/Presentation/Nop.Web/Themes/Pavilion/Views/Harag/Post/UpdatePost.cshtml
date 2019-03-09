@@ -1,48 +1,119 @@
-﻿@model List<Nop.Web.Models.Harag.Message.MessageThreadsModel>
+﻿@model Nop.Services.Z_Harag.Post.PostForPostListModel
 
 @{
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
 }
 
-    <div class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="items">
-                        @if (Model.Count <= 0)
-                        {
-                            <div class="item msgItem">
-                                لا يوجد رسائل
-                            </div>
-                        }
-                        else
-                        {
-                            @foreach (var item in Model)
-                            {
-                                <div class="item msgItem">
-                                    <div class="det">
-                                        <a href="/Harag/Messages/Post/@item.MessageUserId"><h3>@item.MessageUser</h3></a>
-                                        <small>منذ 4 دقيقة</small>
-                                        <div class="det-det">
-                                            <span><i class="fa fa-user"></i> @item.SenderName </span>
-                                        </div>
-                                        <p>@item.LastMessageText</p>
-                                    </div>
-                                </div>
-                            }
-                        }
-
-                    </div>
-                    </div>
+@{
+    string getCustomerPosts = "";
+    if (@ViewBag.UserRole == "Registered")
+    {
+        getCustomerPosts = "getCustomerPosts()";
+    }
+    else if (@ViewBag.UserRole == "Consultant")
+    {
+        getCustomerPosts = "getConsultantPosts()";
+    }
+    else if (@ViewBag.UserRole == "vistor")
+    {
+        getCustomerPosts = "login()";
+    }
+}
+ 
+@*@if (ViewBag.UserRole == "Registered")
+    {
+        if (@ViewBag.CanAddNewPost == true)
+        {*@
+<h3>اضافه اعلان جديد</h3>
+<div class="row">
+    <div class="col-md-12">
+        <form id="addPostForm" action="@Url.RouteUrl("Harag.Post.UpdatePostAjax")" method="post" class="add-adverse">
+             
+            @Html.HiddenFor(m => m.Id)
+            <div class="col-md-3">
+                <label>عنوان الاعلان</label> <br>
+                @Html.TextBoxFor(m => m.Title, new { id = "Title-js-ajax", @class = "form-control", placeholder = "العنوان", required = "required" })
             </div>
-        </div>
-    </div>
-<!-- Content -->
+            <div class="col-md-3">
+                <label> اختر المدينه </label> <br>
+                <select name="CityId" id="city-js-ajax" class="form-control" required placeholder="اختر المدينه "></select>
+            </div>
+            <div class="col-md-3">
+                <label> اختر القسم </label> <br>
+                <select id="CategoryId-js-ajax" , name="CategoryId" required class="form-control" placeholder="اختر القسم "></select>
+            </div>
+            <div class="col-md-3">
+                <label>وسيلة الاتصال</label> <br>
+                @Html.TextBoxFor(m => m.Contact, new { id = "Contact-js-ajax", required = "required", @class = "form-control", placeholder = "0134578888" })
 
+            </div>
+            <div class="col-md-6">
+                <label>نص الاعلان</label> <br>
+                @Html.TextAreaFor(m => m.Text, new { id = "Text-js-ajax", @class = "form-control txtArea", required = "required", rows = "7", placeholder = "نص الاعلان" })
+
+            </div>
+
+            <div class="col-xs-12">
+                <div class="row">
+                    <br />
+
+                    <div class="form-group bordering">
+                        <div class="images" id="images">
+
+                        </div>
+                        <br />
+
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="file">
+                        <input type="file" name="file" accept="image/*" id="file">
+                        <label for="file">تحميل الصور</label>
+                    </p>
+                </div>
+
+                @foreach(var i in Model.Files){
+                <img hidden type="file" src="/HaragApi/Uploads/Images/@i" class="postPhotos" />
+                    }
+            </div>
+            <div class="col-md-12">
+                <button class="btn btn-default add" type="submit">اضافة الاعلان للموقع</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+@*}
+        else
+        {
+            <div id="AddPost">
+
+                <div class="row">
+                    <div class="col-md-9 col-lg-offset-2">
+                        <form id="addPostForm">
+                            <div class="form-group" style="margin-bottom:5%;">
+                                <h3>لا يمكنك اضافه استشاره الا بعد اغلاق جميع الاستشارات المفتوحه.</h3>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        }
+    }*@
 
 <script type="text/javascript">
 
+    var Files = [];
 
+    var photos = $('.postPhotos');
+
+    for (var i = 0; i < photos.length; i++) {
+
+
+        getBase64Image(photos[i]);
+    }
       $.ajax({
             type: 'GET',
             url: '@Url.RouteUrl("Harag.Post.GetCategories")',
@@ -70,6 +141,24 @@
     });
 
 
+    function getBase64Image(img) {
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        var imagebase64 = canvas.toDataURL("image/png");
+        var image = imagebase64.replace(/^data:image\/(png|jpg);base64,/, "");
+
+        Files.push(image);
+        var index = Files.length - 1;
+
+        $("#images").append("<div  class='col-xs-3  img_blck' style='padding-right:0px' id='imgno" + index + "'>" +
+            "<img src='" + img.src + "' width='100' height='60' />" +
+            "<div class='overlay' onclick='deleteFile(" + index + ")'>" +
+            "<i class='fa fa-trash imageli' ></i>" +
+            "</div>");
+    }
 
 
     function convertToBase64(file) {
@@ -79,8 +168,10 @@
         fileReader.readAsDataURL(file);
         fileReader.onloadend = (e) => {
             image = fileReader.result;
+
             var indexofcomma = image.indexOf(",");
             var imagebase64 = image.substring(indexofcomma + 1);
+
             Files.push(imagebase64);
             var index = Files.length - 1;
 
@@ -92,10 +183,8 @@
         };
     }
 
-
-
     $("#file").change(function (event) {
-
+        console.log(Files);
         if (Files.length >= 5) {
             alert("لقد تجاوزت العدد المسموح من الصور ,مسموح بخمس صور فقط");
         }
@@ -109,7 +198,6 @@
         }
     });
 
-    var Files = [];
 
     function deleteFile(index) {
 
@@ -151,7 +239,9 @@
                 Contact: Contact,
                 CategoryId: CategoryId,
                 CityId: CityId,
-                Files: Files
+                Files: Files,
+                Id: '@Model.Id',
+                NeighborhoodId: '@Model.NeighborhoodId'
             };
 
 
@@ -161,12 +251,13 @@
                     'Content-Type': 'application/json'
                 },
                 type: "POST",
-                url: '@Url.RouteUrl("Harag.Post.AddNewPostAjax")',
+                url: '@Url.RouteUrl("Harag.Post.UpdatePostAjax")',
                 dataType: 'json',
                 data: JSON.stringify(postForPostModel),
-                complete: function (data) {
-                    if (data.status == 200) {
-                        alert("تمت اضافة الاستئارة بنجاح يمكنك الذهاب الى استشاراتى لرؤية الاستشاراة");
+                success: function (data) {
+                    if (data.postId != 0) {
+                        alert("تمت اضافة الاعلان بنجاح يمكنك سيتم تحويلك الي تحديث العنوان");
+                        window.location = "/Harag/UpdateLocation/" + data.postId;
                     }
                     else {
                         alert("حدث خطأ ما تأكد من الاتصال بالانترنت");

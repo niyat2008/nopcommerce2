@@ -61,20 +61,18 @@ namespace Nop.Web.Controllers.Harag
                 Message = message.Message,
                 CreatedTime = DateTime.Now,
                 ToUserId = message.ToUserId, 
-                FromUserId = currentUserId
+                FromUserId = currentUserId,
+                MessageType = message.Type
             };
 
             if (message.PostId != 0)
                msg.PostId = message.PostId;
              
             var mes = _messageService.AddMessage(msg);
-
-            var messageType = (MessageType) message.Type;
-
+              
             var model = new MessageOutputModel{
                 Message = mes.Message,
-                DateTime = (DateTime) mes.CreatedTime,
-              
+                DateTime = (DateTime) mes.CreatedTime, 
                 FromUser = mes.Customer.Username,
                 FromUserId = (int)mes.ToUserId,
                 Type = (MessageType)mes.MessageType
@@ -110,7 +108,7 @@ namespace Nop.Web.Controllers.Harag
                 Messages = messages.Select(m => new MessageOutputModel
                 {
                     Message = m.Message,
-                    postId = (int)m.PostId, 
+                    postId = (m.PostId == null? 0: (int)m.PostId ), 
                     ToUser = m.User.GetFullName(),
                     ToUserId = m.ToUserId,
                     FromUserId = (int)m.FromUserId,
@@ -139,14 +137,18 @@ namespace Nop.Web.Controllers.Harag
             ViewBag.UserName = _workContext.CurrentCustomer.Username; 
           
             var messages = _messageService.GetMessagesByUser(currentUserId);
+            var user = _cusService.GetCustomerById(currentUserId);
 
             var model = messages.Select(m => new MessageThreadsModel
             {
-                LastMessageText = m.Message, 
+                LastMessageText = m.Message,
                 SenderName = m.SentFromName,
                 postId = (int)m.PostId,
-                title = m.PostTitle, 
-                LastMessageTime = (DateTime)m.CreatedTime
+                title = m.PostTitle,
+                LastMessageTime = (DateTime)m.CreatedTime,
+                MessageUser = ((m.SentFromName == 
+                _workContext.CurrentCustomer.GetFullName()) ? m.SentToName : m.SentFromName),
+                MessageUserId = ((m.UserId == currentUserId) ? (int)m.CustomerId : m.UserId)
             }).ToList();
 
             return View("~/Themes/Pavilion/Views/Harag/Message/UserMessageList.cshtml", model);

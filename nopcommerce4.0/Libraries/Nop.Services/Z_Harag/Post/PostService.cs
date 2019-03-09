@@ -71,7 +71,49 @@ namespace Nop.Services.Z_Harag.Post
         #endregion
 
         #region Methods
+        private bool DeletePostPhohos(int postId)
+        {
+            var photos = _photoRepository.Table.Where(m => m.PostId == postId).ToList();
 
+            foreach (var item in photos)
+            {
+                _photoRepository.Delete(item);
+            }
+            return true;
+        }
+        public Z_Harag_Post UpdatePost(PostForPostListModel postForPostModel, int cutomerId, IList<string> files, List<string> errors)
+        {
+            DeletePostPhohos(postForPostModel.Id);
+
+            List<KeyAndValue> filesUrl = UploadFiles(files, errors);
+
+            if (errors.Count > 0)
+            {
+                return null;
+            }
+            var postE = _postRepository.Table.Where(m => m.Id == postForPostModel.Id).FirstOrDefault();
+            
+            postE.Text = postForPostModel.Text;
+            postE.Title = postForPostModel.Title;
+            postE.CategoryId = postForPostModel.CategoryId;
+                postE.CityId = postForPostModel.CityId; 
+                postE.Contact = postForPostModel.Contact;
+                postE.DateUpdated = DateTime.Now;
+             
+
+            foreach (var item in filesUrl)
+            {
+                if (item.Key.ToLower() == "image")
+                    postE.Z_Harag_Photo.Add(new Z_Harag_Photo()
+                    {
+                        Url = item.Value
+                    });
+            } 
+            _postRepository.Update(postE);
+
+
+            return postE;
+        }
 
         public Z_Harag_Post AddNewPost(PostForPostListModel postForPostModel, int cutomerId, IList<string> files, List<string> errors)
         {

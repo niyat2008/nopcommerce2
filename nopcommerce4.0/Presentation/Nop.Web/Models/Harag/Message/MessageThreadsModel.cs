@@ -11,7 +11,9 @@ namespace Nop.Web.Models.Harag.Message
     {
         public int postId { get; set; }
         public string title { get; set; }
-        public string LastMessageText { get; set; }
+        public string LastMessageText { get; set; } 
+        public string MessageUser { get; set; } 
+        public int MessageUserId { get; set; } 
         public DateTime LastMessageTime { get; set; }
         public string UserName { get; set; }
         public string SenderName { get; set; }  

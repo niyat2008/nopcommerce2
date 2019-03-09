@@ -42,6 +42,14 @@ namespace Nop.Web.Infrastructure
             // done 
             routeBuilder.MapRoute("Harag.Post.AddNewPostAjax", "Harag/Post/NewAjax",
             new { controller = "Post", action = "AddNewPostAjax" });
+
+            // UpdatePost  
+            routeBuilder.MapRoute("Harag.Post.HaragUpdatePost", "Harag/Post/Update/{postId?}",
+            new { controller = "Post", action = "HaragUpdatePost" });
+            // UpdatePostAjax 
+            routeBuilder.MapRoute("Harag.Post.UpdatePostAjax", "Harag/Post/UpdateAjax",
+            new { controller = "Post", action = "UpdatePostAjax" });
+
             // Get Post
             routeBuilder.MapRoute("Harag.Post.GetHaragPost", "Harag/Post/{postId?}",
             new { controller = "Post", action = "GetHaragPost" });
