@@ -129,22 +129,35 @@ namespace Nop.Web.Infrastructure
 
 
             /////////
-            /// Harag Messages
+            //// Harag Messages
             /////////
             //  Harag all Messages  
             routeBuilder.MapRoute("Harag.Message.GetUserMessageThreads", "Harag/Messages",
             new { controller = "Message", action = "GetUserMessageThreads" });
 
             //  Harag Get Post Messages  
-            routeBuilder.MapRoute("Harag.Message.GetAllPostMessages", "Harag/Messages/Post/{postId?}",
+            routeBuilder.MapRoute("Harag.Message.GetAllPostMessages", "Harag/Messages/Post/{userId?}/{postId?}/{type?}",
             new { controller = "Message", action = "GetAllPostMessages" });
 
             // Harag New Message
-            routeBuilder.MapRoute("Harag.Message.AddPostMessage", "Harag/NewPostMessage/{postId?}/{Message?}",
+            routeBuilder.MapRoute("Harag.Message.AddPostMesssage", "Harag/NewPostMessage/{postId?}/{Message?}/{type?}",
+           new { controller = "Message", action = "AddPostMessagse" });
+
+            // Harag New Message
+            routeBuilder.MapRoute("Harag.Message.AddPostMessage", "Harag/NewPostMessageAjax",
            new { controller = "Message", action = "AddPostMessage" });
-             
+
+            // Harag Comment Report
+            routeBuilder.MapRoute("Harag.Message.SendCommentMessage", "Harag/Message/SendCommentMessage/{postId?}/{type?}",
+           new { controller = "Message", action = "SendCommentMessage" });
+
+            // Harag Comment Report
+            routeBuilder.MapRoute("Harag.Message.SnedUserMessage", "Harag/Comment/SnedUserMessage/",
+           new { controller = "Message", action = "SnedUserMessage" });
+         
+            
             ///////////////
-            /// HARAG USER
+            //// HARAG USER
             ///////////////
 
             // check black list 

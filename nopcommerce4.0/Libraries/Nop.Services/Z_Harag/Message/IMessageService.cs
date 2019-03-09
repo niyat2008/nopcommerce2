@@ -13,6 +13,7 @@ namespace Nop.Services.Z_Harag.Message
         List<Z_Harag_Message> GetMessagesByPost(int postId);
         Z_Harag_Message GetMessage(int messageId);
         bool DeleteMessage(int messageId);
+        List<Z_Harag_Message> GetUserMessages(int FromUserId, int toUserId);
         Z_Harag_Message AddMessage(Z_Harag_Message message);
         Z_Harag_Message AddCommentMessage(CommentMessageModel messageModel);
     }

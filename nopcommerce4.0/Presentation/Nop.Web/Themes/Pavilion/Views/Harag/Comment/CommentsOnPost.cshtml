@@ -94,6 +94,20 @@
             }
         });
     }
+
+    function sendmessage(id, commentId, postId, type) {
+        $.ajax({
+            type: 'GET',
+            url: '/Harag/Message/SendCommentMessage/' + postId + '/' + commentId + '/' + type,
+            complete: function (data) {
+                if (data.status == 200)
+                    id.html("<p class='alert alert-success'>تم ارسال الرساله</p>");
+                else
+                    alert("لم يتم اضافه الرساله تاكد من اتصال انترنت")
+            }
+        });
+    }
+
     $(".uprate").on("click", function () {
         var upRate = $(this);
 
@@ -113,7 +127,17 @@
         var btn = $(this).attr("data-report");
         ratecomment($("#id-" + btn + ""), commentId, postId, 2);
     });
- 
+
+    $(".send-message").on("click", function () {
+        var sendBtn = $(this);
+
+        var commentId = sendBtn.attr("data-commentId");
+        var postId = sendBtn.attr("data-postId");
+
+        var btn = $(this).attr("data-report");
+        sendmessage($("#id-" + btn + ""), commentId, postId, 2);
+    });
+
     $(".report").on("click", function () {
         var btn = $(this).attr("data-report");
         console.log(btn);
