@@ -98,11 +98,14 @@ input.form-control { border: 1px solid #ddd }
 .content .items .item .det h3 { margin-top:0; font-weight: bold; color:#4da74d }
 .content .items .item .det small { color:#777 }
 .content .items .item .det span { padding-left:30px; color:#777 }
-.content .items .item .det-img { width: 8%; float: right }
-.content .items .item .det-img img { width:100%; margin:5px 0 }
+.content .items .item .det-img { width: 12%; float: right }
+.content .items .item .det-img img { width:100%; margin:5px 0; height:100px }
 .content .items .item.msgItem { width: 90% }
 .content .items .item.msgItem .det { width: 100%; float: none; }
-
+@media(max-width:767px) {
+    .content .items .item .det { width: 74%; }
+    .content .items .item .det-img { width: 25%; }
+}
 .footer { background: #eee; margin-top: 15px; padding-top: 30px; }
 .footer ul li { margin-bottom: 10px }
 .footer .copyright hr { margin-bottom: 12px; border-top: 1px solid #ddd; }
