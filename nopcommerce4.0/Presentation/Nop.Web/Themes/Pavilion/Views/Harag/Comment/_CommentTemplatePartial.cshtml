@@ -1,4 +1,4 @@
-﻿
+﻿@using Nop.Web.Controllers.Harag
 @model Nop.Web.Models.Harag.Comment.CommentModel
 
 <div class="comment">
@@ -11,7 +11,7 @@
             <div  class="pull-left adxExtraInfoPart"> 
                 <div class="pull-left">
                     ››
-                    <a data-report="@Model.Id" data-commentId="@Model.Id" data-postId="@Model.PostId">ارسال رساله</a>
+                    <a href="/Harag/Messages/Post/@Model.PostOwnerId/@((int)MessageType.Comment)/@Model.PostId" data-report="@Model.Id" data-commentId="@Model.Id" data-postId="@Model.PostId">ارسال رساله</a>
                 </div> 
             </div>
         </div> 

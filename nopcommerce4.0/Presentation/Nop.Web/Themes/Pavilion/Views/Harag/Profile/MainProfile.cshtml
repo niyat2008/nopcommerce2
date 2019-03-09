@@ -1,5 +1,5 @@
 ﻿@model Nop.Web.Models.Harag.Profile.ProfileModel
-
+@using Nop.Web.Controllers.Harag
 @{
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
 }
@@ -29,7 +29,7 @@
                     <hr />
                     <p> @Model.LastSeen </p>
                     <hr />
-                    @*<p><a href="add-message.html"><i class="fa fa-envelope-o"></i> مراسلة </a></p>*@
+                    <p><a href="/Harag/Messages/Post/@Model.Id/@((int)MessageType.User)"><i class="fa fa-envelope-o"></i> مراسلة </a></p>
                     <hr />
                     <p><a href="/Harag/User/@Model.UserName/Rates">مشاهدة كل التقييمات</a></p>
                     <div class="col-xs-12" style="padding:0">

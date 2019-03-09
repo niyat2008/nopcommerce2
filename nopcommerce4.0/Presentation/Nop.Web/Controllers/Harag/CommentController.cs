@@ -104,6 +104,7 @@ namespace Nop.Web.Controllers.Harag
                         DateUpdated = m.DateUpdated,
                         CommentedBy = m.CommentedBy,
                         CommentOwner = m.Customer.Username,
+                        PostOwnerId = m.Z_Harag_Post.CustomerId
                         //Photos = m.Photos.Select(p => p.Url).ToList()
                     }).ToList(),
                 };
@@ -161,6 +162,7 @@ namespace Nop.Web.Controllers.Harag
                 string userName = _workContext.CurrentCustomer.Username;
                 var commentToReturn = commentCreated.ToCommentModel();
                 commentToReturn.CommentOwner = userName;
+                commentToReturn.PostOwnerId = post.CustomerId;
 
                 return PartialView("~/Themes/Pavilion/Views/Harag/Comment/_CommentTemplatePartial.cshtml", commentToReturn);
             }

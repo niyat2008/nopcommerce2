@@ -136,7 +136,7 @@ namespace Nop.Web.Infrastructure
             new { controller = "Message", action = "GetUserMessageThreads" });
 
             //  Harag Get Post Messages  
-            routeBuilder.MapRoute("Harag.Message.GetAllPostMessages", "Harag/Messages/Post/{userId?}/{postId?}/{type?}",
+            routeBuilder.MapRoute("Harag.Message.GetAllPostMessages", "Harag/Messages/Post/{userId?}/{type?}/{postId?}",
             new { controller = "Message", action = "GetAllPostMessages" });
 
             // Harag New Message

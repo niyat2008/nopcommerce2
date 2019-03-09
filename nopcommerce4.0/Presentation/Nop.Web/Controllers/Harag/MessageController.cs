@@ -60,11 +60,13 @@ namespace Nop.Web.Controllers.Harag
             {
                 Message = message.Message,
                 CreatedTime = DateTime.Now,
-                ToUserId = message.FromUserId,
-                PostId = message.PostId,
+                ToUserId = message.ToUserId, 
                 FromUserId = currentUserId
             };
-                 
+
+            if (message.PostId != 0)
+               msg.PostId = message.PostId;
+             
             var mes = _messageService.AddMessage(msg);
 
             var messageType = (MessageType) message.Type;
@@ -72,12 +74,15 @@ namespace Nop.Web.Controllers.Harag
             var model = new MessageOutputModel{
                 Message = mes.Message,
                 DateTime = (DateTime) mes.CreatedTime,
-                postId = (int)mes.PostId,
+              
                 FromUser = mes.Customer.Username,
                 FromUserId = (int)mes.ToUserId,
                 Type = (MessageType)mes.MessageType
             };
 
+            if (message.PostId != 0)
+             model.postId = (int)mes.PostId;
+              
             if (mes != null)
                 return PartialView("~/Themes/Pavilion/Views/Harag/Message/_MessageTemplatePartial.cshtml", model);
 
@@ -95,7 +100,7 @@ namespace Nop.Web.Controllers.Harag
 
             if (user == null)
                 return NotFound();
-             
+  
             var messages = _messageService.GetUserMessages(currentUserId, userId);
             var post = _postService.GetPost(postId, "");
              
@@ -114,6 +119,8 @@ namespace Nop.Web.Controllers.Harag
                     DateTime = (DateTime)m.CreatedTime
                 }).ToList()
             };
+            model.ToUserId = userId;
+            model.MessageType = (MessageType)type;
 
             if (post != null)
             {

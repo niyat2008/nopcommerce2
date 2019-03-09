@@ -18,7 +18,7 @@ namespace Nop.Data.Mapping.Z_Harag
             this.Property(m => m.FromUserId).IsOptional();
             this.Property(m => m.MessageType).IsOptional();
             this.HasOptional(m => m.Z_Harag_Post).WithMany(p => p.Z_Harag_Message).HasForeignKey(m => m.PostId);
-            this.HasOptional(m => m.Customer).WithMany(c => c.PostsMessages).HasForeignKey(m => m.ToUserId);
+            this.HasOptional(m => m.User).WithMany(c => c.PostsMessages).HasForeignKey(m => m.ToUserId);
             this.HasOptional(m => m.Customer).WithMany(c => c.UserMessages).HasForeignKey(m => m.FromUserId);
         }
     }

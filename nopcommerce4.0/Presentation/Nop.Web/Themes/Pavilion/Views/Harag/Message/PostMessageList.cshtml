@@ -4,6 +4,17 @@
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
 }
 
+
+@{ 
+    int postId = 0;
+    string postTitle = "";
+
+    if (Model.Post != null)
+    {
+        postId = Model.Post.Id;
+        postTitle = Model.Post.Title;
+    }
+}
 <!-- Content -->
 <div class="content">
     <div class="container-fluid">
@@ -13,21 +24,19 @@
             <div class="col-sm-9">
                 <h4>الرسائل</h4>
 
-                <div id="messages">
+                <div id="messages" class="row">
                     @foreach (var item in Model.Messages)
                     {
                         @Html.Partial("~/Themes/Pavilion/Views/Harag/Message/_MessageTemplatePartial.cshtml", item)
                     }
                 </div>
 
-                <div class="follow">
-                    <div class="col-xs-12">
-                        <button> 
-                            <a href="/Harag/post/@Model.Post.Id" class="btn btn-default add"> رجوع <i class="fa fa-arrow-left"></i></a>
-                        </button>
+                <div class="follow row">
+                    <div class="col-xs-12"> 
+                       <a  href="/Harag/post/@postId" class="btn btn-default add"> رجوع <i class="fa fa-arrow-left"></i></a> 
                     </div>
                 </div>
-                <div>
+                <div class="row">
                     <div class="col-sm-12">
                         <textarea id="add-message-js-ajax" class="form-control txtArea" placeholder="أكتب ردك هنا" rows="7"></textarea>
                         <button id="add-message-btn-js" class="btn btn-default add" type="button"> ارسال >>  </button>
@@ -57,21 +66,22 @@
         var text = $("#add-message-js-ajax").val();
 
         var messageModel = {
-            Message: text + "",
-            PostId: '@Model.Post.Id',
-            FromUserId: '@Model.ToUserId',
-            ToUserId: '',
-            Type: '@Model.MessageType'
+            "Message": text + "",
+            "PostId": "@postId",
+            "FromUserId": "0",
+            "ToUserId": "@Model.ToUserId",
+            "Type": "@((int)Model.MessageType)"
         };
-         
+
+        console.log(JSON.stringify(messageModel));
+
         $.ajax({
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             type: "POST",
-            url: '/Harag/NewPostMessageAjax/',
-            dataType: 'json',
+            url: '/Harag/NewPostMessageAjax/', 
             data: JSON.stringify(messageModel),
             complete: function (data) {
                 $("#messages").append(data.responseText);
