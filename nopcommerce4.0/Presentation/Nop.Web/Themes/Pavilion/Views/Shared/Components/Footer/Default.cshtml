@@ -53,7 +53,7 @@
                     <li><a href="@Url.RouteUrl("CustomerInfo")">@T("Account.CustomerInfo")</a></li>
                     <li><a href="@Url.RouteUrl("CustomerAddresses")">@T("Account.CustomerAddresses")</a></li>
                     <li><a href="@Url.RouteUrl("CustomerOrders")">@T("Account.CustomerOrders")</a></li>
-                    
+
                     @if (Model.ShoppingCartEnabled)
                     {
                         <li><a href="@Url.RouteUrl("ShoppingCart")">@T("ShoppingCart")</a></li>
@@ -129,3 +129,4 @@
     </div>
     @await Component.InvokeAsync("Widget", new { widgetZone = "footer" })
 </div>
+

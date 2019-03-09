@@ -1656,3 +1656,8 @@
             white-space: nowrap;
         }
     }
+@media (min-width: 1281px) {
+    .footer .center {
+        width: 1200px;
+    }
+}
