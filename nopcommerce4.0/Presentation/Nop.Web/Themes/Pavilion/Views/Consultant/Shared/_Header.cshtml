@@ -51,6 +51,21 @@
     .btndarckgreen:hover {
         background-color: darkgreen !important;
     }
+    .consult:hover {
+        color: #4da74d !important;
+    }
+    .consult .cart-label:hover, .consult .cart-qty:hover {
+        color: #4da74d;
+    }
+    #flyout-cart:hover {
+        color: #4da74d !important;
+    } 
+    #flyout-cart a:hover {
+        color: #4da74d !important;
+    } 
+    .badge {
+        background-color: red !important;
+    }
 </style>
 
 
@@ -66,9 +81,10 @@
                 </div>
                 <div class="col-md-4">
                     <div class="text-center">
-                        <span>@Html.RouteLink("سوق", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-                        <span class="active">@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-                        <span  >@Html.RouteLink("حراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                        <span>@Html.RouteLink("المتجر", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                        <span >@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+
+                        <span class="active">@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</spanclass="active">
 
                     </div>
                 </div>
@@ -99,11 +115,22 @@
                     <button onclick="filterWithText()" style="height:44px;" class="btndarckgreen">
                         <i class="fa fa-search"></i>
                     </button>
+                   
+
                 </div>
             </div>
-
+            <div class="col-md-3 consult " style="padding-top:25px;">
+                <div class="flyout-cart-wrapper" id="flyout-cart">
+                    <a href="/Consultant/Notifications" >
+                        <span class="cart-qty badge NotificationNum"></span>
+                        <span class="cart-label ">الاشعارات</span>
+                    </a>
+                   
+                </div>
+            </div>
         </div>
     </div>
+   
 </section>
 
 <!--<!-- Nav -->
@@ -213,6 +240,18 @@
 
     $(document).ready(function () {
 
+
+        $.ajax({
+            url: "/Consultant/UnReadNotifications",
+            type: "get",
+            success: function (data) {
+                console.log("data " + data.query);
+                $(".NotificationNum").html(data.query);
+
+            }
+
+        });
+
         $.ajax({
             type: 'GET',
             url: '@Url.RouteUrl("Consultant.User.GetUserInfo")',
@@ -249,6 +288,11 @@
                 $("#threebuttons").html(data);
             }
         });
+         
+          $(".NotificationNum").on("mouseover", function () {
+              $(".cart-label").css("color", "#4da74d");
+
+          })
 
     });
 

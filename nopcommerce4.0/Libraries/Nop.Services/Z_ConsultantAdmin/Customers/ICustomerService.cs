@@ -9,6 +9,8 @@ namespace Nop.Services.Z_ConsultantAdmin.Customers
 {
     public interface ICustomerService
     {
+
+        List<Customer> GetCustomers();
         //Get Members
         List<Customer> GetMembers(int start,int length,string searchValue,string sortColumnName,string sortDirection);
 
@@ -23,6 +25,8 @@ namespace Nop.Services.Z_ConsultantAdmin.Customers
 
         //Get Consultants
         List<Customer> GetConsultants(int start, int length, string searchValue, string sortColumnName, string sortDirection);
+        //Get Consultants for Notifications
+         List<Customer> GetConsultants();
 
         //Get Consultant Details
         Customer GetConsultantDetails(int id);

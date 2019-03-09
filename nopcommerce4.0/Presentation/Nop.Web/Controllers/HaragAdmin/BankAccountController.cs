@@ -9,6 +9,7 @@ using Nop.Core.Domain.Customers;
 using Nop.Services.Z_Harag.Helpers;
 using Nop.Services.Events;
 using Nop.Web.Models.HaragAdmin.BankAccount;
+using Nop.Web.Models.HaragAdmin.BankPayment;
 
 namespace Nop.Web.Controllers.HaragAdmin
 {
@@ -137,6 +138,56 @@ namespace Nop.Web.Controllers.HaragAdmin
 
             return Json(new { data = result });
 
+        }
+
+        //Get Payment 
+        public IActionResult GetPayments()
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+                return Forbid();
+
+            return View("~/Themes/Pavilion/Views/HaragAdmin/BankPayment/GetBankPayments.cshtml");
+        }
+
+        //Get Payment Ajax
+        [HttpPost]
+        public IActionResult GetPaymentsAjax()
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+                return Forbid();
+
+            var start = Convert.ToInt32(Request.Form["start"].FirstOrDefault());
+
+            int length = Convert.ToInt32(Request.Form["length"]);
+            string searchValue = Request.Form["search[value]"];
+            string sortColumnName = Request.Form["columns[" + Request.Form["order[0][column]"] + "][name]"];
+            string sortDirection = Request.Form["order[0][dir]"];
+
+            
+            var paymentInDb = _bankService.GetPayments(start, length, searchValue, sortColumnName, sortDirection);
+
+            var model = new BankPaymentOutputModel
+            {
+                Items = paymentInDb.Select(b => new BankPaymentModel
+                {
+                    Id=b.Id,
+                    BankName=b.BankAccount?.BankName,
+                    BankAccount=b.BankAccount?.AccountNo,
+                    UserName=b.UserName,
+                    TransatctorUser=b.TransatctorUser,
+                    SiteAmount=b.SiteAmount,
+                    Notes=b.Notes,
+                    PostId=b.Post.Id
+                }).ToList()
+            };
+
+            return Json(new { data = model.Items });
         }
         #endregion
     }

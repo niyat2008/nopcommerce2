@@ -4,6 +4,7 @@ using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Z_Harag;
 using Nop.Services.Z_Harag.Comment;
 using Nop.Services.Z_Harag.Helpers;
+using Nop.Services.Z_Harag.Notification;
 using Nop.Services.Z_Harag.Post;
 using Nop.Web.Extensions.Harag;
 using Nop.Web.Models.Harag.Comment;
@@ -17,6 +18,7 @@ namespace Nop.Web.Controllers.Harag
 {
     public class CommentController : BasePublicController
     {
+        private readonly INotificationService _notificationService;
 
         private readonly IUrlHelper _urlHelper;
         private readonly IPostService _postService;
@@ -27,6 +29,7 @@ namespace Nop.Web.Controllers.Harag
 
         public CommentController(
             IUrlHelper urlHelper,
+            INotificationService _notificationService,
             IPostService postService,
             Core.IWorkContext workContext,
             IHostingEnvironment env,
@@ -34,6 +37,7 @@ namespace Nop.Web.Controllers.Harag
             )
         {
             this._urlHelper = urlHelper;
+            this._notificationService = _notificationService;
             this._postService = postService;
             this._workContext = workContext;
             this._env = env;
@@ -112,7 +116,7 @@ namespace Nop.Web.Controllers.Harag
 
         }
         [HttpPost]
-        public IActionResult AddHaragComment([FromBody]CommentForPostModel model)
+        public IActionResult AddHaragComment([FromBody] CommentForPostModel model)
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Unauthorized();
@@ -124,11 +128,36 @@ namespace Nop.Web.Controllers.Harag
             {
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
-
-
+                 
                 List<string> errors = new List<string>();
                 var commentCreated = _commentService.AddComment(model, currentUserId);
+                var post = _postService.GetPost(model.PostId, "");
 
+                if (post.CustomerId != currentUserId)
+                {
+                    var notifications = _notificationService.PushPostCommentNotification(new CommentForNotifyModel
+                    {
+                        CustomerId = currentUserId,
+                        Text = commentCreated.Text,
+                        PostId = model.PostId,
+                        Time = DateTime.Now,
+                        PostOwner = post.CustomerId
+                    });
+
+                    var d = _notificationService.PushPostOwnerNotification(new CommentForNotifyModel
+                    {
+                        CustomerId = currentUserId,
+                        Text = commentCreated.Text,
+                        PostId = model.PostId,
+                        Time = DateTime.Now,
+                        PostOwner = post.CustomerId
+                    });
+                }
+                else
+                {
+
+                }
+                 
                 string userName = _workContext.CurrentCustomer.Username;
                 var commentToReturn = commentCreated.ToCommentModel();
                 commentToReturn.CommentOwner = userName;

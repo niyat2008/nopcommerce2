@@ -7,6 +7,9 @@
         Category = 3,
         General = 4,
         Note = 5,
-        Comment = 6
+        Comment = 6,
+        UpdatePost = 7,
+        PostOwnnerComment = 8,
+        Rate = 9
     }
 }

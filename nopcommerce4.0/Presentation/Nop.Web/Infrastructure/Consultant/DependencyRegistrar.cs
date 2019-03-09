@@ -4,6 +4,7 @@ using Nop.Core.Infrastructure;
 using Nop.Core.Infrastructure.DependencyManagement;
 using Nop.Services.Z_Consultant.Category;
 using Nop.Services.Z_Consultant.Comment;
+using Nop.Services.Z_Consultant.Notification;
 using Nop.Services.Z_Consultant.Post;
 using Nop.Services.Z_Consultant.SubCategory;
 using System;
@@ -23,6 +24,7 @@ namespace Nop.Web.Infrastructure.Consultant
             builder.RegisterType<SubCategoryService>().As<ISubCategoryService>().InstancePerLifetimeScope();
             builder.RegisterType<PostService>().As<IPostService>().InstancePerLifetimeScope();
             builder.RegisterType<CommentService>().As<ICommentService>().InstancePerLifetimeScope();
+            builder.RegisterType<NotificationService>().As<INotificationService>().InstancePerLifetimeScope();
         }
 
         /// <summary>

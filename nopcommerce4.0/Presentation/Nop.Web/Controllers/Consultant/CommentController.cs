@@ -4,6 +4,7 @@ using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Z_Consultant;
 using Nop.Services.Z_Consultant.Comment;
 using Nop.Services.Z_Consultant.Helpers;
+using Nop.Services.Z_Consultant.Notification;
 using Nop.Services.Z_Consultant.Post;
 using Nop.Web.Extensions.Consultant;
 using Nop.Web.Models.Consultant.Comment;
@@ -22,14 +23,16 @@ namespace Nop.Web.Controllers.Consultant
         private readonly Core.IWorkContext _workContext;
         private readonly IHostingEnvironment _env;
         private readonly ICommentService _commentService;
-
+        private readonly INotificationService _notificationtService;
+        
 
         public CommentController(
             IUrlHelper urlHelper,
             IPostService postService,
             Core.IWorkContext workContext,
             IHostingEnvironment env,
-            ICommentService commentService
+            ICommentService commentService,
+            INotificationService notificationtService
             )
         {
             this._urlHelper = urlHelper;
@@ -37,6 +40,7 @@ namespace Nop.Web.Controllers.Consultant
             this._workContext = workContext;
             this._env = env;
             this._commentService = commentService;
+            this._notificationtService = notificationtService;
         }
 
 
@@ -191,7 +195,7 @@ namespace Nop.Web.Controllers.Consultant
             var currentUserId = _workContext.CurrentCustomer.Id;
             ViewBag.UserName = _workContext.CurrentCustomer.Username;
 
-            
+            var notifyModel = new NotificationModel();
 
             if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Consultant, true))
             {
@@ -213,6 +217,19 @@ namespace Nop.Web.Controllers.Consultant
                         string userName = _workContext.CurrentCustomer.Username;
                         var commentToReturn = commentCreated.ToCommentModel();
                         commentToReturn.CommentOwner = userName;
+                        //--Notification--
+
+                        var post = _postService.GetPostById(commentToReturn.PostId);
+
+                        if (post != null)
+                            notifyModel.OwnerId = post.CustomerId;
+
+                        notifyModel.PostId = commentCreated.PostId;
+                        notifyModel.UserId = _workContext.CurrentCustomer.Id;
+                        notifyModel.Type = 2;
+
+                        _notificationtService.AddCommentNotification(notifyModel);
+                        //--End Notification
                         return CreatedAtRoute("Consultant.Comment.GetComment", new { CommentId = commentToReturn.Id }, commentToReturn);
                     }
                     else
@@ -229,6 +246,21 @@ namespace Nop.Web.Controllers.Consultant
                     string userName = _workContext.CurrentCustomer.Username;
                     var commentToReturn = commentCreated.ToCommentModel();
                     commentToReturn.CommentOwner = userName;
+
+                    //--Notification--
+
+                    var post = _postService.GetPostById(commentToReturn.PostId);
+
+                    if (post != null)
+                        notifyModel.OwnerId = post.Customer.Id;
+
+                    notifyModel.PostId = commentCreated.PostId;
+                    notifyModel.UserId = _workContext.CurrentCustomer.Id;
+                    notifyModel.Type = 2;
+
+                    _notificationtService.AddCommentNotification(notifyModel);
+                    //--End Notification
+
                     return GetComment(commentToReturn.Id);
                 }
 
@@ -250,6 +282,22 @@ namespace Nop.Web.Controllers.Consultant
                     string userName = _workContext.CurrentCustomer.Username;
                     var commentToReturn = commentCreated.ToCommentModel();
                     commentToReturn.CommentOwner = userName;
+
+                    //--Notification--
+
+                    var post = _postService.GetPostById(commentToReturn.PostId);
+
+                    if (post != null)
+                        notifyModel.OwnerId = post.Consultant.Id;
+
+                    notifyModel.PostId = commentCreated.PostId;
+                    notifyModel.UserId = _workContext.CurrentCustomer.Id;
+                    notifyModel.Type = 2;
+
+                    _notificationtService.AddCommentNotification(notifyModel);
+                    //--End Notification
+
+
                     return GetComment(commentToReturn.Id);
                 }
                 else

@@ -17,6 +17,10 @@ using Nop.Web.Models.Consultant.Comment;
 using Nop.Web.Models.Consultant.Post;
 using Nop.Web.Models.Consultant.SubCategory;
 using Nop.Web.Models.Consultant.User;
+using Nop.Services.Z_Consultant.Notification;
+using Nop.Services.Z_ConsultantAdmin.Customers;
+using System;
+using Nop.Web.Models.Consultant.Notification;
 
 namespace Nop.Web.Controllers.Consultant
 {
@@ -31,7 +35,8 @@ namespace Nop.Web.Controllers.Consultant
         private readonly IHostingEnvironment _env;
         private readonly ICommentService _commentService;
         private readonly ISubCategoryService _subCategoryService;
-
+        private readonly INotificationService _notificationService;
+        private readonly ICustomerService _consultantService;
         #endregion
 
 
@@ -43,7 +48,9 @@ namespace Nop.Web.Controllers.Consultant
             Core.IWorkContext workContext,
             IHostingEnvironment env,
             ICommentService commentService,
-            ISubCategoryService subCategoryService
+            ISubCategoryService subCategoryService,
+            INotificationService notificationService,
+            ICustomerService consultantService
             )
         {
             this._categoryService = categoryService;
@@ -53,6 +60,8 @@ namespace Nop.Web.Controllers.Consultant
             this._env = env;
             this._commentService = commentService;
             this._subCategoryService = subCategoryService;
+            this._notificationService = notificationService;
+            this._consultantService = consultantService;
         }
         #endregion
 
@@ -1209,7 +1218,26 @@ namespace Nop.Web.Controllers.Consultant
             }
 
 
+            
 
+            var postNotification = new NotificationModel
+            {
+                PostId = post.Id,
+                UserId=_workContext.CurrentCustomer.Id,
+               Type=1
+            };
+
+            List<int> consultantId = new List<int>();
+
+            var consultants= _consultantService.GetConsultants();
+
+            foreach (var con in consultants)
+            {
+                consultantId.Add(con.Id);
+            }
+
+            _notificationService.AddPostNotification(postNotification, consultantId);
+            
 
             string userName = _workContext.CurrentCustomer.Username;
 

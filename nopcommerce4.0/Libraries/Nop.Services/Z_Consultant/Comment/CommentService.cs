@@ -331,5 +331,15 @@ namespace Nop.Services.Z_Consultant.Comment
             _commentRepository.Update(comment);
             return comment;
         }
+
+        // Get Comments By PostId
+       //public List<Z_Consultant_Comment> GetcommentsByPOstId(int postId)
+       // {
+       //     if(postId !=0)
+       //     {
+       //         return _commentRepository.TableNoTracking.Include(c => c.Post).Include(c => c.Customer).ToList();
+       //     }
+       //     return null;
+       // }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Nop.Core.Data;
 using Nop.Core.Domain.Z_Harag;
+using Nop.Services.Customers;
 using Nop.Services.Events;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Nop.Services.Z_Harag.Message
 {
-   public class MessageService:IMessageService
+    public class MessageService:IMessageService
     {
         private readonly IRepository<Z_Harag_Message> _messageRepository ;
         
@@ -25,10 +26,16 @@ namespace Nop.Services.Z_Harag.Message
             this._env = env;
         }
 
+        public Z_Harag_Message AddCommentMessage(CommentMessageModel messageModel)
+        {
+            throw new NotImplementedException();
+        }
+
         public Z_Harag_Message AddMessage(Z_Harag_Message message)
         {
             if (message == null)
                 return null; 
+
             _messageRepository.Insert(message);
             return message;
         }
@@ -68,17 +75,55 @@ namespace Nop.Services.Z_Harag.Message
             return query;
         }
 
-        public List<Z_Harag_Message> GetMessagesByUser(int userId)
+        public List<Z_Harag_Message> GetUserMessages(int FromUserId, int toUserId)
         {
             var query = _messageRepository.TableNoTracking
-                .Include(mbox => mbox.Customer) 
-                .Include(mbox => mbox.Z_Harag_Post)
-                .Where(m => m.CustomerId == userId)
-                
-                .Distinct()
-                .OrderByDescending(m => m.CreatedTime)
-                .ToList();
+                .Include(mbox => mbox.Customer)
+                .Include(mbox => mbox.User)
+                .Include(mbox => mbox.Z_Harag_Post) 
+                .Where(m => m.FromUserId == FromUserId && m.ToUserId == toUserId).ToList();
             return query;
         }
+
+        public List<MessageThreadModel> GetMessagesByUser(int userId)
+        {
+            var users = _messageRepository.TableNoTracking 
+                .Where(m => m.ToUserId == userId) 
+                .Select(n => n.FromUserId)
+                .Distinct()
+                .ToList(); 
+             
+            var messagesthread = new List<MessageThreadModel>();
+            foreach (var user in users)
+            {
+
+                var message = _messageRepository.TableNoTracking.Where(m => m.FromUserId == user)
+                    .Include(mbox => mbox.Customer)
+                    .Include(mbox => mbox.Z_Harag_Post)
+                    .Include(mbox => mbox.User)
+                    .OrderBy(m => m.CreatedTime).FirstOrDefault();
+
+                var fromUser = message.User == null ? "" : message.User.GetFullName();
+                var toUser = message.Customer == null ? "" : message.Customer.GetFullName();
+                var postObj = message.Z_Harag_Post == null ? "" :message.Z_Harag_Post.Title;
+
+                messagesthread.Add(new MessageThreadModel
+                {
+                    Message = message.Message,
+                    SentFromName = fromUser,
+                    SentToName = toUser,
+                    CreatedTime = message.CreatedTime,
+                    CustomerId = message.ToUserId,
+                    UserId = message.FromUserId,
+                    MessageTitle = message.MessageTitle,
+                    MessageType = message.MessageType,
+                    PostId = message.PostId,
+                    PostTitle = postObj
+                });
+            }
+            return messagesthread;
+        }
+
+      
     }
 }

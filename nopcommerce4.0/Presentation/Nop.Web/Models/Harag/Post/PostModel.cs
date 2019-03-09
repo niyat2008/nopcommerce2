@@ -14,6 +14,7 @@ namespace Nop.Web.Models.Harag.Post
         public DateTime DateUpdated { get; set; }
         public bool IsClosed { get; set; }
         public bool IsAnswered { get; set; }
+        public string PostOwnerFullName { get; set; }
         public int? Rate { get; set; }
         public bool IsDispayed { get; set; }
         public bool IsReserved { get; set; }

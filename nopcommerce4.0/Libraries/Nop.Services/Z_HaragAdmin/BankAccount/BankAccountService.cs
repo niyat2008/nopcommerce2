@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Dynamic;
+using System.Data.Entity;
 
 namespace Nop.Services.Z_HaragAdmin.BankAccount
 {
@@ -13,11 +14,13 @@ namespace Nop.Services.Z_HaragAdmin.BankAccount
     {
         #region Fields
         private readonly IRepository<Z_Harag_BankAccount> _bankRepository;
+        private readonly IRepository<Z_Harag_BankPayment> _bankPaymentRepository;
         #endregion
         #region Ctor
-        public BankAccountService(IRepository<Z_Harag_BankAccount> bankRepository)
+        public BankAccountService(IRepository<Z_Harag_BankAccount> bankRepository, IRepository<Z_Harag_BankPayment> bankPaymentRepository)
         {
             this._bankRepository = bankRepository;
+            this._bankPaymentRepository = bankPaymentRepository;
         }
         #endregion
         #region Methods
@@ -110,6 +113,32 @@ namespace Nop.Services.Z_HaragAdmin.BankAccount
             _bankRepository.Delete(account);
 
             return true;
+        }
+
+       
+       
+
+        // Get Bank Payments 
+        public List<Z_Harag_BankPayment> GetPayments(int start, int length, string searchValue, string sortColumnName, string sortDirection)
+        {
+            var query = _bankPaymentRepository.TableNoTracking.Include(b => b.Post).Include(b => b.User).Include(b => b.BankAccount);
+
+            //search
+           if(!string.IsNullOrEmpty(searchValue))
+            {
+                query = query.Where(b => b.UserName.Contains(searchValue) || b.BankAccount.BankName.Contains(searchValue));
+            }
+
+           //sort
+           if(!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
+            {
+                query = query.OrderBy(sortColumnName + " " + sortDirection);
+            }
+
+            //paging
+            query = query.OrderByDescending(b => b.TransactionDate).Skip(start).Take(length);
+
+            return query.ToList();
         }
         #endregion
     }

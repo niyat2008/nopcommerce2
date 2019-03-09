@@ -131,30 +131,39 @@
         </div>
     </div>
 </div>
-@*style="max-height:300px;padding:0!important;"*@
-
-<a href="@Model.Photos.FirstOrDefault()" data-toggle="lightbox">
 
 
-   
-</a>
-@*<img src="@Model.Photos.FirstOrDefault()" class="img-fluid">*@
 
-@*<div class="row">
-    @foreach (var photo in Model.Photos)
-    {
-        <div class="col-md-2">
-            <img src="@photo" class="img-responsive" style="width:200px;height:200px;  margin-bottom:10px;margin-top:20px;" />
-        </div>
 
-    }
-</div>*@
-@*<div id="comments" class="alert alert-primary" role="alert">
-    A simple primary alert—check it out!
-</div>*@
-<div id="comments" style="margin-top:30px;"><span>التعليقات</span></div>
-<div id="messages"><span>الرسائل</span></div>
-<div id="reports"><span>البلاغات</span></div>
+
+<nav style="margin-top:50px;">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#comments" role="tab" aria-controls="nav-home" aria-selected="true">التعليقات</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="nav-profile" aria-selected="false">الرسائل</a>
+        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#reports" role="tab" aria-controls="nav-contact" aria-selected="false">البلاغات</a>
+    </div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent">
+    <div id="comments" class="tab-pane fade show active"  role="tabpanel" aria-labelledby="nav-home-tab">
+
+        
+    </div>
+    <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="nav-profile-tab">
+        
+</div>
+    <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="nav-contact-tab">
+       
+    </div>
+</div>
+
+
+
+
+
+@*<div id="comments" style="margin-top:30px;"><span>التعليقات</span></div>
+<div id="messages" style="margin-top:30px;"><span>الرسائل</span></div>*@
+@*<div id="reports"><span>البلاغات</span></div>*@
 
 <script src="~/js/HaragAdmin/ekko-lightbox.min.js"></script>
 
@@ -247,6 +256,7 @@
 
 
 
+
 @*<div class="col-md-4" style="max-height:300px!important;">
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -269,3 +279,31 @@
     </div>
 
 </div>*@
+
+
+
+
+
+
+
+@*style="max-height:300px;padding:0!important;"*@
+
+@*<a href="@Model.Photos.FirstOrDefault()" data-toggle="lightbox">
+
+
+
+    </a>*@
+@*<img src="@Model.Photos.FirstOrDefault()" class="img-fluid">*@
+
+@*<div class="row">
+        @foreach (var photo in Model.Photos)
+        {
+            <div class="col-md-2">
+                <img src="@photo" class="img-responsive" style="width:200px;height:200px;  margin-bottom:10px;margin-top:20px;" />
+            </div>
+
+        }
+    </div>*@
+@*<div id="comments" class="alert alert-primary" role="alert">
+        A simple primary alert—check it out!
+    </div>*@

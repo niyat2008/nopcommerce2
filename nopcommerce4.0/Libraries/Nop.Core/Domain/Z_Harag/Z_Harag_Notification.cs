@@ -16,6 +16,7 @@ namespace Nop.Core.Domain.Z_Harag
         public Nullable<int> PostId { get; set; }
         public Nullable<int> OwnerId { get; set; }
         public Nullable<int> CategoryId { get; set; }
+        public Nullable<bool> IsRead { get; set; }
 
         public virtual Customer Customer { get; set; }
         public virtual Customer Owner { get; set; }

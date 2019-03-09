@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Nop.Web.Models.Consultant.Notification.GetNotificationModel>
+
+    @{ 
+        Layout = "~/Themes/Pavilion/Views/Consultant/Shared/_Header.cshtml";
+    }
+
+
+
+<style type="text/css">
+    .notification-list {
+        margin-right: 20px;
+    }
+    .notification {
+        font-size: 18px;
+        padding: 8px;
+        display:block;
+    }
+</style>
+
+
+
+<div class="notification-list">
+    @foreach (var not in Model)
+    {
+        <a href="/Consultations/Post?PostId=@not.PostId" class="notification">
+        <span>لقد قام </span>    @not.User <span>بنشر @(not.Type == 1 ? "استشارة" : "تعليق")</span><span> @(not.TimeDescription) </span>
+        </a>
+       
+    }
+</div>
+@*<script>
+    $(document).ready(function () {
+    var model = {
+        "model":@notificationList
+
+    }
+    //var values = JSON.stringify(model);
+
+        $.ajax({
+            url: "/Consultant/UpdateNotifications",
+            type: "post",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: {model:@notificationList},
+            success: function (data) {
+                console.log("success");
+
+            }
+
+        });
+
+    });
+</script>*@

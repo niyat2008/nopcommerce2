@@ -111,8 +111,30 @@ namespace Nop.Services.Z_ConsultantAdmin.Customers
             return Consultants.ToList();
         }
 
+        //Get Consultants for Notifications
+        public List<Customer> GetConsultants()
+        {
+            var Consultants = _customerRepository.TableNoTracking.Include(c => c.CustomerRoles).Include(c => c.CustomerRoles).Where(c => c.Deleted == false && c.CustomerRoles.Any(x => x.Name == "Consultant"));
+
+           
+
+
+            return Consultants.ToList();
+        }
+
+        public List<Customer> GetCustomers()
+        {
+            var Consultants = _customerRepository.TableNoTracking.Include(c => c.CustomerRoles).Include(c => c.CustomerRoles).Where(c => c.Deleted == false && c.CustomerRoles.Any(x => x.Name == "Registered"));
+
+
+
+
+            return Consultants.ToList();
+        }
+
+
         //Get Online Consultants
-       public List<Customer> GetOnlineConsultants(int start, int length, string searchValue, string sortColumnName, string sortDirection)
+        public List<Customer> GetOnlineConsultants(int start, int length, string searchValue, string sortColumnName, string sortDirection)
         {
             var consultants = _customerRepository.TableNoTracking.Include(c => c.CustomerRoles).Where(c => c.Active && c.Deleted==false&&c.CustomerRoles.Any(x=>x.Name=="Consultant"));
 

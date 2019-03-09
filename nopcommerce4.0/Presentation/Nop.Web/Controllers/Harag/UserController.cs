@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Nop.Core.Domain.Customers;
 using Nop.Services.Customers;
-using Nop.Services.Z_Consultant.Helpers;
+using Nop.Services.Z_Harag.Helpers;
 using Nop.Services.Z_Harag.BlackList;
 using Nop.Services.Z_Harag.Rate;
 using Nop.Services.Z_Harag.Post; 
@@ -14,26 +14,44 @@ using System.Linq;
 using System.Threading.Tasks;
 using Nop.Core.Domain.Z_Harag;
 using Nop.Web.Models.Harag.User;
+using Nop.Services.Z_Harag.Follow;
+using Nop.Services.Z_Harag.Payment;
+using Nop.Services.Z_HaragAdmin.Setting;
+using Nop.Services.Z_Harag.Notification;
 
 namespace Nop.Web.Controllers.Harag
 {
     public class UserController : BasePublicController
     {
+        private SettingsModel Settings;
         private readonly Core.IWorkContext _workContext;
         private readonly  ICustomerService _customerContext;
-        private readonly  IRateSrevice _rateRepository
-            ;
+        private readonly IRateSrevice _rateRepository;
+        private readonly INotificationService _notificationService;
+        private readonly IPaymentService _paymentRepository;
+        private readonly ISettingService _settingRepository;
+
+        private readonly IFollowService _followRepository; 
         private readonly  IBlackListService _blackListService;
         private readonly  IPostService _postService;
 
-        public UserController(Core.IWorkContext workContext,IRateSrevice _rateRepository,
-             IBlackListService _blackListService, IPostService _postService,ICustomerService _customerContext)
+        public PagingParams PagingParams { get; set; }
+
+        public UserController(Core.IWorkContext workContext,IRateSrevice _rateRepository, IFollowService _followRepository, IPaymentService _paymentRepository,
+             IBlackListService _blackListService, IPostService _postService,ICustomerService _customerContext, ISettingService _settingRepository, INotificationService _notificationService)
         {
+            this._notificationService = _notificationService;
+            this._paymentRepository = _paymentRepository;
+            this._settingRepository = _settingRepository;
+            this._followRepository = _followRepository;
             this._workContext = workContext;
             this._rateRepository = _rateRepository;
             this._customerContext = _customerContext;
             this._postService = _postService;
             this._blackListService = _blackListService;
+
+            Settings = _settingRepository.GetSettings();
+            PagingParams = new PagingParams();
         }
 
         [HttpGet]
@@ -58,9 +76,10 @@ namespace Nop.Web.Controllers.Harag
                 return Redirect("Login");
 
             var result = _workContext.CurrentCustomer; 
-                ViewBag.SameUser = true; 
+            ViewBag.SameUser = true; 
+            ViewBag.CanRateOtherUsers = false;
 
-            var posts = _postService.GetCurrentUserPosts(result.Id).Select(p => new PostModel
+            var posts = _postService.GetCurrentUserPosts(result.Id, PagingParams).Select(p => new PostModel
             {
                 CategoryId = p.CategoryId,
                 CategoryName = p.Category.Name,
@@ -104,14 +123,31 @@ namespace Nop.Web.Controllers.Harag
             }
             return PartialView("~/Themes/Pavilion/Views/Harag/User/_AdminLink.cshtml", 0);
         }
-
+        /// <summary>
+        /// Helper get the abilitty to add rate 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        private bool CanRateOtherUsers()
+        { 
+            var payments = _paymentRepository.GetUserPayments(_workContext.CurrentCustomer.Id);
+            if(payments.Count >= this.Settings.RateCommissionNumber)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         [HttpGet]
         public IActionResult RateUserView(string username)
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
-                return Redirect("Login");
+                return Redirect("/Login");
             var user = _customerContext.GetCustomerByUsername(username);
 
+ 
             if (user == null)
             {
                 return NotFound();
@@ -123,17 +159,30 @@ namespace Nop.Web.Controllers.Harag
                 UserId = user.Id
             };
 
+           
+
+            if (user.Username == _workContext.CurrentCustomer.Username)
+            { 
+                var note = "لا يمكنك تقييم نفسك";
+                return View("~/Themes/Pavilion/Views/Harag/Rate/RateNote.cshtml", note); 
+            }
+            else if (!CanRateOtherUsers())
+            {
+                var note = "لابد من الوصول الي شرط التقييم لامكانيه تقييم عضو اخر";
+                return View("~/Themes/Pavilion/Views/Harag/Rate/RateNote.cshtml", note);
+            }
+
             ViewBag.Added = false;
 
             return View("~/Themes/Pavilion/Views/Harag/Rate/RateUser.cshtml", model); 
         }
 
         [HttpPost]
-        public IActionResult RateUserAjax( RateModel model)
+        public IActionResult RateUserAjax(RateModel model)
         { 
 
             if (!_workContext.CurrentCustomer.IsRegistered())
-                return Redirect("Login");
+                return Redirect("/Login");
 
             if(!ModelState.IsValid)
                 return View("~/Themes/Pavilion/Views/Harag/Rate/RateUser.cshtml", model);
@@ -152,6 +201,7 @@ namespace Nop.Web.Controllers.Harag
             };
 
             var posts = _rateRepository.AddUserRate(rate);
+            var notification = _notificationService.PushRateNotification(_workContext.CurrentCustomer.Id,  model.AdviceDeal);
 
             ViewBag.Added = true;
 
@@ -162,6 +212,7 @@ namespace Nop.Web.Controllers.Harag
         [HttpGet]
         public IActionResult GetUserRates(string userId)
         {
+             
             var userRates = new UserRateOutList();
 
             var user = _customerContext.GetCustomerByUsername(userId);
@@ -199,12 +250,12 @@ namespace Nop.Web.Controllers.Harag
 
             if(result == null)
                 return NotFound();
+             
+            ViewBag.SameUser = (result.Username == _workContext.CurrentCustomer.Username); 
+            ViewBag.CanRateOtherUsers = this.CanRateOtherUsers();   
 
-          
-                ViewBag.SameUser = false;
-            
-
-            var posts = _postService.GetCurrentUserPosts(result.Id).Select(p => new PostModel
+            var posts = _postService.GetCurrentUserPosts(result.Id, PagingParams)
+                .Select(p => new PostModel
             {
                 CategoryId = p.CategoryId,
                 CategoryName = p.Category.Name,
@@ -222,9 +273,9 @@ namespace Nop.Web.Controllers.Harag
 
             var model = new ProfileModel
             {
-                DownRating = 0,
-                UpRating = 0,
-                FollowerCount = 0,
+                DownRating = _rateRepository.GetUserDownRates(result.Id).Count,
+                UpRating = _rateRepository.GetUserUpRates(result.Id).Count,
+                FollowerCount = _followRepository.GetFollowedUsers(result.Id).Count,
                 LastSeen = result.LastActivityDateUtc,
                 Posts = posts,
                 userId = result.Id,

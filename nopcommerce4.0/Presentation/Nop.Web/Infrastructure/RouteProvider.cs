@@ -64,9 +64,14 @@ namespace Nop.Web.Infrastructure
             new { controller = "Post", action = "AddPostToFavorite" });
 
 
-            // waiting
+            // FeaturedPostsAjax
             routeBuilder.MapRoute("Harag.Post.GetAllFeaturedPosts", "Harag/FeaturedPostsAjax",
+            new { controller = "Post", action = "LatestPosts" });
+
+            // FeaturedPostsAjax
+            routeBuilder.MapRoute("Harag.Post.LatestPosts", "Harag/LatestPosts",
             new { controller = "Post", action = "GetAllFeaturedPosts" });
+
             // waiting
             routeBuilder.MapRoute("Harag.Home.GetAllSideBarTags", "Harag/TagsAjax",
             new { controller = "Post", action = "GetAllSideBarTags" });
@@ -87,14 +92,21 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapRoute("Harag.Navbar", "Harag/NavbarAjax",
             new { controller = "Post", action = "GetHaragNavbar" });
              
+
+
+            //////
+            ////  rEPORT 
+            ////////
             // Harag Post Report
             routeBuilder.MapRoute("Harag.Post.ReportPostAjax", "Harag/ReportPost",
             new { controller = "Post", action = "ReportPostAjax" });
 
             routeBuilder.MapRoute("Harag.Post.ReportPost", "Harag/ReportPost/{postId}",
             new { controller = "Post", action = "ReportPost" });
+            
+            ////////
             // Comment 
-
+            /////////
             //  Harag all Comment  
             routeBuilder.MapRoute("Harag.Comment.GetAllPostCommentsAjax", "Harag/AllCommentsAjax",
             new { controller = "Comment", action = "GetAllPostComments" });
@@ -107,33 +119,46 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapRoute("Harag.Comment.ReportCommentAjax", "Harag/Comment/ReportCommentAjax/{postId?}/{commentId?}/{type?}",
            new { controller = "Comment", action = "ReportCommentAjax" });
 
+
             //////////
-            ////
-            ///
-                      // chceck black list
+            //// Harag Agreement
+            //////////
+            // chceck black list
             routeBuilder.MapRoute("Harag.Post.AgreementBeforeAddPost", "Harag/Agreement",
             new { controller = "Post", action = "AgreementBeforeAddPost" });
 
 
-            ///
-            /// Harag Messages
-            ///
-
+            /////////
+            //// Harag Messages
+            /////////
             //  Harag all Messages  
             routeBuilder.MapRoute("Harag.Message.GetUserMessageThreads", "Harag/Messages",
             new { controller = "Message", action = "GetUserMessageThreads" });
 
             //  Harag Get Post Messages  
-            routeBuilder.MapRoute("Harag.Message.GetAllPostMessages", "Harag/Messages/Post/{postId?}",
+            routeBuilder.MapRoute("Harag.Message.GetAllPostMessages", "Harag/Messages/Post/{userId?}/{postId?}/{type?}",
             new { controller = "Message", action = "GetAllPostMessages" });
 
             // Harag New Message
-            routeBuilder.MapRoute("Harag.Message.AddPostMessage", "Harag/NewPostMessage/{postId?}/{Message?}",
+            routeBuilder.MapRoute("Harag.Message.AddPostMesssage", "Harag/NewPostMessage/{postId?}/{Message?}/{type?}",
+           new { controller = "Message", action = "AddPostMessagse" });
+
+            // Harag New Message
+            routeBuilder.MapRoute("Harag.Message.AddPostMessage", "Harag/NewPostMessageAjax",
            new { controller = "Message", action = "AddPostMessage" });
-             
-            ///
-            /// HARAG USER
-            /// 
+
+            // Harag Comment Report
+            routeBuilder.MapRoute("Harag.Message.SendCommentMessage", "Harag/Message/SendCommentMessage/{postId?}/{type?}",
+           new { controller = "Message", action = "SendCommentMessage" });
+
+            // Harag Comment Report
+            routeBuilder.MapRoute("Harag.Message.SnedUserMessage", "Harag/Comment/SnedUserMessage/",
+           new { controller = "Message", action = "SnedUserMessage" });
+         
+            
+            ///////////////
+            //// HARAG USER
+            ///////////////
 
             // check black list 
             routeBuilder.MapRoute("Harag.User.CheckBlackList", "Harag/CheckBlackList",
@@ -242,6 +267,14 @@ namespace Nop.Web.Infrastructure
             ///
             /// Harag Notification
             ///
+            routeBuilder.MapRoute("Harag.Follow.Notifications", "Harag/Notifications",
+            new { controller = "Notification", action = "Notifications" });
+
+            routeBuilder.MapRoute("Harag.Notification.NotificationsCount", "Harag/Notifications/Unseen",
+            new { controller = "Notification", action = "NotificationsCount" });
+
+
+
 
 
             // ------------------------ Consultant ------------------------- 
@@ -265,6 +298,23 @@ namespace Nop.Web.Infrastructure
 
             routeBuilder.MapRoute("Consultant.Post.GetAllClosedPostsAjax", "Consultations/GetAllClosedPostsAjax",
             new { controller = "Post", action = "GetAllClosedPostsAjax" });
+
+
+            //Notifications
+            routeBuilder.MapRoute("Consultant.Notifications.GetAllNotification","Consultant/Notifications",
+
+            new { controller = "Notification", action = "GetNotifications" });
+
+            //UnRaed Notifications
+            routeBuilder.MapRoute("Consultant.Notifications.UnReadNotification", "Consultant/UnReadNotifications",
+
+            new { controller = "Notification", action = "GetUnReadNotifications" });
+
+
+            //update notification
+            routeBuilder.MapRoute("Consultant.Notifications.updateNotification", "Consultant/UpdateNotifications",
+
+           new { controller = "Notification", action = "UpdateNotification" });
 
             ///
             /*
@@ -757,6 +807,24 @@ new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
             routeBuilder.MapRoute("Harag.Admin.GetAllBank", "Harag/Admin/GetAllBank", new { controller = "BankAccount", action = "GetBankAccounts" });
             //Get All Bank Accounts Ajax
             routeBuilder.MapRoute("Harag.Admin.GetAllBankAjax", "Harag/Admin/GetAllBankAjax", new { controller = "BankAccount", action = "GetBankAccountsAjax" });
+
+            //Get Payments
+            routeBuilder.MapRoute("Harag.Admin.GetAllBankPayments", "Harag/Admin/GetAllBankPayments", new { controller = "BankAccount", action = "GetPayments" });
+
+            //Get Payments Ajax
+            routeBuilder.MapRoute("Harag.Admin.GetAllBankPaymentsAjax", "Harag/Admin/GetAllBankPaymentsAjax", new { controller = "BankAccount", action = "GetPaymentsAjax" });
+
+
+            //Send Messege To All Users
+            routeBuilder.MapRoute("Harag.Admin.PushMessage", "Harag/Admin/PushMessage", new { controller = "Notification", action = "PushMessage" });
+
+            //Send Messege To All Users Ajax
+            routeBuilder.MapRoute("Harag.Admin.PushMessageAjax", "Harag/Admin/PushMessageAjax", new { controller = "Notification", action = "PushMessageAjax" });
+
+            //Send Messege To User
+            routeBuilder.MapRoute("Harag.Admin.SendMessage", "Harag/Admin/SendMessage", new { controller = "Notification", action = "SendMessage" });
+
+
 
             ////Post Messages
 
@@ -1262,9 +1330,7 @@ new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
         }
 
         #endregion
-
-
-
+        
         #region Properties
 
         /// <summary>

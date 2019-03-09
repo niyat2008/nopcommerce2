@@ -10,11 +10,16 @@ namespace Nop.Core.Domain.Z_Harag
    public class Z_Harag_Message:BaseEntity
     { 
         public Nullable<int> PostId { get; set; }
-        public Nullable<int> CustomerId { get; set; }
+        public Nullable<int> ToUserId { get; set; }
         public string Message { get; set; }
         public Nullable<System.DateTime> CreatedTime { get; set; }
+        public int FromUserId { get; set; }
+        public int MessageType { get; set; }
+        public string MessageTitle { get; set; }
+
 
         public virtual Customer Customer { get; set; }
+        public virtual Customer User { get; set; }
         public virtual Z_Harag_Post Z_Harag_Post { get; set; }
     }
 }

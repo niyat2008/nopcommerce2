@@ -23,5 +23,8 @@ namespace Nop.Services.Z_HaragAdmin.BankAccount
 
         //Delete Account 
          bool DeleteBankAccount(int id);
+
+        // Get Bank Payments
+        List<Z_Harag_BankPayment> GetPayments(int start, int length, string searchValue, string sortColumnName, string sortDirection);
     }
 }

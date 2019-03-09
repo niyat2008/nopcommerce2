@@ -150,4 +150,17 @@
 table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
     border-bottom-width: 16px!important;
 }
+#nav-home-tab, #nav-profile-tab, #nav-contact-tab {
+    font-family: 'Cairo',sans-serif;
+    font-size: 20px;
+    color: #000;
+}
+    #nav-home-tab.active, #nav-profile-tab.active, #nav-contact-tab.active {
+       
+        color: #3c8dbc;
+    }
+
+.sendMessage{
+   
+}
     /*******front end**********/

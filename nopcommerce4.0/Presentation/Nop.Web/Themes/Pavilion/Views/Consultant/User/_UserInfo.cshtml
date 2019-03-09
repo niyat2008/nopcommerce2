@@ -15,7 +15,8 @@
                 <li> @Html.RouteLink("دخول", "login", new { returnUrl = "consultations" }, new { @class = "ico-login" })  </li>
                 <li>
                     <a href="/wishlist" class="ico-wishlist">
-                        <p class="wishlist-label">قائمة الملاحظة</p>
+                        @*<p class="wishlist-label">قائمة الملاحظة</p>*@
+                        <p class="wishlist-label">السلع المفضلة</p>
                     </a>
                 </li>
 
@@ -36,7 +37,7 @@ else
                 <li class="link" (click)="logout()">@Html.RouteLink("تسجيل  خروج", "logout", new { returnUrl = "consultations" })</li>
                 <li>
                     <a href="/wishlist" class="ico-wishlist">
-                        قائمة الملاحظة
+                        السلع المفضلة
                     </a>
                 </li>
             </ul>

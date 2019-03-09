@@ -11,5 +11,7 @@ namespace Nop.Services.Z_Harag.Rate
     {
         bool AddUserRate(Z_Harag_Rate rate);
         List<Z_Harag_Rate> GetUserRates(int userId);
+        List<Z_Harag_Rate> GetUserUpRates(int userId);
+        List<Z_Harag_Rate> GetUserDownRates(int userId);
     }
 }

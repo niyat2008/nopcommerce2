@@ -23,9 +23,6 @@ namespace Nop.Web.Extensions.Consultant
             return AutoMapperConfiguration.Mapper.Map(source, destination);
         }
 
-
-
-
         #region Category
 
         public static CategoryModel ToCategoryModel(this Z_Consultant_Category entity)
@@ -63,12 +60,7 @@ namespace Nop.Web.Extensions.Consultant
         }
 
         #endregion
-
-
-
-
-
-
+        
         #region SubCategory
 
         public static SubCategoryModel ToSubCategoryModel(this Z_Consultant_SubCategory entity)
@@ -87,8 +79,7 @@ namespace Nop.Web.Extensions.Consultant
         }
 
         #endregion
-
-
+        
         #region Post
 
         public static PostModel ToPostModel(this Z_Consultant_Post entity)
@@ -125,8 +116,7 @@ namespace Nop.Web.Extensions.Consultant
         }
 
         #endregion
-
-
+        
         #region Post
         public static CommentModel ToCommentModel(this Z_Consultant_Comment entity)
         {
