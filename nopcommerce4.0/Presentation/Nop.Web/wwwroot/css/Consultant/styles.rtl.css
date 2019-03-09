@@ -1124,6 +1124,7 @@ label, label + * {
 .accepted-payments {
 	margin: 0 0 20px;
 	font-size: 0;
+    text-align:center
 }
 .accepted-payments li { 
 	display: inline-block;
@@ -1338,6 +1339,8 @@ label, label + * {
 .home-page-polls .poll-results {
 	margin: 0 0 20px;
 }
+
+.footer-disclaimer { text-align:center }
 
 @media (max-width: 1025px) {
     .title, .footer ul li, .accepted-payments, .footer-disclaimer, .social-sharing {
