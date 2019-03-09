@@ -73,6 +73,13 @@
     <Content Remove="Themes\Pavilion\Views\Harag\Search\searchPage.cshtml" />
     <Content Remove="wwwroot\css\Consultant\imageResponsive.css" />
     <Content Remove="wwwroot\fonts\fonts\Home.cshtml" />
+    <None Remove="Themes\Pavilion\Content\css\font-awesome.min.css" />
+    <None Remove="Themes\Pavilion\Content\css\fontawesome-webfont.eot" />
+    <None Remove="Themes\Pavilion\Content\css\fontawesome-webfont.svg" />
+    <None Remove="Themes\Pavilion\Content\css\fontawesome-webfont.ttf" />
+    <None Remove="Themes\Pavilion\Content\css\fontawesome-webfont.woff" />
+    <None Remove="Themes\Pavilion\Content\css\fontawesome-webfont.woff2" />
+    <None Remove="Themes\Pavilion\Content\css\FontAwesome.otf" />
     <None Remove="Themes\Pavilion\Content\css\pages.css" />
     <None Remove="Themes\Pavilion\Content\css\style.css" />
     <None Remove="Themes\Pavilion\Content\img\google-plus.png" />

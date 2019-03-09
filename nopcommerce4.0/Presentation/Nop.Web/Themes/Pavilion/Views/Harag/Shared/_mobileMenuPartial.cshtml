@@ -1,113 +1,4 @@
-﻿@using Nop.Core
-@using Nop.Services.Configuration
-
-
-@inject IStoreContext storeContext
-@inject ISettingService settingService
-
-@{
-    var controllerName = Url.ActionContext.RouteData.Values["controller"].ToString();
-    var actionName = Url.ActionContext.RouteData.Values["action"].ToString();
-    var isHomePage = controllerName.Equals("home", StringComparison.InvariantCultureIgnoreCase) &&
-                        actionName.Equals("index", StringComparison.InvariantCultureIgnoreCase);
-
-    var currentStore = storeContext.CurrentStore;
-    int storeId = currentStore.Id;
-    bool isHomeSliderFullWidth = settingService.GetSettingByKey("pavilionthemesettings.ishomepagemainsliderfullwidth", false, storeId, true);
-    bool stickyCategoryMenuFlyout = settingService.GetSettingByKey("pavilionthemesettings.StickyCategoryMenuFlyout", true, storeId, true);
-    bool showCategoriesInSideMenu = settingService.GetSettingByKey("pavilionthemesettings.ShowCategoriesInSideMenu", true, storeId, true);
-}
-
-
-<style type="text/css">
-    a:hover {
-        color: #40ca40
-    }
-
-    /*top-bar*/
-    .top_bar {
-        background: #333;
-        padding: 10px 0;
-        text-align: center;
-    }
-
-    .topbarspan {
-        cursor: pointer;
-        color: #fff;
-        font-size: 17px;
-        padding: 10px 30px
-    }
-
-    .topbarspanActive {
-        background: #4da74d
-    }
-
-    .header label {
-        color: white;
-    }
-
-    .admin-header-links a {
-        color: white;
-    }
-
-    /*#sticky {
-        display: none;
-        background-color: #546bcb;
-        height: 70px;
-    }*/
-
-    #sticky.fixed {
-        /*display: block;*/
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background-color: rgb(246,246,246);
-    }
-
-    .imgsizing {
-        width: 90px;
-        /*height:40px;*/
-    }
-
-    .searchpadding {
-        padding-top: 4px !important;
-    }
-</style>
-
-
-<script type="text/javascript">
-
-    $(window).scroll(function () {
-        if ($(window).width() > 1009) {
-            var distanceFromTop = $(this).scrollTop();
-            if (distanceFromTop >= $('#sticky').height()) {
-                $('#sticky').addClass('fixed');
-                $(".store-search-box").addClass('searchpadding');
-                $(".header-logo a img").addClass('imgsizing');
-            } else {
-                $('#sticky').removeClass('fixed');
-                $(".store-search-box").removeClass('searchpadding');
-                $(".header-logo a img").removeClass('imgsizing');
-            }
-        }
-    });
-</script>
-
-
-
-<div id="topThreeHeader" style="width:100%; margin:auto !important; background-color:black;height:43px;text-align:center;top:0;position:fixed;z-index:1030;padding-top:10px;padding-bottom:5px;background-color:rgba(0,0,0,0.9); ">
-    <span class="col-md-4 col-md-offset-17" style="text-align: center">
-        <span class="topbarspan topbarspanActive">@Html.RouteLink("المتجر", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-        <span>@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-
-        <span class="topbarspan">@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-
-    </span>
-</div>
-
-
-
-<div class="header">
+﻿<div class="header">
     @await Component.InvokeAsync("Widget", new { widgetZone = "header" })
 
     <div class="header-upper top_bar">
@@ -140,9 +31,9 @@
             @*</section>*@
 
             @if (!String.IsNullOrEmpty(taxTypeSelectorHtml.ToHtmlString()) ||
-        !String.IsNullOrEmpty(currencySelectorHtml.ToHtmlString()) ||
-        //!String.IsNullOrEmpty(languageSelectorHtml.ToHtmlString()) ||
-        !String.IsNullOrEmpty(headerSelectorWidgetHtml.ToHtmlString()))
+       !String.IsNullOrEmpty(currencySelectorHtml.ToHtmlString()) ||
+       //!String.IsNullOrEmpty(languageSelectorHtml.ToHtmlString()) ||
+       !String.IsNullOrEmpty(headerSelectorWidgetHtml.ToHtmlString()))
             {
                 <div class="header-selectors-wrapper">
                     <label>@T("SevenSpikes.Themes.Pavilion.Header.Preferences")</label>
@@ -244,38 +135,3 @@
 
     </div>
 </div>
-
-
-@if (isHomePage)
-{
-    var homePageSliderCss = isHomeSliderFullWidth ? "slider-fullwidth" : "slider-right-column";
-
-    <div class="two-columns-area @homePageSliderCss">
-        @if (isHomeSliderFullWidth)
-        {
-            @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_main_slider" });
-            @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_search_widget" })
-        }
-
-        <div class="center">
-            <div class="two-colums-area-left">
-                @if (showCategoriesInSideMenu && !isHomeSliderFullWidth)
-                {
-                    <div class="category-navigation-list-wrapper">
-                        <ul class="category-navigation-list @if (stickyCategoryMenuFlyout){<text>sticky-flyout</text>}"></ul>
-                    </div>
-                }
-                @await Component.InvokeAsync("HomepageProducts")
-            </div>
-            <div class="two-colums-area-right">
-                @if (!isHomeSliderFullWidth)
-                {
-                    @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_main_slider" });
-                    @await Component.InvokeAsync("Widget", new { widgetZone = "home_page_search_widget" })
-
-                }
-                @await Component.InvokeAsync("Widget", new { widgetZone = "homepage_slider_after" })
-            </div>
-        </div>
-    </div>
-}

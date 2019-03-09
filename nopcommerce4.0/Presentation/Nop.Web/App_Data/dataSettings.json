@@ -6,10 +6,10 @@
 
 
 
-  //"DataConnectionString": "Data Source=10.2.2.104;Initial Catalog=DB_A409B4_nop4;Integrated Security=false;MultipleActiveResultSets=true;uid=sa;password=123;",
+  "DataConnectionString": "Data Source=10.2.2.103;Initial Catalog=DB_A409B4_nop4;Integrated Security=false;MultipleActiveResultSets=true;uid=sa;password=123;",
 
 
-  "DataConnectionString": "Data Source=DESKTOP-6A85539;Initial Catalog=DB_A409B4_nop4;Integrated Security=false;MultipleActiveResultSets=true;uid=sa;password=123;",
+  //"DataConnectionString": "Data Source=DESKTOP-6A85539;Initial Catalog=DB_A409B4_nop4;Integrated Security=false;MultipleActiveResultSets=true;uid=sa;password=123;",
 
   "RawDataSettings": {}
 }

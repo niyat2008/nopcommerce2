@@ -174,9 +174,10 @@
             .header-selectors-wrapper label {
                 display: block;
                 padding: 0 20px 0 0;
-                background-image: url('../img/header-sprite-2.png');
-                background-repeat: no-repeat;
-                line-height: 42px;
+                /*background-image: url('../img/header-sprite-2.png');
+                background-repeat: no-repeat;*/
+                line-height: 25px;
+                cursor:pointer;
             }
 
             .header-links-wrapper label {

@@ -5,8 +5,8 @@
 {
 
     <div class="header-links-wrapper" style="height: 23px;">
-        <label style="  color: white; font-size:100% !important;">حسابي</label>
-        <div style="margin-top: -10px;margin-left: 20px !important; " class="header-links">
+        <label style="  color: white; font-size:100% !important;"> <i class="fa fa-user"></i> حسابى </label>
+        <div style="margin-left: 20px !important; " class="header-links">
             <ul>
 
                 <li>
@@ -29,8 +29,8 @@
 else
 {
     <div class="header-links-wrapper" style="height: 23px;">
-        <label style="  color: white; font-size:100% !important;">حسابي</label>
-        <div style="margin-top: -10px;margin-left: 20px !important; " class="header-links">
+        <label style="  color: white; font-size:100% !important;"> <i class="fa fa-user"></i> حسابى </label>
+        <div style="margin-left: 20px !important; " class="header-links">
             <ul>
                 <li class="name"><a class="ico-register">@Model.Username</a></li>
                 <li class="link" (click)="logout()">@Html.RouteLink("تسجيل  خروج", "logout", new { returnUrl = "consultations" })</li>

@@ -71,6 +71,155 @@
             <div class="col-md-2"> </div>
         </div>
     </div>
+
+
+    @*
+        Partial
+    *@
+
+    <div class="header">
+        @await Component.InvokeAsync("Widget", new { widgetZone = "header" })
+
+        <div class="header-upper top_bar">
+            <div class="center container-fluid" style="margin:auto !important;">
+                @await Component.InvokeAsync("AdminHeaderLinks")
+                @{
+                    var taxTypeSelectorHtml = await Component.InvokeAsync("TaxTypeSelector");
+                    var currencySelectorHtml = await Component.InvokeAsync("CurrencySelector");
+                    //var languageSelectorHtml = await Component.InvokeAsync("LanguageSelector");
+                    var headerSelectorWidgetHtml = await Component.InvokeAsync("Widget", new { widgetZone = "header_selectors" });
+                }
+
+                @*<section class="top_bar">*@
+                @*<div class="container-fluid">*@
+                @*<div class="row">*@
+                @*<div class="col-md-12">*@
+
+
+                <span class="col-md-4 col-md-offset-17" style="text-align: center">
+                    <span class="topbarspan topbarspanActive">@Html.RouteLink("المتجر", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                    <span class="topbarspan">@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+
+                    <span class="topbarspan">@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+
+                </span>
+
+                @*</div>*@
+                @*</div>*@
+                @*</div>*@
+                @*</section>*@
+
+                @if (!String.IsNullOrEmpty(taxTypeSelectorHtml.ToHtmlString()) ||
+          !String.IsNullOrEmpty(currencySelectorHtml.ToHtmlString()) ||
+          //!String.IsNullOrEmpty(languageSelectorHtml.ToHtmlString()) ||
+          !String.IsNullOrEmpty(headerSelectorWidgetHtml.ToHtmlString()))
+                {
+                    <div class="header-selectors-wrapper">
+                        <label>@T("SevenSpikes.Themes.Pavilion.Header.Preferences")</label>
+                        <div class="header-selectors">
+                            @taxTypeSelectorHtml
+                            @currencySelectorHtml
+                            @*@languageSelectorHtml*@
+                            @headerSelectorWidgetHtml
+                        </div>
+                    </div>
+                    <div class="header-selector-widget" style="display: none;">@headerSelectorWidgetHtml</div>
+                }
+
+                <div class="header-links-wrapper">
+                    <label style="font-size:120% !important;"> <i class="fa fa-user"></i> @T("SevenSpikes.Themes.Pavilion.Header.MyAccount")</label>
+                    @await Component.InvokeAsync("HeaderLinks")
+                </div>
+            </div>
+        </div>
+
+
+        <div id="sticky" class="header-middle">
+            <div class="" id="problem">
+
+                <div class="header-menu-parent">
+                    @*<div class="header-logo">
+                            @await Component.InvokeAsync("Logo")
+                        </div>*@
+
+                    @*<div class="header-menu @if (showCategoriesInSideMenu){<text>categories-in-side-panel</text>}">
+                            <div class="close-menu">
+                                <span>@T("SevenSpikes.Themes.Common.CloseMenu")</span>
+                            </div>
+                            @{
+                                var menuHtml = await Component.InvokeAsync("Widget", new { widgetZone = "theme_header_menu" });
+                            }
+                            @if (!String.IsNullOrEmpty(menuHtml.ToHtmlString()))
+                            {
+                                @menuHtml
+                            }
+                            else
+                            {
+                                @await Component.InvokeAsync("TopMenu")
+                            }
+                        </div>*@
+                    <div class="center">
+                        <div class="header-logo">
+                            @await Component.InvokeAsync("Logo")
+                        </div>
+                        <div class="search-box store-search-box">
+                            @await Component.InvokeAsync("SearchBox")
+                        </div>
+
+                    </div>
+
+                </div>
+
+                @await Component.InvokeAsync("FlyoutShoppingCart")
+            </div>
+        </div>
+
+
+        <div class="men" style="background-color:rgb(231, 234, 237);padding-bottom:.4%;padding-top:0;">
+            <div class="center">
+                @*@if (showCategoriesInSideMenu)
+                    {
+                        <span class="category-navigation-title">@T("SevenSpikes.Themes.Pavilion.Header.AllCategories")</span>
+
+                        if (!isHomePage || isHomeSliderFullWidth)
+                        {
+                            <div class="category-navigation-list-wrapper">
+                                <ul class="category-navigation-list @if (stickyCategoryMenuFlyout){<text>sticky-flyout</text>}"></ul>
+                            </div>
+                        }
+                    }
+                    <div class="search-box store-search-box @if (!showCategoriesInSideMenu){<text>full-width</text>}">
+                        @await Component.InvokeAsync("SearchBox")
+                    </div>*@
+
+
+                <div class="header-menu @if (showCategoriesInSideMenu){<text>categories-in-side-panel</text>}">
+                    <div class="close-menu">
+                        <span>@T("SevenSpikes.Themes.Common.CloseMenu")</span>
+                    </div>
+                    @{
+                        var menuHtml = await Component.InvokeAsync("Widget", new { widgetZone = "theme_header_menu" });
+                    }
+                    @if (!String.IsNullOrEmpty(menuHtml.ToHtmlString()))
+                    {
+                        @menuHtml
+                    }
+                    else
+                    {
+                        @await Component.InvokeAsync("TopMenu")
+                    }
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    @* @Html.Partial("~/Themes/Pavilion/Views/Harag/Shared/_mobileMenuPartial.cshtml")*@
 </section>
 
 <div class="text-center top-user-menu" style="background-color:#e8ebee;padding:0.3px;padding-top:6px;">
