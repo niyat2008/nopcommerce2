@@ -66,7 +66,7 @@
                             }
                             else
                             {
-                                <p class="phone">@Model.Contact<i class="fa fa-phone"></i></p>
+                                <p class="phone">@Model.Contact<i class="fa fa-phone" style="padding-right:5px"></i></p>
                             }
                         </div>
 
@@ -139,9 +139,9 @@
             </div>
             <div class="col-sm-3">
                 <div class="disTable advBox">
-                    <div class="choices choices2 disTable">
+                    @*<div class="choices choices2 disTable">
 
-                    </div>
+                    </div>*@
                     @if (Model.RelatedPosts.Count > 0)
                     {
                         <div class="adv-images">

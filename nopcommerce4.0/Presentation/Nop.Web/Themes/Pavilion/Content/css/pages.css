@@ -57,6 +57,9 @@ form.commission {
     background: #f3f9f7;
     width: 95%;
     border: 1px solid #ddd;
+    padding-top: 15px;
+    padding-right: 20px;
+    font-size: 15px;
 }
 
     .content .det-block .det-top {
@@ -67,7 +70,8 @@ form.commission {
         .content .det-block .det-top h4 {
             margin-top: 0;
             font-weight: bold;
-            color: #4da74d !important
+            color: #4da74d !important;
+            font-size: 24px;
         }
 
         .content .det-block .det-top small {
@@ -125,7 +129,7 @@ form.commission {
 .content .advBox {
     width: 100%;
     min-height: 200px;
-    padding: 15px 0;
+    padding: 15px 12px;
     border: 1px solid #ddd;
     border-radius: 4px;
     margin-bottom: 25px;
@@ -138,10 +142,7 @@ form.commission {
 }
 
 @media(max-width:597px) {
-    .content .det-block .det-bottom img {
-        width: 100%;
-        float: none
-    }
+    .content .det-block .det-bottom img { width: 90%; float: none }
 }
 
 /* Featured Advertise */
