@@ -122,6 +122,16 @@ namespace Nop.Services.Z_ConsultantAdmin.Customers
             return Consultants.ToList();
         }
 
+        public List<Customer> GetCustomers()
+        {
+            var Consultants = _customerRepository.TableNoTracking.Include(c => c.CustomerRoles).Include(c => c.CustomerRoles).Where(c => c.Deleted == false && c.CustomerRoles.Any(x => x.Name == "Registered"));
+
+
+
+
+            return Consultants.ToList();
+        }
+
 
         //Get Online Consultants
         public List<Customer> GetOnlineConsultants(int start, int length, string searchValue, string sortColumnName, string sortDirection)

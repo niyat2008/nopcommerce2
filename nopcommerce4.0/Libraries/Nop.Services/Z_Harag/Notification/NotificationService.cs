@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Nop.Core.Data;
+using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Z_Harag;
 using Nop.Services.Customers;
 using Nop.Services.Events;
@@ -18,18 +19,20 @@ namespace Nop.Services.Z_Harag.Notification
     {
         private readonly IRepository<Z_Harag_Notification> _notificationService;
         private readonly IRepository<Z_Harag_Post> _postRepository;
-        private readonly ICustomerService _userRepository; 
-        private readonly IRepository<Z_Harag_Follow> _followRepository; 
-
+        //private readonly ICustomerService _userRepository; 
+        private readonly IRepository<Z_Harag_Follow> _followRepository;
+        //private readonly IRepository<Customer> _customerRepository;
+        private readonly Nop.Services.Z_ConsultantAdmin.Customers.ICustomerService _customerService;
         private readonly IEventPublisher _eventPublisher;
         private readonly IHostingEnvironment _env;
 
         public NotificationService(IRepository<Z_Harag_Notification> notificationService,
             IRepository<Z_Harag_Follow> _followRepository,
-        IEventPublisher eventPublisher, IHostingEnvironment env)
+        IEventPublisher eventPublisher, IHostingEnvironment env, Nop.Services.Z_ConsultantAdmin.Customers.ICustomerService customerService)
         {
             this._notificationService = notificationService;
             this._followRepository = _followRepository;
+            this._customerService = customerService; 
             this._eventPublisher = eventPublisher;
             this._env = env;
         }
@@ -197,7 +200,8 @@ namespace Nop.Services.Z_Harag.Notification
                 NotificationType = (int)NotificationType.General,
                 OwnerId = notificationModel.UserId,
                 NotificationTime = DateTime.Now, 
-                CustomerId = notificationModel.AdminId
+                CustomerId = notificationModel.AdminId,
+                NotificationContent = notificationModel.Content,
             };
 
             try
@@ -214,10 +218,21 @@ namespace Nop.Services.Z_Harag.Notification
         public bool PushSiteToAllUserNotification(SiteToUserNotificationModel notificationModel)
         {
             // registered users
-            var users = _userRepository.GetAllCustomers(customerRoleIds: new int [3]);
+            //var users = _userRepository.GetAllCustomers();
+
+            var users = _customerService.GetCustomers();
+
 
             foreach (var user in users)
             {
+
+                
+
+
+                //if (inRole != null && inRole == )
+                //{
+
+                //}
 
                 var notification = new Z_Harag_Notification
                 {

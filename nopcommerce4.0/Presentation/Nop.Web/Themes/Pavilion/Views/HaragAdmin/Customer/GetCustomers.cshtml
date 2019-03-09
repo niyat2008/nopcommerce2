@@ -10,6 +10,7 @@
 
 
 <div class="message-modal">
+    <span id="userId" hidden></span>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -32,7 +33,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">غلق</button>
-                    <button type="button" id="sendMessage" class="btn btn-default">ارسال</button>
+                    <button type="button" id="sendMessage"  class="btn btn-default">ارسال</button>
                 </div>
             </div>
         </div>
@@ -94,7 +95,7 @@
     {
         "data": "Id",
         "render": function (data, type, row) {
-            return (row.Blocked) ? "<span  id='added' class='btn btn-xs btn-default' data-post-phone=" + row.Mobile + "  data-post-id=" + row.Id + " > مضاف الى القائمة السوداء </span>" + " " + "<button type='button'  data-user-id=" + row.Id + " class='btn btn-default' data-toggle='modal' data-target='#exampleModal'  >رسالة</button > " : "<span id='addToBlackList' class='btn btn-xs btn-default' data-post-phone=" + row.Mobile + "  data-post-id=" + row.Id + " > اضف الى القائمة السوداء </span>" + " " + "<button type='button'  data-user-id=" + row.Id + " class='btn btn-default' data-toggle='modal' data-target='#exampleModal'  >رسالة</button > ";
+            return (row.Blocked) ? "<span  id='added' class='btn btn-xs btn-default' data-post-phone=" + row.Mobile + "  data-post-id=" + row.Id + " > مضاف الى القائمة السوداء </span>" + " " + "<span  id='Allmessage' data-user-id=" + row.Id + " class='btn btn-default' data-toggle='modal' data-target='#exampleModal'  >رسالة</span > " : "<span id='addToBlackList' class='btn btn-xs btn-default' data-post-phone=" + row.Mobile + "  data-post-id=" + row.Id + " > اضف الى القائمة السوداء </span>" + " " + "<span  id='Allmessage'   data-user-id=" + row.Id + " class='btn btn-default' data-toggle='modal' data-target='#exampleModal'  >رسالة</span > ";
 
     }
          
@@ -168,27 +169,67 @@
                 }
             });
     });
-    $("#sendMessage").on("click", function () {
 
-        var model = JSON.stringify({
-            "Content": $("#userMessage").val()
+    $("#customers").on("click", "#Allmessage", function (e) {
+        e.preventDefault();
+        var button = $(this);
+        var userId = button.attr("data-user-id");
+        $("#userId").html(userId);
+        console.log("id " + userId);
+        console.log("spanId " + $("#userId").html());
+        $("#exampleModal").show();
+        $("#sendMessage").on("click", function () {
 
-        })
 
-        $.ajax({
-            url: "",
-            type: "post",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            data:model,
-            success: function (data) {
-                console.log("result "+data.data);
 
+            var model = {
+                "Content": $("#userMessage").val(),
+                "UserId": $("#userId").html(),
+                
             }
+           var messageData = JSON.stringify(model);
+           console.log(messageData);
+           var ajxResponse;
+           ajxResponse= $.ajax({
+                url: "/Harag/Admin/SendMessage",
+                type: "post",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: messageData
+               
+           })
+           ajxResponse.done(function (response) {
+               $.notify("تم الارسال بنجاح", "success");
+               $("#userMessage").val("");
+               console.log("done result " + response.added);
 
-        })
+           });
+
+        });
 
     });
+
+    //$("#sendMessage").on("click", function () {
+
+    //    var model = JSON.stringify({
+    //        "Content": $("#userMessage").val()
+    //        "UserId":userId
+    //    })
+
+    //    $.ajax({
+    //        url: "/Harag/Admin/SendMessage",
+    //        type: "post",
+    //        dataType: "json",
+    //        contentType: "application/json; charset=utf-8",
+    //        data:model,
+    //        success: function (data) {
+    //            console.log("result "+data.data);
+
+    //        }
+
+    //    })
+
+    //});
    
 </script>
     

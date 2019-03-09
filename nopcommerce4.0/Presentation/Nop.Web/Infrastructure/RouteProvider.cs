@@ -801,6 +801,18 @@ new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
             //Get Payments Ajax
             routeBuilder.MapRoute("Harag.Admin.GetAllBankPaymentsAjax", "Harag/Admin/GetAllBankPaymentsAjax", new { controller = "BankAccount", action = "GetPaymentsAjax" });
 
+
+            //Send Messege To All Users
+            routeBuilder.MapRoute("Harag.Admin.PushMessage", "Harag/Admin/PushMessage", new { controller = "Notification", action = "PushMessage" });
+
+            //Send Messege To All Users Ajax
+            routeBuilder.MapRoute("Harag.Admin.PushMessageAjax", "Harag/Admin/PushMessageAjax", new { controller = "Notification", action = "PushMessageAjax" });
+
+            //Send Messege To User
+            routeBuilder.MapRoute("Harag.Admin.SendMessage", "Harag/Admin/SendMessage", new { controller = "Notification", action = "SendMessage" });
+
+
+
             ////Post Messages
 
             //routeBuilder.MapRoute("Harag.Admin.HaragPostMessage", "Harag/Admin/Post/HaragPostsMessage", new { controller = "Post", action = "GetPostMessages" });

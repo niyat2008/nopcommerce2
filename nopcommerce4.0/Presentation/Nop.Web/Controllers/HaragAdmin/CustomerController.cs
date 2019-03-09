@@ -85,6 +85,9 @@ namespace Nop.Web.Controllers.HaragAdmin
             return Json(new { data = customers.Customers });
         }
 
+
+        
+
         //Get Member Details
         //public ActionResult HaragGetMemberDetails(int id)
         //{

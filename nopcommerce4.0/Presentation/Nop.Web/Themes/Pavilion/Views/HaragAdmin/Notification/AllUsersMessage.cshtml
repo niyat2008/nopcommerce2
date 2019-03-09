@@ -3,4 +3,71 @@
 @{ 
     Layout = "~/Themes/Pavilion/Views/HaragAdmin/Shared/_Layout.cshtml";
 }
+@Html.Partial("~/Themes/Pavilion/Views/HaragAdmin/Shared/_DataTable.cshtml")
 
+<style>
+    .fontType{
+        font-family:'Cairo',sans-serif;
+        font-size:18px;
+        font-weight:bold;
+    }
+    .messageTitle{
+        margin-bottom:50px;
+        margin-top:20px;
+        text-align:center;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="messageTitle fontType">
+            ارسال رسالة لكل الاعضاء
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form id="sendMessage">
+            <label class="fontType">ارسال رسالة</label>
+            <div class="form-group">
+                <textarea id="userMessage" class="form-control detailsTextBox fontType" cols="60" rows="7"></textarea>
+
+            </div>
+            <input class="btn btn-success" type="submit" value="ارسال" />
+        </form>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#sendMessage").submit(function (e) {
+            var ajaxResult;
+            e.preventDefault();
+            var values = JSON.stringify({
+                "Content": $("#userMessage").val()
+
+            })
+            ajaxResult = $.ajax({
+                url: "/Harag/Admin/PushMessageAjax",
+                type: "post",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: values
+
+            });
+            ajaxResult.done(function (response) {
+                $.notify("تم الارسال بنجاح", "Success");
+                $("#userMessage").val("");
+                console.log("res " + response.added);
+            })
+
+        });
+
+    });
+</script>
