@@ -1,0 +1,46 @@
+﻿@using Nop.Services.Z_Harag.Post
+@model DeletePost
+
+@{
+    Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
+}
+
+
+
+<!-- Content -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="alert alert-warn addRate" role="alert">
+                    عميلنا العزيز <br />
+                    الرجاء ذكر سبب الحذف: للاعلان رقم @Model.PostId <br /> 
+                </div>
+                <form class="add-adverse" action="~/HaragApi/Post/Delete/@Model.PostId" method="POST">
+                    @Html.HiddenFor(m => m.PostId)
+
+                    <div class="col-md-6">
+                        @Html.EditorFor(m => m.ReportMessage, new {@class = "form-control", required = "required", minLength = 50})
+                    </div> 
+                    <div class="col-xs-12">
+                        <button class="btn btn-danger add" type="button">حذف >> </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+
+    function getPostPaging(url) {
+
+        var indexmyurl = url.indexOf("Consultations/Consultations");
+        var myurl = url.substring(indexmyurl);
+        window.location.href = myurl;
+
+    }
+</script>

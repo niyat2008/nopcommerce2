@@ -64,20 +64,24 @@ namespace Nop.Web.Infrastructure
 
 
             // done get all posts home 
-            routeBuilder.MapRoute("Harag.Post.GetAllHaragPostsAjax", "Harag/PostsAjax",
+            routeBuilder.MapRoute("Harag.Post.GetAllHaragPostsAjax", "Harag/PostsAjax/{pageNo?}",
             new { controller = "Post", action = "GetAllHaragPostsAjax" });
               
             // add to favorite
             routeBuilder.MapRoute("Harag.Post.AddPostToFavorite", "Harag/AddPostToFavorite",
             new { controller = "Post", action = "AddPostToFavorite" });
 
+            // add to favorite
+            routeBuilder.MapRoute("Harag.Post.DeletePost", "Harag/Post/Delete/{postId}",
+            new { controller = "Post", action = "DeletePost" });
+
 
             // FeaturedPostsAjax
-            routeBuilder.MapRoute("Harag.Post.GetAllFeaturedPosts", "Harag/FeaturedPostsAjax",
+            routeBuilder.MapRoute("Harag.Post.GetAllFeaturedPosts", "Harag/FeaturedPostsAjax/{pageNo?}",
             new { controller = "Post", action = "LatestPosts" });
 
             // FeaturedPostsAjax
-            routeBuilder.MapRoute("Harag.Post.LatestPosts", "Harag/LatestPosts",
+            routeBuilder.MapRoute("Harag.Post.LatestPosts", "Harag/LatestPosts/{pageNo?}",
             new { controller = "Post", action = "GetAllFeaturedPosts" });
 
             // waiting
@@ -116,7 +120,7 @@ namespace Nop.Web.Infrastructure
             // Comment 
             /////////
             //  Harag all Comment  
-            routeBuilder.MapRoute("Harag.Comment.GetAllPostCommentsAjax", "Harag/AllCommentsAjax",
+            routeBuilder.MapRoute("Harag.Comment.GetAllPostCommentsAjax", "Harag/AllCommentsAjax/{pageNo?}",
             new { controller = "Comment", action = "GetAllPostComments" });
 
             //  Harag Comment  
@@ -140,11 +144,11 @@ namespace Nop.Web.Infrastructure
             //// Harag Messages
             /////////
             //  Harag all Messages  
-            routeBuilder.MapRoute("Harag.Message.GetUserMessageThreads", "Harag/Messages",
+            routeBuilder.MapRoute("Harag.Message.GetUserMessageThreads", "Harag/Messages/{pageNo?}",
             new { controller = "Message", action = "GetUserMessageThreads" });
 
             //  Harag Get Post Messages  
-            routeBuilder.MapRoute("Harag.Message.GetAllPostMessages", "Harag/Messages/Post/{userId?}/{type?}/{postId?}",
+            routeBuilder.MapRoute("Harag.Message.GetAllPostMessages", "Harag/Messages/Post/{userId?}/{type?}/{postId?}/{pageNo?}",
             new { controller = "Message", action = "GetAllPostMessages" });
 
             // Harag New Message
@@ -185,7 +189,7 @@ namespace Nop.Web.Infrastructure
             new { controller = "User", action = "UserProfile" });
 
             // user posts
-            routeBuilder.MapRoute("Harag.User.GetUserPostsByUserId", "Harag/user/posts/{userId?}",
+            routeBuilder.MapRoute("Harag.User.GetUserPostsByUserId", "Harag/user/posts/{userId?}/{pageNo?}",
             new { controller = "User", action = "GetUserPostsByUserId" });
 
             // user rate
@@ -215,23 +219,23 @@ namespace Nop.Web.Infrastructure
             ///
 
             // done search by cat
-            routeBuilder.MapRoute("Harag.Post.GetHaragCatPosts", "Harag/Cat/{catId?}",
+            routeBuilder.MapRoute("Harag.Post.GetHaragCatPosts", "Harag/Cat/{catId?}/{pageNo?}",
             new { controller = "Post", action = "GetHaragCatPosts" });
    
             // done search by user
-            routeBuilder.MapRoute("Harag.Post.GetHaragUserPosts", "Harag/{userId}/Posts",
+            routeBuilder.MapRoute("Harag.Post.GetHaragUserPosts", "Harag/{userId}/Posts/{pageNo?}",
             new { controller = "Post", action = "GetHaragUserPosts" });
 
             // done search by cat and city and neighborhood
-            routeBuilder.MapRoute("Harag.Post.GetHaragSearchPostsPosts", "Harag/City/{city?}",
+            routeBuilder.MapRoute("Harag.Post.GetHaragSearchPostsPosts", "Harag/City/{city?}/{pageNo?}",
             new { controller = "Post", action = "GetHaragCityPosts" });
 
             // done search by cat and city and neighborhood
-            routeBuilder.MapRoute("Harag.Post.HaragSearch", "Harag/Search/{Term?}",
+            routeBuilder.MapRoute("Harag.Post.HaragSearch", "Harag/Search/{Term?}/{pageNo?}",
             new { controller = "Post", action = "HaragSearch" });
              
             // done search by cat and city and neighborhood
-            routeBuilder.MapRoute("Harag.Post.HaragSearchCatCity", "Harag/HaragSearchCatCity/{Cat?}/{City?}",
+            routeBuilder.MapRoute("Harag.Post.HaragSearchCatCity", "Harag/HaragSearchCatCity/{Cat?}/{City?}/{pageNo?}",
             new { controller = "Post", action = "HaragSearchCatCity" });
 
 
@@ -272,6 +276,7 @@ namespace Nop.Web.Infrastructure
 
             routeBuilder.MapRoute("Harag.Follow.GetFollowedUsersPosts", "Harag/Follow",
             new { controller = "Follow", action = "GetFollowedUsersPosts" });
+          
             ///
             /// Harag Notification
             ///
@@ -280,7 +285,7 @@ namespace Nop.Web.Infrastructure
 
             routeBuilder.MapRoute("Harag.Notification.NotificationsCount", "Harag/Notifications/Unseen",
             new { controller = "Notification", action = "NotificationsCount" });
-
+            
 
 
 

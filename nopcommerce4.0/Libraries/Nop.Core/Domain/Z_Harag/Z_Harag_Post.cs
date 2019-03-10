@@ -68,5 +68,8 @@ namespace Nop.Core.Domain.Z_Harag
         public ICollection<Z_Harag_Reports> Z_Harag_Reports { get; set; }
         public ICollection<Z_Harag_BankPayment> HaragPostsPayment { get; set; }
         public ICollection<Z_Harag_Follow> FollowdPosts { get; set; }
+        public bool IsDeleted { get; set; }
+        public string DeleteMessage { get; set; }
+        public DateTime? DeleteTime { get; set; }
     }
 }

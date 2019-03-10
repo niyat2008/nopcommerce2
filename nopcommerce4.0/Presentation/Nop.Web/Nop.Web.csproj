@@ -343,7 +343,7 @@
     <Content Update="Themes\Pavilion\Views\Harag\Post\ConsultantOpenConsultations.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Themes\Pavilion\Views\Harag\Post\ConsultantReservedConsultations.cshtml">
+    <Content Update="Themes\Pavilion\Views\Harag\Post\DeletePost.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Post\RelatedPosts.cshtml">

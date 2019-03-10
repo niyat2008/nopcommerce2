@@ -33,7 +33,7 @@ namespace Nop.Services.Z_Harag.Post
         List<Z_Harag_Post> SearchByNeighborhood(int catId, PagingParams pagingParams);
         List<Z_Harag_Post> GetUserPosts(int catId, PagingParams pagingParams);
         List<Z_Harag_Post> GetCurrentUserPosts(int catId, PagingParams pagingParams);
-        bool UpdatePostLocation(int postId, Z_Harag_Post post);
+        int UpdatePostLocation(UpdatePostLocationModel post);
         bool AddPostToFavorite(int postId, int userId);
         bool AddPostToBlackList(int postId, int userId);
         bool FollowReplysOnPost(int postId, int userId);
@@ -45,5 +45,6 @@ namespace Nop.Services.Z_Harag.Post
         List<Z_Harag_Post> SearchPosts(SearchModel searchModel, PagingParams pagingParams);
          List<Z_Harag_Post> SearchPostsCatCity(int cat, int city, PagingParams pagingParams);
         List<Z_Harag_Post> GetLatestPosts(PagingParams pagingParams);
+        bool DeletePost(DeletePost deleteData);
     }
 }

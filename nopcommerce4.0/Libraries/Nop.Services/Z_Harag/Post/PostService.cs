@@ -385,7 +385,7 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                    .Where(p => p.IsDispayed == true).OrderBy(r => r.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                    .Where(p =>  p.IsDeleted == false).OrderByDescending(r => r.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
         }
@@ -431,7 +431,7 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                .Where(c => c.CategoryId == catId).OrderBy(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                .Where(c => c.CategoryId == catId&&c.IsDeleted == false).OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
@@ -445,7 +445,7 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                .Where(c => c.CityId == catId).OrderBy(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                .Where(c => c.CityId == catId&& c.IsDeleted == false).OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
@@ -459,8 +459,8 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                 .Where(c => c.DateCreated.Day == date.Day)
-                 .OrderBy(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                 .Where(c => c.DateCreated.Day == date.Day&& c.IsDeleted == false)
+                 .OrderByDescending(mbox => mbox.DateUpdated ).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
@@ -474,7 +474,7 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                .Where(c => c.NeighborhoodId == id).OrderBy(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                .Where(c => c.NeighborhoodId == id&& c.IsDeleted == false).OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
@@ -488,7 +488,7 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                 .Where(c => c.CustomerId == userId).OrderBy(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                 .Where(c => c.CustomerId == userId&& c.IsDeleted == false).OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
@@ -502,23 +502,28 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                .Where(c => c.CustomerId == userId)
-                  .OrderBy(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                .Where(c => c.CustomerId == userId&& c.IsDeleted == false)
+                  .OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
         }
 
-        public bool UpdatePostLocation(int postId, Z_Harag_Post post)
+        public int UpdatePostLocation(UpdatePostLocationModel post)
         {
-            var isExists = this.IsExists(postId);
+            var isExists = this.IsExists(post.PostId);
 
             if (!isExists)
-                return false;
+                return 0;
 
-            _postRepository.Update(post);
+            var postE = _postRepository.Table.Where(m => m.Id == post.PostId).FirstOrDefault();
 
-            return true;
+            postE.CityId = post.CityId;
+            postE.NeighborhoodId = post.NeighborhoodId;
+
+            _postRepository.Update(postE);
+
+            return postE.Id;
             
         }
 
@@ -627,7 +632,7 @@ namespace Nop.Services.Z_Harag.Post
         List<Z_Harag_Post> IPostService.GetFavoritesPosts(int id, PagingParams pagingParams)
         {
             var posts = _favRepository.Table.Include(m => m.Customer).Include(m => m.Z_Harag_Post).Where(m => m.CustomerId == id)
-                  .OrderBy(m => m.Id).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                  .OrderByDescending(m => m.Id).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             List<Z_Harag_Post> postsFav = new List<Z_Harag_Post>();
@@ -655,8 +660,8 @@ namespace Nop.Services.Z_Harag.Post
               .Include(m => m.City)
               .Include(m => m.Z_Harag_Photo)
               .Include(m => m.Z_Harag_Comment)
-              .Where(c => c.CategoryId == catId)
-                         .OrderBy(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+              .Where(c => c.CategoryId == catId  && c.IsDeleted == false)
+                         .OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
@@ -670,8 +675,8 @@ namespace Nop.Services.Z_Harag.Post
               .Include(m => m.City)
               .Include(m => m.Z_Harag_Photo)
               .Include(m => m.Z_Harag_Comment)
-              .Where(c => c.CityId == catId)
-           .OrderBy(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+              .Where(c => c.CityId == catId && c.IsDeleted == false)
+           .OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
@@ -684,11 +689,11 @@ namespace Nop.Services.Z_Harag.Post
               .Include(m => m.City)
               .Include(m => m.Z_Harag_Photo)
               .Include(m => m.Z_Harag_Comment)
-              .Where(c => c.Text.Contains(searchModel.Term) 
+              .Where(c => (c.Text.Contains(searchModel.Term) 
               || c.Title.Contains(searchModel.Term) 
               || c.City.ArName.Contains(searchModel.Term) 
-              || c.Category.Name.Contains(searchModel.Term))
-              .OrderBy(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+              || c.Category.Name.Contains(searchModel.Term)) &&  c.IsDeleted == false)
+              .OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
@@ -703,8 +708,8 @@ namespace Nop.Services.Z_Harag.Post
             .Include(m => m.Z_Harag_Photo)
             .Include(m => m.Z_Harag_Comment)
             .Where(c => c.CityId == city
-            && c.CategoryId == cat)
-            .OrderBy(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+            || c.CategoryId == cat && c.IsDeleted == false)
+            .OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
@@ -717,9 +722,24 @@ namespace Nop.Services.Z_Harag.Post
                .Include(m => m.Customer)
                .Include(m => m.City)
                .Include(m => m.Z_Harag_Photo)
-               .Include(m => m.Z_Harag_Comment).OrderByDescending(r => r.DateCreated)
-               .OrderBy(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber* pagingParams.PageSize)
+               .Include(m => m.Z_Harag_Comment).Where(m => m.IsDeleted == false).OrderByDescending(r => r.DateCreated)
+               .OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber* pagingParams.PageSize)
                .Take(pagingParams.PageSize).ToList();
+        }
+         
+        public bool DeletePost(DeletePost deleteData)
+        {
+            var post = _postRepository.Table
+                .Where(m => m.Id == deleteData.PostId)
+                .FirstOrDefault();
+             
+            post.IsDeleted = true;
+            post.DeleteMessage = deleteData.ReportMessage;
+            post.DeleteTime = DateTime.Now;
+
+            _postRepository.Update(post);
+
+            return true;
         }
         #endregion
     }

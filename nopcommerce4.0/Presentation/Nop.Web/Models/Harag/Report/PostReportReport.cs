@@ -13,4 +13,6 @@ namespace Nop.Web.Models.Harag.Report
         public int ReportType { get; set; }
         public string ReportMessage { get; set; }
     }
+  
+     
 }
