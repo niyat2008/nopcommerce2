@@ -325,7 +325,7 @@
     <Content Update="Themes\Pavilion\Views\Harag\Post\AddPost.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Themes\Pavilion\Views\Harag\Post\ChangeCatAndSub.cshtml">
+    <Content Update="Themes\Pavilion\Views\Harag\Post\_CategoriesImagesGrid.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Post\ListOfNieghbohood.cshtml">
@@ -368,6 +368,9 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Post\PostsAjax.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\_PostAddedSuccessfully.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Profile\MainProfile.cshtml">

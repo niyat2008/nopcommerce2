@@ -19,16 +19,18 @@ using Nop.Services.Customers;
 using Nop.Web.Models.Harag.Report;
 using PostOutputModel = Nop.Web.Models.Harag.Post.PostOutputModel;
 using Nop.Services.Z_Harag.Follow;
+using Nop.Services.Z_HaragAdmin.Setting;
 
 namespace Nop.Web.Controllers.Harag
 {
     public class PostController : BasePublicController
     {
         #region Fields
-
+        public SettingsModel Setting;
         private readonly ICategoryService _categoryService;
         private readonly INotificationService _notificationService;
         private readonly IUrlHelper _urlHelper;
+        private readonly ISettingService _settingsService;
         private readonly IPostService _postService;
         private readonly Core.IWorkContext _workContext;
         private readonly IFollowService _followService; 
@@ -41,6 +43,7 @@ namespace Nop.Web.Controllers.Harag
         public PostController(
             ICategoryService categoryService,
             IUrlHelper urlHelper,
+            ISettingService _settingsService,
              IFollowService _followService,
             IPostService postService,
             Core.IWorkContext workContext,
@@ -49,6 +52,7 @@ namespace Nop.Web.Controllers.Harag
             ICommentService commentService
             )
         {
+            this._settingsService =_settingsService;
             this._followService = _followService;
             this._categoryService = categoryService;
             this._urlHelper = urlHelper;
@@ -58,6 +62,7 @@ namespace Nop.Web.Controllers.Harag
             this._env = env;
             this._commentService = commentService;
 
+            Setting = _settingsService.GetSettings();
             PagingParams = new PagingParams();
         }
         #endregion
@@ -1011,7 +1016,17 @@ namespace Nop.Web.Controllers.Harag
         public IActionResult DeletePost(int postId)
         {
 
-            return PartialView("~/Themes/Pavilion/Views/Harag/Post/DeletePost.cshtml");
+            var post = _postService.IsExists(postId);
+
+            if (!post)
+                return NotFound();
+
+            var obj = new DeletePost
+            { 
+                PostId = postId
+            };
+
+            return  View("~/Themes/Pavilion/Views/Harag/Post/DeletePost.cshtml", obj);
 
         }
 
@@ -1030,10 +1045,9 @@ namespace Nop.Web.Controllers.Harag
 
             if (deleted)
             {
-                return PartialView("~/Themes/Pavilion/Views/Harag/Report/_PostAddedSuccessfully.cshtml"); 
+                return View("~/Themes/Pavilion/Views/Harag/Post/_PostAddedSuccessfully.cshtml"); 
             }
-
-            return PartialView("~/Themes/Pavilion/Views/Harag/Report/_PostAddedSuccessfully.cshtml"); 
+            return View("~/Themes/Pavilion/Views/Harag/Post/_PostAddedSuccessfully.cshtml"); 
         }
         //    var model = _postService.GetClosedPosts(pagingParams);
 

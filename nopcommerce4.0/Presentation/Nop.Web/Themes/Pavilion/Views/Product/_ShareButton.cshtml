@@ -11,11 +11,10 @@
 <div class="product-social-buttons">
     <label>@T("sevenspikes.themes.pavilion.products.sharing.text"):</label>
     <ul class="social-sharing">
-        <li class="twitter">
-            <!-- Twitter -->
-            <a href="javascript:openShareWindow('https://twitter.com/share?url=@shareUrl')">
-                <span class="flip"></span>
-                <span class="flop"></span>
+        <li class="share-wha tsapp">
+            <!-- Google+ -->
+            <a style="background: none; margin-left:  18px; margin-top: -15px" href="javascript:openShareWindow('https://api.whatsapp.com/send?text=@shareUrl')">
+                <img width="60" src="/Themes/Pavilion/Content/img/whatsapp-image.png" />
             </a>
         </li>
         <li class="facebook">
@@ -25,18 +24,17 @@
                 <span class="flop"></span>
             </a>
         </li>
-        <li class="share-whatsapp">
-            <!-- Google+ -->
-            <a href="javascript:openShareWindow('https://api.whatsapp.com/send?text=@shareUrl')">
+        <li class="twitter">
+            <!-- Twitter -->
+            <a href="javascript:openShareWindow('https://twitter.com/share?url=@shareUrl')">
                 <span class="flip"></span>
                 <span class="flop"></span>
             </a>
         </li>
-        <li class="share-googleplus">
-            <!-- Google+ -->
-            <a href="javascript:openShareWindow('https://plus.google.com/share?url=@shareUrl')">
-                <span class="flip"></span>
-                <span class="flop"></span>
+
+        <li style="background: none; margin-left:  18px; margin-top: -15px">
+            <a class="btn fa fa-inbox email-a-friend-button" onclick="setLocation('/productemailafriend/' + '@Model.Id')">
+                <img style="width: inherit; margin: 3px;" width="60" src="https://cdn1.iconfinder.com/data/icons/rcons-line-ios-3/32/mail-512.png" />
             </a>
         </li>
     </ul>

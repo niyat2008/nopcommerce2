@@ -16,14 +16,14 @@
                     عميلنا العزيز <br />
                     الرجاء ذكر سبب الحذف: للاعلان رقم @Model.PostId <br /> 
                 </div>
-                <form class="add-adverse" action="~/HaragApi/Post/Delete/@Model.PostId" method="POST">
+                <form class="add-adverse" action="/Harag/Post/Delete/@Model.PostId" method="POST">
                     @Html.HiddenFor(m => m.PostId)
 
                     <div class="col-md-6">
                         @Html.EditorFor(m => m.ReportMessage, new {@class = "form-control", required = "required", minLength = 50})
                     </div> 
                     <div class="col-xs-12">
-                        <button class="btn btn-danger add" type="button">حذف >> </button>
+                        <button class="btn btn-danger add" type="submit">حذف >> </button>
                     </div>
                 </form>
             </div>

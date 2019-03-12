@@ -34,7 +34,12 @@
                 }
                 else
                 {
-                    <input asp-for="EnteredQuantity" class="qty-input" type="text"/>
+                    <div>
+                        <input asp-for="EnteredQuantity" class="qty-input" type="text" />
+
+                        <span id="@(Html.IdFor(model => model.EnteredQuantity) + "p")" class="k-plus">+</span>
+                        <span  id="@(Html.IdFor(model => model.EnteredQuantity) + "m")" class="k-minus">-</span>
+                    </div>
                     <script type="text/javascript" asp-location="Footer">
                         //when a customer clicks 'Enter' button we submit the "add to cart" button (if visible)
                         $(document).ready(function() {
@@ -44,6 +49,15 @@
                                     return false;
                                 }
                             });
+
+                             $("#@Html.IdFor(model => model.EnteredQuantity)" + "p").keydown(function(event) {
+                                 alert(@Html.IdFor(model => model.EnteredQuantity));
+
+                               
+                                }
+                            });
+
+
                         });
                     </script>
                 }

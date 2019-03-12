@@ -200,12 +200,12 @@
             <nav class="pagination-outer" aria-label="Page navigation">
                 <ul class="pagination">
                     <li class="page-item">
-                        <a class="page-link" aria-label="Next" onclick="getPostPaging('@Model.Links[1]?.Href')">
+                        <a class="page- link  btn btn-primary" aria-label="Next" onclick="getPostPaging('@Model.Links[1]?.Href')">
                             <span aria-hidden="true"> <<< </span>
                         </a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link">@Model.Paging.PageNumber</a>
+                        <a class="page- link  btn btn-primary">@Model.Paging.PageNumber</a>
                     </li>
 
                 </ul>
@@ -218,10 +218,10 @@
                 <ul class="pagination">
 
                     <li class="page-item">
-                        <a class="page-link">@Model.Paging.PageNumber</a>
+                        <a class="page- link  btn btn-primary">@Model.Paging.PageNumber</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" aria-label="Previous" onclick="getPostPaging('@Model.Links[0]?.Href')">
+                        <a class="page- link  btn btn-primary" aria-label="Next" onclick="getPostPaging('@Model.Links[0]?.Href')">
                             <span aria-hidden="true"> >>> </span>
                         </a>
                     </li>
@@ -235,15 +235,15 @@
         <nav class="pagination-outer" aria-label="Page navigation">
             <ul class="pagination">
                 <li class="page-item">
-                    <a class="page-link" aria-label="Next" onclick="getPostPaging('@Model.Links[2]?.Href')">
+                    <a class="page- link  btn btn-primary" aria-label="Previous" onclick="getPostPaging('@Model.Links[2]?.Href')">
                         <span aria-hidden="true"> <<< </span>
                     </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link">@Model.Paging.PageNumber</a>
+                    <a class="page- link">@Model.Paging.PageNumber</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" aria-label="Previous" onclick="getPostPaging('@Model.Links[0]?.Href')">
+                    <a class="page- link btn btn-primary" aria-label="Previous" onclick="getPostPaging('@Model.Links[0]?.Href')">
                         <span aria-hidden="true"> >>> </span>
                     </a>
                 </li>

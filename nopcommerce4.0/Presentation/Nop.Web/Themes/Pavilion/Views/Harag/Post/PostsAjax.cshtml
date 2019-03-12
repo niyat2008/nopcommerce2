@@ -23,15 +23,27 @@ else
         <div class="item">
             <div class="det">
                 <a href="/Harag/Post/@post.Id"><h3>@post.Title</h3></a>
-                <small>@post.DateDescription</small>
+                <div class="ro w">
+                    <div class="col-md-6">
+                        <div class="row"><a><span> رقم الاعلان:  @post.Id </span></a></div>
+                        <div class="row">
+                            <a href="/Harag/City/@post.City">
+                                <span><i class="fa fa-map-marker"></i> @post.City </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row"> <strong>@post.DateDescription</strong></div>
+                        <div class="row">
+                            <a href="/Harag/User/@post.PostOwner">
+                                <span><i class="fa fa-user"></i> @post.PostOwnerFullName </span>
+                            </a>
+                        </div> 
+                    </div>
+                </div>
+               
                 <div class="det-det">
-                    <a href="/Harag/City/@post.City">
-                        <span><i class="fa fa-map-marker"></i> @post.City </span>
-                    </a>
-                    <a href="/Harag/User/@post.PostOwner">
-                        <span><i class="fa fa-user"></i> @post.PostOwnerFullName </span>
-                    </a>               
-                    <a><span> رقم الاعلان:  @post.Id </span></a>
+                 
 
                 </div>
 

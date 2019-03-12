@@ -3,13 +3,13 @@
 
 <div class="cont det-block">
     <div class="det-top">
-        <small> @Model.DateDescription </small>
         <div class="det-det">
-            <a href="@Model.FromUserId"><span><i class="fa fa-user"></i> @Model.FromUser </span></a>
+            <a href="/Harag/User/@Model.FromUser"><strong>المرسل:  <span><i class="fa fa-user"></i> @Model.FromUser </span></strong></a>
+             
 
+        </div>
+        <small> @Model.DateDescription </small>
 
-
-        </div> 
         @if (Model.Type == Nop.Web.Controllers.Harag.MessageType.Post)
         {
             <a href="/Harag/Post/@Model.postId" class="text-danger">
@@ -24,6 +24,6 @@
         }
     </div>
     <div class="det-bottom">
-        <p>@Model.Message</p>
+        <p class="text-black-50">@Model.Message</p>
     </div>
 </div>

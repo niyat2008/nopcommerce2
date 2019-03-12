@@ -131,7 +131,7 @@ namespace Nop.Web.Controllers.Harag
         private bool CanRateOtherUsers()
         { 
             var payments = _paymentRepository.GetUserPayments(_workContext.CurrentCustomer.Id);
-            if(payments.Count >= this.Settings.RateCommissionNumber)
+            if(payments.Count >= this.Settings.RateCommissionNumber && payments.Sum(m => m.SiteAmount) > Settings.RateCommissionSum)
             {
                 return true;
             }

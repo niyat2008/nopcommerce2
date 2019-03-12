@@ -23,12 +23,12 @@ else
                         @Html.HiddenFor(m => m.UserId);
                         <div class="col-md-12">
                             <p>هل هذا الاعلان مخالف ؟ </p>
-                            @Html.RadioButtonFor(m => m.IsIllegal, true, new { })  نعم <br />
+                            @Html.RadioButtonFor(m => m.IsIllegal, true, new { @checked= "checked" })  نعم <br />
                             @Html.RadioButtonFor(m => m.IsIllegal, false, new { })   لا <br /><br />
                         </div>
                         <div class="col-md-6">
                             <label>نص الابلاغ</label> <br />
-                            @Html.TextAreaFor(m => m.ReportMessage, new { @class = "form-control txtArea", placeholder = "نص الابلاغ", rows = "7" })
+                            @Html.TextAreaFor(m => m.ReportMessage, new { @class = "form-control txtArea", placeholder = "نص الابلاغ", rows = "7" , required= "required" })
                             <br />
                             <button class="btn btn-default add" type="submit">ارسال</button>
                         </div>

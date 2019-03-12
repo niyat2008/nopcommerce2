@@ -73,13 +73,25 @@
 
                     </div>
                 </div>
+
+
+                @if (Model.IsPostOwner)
+                {
+                    <div class="input-icon-wrap">
+
+                        <a class="input-with-icon2" href="/Harag/Post/Update/@Model.Id"><i class="fa fa-pencil  fa-2x"></i><br> تعديل </a>
+
+                        @*<a class="input-with-icon2" href="https://haraj.com.sa/update2.php?adxs_id=38144098"><i class="fa fa-refresh  fa-2x"></i><br>تحديث </a>*@
+
+                        <a class="input-with-icon2" href="/Harag/Post/Delete/@Model.Id"><i class="fa fa-trash-o  fa-2x"></i><br> حذف  </a>
+
+                        <a class="input-with-icon2" href="/Harag/UpdateLocation/@Model.Id"><i class="fa fa-map-marker  fa-2x"></i> <br>تعديل الموقع</a>
+
+                    </div>
+                }
+
                 <div class="social-contact">
-                    @if (Model.IsPostOwner)
-                    {
-                        <div class="col-xs-2 text-center">
-                            <a href="/Harag/Post/Update/@PostId">تحديث الاعلان </a>
-                        </div>
-                    }
+
                     <div class="col-xs-2 text-center">
                         <a href="/Harag/Messages/Post/@Model.userId/2/@Model.Id"><i class="fa fa-envelope-o fa-2x"></i></a>
                     </div>

@@ -164,6 +164,42 @@
 
     </div>
 </div>
+
+
+
+<link href="~/css/Consultant/bootstrap.min.css" rel="stylesheet" />
+<script src="~/js/Consultant/bootstrap.min.js"></script>
+ 
+<div id="changeCatAndSubDiv" class="modal" tabindex="-1" role="dialog" Style="display:none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title"> اضف رسالتك الي اداره الموقع </h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <textarea type="text" class="form-control"></textarea>
+                    <div class="modal-footer">
+                        <button id="add-service-message-event" type="button" onclick="" class="btn btn-success">تعديل</button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+
+</div><!-- /.modal !-->
+<script type="text/javascript">
+    $("#open-customer-service").click(function () {
+        $("#changeCatAndSubDiv").show();
+    });
+
+    $("#add-service-message-event").click(function () {
+        $("#changeCatAndSubDiv").hide();
+    });
+</script>
+
+
 <div class="footer">
     <div class="footer-upper">
         <div class="center">
@@ -190,7 +226,7 @@
             </div>
             <div class="footer-block">
                 <div class="title">
-                    <strong>خدمة العملاء</strong>
+                    <a id="open-customer-service">خدمة العملاء</a>
                 </div>
                 <ul class="list"></ul>
             </div>

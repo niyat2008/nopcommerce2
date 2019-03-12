@@ -5667,3 +5667,22 @@ label, label + * {
     background-image: url('../img/google-plus.png') !important;
 }
 
+.add-to-cart-panel > div > .k-plus {
+    font-size: 23px;
+    font-weight: bolder;
+    float: inherit;
+    /* margin-top: 4px; */
+    padding: 7px;
+    background: #e6edeb;
+}
+
+.add-to-cart-panel > div > .k-minus {
+    font-size: 23px;
+    font-weight: bolder;
+    float: left;
+    margin-right: -5px;
+    padding: 7px;
+    padding-right: 11px;
+    padding-left: 11px;
+    background: #e6edeb;
+}
