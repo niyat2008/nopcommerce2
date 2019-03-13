@@ -251,6 +251,26 @@ namespace Nop.Web.Controllers.Harag
                 return RedirectToRoute("Login", new { returnUrl = "Harag" });
             }
         }
+
+        [HttpGet]
+        public IActionResult RefreshPost(int postId)
+        {
+            if (_workContext.CurrentCustomer.IsRegistered())
+            {
+                var post = _postService.GetPost(postId, "");
+
+                if (post == null)
+                {
+                    return Ok(new { state = false});
+                }
+
+                var refreshed = _postService.RefreshPost(postId);
+
+                return Ok(new {state = true }); 
+            }
+            return Ok(new { state = false });
+        }
+
         [HttpGet]
         public IActionResult HaragAddPost()
         {

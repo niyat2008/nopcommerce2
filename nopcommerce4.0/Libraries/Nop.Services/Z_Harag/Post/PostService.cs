@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -14,6 +15,7 @@ using Nop.Core.Domain.Z_Harag;
 using Nop.Services.Events;
 using Nop.Services.Localization;
 using Nop.Services.Z_Harag.Helpers;
+
 using static Nop.Services.Z_Consultant.Post.PostService;
 
 namespace Nop.Services.Z_Harag.Post
@@ -178,7 +180,30 @@ namespace Nop.Services.Z_Harag.Post
 
             return true;
         }
+        public static Bitmap ResizeImage(Image image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
 
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
+        }
         public List<KeyAndValue> UploadFiles(IList<string> files, List<string> errors)
         {
 
@@ -219,6 +244,7 @@ namespace Nop.Services.Z_Harag.Post
                 foreach (var fileString in files)
                 {
                     byte[] imageBytes = Convert.FromBase64String(fileString);
+
                     ImageFormat imageformate = null;
                     string imageFormateName = string.Empty;
                     using (var ms = new MemoryStream(imageBytes))
@@ -232,6 +258,7 @@ namespace Nop.Services.Z_Harag.Post
                         else
                         {
                             Image image = Image.FromStream(ms);
+                            
                             imageformate = image.RawFormat;
 
                             bool acceptFormat = false;
@@ -300,12 +327,32 @@ namespace Nop.Services.Z_Harag.Post
                     var fileName = randomNumber + Path.GetRandomFileName() + "." + file.ImageFormateName;
                     var filePath = Path.Combine(ImagesPath, fileName);
 
-                    File.WriteAllBytes(filePath, file.ImageBytes);
+                    using (var ms = new MemoryStream(file.ImageBytes))
+                    {
+                        var image = DrawLogo(ImagesPath + "\\1400779571d0nqxse.eui.Jpeg", Image.FromStream(ms));
+                        image.Save(filePath);
+                    }
+                        // File.WriteAllBytes(filePath, file.ImageBytes);
                     filesUrl.Add(new KeyAndValue() { Key = "image", Value = fileName });
                 }
             }
 
             return filesUrl;
+        }
+
+        private Bitmap DrawLogo(string logo, Image img )
+        { 
+                var image = new Bitmap(img);
+               
+                Image ib = Image.FromFile(logo); // This is 300x300 
+                ib = ResizeImage(ib, 60, 60);
+                using (Graphics g = Graphics.FromImage(image))
+                {
+                    g.DrawImage(ib, 0, 0, 60, 40);
+                }
+
+                return image;
+              
         }
 
         //Get  Post By Id
@@ -736,6 +783,22 @@ namespace Nop.Services.Z_Harag.Post
             post.IsDeleted = true;
             post.DeleteMessage = deleteData.ReportMessage;
             post.DeleteTime = DateTime.Now;
+
+            _postRepository.Update(post);
+
+            return true;
+        }
+
+        public bool RefreshPost(int postId)
+        {
+            var post = _postRepository.Table.Where(m => m.Id == postId) .FirstOrDefault();
+
+            if (post == null)
+            {
+                return false;
+            }
+
+            post.DateUpdated = DateTime.Now;
 
             _postRepository.Update(post);
 

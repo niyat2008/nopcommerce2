@@ -37,6 +37,7 @@ namespace Nop.Web.Infrastructure.Harag
             builder.RegisterType<NotificationService>().As<INotificationService>().InstancePerLifetimeScope();
             builder.RegisterType<RateService>().As<IRateSrevice>().InstancePerLifetimeScope();
             builder.RegisterType<ReportService>().As<IReportService>().InstancePerLifetimeScope();
+            builder.RegisterType<CustomerServicesService>().As<ICustomerServicesService>().InstancePerLifetimeScope();
 
             // Harag Payment Form
             builder.RegisterType<PaymentService>().As<IPaymentService>().InstancePerLifetimeScope();

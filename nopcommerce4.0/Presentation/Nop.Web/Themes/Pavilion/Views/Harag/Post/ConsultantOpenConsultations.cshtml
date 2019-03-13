@@ -1,37 +1,11 @@
-﻿@using Nop.Web.Models.Consultant.Post;
+﻿@using Nop.Services.Z_Harag.;
 @model PostOutputModel
 
 @{
     Layout = "~/Themes/Pavilion/Views/Consultant/Shared/_Header.cshtml";
-}
+} 
 
-<link href="~/css/Consultant/CustomerConsultations.css" rel="stylesheet" />
-
-<link href="~/css/Consultant/pagination.css" rel="stylesheet" />
-
-<style type="text/css">
-    .btndarckgreen:hover {
-        background-color: darkgreen !important;
-    }
-</style>
-
-<!-- Tab -->
-
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation">
-                    <a href="@Url.RouteUrl("Consultant.Post.GetConsultantNotAnsweredPosts")">لم يرد عليها  </a>
-                </li>
-                <li role="presentation">
-                    <a href="@Url.RouteUrl("Consultant.Post.GetConsultantReservedPosts")">المحجوزة</a>
-                </li>
-                <li role="presentation" Class="active">
-                    <a href="@Url.RouteUrl("Consultant.Post.GetConsultantOpenPosts")">المفتوحة</a>
-                </li>
-                <li role="presentation">
-                    <a href="@Url.RouteUrl("Consultant.Post.GetConsultantClosedPosts")">المغلقة</a>
-                </li>
-            </ul>
+         
 
             <!-- Tab panes -->
             <div class="tab-content">
@@ -41,9 +15,6 @@
                 {
                     <div id="tabpanelPosts" style="text-align:center"><b>لا يوجد</b></div>
                 }
-
-
-
 
                 @foreach (var post in Model.Items)
                 {

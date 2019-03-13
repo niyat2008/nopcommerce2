@@ -319,6 +319,12 @@
     <Content Update="Themes\Pavilion\Views\Harag\Payment\_BanksAccountsPartial.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\CustomerServiceMessageAdded.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\AddCustomerServiceMessage.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Post\UpdatePost.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

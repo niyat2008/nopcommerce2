@@ -78,38 +78,41 @@
                 @if (Model.IsPostOwner)
                 {
                     <div class="input-icon-wrap">
-
-                        <a class="input-with-icon2" href="/Harag/Post/Update/@Model.Id"><i class="fa fa-pencil  fa-2x"></i><br> تعديل </a>
-
-                        @*<a class="input-with-icon2" href="https://haraj.com.sa/update2.php?adxs_id=38144098"><i class="fa fa-refresh  fa-2x"></i><br>تحديث </a>*@
-
-                        <a class="input-with-icon2" href="/Harag/Post/Delete/@Model.Id"><i class="fa fa-trash-o  fa-2x"></i><br> حذف  </a>
-
-                        <a class="input-with-icon2" href="/Harag/UpdateLocation/@Model.Id"><i class="fa fa-map-marker  fa-2x"></i> <br>تعديل الموقع</a>
-
+                        <div class="social-contact">
+                            <div class="col-xs-2 text-center">
+                                <a class="input-with-icon2" href="/Harag/Post/Update/@Model.Id"><i class="fa fa-pencil  fa-2x"></i><br> تعديل </a>
+                            </div>
+                            <div class="col-xs-2 text-center">
+                                <a id="refresh-post" class="input-with-icon2"><i class="fa fa-refresh  fa-2x"></i><br>تحديث </a>
+                            </div>
+                            <div class="col-xs-2 text-center">
+                                <a class="input-with-icon2" href="/Harag/Post/Delete/@Model.Id"><i class="fa fa-trash-o  fa-2x"></i><br> حذف  </a>
+                            </div>
+                            <div class="col-xs-2 text-center">
+                                <a class="input-with-icon2" href="/Harag/UpdateLocation/@Model.Id"><i class="fa fa-map-marker  fa-2x"></i> <br>تعديل الموقع</a>
+                            </div>
+                        </div>
                     </div>
                 }
+                    <div class="social-contact">
+                        <div class="col-xs-2 text-center">
+                            <a href="/Harag/Messages/Post/@Model.userId/2/@Model.Id"><i class="fa fa-envelope-o fa-2x"></i></a>
+                        </div>
+                        <div class="col-xs-2 text-center">
+                            <a id="add-post-to-favorite"><i class="fa fa-heart fa-2x"></i></a>
+                            <sub></sub>
+                        </div>
+                        <div class="col-xs-2 text-center">
+                            <a href="/Harag/ReportPost/@PostId"><i class="fa fa-flag-o fa-2x"></i></a>
+                        </div>
+                        <div class="col-xs-2 text-center">
+                            <a href="javascript:openShareWindow('https://api.whatsapp.com/send?text=')"><i class="fa fa-whatsapp fa-2x"></i></a>
+                        </div>
+                        <div class="col-xs-2 text-center">
+                            <a href="javascript:openShareWindow('https://twitter.com/share?url=')"><i class="fa fa-twitter fa-2x"></i></a>
+                        </div>
 
-                <div class="social-contact">
-
-                    <div class="col-xs-2 text-center">
-                        <a href="/Harag/Messages/Post/@Model.userId/2/@Model.Id"><i class="fa fa-envelope-o fa-2x"></i></a>
                     </div>
-                    <div class="col-xs-2 text-center">
-                        <a id="add-post-to-favorite"><i class="fa fa-heart fa-2x"></i></a>
-                        <sub></sub>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <a href="/Harag/ReportPost/@PostId"><i class="fa fa-flag-o fa-2x"></i></a>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <a href="javascript:openShareWindow('https://api.whatsapp.com/send?text=')"><i class="fa fa-whatsapp fa-2x"></i></a>
-                    </div>
-                    <div class="col-xs-2 text-center">
-                        <a href="javascript:openShareWindow('https://twitter.com/share?url=')"><i class="fa fa-twitter fa-2x"></i></a>
-                    </div>
-
-                </div>
 
                 <div>
                     <div class="col-xs-12">
@@ -325,6 +328,22 @@
         });
     });
 
+        $("#refresh-post").click(function () {
+            $.ajax({
+                type: 'GET',
+                url: '/Harag/Post/Refresh/@Model.Id',
+                success: function (data) {
+
+                    if (data.state === true) {
+                        window.location = "/Harag/Post/" + @Model.Id;
+                    } else {
+                        alert("اعد تحميل الاعلان وحاول مجددا   ");
+                    }
+
+                }
+            });
+    });
+    
     $("#add-follow-js").click(function () {
         $.ajax({
             type: 'GET',

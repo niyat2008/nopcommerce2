@@ -18,6 +18,7 @@ using Nop.Services.Z_Harag.Follow;
 using Nop.Services.Z_Harag.Payment;
 using Nop.Services.Z_HaragAdmin.Setting;
 using Nop.Services.Z_Harag.Notification;
+using Nop.Services.Z_Harag.Category;
 
 namespace Nop.Web.Controllers.Harag
 {
@@ -26,6 +27,7 @@ namespace Nop.Web.Controllers.Harag
         private SettingsModel Settings;
         private readonly Core.IWorkContext _workContext;
         private readonly  ICustomerService _customerContext;
+        private readonly  ICustomerServicesService _customerServiceContext;
         private readonly IRateSrevice _rateRepository;
         private readonly INotificationService _notificationService;
         private readonly IPaymentService _paymentRepository;
@@ -38,7 +40,7 @@ namespace Nop.Web.Controllers.Harag
         public PagingParams PagingParams { get; set; }
 
         public UserController(Core.IWorkContext workContext,IRateSrevice _rateRepository, IFollowService _followRepository, IPaymentService _paymentRepository,
-             IBlackListService _blackListService, IPostService _postService,ICustomerService _customerContext, ISettingService _settingRepository, INotificationService _notificationService)
+             IBlackListService _blackListService, ICustomerServicesService _customerServiceContext, IPostService _postService,ICustomerService _customerContext, ISettingService _settingRepository, INotificationService _notificationService)
         {
             this._notificationService = _notificationService;
             this._paymentRepository = _paymentRepository;
@@ -49,7 +51,7 @@ namespace Nop.Web.Controllers.Harag
             this._customerContext = _customerContext;
             this._postService = _postService;
             this._blackListService = _blackListService;
-
+            this._customerServiceContext = _customerServiceContext;
             Settings = _settingRepository.GetSettings();
             PagingParams = new PagingParams();
         }
@@ -67,6 +69,61 @@ namespace Nop.Web.Controllers.Harag
 
             var re = result ? "هذا الرقم موجود في القائمه السوداء" : "هذا الرقم غير موجود في القائمه السوداء";
             return Ok(re);
+        }
+
+        [HttpGet]
+        public IActionResult CustomerServiseMessage()
+        {
+            return View("~/Themes/Pavilion/Views/Harag/Post/AddCustomerServiceMessage.cshtml");
+        }
+
+        [HttpPost]
+        public IActionResult CustomerServiseMessage(CustomerServiceModel customerService)
+        {
+            if (_workContext.CurrentCustomer.IsRegistered())
+            {
+                var message = new Z_Harag_CustomerServicesMessage
+                {
+                    Message = customerService.Message,
+                    UserId = _workContext.CurrentCustomer.Id
+                }; 
+                _customerServiceContext.AddCustomerServiceMessage(message);
+            }
+
+            return View("~/Themes/Pavilion/Views/Harag/Post/CustomerServiceMessageAdded.cshtml");
+        }
+
+        [HttpGet]
+        public IActionResult GetCustomerServiseMessage(int id)
+        { 
+                
+               var m = _customerServiceContext.GetCustomerServiceMessage(id);
+ 
+            var model = new CustomerServiceOutputModel
+            {
+                Message = m.Message,
+                UserName = (m.User  != null?m.User.GetFullName():""),
+                UserId =  (int)m.UserId
+            };
+
+            return View("");
+        }
+
+
+        [HttpGet]
+        public IActionResult AllCustomerServiseMessage(CustomerServiceModel customerService)
+        {
+            if (_workContext.CurrentCustomer.IsRegistered())
+            {
+                var message = new Z_Harag_CustomerServicesMessage
+                {
+                    Message = customerService.Message,
+                    UserId = 0
+                };
+                _customerServiceContext.AddCustomerServiceMessage(message);
+            }
+
+            return Ok(new { state = true });
         }
 
         [HttpGet]
@@ -94,18 +151,17 @@ namespace Nop.Web.Controllers.Harag
                 IsDispayed = p.IsDispayed,
                 PostOwner = p.Customer.Username
             }).ToList();
-
+            
             var model = new ProfileModel
             {
-                DownRating = 0,
-                UpRating = 0,
-                FollowerCount = 0,
+                DownRating = _rateRepository.GetUserDownRates(result.Id).Count,
+                UpRating = _rateRepository.GetUserUpRates(result.Id).Count,
+                FollowerCount = _followRepository.GetFollowedUsers(result.Id).Count,
                 LastSeen = result.LastActivityDateUtc,
                 Posts = posts,
                 userId = result.Id,
                 UserName = result.Username
             };
-
             return View("~/Themes/Pavilion/Views/Harag/Profile/MainProfile.cshtml", model);
         }
 
