@@ -106,19 +106,8 @@ input.form-control { border: 1px solid #ddd }
     .content .items .item .det { width: 74%; }
     .content .items .item .det-img { width: 25%; }
 }
-.content .images_list {
-    min-height: 215px;
-}
-
-    .content .images_list .img_block {
-        border: 2px solid #ddd;
-        padding: 5px;
-        width: 90px;
-        text-align: center;
-        margin-bottom: 12px;
-        float: right;
-        margin-left: 12px;
-        cursor: pointer;}
+.content .images_list { min-height: 215px; }
+.content .images_list .img_block { border: 2px solid #ddd; padding: 5px; width: 90px; text-align: center; margin-bottom: 12px; float: right; margin-left: 12px; cursor: pointer;}
 
 .footer { background: #eee; margin-top: 15px; padding-top: 30px; }
 .footer ul li { margin-bottom: 10px }
