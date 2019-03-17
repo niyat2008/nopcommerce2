@@ -205,7 +205,8 @@ a:hover {
 
 .navbar-default {
     border-color: #ededed;
-    background: #e8ebee
+    background: #e8ebee;
+    min-height: 30px;
 }
 
     .navbar-default .navbar-nav > li > a, .subNav li a {
@@ -228,7 +229,7 @@ a:hover {
     background: #fff;
     border: 1px solid #ddd;
     position: absolute;
-    top: 51px;
+    top: 30px;
     z-index: 9999;
     min-width: 1000px;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.08);
@@ -249,11 +250,14 @@ a:hover {
 
 .navbar-default .navbar-nav > li.hasSubMenu a:hover {
     color: #4da74d;
-    font-weight: bold
+    font-weight: bold; text-decoration:underline
 }
 
 .navbar-default .navbar-nav > li.hasSubMenu a {
-    font-size: 15px
+    font-size: 15px;
+    padding-bottom: 0;
+    padding-top: 0;
+    line-height: 30px;
 }
 
 .subNav:hover {

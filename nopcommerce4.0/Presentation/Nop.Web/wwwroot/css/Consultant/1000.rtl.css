@@ -899,6 +899,9 @@
             .footer-block li {
                 padding: 6px 0;
             }
+        .footer ul li a {
+            color: #337ab7
+        }
 
             .footer-block.quick-contact li {
                 padding: 6px 0 16px;

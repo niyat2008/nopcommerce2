@@ -51,37 +51,73 @@
 </head>
 <!-- Header -->
 <!-- Top Bar -->
-<section class="top_bar">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-1">
-                <div id="admin-link-js-ajax" style="color: white"></div>
-                @*<a href="/Consultations/Admin">اداره الاستشارات</a>*@
+<section class="topFixed">
+    <section class="top_bar" >
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-2 hidden-xs "></div>
+                <div class="col-md-1 hidden-xs">
+                    <div id="admin-link-js-ajax" style="color: white"></div>
+                    @*<a href="/Consultations/Admin">اداره الاستشارات</a>*@
+                </div>
+                <div class="col-lg-4 col-md-6 col-xs-12">
+                    <div class="text-center">
+                        <span>@Html.RouteLink("المتجر", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                        <span class="active">@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+
+                        <span>@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-2" id="userInfo"></div>
+                <div class="col-md-2 hidden-xs"> </div>
             </div>
-            <div class="col-md-4">
-                <div class="text-center">
-                    <span>@Html.RouteLink("المتجر", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-                    <span class="active">@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+        </div>
 
-                    <span>@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
 
+        @*
+            Partial
+        *@
+
+        @* @Html.Partial("~/Themes/Pavilion/Views/Harag/Shared/_mobileMenuPartial.cshtml")*@
+
+    </section>
+
+    <div class="fixedNavScreen text-center">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">                   
+                    <ul>
+                        <li>
+                            <i class="fa fa-user-o fa-lg"></i>
+                        </li>
+                        <li>
+                            <i class="fa fa-heart-o fa-lg"></i>
+                        </li>
+                        <li>
+                            <i class="fa fa-thumbs-o-up fa-lg"></i>
+                        </li>
+                        <li>
+                            <i class="fa fa-bell-o fa-lg"></i>
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope-o fa-lg"></i>
+                        </li>
+                        <li id="searchScreen">
+                            <i class="fa fa-search fa-lg"></i>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="searchScreenFull">
+                    kdjfskjdfsdkjfdskjfjkf dklfjdkfjdsk
                 </div>
             </div>
-            <div class="col-md-2" id="userInfo"></div>
-            <div class="col-md-2"> </div>
         </div>
     </div>
-
-
-    @*
-        Partial
-    *@
-
-    @* @Html.Partial("~/Themes/Pavilion/Views/Harag/Shared/_mobileMenuPartial.cshtml")*@
 </section>
 
-<div class="text-center top-user-menu" style="background:#e8ebee;padding:8px;">
+<div class="text-center top-user-menu">
     <span>
         <a href="/Harag/Profile">الملف الشخصي</a>
     </span>
@@ -111,7 +147,7 @@
         <div class="row">
             <div class="col-md-1"></div>
 
-            <div class="col-md-2">
+            <div class="col-md-2 col-xs-12 logoContainer">
                 <img class="logo" src="~/images/Consultant/images/logo3.png" onclick="goToHome()" />
 
             </div>
@@ -150,9 +186,8 @@
 
 
 
-<link href="~/css/Consultant/bootstrap.min.css" rel="stylesheet" />
+@*<link href="~/css/Consultant/bootstrap.min.css" rel="stylesheet" />*@
 <script src="~/js/Consultant/bootstrap.min.js"></script>
-
 
 
 <div id="changeCatAndSubDiv" class="modal" tabindex="-1" role="dialog" Style="display:none">
@@ -357,3 +392,12 @@
 <script src="/Plugins/SevenSpikes.Core/Scripts/sevenspikes.core.min.js" type="text/javascript"></script>
 <script src="/Plugins/SevenSpikes.Core/Scripts/sevenspikes.theme.ex.min.js" type="text/javascript"></script>
 <script src="/Themes/Pavilion/Content/scripts/pavilion.js" type="text/javascript"></script>
+
+<script>
+    $("#searchScreen").click(function () {
+        $("#searchScreenFull").slideToggle("slow", function () {
+            // Animation complete.
+           // $(this).css("display", "block");
+        });
+    });
+</script>

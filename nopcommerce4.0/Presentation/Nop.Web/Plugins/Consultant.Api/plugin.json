@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Consultant Api",
+  "FriendlyName": "Consultant Api",
+  "SystemName": "Consultant.Api",
+  "Version": "1.00",
+  "SupportedVersions": [ "4.00" ],
+  "Author": "Niyat team",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Consultant.Api.dll",
+  "Description": "This plugin is Api For Consultant project"
+}
