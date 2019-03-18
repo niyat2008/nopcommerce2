@@ -280,15 +280,16 @@ namespace Nop.Web.Controllers.Harag
 
             userRates.Rates = rates.Select(m => new RateModel
             {
-                AdviceDeal = m.AdviceDeal,
-                
+                AdviceDeal = m.AdviceDeal, 
                 IsBuyDone = m.IsBuyDone,
                 RateComment = m.RateComment,
-                Username = m.Customer.Username
+                Username = m.Customer.Username,
+                User = m.User,
+                Customer = m.Customer
             }).ToList();
 
-            userRates.ConfirmedUserDownRateCount = 0;
-            userRates.ConfirmedUserUpRateCount = 0;
+            userRates.ConfirmedUserDownRateCount = userRates.Rates.Where(m => m.Customer.IsPaymentDone == true && m.AdviceDeal == true).ToList().Count;
+            userRates.ConfirmedUserUpRateCount = userRates.Rates.Where(m => m.Customer.IsPaymentDone ==true && m.AdviceDeal == false).ToList().Count; ;
             userRates.UpRateCount = userRates.Rates.Where(m => m.AdviceDeal == true).ToList().Count; ;
             userRates.DownRateCount = userRates.Rates.Where(m => m.AdviceDeal == false).ToList().Count; 
             ViewBag.Added = true;

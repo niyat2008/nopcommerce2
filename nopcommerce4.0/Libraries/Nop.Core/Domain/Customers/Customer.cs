@@ -67,6 +67,8 @@ namespace Nop.Core.Domain.Customers
         public string Email { get; set; }
 
         public string Mobile { get; set; }
+        public bool IsFeatured { get; set; }
+        public bool IsPaymentDone { get; set; }
         /// <summary>
         /// Gets or sets the email that should be re-validated. Used in scenarios when a customer is already registered and wants to change an email address.
         /// </summary>

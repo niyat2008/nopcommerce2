@@ -107,9 +107,19 @@ namespace Nop.Web.Infrastructure
             // NavbarAjax
             routeBuilder.MapRoute("Harag.Navbar", "Harag/NavbarAjax",
             new { controller = "Post", action = "GetHaragNavbar" });
+
+            ////
+            ////  Featured Members
+            ////
+
+            // Featured
+            routeBuilder.MapRoute("Harag.Post.SetPostFeatured", "Harag/SetFeaturedPost/{postId}",
+            new { controller = "Post", action = "SetPostFeatured" });
+
+            // Featured
+            routeBuilder.MapRoute("Harag.Post.CloseCommenting", "Harag/OpenCloseCommentingPost/{postId}",
+            new { controller = "Post", action = "OpenCloseCommentingPost" });
              
-
-
             //////
             ////  rEPORT 
             ////////

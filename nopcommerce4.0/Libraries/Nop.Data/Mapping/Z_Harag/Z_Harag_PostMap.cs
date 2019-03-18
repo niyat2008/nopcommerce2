@@ -19,13 +19,13 @@ namespace Nop.Data.Mapping.Z_Harag
             this.Property(p => p.Title).IsRequired().HasMaxLength(4000);
             this.Property(p => p.DateCreated).IsRequired();
             this.Property(p => p.DateUpdated).IsOptional();
-            this.Property(p => p.IsClosed).IsRequired();
+            this.Property(p => p.IsCommentingClosed).IsRequired();
             this.Property(p => p.IsAnswered).IsRequired();
             this.Property(p => p.IsCommon).IsRequired();
             //this.Property(p => p.IsSetToSubCategory).IsRequired();
             //this.Property(p => p.Rate).IsOptional();
             this.Property(p => p.IsDispayed).IsRequired();
-            this.Property(p => p.IsReserved).IsRequired();
+            this.Property(p => p.IsFeatured).IsRequired();
             this.Property(p => p.LastCommentTime).IsOptional();
             this.Property(p => p.IsCommon).IsOptional();
             this.Property(p => p.Longtiude).IsOptional();

@@ -22,6 +22,8 @@ namespace Nop.Web.Models.Harag.Post
         public double Len { get; set; }
         public double Lat { get; set; }
         public bool IsReserved { get; set; }
+        public bool IsFeatured { get; set; }
+        public bool IsCommentingClosed { get; set; }
         public int CategoryId { get; set; } 
         public string CategoryName { get; set; }
         public string CityName { get; set; }

@@ -36,9 +36,10 @@ namespace Nop.Core.Domain.Z_Harag
         //public Nullable<int> Rate { get; set; }
         // public bool IsSetToSubCategory { get; set; }
         public bool IsDispayed { get; set; }
-        public bool IsReserved { get; set; }
+        public Nullable<DateTime> LastFeaturedTime { get; set; }
+        public Nullable<bool> IsFeatured { get; set; }
         public Nullable<bool> IsCommon { get; set; }
-        public bool IsClosed { get; set; }
+        public bool IsCommentingClosed { get; set; }
         public bool IsAnswered { get; set; }
         public Nullable<Decimal> Longtiude { get; set; }
         public Nullable<Decimal> Lattiude { get; set; }

@@ -47,8 +47,9 @@ namespace Nop.Web.Infrastructure
             builder.RegisterType<VendorModelFactory>().As<IVendorModelFactory>().InstancePerLifetimeScope();
             builder.RegisterType<WidgetModelFactory>().As<IWidgetModelFactory>().InstancePerLifetimeScope();
             builder.RegisterType<ClosePostAfter48Hours>().As<IClosePostAfter48Hours>().InstancePerLifetimeScope();
+            builder.RegisterType<HaragPostPostsTracking>().As<IHaragPostPostsTracking>().InstancePerLifetimeScope();
         }
-
+        
         /// <summary>
         /// Gets order of this dependency registrar implementation
         /// </summary>

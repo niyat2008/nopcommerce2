@@ -24,6 +24,7 @@ namespace Nop.Services.Z_Harag.Post
         List<Neighborhood> GetNeighborhoods(int cityId);
         // can add post
         bool CanAddNewPost(int userId);
+        bool CanSetFeaturedPost(int userId);
         bool EditHaragPost(int postId, Z_Harag_Post post);
         List<Z_Harag_Post> SearchByCategory(int catId, PagingParams pagingParams); 
         List<Z_Harag_Post> SearchByCategoryPage(int catId, PagingParams pagingParams);
@@ -47,5 +48,11 @@ namespace Nop.Services.Z_Harag.Post
         List<Z_Harag_Post> GetLatestPosts(PagingParams pagingParams);
         bool DeletePost(DeletePost deleteData);
         bool RefreshPost(int postId);
+        bool hasFeaturedPost(int userId);
+        bool IsFeaturedPost(int postId);
+        bool SetFeatured(int postId);
+        bool CloseCommenting(int pid);
+        bool openCommenting(int pid);
+
     }
 }

@@ -1,7 +1,8 @@
 ﻿@model Nop.Services.Z_Harag.Category.CustomerServiceModel
 
 @{
-    Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
+    //Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
+    Layout = "~/Themes/Pavilion/Views/Shared/_ColumnsTwo.cshtml";
 }
 
 @{
@@ -30,7 +31,7 @@
         <form  action="@Url.RouteUrl("Harag.CustomerService.AddNewMessageAjax")" method="post" class="add-adverse">
 
             <div class="row"> 
-                @Html.TextAreaFor(m => m.Message, new { id = "Title-js-ajax", @class = "form-control", placeholder = "الرساله", required = "required" })
+                @Html.TextAreaFor(m => m.Message, new { id = "Title-js-ajax", @class = "form-control",col=20, placeholder = "الرساله", required = "required" })
             </div>
             <br />
             <div class="row">

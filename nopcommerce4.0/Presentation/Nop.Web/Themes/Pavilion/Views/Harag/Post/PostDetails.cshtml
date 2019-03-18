@@ -24,7 +24,6 @@
         background: red !important;
         color: white !important;
     }
-
 </style>
 <!-- Content -->
 <div class="content">
@@ -88,31 +87,64 @@
                             <div class="col-xs-2 text-center">
                                 <a class="input-with-icon2" href="/Harag/Post/Delete/@Model.Id"><i class="fa fa-trash-o  fa-2x"></i><br> حذف  </a>
                             </div>
+
+
+                            @if (!Model.IsFeatured)
+                            {
+                                @if (!Model.IsFeatured)
+                                {
+                                    <div class="col-xs-2 text-center">
+                                        <a class="btn btn-default add" href="/Harag/SetFeaturedPost/@Model.Id">  <span><i class="fa fa-trash-o  fa-2x"></i><br>  </span><i class="fa fa-feed"></i></a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-xs-2 text-center">
+                                        <a class="btn btn-default add followed" href="/Harag/SetFeaturedPost/@Model.Id"> <i class="fa fa-feed"></i></a>
+                                    </div>
+                                }
+
+                                <div class="col-xs-2 text-center">
+                                    <a class="input-with-icon2" href="/Harag/SetFeaturedPost/@Model.Id"><i class="fa fa-map-marker  fa-2x"></i> <br>تعديل الموقع</a>
+                                </div>
+                                @if (!Model.IsCommentingClosed)
+                                {
+                                    <div class="col-xs-2 text-center">
+                                        <a class="btn btn-default add" href="/Harag/OpenCloseCommentingPost/@Model.Id">  <span>ايقاف الردود </span><i class="fa fa-feed"></i></a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-xs-2 text-center">
+                                        <a class="btn btn-default add followed" href="/Harag/OpenCloseCommentingPost/@Model.Id">  <span> تفعيل الردود </span><i class="fa fa-feed"></i></a>
+                                    </div>
+                                }
+                            }
                             <div class="col-xs-2 text-center">
                                 <a class="input-with-icon2" href="/Harag/UpdateLocation/@Model.Id"><i class="fa fa-map-marker  fa-2x"></i> <br>تعديل الموقع</a>
                             </div>
                         </div>
                     </div>
                 }
-                    <div class="social-contact">
-                        <div class="col-xs-2 text-center">
-                            <a href="/Harag/Messages/Post/@Model.userId/2/@Model.Id"><i class="fa fa-envelope-o fa-2x"></i></a>
-                        </div>
-                        <div class="col-xs-2 text-center">
-                            <a id="add-post-to-favorite"><i class="fa fa-heart fa-2x"></i></a>
-                            <sub></sub>
-                        </div>
-                        <div class="col-xs-2 text-center">
-                            <a href="/Harag/ReportPost/@PostId"><i class="fa fa-flag-o fa-2x"></i></a>
-                        </div>
-                        <div class="col-xs-2 text-center">
-                            <a href="javascript:openShareWindow('https://api.whatsapp.com/send?text=')"><i class="fa fa-whatsapp fa-2x"></i></a>
-                        </div>
-                        <div class="col-xs-2 text-center">
-                            <a href="javascript:openShareWindow('https://twitter.com/share?url=')"><i class="fa fa-twitter fa-2x"></i></a>
-                        </div>
-
+                <div class="social-contact">
+                    <div class="col-xs-2 text-center">
+                        <a href="/Harag/Messages/Post/@Model.userId/2/@Model.Id"><i class="fa fa-envelope-o fa-2x"></i></a>
                     </div>
+                    <div class="col-xs-2 text-center">
+                        <a id="add-post-to-favorite"><i class="fa fa-heart fa-2x"></i></a>
+                        <sub></sub>
+                    </div>
+                    <div class="col-xs-2 text-center">
+                        <a href="/Harag/ReportPost/@PostId"><i class="fa fa-flag-o fa-2x"></i></a>
+                    </div>
+                    <div class="col-xs-2 text-center">
+                        <a href="javascript:openShareWindow('https://api.whatsapp.com/send?text=')"><i class="fa fa-whatsapp fa-2x"></i></a>
+                    </div>
+                    <div class="col-xs-2 text-center">
+                        <a href="javascript:openShareWindow('https://twitter.com/share?url=')"><i class="fa fa-twitter fa-2x"></i></a>
+                    </div>
+
+                </div>
 
                 <div>
                     <div class="col-xs-12">
@@ -141,22 +173,25 @@
                         </div>
                     </div>
                 }
-
-                <div>
-                    <div class="col-sm-12">
-                        <p>تذكر قول الله تعالى: ( مَا يَلْفِظُ مِن قَوْلٍ إِلا لَدَيْهِ رَقِيبٌ عَتِيدٌ ) </p>
-                        <form>
-                            <textarea id="CommentText" class="form-control txtArea" placeholder="أكتب سؤالك للمعلن هنا" rows="7"></textarea>
-                            <button id="add-comment-post-js-ajax" class="btn btn-default add" type="button"> ارسال &gt;&gt;  </button>
-                        </form>
+                @if (!Model.IsCommentingClosed)
+                {
+                    <div>
+                        <div class="col-sm-12">
+                            <p>تذكر قول الله تعالى: ( مَا يَلْفِظُ مِن قَوْلٍ إِلا لَدَيْهِ رَقِيبٌ عَتِيدٌ ) </p>
+                            <form>
+                                <textarea id="CommentText" class="form-control txtArea" placeholder="أكتب سؤالك للمعلن هنا" rows="7"></textarea>
+                                <button id="add-comment-post-js-ajax" class="btn btn-default add" type="button"> ارسال &gt;&gt;  </button>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                }
+
             </div>
             <div class="col-sm-3">
                 <div class="disTable advBox">
                     @*<div class="choices choices2 disTable">
 
-                    </div>*@
+                        </div>*@
                     @if (Model.RelatedPosts.Count > 0)
                     {
                         <div class="adv-images">
@@ -199,23 +234,23 @@
                 }
 
                 @*<div class="disTable advBox">
-                <div class="choices choices2 disTable">
+                        <div class="choices choices2 disTable">
 
-                </div>
-                <div class="adv-images">
-                    @foreach (var item in Model.Files)
-                    {
-                        @foreach (var image in Model.Files)
-                        {
-                            <div style="width:160px; display:inline;">
-                                <a href="~/HaragApi/Uploads/Images/@image" data-lightbox="image2-@Model.Id" data-title="My caption">
-                                    <img src="~/HaragApi/Uploads/Images/@image" alt="Single Image" style="width:150px;height:150px;" />
-                                </a>
-                            </div>
-                        }
-                    }
-                </div>
-            </div>*@
+                        </div>
+                        <div class="adv-images">
+                            @foreach (var item in Model.Files)
+                            {
+                                @foreach (var image in Model.Files)
+                                {
+                                    <div style="width:160px; display:inline;">
+                                        <a href="~/HaragApi/Uploads/Images/@image" data-lightbox="image2-@Model.Id" data-title="My caption">
+                                            <img src="~/HaragApi/Uploads/Images/@image" alt="Single Image" style="width:150px;height:150px;" />
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>*@
             </div>
 
         </div>
@@ -250,7 +285,7 @@
         </ul>
 
     </div>*@
-  
+
 <div id="changeCatAndSubDiv" class="modal" tabindex="-1" role="dialog" Style="display:none">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -292,8 +327,7 @@
         window.open(url + window.location, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
     }
 
-    function deleteFile(index) {
-
+    function deleteFile(index) { 
         Files.splice(+index, 1);
         $("#imgno" + index).remove();
     }
@@ -328,22 +362,22 @@
         });
     });
 
-        $("#refresh-post").click(function () {
-            $.ajax({
-                type: 'GET',
-                url: '/Harag/Post/Refresh/@Model.Id',
-                success: function (data) {
+    $("#refresh-post").click(function () {
+        $.ajax({
+            type: 'GET',
+            url: '/Harag/Post/Refresh/@Model.Id',
+            success: function (data) {
 
-                    if (data.state === true) {
-                        window.location = "/Harag/Post/" + @Model.Id;
-                    } else {
-                        alert("اعد تحميل الاعلان وحاول مجددا   ");
-                    }
-
+                if (data.state === true) {
+                    window.location = "/Harag/Post/" + @Model.Id;
+                } else {
+                    alert("اعد تحميل الاعلان وحاول مجددا   ");
                 }
-            });
+
+            }
+        });
     });
-    
+  
     $("#add-follow-js").click(function () {
         $.ajax({
             type: 'GET',
@@ -355,13 +389,12 @@
                         $("#add-follow-js span").html("الغاء المتابعه");
                     } else {
                         $("#add-follow-js").removeClass("followed");
-                        $("#add-follow-js   span").html("متابعه الردود");
-
+                        $("#add-follow-js   span").html("متابعه الردود"); 
                     }
-                    
+
                 } else {
                     alert("تاكد من الاتصال بالانترنت");
-                } 
+                }
             }
         });
     });

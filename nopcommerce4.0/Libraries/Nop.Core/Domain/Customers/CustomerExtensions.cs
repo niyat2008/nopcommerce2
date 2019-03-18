@@ -99,8 +99,8 @@ namespace Nop.Core.Domain.Customers
         {
             return IsInCustomerRole(customer, SystemCustomerRoleNames.Registered, onlyActiveCustomerRoles);
         }
-
-        /// <summary>
+  
+        /// /// <summary>
         /// Gets a value indicating whether customer is guest
         /// </summary>
         /// <param name="customer">Customer</param>

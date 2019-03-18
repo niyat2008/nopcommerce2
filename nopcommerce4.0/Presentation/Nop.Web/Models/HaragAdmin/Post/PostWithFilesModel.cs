@@ -22,6 +22,7 @@ namespace Nop.Web.Models.HaragAdmin.Post
         public Nullable<bool> IsCommon { get; set; }
         public bool IsClosed { get; set; }
         public bool IsAnswered { get; set; }
+        public bool IsFeatured { get; set; }
 
         public System.DateTime DateCreated { get; set; }
         public System.DateTime DateUpdated { get; set; }

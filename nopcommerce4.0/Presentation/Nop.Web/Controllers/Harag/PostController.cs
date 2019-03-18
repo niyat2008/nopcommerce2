@@ -31,6 +31,7 @@ namespace Nop.Web.Controllers.Harag
         private readonly INotificationService _notificationService;
         private readonly IUrlHelper _urlHelper;
         private readonly ISettingService _settingsService;
+        private readonly ICustomerService customerService;
         private readonly IPostService _postService;
         private readonly Core.IWorkContext _workContext;
         private readonly IFollowService _followService; 
@@ -43,6 +44,7 @@ namespace Nop.Web.Controllers.Harag
         public PostController(
             ICategoryService categoryService,
             IUrlHelper urlHelper,
+             ICustomerService customerService,
             ISettingService _settingsService,
              IFollowService _followService,
             IPostService postService,
@@ -53,6 +55,7 @@ namespace Nop.Web.Controllers.Harag
             )
         {
             this._settingsService =_settingsService;
+             customerService = customerService;
             this._followService = _followService;
             this._categoryService = categoryService;
             this._urlHelper = urlHelper;
@@ -267,6 +270,65 @@ namespace Nop.Web.Controllers.Harag
                 var refreshed = _postService.RefreshPost(postId);
 
                 return Ok(new {state = true }); 
+            }
+            return Ok(new { state = false });
+        }
+
+        [HttpGet]
+        public IActionResult SetPostFeatured(int postId)
+        {
+            if (_workContext.CurrentCustomer.IsRegistered() && _workContext.CurrentCustomer.IsFeatured)
+            { 
+                var post = _postService.GetPost(postId, "");
+
+                if (post == null)
+                {
+                    return Ok(new { state = false });
+                }
+                if (_postService.CanSetFeaturedPost(_workContext.CurrentCustomer.Id))
+                {
+                    if ((bool)post.IsFeatured)
+                    { 
+                        return Ok(new { state = false });
+                    }
+                    else
+                    {
+                        var refreshed = _postService.SetFeatured(post.Id);
+                        return Ok(new { state = true });
+                    }
+                }
+                else
+                {
+                    return Ok(new { state = false });
+                } 
+            }
+            return Ok(new { state = false });
+        }
+         
+        [HttpGet]
+        public IActionResult OpenCloseCommentingPost(int postId)
+        {
+            if (_workContext.CurrentCustomer.IsRegistered() && _workContext.CurrentCustomer.IsFeatured)
+            {
+                var post = _postService.GetPost(postId, "");
+
+                if (post == null)
+                {
+                    return Ok(new { state = false });
+                }
+
+                if (post.IsCommentingClosed)
+                {
+                   var closed = _postService.openCommenting(postId);
+
+                    return Ok(new { state = true, closed = true});
+                }
+                else
+                {
+                   var closed = _postService.CloseCommenting(postId);
+                    return Ok(new { state = true, closed =  false});
+                } 
+               
             }
             return Ok(new { state = false });
         }
@@ -2052,9 +2114,8 @@ namespace Nop.Web.Controllers.Harag
                     DateCreated = m.DateCreated,
                     DateUpdated = m.DateUpdated,
                     IsAnswered = m.IsAnswered,
-                    IsClosed = m.IsClosed,
-                    IsDispayed = m.IsDispayed,
-                    IsReserved = m.IsReserved, 
+                    IsClosed = m.IsCommentingClosed,
+                    IsDispayed = m.IsDispayed, 
                     City = m.City.ArName,
                     CategoryName = m.Category.Name, 
                     Photo = m.Z_Harag_Photo?.FirstOrDefault()?.Url
@@ -2090,9 +2151,8 @@ namespace Nop.Web.Controllers.Harag
                     DateCreated = m.DateCreated,
                     DateUpdated = m.DateUpdated,
                     IsAnswered = m.IsAnswered,
-                    IsClosed = m.IsClosed,
-                    IsDispayed = m.IsDispayed,
-                    IsReserved = m.IsReserved,
+                    IsClosed = m.IsCommentingClosed,
+                    IsDispayed = m.IsDispayed, 
                     City = m.City.ArName,
                     CategoryName = m.Category.Name,
                     Photo = m.Z_Harag_Photo?.FirstOrDefault()?.Url

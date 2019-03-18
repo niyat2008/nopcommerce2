@@ -13,7 +13,7 @@
             <h3>الاشعارات</h3>
             <div class="col-md-3 cont"></div>
             <div class="col-md-9 cont">
-                @foreach (var n in Model.Notifications)
+                @foreach (var n in Model.Notifications.OrderByDescending(m => m.Time))
                 {
                     if (n.Type == NotificationType.PostOwnnerComment)
                     {
@@ -39,24 +39,25 @@
                             </h3>
                         </div>
                     }
-                    else if (n.Type == NotificationType.UpdatePost)
+                    else if (n.Type == NotificationType.UpdatePost || n.Type == NotificationType.Note)
                     {
                         <div class="feat- adv-blck">
-                            <h3 >
-                                ملاحظه: قم بتحديث اعلانك<a class="text-danger" href="/Harag/Post/@n.PostId"> @n.PostTitle</a> قبل @n.Time.ToLongDateString()
+                            <h3>
+                                ملاحظه: قم بتحديث اعلانك<a class="text-danger" href="/Harag/Post/@n.PostId"> @n.PostTitle</a> قبل @n.Time.AddMonths(3).ToLongDateString()
                             </h3>
                         </div>
                     }
                     else if (n.Type == NotificationType.General)
                     {
                         <div class="feat- adv-blck">
-                            <h3 class="text-danger">
-                                @n.DateDescription: @n.Note
-                            </h3>
-                        </div>
+                        <h3 class="text-danger">
+                            @n.DateDescription: @n.Note
+                        </h3>
+                    </div>
 
-                    }
                 }
+                
+            }
 
             </div>
             </div>

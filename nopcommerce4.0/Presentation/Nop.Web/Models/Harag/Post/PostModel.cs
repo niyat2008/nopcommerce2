@@ -12,12 +12,14 @@ namespace Nop.Web.Models.Harag.Post
         public string Title { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
+        public DateTime FeaturedDate { get; set; }
         public bool IsClosed { get; set; }
         public bool IsAnswered { get; set; }
         public string PostOwnerFullName { get; set; }
         public int? Rate { get; set; }
         public bool IsDispayed { get; set; }
         public bool IsReserved { get; set; }
+        public bool IsFeatured { get; set; }
         public bool IsSetToSubCategory { get; set; }
         public int? SubCategoryId { get; set; }
         public string CategoryName { get; set; }

@@ -54,12 +54,12 @@ namespace Nop.Web.Infrastructure.HaragAdmin
                     .ForMember(dest => dest.IsAnswered,
                     mo => mo.MapFrom(src => src.IsAnswered))
                     .ForMember(dest => dest.IsClosed,
-                    mo => mo.MapFrom(src => src.IsClosed))
+                    mo => mo.MapFrom(src => src.IsCommentingClosed))
 
                     .ForMember(dest => dest.IsDispayed,
                     mo => mo.MapFrom(src => src.IsDispayed))
                     .ForMember(dest => dest.IsReserved,
-                    mo => mo.MapFrom(src => src.IsReserved))
+                    mo => mo.MapFrom(src => src.IsFeatured))
              
                     .ForMember(dest => dest.Text,
                     mo => mo.MapFrom(src => src.Text))
@@ -86,12 +86,12 @@ namespace Nop.Web.Infrastructure.HaragAdmin
                     .ForMember(dest => dest.IsAnswered,
                     mo => mo.MapFrom(src => src.IsAnswered))
                     .ForMember(dest => dest.IsClosed,
-                    mo => mo.MapFrom(src => src.IsClosed))
+                    mo => mo.MapFrom(src => src.IsCommentingClosed))
 
                     .ForMember(dest => dest.IsDispayed,
                     mo => mo.MapFrom(src => src.IsDispayed))
                     .ForMember(dest => dest.IsReserved,
-                    mo => mo.MapFrom(src => src.IsReserved))
+                    mo => mo.MapFrom(src => src.IsFeatured))
                    
                     .ForMember(dest => dest.Text,
                     mo => mo.MapFrom(src => src.Text))

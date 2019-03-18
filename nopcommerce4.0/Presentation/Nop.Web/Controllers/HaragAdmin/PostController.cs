@@ -85,14 +85,12 @@ namespace Nop.Web.Controllers.HaragAdmin
                     Title = m.Title,
                     DateCreated = m.DateCreated.Date,
                     DateUpdated = m.DateUpdated,
-                    IsClosed = m.IsClosed,
+                    IsClosed = m.IsCommentingClosed,
                     IsAnswered = m.IsAnswered,
                     City = m.City?.ArName,
 
                     IsDispayed = m.IsDispayed,
-                    IsReserved = m.IsReserved,
-
-
+                    IsFeatured = (m.IsFeatured == null? false:(bool)  m.IsFeatured), 
                     Customer = m.Customer.Username,
                     Category = m.Category.Name,
 
@@ -135,11 +133,11 @@ namespace Nop.Web.Controllers.HaragAdmin
                 Title = postDetailsInDb.Title,
                 DateCreated = postDetailsInDb.DateCreated,
                 DateUpdated = postDetailsInDb.DateUpdated,
-                IsClosed = postDetailsInDb.IsClosed,
+                IsClosed = postDetailsInDb.IsCommentingClosed,
                 IsAnswered = postDetailsInDb.IsAnswered,
                 City = postDetailsInDb.City?.ArName,
                 IsDispayed = postDetailsInDb.IsDispayed,
-                IsReserved = postDetailsInDb.IsReserved,
+                IsFeatured = (postDetailsInDb.IsFeatured == null?false:(bool)postDetailsInDb.IsFeatured),
 
 
                 Customer = postDetailsInDb.Customer?.Username,
@@ -299,12 +297,12 @@ namespace Nop.Web.Controllers.HaragAdmin
                     Title = m.Title,
                     DateCreated = m.DateCreated,
                     DateUpdated = m.DateUpdated,
-                    IsClosed = m.IsClosed,
+                    IsClosed = m.IsCommentingClosed,
                     IsAnswered = m.IsAnswered,
                     City = m.City?.ArName,
 
                     IsDispayed = m.IsDispayed,
-                    IsReserved = m.IsReserved,
+                    IsFeatured = (m.IsFeatured == null ? false : (bool)m.IsFeatured),
 
 
                     Customer = m.Customer.Username,
@@ -366,12 +364,12 @@ namespace Nop.Web.Controllers.HaragAdmin
                     Title = m.Title,
                     DateCreated = m.DateCreated,
                     DateUpdated = m.DateUpdated,
-                    IsClosed = m.IsClosed,
+                    IsClosed = m.IsCommentingClosed,
                     IsAnswered = m.IsAnswered,
                     City = m.City?.ArName,
 
                     IsDispayed = m.IsDispayed,
-                    IsReserved = m.IsReserved,
+                    IsFeatured = (m.IsFeatured == null ? false : (bool)m.IsFeatured),
 
 
                     Customer = m.Customer.Username,
@@ -431,14 +429,12 @@ namespace Nop.Web.Controllers.HaragAdmin
                     Title = m.Title,
                     DateCreated = m.DateCreated,
                     DateUpdated = m.DateUpdated,
-                    IsClosed = m.IsClosed,
+                    IsClosed = m.IsCommentingClosed,
                     IsAnswered = m.IsAnswered,
                     City = m.City?.ArName,
 
                     IsDispayed = m.IsDispayed,
-                    IsReserved = m.IsReserved,
-
-
+                    IsFeatured = (m.IsFeatured == null ? false : (bool)m.IsFeatured), 
                     Customer = m.Customer.Username,
                     Category = m.Category.Name,
 

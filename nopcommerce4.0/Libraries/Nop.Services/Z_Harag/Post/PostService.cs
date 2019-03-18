@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Nop.Core.Data;
+using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Z_Harag;
 using Nop.Services.Events;
 using Nop.Services.Localization;
@@ -29,6 +30,7 @@ namespace Nop.Services.Z_Harag.Post
         private readonly IRepository<Z_Harag_Category> _categoryRepository;
         private readonly IRepository<Z_Harag_Photo> _photoRepository;
         private readonly IRepository<Z_Harag_Favorite> _favRepository;
+        private readonly IRepository<Customer> _customerRepository;
         private readonly IRepository<City> _cityRepository;
         private readonly IRepository<Neighborhood> _neighborhoodRepository;
         private readonly IRepository<Z_Harag_Comment> _commentRepository;
@@ -50,12 +52,13 @@ namespace Nop.Services.Z_Harag.Post
              IRepository<Z_Harag_Reports> _reportRepository,
              IRepository<Neighborhood> _neighborhoodRepository,
              IRepository<Z_Harag_Favorite> _favRepository,
-
+ IRepository<Customer> _customerRepository,
             ILocalizationService localizationService,
             IHostingEnvironment env,
         IEventPublisher eventPublisher)
         {
             this._blacklistRepository = _blacklistRepository;
+            this._customerRepository = _customerRepository;
             this._postRepository = postRepository;
             this._favRepository = _favRepository;
             this._neighborhoodRepository = _neighborhoodRepository;
@@ -70,7 +73,7 @@ namespace Nop.Services.Z_Harag.Post
         }
 
 
-        #endregion
+        #endregion 
 
         #region Methods
         private bool DeletePostPhohos(int postId)
@@ -136,9 +139,9 @@ namespace Nop.Services.Z_Harag.Post
                 CustomerId = cutomerId,
                 DateCreated = DateTime.Now,
                 IsAnswered = false,
-                IsClosed = false,
+                IsCommentingClosed = false,
                 IsDispayed = false,
-                IsReserved = false,
+                IsFeatured = false,
                 IsCommon = false
             };
             foreach (var item in filesUrl)
@@ -361,11 +364,11 @@ namespace Nop.Services.Z_Harag.Post
             if (type == "ClosedDisplayed")
             {
                 //var post = _postRepository.TableNoTracking.Where(p => p.Id == postId && p.IsClosed==true && p.IsDispayed==true);
-                return _postRepository.TableNoTracking.Include(p => p.Z_Harag_Photo).Include(p => p.Customer).Include(p => p.Category).Include(p => p.City).Where(p => p.Id == postId && p.IsClosed == true && p.IsDispayed == true).ToList();
+                return _postRepository.TableNoTracking.Include(p => p.Z_Harag_Photo).Include(p => p.Customer).Include(p => p.Category).Include(p => p.City).Where(p => p.Id == postId && p.IsCommentingClosed == true && p.IsDispayed == true).ToList();
             }
             if (type == "ClosedNotDisplayed")
             {
-                return _postRepository.TableNoTracking.Include(p => p.Z_Harag_Photo).Include(p => p.Customer).Include(p => p.Category).Include(p => p.City).Where(p => p.Id == postId && p.IsClosed == true && p.IsDispayed == false).ToList();
+                return _postRepository.TableNoTracking.Include(p => p.Z_Harag_Photo).Include(p => p.Customer).Include(p => p.Category).Include(p => p.City).Where(p => p.Id == postId && p.IsCommentingClosed == true && p.IsDispayed == false).ToList();
             }
             if (type == "NotReplied")
             {
@@ -373,11 +376,11 @@ namespace Nop.Services.Z_Harag.Post
             }
             if (type == "Reserved")
             {
-                return _postRepository.TableNoTracking.Include(p => p.Z_Harag_Photo).Include(p => p.Customer).Include(p => p.Category).Include(p => p.City).Where(p => p.Id == postId && p.IsReserved == true).ToList();
+                return _postRepository.TableNoTracking.Include(p => p.Z_Harag_Photo).Include(p => p.Customer).Include(p => p.Category).Include(p => p.City).Where(p => p.Id == postId && p.IsFeatured == true).ToList();
             }
             if (type == "Open")
             {
-                return _postRepository.TableNoTracking.Include(p => p.Z_Harag_Photo).Include(p => p.Customer).Include(p => p.Category).Include(p => p.City).Where(p => p.Id == postId && p.IsClosed == false && p.IsDispayed == false && p.IsAnswered == true).ToList();
+                return _postRepository.TableNoTracking.Include(p => p.Z_Harag_Photo).Include(p => p.Customer).Include(p => p.Category).Include(p => p.City).Where(p => p.Id == postId && p.IsCommentingClosed == false && p.IsDispayed == false && p.IsAnswered == true).ToList();
             }
             else
             {
@@ -432,7 +435,7 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                    .Where(p =>  p.IsDeleted == false).OrderByDescending(r => r.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                    .Where(p =>  p.IsDeleted == false).OrderByDescending(r => r.DateUpdated).OrderByDescending(mbox => mbox.IsFeatured).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
         }
@@ -478,7 +481,7 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                .Where(c => c.CategoryId == catId&&c.IsDeleted == false).OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                .Where(c => c.CategoryId == catId&&c.IsDeleted == false).OrderByDescending(mbox => mbox.DateUpdated).OrderByDescending(mbox => mbox.IsFeatured).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
@@ -492,7 +495,7 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                .Where(c => c.CityId == catId&& c.IsDeleted == false).OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                .Where(c => c.CityId == catId&& c.IsDeleted == false).OrderByDescending(mbox => mbox.DateUpdated).OrderByDescending(mbox => mbox.IsFeatured).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
@@ -507,7 +510,7 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
                  .Where(c => c.DateCreated.Day == date.Day&& c.IsDeleted == false)
-                 .OrderByDescending(mbox => mbox.DateUpdated ).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                 .OrderByDescending(mbox => mbox.DateUpdated ).OrderByDescending(mbox => mbox.IsFeatured).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
@@ -521,7 +524,7 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                .Where(c => c.NeighborhoodId == id&& c.IsDeleted == false).OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                .Where(c => c.NeighborhoodId == id&& c.IsDeleted == false).OrderByDescending(mbox => mbox.DateUpdated).OrderByDescending(mbox => mbox.IsFeatured).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
@@ -535,7 +538,7 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                 .Where(c => c.CustomerId == userId&& c.IsDeleted == false).OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                 .Where(c => c.CustomerId == userId&& c.IsDeleted == false).OrderByDescending(mbox => mbox.DateUpdated).OrderByDescending(mbox => mbox.IsFeatured).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
@@ -550,7 +553,7 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
                 .Where(c => c.CustomerId == userId&& c.IsDeleted == false)
-                  .OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                  .OrderByDescending(mbox => mbox.DateUpdated).OrderByDescending(mbox => mbox.IsFeatured).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
@@ -566,7 +569,17 @@ namespace Nop.Services.Z_Harag.Post
             var postE = _postRepository.Table.Where(m => m.Id == post.PostId).FirstOrDefault();
 
             postE.CityId = post.CityId;
-            postE.NeighborhoodId = post.NeighborhoodId;
+
+            if (post.NeighborhoodId == 0)
+            {
+                postE.NeighborhoodId = null;
+            }
+            else
+            {
+                postE.NeighborhoodId = post.NeighborhoodId;
+            }
+
+         
 
             _postRepository.Update(postE);
 
@@ -708,7 +721,7 @@ namespace Nop.Services.Z_Harag.Post
               .Include(m => m.Z_Harag_Photo)
               .Include(m => m.Z_Harag_Comment)
               .Where(c => c.CategoryId == catId  && c.IsDeleted == false)
-                         .OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                         .OrderByDescending(mbox => mbox.DateUpdated).OrderByDescending(mbox => mbox.IsFeatured).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
@@ -723,7 +736,7 @@ namespace Nop.Services.Z_Harag.Post
               .Include(m => m.Z_Harag_Photo)
               .Include(m => m.Z_Harag_Comment)
               .Where(c => c.CityId == catId && c.IsDeleted == false)
-           .OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+           .OrderByDescending(mbox => mbox.DateUpdated).OrderByDescending(mbox => mbox.IsFeatured).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
@@ -740,7 +753,9 @@ namespace Nop.Services.Z_Harag.Post
               || c.Title.Contains(searchModel.Term) 
               || c.City.ArName.Contains(searchModel.Term) 
               || c.Category.Name.Contains(searchModel.Term)) &&  c.IsDeleted == false)
-              .OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+              .OrderByDescending(mbox =>mbox.DateUpdated)
+              .OrderByDescending(mbox => mbox.IsFeatured)
+              .Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
@@ -756,7 +771,8 @@ namespace Nop.Services.Z_Harag.Post
             .Include(m => m.Z_Harag_Comment)
             .Where(c => c.CityId == city
             || c.CategoryId == cat && c.IsDeleted == false)
-            .OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+            .OrderByDescending(mbox => mbox.DateUpdated)
+            .OrderByDescending(mbox => mbox.IsFeatured).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
             return query;
@@ -770,7 +786,7 @@ namespace Nop.Services.Z_Harag.Post
                .Include(m => m.City)
                .Include(m => m.Z_Harag_Photo)
                .Include(m => m.Z_Harag_Comment).Where(m => m.IsDeleted == false).OrderByDescending(r => r.DateCreated)
-               .OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber* pagingParams.PageSize)
+               .OrderByDescending(mbox => mbox.DateUpdated).OrderByDescending(mbox => mbox.IsFeatured).Skip(pagingParams.PageNumber* pagingParams.PageSize)
                .Take(pagingParams.PageSize).ToList();
         }
          
@@ -803,6 +819,78 @@ namespace Nop.Services.Z_Harag.Post
             _postRepository.Update(post);
 
             return true;
+        }
+
+        public bool hasFeaturedPost(int userId)
+        {
+            var posts = _postRepository
+                .TableNoTracking.Where(m => m.IsFeatured == true).ToList();
+
+            if (posts.Count > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+
+        public bool IsFeaturedPost(int postId)
+        {
+            var posts = _postRepository
+                .TableNoTracking.Where(m => m.Id == postId).FirstOrDefault();
+
+            if (posts != null && posts.IsFeatured != null && posts.IsFeatured == true)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool SetFeatured(int postId)
+        {
+            var posts = _postRepository
+               .Table.Where(m => m.Id == postId).FirstOrDefault();
+
+            posts.IsFeatured = true;
+
+            _postRepository.Update(posts);
+            return true;
+        }
+
+        public bool CloseCommenting(int postId)
+        {
+            var posts = _postRepository
+               .Table.Where(m => m.Id == postId).FirstOrDefault();
+
+            posts.IsCommentingClosed = true;
+
+            _postRepository.Update(posts);
+            return true;
+        }
+
+        public bool openCommenting(int postId)
+        {
+            var posts = _postRepository
+               .Table.Where(m => m.Id == postId).FirstOrDefault();
+
+            posts.IsCommentingClosed = false;
+
+            _postRepository.Update(posts);
+            return true;
+        }
+
+        public bool CanSetFeaturedPost(int userId)
+        { 
+            var date = _postRepository.TableNoTracking.Where(m => m.CustomerId == userId).Max(m => m.LastFeaturedTime);
+
+            if (DateTime.Today - date > TimeSpan.FromDays(7) )
+            {
+                return true;
+            }
+
+            return false;
         }
         #endregion
     }

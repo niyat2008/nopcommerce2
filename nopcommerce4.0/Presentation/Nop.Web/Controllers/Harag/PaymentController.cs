@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using Nop.Core.Domain.Z_Harag;
 using Nop.Web.Models.Harag;
 using Nop.Services.Z_Harag.Payment;
+using Nop.Services.Z_HaragAdmin.Setting;
 
 namespace Nop.Web.Controllers.Harag
 {
@@ -23,22 +24,26 @@ namespace Nop.Web.Controllers.Harag
     {
         private readonly Core.IWorkContext _workContext;
         private readonly  ICustomerService _customerContext;
+        private readonly  ISettingService settingService;
         private readonly  IRateSrevice _rateRepository
             ;
         private readonly  IBlackListService _blackListService;
         private readonly  IPostService _postService;
         private readonly  IPaymentService _paymentService;
-
-        public PaymentController(Core.IWorkContext workContext, IRateSrevice _rateRepository,
+        private SettingsModel Settings;
+        public PaymentController(Core.IWorkContext workContext, IRateSrevice _rateRepository, ISettingService settingService,
              IPaymentService _paymentService,
-             IBlackListService _blackListService, IPostService _postService,ICustomerService _customerContext)
+             IBlackListService _blackListService, IPostService _postService, ICustomerService _customerContext)
         {
+            settingService = settingService;
             this._paymentService = _paymentService;
             this._workContext = workContext;
             this._rateRepository = _rateRepository;
             this._customerContext = _customerContext;
             this._postService = _postService;
             this._blackListService = _blackListService;
+
+            Settings = settingService.GetSettings();
         }
 
   
@@ -93,7 +98,22 @@ namespace Nop.Web.Controllers.Harag
 
               payment.Banks = banks ;
             _paymentService.AddNewPaymentDetails(model);
+
             ViewBag.Added = true;
+
+            var user = _customerContext.GetCustomerById(model.UserId);
+            if (user != null && user.IsFeatured == false)
+            {
+                var paymentA = _paymentService.GetUserPayments(user.Id);
+                if (paymentA.Sum(m => m.SiteAmount) >= Settings.FeaturedMemberCommissionSum
+                    && paymentA.Count >= Settings.FeaturedMemberCommissionNumber )
+                {
+                    user.IsFeatured = true;
+
+                }
+                _customerContext.UpdateCustomer(user);
+            }
+            
             return View("~/Themes/Pavilion/Views/Harag/Payment/bankpayment.cshtml", payment);
         }
 

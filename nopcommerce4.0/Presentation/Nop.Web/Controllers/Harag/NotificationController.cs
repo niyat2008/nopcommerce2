@@ -55,8 +55,8 @@ namespace Nop.Web.Controllers.Harag
              
             var notificationsModels = Notifications.Select(m => new NotificationModel
             {
-                CustomerId = (int)m.CustomerId,
-                CustomerName = m.Customer == null ? "" : m?.Customer.GetFullName(),
+                CustomerId = (int)(m.CustomerId == null? 0: m.CustomerId),
+                CustomerName = (m.Customer == null ? "" : m?.Customer.GetFullName()),
                 Type = (NotificationType)m.NotificationType,
                 Note = m.NotificationContent,
                 OwnerId = (int)m.OwnerId,

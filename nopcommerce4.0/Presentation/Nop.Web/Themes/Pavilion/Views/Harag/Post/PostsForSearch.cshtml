@@ -3,6 +3,7 @@
 
 @{
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
+     
 }
 
 <div class="content">
@@ -54,39 +55,56 @@
                 *@
                 <!-- List -->
                 <div id="posts" class="items">
-
+                     
                     @if (Model.Items.Count() <= 0)
-{
-                    <div id="tabpanelPosts" style="text-align:center"><b>لا يوجد</b></div>
-}
-else
-{
-                    @foreach (var post in Model.Items)
-    {
-                    <div class="item">
-                        <div class="det">
-                            <a href="/Harag/Post/@post.Id"><h3>@post.Title</h3></a>
-                            <small>منذ 4 دقيقة</small>
-                            <div class="det-det">
-                                <a href="/Harag/City/@post.City">
-                                    <span><i class="fa fa-map-marker"></i> @post.City </span>
-                                </a>
-                                <a href="/Harag/user/@post.PostOwner">
-                                    <span><i class="fa fa-user"></i> @post.PostOwnerFullName </span>
-                                </a>
-                                <a><span> رقم الاعلان:  @post.Id </span></a>
+                    {
+                        <div id="tabpanelPosts" style="text-align:center"><b>لا يوجد</b></div>
+                    }
+                    else
+                    {
+                        @foreach (var post in Model.Items)
+                        {
+                            <div class="item">
+                                <div class="det">
+                                    <a href="/Harag/Post/@post.Id"><h3>@post.Title</h3></a>
+                                    <div class="ro w">
+                                        <div class="col-md-6">
+                                            @if (post.IsFeatured)
+                                            {
+                                                <div class="row"><span><i class="fa fa-star"></i></span></div>
+                                            }
+                                            <div class="row">
+                                                <a href="/Harag/City/@post.City">
+                                                    <span><i class="fa fa-map-marker"></i> @post.City </span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row"> <strong>@post.DateDescription</strong></div>
+                                            <div class="row">
+                                                <a href="/Harag/User/@post.PostOwner">
+                                                    <span><i class="fa fa-user"></i> @post.PostOwnerFullName </span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    <div class="det-det">
+
+
+                                    </div>
+
+                                </div>
+                                <div class="det-img">
+                                    @if (!String.IsNullOrEmpty(post.Photo))
+                                    {
+                                        <img src="/HaragApi/Uploads/Images/@post.Photo">
+                                    }
+
+                                </div>
                             </div>
-                        </div>
-                        <div class="det-img">
-                            @if (!String.IsNullOrEmpty(post.Photo))
-                            {
-                                <img src="/HaragApi/Uploads/Images/@post.Photo">
-                            }
-                        </div>
-                    </div>
-    }
-}
+                        }
+                    }
                 </div>
                 @*<div>
                     <button class="btn btn-default add" type="button">مشاهدة المزيد</button>

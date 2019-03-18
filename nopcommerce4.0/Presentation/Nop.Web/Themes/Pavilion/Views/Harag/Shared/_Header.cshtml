@@ -93,18 +93,23 @@
                         </li>
                         <li id="myAccount">
                             <i class="fa fa-user-o fa-lg"></i>
+                        <li>
+                            <a href="/Harag/Profile"> <i class="fa fa-user-o fa-lg"></i> </a>
                         </li>
                         <li>
-                            <i class="fa fa-heart-o fa-lg"></i>
+                            <a href="/Harag/Favorites"><i class="fa fa-heart-o fa-lg"></i> </a>
                         </li>
                         <li>
-                            <i class="fa fa-thumbs-o-up fa-lg"></i>
+                            <a href="/Harag/Follow"><i class="fa fa-thumbs-o-up fa-lg"></i> </a>
                         </li>
                         <li>
-                            <i class="fa fa-bell-o fa-lg"></i>
+                            <a href="/Harag/Notifications">
+                                <span id="notification-count-jsa" class="badge badge-danger"></span>
+                                <i class="fa fa-bell-o fa-lg"></i>
+                            </a>
                         </li>
                         <li>
-                            <i class="fa fa-envelope-o fa-lg"></i>
+                            <a href="/Harag/Messages"><i class="fa fa-envelope-o fa-lg"></i> </a>
                         </li>
                         <li id="searchScreen">
                             <i class="fa fa-search fa-lg"></i>
@@ -319,7 +324,7 @@
             </div>
             <div class="footer-block">
                 <div class="title">
-                    <a id="open-customer-service">خدمة العملاء</a>
+                    @*<a id="open-customer-service">خدمة العملاء</a>*@
                 </div>
                 <ul class="list"></ul>
             </div>
@@ -416,7 +421,9 @@
             url: '@Url.RouteUrl("Harag.Notification.NotificationsCount")',
 
             success: function (data) {
-                $("#notification-count-js").html(data);
+                var n = parseInt(date);
+                $("#notification-count-js").html(n);
+                $("#notification-count-js1").html(n);
             }
         });
 
@@ -456,17 +463,9 @@
 
 <script>
     $("#searchScreen").click(function () {
-        $("#searchScreenFull").slideToggle("slow");
-    });
-    $("#menuBar").click(function () {
-        $(".overlay").css("display", "block");
-        $(".rightMenu").css("display", "block");
-    });
-    $(".rightMenu .top_header i").click(function () {
-        $(".overlay").css("display", "none");
-        $(".rightMenu").css("display", "none");
-    });
-    $("#myAccount").click(function () {
-        $("#myAccountScreenFull").slideToggle("slow");
+        $("#searchScreenFull").slideToggle("slow", function () {
+            // Animation complete.
+           // $(this).css("display", "block");
+        });
     });
 </script>
