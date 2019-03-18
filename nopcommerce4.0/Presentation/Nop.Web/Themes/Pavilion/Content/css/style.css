@@ -101,9 +101,10 @@ input.form-control { border: 1px solid #ddd }
 #searchScreenFull i { float: right; line-height: 40px; width: 10%; margin-right: 12px; cursor: pointer; color: #fff; font-size:15px }
 
 #myAccountScreenFull { display: none }
-#myAccountScreenFull ul { width: 100%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1); background-color: #f9f9f9; }
-#myAccountScreenFull ul li { border-top: 1px solid #ececec; }
+#myAccountScreenFull ul { width: 100%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1); background-color: #f9f9f9; display:block }
+#myAccountScreenFull ul li { border-top: 1px solid #ececec; float:none; text-align:center }
 #myAccountScreenFull ul li a { padding: 15px 25px; font-size: 13px; }
+#myAccountScreenFull ul li a i { color:#999; font-weight:normal; padding-left:15px }
 
 .overlay { display: none; background: rgba(0,0,0,0.6); position: fixed; top: 0; right: 0; bottom: 0; width: 100%; height: 100%; z-index: 1060; }
 
@@ -111,7 +112,7 @@ input.form-control { border: 1px solid #ddd }
 .rightMenu .top_header { height: 50px; }
 .rightMenu .top_header i { color: #aaa; cursor: pointer; margin-left: 20px; line-height: 50px  }
 .rightMenu ul { margin: 0; padding: 0; background: #fff; height: 100%; }
-.rightMenu ul li { padding: 20px; line-height: 19px; }
+.rightMenu ul li { padding: 20px; line-height: 19px; cursor:pointer }
 .rightMenu ul li a { color: #333; font-size: 15px; text-decoration: none; font-weight: bold; text-transform: uppercase; }
 .rightMenu ul li:hover a { color: #4da74d }
 .rightMenu ul li i { color: #4da74d; cursor: pointer; }
