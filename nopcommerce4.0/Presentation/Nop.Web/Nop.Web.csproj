@@ -397,6 +397,9 @@
     <Content Update="Themes\Pavilion\Views\Harag\Shared\_Header.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Shared\_NavbarMobile.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Shared\_Navbar.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

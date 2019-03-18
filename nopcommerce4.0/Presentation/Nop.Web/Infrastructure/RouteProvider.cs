@@ -108,6 +108,9 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapRoute("Harag.Navbar", "Harag/NavbarAjax",
             new { controller = "Post", action = "GetHaragNavbar" });
 
+            routeBuilder.MapRoute("Harag.NavbarMobile", "Harag/NavbarMobileAjax",
+new { controller = "Post", action = "GetHaragMobileNavbar" });
+
             ////
             ////  Featured Members
             ////

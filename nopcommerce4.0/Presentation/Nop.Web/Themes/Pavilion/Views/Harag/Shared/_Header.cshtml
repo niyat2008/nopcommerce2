@@ -408,6 +408,17 @@
 
          $.ajax({
             type: 'GET',
+            url: '@Url.RouteUrl("Harag.NavbarMobile")',
+
+            success: function (data) {
+                $("#rightMenu").html(data);
+            }
+        });
+
+        Harag/NavbarMobileAjax
+
+         $.ajax({
+            type: 'GET',
             url: '@Url.RouteUrl("Consultant.User.GetUserRoles")',
 
             success: function (data) {

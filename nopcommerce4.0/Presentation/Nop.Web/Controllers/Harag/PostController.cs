@@ -693,6 +693,23 @@ namespace Nop.Web.Controllers.Harag
         }
 
         [HttpGet]
+        public IActionResult GetHaragMobileNavbar()
+        {
+            var categories = _categoryService.GetCategories();
+            var model = new CategoryWithSubCategoriesOutputModel();
+            if (categories != null)
+            {
+                model.Items = categories.Select(m => new CategoryWithSubCategoriesModel
+                {
+                    Id = m.Id,
+                    Name = m.Name
+                }).ToList();
+                return PartialView("~/Themes/Pavilion/Views/Harag/Shared/_NavbarMobile.cshtml", model);
+            }
+            return PartialView("~/Themes/Pavilion/Views/Harag/Shared/_NavbarMobile.cshtml", model);
+        }
+
+        [HttpGet]
         public IActionResult GetAllFeaturedPosts(int postId, int pageNo = 0)
         {
             PagingParams.PageNumber = pageNo;
