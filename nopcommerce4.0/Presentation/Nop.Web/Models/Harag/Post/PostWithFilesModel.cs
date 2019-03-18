@@ -52,6 +52,7 @@ namespace Nop.Web.Models.Harag.Post
         }
 
         public bool IsPostOwner { get; set; }
+        public bool IsUserFeatured { get;  set; }
 
         private string GetDateDescrition(DateTime dateCreated)
         {

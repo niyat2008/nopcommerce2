@@ -289,12 +289,12 @@ namespace Nop.Web.Controllers.Harag
                 {
                     if ((bool)post.IsFeatured)
                     { 
-                        return Ok(new { state = false });
+                        return Ok(new { state = false, added = false });
                     }
                     else
                     {
                         var refreshed = _postService.SetFeatured(post.Id);
-                        return Ok(new { state = true });
+                        return Ok(new { state = true, added = true });
                     }
                 }
                 else
@@ -611,12 +611,7 @@ namespace Nop.Web.Controllers.Harag
 
             Models.Harag.Post.PostWithFilesModel model = new Models.Harag.Post.PostWithFilesModel();
 
-            if (!_workContext.CurrentCustomer.IsRegistered())
-                return Unauthorized();
-
-            var currentUserId = _workContext.CurrentCustomer.Id;
-            ViewBag.UserName = _workContext.CurrentCustomer.Username;
-
+            
             if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
             {
                 var post = this._postService.GetPost(PostId, "");
@@ -624,9 +619,20 @@ namespace Nop.Web.Controllers.Harag
                 var sameCityPosts = _postService.SearchByCity((int)post.CityId, PagingParams);
 
                 if (post != null)
-                {
+                {var currentUserId = _workContext.CurrentCustomer == null?0:_workContext.CurrentCustomer.Id;
+                    if (_workContext.CurrentCustomer.IsRegistered())
+                    {
+                       ViewBag.UserName = _workContext.CurrentCustomer.Username;
+                        ViewBag.LoggedIn = true; 
+                    }
+                    else
+                    {
+                        ViewBag.UserName = _workContext.CurrentCustomer.Username;
+                        ViewBag.LoggedIn = false;
+                    }
                     var Following = _followService.IsPostFollowed(post.Id, currentUserId);
                     var isPostOwner = (post.CustomerId == currentUserId);
+
                     model = new Models.Harag.Post.PostWithFilesModel
                     {
                         Following = Following,
@@ -645,8 +651,11 @@ namespace Nop.Web.Controllers.Harag
                         Contact = post.Contact,
                         CityId = (int)post.CityId,
                         Id = post.Id,
+                        IsUserFeatured = post.Customer.IsFeatured,
                         DateUpdated = post.DateUpdated,
                         IsDispayed = post.IsDispayed,
+                        IsFeatured = (bool) post.IsFeatured,
+                        IsCommentingClosed = post.IsCommentingClosed,
                         PostOwner = post.Customer.Username,
                         PostOwnerFullName = post.Customer.GetFullName(),
                         RelatedPosts = relatedPosts.Select(m => new Models.Harag.Post.PostModel

@@ -854,6 +854,7 @@ namespace Nop.Services.Z_Harag.Post
                .Table.Where(m => m.Id == postId).FirstOrDefault();
 
             posts.IsFeatured = true;
+            posts.LastFeaturedTime = DateTime.Now;
 
             _postRepository.Update(posts);
             return true;
@@ -884,7 +885,10 @@ namespace Nop.Services.Z_Harag.Post
         public bool CanSetFeaturedPost(int userId)
         { 
             var date = _postRepository.TableNoTracking.Where(m => m.CustomerId == userId).Max(m => m.LastFeaturedTime);
-
+            if (date == null)
+            {
+                return true;
+            }
             if (DateTime.Today - date > TimeSpan.FromDays(7) )
             {
                 return true;

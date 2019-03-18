@@ -89,34 +89,32 @@
                             </div>
 
 
-                            @if (!Model.IsFeatured)
+                            @if (Model.IsUserFeatured)
                             {
                                 @if (!Model.IsFeatured)
                                 {
                                     <div class="col-xs-2 text-center">
-                                        <a class="btn btn-default add" href="/Harag/SetFeaturedPost/@Model.Id">  <span><i class="fa fa-trash-o  fa-2x"></i><br>  </span><i class="fa fa-feed"></i></a>
+                                        <a id="set-post-featured" class="btn btn-default add" >  <i class="fa fa-trash-o  fa-2x"></i><br> </a>
                                     </div>
                                 }
                                 else
                                 {
                                     <div class="col-xs-2 text-center">
-                                        <a class="btn btn-default add followed" href="/Harag/SetFeaturedPost/@Model.Id"> <i class="fa fa-feed"></i></a>
+                                        <a id="set-post-featured" class="btn btn-default add followed"> <i class="fa fa-feed"></i></a>
                                     </div>
                                 }
 
-                                <div class="col-xs-2 text-center">
-                                    <a class="input-with-icon2" href="/Harag/SetFeaturedPost/@Model.Id"><i class="fa fa-map-marker  fa-2x"></i> <br>تعديل الموقع</a>
-                                </div>
+                                
                                 @if (!Model.IsCommentingClosed)
                                 {
                                     <div class="col-xs-2 text-center">
-                                        <a class="btn btn-default add" href="/Harag/OpenCloseCommentingPost/@Model.Id">  <span>ايقاف الردود </span><i class="fa fa-feed"></i></a>
+                                        <a id="set-post-comment-closed"  class="btn btn-default add" href="/Harag/OpenCloseCommentingPost/@Model.Id">  <span>ايقاف الردود </span><i class="fa fa-feed"></i></a>
                                     </div>
                                 }
                                 else
                                 {
                                     <div class="col-xs-2 text-center">
-                                        <a class="btn btn-default add followed" href="/Harag/OpenCloseCommentingPost/@Model.Id">  <span> تفعيل الردود </span><i class="fa fa-feed"></i></a>
+                                        <a id="set-post-comment-closed"  class="btn btn-default add followed" href="/Harag/OpenCloseCommentingPost/@Model.Id">  <span> تفعيل الردود </span><i class="fa fa-feed"></i></a>
                                     </div>
                                 }
                             }
@@ -173,7 +171,7 @@
                         </div>
                     </div>
                 }
-                @if (!Model.IsCommentingClosed)
+                @if (!Model.IsCommentingClosed && ViewBag.LoggedIn)
                 {
                     <div>
                         <div class="col-sm-12">
@@ -378,7 +376,47 @@
         });
     });
   
-    $("#add-follow-js").click(function () {
+    $("#set-post-featured").click(function () {
+        $.ajax({
+            type: 'GET',
+            url: '/Harag/SetFeaturedPost/@Model.Id',
+            success: function (data) {
+                if (data.status === true) { 
+                    if (data.added == true) {
+                        $("#set-post-featured").addClass("followed"); 
+                    } else {
+                        $("#set-post-featured").removeClass("followed"); 
+                    }
+                      
+                } else {
+                    alert("تاكد من الاتصال بالانترنت");
+                }
+            }
+        });
+    });
+
+     $("#add-follow-js").click(function () {
+        $.ajax({
+            type: 'GET',
+            url: '/Harag/Follow/Post/@Model.Id',
+            success: function (data) {
+                if (data.status === true) {
+                    if (data.added == true) {
+                        $("#add-follow-js").addClass("followed");
+                        $("#add-follow-js span").html("الغاء المتابعه");
+                    } else {
+                        $("#add-follow-js").removeClass("followed");
+                        $("#add-follow-js   span").html("متابعه الردود"); 
+                    }
+
+                } else {
+                    alert("تاكد من الاتصال بالانترنت");
+                }
+            }
+        });
+    });
+
+     $("#add-follow-js").click(function () {
         $.ajax({
             type: 'GET',
             url: '/Harag/Follow/Post/@Model.Id',
