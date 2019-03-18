@@ -5,10 +5,8 @@
     <div class="det-top">
         <div class="det-det">
             <a href="/Harag/User/@Model.FromUser"><strong>المرسل:  <span><i class="fa fa-user"></i> @Model.FromUser </span></strong></a>
-             
-
+            <small>( @Model.DateDescription )</small>
         </div>
-        <small> @Model.DateDescription </small>
 
         @if (Model.Type == Nop.Web.Controllers.Harag.MessageType.Post)
         {
