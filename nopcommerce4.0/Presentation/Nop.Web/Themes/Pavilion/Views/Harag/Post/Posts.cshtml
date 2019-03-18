@@ -64,8 +64,13 @@
                                 <div class="det">
                                     <a href="/Harag/Post?postId=@post.Id"><h3>@post.Title</h3></a>
                                     <small>منذ 4 دقيقة</small>
+                                    @if (post.IsFeatured)
+                                    {
+                                        <div class="row" style="color: gold"><span><i class="fa fa-star"></i></span></div>
+                                    }
+
                                     <div class="det-det">
-                                        <a href="/Harag/City/1">
+                                        <a href="/Harag/City/@post.City">
                                             <span><i class="fa fa-map-marker"></i> @post.City </span>
                                         </a>
                                         <a href="/Harag/user/@post.PostOwner">

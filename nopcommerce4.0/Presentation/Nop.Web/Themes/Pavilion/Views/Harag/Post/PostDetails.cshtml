@@ -96,15 +96,8 @@
                                     <div class="col-xs-2 text-center">
                                         <a id="set-post-featured" class="btn btn-default add" >  <i class="fa fa-trash-o  fa-2x"></i><br> </a>
                                     </div>
-                                }
-                                else
-                                {
-                                    <div class="col-xs-2 text-center">
-                                        <a id="set-post-featured" class="btn btn-default add followed"> <i class="fa fa-feed"></i></a>
-                                    </div>
-                                }
+                                } 
 
-                                
                                 @if (!Model.IsCommentingClosed)
                                 {
                                     <div class="col-xs-2 text-center">
@@ -383,7 +376,7 @@
             success: function (data) {
 
                 console.log(data);
-                if (data.status === true) { 
+                if (data.state === true) { 
                     if (data.added == true) {
                         $("#set-post-featured").addClass("followed"); 
                     } else {
@@ -391,7 +384,7 @@
                     }
                       
                 } else {
-                    alert("تاكد من الاتصال بالانترنت");
+                    alert("يمكنك وضع اعلان مميز كل 7 ايام");
                 }
             }
         });
@@ -418,18 +411,21 @@
         });
     });
 
-     $("#add-follow-js").click(function () {
+    $("#set-post-comment-closed").click(function () {
         $.ajax({
             type: 'GET',
             url: '/Harag/OpenCloseCommentingPost/@Model.Id',
             success: function (data) {
-                if (data.status === true) {
+                if (data.state === true) {
                     if (data.closed == false) {
-                        $("#add-follow-js").addClass("followed");
-                        $("#add-follow-js span").html(" ايقاف التعليقات");
+                        $("#set-post-comment-closed").addClass("followed");
+                        $("set-post-comment-closed").html(" ايقاف الردود");
+                        window.location = window.location.href;
                     } else {
-                        $("#add-follow-js").removeClass("followed");
-                        $("#add-follow-js   span").html("تفعيل التعليقات "); 
+                        $("#set-post-comment-closed").removeClass("followed");
+                        $("#set-post-comment-closed ").html("تفعيل الردود "); 
+                        window.location = window.location.href;
+
                     }
 
                 } else {

@@ -102,7 +102,7 @@
                         </li>
                         <li>
                             <a href="/Harag/Notifications">
-                                <span id="notification-count-jsa" class="badge badge-danger"></span>
+                                <sup id="notification-count-jsa" class="badge badge-danger">0</sup>
                                 <i class="fa fa-bell-o fa-lg"></i>
                             </a>
                         </li>
@@ -418,7 +418,7 @@
             success: function (data) {
                 var n = parseInt(data);
                 $("#notification-count-js").html(n);
-                $("#notification-count-js1").html(n);
+                $("#notification-count-jsa").html(n);
             }
         });
 

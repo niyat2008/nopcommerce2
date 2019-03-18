@@ -889,7 +889,7 @@ namespace Nop.Services.Z_Harag.Post
             {
                 return true;
             }
-            if (DateTime.Today - date > TimeSpan.FromDays(7) )
+            if (DateTime.Now - date.Value > TimeSpan.FromDays(7) )
             {
                 return true;
             }
