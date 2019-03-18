@@ -52,7 +52,7 @@
 <!-- Header -->
 <!-- Top Bar -->
 <section class="topFixed">
-    <section class="top_bar" >
+    <section class="top_bar">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3 col-md-2 hidden-xs "></div>
@@ -86,9 +86,12 @@
     <div class="fixedNavScreen text-center">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-12">                   
+                <div class="col-xs-12">
                     <ul>
-                        <li>
+                        <li id="menuBar">
+                            <i class="fa fa-bars fa-lg"></i>
+                        </li>
+                        <li id="myAccount">
                             <i class="fa fa-user-o fa-lg"></i>
                         </li>
                         <li>
@@ -110,8 +113,40 @@
                 </div>
 
                 <div id="searchScreenFull">
-                    kdjfskjdfsdkjfdskjfjkf dklfjdkfjdsk
+                    <div class="col-xs-3"></div>
+                    <div class="col-xs-6 text-center">
+                        <div class="form-group">
+                            <input id="searchText" type="text" class="form-control">
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </div>
                 </div>
+
+                <div id="myAccountScreenFull">
+                    <div class="col-xs-12 text-center" style="padding:0">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-edit"></i>
+                                    <span>سجل</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-edit"></i>
+                                    <span>سجل</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-edit"></i>
+                                    <span>سجل</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -184,7 +219,33 @@
     </div>
 </div>
 
-
+<div class="overlay"></div>
+<div class="rightMenu">
+    <div class="top_header">
+        <i class="fa fa-times pull-left"></i>
+    </div>
+    <ul>
+        <li>
+            <a href="#">الرئيسية</a>
+        </li>
+        <li>
+            <a href="#">الرئيسية</a>
+        </li>
+        <li>
+            <a href="#">الرئيسية</a>
+        </li>
+        <li>
+            <a href="#">الرئيسية</a>
+            <i class="fa fa-chevron-left pull-left"></i>
+        </li>
+        <li>
+            <a href="#">الرئيسية</a>
+        </li>
+        <li>
+            <a href="#">الرئيسية</a>
+        </li>
+    </ul>
+</div>
 
 @*<link href="~/css/Consultant/bootstrap.min.css" rel="stylesheet" />*@
 <script src="~/js/Consultant/bootstrap.min.js"></script>
@@ -395,9 +456,17 @@
 
 <script>
     $("#searchScreen").click(function () {
-        $("#searchScreenFull").slideToggle("slow", function () {
-            // Animation complete.
-           // $(this).css("display", "block");
-        });
+        $("#searchScreenFull").slideToggle("slow");
+    });
+    $("#menuBar").click(function () {
+        $(".overlay").css("display", "block");
+        $(".rightMenu").css("display", "block");
+    });
+    $(".rightMenu .top_header i").click(function () {
+        $(".overlay").css("display", "none");
+        $(".rightMenu").css("display", "none");
+    });
+    $("#myAccount").click(function () {
+        $("#myAccountScreenFull").slideToggle("slow");
     });
 </script>
