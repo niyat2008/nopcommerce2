@@ -1,0 +1,336 @@
+﻿@model Nop.Services.Z_Harag.Category.CustomerServiceModel
+
+@{
+    Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
+}
+
+@{
+    string getCustomerPosts = "";
+    if (@ViewBag.UserRole == "Registered")
+    {
+        getCustomerPosts = "getCustomerPosts()";
+    }
+    else if (@ViewBag.UserRole == "Consultant")
+    {
+        getCustomerPosts = "getConsultantPosts()";
+    }
+    else if (@ViewBag.UserRole == "vistor")
+    {
+        getCustomerPosts = "login()";
+    }
+}
+
+@*@if (ViewBag.UserRole == "Registered")
+    {
+        if (@ViewBag.CanAddNewPost == true)
+        {*@
+<h3>اضافه رساله جديده</h3>
+<div class="row">
+    <div class="col-md-12">
+        <form  action="@Url.RouteUrl("Harag.CustomerService.AddNewMessageAjax")" method="post" class="add-adverse">
+
+            <div class="row"> 
+                @Html.TextAreaFor(m => m.Message, new { id = "Title-js-ajax", @class = "form-control", placeholder = "الرساله", required = "required" })
+            </div>
+            <br />
+            <div class="row">
+                <button class="btn btn-default add" type="submit">اضافة الرساله للموقع</button>
+            </div>
+</form>
+    </div>
+</div>
+
+@*}
+            else
+            {
+    <a href="~/Themes/Pavilion/Views/Harag/Post/AddCustomerServiceMessage.cshtml">~/Themes/Pavilion/Views/Harag/Post/AddCustomerServiceMessage.cshtml</a>
+    <div id="AddPost">
+
+        <div class="row">
+            <div class="col-md-9 col-lg-offset-2">
+                <form id="addPostForm">
+                    <div class="form-group" style="margin-bottom:5%;">
+                        <h3>لا يمكنك اضافه استشاره الا بعد اغلاق جميع الاستشارات المفتوحه.</h3>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+            }
+        }*@
+
+<script type="text/javascript">
+
+
+    $.ajax({
+        type: 'GET',
+        url: '@Url.RouteUrl("Harag.Post.GetCategories")',
+
+        success: function (data) {
+            $("#CategoryId-js-ajax").html(data);
+        }
+
+    });
+
+
+    $.ajax({
+        cache: false,
+        type: "GET",
+        url: "@(Url.RouteUrl("Consultant.Comment.GetCities"))",
+        success: function (data) {
+            $("#city-js-ajax").html('');
+            $.each(data, function (id, option) {
+                $("#city-js-ajax").append($('<option></option>').val(option.Id).html(option.ArName));
+            });
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert('Failed to retrieve states.');
+        }
+    });
+
+
+
+
+    function convertToBase64(file) {
+        var image;
+        var fileReader = new FileReader();
+
+        fileReader.readAsDataURL(file);
+        fileReader.onloadend = (e) => {
+            image = fileReader.result;
+            var indexofcomma = image.indexOf(",");
+            var imagebase64 = image.substring(indexofcomma + 1);
+            Files.push(imagebase64);
+            var index = Files.length - 1;
+
+            $("#images").append("<div  class='col-xs-3  img_blck' style='padding-right:0px' id='imgno" + index + "'>" +
+                "<img src='" + image + "' width='100' height='60' />" +
+                "<div class='overlay' onclick='deleteFile(" + index + ")'>" +
+                "<i class='fa fa-trash imageli' ></i>" +
+                "</div>");
+        };
+    }
+
+
+
+    $("#file").change(function (event) {
+
+        if (Files.length >= 5) {
+            alert("لقد تجاوزت العدد المسموح من الصور ,مسموح بخمس صور فقط");
+        }
+        else {
+
+            if (event.target.files && event.target.files[0]) {
+                for (var i = 0; i < event.target.files.length; i++) {
+                    convertToBase64(event.target.files[i]);
+                }
+            }
+        }
+    });
+
+    var Files = [];
+
+    function deleteFile(index) {
+
+        Files.splice(+index, 1);
+        $("#imgno" + index).remove();
+    }
+
+    $("#addPostForm").submit(function (event) {
+
+        /* stop form from submitting normally */
+        event.preventDefault();
+
+
+        var CategoryId = $('#CategoryId-js-ajax').find(":selected").val();
+        var Title = $('#Title-js-ajax').val();
+        var Text = $('#Text-js-ajax').val();
+        var Contact = $('#Contact-js-ajax').val();
+        var CityId = $('#city-js-ajax').val();
+
+
+        if (CategoryId <= 0) {
+            alert("فضلا قم باختيار القسم");
+        } else if (CityId <= 0) {
+            alert("فضلا قم باختيار القسم");
+        }
+        else if (Title === null || Title === "") {
+            alert("قم بكتابة عنوان الاعلان");
+        }
+        else if (Text === null || Text === "") {
+
+            alert("فضلا قم باضافه وصف الاعلان ");
+        }
+        else {
+
+
+            var postForPostModel = {
+                Text: Text,
+                Title: Title,
+                Contact: Contact,
+                CategoryId: CategoryId,
+                CityId: CityId,
+                Files: Files
+            };
+
+
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                type: "POST",
+                url: '@Url.RouteUrl("Harag.Post.AddNewPostAjax")',
+                dataType: 'json',
+                data: JSON.stringify(postForPostModel),
+                success: function (data) {
+                    if (data.postId != 0) {
+                        alert("تمت اضافة الاعلان بنجاح يمكنك سيتم تحويلك الي تحديث العنوان");
+                        window.location = "/Harag/UpdateLocation/" + data.postId;
+                    }
+                    else {
+                        alert("حدث خطأ ما تأكد من الاتصال بالانترنت");
+                    }
+                }
+            });
+
+            event.preventDefault();
+        }
+
+    });
+</script>
+
+@*
+    <script type="text/javascript">
+
+
+        function deleteFile(index) {
+
+            Files.splice(+index, 1);
+            $("#imgno" + index).remove();
+        }
+
+
+        $(document).ready(function () {
+
+            $.ajax({
+                type: 'GET',
+                url: '@Url.RouteUrl("Consultant.Post.GetCategories")',
+
+                success: function (data) {
+                    $("#categoryList").html(data);
+                }
+
+            });
+
+
+            function convertToBase64(file) {
+                var image;
+                var fileReader = new FileReader();
+
+                fileReader.readAsDataURL(file);
+                fileReader.onloadend = (e) => {
+                    image = fileReader.result;
+                    var indexofcomma = image.indexOf(",");
+                    var imagebase64 = image.substring(indexofcomma + 1);
+                    Files.push(imagebase64);
+                    var index = Files.length - 1;
+
+                    $("#images").append("<div  class='col-xs-4 img_blck' style='padding-right:0px' id='imgno" + index + "'>" +
+                        "<img src='" + image + "' width='100' height='60' />" +
+                        "<div class='overlay' onclick='deleteFile(" + index + ")'>" +
+                        "<i class='fa fa-trash imageli' ></i>" +
+                        "</div>");
+                };
+            }
+
+
+
+            $("#file").change(function (event) {
+
+                if (Files.length >= 5) {
+                    alert("لقد تجاوزت العدد المسموح من الصور ,مسموح بخمس صور فقط");
+                }
+                else {
+
+                    if (event.target.files && event.target.files[0]) {
+                        for (var i = 0; i < event.target.files.length; i++) {
+                            convertToBase64(event.target.files[i]);
+                        }
+                    }
+                }
+            });
+
+        });
+
+
+        var Files = [];
+
+
+        $("#addPostForm").submit(function (event) {
+
+            /* stop form from submitting normally */
+            event.preventDefault();
+
+
+            var CategoryId = $('#categoryList').find(":selected").val();
+
+            var Title = $('#postTitle').val();
+            var Text = $('#postText').val();
+
+
+            if (CategoryId <= 0) {
+                alert("فضلا قم باختيار التصنيف");
+            }
+            else if (Title === null || Title === "") {
+                alert("قم بكتابة عنوان الاستشارة");
+            }
+            else if (!Title.replace(/\s/g, '').length) {
+                alert("قم بكتابة عنوان الاستشارة");
+            }
+            else if (Text === null || Text === "") {
+                alert("فضلا قم بشرح المشكلة الخاصة بك ");
+            }
+            else if (!Text.replace(/\s/g, '').length) {
+                alert("فضلا قم بشرح المشكلة الخاصة بك ");
+            }
+            else {
+
+
+                var postForPostModel = {
+                    Text: Text,
+                    Title: Title,
+                    CategoryId: CategoryId,
+                    Files: Files
+                };
+
+
+                $.ajax({
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    type: "POST",
+                    url: '@Url.RouteUrl("Consultant.Post.AddPostAjax")',
+                    dataType: 'json',
+                    data: JSON.stringify(postForPostModel),
+                    complete: function (data) {
+                        if (data.status == 200) {
+                            alert("تمت اضافة الاستئارة بنجاح يمكنك الذهاب الى استشاراتى لرؤية الاستشاراة");
+                        }
+                        else {
+                            alert("حدث خطأ ما تأكد من الاتصال بالانترنت");
+                        }
+                    }
+                });
+
+                event.preventDefault();
+            }
+
+        });
+
+
+
+
+    </script>*@

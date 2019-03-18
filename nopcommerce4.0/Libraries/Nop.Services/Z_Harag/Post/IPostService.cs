@@ -46,5 +46,6 @@ namespace Nop.Services.Z_Harag.Post
          List<Z_Harag_Post> SearchPostsCatCity(int cat, int city, PagingParams pagingParams);
         List<Z_Harag_Post> GetLatestPosts(PagingParams pagingParams);
         bool DeletePost(DeletePost deleteData);
+        bool RefreshPost(int postId);
     }
 }

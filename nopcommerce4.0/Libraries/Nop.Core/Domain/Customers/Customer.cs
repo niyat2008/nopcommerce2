@@ -47,6 +47,7 @@ namespace Nop.Core.Domain.Customers
             this.HaragCustomerNotification = new HashSet<Z_Harag_Notification>();
             this.OwnerNotification = new Collection<Z_Consultant_Notification>();
             this.UserNotification = new Collection<Z_Consultant_Notification>();
+            this.CustomerServiceMessages = new Collection<Z_Harag_CustomerServicesMessage>();
 
         }
 
@@ -260,6 +261,7 @@ namespace Nop.Core.Domain.Customers
         public ICollection<Z_Harag_Follow> HaragFollowingUsers { get; set; }
         public ICollection<Z_Harag_Follow> HaragFollowedUsers { get; set; }
         public ICollection<Z_Harag_Notification> HaragCustomerNotification { get; set; }
+        public ICollection<Z_Harag_CustomerServicesMessage> CustomerServiceMessages { get; set; }
 
         #endregion
     }

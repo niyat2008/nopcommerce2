@@ -75,6 +75,10 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapRoute("Harag.Post.DeletePost", "Harag/Post/Delete/{postId}",
             new { controller = "Post", action = "DeletePost" });
 
+            // add to refresh
+            routeBuilder.MapRoute("Harag.Post.RefreshPost", "Harag/Post/Refresh/{postId}",
+            new { controller = "Post", action = "RefreshPost" });
+
 
             // FeaturedPostsAjax
             routeBuilder.MapRoute("Harag.Post.GetAllFeaturedPosts", "Harag/FeaturedPostsAjax/{pageNo?}",
@@ -138,6 +142,15 @@ namespace Nop.Web.Infrastructure
             // chceck black list
             routeBuilder.MapRoute("Harag.Post.AgreementBeforeAddPost", "Harag/Agreement",
             new { controller = "Post", action = "AgreementBeforeAddPost" });
+
+            /////
+            ///// Customer Service //
+            //////
+            routeBuilder.MapRoute("Harag.CustomerService.AddNewMessageAjax", "Harag/CustomerService",
+                 new { controller = "User", action = "CustomerServiseMessage" });
+
+            routeBuilder.MapRoute("Harag.CustomerService.AddNewMessage", "Harag/CustomerService",
+     new { controller = "User", action = "CustomerServiseMessage" });
 
 
             /////////
