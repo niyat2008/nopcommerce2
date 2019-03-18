@@ -85,7 +85,8 @@ namespace Nop.Web.Controllers.Harag
                 var message = new Z_Harag_CustomerServicesMessage
                 {
                     Message = customerService.Message,
-                    UserId = _workContext.CurrentCustomer.Id
+                    UserId = _workContext.CurrentCustomer.Id,
+                    Time = DateTime.Now
                 }; 
                 _customerServiceContext.AddCustomerServiceMessage(message);
             }
@@ -103,7 +104,7 @@ namespace Nop.Web.Controllers.Harag
             {
                 Message = m.Message,
                 UserName = (m.User  != null?m.User.GetFullName():""),
-                UserId =  (int)m.UserId
+                UserId =  (int) m.UserId
             };
 
             return View("");
@@ -111,19 +112,26 @@ namespace Nop.Web.Controllers.Harag
 
 
         [HttpGet]
-        public IActionResult AllCustomerServiseMessage(CustomerServiceModel customerService)
+       
+        public IActionResult AllCustomerServiseMessage()
         {
-            if (_workContext.CurrentCustomer.IsRegistered())
+            if (_workContext.CurrentCustomer.IsAdmin())
             {
-                var message = new Z_Harag_CustomerServicesMessage
+                var message = _customerServiceContext.GetCustomerServicesMessages();
+
+                var model = message.ToList().Select(m => new CustomerServiceOutputModel
                 {
-                    Message = customerService.Message,
-                    UserId = 0
-                };
-                _customerServiceContext.AddCustomerServiceMessage(message);
+                    UserId = (int)m.UserId,
+                    Message = m.Message,
+                    Phone = "", // m.User.Mobile,
+                    Time = m.Time,
+                    UserName = "User", // m.User.GetFullName()
+                }).ToList();
+
+                return View("~/Themes/Pavilion/Views/Harag/Post/CustomerServiceMessageList.cshtml", model);
             }
 
-            return Ok(new { state = true });
+            return NotFound();
         }
 
         [HttpGet]
