@@ -90,10 +90,8 @@
                     <ul>
                         <li id="menuBar">
                             <i class="fa fa-bars fa-lg"></i>
-                        </li>
+                        </li>  
                         <li id="myAccount">
-                            <i class="fa fa-user-o fa-lg"></i>
-                        <li>
                             <a href="/Harag/Profile"> <i class="fa fa-user-o fa-lg"></i> </a>
                         </li>
                         <li>
@@ -421,7 +419,7 @@
             url: '@Url.RouteUrl("Harag.Notification.NotificationsCount")',
 
             success: function (data) {
-                var n = parseInt(date);
+                var n = parseInt(data);
                 $("#notification-count-js").html(n);
                 $("#notification-count-js1").html(n);
             }
@@ -467,5 +465,20 @@
             // Animation complete.
            // $(this).css("display", "block");
         });
+    });
+
+    $("#searchScreen").click(function () {
+        $("#searchScreenFull").slideToggle("slow");
+    });
+    $("#menuBar").click(function () {
+        $(".overlay").css("display", "block");
+        $(".rightMenu").css("display", "block");
+    });
+    $(".rightMenu .top_header i").click(function () {
+        $(".overlay").css("display", "none");
+        $(".rightMenu").css("display", "none");
+    });
+    $("#myAccount").click(function () {
+        $("#myAccountScreenFull").slideToggle("slow");
     });
 </script>
