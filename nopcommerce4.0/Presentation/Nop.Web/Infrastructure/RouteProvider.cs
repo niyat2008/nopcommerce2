@@ -166,6 +166,10 @@ new { controller = "Post", action = "GetHaragMobileNavbar" });
      new { controller = "User", action = "CustomerServiseMessage" });
 
 
+            routeBuilder.MapRoute("Harag.CustomerService.AllCustomerServiseMessage", "Admin/CustomerServise/Message",
+     new { controller = "User", action = "AllCustomerServiseMessage" });
+
+
             /////////
             //// Harag Messages
             /////////

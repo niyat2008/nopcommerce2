@@ -17,5 +17,7 @@ namespace Nop.Services.Z_Harag.Category
         public int UserId { get; set; }
         public string UserName { get; set; }
         public string Message { get; set; }
+        public string Phone { get; set; }
+        public DateTime Time { get; set; }
     }
 }

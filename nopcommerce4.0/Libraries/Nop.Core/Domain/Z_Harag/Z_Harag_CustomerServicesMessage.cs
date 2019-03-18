@@ -11,7 +11,7 @@ namespace Nop.Core.Domain.Z_Harag
     {  
         public int? UserId { get; set; }
         public string Message { get; set; }
-
+        public DateTime Time { get; set; }
         public Customer User { get; set; }
     }
 }
