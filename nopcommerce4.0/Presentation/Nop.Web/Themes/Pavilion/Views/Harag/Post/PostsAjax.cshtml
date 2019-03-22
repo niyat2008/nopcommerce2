@@ -25,7 +25,12 @@ else
                 <a href="/Harag/Post/@post.Id"><h3>@post.Title</h3></a>
                 <div class="ro w">
                     <div class="col-md-6">
-                        <div class="row"><span><i class="fa fa-star"></i></span></div>
+                        
+                        @if (post.IsFeatured)
+                        {
+                        <div class="row"><span><i style="color: gold" class="fa fa-star"></i></span></div>
+                        }
+
                         <div class="row">
                             <a href="/Harag/City/@post.City">
                                 <span><i class="fa fa-map-marker"></i> @post.City </span>

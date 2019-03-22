@@ -321,12 +321,12 @@ namespace Nop.Web.Controllers.Harag
                 {
                    var closed = _postService.openCommenting(postId);
 
-                    return Ok(new { state = true, closed = true});
+                    return Ok(new { state = true, closed = false});
                 }
                 else
                 {
                    var closed = _postService.CloseCommenting(postId);
-                    return Ok(new { state = true, closed =  false});
+                    return Ok(new { state = true, closed =  true});
                 } 
                
             }
@@ -395,6 +395,7 @@ namespace Nop.Web.Controllers.Harag
                     Files = post.Z_Harag_Photo.Select(m => m.Url).ToList(),
                     NeighborhoodId = post.NeighborhoodId == null? 0 : (int) post.NeighborhoodId,
                     Id = post.Id,
+                    
                     Title = post.Title,
                     Text = post.Text
                 };
@@ -740,6 +741,7 @@ namespace Nop.Web.Controllers.Harag
                 // Rate = p.Rate,
                 DateUpdated = p.DateUpdated,
                 IsDispayed = p.IsDispayed,
+                IsFeatured = (bool)p.IsFeatured,
                 PostOwner = p.Customer.Username,
                 PostOwnerFullName = p.Customer.GetFullName()
             }).ToList();
@@ -770,6 +772,7 @@ namespace Nop.Web.Controllers.Harag
                 DateCreated = p.DateCreated,
                 Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(), 
                 DateUpdated = p.DateUpdated,
+                IsFeatured = (bool)p.IsFeatured,
                 IsDispayed = p.IsDispayed,
                 PostOwner = p.Customer.Username,
                 PostOwnerFullName = p.Customer.GetFullName()
@@ -798,6 +801,7 @@ namespace Nop.Web.Controllers.Harag
                 DateCreated = p.DateCreated,
                 Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
                 // Rate = p.Rate,
+                IsFeatured = (bool)p.IsFeatured,
                 DateUpdated = p.DateUpdated,
                 IsDispayed = p.IsDispayed,
                 PostOwner = p.Customer.Username,
@@ -827,6 +831,7 @@ namespace Nop.Web.Controllers.Harag
                 DateCreated = p.DateCreated,
                 Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
                 //Rate = p.Rate,
+                IsFeatured = (bool)p.IsFeatured,
                 DateUpdated = p.DateUpdated,
                 IsDispayed = p.IsDispayed,
                 PostOwner = p.Customer.Username,
@@ -862,6 +867,7 @@ namespace Nop.Web.Controllers.Harag
                 City = p.City.ArName,
                 DateCreated = p.DateCreated,
                 Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
+                IsFeatured = (bool)p.IsFeatured,
                 // Rate = p.Rate,
                 DateUpdated = p.DateUpdated,
                 IsDispayed = p.IsDispayed,
@@ -896,6 +902,7 @@ namespace Nop.Web.Controllers.Harag
                 Text = p.Text,
                 Id = p.Id,
                 Title = p.Title,
+                IsFeatured = (bool)p.IsFeatured,
                 City = p.City.ArName,
                 DateCreated = p.DateCreated,
                 Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
@@ -935,6 +942,7 @@ namespace Nop.Web.Controllers.Harag
                 CategoryName = p.Category.Name,
                 Text = p.Text,
                 Id = p.Id,
+                IsFeatured = (bool)p.IsFeatured,
                 Title = p.Title,
                 City = p.City.ArName,
                 DateCreated = p.DateCreated,
@@ -968,6 +976,7 @@ namespace Nop.Web.Controllers.Harag
                 Text = p.Text,
                 Id = p.Id,
                 Title = p.Title,
+                IsFeatured = (bool)p.IsFeatured,
                 City = p.City.ArName,
                 DateCreated = p.DateCreated,
                 Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
@@ -1006,6 +1015,7 @@ namespace Nop.Web.Controllers.Harag
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     Text = p.Text,
+                IsFeatured = (bool)p.IsFeatured,
                     Title = p.Title,
                     DateCreated = p.DateCreated,
                     Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
@@ -2139,6 +2149,7 @@ namespace Nop.Web.Controllers.Harag
                     PostOwnerFullName = m.Customer.GetFullName(), 
                     DateCreated = m.DateCreated,
                     DateUpdated = m.DateUpdated,
+                IsFeatured = (bool)m.IsFeatured,
                     IsAnswered = m.IsAnswered,
                     IsClosed = m.IsCommentingClosed,
                     IsDispayed = m.IsDispayed, 
@@ -2178,7 +2189,8 @@ namespace Nop.Web.Controllers.Harag
                     DateUpdated = m.DateUpdated,
                     IsAnswered = m.IsAnswered,
                     IsClosed = m.IsCommentingClosed,
-                    IsDispayed = m.IsDispayed, 
+                IsFeatured = (bool)m.IsFeatured,
+                    IsDispayed = m.IsDispayed,
                     City = m.City.ArName,
                     CategoryName = m.Category.Name,
                     Photo = m.Z_Harag_Photo?.FirstOrDefault()?.Url
