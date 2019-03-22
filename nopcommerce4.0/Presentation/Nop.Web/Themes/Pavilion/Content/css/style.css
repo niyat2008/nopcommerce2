@@ -129,7 +129,7 @@ input.form-control { border: 1px solid #ddd }
 .content .choices a { background: #eee; padding: 5px; border-radius: 3px; cursor: pointer; line-height: 35px; }
 .content .choices a:hover { color: #0473c0; background: #e6f1f9; font-weight: bold; }
 .content .items { margin: 25px 0 }
-.content .items .item { display: table; border: 1px solid #ddd; cursor: pointer; padding: 5px 10px; width: 100% }
+.content .items .item { display: table; border-bottom: 1px solid #ddd; cursor: pointer; padding: 5px 10px; width: 100% }
 .content .items .item:nth-child(odd) { background: #f3f9f7 }
 .content .items .item .det { width: 87%; float: right }
 .content .items .item .det p { font-size: 16px; padding: 4px; }
