@@ -29,7 +29,7 @@ namespace Nop.Services.Z_Harag.Payment
 
         public List<Z_Harag_CustomerServicesMessage> GetCustomerServicesMessages()
         {
-            var cs = _customerServiceRepository.TableNoTracking.ToList();
+            var cs = _customerServiceRepository.TableNoTracking.Include(u => u.User).ToList();
 
             return cs;
         }

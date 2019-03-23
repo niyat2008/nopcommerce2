@@ -27,6 +27,8 @@ namespace Nop.Web
         /// Get configuration root of the application
         /// </summary>
         public IConfigurationRoot Configuration { get; }
+        public IHaragPostPostsTracking HaragPostPostsTracking { get; }
+        public IClosePostAfter48Hours ClosePostAfter48Hours { get; }
 
         #endregion
 
@@ -34,6 +36,7 @@ namespace Nop.Web
 
         public Startup(IHostingEnvironment environment)
         {
+
             //create configuration
             Configuration = new ConfigurationBuilder()
                 .SetBasePath(environment.ContentRootPath)
@@ -89,6 +92,9 @@ namespace Nop.Web
             //{
             //    options.Filters.Add(new CorsAuthorizationFilterFactory("MyPolicy"));
             //});
+             
+            services.AddTransient<HaragPostPostsTracking>();
+            services.AddTransient<ClosePostAfter48Hours>();
 
             //services.AddTransient<ClosePostAfter48Hours>();
             return services.ConfigureApplicationServices(Configuration);
@@ -98,7 +104,7 @@ namespace Nop.Web
         /// Configure the application HTTP request pipeline
         /// </summary>
         /// <param name="application">Builder for configuring an application's request pipeline</param>
-        public void Configure(IApplicationBuilder application)//, IClosePostAfter48Hours closePostAfter48Hours
+        public void Configure(IApplicationBuilder application, IHaragPostPostsTracking HaragPostPostsTracking, IClosePostAfter48Hours ClosePostAfter48Hours)
         {
             //application.UseCors("MyPolicy");
 
@@ -107,11 +113,17 @@ namespace Nop.Web
             //                    .AllowAnyHeader()
             //                    .AllowCredentials());
 
-            //application.UseCors(m => m.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+            //application.UseCors(m => m.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials());  
+
+
+
             application.UseCors("AllowAll");
             application.ConfigureRequestPipeline();
-            //closePostAfter48Hours.StartClosingService();
-            
+ 
+            ClosePostAfter48Hours.StartClosingService();
+            HaragPostPostsTracking.StartPostDeletingService();
+            HaragPostPostsTracking.RefreashPostRequestService();
+
         }
     }
 }

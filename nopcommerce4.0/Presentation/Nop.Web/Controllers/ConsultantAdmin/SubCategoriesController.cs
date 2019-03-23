@@ -41,7 +41,7 @@ namespace Nop.Web.Controllers.ConsultantAdmin
                 return Unauthorized();
 
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) &&!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.ConsultationAdmin, true))
                 return Forbid();
 
             return View("~/Themes/Pavilion/Views/ConsultantAdmin/Subcategories/GetSubCategories.cshtml");
@@ -54,7 +54,7 @@ namespace Nop.Web.Controllers.ConsultantAdmin
                 return Unauthorized();
 
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) &&!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.ConsultationAdmin, true))
                 return Forbid();
 
             //Server Side Parameters
@@ -92,7 +92,7 @@ namespace Nop.Web.Controllers.ConsultantAdmin
                 return Unauthorized();
 
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) &&!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.ConsultationAdmin, true))
                 return Forbid();
 
             ViewBag.categoryId = categoryId;
@@ -107,7 +107,7 @@ namespace Nop.Web.Controllers.ConsultantAdmin
                 return Unauthorized();
 
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) &&!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.ConsultationAdmin, true))
                 return Forbid();
 
             if (categoryId == null || categoryId == 0)
@@ -156,7 +156,7 @@ namespace Nop.Web.Controllers.ConsultantAdmin
                 return Unauthorized();
 
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) &&!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.ConsultationAdmin, true))
                 return Forbid();
 
             if (!ModelState.IsValid)
@@ -177,7 +177,7 @@ namespace Nop.Web.Controllers.ConsultantAdmin
                 return Unauthorized();
 
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) &&!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.ConsultationAdmin, true))
                 return Forbid();
 
             if (subCategoryId == null || subCategoryId == 0)

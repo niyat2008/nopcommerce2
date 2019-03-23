@@ -89,9 +89,12 @@ namespace Nop.Web.Controllers.Harag
                     Time = DateTime.Now
                 }; 
                 _customerServiceContext.AddCustomerServiceMessage(message);
+                return View("~/Themes/Pavilion/Views/Harag/Post/CustomerServiceMessageAdded.cshtml");
             }
 
-            return View("~/Themes/Pavilion/Views/Harag/Post/CustomerServiceMessageAdded.cshtml");
+            return Redirect("/Login?returnUrl=/Harag/CustomerService");
+
+            
         }
 
         [HttpGet]
@@ -115,7 +118,7 @@ namespace Nop.Web.Controllers.Harag
        
         public IActionResult AllCustomerServiseMessage()
         {
-            if (_workContext.CurrentCustomer.IsAdmin())
+            if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin) || _workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators))
             {
                 var message = _customerServiceContext.GetCustomerServicesMessages();
 
@@ -125,7 +128,7 @@ namespace Nop.Web.Controllers.Harag
                     Message = m.Message,
                     Phone = "", // m.User.Mobile,
                     Time = m.Time,
-                    UserName = "User", // m.User.GetFullName()
+                    UserName =  m.User.GetFullName()
                 }).ToList();
 
                 return View("~/Themes/Pavilion/Views/Harag/Post/CustomerServiceMessageList.cshtml", model);
@@ -182,7 +185,7 @@ namespace Nop.Web.Controllers.Harag
 
             if (_workContext.CurrentCustomer.IsRegistered())
             {
-                if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+                if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || _workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
                     return PartialView("~/Themes/Pavilion/Views/Harag/User/_AdminLink.cshtml", 1);
             }
             return PartialView("~/Themes/Pavilion/Views/Harag/User/_AdminLink.cshtml", 0);

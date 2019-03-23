@@ -329,6 +329,9 @@ new { controller = "Post", action = "GetHaragMobileNavbar" });
             routeBuilder.MapRoute("Consultant.Navbar", "Consultations/Consultant/Navbar",
             new { controller = "ConsultantHome", action = "Navbar" });
 
+            routeBuilder.MapRoute("Consultant.NavbarMobile", "Consultations/Consultant/NavbarMobile",
+          new { controller = "ConsultantHome", action = "GetMobileNavbar" });
+            
             routeBuilder.MapRoute("Consultant.User.GetUserInfo", "Consultations/User/GetUserInfo",
             new { controller = "User", action = "GetUserInfo" });
 
@@ -843,6 +846,7 @@ new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
 
             //Delete Bank 
             routeBuilder.MapRoute("Harag.Admin.DeleteBank", "Harag/Admin/Comment/DeleteBank", new { controller = "BankAccount", action = "DeleteBankAccount" });
+            routeBuilder.MapRoute("Harag.Admin.ConfirmPayment", "Harag/Admin/Payment/ConfirmPayment/{paymentId}", new { controller = "BankAccount", action = "ConfirmPayment" });
 
 
 

@@ -226,17 +226,15 @@
                 </div>
             </div>
             <div class="main-footer clearfix">
-                @if (!storeInformationSettings.HidePoweredByNopCommerce)
-                {
-                    @*Would you like to remove the "Powered by nopCommerce" link in the bottom of the footer?
-                        Please find more info at https://www.nopcommerce.com/copyrightremoval.aspx*@
+                @*@if (!storeInformationSettings.HidePoweredByNopCommerce)
+                { 
                     <div class="pull-left">
                         Powered by <a href="https://www.nopcommerce.com/?utm_source=admin-panel&utm_medium=footer&utm_campaign=admin-panel" target="_blank">nopCommerce</a>
                     </div>
                 }
                 <div class="pull-right hidden-xs">
                     <b>nopCommerce version @NopVersion.CurrentVersion</b>
-                </div>
+                </div>*@
                 <div class="text-center">
                     @{
                         var currentCulture = new CultureInfo(workContext.WorkingLanguage.LanguageCulture);

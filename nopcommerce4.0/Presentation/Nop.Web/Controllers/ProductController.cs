@@ -280,9 +280,12 @@ namespace Nop.Web.Controllers
                 var hasCompletedOrders = _orderService.SearchOrders(customerId: _workContext.CurrentCustomer.Id,
                     productId: productId,
                     osIds: new List<int> { (int)OrderStatus.Complete },
-                    pageSize: 1).Any();
+                    pageSize: 1 ).Where(m=>  (DateTime.Now - m.CreatedOnUtc) < TimeSpan.FromDays(10)).Any();
                 if (!hasCompletedOrders)
-                    ModelState.AddModelError(string.Empty, _localizationService.GetResource("Reviews.ProductReviewPossibleOnlyAfterPurchasing"));
+                {
+                     ModelState.AddModelError(string.Empty, _localizationService.GetResource("Reviews.ProductReviewPossibleOnlyAfterPurchasing"));
+                }
+                   
             }
 
             //default value

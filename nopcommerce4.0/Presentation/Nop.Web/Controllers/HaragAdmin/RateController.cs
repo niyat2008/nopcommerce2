@@ -39,7 +39,7 @@ namespace Nop.Web.Controllers.HaragAdmin
                 return Unauthorized();
 
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
                 return Forbid();
 
             return View("~/Themes/Pavilion/Views/HaragAdmin/Rates/GetRates.cshtml");
@@ -53,7 +53,7 @@ namespace Nop.Web.Controllers.HaragAdmin
                 return Unauthorized();
 
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
                 return Forbid();
 
             //Server Side Parameters
@@ -91,7 +91,7 @@ namespace Nop.Web.Controllers.HaragAdmin
                 return Unauthorized();
 
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
                 return Forbid();
 
             if (rateId == 0)
@@ -123,7 +123,7 @@ namespace Nop.Web.Controllers.HaragAdmin
                 return Unauthorized();
 
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
                 return Forbid();
 
             if (rateId == 0)

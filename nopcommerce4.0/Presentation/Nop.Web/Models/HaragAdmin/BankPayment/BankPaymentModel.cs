@@ -19,5 +19,6 @@ namespace Nop.Web.Models.HaragAdmin.BankPayment
         public Decimal SiteAmount { get; set; }
         public string BankName { get; set; }
         public string BankAccount { get; set; }
+        public bool Confirmed { get;  set; }
     }
 }

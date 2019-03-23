@@ -39,7 +39,7 @@ namespace Nop.Services.Z_Harag.Payment
 
         public List<Z_Harag_BankPayment> GetUserPayments(int id)
         {
-            var payments = _paymentRepository.Table.Where(m => m.UserId == id);
+            var payments = _paymentRepository.Table.Where(m => m.UserId == id && m.PaymentConfirmed == true);
             return payments.ToList();
         }
     }

@@ -84,6 +84,11 @@
             {
                 <div class="col-md-9">
                     <form class="add-adverse" action="/Harag/Payment/BanksJ" method="post">
+                        @if (@ViewBag.ErrorMessage != "")
+	                    {
+                        <div class="alert alert-danger">@ViewBag.ErrorMessage</div>  
+	                    }
+                        @Html.HiddenFor(m => m.UserId, new { id= "user-id"});
                         <div class="col-md-4">
                             <label>اسم المستخدم</label> <br />
                             @Html.TextBoxFor(m => m.UserName, new { id = "username-js", @class = "form-control", placeholder = "اسم المستخدم", required = "required" })
@@ -96,16 +101,15 @@
                         <div class="col-md-4">
                             <label> البنك الذى تم التحويل اليه </label> <br />
                             <select id="banks-js" name="BankId" class="form-control" required="required" placeholder="اختر اسم البنك ">
-                                <option>اختر البنك  </option>
                             </select>
                         </div>
                         <div class="col-md-4">
                             <label> متى تم التحويل ؟ </label> <br />
                             <select name="TransactionDate" class="form-control" placeholder="اختر متي تم التحويل" required="required">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
+                                <option value="1">قبل شهر</option>
+                                <option value="2">قبل شهرين</option>
+                                <option value="3">قبل ثلاثه شهور</option>
+                                <option value="4">اكثر من ثلاثه شهور</option>
                             </select>
                         </div>
                         <div class="col-md-4">
@@ -118,7 +122,7 @@
                         </div>
                         <div class="col-md-12">
                             <label>ملاحظات</label> <br />
-                            @Html.TextAreaFor(m => m.Notes, new { @class = "form-control txtArea", placeholder = " ملاحظات   ", rows = "7", required = "required" })
+                            @Html.TextAreaFor(m => m.Notes, new { @class = "form-control txtArea", placeholder = " ملاحظات", rows = "7", required = "required" })
                         </div>
                         <div class="col-md-12">
                             <p style="margin-top:15px"> نرجو الحرص على أن تكون معلومات التحويل صحيحة ودقيقه </p>
@@ -146,6 +150,7 @@
             success: function (data) {
                 if (data.Status == true) {
                     $("#username-js").val(data.Data.Username);
+                    $("#user-id").val(data.Data.Id);
                 } else {
                     alert("لا يوجد هذا المستخدم");
                 }
@@ -159,7 +164,7 @@
         url: '/Harag/Payment/BanksList',
         complete: function (data) {
             if (data.status == 200) {
-                $('#banks-js').html(data.responseText);
+                $('#banks-js').html(data.responseText); 
             }
         }
     });

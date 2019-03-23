@@ -71,6 +71,367 @@
     .badge {
         background-color: red !important;
     }
+
+    .weLink:hover ~ .mnuList {
+        display: block;
+        border-top: 0;
+    }
+
+    .mnuList:hover {
+        display: block;
+        border-top: 0
+    }
+
+    .user {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        position: relative;
+        min-width: 145px;
+        padding: 5px 10px;
+    }
+
+        .user:hover {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-bottom: 0
+        }
+
+        .user img {
+            margin-left: 5px
+        }
+
+        .user i {
+            color: #888;
+            padding-right: 5px;
+        }
+
+    .avatar {
+        position: relative;
+    }
+
+        .avatar ul {
+            position: absolute;
+            z-index: 999;
+            background: #fff;
+            min-width: 145px;
+            padding-top: 10px;
+            border: 1px solid #ddd;
+            width: 100%;
+            display: none
+        }
+
+            .avatar ul li {
+                text-align: center;
+                border-bottom: 1px solid #ddd
+            }
+
+                .avatar ul li:last-child {
+                    border-bottom: 0;
+                    padding-bottom: 10px;
+                }
+
+                .avatar ul li a {
+                    text-decoration: none;
+                    cursor: pointer;
+                    color: #4da74d;
+                    padding: 10px;
+                    font-size: 16px
+                }
+
+                .avatar ul li.name {
+                    padding-bottom: 10px
+                }
+
+                .avatar ul li.link {
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    cursor: pointer;
+                }
+
+                    .avatar ul li.link:hover {
+                        background: #eee
+                    }
+
+        .avatar:hover ul {
+            display: block
+        }
+
+    .profile_blck:hover .user {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-bottom: 0
+    }
+
+    /*Nav*/
+    .navbar-collapse {
+        padding: 0;
+        position: relative;
+        background: #e8ebee
+    }
+
+    .navbar-default {
+        border-color: #ededed;
+        background: #e8ebee;
+        min-height: 30px;
+    }
+
+        .navbar-default .navbar-nav > li > a, .subNav li a {
+            color: #000;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none
+        }
+
+        .navbar-default .navbar-nav > li.main > a.active, .navbar-default .navbar-nav > li.main:hover > a {
+            color: #4da74d;
+            font-weight: bold;
+            background: #fff;
+        }
+
+    .subNav {
+        display: none;
+        min-height: 100px;
+        padding: 10px 0;
+        background: #fff;
+        border: 1px solid #ddd;
+        position: absolute;
+        top: 51px;
+        z-index: 9999;
+        min-width: 1000px;
+        box-shadow: 0 1px 2px 0 rgba(0,0,0,.08);
+        -ms-transition: all 3s ease-in-out;
+        -o-transition: all 3s ease-in-out;
+        -webkit-transition: all 3s ease-in-out;
+        transition: all 3s ease-in-out;
+    }
+    /* .subNav { display: none; min-height: 100px; padding: 10px 0; background:#fff; border:1px solid #ddd; position: absolute; top: 51px; right: -292px; z-index: 9999; width: 1518px; box-shadow: 0 1px 2px 0 rgba(0,0,0,.08); -ms-transition: all 3s ease-in-out; -o-transition: all 3s ease-in-out; -webkit-transition: all 3s ease-in-out; transition: all 3s ease-in-out; } */
+    /* .navbar-default .navbar-nav>li.hasSubMenu :hover { background:#fff; border-top:1px solid #4da74d } */
+    .navbar-default .navbar-nav > li.hasSubMenu :hover ~ .subNav {
+        display: block;
+        -ms-transition: all 3s ease-in-out;
+        -o-transition: all 3s ease-in-out;
+        -webkit-transition: all 3s ease-in-out;
+        transition: all 3s ease-in-out;
+    }
+
+    .navbar-default .navbar-nav > li.hasSubMenu a:hover {
+        color: #4da74d;
+        font-weight: bold
+    }
+
+    .navbar-default .navbar-nav > li.hasSubMenu a {
+        font-size: 15px;
+        padding-bottom: 0;
+        padding-top: 0;
+        line-height: 30px;
+    }
+
+        .navbar-default .navbar-nav > li.hasSubMenu a:hover {
+            text-decoration: underline
+        }
+
+    .subNav:hover {
+        display: block
+    }
+
+    .subNav ul {
+        float: right;
+        min-width: 220px;
+        margin-right: 15px;
+        border-left: 1px solid #ddd;
+    }
+
+        .subNav ul:last-of-type {
+            border-left: 0
+        }
+
+        .subNav ul li {
+            padding-bottom: 15px
+        }
+
+            .subNav ul li a {
+                font-size: 14px;
+                color: #888
+            }
+
+    .heading_nav {
+        background: #e8ebee;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 20px;
+        border: 1px solid #ddd;
+    }
+
+    .fixedNavScreen {
+        background: #fff;
+        box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+        display: none;
+    }
+
+        .fixedNavScreen ul {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 0;
+            padding: 0
+        }
+
+            .fixedNavScreen ul li {
+                float: right;
+                cursor: pointer;
+                padding: 10px;
+                border-left: 1px solid #ddd;
+                border-right: 1px solid #ddd;
+            }
+
+                .fixedNavScreen ul li i {
+                    color: #4da74d;
+                    font-weight: bold;
+                }
+
+    @@media(max-width:767px) {
+        .top-user-menu {
+            display: none
+        }
+
+        .fixedNavScreen {
+            display: block
+        }
+
+        .search {
+            margin-top: 85px;
+            padding: 15px 0;
+        }
+
+            .search .logoContainer {
+                text-align: center
+            }
+
+            .navbar-default, #userInfo, .search .form-group {
+                display: none
+            }
+    }
+
+    #searchScreenFull {
+        display: none;
+        background: #4da74d;
+        margin-top: 40px;
+        min-height: 45px;
+    }
+
+        #searchScreenFull input {
+            border-radius: 0;
+            height: 33px;
+            width: 75%;
+            float: right;
+            margin-top: 6px
+        }
+
+        #searchScreenFull i {
+            float: right;
+            line-height: 40px;
+            width: 10%;
+            margin-right: 12px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 15px
+        }
+
+    #myAccountScreenFull {
+        display: none
+    }
+
+        #myAccountScreenFull ul {
+            width: 100%;
+            box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            display: block
+        }
+
+            #myAccountScreenFull ul li {
+                border-top: 1px solid #ececec;
+                float: none;
+                text-align: center
+            }
+
+                #myAccountScreenFull ul li a {
+                    padding: 15px 25px;
+                    font-size: 13px;
+                }
+
+                    #myAccountScreenFull ul li a i {
+                        color: #999;
+                        font-weight: normal;
+                        padding-left: 15px
+                    }
+
+    .overlay {
+        display: none;
+        background: rgba(0,0,0,0.6);
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1060;
+    }
+
+    .rightMenu {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 320px;
+        height: 100%;
+        text-align: right;
+        background: #f6f6f6;
+        box-shadow: 1px 0 5px rgba(0,0,0,0.5);
+        overflow: hidden;
+        z-index: 1070;
+        transition: all 0.5s ease;
+    }
+
+        .rightMenu .top_header {
+            height: 50px;
+        }
+
+            .rightMenu .top_header i {
+                color: #aaa;
+                cursor: pointer;
+                margin-left: 20px;
+                line-height: 50px
+            }
+
+        .rightMenu ul {
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            height: 100%;
+        }
+
+            .rightMenu ul li {
+                padding: 20px;
+                line-height: 19px;
+                cursor: pointer
+            }
+
+                .rightMenu ul li a {
+                    color: #333;
+                    font-size: 15px;
+                    text-decoration: none;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                }
+
+                .rightMenu ul li:hover a {
+                    color: #4da74d
+                }
+
+                .rightMenu ul li i {
+                    color: #4da74d;
+                    cursor: pointer;
+                }
 </style>
 
 
@@ -97,10 +458,77 @@
             <div class="col-md-2 hidden-xs"> </div>
         </div>
     </div>
+
+
+
+    <div class="fixedNavScreen text-center">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul>
+                        <li id="menuBar">
+                            <i class="fa fa-bars fa-lg"></i>
+                        </li>
+                        <li id="myAccount">
+                            <a> <i class="fa fa-user-o fa-lg"></i> </a>
+                        </li>
+
+
+                        <li>
+                            <a href="/Consultant/Notifications">
+                                <sup id="notification-count-jsa" class="badge badge-danger"></sup>
+                                <i class="fa fa-bell-o fa-lg"></i>
+                            </a>
+                        </li>
+
+                        <li id="searchScreen">
+                            <i class="fa fa-search fa-lg"></i>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="searchScreenFull">
+                    <div class="col-xs-3"></div>
+                    <div class="col-xs-6 text-center">
+                        <div class="form-group">
+                            <input id="searchTextM" type="text" class="form-control">
+                            <i onclick="filterWithText('searchTextM')" id="search-js1" class="fa fa-search"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="myAccountScreenFull">
+                    <div class="col-xs-12 text-center" style="padding:0">
+                        <ul>
+                            <li>
+                                <a href="/Register">
+                                    <i class="fa fa-pencil"></i>
+                                    <span>سجل الان</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Login">
+                                    <i class="fa fa-lock"></i>
+                                    <span>دخول</span>
+                                </a>
+                            </li>
+                            @*<li>
+                                    <a href="#">
+                                        <i class="fa fa-heart"></i>
+                                        <span>السلع المفضلة</span>
+                                    </a>
+                                </li>*@
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </section>
 
 
-<div style="background-color:#e8ebee;padding:8px;"><p id="messagep" style="text-align:center;margin:0; font-size: 15px;">خدمة الاستشارات هى خدمة مجانية تقدم من قبل موقع المزراع لمساعدة حل المشاكل الزراعية بواسطة مستشارين مختصين فى هذا المجال.</p></div>
+<div style="background-color:#e8ebee;padding:8px; margin-top: 45px;"><p id="messagep" style="text-align:center;margin:0; font-size: 15px;">خدمة الاستشارات هى خدمة مجانية تقدم من قبل موقع المزراع لمساعدة حل المشاكل الزراعية بواسطة مستشارين مختصين فى هذا المجال.</p></div>
 
 
 <!-- Search -->
@@ -117,7 +545,7 @@
                 <div class="form-group">
                     <input id="searchText" type="text" style="height:44px;"
                            class="form-control" placeholder="ابحث عن ...">
-                    <button onclick="filterWithText()" style="height:44px;" class="btndarckgreen">
+                    <button onclick="filterWithText('searchText')" style="height:44px;" class="btndarckgreen">
                         <i class="fa fa-search"></i>
                     </button>
 
@@ -139,7 +567,7 @@
 </section>
 
 <!--<!-- Nav -->
-<div id="Nav"></div>
+<div id="Nav"></div> 
 
 
 
@@ -165,11 +593,18 @@
     </div>
 </div>
 
+<div class="overlay"></div>
+<div class="rightMenu">
+    <div class="top_header">
+        <i class="fa fa-times pull-left"></i>
+    </div>
+    <div id="mobile-navbar-js"></div>
+</div>
 
 
 @*<link href="~/css/Consultant/bootstrap.min.css" rel="stylesheet" />*@
 <script src="~/js/Consultant/bootstrap.min.js"></script>
- 
+
 <div id="changeCatAndSubDiv" class="modal" tabindex="-1" role="dialog" Style="display:none">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -288,8 +723,12 @@
             type: "get",
             success: function (data) {
                 console.log("data " + data.query);
-                $(".NotificationNum").html(data.query);
 
+                if (data.query === 0) {
+                    return;
+                }
+                $(".NotificationNum").html(data.query);
+                $("#notification-count-jsa").html(data.query);
             }
 
         });
@@ -322,6 +761,15 @@
             }
         });
 
+           $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Consultant.NavbarMobile")',
+
+            success: function (data) {
+                $("#mobile-navbar-js").html(data);
+            }
+        });
+
         $.ajax({
             type: 'GET',
             url: '@Url.RouteUrl("Consultant.User.GetUserRoles")',
@@ -351,8 +799,8 @@
     }
 
 
-    function filterWithText() {
-        var Term = $("#searchText").val();
+    function filterWithText(s) {
+        var Term = $("#" + s).val();
 
         if (Term) {
 
@@ -368,3 +816,25 @@
 <script src="/Plugins/SevenSpikes.Core/Scripts/sevenspikes.core.min.js" type="text/javascript"></script>
 <script src="/Plugins/SevenSpikes.Core/Scripts/sevenspikes.theme.ex.min.js" type="text/javascript"></script>
 <script src="/Themes/Pavilion/Content/scripts/pavilion.js" type="text/javascript"></script>
+
+
+
+<script>
+
+    $("#searchScreen").click(function () {
+        $("#searchScreenFull").slideToggle("slow");
+        $("#myAccountScreenFull").css("display", "none");
+    });
+    $("#menuBar").click(function () {
+        $(".overlay").css("display", "block");
+        $(".rightMenu").css("display", "block");
+    });
+    $(".rightMenu .top_header i").click(function () {
+        $(".overlay").css("display", "none");
+        $(".rightMenu").css("display", "none");
+    });
+    $("#myAccount").click(function () {
+        $("#myAccountScreenFull").slideToggle("slow");
+        $("#searchScreenFull").css("display", "none");
+    });
+</script>

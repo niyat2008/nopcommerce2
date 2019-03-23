@@ -53,6 +53,8 @@ namespace Nop.Web.Controllers.Harag
         public IActionResult PaymentBanks()
         {
             ViewBag.Added = false;
+            ViewBag.ErrorMessage = "";
+
             var banks = _paymentService.GetBaknAccountsDetails().Select(m => new BankAccountModel
             {
                 AccountNumber = m.AccountNo,
@@ -68,14 +70,37 @@ namespace Nop.Web.Controllers.Harag
         [HttpPost]
         public IActionResult AddPaymentBankAjax(PaymentModel payment)
         {
+            var post = _postService.GetPost(payment.PostId, "");
+
+            var banks = _paymentService.GetBaknAccountsDetails().Select(m => new BankAccountModel
+            {
+                AccountNumber = m.AccountNo,
+                BankId = m.Id,
+                IBANNumber = m.IBANNumber,
+                BankName = m.BankName                
+            }).ToList();
+
+            payment.Banks = banks;
+
+            if (post == null)
+            {
+               
+                payment.Banks = banks;
+                ViewBag.Added = false;
+                ViewBag.ErrorMessage = "تاكد من رقم الاعلان";
+                return View("~/Themes/Pavilion/Views/Harag/Payment/bankpayment.cshtml", payment); 
+            }
 
             if (!ModelState.IsValid)
             {
+
                 ViewBag.Added = false;
 
                 return View("~/Themes/Pavilion/Views/Harag/Payment/bankpayment.cshtml", payment);
 
             }
+
+
             var model = new Z_Harag_BankPayment
             {
                 SiteAmount = payment.SiteAmount,
@@ -88,32 +113,12 @@ namespace Nop.Web.Controllers.Harag
                 UserId = payment.UserId
             };
 
-            var banks = _paymentService.GetBaknAccountsDetails().Select(m => new BankAccountModel
-            {
-                AccountNumber = m.AccountNo,
-                BankId = m.Id,
-                IBANNumber = m.IBANNumber,
-                BankName = m.BankName
-            }).ToList();
-
-              payment.Banks = banks ;
+          
             _paymentService.AddNewPaymentDetails(model);
 
             ViewBag.Added = true;
 
-            var user = _customerContext.GetCustomerById(model.UserId);
-            if (user != null && user.IsFeatured == false)
-            {
-                var paymentA = _paymentService.GetUserPayments(user.Id);
-                if (paymentA.Sum(m => m.SiteAmount) >= Settings.FeaturedMemberCommissionSum
-                    && paymentA.Count >= Settings.FeaturedMemberCommissionNumber )
-                {
-                    user.IsFeatured = true;
 
-                }
-                _customerContext.UpdateCustomer(user);
-            }
-            
             return View("~/Themes/Pavilion/Views/Harag/Payment/bankpayment.cshtml", payment);
         }
 

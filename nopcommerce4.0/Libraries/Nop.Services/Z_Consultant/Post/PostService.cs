@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -124,7 +125,9 @@ namespace Nop.Services.Z_Consultant.Post
             List<KeyAndValue> filesUrl = new List<KeyAndValue>();
 
             var ImagesPath = Path.Combine(_env.WebRootPath, "ConsultantApi\\Uploads\\Images");
-            //var Vedios = Path.Combine(_env.WebRootPath, "Uploads\\Videos");
+            var logoImage = Path.Combine(_env.WebRootPath, "images\\Consultant\\images\\logo3.png");
+
+            //var Vedios = Path.Combine(_env.WebRootPath, "Uploads\\Videos"); /images/Consultant/images/logo3.png
 
             int MaxContentLength = 1024 * 1024 * SizeOfPhotoAllowedInMb; //Size = 1*SizeOfPhotoAllowedInMb  MB   
 
@@ -223,8 +226,12 @@ namespace Nop.Services.Z_Consultant.Post
                     int randomNumber = new Random().Next();
                     var fileName = randomNumber + Path.GetRandomFileName() + "." + file.ImageFormateName;
                     var filePath = Path.Combine(ImagesPath, fileName);
-
-                    File.WriteAllBytes(filePath, file.ImageBytes);
+                    using (var ms = new MemoryStream(file.ImageBytes))
+                    {
+                        var image = DrawLogo(logoImage, Image.FromStream(ms));
+                        image.Save(filePath);
+                    }
+                    // File.WriteAllBytes(filePath, file.ImageBytes);
                     filesUrl.Add(new KeyAndValue() { Key = "image", Value = fileName });
                 }
             }
@@ -233,7 +240,47 @@ namespace Nop.Services.Z_Consultant.Post
         }
 
 
-        
+        private Bitmap DrawLogo(string logo, Image img)
+        {
+            var image = new Bitmap(img);
+
+            Image ib = Image.FromFile(logo); // This is 300x300 
+            ib = ResizeImage(ib, 60, 60);
+            using (Graphics g = Graphics.FromImage(image))
+            {
+                g.DrawImage(ib, 0, 0, 60, 40);
+            }
+
+            return image;
+
+        }
+
+
+        public static Bitmap ResizeImage(Image image, int width, int height)
+        {
+            var destRect = new Rectangle(0, 0, width, height);
+            var destImage = new Bitmap(width, height);
+
+            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.SmoothingMode = SmoothingMode.HighQuality;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return destImage;
+        }
+
 
 
 

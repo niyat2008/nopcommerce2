@@ -120,7 +120,16 @@
                 type: 'GET',
                 url: '@Url.RouteUrl("Harag.Post.GetAllHaragPostsAjax")/' + pageNo,
                 complete: function (data) {
-                    $("#posts").append(data.responseText);
+                    if (data.responseText == '<div id="tabpanelPosts" style="text-align:center"><b>لا يوجد</b></div><!-- Post -->') {
+                        $('.view-more').addClass("hidden");
+                        return;
+                    }
+
+                    $('.view-more').attr("data-pageno", parseInt($('.view-more').attr("data-pageno")) + parseInt('1'));
+
+                    $("#posts").append("<br />" 
+                        + data.responseText);
+
                     $(this).attr("data-pageno", parseInt(pageNo) + 1);
                 }
             }); 

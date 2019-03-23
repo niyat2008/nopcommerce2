@@ -1,0 +1,54 @@
+﻿@using Nop.Web.Models.Consultant.Category;
+@model CategoryWithSubCategoriesOutputModel
+ 
+<ul>
+    @foreach (var item in Model.Items)
+    {
+    <li>
+        @Html.RouteLink(item.Name, "Consultant.GetAllClosedPostsByCategoryId", new { CategoryId = item.Id })
+        <i class="fa fa-chevron-left pull-left"></i>
+        <ul>
+            @foreach (var subCat in item.SubCategories)
+                            {
+            <li>
+                @Html.RouteLink(subCat.Name, "Consultant.GetAllClosedPostsBySubCategoryId", new { SubCategoryId = subCat.Id })
+            </li>
+                            }
+        </ul>
+
+
+    </li>
+     }
+    @*<li>
+                <a href="#">الرئيسية</a>
+            </li>
+            <li>
+                <a href="#">الرئيسية</a>
+            </li>
+            <li>
+                <a href="#">الرئيسية</a>
+            </li>
+            <li>
+                <a href="#">الرئيسية</a>
+                <i class="fa fa-chevron-left pull-left"></i>
+                    <ul>
+                        <li>
+                            <a href="#">فن تصليح الايرور</a>
+                        </li>
+                        <li>
+                            <a href="#">فن تصليح الايرور</a>
+                        </li>
+                    </ul>
+        </li>
+        <li>
+            <a href="#">الرئيسية</a>
+        </li>
+        <li>
+            <a href="#">الرئيسية</a>
+        </li>*@
+</ul>
+
+<!-- Nav -->
+ 
+ 
+ 

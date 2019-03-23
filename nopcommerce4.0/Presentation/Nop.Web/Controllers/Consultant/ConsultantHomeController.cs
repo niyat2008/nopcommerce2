@@ -152,7 +152,33 @@ namespace Nop.Web.Controllers.Consultant
         }
 
 
-        
+        [HttpGet]
+        public IActionResult GetMobileNavbar(PagingParams pagingParams)
+        {
+            var model = _categoryService.GetCategoriesWithSubCategories(pagingParams);
+
+            Response.Headers.Add("X-Pagination", model.GetHeader().ToJson());
+
+            var outputModel = new CategoryWithSubCategoriesOutputModel
+            {
+                Paging = model.GetHeader(),
+                Links = GetLinks(model, "Consultant.Navbar"),
+                Items = model.List.Select(m => new CategoryWithSubCategoriesModel()
+                {
+                    Id = m.Id,
+                    Name = m.Name,
+                    SubCategories = m.SubCategories.Select(s => new SubCategoryModel()
+                    {
+                        Id = s.Id,
+                        Name = s.Name
+                    }).ToList()
+                }).ToList(),
+            };
+
+
+            return PartialView("~/Themes/Pavilion/Views/Consultant/Shared/_NavbarMobile.cshtml", outputModel);
+        }
+
 
 
 

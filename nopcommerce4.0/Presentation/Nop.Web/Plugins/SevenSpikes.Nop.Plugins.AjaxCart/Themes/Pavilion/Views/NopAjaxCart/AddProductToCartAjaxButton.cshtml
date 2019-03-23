@@ -33,7 +33,7 @@
                         <option value="@allowedQuantity.Value">@allowedQuantity.Text</option>
                     }
                 </select>
-
+                <button></button>
                 <input class="@string.Concat("productQuantityChanged", button.ProductId)" type="hidden" value="no" />
             }
             else
@@ -55,3 +55,47 @@
 </div>
     }
 }
+
+<script type="text/javascript">
+    //function incrementQuantityValue(event) {
+    //    event.preventDefault();
+    //    event.stopPropagation();
+
+    //    var input = $(this).siblings('target goes here').first();
+
+    //    var value = parseInt(input.val());
+    //    if (isNaN(value)) {
+    //        input.val(1);
+    //        return;
+    //    }
+
+    //    value++;
+    //    input.val(value);
+    //}
+
+    //function decrementQuantityValue(event) {
+    //    event.preventDefault();
+    //    event.stopPropagation();
+
+    //    var input = $(this).siblings('target goes here').first();
+
+    //    var value = parseInt(input.val());
+
+    //    if (isNaN(value)) {
+    //        input.val(1);
+    //        return;
+    //    }
+
+    //    if (value <= 1) {
+    //        return;
+    //    }
+
+    //    value--;
+    //    input.val(value);
+    //} 
+
+    //$(document).ready(function () {
+    //    $('#pppp').on('click', '.plus', incrementQuantityValue);
+    //    $('#dddd').on('click', '.minus', decrementQuantityValue);
+    //});
+</script>
