@@ -311,18 +311,14 @@ input.form-control { border: 1px solid #ddd }
         border-radius: 20px;
         border: 1px solid #ddd;
     }
-
-    .fixedNavScreen {
-        background: #fff;
-        box-shadow: 0 3px 5px rgba(0,0,0,0.1);
-        display: none;
-    }
+.fixedNavScreen { background:#fff; box-shadow: 0 3px 5px rgba(0,0,0,0.1); display: none; }
 
         .fixedNavScreen ul {
             display: flex;
             justify-content: center;
             margin-bottom: 0;
-            padding: 0
+            padding: 0;
+            line-height:31px
         }
 
             .fixedNavScreen ul li {
@@ -339,7 +335,7 @@ input.form-control { border: 1px solid #ddd }
                 }
 
 /*@media(max-width:767px) {*/
-@media(max-width:921px) {
+@media(max-width:991px) {
         .top-user-menu {
             display: none
         }
