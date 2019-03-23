@@ -469,9 +469,8 @@ namespace Nop.Web.Controllers.Harag
 
 
             if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
-                return Forbid();
-
-
+                return Redirect("/Login");
+             
 
             var currentUserId = _workContext.CurrentCustomer.Id;
 
@@ -612,29 +611,36 @@ namespace Nop.Web.Controllers.Harag
 
             Models.Harag.Post.PostWithFilesModel model = new Models.Harag.Post.PostWithFilesModel();
 
-            
+            var Following = false;
+            var isPostOwner = false;
+            var post = this._postService.GetPost(PostId, "");
+            var relatedPosts = _postService.SearchByCategory(post.CategoryId, PagingParams);
+            var sameCityPosts = _postService.SearchByCity((int)post.CityId, PagingParams);
+            var currentUserId = 0;
+
+            if (post != null)
+            {
+                 currentUserId= _workContext.CurrentCustomer == null ? 0 : _workContext.CurrentCustomer.Id;
+                ViewBag.UserName = _workContext.CurrentCustomer.Username;
+                ViewBag.LoggedIn = true; 
+            }
+            else
+            {
+                return NotFound();
+            }
+
             if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
             {
-                var post = this._postService.GetPost(PostId, "");
-                var relatedPosts = _postService.SearchByCategory(post.CategoryId, PagingParams);
-                var sameCityPosts = _postService.SearchByCity((int)post.CityId, PagingParams);
+                Following = _followService.IsPostFollowed(post.Id, currentUserId);
+                isPostOwner = (post.CustomerId == currentUserId);
+            }
+            else
+            {
+                ViewBag.UserName = "";
+                ViewBag.LoggedIn = false;
 
-                if (post != null)
-                {var currentUserId = _workContext.CurrentCustomer == null?0:_workContext.CurrentCustomer.Id;
-                    if (_workContext.CurrentCustomer.IsRegistered())
-                    {
-                       ViewBag.UserName = _workContext.CurrentCustomer.Username;
-                        ViewBag.LoggedIn = true; 
-                    }
-                    else
-                    {
-                        ViewBag.UserName = _workContext.CurrentCustomer.Username;
-                        ViewBag.LoggedIn = false;
-                    }
-                    var Following = _followService.IsPostFollowed(post.Id, currentUserId);
-                    var isPostOwner = (post.CustomerId == currentUserId);
-
-                    model = new Models.Harag.Post.PostWithFilesModel
+            }
+            model = new Models.Harag.Post.PostWithFilesModel
                     {
                         Following = Following,
                         IsPostOwner = isPostOwner,
@@ -671,14 +677,10 @@ namespace Nop.Web.Controllers.Harag
                             Id = m.Id
                         }).ToList()
                     };
-                }
+               
 
 
-            }
-            else
-            {
-                return Unauthorized();
-            }
+          
 
             ViewBag.UserRole = UserRole;
 

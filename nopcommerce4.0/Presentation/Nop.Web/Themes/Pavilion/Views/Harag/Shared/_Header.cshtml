@@ -102,7 +102,7 @@
                         </li>
                         <li>
                             <a href="/Harag/Notifications">
-                                <sup id="notification-count-jsa" class="badge badge-danger">0</sup>
+                                <sup id="notification-count-jsa" class="badge badge-danger"></sup>
                                 <i class="fa fa-bell-o fa-lg"></i>
                             </a>
                         </li>
@@ -416,6 +416,7 @@
             url: '@Url.RouteUrl("Harag.Notification.NotificationsCount")',
 
             success: function (data) {
+                
                 var n = parseInt(data);
                 $("#notification-count-js").html(n);
                 $("#notification-count-jsa").html(n);
@@ -428,7 +429,7 @@
 
 
     function login() {
-        window.location.href = "login?returnUrl=consultations";
+        window.location.href = "login?returnUrl=/harag";
     }
 
 

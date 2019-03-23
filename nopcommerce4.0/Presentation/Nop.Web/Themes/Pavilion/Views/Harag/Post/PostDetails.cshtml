@@ -50,7 +50,7 @@
                         {
                             <div class="row">
                                 <a href="~/HaragApi/Uploads/Images/@image" data-lightbox="image-1@Model.Id" data-title="My caption">
-                                    <img src="~/HaragApi/Uploads/Images/@image" alt="Single Image" />
+                                    <img style="width: 97%" src="~/HaragApi/Uploads/Images/@image" alt="Single Image" />
                                 </a>
                             </div>
 
@@ -147,7 +147,7 @@
                     <div id="comments" class="col-xs-12">
                     </div>
                 </div>
-                @if (!Model.IsPostOwner)
+                @if (!Model.IsPostOwner && ViewBag.LoggedIn)
                 {
                     <div class="follow">
                         <div class="col-xs-12">

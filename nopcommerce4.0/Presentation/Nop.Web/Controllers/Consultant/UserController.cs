@@ -51,7 +51,7 @@ namespace Nop.Web.Controllers.Consultant
 
             if (_workContext.CurrentCustomer.IsRegistered())
             {
-                if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+                if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || _workContext.CurrentCustomer.IsInCustomerRole(RolesType.ConsultationAdmin, true))
                     return PartialView("~/Themes/Pavilion/Views/Consultant/User/_AdminLink.cshtml", 1);
             }
             return PartialView("~/Themes/Pavilion/Views/Consultant/User/_AdminLink.cshtml", 0);

@@ -35,10 +35,10 @@ namespace Nop.Web.ConsultantTasks
                             command.ExecuteNonQuery();
                         }
                     }
-                   
+                     Thread.Sleep(TimeSpan.FromHours(5).Milliseconds);
                 }
 
-                Thread.Sleep(TimeSpan.FromHours(5).Milliseconds);
+              
 
             }).Start();
 
@@ -63,10 +63,10 @@ namespace Nop.Web.ConsultantTasks
                             command.ExecuteNonQuery();
                         }
                     }
-
+                    Thread.Sleep(TimeSpan.FromHours(5).Milliseconds);
                 }
 
-                Thread.Sleep(TimeSpan.FromHours(5).Milliseconds);
+                
             }).Start();
 
 
@@ -91,10 +91,10 @@ namespace Nop.Web.ConsultantTasks
                             command.ExecuteNonQuery();
                         }
                     }
-
+                      Thread.Sleep(TimeSpan.FromHours(1).Milliseconds);
                 }
 
-                Thread.Sleep(TimeSpan.FromHours(1).Milliseconds);
+                
             }).Start();
 
 

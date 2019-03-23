@@ -26,5 +26,7 @@ namespace Nop.Services.Z_HaragAdmin.BankAccount
 
         // Get Bank Payments
         List<Z_Harag_BankPayment> GetPayments(int start, int length, string searchValue, string sortColumnName, string sortDirection);
+
+        Z_Harag_BankPayment ConfirmSitePayment(int paymentId);
     }
 }

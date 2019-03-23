@@ -37,7 +37,7 @@ namespace Nop.Web.Controllers.HaragAdmin
                 return Unauthorized();
 
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
                 return Forbid();
 
             return View("~/Themes/Pavilion/Views/HaragAdmin/Customer/GetCustomers.cshtml");
@@ -50,7 +50,7 @@ namespace Nop.Web.Controllers.HaragAdmin
                 return Unauthorized();
 
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
                 return Forbid();
 
 
@@ -116,7 +116,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         //        return Unauthorized();
 
 
-        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
         //        return Forbid();
 
         //    return View("~/Themes/Pavilion/Views/ConsultantAdmin/Customers/GetOnlineMembers.cshtml");
@@ -131,7 +131,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         //        return Unauthorized();
 
 
-        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
         //        return Forbid();
 
 
@@ -173,7 +173,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         //        return Unauthorized();
 
 
-        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
         //        return Forbid();
 
         //    return View("~/Themes/Pavilion/Views/ConsultantAdmin/Customers/GetConsultants.cshtml");
@@ -187,7 +187,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         //        return Unauthorized();
 
 
-        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
         //        return Forbid();
 
 
@@ -227,7 +227,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         //        return Unauthorized();
 
 
-        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
         //        return Forbid();
 
         //    return View("~/Themes/Pavilion/Views/ConsultantAdmin/Customers/GetOnlineConsultants.cshtml");
@@ -241,7 +241,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         //        return Unauthorized();
 
 
-        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
         //        return Forbid();
 
 
@@ -308,7 +308,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         //        return Unauthorized();
 
 
-        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
         //        return Forbid();
 
         //    var model = new CustomerPostsModel
@@ -327,7 +327,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         //        return Unauthorized();
 
 
-        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
         //        return Forbid();
 
         //    if (customerId == null || customerId == 0)
@@ -381,7 +381,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         //        return Unauthorized();
 
 
-        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
         //        return Forbid();
 
         //    if (customerId == null || customerId == 0 || postId == null || postId == 0)
@@ -428,7 +428,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         //        return Unauthorized();
 
 
-        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
         //        return Forbid();
 
         //    var model = new CustomerPostsModel
@@ -447,7 +447,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         //        return Unauthorized();
 
 
-        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
         //        return Forbid();
 
         //    if (consultantId == null || consultantId == 0)
@@ -501,7 +501,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         //        return Unauthorized();
 
 
-        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
         //        return Forbid();
 
         //    if (consultantId == null || consultantId == 0 || postId == null || postId == 0)
@@ -548,7 +548,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         //        return Unauthorized();
 
 
-        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
         //        return Forbid();
             
         //    return View("~/Themes/Pavilion/Views/ConsultantAdmin/Customers/GetTop20MemberByPostNumber.cshtml");
@@ -560,7 +560,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         //        return Unauthorized();
 
 
-        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
         //        return Forbid();
 
         //    var MembersInDb = _postService.GetTop20MemberByPostsNumber();
@@ -589,7 +589,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         //        return Unauthorized();
 
 
-        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
         //        return Forbid();
 
         //    return View("~/Themes/Pavilion/Views/ConsultantAdmin/Customers/GetTop20ConsultantByPostNumber.cshtml");
@@ -601,7 +601,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         //        return Unauthorized();
 
 
-        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
         //        return Forbid();
 
         //    var ConsultantsInDb = _postService.GetTop20ConsultantByPostsNumber();
@@ -630,7 +630,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         //        return Unauthorized();
 
 
-        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
         //        return Forbid();
 
         //    return View("~/Themes/Pavilion/Views/ConsultantAdmin/Customers/GetTop20ConsultantByPostEvaluate.cshtml");
@@ -642,7 +642,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         //        return Unauthorized();
 
 
-        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+        //    if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
         //        return Forbid();
 
         //    var ConsultantsInDb = _postService.GetTop20ConsultantByPostsNumber();

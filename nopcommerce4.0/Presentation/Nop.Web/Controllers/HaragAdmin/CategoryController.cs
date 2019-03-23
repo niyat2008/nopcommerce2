@@ -36,7 +36,7 @@ namespace Nop.Web.Controllers.HaragAdmin
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Unauthorized();
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
                 return Forbid();
 
             var category = new PostCategoryModel();
@@ -71,7 +71,7 @@ namespace Nop.Web.Controllers.HaragAdmin
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Unauthorized();
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
                 return Forbid();
 
             if (!ModelState.IsValid)
@@ -101,7 +101,7 @@ namespace Nop.Web.Controllers.HaragAdmin
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Unauthorized();
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
                 return Forbid();
 
             //Server Side Parameters

@@ -10,6 +10,9 @@ using Nop.Services.Z_Harag.Helpers;
 using Nop.Services.Events;
 using Nop.Web.Models.HaragAdmin.BankAccount;
 using Nop.Web.Models.HaragAdmin.BankPayment;
+using Nop.Services.Customers;
+using Nop.Services.Z_HaragAdmin.Setting;
+using Nop.Services.Z_Harag.Payment;
 
 namespace Nop.Web.Controllers.HaragAdmin
 {
@@ -18,14 +21,23 @@ namespace Nop.Web.Controllers.HaragAdmin
         #region Fields
         private readonly IBankAccountService _bankService;
         private readonly IWorkContext _workContext;
+        private readonly ISettingService settingService;
+        private readonly ICustomerService customerService; 
+        private readonly IPaymentService paymentService;
+        private readonly SettingsModel Settings;
         private readonly IEventPublisher _env;
         #endregion
         #region Ctor
-        public BankAccountController(IBankAccountService bankService, IWorkContext workContext, IEventPublisher env)
+        public BankAccountController(ISettingService settingService, IBankAccountService bankService, IPaymentService paymentService, IWorkContext workContext, IEventPublisher env, ICustomerService customerService)
         {
             this._bankService = bankService;
+            this.customerService = customerService;
+            this.settingService = settingService;
+            this.paymentService = paymentService;
             this._workContext = workContext;
             this._env = env;
+
+            Settings = settingService.GetSettings();
         }
         #endregion
         #region Actions
@@ -35,7 +47,7 @@ namespace Nop.Web.Controllers.HaragAdmin
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Unauthorized();
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
                 return Forbid();
 
             var model = new BankAccountModel();
@@ -49,8 +61,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Unauthorized();
-
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
                 return Forbid();
 
             //Server Side Parameters
@@ -85,8 +96,7 @@ namespace Nop.Web.Controllers.HaragAdmin
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Unauthorized();
-
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
                 return Forbid();
 
             var model = new PostBankAccount();
@@ -105,10 +115,10 @@ namespace Nop.Web.Controllers.HaragAdmin
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Unauthorized();
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
                 return Forbid();
 
-            if(model.Id !=0)
+            if (model.Id !=0)
             {
                 var response = _bankService.UpdateBankAccount(model);
                 return Json(new { data = response });
@@ -126,7 +136,7 @@ namespace Nop.Web.Controllers.HaragAdmin
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Unauthorized();
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
                 return Forbid();
 
             if (accountId == 0)
@@ -146,7 +156,7 @@ namespace Nop.Web.Controllers.HaragAdmin
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Unauthorized();
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
                 return Forbid();
 
             return View("~/Themes/Pavilion/Views/HaragAdmin/BankPayment/GetBankPayments.cshtml");
@@ -159,7 +169,7 @@ namespace Nop.Web.Controllers.HaragAdmin
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Unauthorized();
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
                 return Forbid();
 
             var start = Convert.ToInt32(Request.Form["start"].FirstOrDefault());
@@ -183,11 +193,50 @@ namespace Nop.Web.Controllers.HaragAdmin
                     TransatctorUser=b.TransatctorUser,
                     SiteAmount=b.SiteAmount,
                     Notes=b.Notes,
+                    TransactionDate = b.TransactionDate,
+                    Confirmed = b.PaymentConfirmed,
                     PostId=b.Post.Id
                 }).ToList()
             };
 
             return Json(new { data = model.Items });
+        }
+
+
+        [HttpDelete]
+        public IActionResult ConfirmPayment(int paymentId)
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
+                return Forbid();
+
+            var payment = _bankService.ConfirmSitePayment(paymentId);
+
+            if ( payment != null )
+            {
+                var user = customerService.GetCustomerById(payment.UserId);
+                if (user != null && user.IsFeatured == false)
+                {
+                    var paymentA = paymentService.GetUserPayments(user.Id);
+                    if (paymentA.Sum(m => m.SiteAmount) >= Settings.FeaturedMemberCommissionSum
+                        && paymentA.Count >= Settings.FeaturedMemberCommissionNumber)
+                    {
+                        user.IsFeatured = true;
+
+                    }
+                    customerService.UpdateCustomer(user);
+                }
+
+                return Ok();
+
+            }
+            else
+            {
+                return BadRequest();
+            }
+            return BadRequest();
         }
         #endregion
     }

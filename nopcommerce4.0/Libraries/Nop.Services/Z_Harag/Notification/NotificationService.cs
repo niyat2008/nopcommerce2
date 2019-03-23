@@ -111,7 +111,8 @@ namespace Nop.Services.Z_Harag.Notification
                         OwnerId = item,
                         NotificationTime = notifyModel.Time,
                         PostId = notifyModel.PostId,
-                        CustomerId = notifyModel.CustomerId
+                        CustomerId = notifyModel.CustomerId,
+                        IsRead = false
                     });
                 }
                 else
@@ -122,7 +123,8 @@ namespace Nop.Services.Z_Harag.Notification
                         OwnerId = item,
                         NotificationTime = notifyModel.Time,
                         PostId = notifyModel.PostId,
-                        CustomerId = notifyModel.CustomerId
+                        CustomerId = notifyModel.CustomerId,
+                        IsRead = false
                     });
                 }
             }
@@ -141,7 +143,8 @@ namespace Nop.Services.Z_Harag.Notification
                     OwnerId = item,
                     NotificationTime = notifyModel.Time,
                     PostId = notifyModel.PostId,
-                    CustomerId = notifyModel.CustomerId
+                    CustomerId = notifyModel.CustomerId,
+                    IsRead = false
                 });
             }
             return true;
@@ -174,7 +177,8 @@ namespace Nop.Services.Z_Harag.Notification
                 NotificationTime = DateTime.Now,
                 PostId = 1,
                 NotificationContent = adviceDeal.ToString(),
-                CustomerId =1
+                CustomerId =1,
+                IsRead = false
             });
 
             return true;
@@ -188,7 +192,8 @@ namespace Nop.Services.Z_Harag.Notification
                 OwnerId = postCommentModel.PostOwner,
                 NotificationTime = DateTime.Now,
                 PostId = postCommentModel.PostId, 
-                CustomerId = postCommentModel.CustomerId
+                CustomerId = postCommentModel.CustomerId,
+                IsRead = false
             });
 
             return true;
@@ -203,6 +208,7 @@ namespace Nop.Services.Z_Harag.Notification
                 NotificationTime = DateTime.Now, 
                 CustomerId = notificationModel.AdminId,
                 NotificationContent = notificationModel.Content,
+                IsRead = false
             };
 
             try
@@ -241,7 +247,8 @@ namespace Nop.Services.Z_Harag.Notification
                     OwnerId = user.Id,
                     NotificationTime = DateTime.Now,
                     NotificationContent = notificationModel.Content,
-                    CustomerId = notificationModel.AdminId
+                    CustomerId = notificationModel.AdminId,
+                    IsRead = false
                 }; 
                 this.AddGeneralNotification(notification);
                      

@@ -83,7 +83,7 @@
 //                return Unauthorized();
 
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 
@@ -128,7 +128,7 @@
 //                return Unauthorized();
 
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 
@@ -175,7 +175,7 @@
 //                return Unauthorized();
 
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 
@@ -221,7 +221,7 @@
 //                return Unauthorized();
 
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 //            var model = _postService.GetClosedPostsAdmin(pagingParams);
@@ -266,7 +266,7 @@
 //                return Unauthorized();
 
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 //            var model = _postService.GetClosedPostsByCategoryIdAdmin(pagingParams, CategoryId);
@@ -309,7 +309,7 @@
 //                return Unauthorized();
 
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 
@@ -354,7 +354,7 @@
 //            if (!_workContext.CurrentCustomer.IsRegistered())
 //                return Unauthorized();
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 //            var model = _postService.GetClosedDisplayedPosts(pagingParams);
@@ -399,7 +399,7 @@
 //            if (!_workContext.CurrentCustomer.IsRegistered())
 //                return Unauthorized();
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 //            var model = _postService.GetClosedDisplayedPostsByCategoryId(pagingParams, CategoryId);
@@ -442,7 +442,7 @@
 //            if (!_workContext.CurrentCustomer.IsRegistered())
 //                return Unauthorized();
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 
@@ -486,7 +486,7 @@
 //            if (!_workContext.CurrentCustomer.IsRegistered())
 //                return Unauthorized();
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 //            var model = _postService.GetClosedHiddenPosts(pagingParams);
@@ -530,7 +530,7 @@
 //            if (!_workContext.CurrentCustomer.IsRegistered())
 //                return Unauthorized();
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 //            var model = _postService.GetClosedHiddenPostsByCategoryId(pagingParams, CategoryId);
@@ -573,7 +573,7 @@
 //            if (!_workContext.CurrentCustomer.IsRegistered())
 //                return Unauthorized();
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 
@@ -618,7 +618,7 @@
 //            if (!_workContext.CurrentCustomer.IsRegistered())
 //                return Unauthorized();
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 
@@ -661,7 +661,7 @@
 //            if (!_workContext.CurrentCustomer.IsRegistered())
 //                return Unauthorized();
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 
@@ -705,7 +705,7 @@
 //            if (!_workContext.CurrentCustomer.IsRegistered())
 //                return Unauthorized();
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 
@@ -749,7 +749,7 @@
 //            if (!_workContext.CurrentCustomer.IsRegistered())
 //                return Unauthorized();
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
             
@@ -793,7 +793,7 @@
 //            if (!_workContext.CurrentCustomer.IsRegistered())
 //                return Unauthorized();
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
             
@@ -837,7 +837,7 @@
 //            if (!_workContext.CurrentCustomer.IsRegistered())
 //                return Unauthorized();
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 
@@ -881,7 +881,7 @@
 //            if (!_workContext.CurrentCustomer.IsRegistered())
 //                return Unauthorized();
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 
@@ -925,7 +925,7 @@
 //            if (!_workContext.CurrentCustomer.IsRegistered())
 //                return Unauthorized();
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 
@@ -970,7 +970,7 @@
 //            if (!_workContext.CurrentCustomer.IsRegistered())
 //                return Unauthorized();
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 
@@ -1012,7 +1012,7 @@
 //            if (!_workContext.CurrentCustomer.IsRegistered())
 //                return Unauthorized();
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 //            PostWithFilesModel model = new PostWithFilesModel();
@@ -1059,7 +1059,7 @@
 //            if (!_workContext.CurrentCustomer.IsRegistered())
 //                return Unauthorized();
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 
@@ -1080,7 +1080,7 @@
 //            if (!_workContext.CurrentCustomer.IsRegistered())
 //                return Unauthorized();
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 
 
@@ -1099,7 +1099,7 @@
 //            if (!_workContext.CurrentCustomer.IsRegistered())
 //                return Unauthorized();
 
-//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+//            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) || !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
 //                return Forbid();
 //            if (!_postService.IsExist(reservePost.PostId))
 //                return BadRequest("Post not found");

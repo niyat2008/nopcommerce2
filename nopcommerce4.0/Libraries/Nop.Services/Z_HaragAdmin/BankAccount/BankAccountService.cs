@@ -121,8 +121,9 @@ namespace Nop.Services.Z_HaragAdmin.BankAccount
         // Get Bank Payments 
         public List<Z_Harag_BankPayment> GetPayments(int start, int length, string searchValue, string sortColumnName, string sortDirection)
         {
-            var query = _bankPaymentRepository.TableNoTracking.Include(b => b.Post).Include(b => b.User).Include(b => b.BankAccount);
 
+            var query =  _bankPaymentRepository.Table;
+            var t =  query.ToList();
             //search
            if(!string.IsNullOrEmpty(searchValue))
             {
@@ -138,7 +139,23 @@ namespace Nop.Services.Z_HaragAdmin.BankAccount
             //paging
             query = query.OrderByDescending(b => b.TransactionDate).Skip(start).Take(length);
 
-            return query.ToList();
+            return query.Include(b => b.Post).Include(b => b.User).Include(b => b.BankAccount).ToList();
+        }
+
+        public Z_Harag_BankPayment ConfirmSitePayment(int paymentId)
+        {
+            var payment = _bankPaymentRepository.Table.Where(m => m.Id == paymentId).FirstOrDefault();
+
+            if (payment == null)
+            {
+                return null;
+            }
+
+            payment.PaymentConfirmed = true;
+
+            _bankPaymentRepository.Update(payment);
+
+            return payment;
         }
         #endregion
     }

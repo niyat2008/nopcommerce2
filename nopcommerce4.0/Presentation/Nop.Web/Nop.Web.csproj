@@ -37,6 +37,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
     <PackageReference Include="Swagger" Version="1.0.0" />
     <PackageReference Include="System.Linq.Dynamic" Version="1.0.7" />
+    <PackageReference Include="Unifonic" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -248,6 +249,9 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Consultant\Post\PostsAjax.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Consultant\Shared\_NavbarMobile.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Consultant\User\_AdminLink.cshtml">

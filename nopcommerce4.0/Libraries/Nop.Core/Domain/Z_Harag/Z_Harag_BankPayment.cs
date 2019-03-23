@@ -11,6 +11,7 @@ namespace Nop.Core.Domain.Z_Harag
     {
         public string UserName { get; set; } 
         public int PostId { get; set; }
+        public bool PaymentConfirmed { get; set; }
         public int UserId { get; set; }
         public string   Notes { get; set; }
         public string TransatctorUser { get; set; }

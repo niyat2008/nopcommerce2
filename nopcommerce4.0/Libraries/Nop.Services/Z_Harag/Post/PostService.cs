@@ -141,6 +141,9 @@ namespace Nop.Services.Z_Harag.Post
                 IsAnswered = false,
                 IsCommentingClosed = false,
                 IsDispayed = false,
+                DateUpdated = DateTime.Now ,
+                IsDeleted = false,
+                
                 IsFeatured = false,
                 IsCommon = false
             };
@@ -228,6 +231,7 @@ namespace Nop.Services.Z_Harag.Post
             List<KeyAndValue> filesUrl = new List<KeyAndValue>();
 
             var ImagesPath = Path.Combine(_env.WebRootPath, "HaragApi\\Uploads\\Images");
+            var logoImage = Path.Combine(_env.WebRootPath, "images\\Consultant\\images\\logo3.png");
             //var Vedios = Path.Combine(_env.WebRootPath, "Uploads\\Videos");
 
             int MaxContentLength = 1024 * 1024 * SizeOfPhotoAllowedInMb; //Size = 1*SizeOfPhotoAllowedInMb  MB   
@@ -332,7 +336,7 @@ namespace Nop.Services.Z_Harag.Post
 
                     using (var ms = new MemoryStream(file.ImageBytes))
                     {
-                        var image = DrawLogo(ImagesPath + "\\1400779571d0nqxse.eui.Jpeg", Image.FromStream(ms));
+                        var image = DrawLogo(logoImage, Image.FromStream(ms));
                         image.Save(filePath);
                     }
                         // File.WriteAllBytes(filePath, file.ImageBytes);
@@ -348,10 +352,10 @@ namespace Nop.Services.Z_Harag.Post
                 var image = new Bitmap(img);
                
                 Image ib = Image.FromFile(logo); // This is 300x300 
-                ib = ResizeImage(ib, 60, 60);
+                ib = ResizeImage(ib, img.Width/6 , img.Height/6);
                 using (Graphics g = Graphics.FromImage(image))
                 {
-                    g.DrawImage(ib, 0, 0, 60, 40);
+                    g.DrawImage(ib, 0, 0, img.Width / 6, img.Height / 6);
                 }
 
                 return image;
@@ -435,7 +439,7 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                    .Where(p =>  p.IsDeleted == false).OrderByDescending(r => r.DateUpdated).OrderByDescending(mbox => mbox.IsFeatured).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                    .Where(p =>  p.IsDeleted == false).OrderByDescending(mbox => mbox.IsFeatured == true).OrderByDescending(r => r.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
         }

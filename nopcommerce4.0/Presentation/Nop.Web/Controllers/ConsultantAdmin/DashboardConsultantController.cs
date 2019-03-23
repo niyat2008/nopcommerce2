@@ -43,7 +43,7 @@ namespace Nop.Web.Controllers.ConsultantِAdmin
                 return Unauthorized();
 
 
-            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) &&!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.ConsultationAdmin, true))
                 return Forbid();
             var posts = _postService.GetPostsNumber();
             var members = _customer.GetMembersNumber();

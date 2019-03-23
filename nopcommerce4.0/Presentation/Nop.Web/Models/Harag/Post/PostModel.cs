@@ -41,7 +41,7 @@ namespace Nop.Web.Models.Harag.Post
         {
             get
             {
-                return GetDateDescrition(this.DateCreated);
+                return GetDateDescrition(this.DateUpdated);
             }
             set { }
         }

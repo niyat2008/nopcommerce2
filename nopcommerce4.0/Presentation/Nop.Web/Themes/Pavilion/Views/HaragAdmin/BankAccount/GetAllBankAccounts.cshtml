@@ -56,7 +56,8 @@
                     {
                         "data": "Id","width":"25%",
                         "render": function (data,type,account) {
-                            return "<button class='btn btn-danger' id='delete' data-post-id=" + account.Id + " ><i class='fa fa-trash' ></i>حذف</button>" ;
+                            return "<button class='btn btn-danger' id='delete' data-post-id=" + account.Id + " ><i class='fa fa-trash' ></i>حذف</button>";//+
+                            //"<button class='btn btn-primary' id='delete' data-post-id=" + account.Id + " ><i class='fa fa-trash' ></i>تعديل</button>" ;
 
                         }
 
@@ -96,7 +97,7 @@
                 var button = $(this);
                 swal({
                     title: "هل انت متاكد؟",
-                    text: "هل انت متاكد انك تريد مسح هذه الاستشارة؟",
+                    text: "هل انت متاكد انك تريد المسح  ؟",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
