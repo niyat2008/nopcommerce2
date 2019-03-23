@@ -85,13 +85,17 @@
                 <div class="col-md-9">
                     <form class="add-adverse" action="/Harag/Payment/BanksJ" method="post">
                         @if (@ViewBag.ErrorMessage != "")
-	                    {
-                        <div class="alert alert-danger">@ViewBag.ErrorMessage</div>  
-	                    }
-                        @Html.HiddenFor(m => m.UserId, new { id= "user-id"});
+                        {
+                            <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+                        }
+                       
+                        <div class="col-md-4">
+                            <label>رقم المستخدم</label> <br />
+                            @Html.TextBoxFor(m => m.UserId, new { id = "user-id", disabled = "disalbed", @class = "disabled form-control", placeholder = "اسم المستخدم", required = "required" })
+                        </div>
                         <div class="col-md-4">
                             <label>اسم المستخدم</label> <br />
-                            @Html.TextBoxFor(m => m.UserName, new { id = "username-js", @class = "form-control", placeholder = "اسم المستخدم", required = "required" })
+                            @Html.TextBoxFor(m => m.UserName, new { id = "username-js", disabled="disalbed", @class = "disabled form-control", placeholder = "اسم المستخدم", required = "required" })
                         </div>
                         <div class="col-md-4">
                             <label>مبلغ العمولة</label> <br />
@@ -100,8 +104,7 @@
                         </div>
                         <div class="col-md-4">
                             <label> البنك الذى تم التحويل اليه </label> <br />
-                            <select id="banks-js" name="BankId" class="form-control" required="required" placeholder="اختر اسم البنك ">
-                            </select>
+                            <select id="banks-js" name="BankId" class="form-control" required="required" placeholder="اختر اسم البنك "></select>
                         </div>
                         <div class="col-md-4">
                             <label> متى تم التحويل ؟ </label> <br />
@@ -118,7 +121,7 @@
                         </div>
                         <div class="col-md-4">
                             <label>رقم الاعلان</label> <br />
-                            @Html.TextBoxFor(m => m.PostId, new { @class = "form-control", placeholder = " رقم الاعلان ", required = "required" }) 
+                            @Html.TextBoxFor(m => m.PostId, new { @class = "form-control", placeholder = " رقم الاعلان ", required = "required" })
                         </div>
                         <div class="col-md-12">
                             <label>ملاحظات</label> <br />

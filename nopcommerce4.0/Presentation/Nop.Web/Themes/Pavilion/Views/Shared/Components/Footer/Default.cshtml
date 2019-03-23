@@ -36,9 +36,10 @@
             </div>
             <div class="footer-block">
                 <div class="title">
-                    <a href="/Harag/CustomerService"  >@T("Footer.CustomerService")</a>
+                    <a  >@T("Footer.CustomerService")</a>
                 </div>
                 <ul class="list">
+                    <li><a href="/Harag/CustomerService">@T("Footer.CustomerService")</a></li>
                     @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn2).ToList())
                     {
                         <li><a href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a></li>
