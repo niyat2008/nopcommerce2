@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Nop.Core.Domain.Customers;
+using Nop.Services.Customers;
 using Nop.Services.Z_Consultant.Helpers;
 using Nop.Web.Models.Consultant.User;
 using System;
@@ -33,7 +34,7 @@ namespace Nop.Web.Controllers.Consultant
                     model.UserRole = RolesType.Registered;
 
                 model.Id = _workContext.CurrentCustomer.Id;
-                model.Username = _workContext.CurrentCustomer.Username;
+                model.Username = _workContext.CurrentCustomer.GetFullName();
             }
             else
                 model.UserRole = null;

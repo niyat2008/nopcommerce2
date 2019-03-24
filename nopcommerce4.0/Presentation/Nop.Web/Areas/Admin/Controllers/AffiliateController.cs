@@ -100,7 +100,7 @@ namespace Nop.Web.Areas.Admin.Controllers
                 model.Address.LastNameEnabled = true;
                 model.Address.LastNameRequired = true;
                 model.Address.EmailEnabled = true;
-                model.Address.EmailRequired = true;
+                model.Address.EmailRequired = false;
                 model.Address.CompanyEnabled = true;
                 model.Address.CountryEnabled = true;
                 model.Address.CountryRequired = true;

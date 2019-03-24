@@ -94,20 +94,20 @@
                                 @if (!Model.IsFeatured)
                                 {
                                     <div class="col-xs-2 text-center">
-                                        <a id="set-post-featured" class="btn btn-default add" >  <i class="fa fa-trash-o  fa-2x"></i><br> </a>
+                                        <a id="set-post-featured" class="btn btn-default add">  <i class="fa fa-trash-o  fa-2x"></i><br> </a>
                                     </div>
-                                } 
+                                }
 
                                 @if (!Model.IsCommentingClosed)
                                 {
                                     <div class="col-xs-2 text-center">
-                                        <a id="set-post-comment-closed"  class="btn btn-default add" >  <span>ايقاف الردود </span><i class="fa fa-feed"></i></a>
+                                        <a id="set-post-comment-closed" class="btn btn-default add">  <span>ايقاف الردود </span><i class="fa fa-feed"></i></a>
                                     </div>
                                 }
                                 else
                                 {
                                     <div class="col-xs-2 text-center">
-                                        <a id="set-post-comment-closed"  class="btn btn-default add followed"  >  <span> تفعيل الردود </span><i class="fa fa-feed"></i></a>
+                                        <a id="set-post-comment-closed" class="btn btn-default add followed">  <span> تفعيل الردود </span><i class="fa fa-feed"></i></a>
                                     </div>
                                 }
                             }
@@ -123,7 +123,6 @@
                     </div>
                     <div class="col-xs-2 text-center">
                         <a id="add-post-to-favorite"><i class="fa fa-heart fa-2x"></i></a>
-                        <sub></sub>
                     </div>
                     <div class="col-xs-2 text-center">
                         <a href="/Harag/ReportPost/@PostId"><i class="fa fa-flag-o fa-2x"></i></a>
@@ -143,10 +142,28 @@
                     </div>
                 </div>
 
+
+
+                @if (Model.UserRating != null && (Model.UserRating.UpRating > 0 || Model.UserRating.DownRating > 0))
+                {
+                    <h3>تقييم المعلن</h3>
+
+                    @for (int i = 0; i < Model.UserRating.UpRating; i++)
+                    {
+                        <i class="fa  fa-thumbs-up text-success"></i>
+                    }
+                    <br />
+                    @for (int i = 0; i < Model.UserRating.DownRating; i++)
+                    {
+                        <i class="fa  fa-thumbs-down text-danger"></i>
+                    }
+                }
+
                 <div>
                     <div id="comments" class="col-xs-12">
                     </div>
                 </div>
+
                 @if (!Model.IsPostOwner && ViewBag.LoggedIn)
                 {
                     <div class="follow">
@@ -361,10 +378,12 @@
 
                 if (data.state === true) {
                     window.location = "/Harag/Post/" + @Model.Id;
-                } else {
-                    alert("اعد تحميل الاعلان وحاول مجددا   ");
+                } if (data.state === false) {
+                    alert(data.error);
                 }
 
+            }, error: function () {
+                alert("اعد تحميل الاعلان وحاول مجددا   ");
             }
         });
     });

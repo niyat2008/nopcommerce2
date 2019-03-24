@@ -43,6 +43,49 @@
                 <span class="order-date">@T("Order.OrderDate"): @Model.CreatedOn.ToString("D")</span>
                 <span class="order-status">@T("Order.OrderStatus"): @Model.OrderStatus</span>
             </div>
+            @*<ul style="position: absolute; top: 60px; right: 330px">
+                <li class="li"> قيد الانتظار</li>
+                <li class="li active">  قيد التنفيذ </li>
+                <li class="li"> تم الاستلام </li> <li class="li  @(order.OrderStatusEnum == Nop.Core.Domain.Orders.OrderStatus.Pending?"active":"")">تم الشحن </li>
+            <li class="li  @(order.OrderStatusEnum == Nop.Core.Domain.Orders.OrderStatus.Pending?"active":"")">تم الاستلام</li>
+            </ul>*@
+
+            <style type="text/css">
+
+                li.li {
+                    width: 5em;
+                    height: 5em;
+                    text-align: center;
+                    line-height: 5em;
+                    border-radius: 10em;
+                    background: green;
+                    margin: 1em;
+                    display: inline-block;
+                    color: white;
+                    position: relative;
+                }
+                 
+
+                    li.li:first-child::before {
+                        display: none;
+                    }
+
+                .active {
+                    background: dodgerblue;
+                }
+
+                    .active ~ li.li {
+                        background: lightblue;
+                    }
+
+                         
+
+                body {
+                    font-family: sans-serif;
+                    padding: 2em;
+                }
+            </style>
+
             <div class="order-total">
                 @T("Order.OrderTotal"): <strong>@Model.OrderTotal</strong>
             </div>

@@ -629,7 +629,7 @@ namespace Nop.Web.Areas.Admin.Controllers
                 model.ShippingAddress.LastNameEnabled = true;
                 model.ShippingAddress.LastNameRequired = true;
                 model.ShippingAddress.EmailEnabled = true;
-                model.ShippingAddress.EmailRequired = true;
+                model.ShippingAddress.EmailRequired = false;
                 model.ShippingAddress.CompanyEnabled = _addressSettings.CompanyEnabled;
                 model.ShippingAddress.CompanyRequired = _addressSettings.CompanyRequired;
                 model.ShippingAddress.CountryEnabled = _addressSettings.CountryEnabled;
@@ -672,8 +672,8 @@ namespace Nop.Web.Areas.Admin.Controllers
             model.BillingAddress.FirstNameRequired = true;
             model.BillingAddress.LastNameEnabled = true;
             model.BillingAddress.LastNameRequired = true;
-            model.BillingAddress.EmailEnabled = true;
-            model.BillingAddress.EmailRequired = true;
+            model.BillingAddress.EmailEnabled = false;
+            model.BillingAddress.EmailRequired = false;
             model.BillingAddress.CompanyEnabled = _addressSettings.CompanyEnabled;
             model.BillingAddress.CompanyRequired = _addressSettings.CompanyRequired;
             model.BillingAddress.CountryEnabled = _addressSettings.CountryEnabled;
@@ -2893,7 +2893,7 @@ namespace Nop.Web.Areas.Admin.Controllers
             model.Address.LastNameEnabled = true;
             model.Address.LastNameRequired = true;
             model.Address.EmailEnabled = true;
-            model.Address.EmailRequired = true;
+            model.Address.EmailRequired = false;
             model.Address.CompanyEnabled = _addressSettings.CompanyEnabled;
             model.Address.CompanyRequired = _addressSettings.CompanyRequired;
             model.Address.CountryEnabled = _addressSettings.CountryEnabled;
@@ -2985,7 +2985,7 @@ namespace Nop.Web.Areas.Admin.Controllers
             model.Address.LastNameEnabled = true;
             model.Address.LastNameRequired = true;
             model.Address.EmailEnabled = true;
-            model.Address.EmailRequired = true;
+            model.Address.EmailRequired = false;
             model.Address.CompanyEnabled = _addressSettings.CompanyEnabled;
             model.Address.CompanyRequired = _addressSettings.CompanyRequired;
             model.Address.CountryEnabled = _addressSettings.CountryEnabled;

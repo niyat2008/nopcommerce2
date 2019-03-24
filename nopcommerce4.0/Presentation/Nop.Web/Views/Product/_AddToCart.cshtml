@@ -50,10 +50,22 @@
                                 }
                             });
 
-                             $("#@Html.IdFor(model => model.EnteredQuantity)" + "p").keydown(function(event) {
-                                 alert(@Html.IdFor(model => model.EnteredQuantity));
+                         
+                            $("#@Html.IdFor(model => model.EnteredQuantity)" + "p").click(function (event) { 
+                                
+                                $("#@Html.IdFor(model => model.EnteredQuantity)").val(
+                                    parseInt($("#@Html.IdFor(model => model.EnteredQuantity)").val()) + 1);
+                                    //$("#add-to-cart-button-@Model.ProductId").click();
+                                        return false;
+                            });
 
-                               
+                            $("#@Html.IdFor(model => model.EnteredQuantity)" + "m").click(function (event) {
+                                if (parseInt($("#@Html.IdFor(model => model.EnteredQuantity)").val()) > 0){
+                                      $("#@Html.IdFor(model => model.EnteredQuantity)").val(
+                                        parseInt($("#@Html.IdFor(model => model.EnteredQuantity)").val()) - 1);
+
+                                    //$("#add-to-cart-button-@Model.ProductId").click();
+                                    return false;
                                 }
                             });
 

@@ -39,8 +39,38 @@
             else
             {
                 <input id="@string.Concat("productQuantity", button.ProductId)" type="text" class="productQuantityTextBox" value="@button.DefaultProductMinimumQuantity" />
+
+
+
+                <span id="@(string.Concat("productQuantity", button.ProductId)+ "p")" class="k-plus">+</span>
+                <span id="@(string.Concat("productQuantity", button.ProductId) + "m")" class="k-minus">-</span>
+
+                <script type="text/javascript" asp-location="Footer">
+                        $(document).ready(function() {
+                           
+                            $("#@(string.Concat("productQuantity", button.ProductId) + "m")").click(function (event) {
+
+                                $("#@Html.IdFor(model => model.EnteredQuantity)").val(
+                                    parseInt($("#@Html.IdFor(model => model.EnteredQuantity)").val()) + 1);
+                                    //$("#add-to-cart-button-@Model.ProductId").click();
+                                        return false;
+                            });
+
+                            $("#@(string.Concat("productQuantity", button.ProductId) + "m")").click(function (event) {
+                                if (parseInt($("#@Html.IdFor(model => model.EnteredQuantity)").val()) > 0){
+                                      $("#@Html.IdFor(model => model.EnteredQuantity)").val(
+                                        parseInt($("#@Html.IdFor(model => model.EnteredQuantity)").val()) - 1);
+
+                                    //$("#add-to-cart-button-@Model.ProductId").click();
+                                    return false;
+                                }
+                            });
+
+                        });
+                </script>
+
                 @*<input type="button" value="+" class="productQuantityTextBox" />
-                <input type="button" value="-" class="productQuantityTextBox" />*@
+                    <input type="button" value="-" class="productQuantityTextBox" />*@
             }
         }
 

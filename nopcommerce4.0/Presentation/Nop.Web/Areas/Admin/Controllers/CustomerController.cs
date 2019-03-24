@@ -712,8 +712,8 @@ namespace Nop.Web.Areas.Admin.Controllers
             model.Address.FirstNameRequired = true;
             model.Address.LastNameEnabled = true;
             model.Address.LastNameRequired = true;
-            model.Address.EmailEnabled = true;
-            model.Address.EmailRequired = true;
+            model.Address.EmailEnabled = false;
+            model.Address.EmailRequired = false;
            
             model.Address.CompanyEnabled = _addressSettings.CompanyEnabled;
             model.Address.CompanyRequired = _addressSettings.CompanyRequired;

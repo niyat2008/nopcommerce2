@@ -20,6 +20,7 @@ using Nop.Web.Models.Harag.Report;
 using PostOutputModel = Nop.Web.Models.Harag.Post.PostOutputModel;
 using Nop.Services.Z_Harag.Follow;
 using Nop.Services.Z_HaragAdmin.Setting;
+using Nop.Services.Z_Harag.Rate;
 
 namespace Nop.Web.Controllers.Harag
 {
@@ -31,10 +32,11 @@ namespace Nop.Web.Controllers.Harag
         private readonly INotificationService _notificationService;
         private readonly IUrlHelper _urlHelper;
         private readonly ISettingService _settingsService;
+        private readonly IRateSrevice rateService;
         private readonly ICustomerService customerService;
         private readonly IPostService _postService;
         private readonly Core.IWorkContext _workContext;
-        private readonly IFollowService _followService; 
+        private readonly IFollowService _followService;
         private readonly IHostingEnvironment _env;
         private readonly ICommentService _commentService;
         public PagingParams PagingParams { get; set; }
@@ -43,6 +45,7 @@ namespace Nop.Web.Controllers.Harag
         #region ctor
         public PostController(
             ICategoryService categoryService,
+            IRateSrevice rateService,
             IUrlHelper urlHelper,
              ICustomerService customerService,
             ISettingService _settingsService,
@@ -54,8 +57,9 @@ namespace Nop.Web.Controllers.Harag
             ICommentService commentService
             )
         {
-            this._settingsService =_settingsService;
-             customerService = customerService;
+            this.rateService = rateService;
+            this._settingsService = _settingsService;
+            customerService = customerService;
             this._followService = _followService;
             this._categoryService = categoryService;
             this._urlHelper = urlHelper;
@@ -69,7 +73,7 @@ namespace Nop.Web.Controllers.Harag
             PagingParams = new PagingParams();
         }
         #endregion
-         
+
         #region helpers
 
         private List<LinkInfo> GetLinksForCatPosts(PagedList<Z_Harag_Post> list, string routName, int CategoryId)
@@ -264,21 +268,25 @@ namespace Nop.Web.Controllers.Harag
 
                 if (post == null)
                 {
-                    return Ok(new { state = false});
+                    return Ok(new { state = false, error = "لا يمكن ايجاد هذا الاعلان" });
                 }
 
+                if (DateTime.Now - post.DateCreated < TimeSpan.FromDays(Setting.UpdatePostBefor))
+                {
+                    return Ok(new { state = false, error = "لا يمكن تحديث الاعلان الا بعد مرور " + Setting.UpdatePostBefor + " ايام علي نشره" });
+                }
                 var refreshed = _postService.RefreshPost(postId);
 
-                return Ok(new {state = true }); 
+                return Ok(new { state = true });
             }
-            return Ok(new { state = false });
+            return Ok(new { state = false, error = "سجل الدخول اولا" });
         }
 
         [HttpGet]
         public IActionResult SetPostFeatured(int postId)
         {
             if (_workContext.CurrentCustomer.IsRegistered() && _workContext.CurrentCustomer.IsFeatured)
-            { 
+            {
                 var post = _postService.GetPost(postId, "");
 
                 if (post == null)
@@ -288,7 +296,7 @@ namespace Nop.Web.Controllers.Harag
                 if (_postService.CanSetFeaturedPost(_workContext.CurrentCustomer.Id))
                 {
                     if ((bool)post.IsFeatured)
-                    { 
+                    {
                         return Ok(new { state = false, added = false });
                     }
                     else
@@ -300,11 +308,11 @@ namespace Nop.Web.Controllers.Harag
                 else
                 {
                     return Ok(new { state = false });
-                } 
+                }
             }
             return Ok(new { state = false });
         }
-         
+
         [HttpGet]
         public IActionResult OpenCloseCommentingPost(int postId)
         {
@@ -319,16 +327,16 @@ namespace Nop.Web.Controllers.Harag
 
                 if (post.IsCommentingClosed)
                 {
-                   var closed = _postService.openCommenting(postId);
+                    var closed = _postService.openCommenting(postId);
 
-                    return Ok(new { state = true, closed = false});
+                    return Ok(new { state = true, closed = false });
                 }
                 else
                 {
-                   var closed = _postService.CloseCommenting(postId);
-                    return Ok(new { state = true, closed =  true});
-                } 
-               
+                    var closed = _postService.CloseCommenting(postId);
+                    return Ok(new { state = true, closed = true });
+                }
+
             }
             return Ok(new { state = false });
         }
@@ -393,9 +401,9 @@ namespace Nop.Web.Controllers.Harag
                     CityId = (int)post.CityId,
                     Contact = post.Contact,
                     Files = post.Z_Harag_Photo.Select(m => m.Url).ToList(),
-                    NeighborhoodId = post.NeighborhoodId == null? 0 : (int) post.NeighborhoodId,
+                    NeighborhoodId = post.NeighborhoodId == null ? 0 : (int)post.NeighborhoodId,
                     Id = post.Id,
-                    
+
                     Title = post.Title,
                     Text = post.Text
                 };
@@ -413,10 +421,10 @@ namespace Nop.Web.Controllers.Harag
 
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Unauthorized();
-             
+
             if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
                 return Forbid();
-             
+
             var currentUserId = _workContext.CurrentCustomer.Id;
 
             if (!ModelState.IsValid)
@@ -429,7 +437,7 @@ namespace Nop.Web.Controllers.Harag
             List<string> errors = new List<string>();
 
             var post = _postService.UpdatePost(postForPostModel, currentUserId, postForPostModel.Files, errors);
-             
+
             if (post == null)
             {
                 StringBuilder err = new StringBuilder();
@@ -438,7 +446,7 @@ namespace Nop.Web.Controllers.Harag
                 {
                     err.AppendFormat(" {0} ", item);
                     err.AppendLine();
-                } 
+                }
 
                 return BadRequest(err.ToString());
             }
@@ -470,7 +478,7 @@ namespace Nop.Web.Controllers.Harag
 
             if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
                 return Redirect("/Login");
-             
+
 
             var currentUserId = _workContext.CurrentCustomer.Id;
 
@@ -485,7 +493,7 @@ namespace Nop.Web.Controllers.Harag
 
             var post = _postService.AddNewPost(postForPostModel, currentUserId, postForPostModel.Files, errors);
 
-          
+
 
             if (post == null)
             {
@@ -498,8 +506,8 @@ namespace Nop.Web.Controllers.Harag
                 }
                 return BadRequest(err.ToString());
             }
-             
-           var notifications = _notificationService.PushUserPostsNotification(new UserForNotifyModel
+
+            var notifications = _notificationService.PushUserPostsNotification(new UserForNotifyModel
             {
                 CustomerId = currentUserId,
                 Text = post.Title,
@@ -610,7 +618,7 @@ namespace Nop.Web.Controllers.Harag
             string UserRole = "Vistor";
 
             Models.Harag.Post.PostWithFilesModel model = new Models.Harag.Post.PostWithFilesModel();
-
+              
             var Following = false;
             var isPostOwner = false;
             var post = this._postService.GetPost(PostId, "");
@@ -620,73 +628,77 @@ namespace Nop.Web.Controllers.Harag
 
             if (post != null)
             {
-                 currentUserId= _workContext.CurrentCustomer == null ? 0 : _workContext.CurrentCustomer.Id;
+                currentUserId = _workContext.CurrentCustomer == null ? 0 : _workContext.CurrentCustomer.Id;
                 ViewBag.UserName = _workContext.CurrentCustomer.Username;
-                ViewBag.LoggedIn = true; 
+                ViewBag.LoggedIn = true;
+
+                UserRating userRating = new UserRating
+                {
+                    DownRating = rateService.GetUserDownRates(post.CustomerId).Count,
+                    UpRating   = rateService.GetUserUpRates(post.CustomerId).Count
+                };
+
+                if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
+                {
+                    Following = _followService.IsPostFollowed(post.Id, currentUserId);
+                    isPostOwner = (post.CustomerId == currentUserId);
+                }
+                else
+                {
+                    ViewBag.UserName = "";
+                    ViewBag.LoggedIn = false;
+
+                }
+                model = new Models.Harag.Post.PostWithFilesModel
+                {
+                    Following = Following,
+                    IsPostOwner = isPostOwner,
+                    CategoryId = post.CategoryId,
+                    CategoryName = post.Category.Name,
+                    Text = post.Text,
+                    Title = post.Title,
+                    DateCreated = post.DateCreated,
+                    Files = post.Z_Harag_Photo.Select(p => p.Url).ToList(),
+                    //Rate = post.Rate,
+                    Len = (double)(post.Longtiude ?? 0),
+                    Lat = (double)(post.Lattiude ?? 0),
+                    userId = post.CustomerId,
+                    CityName = post.City.ArName,
+                    Contact = post.Contact,
+                    CityId = (int)post.CityId,
+                    Id = post.Id,
+                    IsUserFeatured = post.Customer.IsFeatured,
+                    DateUpdated = post.DateUpdated,
+                    IsDispayed = post.IsDispayed,
+                    IsFeatured = (bool)post.IsFeatured,
+                    IsCommentingClosed = post.IsCommentingClosed,
+                    PostOwner = post.Customer.Username,
+                    PostOwnerFullName = post.Customer.GetFullName(),
+                    RelatedPosts = relatedPosts.Select(m => new Models.Harag.Post.PostModel
+                    {
+                        Photo = m.Z_Harag_Photo.FirstOrDefault() == null ? "" : m.Z_Harag_Photo.FirstOrDefault().Url,
+                        Id = m.Id
+                    }).ToList(),
+
+                    SameCityPosts = sameCityPosts.Select(m => new Models.Harag.Post.PostModel
+                    {
+                        Photo = m.Z_Harag_Photo.FirstOrDefault() == null ? "" : m.Z_Harag_Photo.FirstOrDefault().Url,
+                        Id = m.Id
+                    }).ToList(),
+                    UserRating = userRating
+                };
+                 
             }
             else
             {
                 return NotFound();
             }
-
-            if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
-            {
-                Following = _followService.IsPostFollowed(post.Id, currentUserId);
-                isPostOwner = (post.CustomerId == currentUserId);
-            }
-            else
-            {
-                ViewBag.UserName = "";
-                ViewBag.LoggedIn = false;
-
-            }
-            model = new Models.Harag.Post.PostWithFilesModel
-                    {
-                        Following = Following,
-                        IsPostOwner = isPostOwner,
-                        CategoryId = post.CategoryId,
-                        CategoryName = post.Category.Name,
-                        Text = post.Text,
-                        Title = post.Title,
-                        DateCreated = post.DateCreated,
-                        Files = post.Z_Harag_Photo.Select(p => p.Url).ToList(),
-                        //Rate = post.Rate,
-                        Len = (double)(post.Longtiude ?? 0),
-                        Lat = (double)(post.Lattiude ?? 0),
-                        userId = post.CustomerId,
-                        CityName = post.City.ArName,
-                        Contact = post.Contact,
-                        CityId = (int)post.CityId,
-                        Id = post.Id,
-                        IsUserFeatured = post.Customer.IsFeatured,
-                        DateUpdated = post.DateUpdated,
-                        IsDispayed = post.IsDispayed,
-                        IsFeatured = (bool) post.IsFeatured,
-                        IsCommentingClosed = post.IsCommentingClosed,
-                        PostOwner = post.Customer.Username,
-                        PostOwnerFullName = post.Customer.GetFullName(),
-                        RelatedPosts = relatedPosts.Select(m => new Models.Harag.Post.PostModel
-                        {
-                            Photo = m.Z_Harag_Photo.FirstOrDefault() == null ? "" : m.Z_Harag_Photo.FirstOrDefault().Url,
-                            Id = m.Id
-                        }).ToList(),
-
-                        SameCityPosts = sameCityPosts.Select(m => new Models.Harag.Post.PostModel
-                        {
-                            Photo = m.Z_Harag_Photo.FirstOrDefault() == null ? "" : m.Z_Harag_Photo.FirstOrDefault().Url,
-                            Id = m.Id
-                        }).ToList()
-                    };
-               
-
-
-          
-
+              
             ViewBag.UserRole = UserRole;
 
             return View("~/Themes/Pavilion/Views/Harag/Post/PostDetails.cshtml", model);
         }
- 
+
         [HttpGet]
         public IActionResult GetHaragNavbar()
         {
@@ -747,7 +759,7 @@ namespace Nop.Web.Controllers.Harag
                 PostOwner = p.Customer.Username,
                 PostOwnerFullName = p.Customer.GetFullName()
             }).ToList();
-  
+
             if (pageNo == 0)
             {
                 return View("~/Themes/Pavilion/Views/Harag/Post/RelatedPosts.cshtml", modelOutput);
@@ -772,7 +784,7 @@ namespace Nop.Web.Controllers.Harag
                 Title = p.Title,
                 City = p.City.ArName,
                 DateCreated = p.DateCreated,
-                Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(), 
+                Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
                 DateUpdated = p.DateUpdated,
                 IsFeatured = (bool)p.IsFeatured,
                 IsDispayed = p.IsDispayed,
@@ -848,7 +860,7 @@ namespace Nop.Web.Controllers.Harag
         public IActionResult GetHaragCityPosts(string city, int pageNo = 0)
         {
             PagingParams.PageNumber = pageNo;
-  
+
             var cityO = _postService.GetCity(city);
 
             if (cityO == null)
@@ -889,7 +901,7 @@ namespace Nop.Web.Controllers.Harag
         public IActionResult GetHaragCatPosts(int catId, int pageNo = 0)
         {
             PagingParams.PageNumber = pageNo;
-        
+
             var posts = _postService.SearchByCategory(catId, PagingParams);
 
             var modelOutput = new Models.Harag.Post.PostOutputModel();
@@ -960,7 +972,7 @@ namespace Nop.Web.Controllers.Harag
         public IActionResult GetHaragUserPosts(int userId, int pageNo = 0)
         {
             PagingParams.PageNumber = pageNo;
-           
+
 
             var posts = _postService.GetCurrentUserPosts(userId, PagingParams);
 
@@ -984,7 +996,7 @@ namespace Nop.Web.Controllers.Harag
                 PostOwnerFullName = p.Customer.GetFullName()
             }).ToList();
 
-           
+
 
             if (pageNo == 0)
             {
@@ -1012,7 +1024,7 @@ namespace Nop.Web.Controllers.Harag
                     CategoryId = p.CategoryId,
                     CategoryName = p.Category.Name,
                     Text = p.Text,
-                IsFeatured = (bool)p.IsFeatured,
+                    IsFeatured = (bool)p.IsFeatured,
                     Title = p.Title,
                     DateCreated = p.DateCreated,
                     Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
@@ -1123,7 +1135,7 @@ namespace Nop.Web.Controllers.Harag
             else
             {
                 var res = _postService.AddPostToFavorite(postId, _workContext.CurrentCustomer.Id);
-                return Ok(new { stat = res, ok = 0 });
+                return Ok(new { stat = res, ok = 1 });
             }
         }
 
@@ -1137,11 +1149,11 @@ namespace Nop.Web.Controllers.Harag
                 return NotFound();
 
             var obj = new DeletePost
-            { 
+            {
                 PostId = postId
             };
 
-            return  View("~/Themes/Pavilion/Views/Harag/Post/DeletePost.cshtml", obj);
+            return View("~/Themes/Pavilion/Views/Harag/Post/DeletePost.cshtml", obj);
 
         }
 
@@ -1160,11 +1172,11 @@ namespace Nop.Web.Controllers.Harag
 
             if (deleted)
             {
-                return View("~/Themes/Pavilion/Views/Harag/Post/_PostAddedSuccessfully.cshtml"); 
+                return View("~/Themes/Pavilion/Views/Harag/Post/_PostAddedSuccessfully.cshtml");
             }
-            return View("~/Themes/Pavilion/Views/Harag/Post/_PostAddedSuccessfully.cshtml"); 
+            return View("~/Themes/Pavilion/Views/Harag/Post/_PostAddedSuccessfully.cshtml");
         }
-       
+
         [HttpGet]
         public IActionResult HaragSearch(string Term, int pageNo = 0)
         {
@@ -1172,25 +1184,25 @@ namespace Nop.Web.Controllers.Harag
             SearchModel SearchModel = new SearchModel() { Term = Term };
 
             var model = _postService.SearchPosts(SearchModel, PagingParams);
-             
+
             var outputModel = new PostOutputModel
-            {  
+            {
                 Items = model.Select(m => new Models.Harag.Post.PostModel()
                 {
                     Id = m.Id,
                     Text = m.Text,
                     Title = m.Title,
-                    CategoryId = m.CategoryId, 
+                    CategoryId = m.CategoryId,
                     PostOwner = m.Customer.Username,
-                    PostOwnerFullName = m.Customer.GetFullName(), 
+                    PostOwnerFullName = m.Customer.GetFullName(),
                     DateCreated = m.DateCreated,
                     DateUpdated = m.DateUpdated,
-                IsFeatured = (bool)m.IsFeatured,
+                    IsFeatured = (bool)m.IsFeatured,
                     IsAnswered = m.IsAnswered,
                     IsClosed = m.IsCommentingClosed,
-                    IsDispayed = m.IsDispayed, 
+                    IsDispayed = m.IsDispayed,
                     City = m.City.ArName,
-                    CategoryName = m.Category.Name, 
+                    CategoryName = m.Category.Name,
                     Photo = m.Z_Harag_Photo?.FirstOrDefault()?.Url
                 }).ToList(),
             };
@@ -1225,7 +1237,7 @@ namespace Nop.Web.Controllers.Harag
                     DateUpdated = m.DateUpdated,
                     IsAnswered = m.IsAnswered,
                     IsClosed = m.IsCommentingClosed,
-                IsFeatured = (bool)m.IsFeatured,
+                    IsFeatured = (bool)m.IsFeatured,
                     IsDispayed = m.IsDispayed,
                     City = m.City.ArName,
                     CategoryName = m.Category.Name,

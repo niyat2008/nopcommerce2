@@ -11,6 +11,7 @@ using Nop.Services.Z_Consultant.Comment;
 using Nop.Services.Z_Consultant.Helpers;
 using Nop.Services.Z_Consultant.Post;
 using Nop.Services.Z_Consultant.SubCategory;
+using Nop.Services.Z_HaragAdmin.Setting;
 using Nop.Web.Extensions.Consultant;
 using Nop.Web.Models.Consultant.Category;
 using Nop.Web.Models.Consultant.Comment;
@@ -34,7 +35,8 @@ namespace Nop.Web.Controllers.Harag
         private readonly IHostingEnvironment _env;
         private readonly ICommentService _commentService;
         private readonly ISubCategoryService _subCategoryService;
-
+        private readonly ISettingService settingService;
+        SettingsModel SettingsModel;
         #endregion
 
         #region ctor
@@ -45,7 +47,9 @@ namespace Nop.Web.Controllers.Harag
             Core.IWorkContext workContext,
             IHostingEnvironment env,
             ICommentService commentService,
-            ISubCategoryService subCategoryService
+            ISubCategoryService subCategoryService,
+            ISettingService settingService
+            
             )
         {
             this._categoryService = categoryService;
@@ -55,6 +59,7 @@ namespace Nop.Web.Controllers.Harag
             this._env = env;
             this._commentService = commentService;
             this._subCategoryService = subCategoryService;
+            SettingsModel = settingService.GetSettings();
         }
         #endregion
 
@@ -125,17 +130,21 @@ namespace Nop.Web.Controllers.Harag
 
 
         public virtual IActionResult DisallaowedProducts()
-        { 
+        {
+            ViewBag.RateCount = 20;
             return View("~/Themes/Pavilion/Views/Harag/GeneralPages/notallowed.cshtml");
         }
 
         public virtual IActionResult Agrement()
         {
+            ViewBag.Agreement = SettingsModel.UseWebsiteCompact;
+
             return View("~/Themes/Pavilion/Views/Harag/GeneralPages/terms.cshtml");
         }
 
         public virtual IActionResult FeaturedProducts()
         {
+            
             return View("~/Themes/Pavilion/Views/Harag/GeneralPages/featuredproducts.cshtml");
         }
 

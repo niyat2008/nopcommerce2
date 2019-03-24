@@ -465,6 +465,8 @@ namespace Nop.Services.Z_Harag.Post
             return true;
         }
 
+
+
         public bool EditHaragPost(int postId, Z_Harag_Post post)
         {
             var isExists =  this.IsExists(postId);

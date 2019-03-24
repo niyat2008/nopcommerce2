@@ -147,11 +147,72 @@
                     <div class="title">
                         <strong>@T("Account.CustomerOrders.OrderNumber"): @order.CustomOrderNumber</strong>
                     </div>
+                    <ul style="position: absolute; top: 10px; right: 290px">
+                        <li class="li @(order.OrderStatusEnum == Nop.Core.Domain.Orders.OrderStatus.Pending?"active":"")"> قيد الانتظار</li>
+                        <li class="li  @(order.OrderStatusEnum == Nop.Core.Domain.Orders.OrderStatus.Processing?"active":"")">  قيد التنفيذ </li>
+                        <li class="li  @(order.OrderStatusEnum == Nop.Core.Domain.Orders.OrderStatus.Complete?"active":"")"> تم الاستلام </li>
+                        @*<li class="li  @(order.OrderStatusEnum == Nop.Core.Domain.Orders.OrderStatus.Pending?"active":"")">تم الشحن </li>
+                        <li class="li  @(order.OrderStatusEnum == Nop.Core.Domain.Orders.OrderStatus.Pending?"active":"")">تم الاستلام</li>*@
+                    </ul>
+
+                    <style type="text/css">
+
+                        li.li {
+                            width: 5em;
+                            height: 5em;
+                            text-align: center;
+                            line-height: 5em;
+                            border-radius: 10em;
+                            background: green;
+                            margin: 1em;
+                            display: inline-block;
+                            color: white;
+                            position: relative;
+                        }
+
+                            li.li::before {
+                                content: '';
+                                position: absolute;
+                                top: 2.1em;
+                                left: -4em;
+                                width: 4em;
+                                height: .7em;
+                                background: dodgerblue;
+                                z-index: -1;
+                            }
+
+
+
+                            li.li:first-child::before {
+                                display: none;
+                            }
+
+                        .active {
+                            background: dodgerblue;
+                        }
+
+                            .active ~ li.li {
+                                background: lightblue;
+                            }
+
+                                .active ~ li.li::before {
+                                    background: lightblue;
+                                }
+
+                        body {
+                            font-family: sans-serif;
+                            padding: 2em;
+                        }
+                    </style>
+
+
                     <ul class="info">
                         <li>@T("Account.CustomerOrders.OrderStatus"): <span class="order-status @order.OrderStatusEnum.ToString().ToLowerInvariant()">@order.OrderStatus</span></li>
                         <li>@T("Account.CustomerOrders.OrderDate"): <span class="order-date">@order.CreatedOn.ToString()</span></li>
                         <li>@T("Account.CustomerOrders.OrderTotal"): <span class="order-total">@order.OrderTotal</span></li>
                     </ul>
+
+
                     <div class="buttons">
                         @if (order.IsReturnRequestAllowed)
                         {

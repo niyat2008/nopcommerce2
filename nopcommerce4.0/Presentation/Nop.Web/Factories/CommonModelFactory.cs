@@ -316,7 +316,7 @@ namespace Nop.Web.Factories
             var model = new HeaderLinksModel
             {
                 IsAuthenticated = customer.IsRegistered(),
-                CustomerName = customer.IsRegistered() ? customer.FormatUserName() : "",
+                CustomerName = customer.IsRegistered() ? customer.GetFullName() : "",
                 ShoppingCartEnabled = _permissionService.Authorize(StandardPermissionProvider.EnableShoppingCart),
                 WishlistEnabled = _permissionService.Authorize(StandardPermissionProvider.EnableWishlist),
                 AllowPrivateMessages = customer.IsRegistered() && _forumSettings.AllowPrivateMessages,

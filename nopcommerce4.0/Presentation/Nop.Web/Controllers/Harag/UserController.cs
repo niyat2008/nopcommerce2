@@ -374,7 +374,7 @@ namespace Nop.Web.Controllers.Harag
             UserModel model = new UserModel();
              
             model.Id = user.Id;
-            model.Username = user.Username;
+            model.Username = user.GetFullName();
             model.Phone = user.Mobile;
 
             return Ok(new { Status = true, Data = model }); 

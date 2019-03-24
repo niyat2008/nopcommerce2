@@ -191,7 +191,7 @@
 
 
         if (CategoryId <= 0) {
-            alert("فضلا قم باختيار القسم");
+            alert("فضلا قم باختيار التصنيف");
         } else if (CityId <= 0) {
             alert("فضلا قم باختيار القسم");
         }
@@ -199,7 +199,6 @@
             alert("قم بكتابة عنوان الاعلان");
         }
         else if (Text === null || Text === "") {
-
             alert("فضلا قم باضافه وصف الاعلان ");
         }
         else {
@@ -225,9 +224,8 @@
                 dataType: 'json',
                 data: JSON.stringify(postForPostModel),
                 success: function (data) {
-                    if (data.postId != 0) {
-                        alert("تمت اضافة الاعلان بنجاح يمكنك سيتم تحويلك الي تحديث العنوان");
-                        window.location = "/Harag/UpdateLocation/" + data.postId;
+                    if (data.postId != 0) { 
+                        window.location = "/Harag/Post/" + data.postId;
                     }
                     else {
                         alert("حدث خطأ ما تأكد من الاتصال بالانترنت");

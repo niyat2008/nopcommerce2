@@ -31,7 +31,7 @@ namespace Nop.Web.Models.Harag.Post
         public int userId { get; set; } 
         public string PostOwner { get; set; }
         public string Contact { get; set; }
-
+        public UserRating UserRating { get; set; }
         public IList<string> Files { get; set; }
         public List<PostModel> RelatedPosts { get;  set; }
         public List<PostModel> SameCityPosts { get; set; }
