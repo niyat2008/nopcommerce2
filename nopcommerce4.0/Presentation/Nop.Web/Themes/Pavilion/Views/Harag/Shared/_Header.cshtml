@@ -49,18 +49,19 @@
     <link href="~/Themes/Pavilion/Content/css/pages.css" rel="stylesheet" />
     <script defer src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD7aG1kYv0KXd-QUetcJUwa3APdzvyQzSk"></script>
 </head>
+
 <!-- Header -->
 <!-- Top Bar -->
 <section class="topFixed">
     <section class="top_bar">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-2 col-md-2 hidden-sm hidden-xs top_col_screen top_hid_sm"></div>
-                <div class="col-md-2 hidden-sm hidden-xs top_col_screen">
-                    <div id="admin-link-js-ajax" style="color: white"></div>
+                <div class="col-lg-2 col-md-1 hidden-sm hidden-xs top_col_screen top_hid_sm"></div>
+                <div class="col-lg-2 col-md-2 hidden-sm hidden-xs top_col_screen">
+                    <div class="admin-link-js-ajax" style="color: white"></div>
                     @*<a href="/Consultations/Admin">اداره الاستشارات</a>*@
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <div class="text-center">
                         <span>@Html.RouteLink("المتجر", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
                         <span class="active">@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
@@ -69,8 +70,8 @@
 
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-3 hidden-sm hidden-xs top_col_screen" id="userInfo"></div>
-                <div class="col-lg-2 col-md-2 hidden-sm hidden-xs top_col_screen top_hid_sm"></div>
+                <div class="col-md-2 hidden-sm hidden-xs top_col_screen" id="userInfo"></div>
+                <div class="col-lg-2 col-md-1 hidden-sm hidden-xs top_col_screen top_hid_sm"></div>
             </div>
         </div>
 
@@ -81,6 +82,16 @@
 
         @* @Html.Partial("~/Themes/Pavilion/Views/Harag/Shared/_mobileMenuPartial.cshtml")*@
 
+    </section>
+
+    <section class="manage">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="admin-link-js-ajax text-center"></div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <div class="fixedNavScreen text-center">
@@ -380,7 +391,7 @@
             url: '@Url.RouteUrl("Harag.User.GetAdminLink")',
 
             success: function (data) {
-                $("#admin-link-js-ajax").html(data);
+                $(".admin-link-js-ajax").html(data);
             }
         });
 
@@ -424,8 +435,6 @@
         });
 
     });
-
-
 
 
     function login() {
@@ -474,17 +483,34 @@
     $("#searchScreen").click(function () {
         $("#searchScreenFull").slideToggle("slow");
         $("#myAccountScreenFull").css("display", "none");
+        $(".manage").toggle();
+        $(".overlay").toggle();
+        $(".top_bar").toggle();
+        $(".topFixed").css("z-index", "1070");
     });
     $("#menuBar").click(function () {
         $(".overlay").css("display", "block");
         $(".rightMenu").css("display", "block");
+        $(".topFixed").css("z-index", "1060");
     });
     $(".rightMenu .top_header i").click(function () {
         $(".overlay").css("display", "none");
         $(".rightMenu").css("display", "none");
+        $(".topFixed").css("z-index", "1070");
     });
     $("#myAccount").click(function () {
         $("#myAccountScreenFull").slideToggle("slow");
         $("#searchScreenFull").css("display", "none");
+        $(".manage").toggle();
+        $(".overlay").toggle();
+        $(".top_bar").toggle();
+        $(".topFixed").css("z-index", "1070");
     });
+    //$("body").click(function () {
+    //    $(".overlay").css("display", "none");
+    //    $(".rightMenu").css("display", "none");
+    //    $(".topFixed").css("z-index", "1070");
+    //    $(".manage").css("display", "none");
+    //    $(".top_bar").css("display", "block");
+    //});
 </script>
