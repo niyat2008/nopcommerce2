@@ -13,16 +13,12 @@
 }
 
 <style>
-    .followed:hover {
-        border: solid #ecd6d6 4px;
-        background: red;
+    .followed:hover { 
         color: white;
     }
 
-    .followed {
-        border: solid #ecd6d6 4px !important;
-        background: red !important;
-        color: white !important;
+    .followed { 
+        color: red !important; 
     }
 </style>
 <!-- Content -->
@@ -94,20 +90,20 @@
                                 @if (!Model.IsFeatured)
                                 {
                                     <div class="col-xs-2 text-center">
-                                        <a id="set-post-featured" class="btn btn-default add">  <i class="fa fa-trash-o  fa-2x"></i><br> </a>
+                                        <a class="input-with-icon2" id="set-post-featured">  <i class="fa fa-star fa-2x"></i><br> تثبيت </a>
                                     </div>
                                 }
 
                                 @if (!Model.IsCommentingClosed)
                                 {
                                     <div class="col-xs-2 text-center">
-                                        <a id="set-post-comment-closed" class="btn btn-default add">  <span>ايقاف الردود </span><i class="fa fa-feed"></i></a>
+                                        <a id="set-post-comment-closed" class="input-with-icon2" >  <i class="fa fa-comment fa-2x"></i><br> منع التعليق </a>
                                     </div>
                                 }
                                 else
                                 {
                                     <div class="col-xs-2 text-center">
-                                        <a id="set-post-comment-closed" class="btn btn-default add followed">  <span> تفعيل الردود </span><i class="fa fa-feed"></i></a>
+                                        <a id="set-post-comment-closed" class="input-with-icon2 followed">   <i class="fa fa-comment fa-2x"></i><br> تفعيل التعليق</a>
                                     </div>
                                 }
                             }

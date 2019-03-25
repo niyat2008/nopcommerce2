@@ -3,6 +3,16 @@
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
 }
 
+@{
+
+    var ascii = System.Text.Encoding.UTF8;
+    var unicode = System.Text.Encoding.Unicode;
+
+    string terms = (System.Uri.UnescapeDataString((ViewBag.Agreement as string)));
+ 
+
+}
+
 <meta charset="utf-8">
 <!-- Content -->
 <div class="content">
@@ -35,7 +45,10 @@
 
         @if (ViewBag.Agreement != null)
         {
-            @Html.Raw((System.Uri.UnescapeDataString(ViewBag.Agreement)))
+         
+            @Html.Raw(System.Text.RegularExpressions.Regex.Unescape(terms))
+
+
         }
     </div>
 </div>

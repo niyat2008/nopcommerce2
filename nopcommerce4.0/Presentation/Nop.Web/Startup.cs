@@ -123,6 +123,7 @@ namespace Nop.Web
             ClosePostAfter48Hours.StartClosingService();
             HaragPostPostsTracking.StartPostDeletingService();
             HaragPostPostsTracking.RefreashPostRequestService();
+            HaragPostPostsTracking.SetPostsUnFeaturedHaragPostService();
 
         }
     }

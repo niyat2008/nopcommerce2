@@ -439,7 +439,9 @@ namespace Nop.Services.Z_Harag.Post
                 .Include(m => m.City)
                 .Include(m => m.Z_Harag_Photo)
                 .Include(m => m.Z_Harag_Comment)
-                    .Where(p =>  p.IsDeleted == false).OrderByDescending(mbox => mbox.IsFeatured == true).OrderByDescending(r => r.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                    .Where(p =>  p.IsDeleted == false).OrderByDescending(r => r.DateUpdated)
+                    .OrderByDescending(mbox => mbox.IsFeatured == true)
+                    .Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();
 
         }
@@ -895,7 +897,7 @@ namespace Nop.Services.Z_Harag.Post
             {
                 return true;
             }
-            if (DateTime.Now - date.Value > TimeSpan.FromDays(7) )
+            if (DateTime.Now - date.Value > TimeSpan.FromDays(5) )
             {
                 return true;
             }

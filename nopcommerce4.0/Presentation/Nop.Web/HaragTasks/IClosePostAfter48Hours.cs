@@ -9,5 +9,6 @@ namespace Nop.Web.ConsultantTasks
     {
         void RefreashPostRequestService();
         void StartPostDeletingService();
+        void SetPostsUnFeaturedHaragPostService();
     }
 }

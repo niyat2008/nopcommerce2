@@ -22,6 +22,7 @@ namespace Nop.Web.ConsultantTasks
         {
             new Thread(() =>
             {
+
                 while (true)
                 {
                     var connectionString = new DataSettingsManager().LoadSettings().DataConnectionString;
@@ -31,11 +32,12 @@ namespace Nop.Web.ConsultantTasks
                         {
                             command.CommandType = System.Data.CommandType.StoredProcedure;
                             command.CommandText = "checkHaragPostTime";
+                            
                             sqlConnection.Open();
-                            command.ExecuteNonQuery();
+                            int u = command.ExecuteNonQuery(); 
                         }
                     }
-                     Thread.Sleep(TimeSpan.FromHours(5).Milliseconds);
+                     Thread.Sleep(TimeSpan.FromHours(1).Milliseconds);
                 }
 
               
@@ -48,6 +50,7 @@ namespace Nop.Web.ConsultantTasks
 
         public void StartPostDeletingService()
         {
+                            Console.WriteLine("StartPostDeletingService: ");
             new Thread(() =>
             {
                 while (true)
@@ -60,7 +63,7 @@ namespace Nop.Web.ConsultantTasks
                             command.CommandType = System.Data.CommandType.StoredProcedure;
                             command.CommandText = "deleteHaragPost";
                             sqlConnection.Open();
-                            command.ExecuteNonQuery();
+                            int u = command.ExecuteNonQuery(); 
                         }
                     }
                     Thread.Sleep(TimeSpan.FromHours(5).Milliseconds);
@@ -76,6 +79,7 @@ namespace Nop.Web.ConsultantTasks
 
         public void SetPostsUnFeaturedHaragPostService()
         {
+                            Console.WriteLine("SetPostsUnFeaturedHaragPostService: ");
             new Thread(() =>
             {
                 while (true)
@@ -88,10 +92,10 @@ namespace Nop.Web.ConsultantTasks
                             command.CommandType = System.Data.CommandType.StoredProcedure;
                             command.CommandText = "SetPostsUnFeaturedHaragPost";
                             sqlConnection.Open();
-                            command.ExecuteNonQuery();
+                            int u = command.ExecuteNonQuery();
                         }
                     }
-                      Thread.Sleep(TimeSpan.FromHours(1).Milliseconds);
+                     Thread.Sleep(TimeSpan.FromHours(1).Milliseconds);
                 }
 
                 
