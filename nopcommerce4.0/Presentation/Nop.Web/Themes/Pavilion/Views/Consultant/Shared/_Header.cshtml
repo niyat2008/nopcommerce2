@@ -506,7 +506,7 @@
                 </div>
 
                 <div id="myAccountScreenFull">
-                    <div class="col-xs-12 text-center" style="padding:0">
+                    <div class="col-xs-12 text-center" id="userInfoMobile" style="padding:0">
                         <ul>
                             <li>
                                 <a href="/Register">
@@ -519,13 +519,7 @@
                                     <i class="fa fa-lock"></i>
                                     <span>دخول</span>
                                 </a>
-                            </li>
-                            @*<li>
-                                    <a href="#">
-                                        <i class="fa fa-heart"></i>
-                                        <span>السلع المفضلة</span>
-                                    </a>
-                                </li>*@
+                            </li> 
                         </ul>
                     </div>
                 </div>
@@ -608,7 +602,7 @@
     <div class="top_header">
         <i class="fa fa-times pull-left"></i>
     </div>
-    <div id="mobile-navbar-js"></div>
+    <div id="sub-mobile-navbar-js"></div>
 </div>
 
 @*<link href="~/css/Consultant/bootstrap.min.css" rel="stylesheet" />*@
@@ -726,6 +720,22 @@
 
     $(document).ready(function () {
 
+        $('#mobile-navbar-js').on('click', '.cat-list-js', function () {
+            var subCatArea = $('#sub-mobile-navbar-js');
+            var cat = $(this);
+
+            $.ajax({
+                type: 'GET',
+                url: '/Consultations/Post/GetSubCategoriesByCategoryIdMobile?id=' + cat.attr('data-cat-id'),
+
+                success: function (data) { 
+                    subCatArea.html(data);
+                    subCatArea.show();
+                    $(".rightMenu .top_header i").click();
+                    $(".subRightMenu").show();
+                }
+            });
+        });
 
         $.ajax({
             url: "/Consultant/UnReadNotifications",
@@ -748,6 +758,15 @@
 
             success: function (data) {
                 $("#userInfo").html(data);
+            }
+        });
+
+           $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Consultant.User.GetUserInfoMobile")',
+
+            success: function (data) {
+                $("#userInfoMobile").html(data);
             }
         });
 

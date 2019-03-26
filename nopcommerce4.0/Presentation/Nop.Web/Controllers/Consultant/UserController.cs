@@ -44,6 +44,31 @@ namespace Nop.Web.Controllers.Consultant
             return PartialView("~/Themes/Pavilion/Views/Consultant/User/_UserInfo.cshtml", model);
         }
 
+        [HttpGet]
+        public IActionResult GetUserInfoMobile()
+        {
+            UserModel model = new UserModel();
+
+            if (_workContext.CurrentCustomer.IsRegistered())
+            {
+                if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true))
+                    model.UserRole = RolesType.Administrators;
+                else if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Consultant, true))
+                    model.UserRole = RolesType.Consultant;
+                else if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
+                    model.UserRole = RolesType.Registered;
+
+                model.Id = _workContext.CurrentCustomer.Id;
+                model.Username = _workContext.CurrentCustomer.GetFullName();
+            }
+            else
+                model.UserRole = null;
+
+
+
+            return PartialView("~/Themes/Pavilion/Views/Consultant/User/_UserInfoMobile.cshtml", model);
+        }
+
 
         [HttpGet]
         public IActionResult GetAdminLink()

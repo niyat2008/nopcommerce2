@@ -69,7 +69,7 @@
                                             attributeValue.Name :
                                             T("Products.ProductAttributes.PriceAdjustment", attributeValue.Name, attributeValue.PriceAdjustment,
                                                 attributeValue.CustomerEntersQty ? T("Products.ProductAttributes.PriceAdjustment.PerItem").Text : string.Empty).Text;
-                                        <option selected="@attributeValue.IsPreSelected" value="@attributeValue.Id">@attributeName</option>
+                                        <option selected="@attributeValue.IsPreSelected" value="@attributeValue.Id">@attributeValue.Name</option>
                                     }
                                 </select>
                                 foreach (var attributeValue in attribute.Values.Where(value => value.CustomerEntersQty))

@@ -78,8 +78,7 @@ namespace Nop.Web.ConsultantTasks
 
 
         public void SetPostsUnFeaturedHaragPostService()
-        {
-                            Console.WriteLine("SetPostsUnFeaturedHaragPostService: ");
+        {  
             new Thread(() =>
             {
                 while (true)

@@ -1070,7 +1070,27 @@ namespace Nop.Web.Controllers.Consultant
             return PartialView("~/Themes/Pavilion/Views/Consultant/Post/ListOfSubCategories.cshtml", outputModel);
         }
 
+        [HttpGet]
+        public IActionResult GetSubCategoriesByCategoryIdMobile(PagingParams pagingParams, int id)
+        {
+            var model = _subCategoryService.GetSubCategoriesByCategoryId(pagingParams, id);
 
+
+            Response.Headers.Add("X-Pagination", model.GetHeader().ToJson());
+
+            var outputModel = new SubCategoryOutputModel
+            {
+                Paging = model.GetHeader(),
+                Links = GetLinks(model, "Consultant.Consultations.GetSubCategoriesByCategoryId"),
+                Items = model.List.Select(m => new SubCategoryModel()
+                {
+                    Id = m.Id,
+                    Name = m.Name
+                }).ToList(),
+            };
+            return PartialView("~/Themes/Pavilion/Views/Consultant/Post/ListOfSubCategoriesMobile.cshtml", outputModel);
+        }
+          
         [HttpPost]
         public IActionResult SetPostToCategoryAndSubCategory([FromBody] SetPostToCategoryAndSubCategoryModel model)
         {

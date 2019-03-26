@@ -1,6 +1,6 @@
 ﻿{
   "Group": "Payment methods",
-  "FriendlyName": "Cash On Delivery (COD)",
+  "FriendlyName": "الدفع عند الاستلام",
   "SystemName": "Payments.CashOnDelivery",
   "Version": "1.40",
   "SupportedVersions": [ "4.00" ],

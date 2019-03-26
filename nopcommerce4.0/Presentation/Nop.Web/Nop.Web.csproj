@@ -245,6 +245,9 @@
     <Content Update="Themes\Pavilion\Views\Consultant\Post\ListOfCategory.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Themes\Pavilion\Views\Consultant\Post\ListOfSubCategoriesMobile.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Themes\Pavilion\Views\Consultant\Post\ListOfSubCategories.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
@@ -255,6 +258,9 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Consultant\User\_AdminLink.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Consultant\User\_UserInfoMobile.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\HaragAdmin\Category\GetCategories.cshtml">

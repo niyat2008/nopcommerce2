@@ -325,15 +325,18 @@ new { controller = "Post", action = "GetHaragMobileNavbar" });
             routeBuilder.MapRoute("Consultant.ConsultantHome", "Consultations",
             new { controller = "ConsultantHome", action = "Home" });
 
-            
+
             routeBuilder.MapRoute("Consultant.Navbar", "Consultations/Consultant/Navbar",
             new { controller = "ConsultantHome", action = "Navbar" });
-
+             
             routeBuilder.MapRoute("Consultant.NavbarMobile", "Consultations/Consultant/NavbarMobile",
           new { controller = "ConsultantHome", action = "GetMobileNavbar" });
             
             routeBuilder.MapRoute("Consultant.User.GetUserInfo", "Consultations/User/GetUserInfo",
             new { controller = "User", action = "GetUserInfo" });
+
+            routeBuilder.MapRoute("Consultant.User.GetUserInfoMobile", "Consultations/User/GetUserInfoMobile",
+new { controller = "User", action = "GetUserInfoMobile" });
 
             routeBuilder.MapRoute("Consultant.User.GetAdminLink", "Consultations/User/GetAdminLink",
             new { controller = "User", action = "GetAdminLink" });
@@ -429,6 +432,11 @@ new { controller = "Post", action = "HasOpenedConsultationAnCanAdd" });
            new { controller = "Post", action = "GetCategory" });
             routeBuilder.MapRoute("Consultant.Post.GetSubCategoriesByCategoryId", "Consultations/Post/GetSubCategoriesByCategoryId",
             new { controller = "Post", action = "GetSubCategoriesByCategoryId" });
+
+            routeBuilder.MapRoute("Consultant.Post.GetSubCategoriesByCategoryIdMobile", "Consultations/Post/GetSubCategoriesByCategoryIdMobile",
+new { controller = "Post", action = "GetSubCategoriesByCategoryIdMobile" });
+
+
             routeBuilder.MapRoute("Consultant.Post.SetPostToCategoryAndSubCategory", "Consultations/Post/SetPostToCategoryAndSubCategory",
             new { controller = "Post", action = "SetPostToCategoryAndSubCategory" });
             routeBuilder.MapRoute("Consultant.Post.AddPost", "Consultations/Post/AddPost",

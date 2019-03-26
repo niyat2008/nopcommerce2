@@ -137,33 +137,8 @@
                 </div>
 
                 <div id="myAccountScreenFull">
-                    <div class="col-xs-12 text-center" style="padding:0">
-                        <ul>
-                            <li>
-                                <a href="/Harag/Profile">
-                                    <i class="fa fa-user"></i>
-                                    <span>حسابى</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/Register">
-                                    <i class="fa fa-pencil"></i>
-                                    <span>سجل الان</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/Login">
-                                    <i class="fa fa-lock"></i>
-                                    <span>دخول</span>
-                                </a>
-                            </li>
-                            @*<li>
-                                <a href="#">
-                                    <i class="fa fa-heart"></i>
-                                    <span>السلع المفضلة</span>
-                                </a>
-                            </li>*@
-                        </ul>
+                    <div class="col-xs-12 text-center"  id ="userInfoMobile" style="padding:0">
+                       
                     </div>
                 </div>
             </div>
@@ -374,6 +349,14 @@
 <script>
 
     $(document).ready(function () {
+          $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Consultant.User.GetUserInfoMobile")',
+
+            success: function (data) {
+                $("#userInfoMobile").html(data);
+            }
+        });
 
         $.ajax({
             type: 'GET',
@@ -471,6 +454,7 @@
     });
 
 
+   
 </script>
 
 <script src="/Plugins/SevenSpikes.Core/Scripts/sevenspikes.core.min.js" type="text/javascript"></script>

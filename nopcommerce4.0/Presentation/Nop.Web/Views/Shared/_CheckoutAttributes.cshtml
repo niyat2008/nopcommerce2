@@ -37,7 +37,7 @@
                                 var attributeName = string.IsNullOrEmpty(attributeValue.PriceAdjustment) ?
                                     attributeValue.Name :
                                     T("ShoppingCart.CheckoutAttributes.PriceAdjustment", attributeValue.Name, attributeValue.PriceAdjustment).Text; 
-                                <option selected="@attributeValue.IsPreSelected" value="@attributeValue.Id">@attributeName</option>
+                                <option selected="@attributeValue.IsPreSelected" value="@attributeValue.Id">@attributeValue.Name</option>
                             }
                         </select>
                             attributeChangeScriptsBuilder.AppendFormat("$('#{0}').change(function(){{checkoutAttributeChange();}});\n", controlId);
