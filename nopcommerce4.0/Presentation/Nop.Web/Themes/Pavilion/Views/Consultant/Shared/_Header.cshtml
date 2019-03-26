@@ -537,185 +537,192 @@
 
 <div style="background-color:#e8ebee;padding:8px;"><p id="messagep" style="text-align:center;margin:0; font-size: 15px;">خدمة الاستشارات هى خدمة مجانية تقدم من قبل موقع المزراع لمساعدة حل المشاكل الزراعية بواسطة مستشارين مختصين فى هذا المجال.</p></div>
 
-    <!-- Search -->
-    <section class="search">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-1"></div>
+<!-- Search -->
+<section class="search">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1"></div>
 
-                <div class="col-md-2 col-xs-12 logoContainer">
-                    <img class="logo" src="~/images/Consultant/images/logo3.png" onclick="goToHome()" />
-                </div>
-
-                <div class="col-md-6" style="padding-top:12px;">
-                    <div class="form-group">
-                        <input id="searchText" type="text" style="height:44px;"
-                               class="form-control" placeholder="ابحث عن ...">
-                        <button onclick="filterWithText('searchText')" style="height:44px;" class="btndarckgreen">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="col-md-3 consult " style="padding-top:25px;">
-                    <div class="flyout-cart-wrapper" id="flyout-cart">
-                        <a href="/Consultant/Notifications">
-                            <span class="cart-qty badge NotificationNum"></span>
-                            <span class="cart-label ">الاشعارات</span>
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-    <!--<!-- Nav -->
-    <div id="Nav"></div>
-
-    <div class="home" id="homeBody">
-        <div class="container-fluid">
-            <div class="col-md-2"></div>
-
-            <div class="col-md-2" id="threebuttons" style="margin-bottom:5%;">
-
+            <div class="col-md-2 col-xs-12 logoContainer">
+                <img class="logo" src="~/images/Consultant/images/logo3.png" onclick="goToHome()" />
             </div>
 
-            <div class="col-md-6">
-                <div class="allPage" id="allpage">
-                    @RenderBody()
-                    <div id="posts"></div>
-                    <not-found *ngIf="!posts.length"></not-found>
-                    <tw-pagination *ngIf="posts?.length" [numberOfPages]="totalNumberOfPages" (pageChanged)="getClosedPost($event)"></tw-pagination>
+            <div class="col-md-6" style="padding-top:12px;">
+                <div class="form-group">
+                    <input id="searchText" type="text" style="height:44px;"
+                           class="form-control" placeholder="ابحث عن ...">
+                    <button onclick="filterWithText('searchText')" style="height:44px;" class="btndarckgreen">
+                        <i class="fa fa-search"></i>
+                    </button>
                 </div>
             </div>
-            <div class="col-md-2"></div>
+            <div class="col-md-3 consult " style="padding-top:25px;">
+                <div class="flyout-cart-wrapper" id="flyout-cart">
+                    <a href="/Consultant/Notifications">
+                        <span class="cart-qty badge NotificationNum"></span>
+                        <span class="cart-label ">الاشعارات</span>
+                    </a>
 
-
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="overlay"></div>
-    <div class="rightMenu">
-        <div class="top_header">
-            <i class="fa fa-times pull-left"></i>
+</section>
+
+<!--<!-- Nav -->
+<div id="Nav"></div>
+
+<div class="home" id="homeBody">
+    <div class="container-fluid">
+        <div class="col-md-2"></div>
+
+        <div class="col-md-2" id="threebuttons" style="margin-bottom:5%;">
+
         </div>
-        <div id="mobile-navbar-js"></div>
+
+        <div class="col-md-6">
+            <div class="allPage" id="allpage">
+                @RenderBody()
+                <div id="posts"></div>
+                <not-found *ngIf="!posts.length"></not-found>
+                <tw-pagination *ngIf="posts?.length" [numberOfPages]="totalNumberOfPages" (pageChanged)="getClosedPost($event)"></tw-pagination>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+
+
     </div>
+</div>
+
+<div class="overlay"></div>
+
+<div class="rightMenu">
+    <div class="top_header">
+        <i class="fa fa-times pull-left"></i>
+    </div>
+    <div id="mobile-navbar-js"></div>
+</div>
+
+<div class="subRightMenu">
+    <div class="top_header">
+        <i class="fa fa-times pull-left"></i>
+    </div>
+    <div id="mobile-navbar-js"></div>
+</div>
+
+@*<link href="~/css/Consultant/bootstrap.min.css" rel="stylesheet" />*@
+<script src="~/js/Consultant/bootstrap.min.js"></script>
+
+<div id="changeCatAndSubDiv" class="modal" tabindex="-1" role="dialog" Style="display:none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title"> اضف رسالتك الي اداره الموقع </h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <textarea type="text" class="form-control"></textarea>
+                    <div class="modal-footer">
+                        <button id="add-service-message-event" type="button" onclick="" class="btn btn-success">تعديل</button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+
+</div><!-- /.modal !-->
+<script type="text/javascript">
+    $("#open-customer-service").click(function () {
+        $("#changeCatAndSubDiv").show();
+    });
+
+    $("#add-service-message-event").click(function () {
+        $("#changeCatAndSubDiv").hide();
+    });
+</script>
 
 
-    @*<link href="~/css/Consultant/bootstrap.min.css" rel="stylesheet" />*@
-    <script src="~/js/Consultant/bootstrap.min.js"></script>
-
-    <div id="changeCatAndSubDiv" class="modal" tabindex="-1" role="dialog" Style="display:none">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <h4 class="modal-title"> اضف رسالتك الي اداره الموقع </h4>
+<div class="footer">
+    <div class="footer-upper">
+        <div class="center">
+            <ul class="social-sharing">
+                <li class="twitter"><a target="_blank" href="https://twitter.com/Niyat"></a></li>
+                <li class="facebook"><a target="_blank" href="http://www.facebook.com/Niyat"></a></li>
+                <li class="youtube"><a target="_blank" href="http://www.youtube.com/user/Niyat"></a></li>
+                <li class="google"><a target="_blank" href="https://plus.google.com/Niyat"></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-middle">
+        <div class="center">
+            <div class="footer-block">
+                <div class="title">
+                    <strong>معلومات</strong>
                 </div>
-                <div class="modal-body">
-                    <form>
-                        <textarea type="text" class="form-control"></textarea>
-                        <div class="modal-footer">
-                            <button id="add-service-message-event" type="button" onclick="" class="btn btn-success">تعديل</button>
-                        </div>
-                    </form>
+                <ul class="list">
+                    <li><a href="/%D8%A7%D9%84%D8%B4%D8%AD%D9%86-%D9%88%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B1%D8%AC%D8%A7%D8%B9">	الشحن والاسترجاع</a></li>
+                    <li><a href="/%D8%A7%D9%84%D8%AE%D8%B5%D9%88%D8%B5%D9%8A%D8%A9">	الخصوصية</a></li>
+                    <li><a href="/%D8%B4%D8%B1%D9%88%D8%B7-%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85">شروط الاستخدام</a></li>
+                    <li><a href="/%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA-%D8%B9%D9%86%D8%A7">معلومات عنا</a></li>
+                </ul>
+            </div>
+            <div class="footer-block">
+                <div class="title">
+                    <a id="open-customer-service">خدمة العملاء</a>
                 </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
+                <ul class="list"></ul>
+            </div>
+            <div class="footer-block">
+                <div class="title">
+                    <strong>حسابي</strong>
+                </div>
+                <ul class="list">
+                    <li><a href="/customer/info">معلومات العميل</a></li>
+                    <li><a href="/customer/addresses">عناوين</a></li>
+                    <li><a href="/order/history">طلبات</a></li>
 
-    </div><!-- /.modal !-->
-    <script type="text/javascript">
-        $("#open-customer-service").click(function () {
-            $("#changeCatAndSubDiv").show();
-        });
-
-        $("#add-service-message-event").click(function () {
-            $("#changeCatAndSubDiv").hide();
-        });
-    </script>
-
-
-    <div class="footer">
-        <div class="footer-upper">
-            <div class="center">
-                <ul class="social-sharing">
-                    <li class="twitter"><a target="_blank" href="https://twitter.com/Niyat"></a></li>
-                    <li class="facebook"><a target="_blank" href="http://www.facebook.com/Niyat"></a></li>
-                    <li class="youtube"><a target="_blank" href="http://www.youtube.com/user/Niyat"></a></li>
-                    <li class="google"><a target="_blank" href="https://plus.google.com/Niyat"></a></li>
+                    <li><a href="/cart">عربة التسوق</a></li>
+                    <li><a href="/wishlist">قائمة الملاحظة</a></li>
+                    <li><a href="/compareproducts">قارن بين  المنتجات</a></li>
+                </ul>
+            </div>
+            <div class="footer-block quick-contact">
+                <div class="title">
+                    <strong>تواصل معنا</strong>
+                </div>
+                <ul class="list">
+                    <li class="address"><span>المملكة العربية السعودية</span></li>
+                    <li class="email"><span>info@Niyat.com</span></li>
+                    <li class="phone"><span>966-0000000</span></li>
                 </ul>
             </div>
         </div>
-        <div class="footer-middle">
-            <div class="center">
-                <div class="footer-block">
-                    <div class="title">
-                        <strong>معلومات</strong>
-                    </div>
-                    <ul class="list">
-                        <li><a href="/%D8%A7%D9%84%D8%B4%D8%AD%D9%86-%D9%88%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B1%D8%AC%D8%A7%D8%B9">	الشحن والاسترجاع</a></li>
-                        <li><a href="/%D8%A7%D9%84%D8%AE%D8%B5%D9%88%D8%B5%D9%8A%D8%A9">	الخصوصية</a></li>
-                        <li><a href="/%D8%B4%D8%B1%D9%88%D8%B7-%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85">شروط الاستخدام</a></li>
-                        <li><a href="/%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA-%D8%B9%D9%86%D8%A7">معلومات عنا</a></li>
-                    </ul>
-                </div>
-                <div class="footer-block">
-                    <div class="title">
-                        <a id="open-customer-service">خدمة العملاء</a>
-                    </div>
-                    <ul class="list"></ul>
-                </div>
-                <div class="footer-block">
-                    <div class="title">
-                        <strong>حسابي</strong>
-                    </div>
-                    <ul class="list">
-                        <li><a href="/customer/info">معلومات العميل</a></li>
-                        <li><a href="/customer/addresses">عناوين</a></li>
-                        <li><a href="/order/history">طلبات</a></li>
+    </div>
+    <div class="footer-lower">
+        <div class="center">
+            <ul class="accepted-payments">
+                <li class="method1"></li>
+                <li class="method2"></li>
+                <li class="method3"></li>
+                <li class="method4"></li>
+            </ul>
+            <div class="footer-disclaimer">
+                حقوق الطبع والنشر © 2019 Niyat Store. جميع الحقوق محفوظة.
+            </div>
 
-                        <li><a href="/cart">عربة التسوق</a></li>
-                        <li><a href="/wishlist">قائمة الملاحظة</a></li>
-                        <li><a href="/compareproducts">قارن بين  المنتجات</a></li>
-                    </ul>
-                </div>
-                <div class="footer-block quick-contact">
-                    <div class="title">
-                        <strong>تواصل معنا</strong>
-                    </div>
-                    <ul class="list">
-                        <li class="address"><span>المملكة العربية السعودية</span></li>
-                        <li class="email"><span>info@Niyat.com</span></li>
-                        <li class="phone"><span>966-0000000</span></li>
-                    </ul>
-                </div>
+            <div class="footer-store-theme">
+
             </div>
         </div>
-        <div class="footer-lower">
-            <div class="center">
-                <ul class="accepted-payments">
-                    <li class="method1"></li>
-                    <li class="method2"></li>
-                    <li class="method3"></li>
-                    <li class="method4"></li>
-                </ul>
-                <div class="footer-disclaimer">
-                    حقوق الطبع والنشر © 2019 Niyat Store. جميع الحقوق محفوظة.
-                </div>
-
-                <div class="footer-store-theme">
-
-                </div>
-            </div>
-        </div>
-
     </div>
 
-    <div id="goToTop" style="display: block;"></div>
+</div>
 
-    <script>
+<div id="goToTop" style="display: block;"></div>
+
+<script>
 
     $(document).ready(function () {
 
@@ -811,37 +818,42 @@
     }
 
 
-    </script>
-    <script src="/Plugins/SevenSpikes.Core/Scripts/sevenspikes.core.min.js" type="text/javascript"></script>
-    <script src="/Plugins/SevenSpikes.Core/Scripts/sevenspikes.theme.ex.min.js" type="text/javascript"></script>
-    <script src="/Themes/Pavilion/Content/scripts/pavilion.js" type="text/javascript"></script>
+</script>
+<script src="/Plugins/SevenSpikes.Core/Scripts/sevenspikes.core.min.js" type="text/javascript"></script>
+<script src="/Plugins/SevenSpikes.Core/Scripts/sevenspikes.theme.ex.min.js" type="text/javascript"></script>
+<script src="/Themes/Pavilion/Content/scripts/pavilion.js" type="text/javascript"></script>
 
 
-    <script>
-        $("#searchScreen").click(function () {
-            $("#searchScreenFull").slideToggle("slow");
-            $("#myAccountScreenFull").css("display", "none");
-            $(".manage").toggle();
-            $(".overlay").toggle();
-            $(".top_bar").toggle();
-            $(".topFixed").css("z-index", "1070");
-        });
-        $("#menuBar").click(function () {
-            $(".overlay").css("display", "block");
-            $(".rightMenu").css("display", "block");
-            $(".topFixed").css("z-index", "1060");
-        });
-        $(".rightMenu .top_header i").click(function () {
-            $(".overlay").css("display", "none");
-            $(".rightMenu").css("display", "none");
-            $(".topFixed").css("z-index", "1070");
-        });
-        $("#myAccount").click(function () {
-            $("#myAccountScreenFull").slideToggle("slow");
-            $("#searchScreenFull").css("display", "none");
-            $(".manage").toggle();
-            $(".overlay").toggle();
-            $(".top_bar").toggle();
-            $(".topFixed").css("z-index", "1070");
-        });
-    </script>
+<script>
+    $("#searchScreen").click(function () {
+        $("#searchScreenFull").slideToggle("slow");
+        $("#myAccountScreenFull").css("display", "none");
+        $(".manage").toggle();
+        $(".overlay").toggle();
+        $(".top_bar").toggle();
+        $(".topFixed").css("z-index", "1070");
+    });
+    $("#menuBar").click(function () {
+        $(".overlay").css("display", "block");
+        $(".rightMenu").css("display", "block");
+        $(".topFixed").css("z-index", "1060");
+    });
+    $(".rightMenu .top_header i").click(function () {
+        $(".overlay").css("display", "none");
+        $(".rightMenu").css("display", "none");
+        $(".topFixed").css("z-index", "1070");
+    });
+    $(".subRightMenu .top_header i").click(function () {
+        $(".overlay").css("display", "none");
+        $(".subRightMenu").css("display", "none");
+        $(".topFixed").css("z-index", "1070");
+    });
+    $("#myAccount").click(function () {
+        $("#myAccountScreenFull").slideToggle("slow");
+        $("#searchScreenFull").css("display", "none");
+        $(".manage").toggle();
+        $(".overlay").toggle();
+        $(".top_bar").toggle();
+        $(".topFixed").css("z-index", "1070");
+    });
+</script>

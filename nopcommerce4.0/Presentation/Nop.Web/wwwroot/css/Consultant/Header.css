@@ -317,13 +317,44 @@ a:hover {
     border: 1px solid #ddd;
 }
 
-.manage { background: #3e874b; color: #fff; min-height: 42px; display: none }
-.manage .admin-link-js-ajax { line-height: 42px; color: #fff; }
+.manage {
+    background: #3e874b;
+    color: #fff;
+    min-height: 42px;
+    display: none
+}
 
-.fixedNavScreen { background: #fff; box-shadow: 0 3px 5px rgba(0,0,0,0.1); display: none; }
-.fixedNavScreen ul { display: flex; justify-content: center; margin-bottom: 0; padding: 0; line-height: 31px }
-.fixedNavScreen ul li { float: right; cursor: pointer; padding: 10px; border-left: 1px solid #ddd; border-right: 1px solid #ddd; }
-.fixedNavScreen ul li i { color: #4da74d; font-weight: bold; }
+    .manage .admin-link-js-ajax {
+        line-height: 42px;
+        color: #fff;
+    }
+
+.fixedNavScreen {
+    background: #fff;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+    display: none;
+}
+
+    .fixedNavScreen ul {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0;
+        padding: 0;
+        line-height: 31px
+    }
+
+        .fixedNavScreen ul li {
+            float: right;
+            cursor: pointer;
+            padding: 10px;
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+        }
+
+            .fixedNavScreen ul li i {
+                color: #4da74d;
+                font-weight: bold;
+            }
 
 /*@media(max-width:767px) {*/
 @media only screen and (max-width : 1024px) {
@@ -402,56 +433,14 @@ a:hover {
                     padding-left: 15px
                 }
 
-.overlay {
-    display: none;
-    background: rgba(0,0,0,0.6);
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1060;
-}
+.overlay { display: none; background: rgba(0,0,0,0.6); position: fixed; top: 0; right: 0; bottom: 0; width: 100%; height: 100%; z-index: 1060; }
 
-.rightMenu {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 320px;
-    height: 100%;
-    text-align: right;
-    background: #f6f6f6;
-    box-shadow: 1px 0 5px rgba(0,0,0,0.5);
-    overflow: hidden;
-    z-index: 1070;
-    transition: all 0.5s ease;
-}
-
-    .rightMenu .top_header {
-        height: 50px;
-    }
-
-        .rightMenu .top_header i {
-            color: #aaa;
-            cursor: pointer;
-            margin-left: 20px;
-            line-height: 50px
-        }
-
-    .rightMenu ul {
-        margin: 0;
-        padding: 0;
-        background: #fff;
-        height: 100%;
-    }
-
-        .rightMenu ul li {
-            padding: 20px;
-            line-height: 19px;
-            cursor: pointer
-        }
-.rightMenu ul li a { color: #333; font-size: 15px; text-decoration: none; font-weight: bold; text-transform: uppercase; }
-.rightMenu ul li:hover a { color: #4da74d }
-.rightMenu ul li i { color: #4da74d; cursor: pointer; }
+.rightMenu { display: none; position: fixed; top: 0; right: 0; width: 320px; height: 100%; text-align: right; background: #f6f6f6; box-shadow: 1px 0 5px rgba(0,0,0,0.5); overflow: hidden;z-index: 1070; transition: all 0.5s ease; }
+.subRightMenu { display: none; position: fixed; top: 0; right: 0; width: 320px; height: 100%; text-align: right; background: #f6f6f6; box-shadow: 1px 0 5px rgba(0,0,0,0.5); overflow: hidden; z-index: 1080; transition: all 0.5s ease; }
+.rightMenu .top_header , .subRightMenu .top_header { height: 50px; }
+.rightMenu .top_header i , .subRightMenu .top_header i { color: #aaa; cursor: pointer; margin-left: 20px; line-height: 50px }
+.rightMenu ul, .subRightMenu ul { margin: 0; padding: 0; background: #fff; height: 100%;  }
+.rightMenu ul li, .subRightMenu ul li { padding: 20px; line-height: 19px; cursor: pointer }
+.rightMenu ul li a , .subRightMenu ul li a { color: #333; font-size: 15px; text-decoration: none; font-weight: bold; text-transform: uppercase; }
+.rightMenu ul li:hover a, .subRightMenu ul li:hover a { color: #4da74d }
+.rightMenu ul li i, .subRightMenu ul li i  { color: #4da74d; cursor: pointer }
