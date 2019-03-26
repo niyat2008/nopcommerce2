@@ -6,14 +6,14 @@
 
   //"DataConnectionString": "Data Source=68.66.228.7;Initial Catalog=niyatcom_nop_farmsstore_db;Integrated Security=false;MultipleActiveResultSets=true;uid=niyatcom_niyat_db_user1;password=Ali123;",
 
-  "DataConnectionString": "Data Source=10.2.2.105;Initial Catalog=DB_A409B4_nop4;Integrated Security=false;MultipleActiveResultSets=true;uid=sa;password=123;",
+  //"DataConnectionString": "Data Source=10.2.2.105;Initial Catalog=DB_A409B4_nop4;Integrated Security=false;MultipleActiveResultSets=true;uid=sa;password=123;",
   //"DataConnectionString": "Data Source=10.2.2.112;Initial Catalog=DB_A409B4_nop4;Integrated Security=false;MultipleActiveResultSets=true;uid=sa;password=123;",
 
 
   //"DataConnectionString": "Data Source=10.2.2.106;Initial Catalog=DB_A409B4_nop4;Integrated Security=false;MultipleActiveResultSets=true;uid=sa;password=123;",
 
 
-  //"DataConnectionString": "Data Source=DESKTOP-NRGMDCN\\SQLEXPRESS;Initial Catalog=DB_A409B4_nop4;Integrated Security=true;",
+  "DataConnectionString": "Data Source=DESKTOP-NRGMDCN\\SQLEXPRESS;Initial Catalog=DB_A409B4_nop4;Integrated Security=true;",
 
   "RawDataSettings": {}
 }

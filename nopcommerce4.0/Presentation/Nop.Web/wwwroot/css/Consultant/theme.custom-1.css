@@ -383,10 +383,7 @@ button.ticket-info-button.k-button:before,
   .flyout-cart-wrapper:hover .cart-trigger {
     border-color: #3e874b;
   }
-  .header-links,
-  .header-selectors {
-    border-top-color: #3e874b;
-  }
+    .header-links,.header-selectors { border-top-color: #3e874b; margin-top: -4px; }
   .category-navigation-list > li > .sublist-wrap > .sublist > li > a,
   .header-menu > ul > li > .sublist-wrap > .sublist > li > a,
   /*plugins*/ .category-navigation-list > li > .sublist-wrap > .sublist .box .title,
