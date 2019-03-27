@@ -699,4 +699,11 @@
         $(".top_bar").toggle();
         $(".topFixed").css("z-index", "1070");
     });
+    $(".overlay").click(function () {
+        $(this).css("display", "none");
+        $(".rightMenu").css("display", "none");
+        $(".subRightMenu").css("display", "none");
+        $("#myAccountScreenFull").css("display", "none");
+        $("#searchScreenFull").css("display", "none");
+    });
 </script>

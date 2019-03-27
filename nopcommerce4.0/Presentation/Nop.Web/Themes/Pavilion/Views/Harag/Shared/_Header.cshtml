@@ -489,11 +489,11 @@
         $(".top_bar").toggle();
         $(".topFixed").css("z-index", "1070");
     });
-    //$("body").click(function () {
-    //    $(".overlay").css("display", "none");
-    //    $(".rightMenu").css("display", "none");
-    //    $(".topFixed").css("z-index", "1070");
-    //    $(".manage").css("display", "none");
-    //    $(".top_bar").css("display", "block");
-    //});
+    $(".overlay").click(function () {
+        $(this).css("display", "none");
+        $(".rightMenu").css("display", "none");
+        $(".subRightMenu").css("display", "none");
+        $("#myAccountScreenFull").css("display", "none");
+        $("#searchScreenFull").css("display", "none");
+    });
 </script>
