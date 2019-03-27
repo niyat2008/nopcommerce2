@@ -16,6 +16,13 @@ input.form-control { border: 1px solid #ddd }
 /*top-bar*/
 .top_bar { background: #333; padding: 10px 0; text-align: center; height: 43px; }
 .top_bar span { cursor: pointer; color: #fff; font-size: 17px; padding: 9px 30px; padding-top: 10px }
+@media(max-width:335px) {
+    .top_bar span { font-size: 13px; padding: 14px 7px }
+}
+
+@media(min-width:336px) and (max-width:355px) {
+    .top_bar span { font-size: 13px; padding: 14px 30px; }
+}
 .top_bar span.active { background: #3e874b }
 .top_bar span a, .top_bar span:hover a, .top_bar span a:hover, .top_bar span:focus a, .top_bar span a:focus { text-decoration: none }
 
