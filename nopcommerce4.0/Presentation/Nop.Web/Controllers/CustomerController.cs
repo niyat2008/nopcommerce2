@@ -285,6 +285,7 @@ namespace Nop.Web.Controllers
                 {
                     model.Username = model.Username.Trim();
                 }
+
                 var loginResult = _customerRegistrationService.ValidateCustomerByMobile(_customerSettings.UsernamesEnabled ? model.Username : model.Mobile, model.Password);
               
                 switch (loginResult)

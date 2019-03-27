@@ -8,7 +8,7 @@
     var ascii = System.Text.Encoding.UTF8;
     var unicode = System.Text.Encoding.Unicode;
 
-    string terms = (System.Uri.UnescapeDataString((ViewBag.Agreement as string)));
+    string terms = (System.Uri.UnescapeDataString((ViewBag.Agreement as string)).Replace("%", "\\"));
  
 
 }

@@ -101,14 +101,14 @@
             <label class="form-lbl"> معاهدة استخدام الموقع</label>
             <div class="col-md-10">
                 @*<textarea id="compact" class="detailsTextBox"></textarea>*@
-                @Html.TextAreaFor(m => m.UseWebsiteCompact, new { @id= "compact", @class = "detailsTextBox" })
+                <textarea name="UseWebsiteCompact" id= "compact" class = "detailsTextBox">@System.Text.RegularExpressions.Regex.Unescape(Model.UseWebsiteCompact.Replace("%", "\\")) </textarea>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group hidden" >
             <label class="form-lbl"> السلع الممنوعة</label>
             <div class="col-md-10">
-                @*<textarea id="compact" class="detailsTextBox"></textarea>*@
-                @Html.TextAreaFor(m => m.NotAllowedProducts, new { @id = "NotAllowed", @class = "detailsTextBox" })
+                @*<textarea id="compact" class="detailsTextBox"></textarea>*@ 
+                <textarea name="NotAllowedProducts" id="NotAllowed" class="detailsTextBox">@System.Text.RegularExpressions.Regex.Unescape(Model.NotAllowedProducts.Replace("%", "\\")) </textarea>
             </div>
         </div>
 
