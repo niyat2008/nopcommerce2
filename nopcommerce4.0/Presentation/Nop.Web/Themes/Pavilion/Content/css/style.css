@@ -229,10 +229,10 @@ input.form-control { border: 1px solid #ddd }
 
 .overlay { display: none; background: rgba(0,0,0,0.6); position: fixed; top: 0; right: 0; bottom: 0; width: 100%; height: 100%; z-index: 1060; }
 
-.rightMenu { display: none; position: fixed; top: 0; right: 0; width: 320px; height: 100%; text-align: right; background: #f6f6f6; box-shadow: 1px 0 5px rgba(0,0,0,0.5); overflow: hidden; z-index: 1070; transition: all 0.5s ease; }
+.rightMenu { position: fixed; top: 0; right: 0; width: 320px; height: 100%; text-align: right; background: #f6f6f6; box-shadow:none; overflow: hidden; z-index: 1070; transition: all 0.5s ease; -webkit-transform: translate(320px); -ms-transform: translate(320px); transform: translate(320px); }
 .rightMenu .top_header { height: 50px; }
 .rightMenu .top_header i { color:#aaa; cursor: pointer; margin-left:20px; line-height:50px }
-.rightMenu ul { margin: 0; padding: 0; background: #fff; height: 100%; }
+.rightMenu ul { margin: 0; padding: 0; background: #fff; }
 .rightMenu ul li { padding: 20px; line-height: 19px; cursor: pointer }
  .rightMenu ul li a { color:#333; font-size: 15px; text-decoration: none; font-weight: bold; text-transform: uppercase; }
 .rightMenu ul li:hover a { color: #4da74d }

@@ -246,10 +246,11 @@
 
    .overlay { display: none; background: rgba(0,0,0,0.6); position: fixed; top: 0; right: 0; bottom: 0; width: 100%; height: 100%; z-index: 1060; }
 
-   .rightMenu { display: none; position: fixed; top: 0; right: 0; width: 320px; height: 100%; text-align: right; background: #f6f6f6; box-shadow: 1px 0 5px rgba(0,0,0,0.5); overflow: hidden; z-index: 1070; transition: all 0.5s ease; }
+   .rightMenu { position: fixed; top: 0; right: 0; width: 320px; height: 100%; text-align: right; background: #f6f6f6; box-shadow: none; overflow: hidden; z-index: 1070; transition: all 0.5s ease; -webkit-transform: translate(320px); -ms-transform: translate(320px); transform: translate(320px); }
+   .subRightMenu { position: fixed; top: 0; right: 0; width: 313px; height: 100%; text-align: right; background: #f6f6f6; box-shadow: none; overflow: hidden; z-index: 1080; transition: all 0.5s ease; -webkit-transform: translate(313px); -ms-transform: translate(313px); transform: translate(313px); }
    .rightMenu .top_header { height: 50px; }
    .rightMenu .top_header i { color: #aaa; cursor: pointer; margin-left: 20px; line-height: 50px }
-   .rightMenu ul { margin: 0; padding: 0; background: #fff; height: 100%; }
+    .rightMenu ul .subRightMenu ul  { margin: 0; padding: 0; background: #fff; }
    .rightMenu ul li { padding: 20px; line-height: 19px; cursor: pointer }
    .rightMenu ul li a { color: #333; font-size: 15px; text-decoration: none; font-weight: bold; text-transform: uppercase; }
    .rightMenu ul li:hover a { color: #4da74d }
@@ -264,9 +265,11 @@
     <section class="top_bar">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-2 col-md-1 hidden-sm hidden-xs top_col_screen top_hid_sm"></div>
-                <div class="col-lg-2 col-md-2 hidden-sm hidden-xs top_col_screen">
-                    <div id="admin-link-js-ajax" style="color: white"></div>
+                <div class="col-lg-2 col-md-1 hidden-sm hidden-xs">
+                    <div class="top_col_screen top_hid_sm"></div>
+                </div>
+                <div class="col-lg-2 col-md-2 hidden-sm hidden-xs">
+                    <div class="admin-link-js-ajax top_col_screen" style="color: white"></div>
                     @*<a href="/Consultations/Admin">اداره الاستشارات</a>*@
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
@@ -552,7 +555,8 @@
                     subCatArea.html(data);
                     subCatArea.show();
                    // $(".rightMenu .top_header i").click();
-                    $(".subRightMenu").show();
+                   // $(".subRightMenu").show();
+                    $(".subRightMenu").css({ "-webkit-transform": "translate(0px)", "-ms-transform": "translate(0px)", "-moz-transform": "translate(0px)", "transform": "translate(0px)", "box-shadow": "1px 0 5px rgba(0,0,0,0.5)" });
                 }
             });
         });
@@ -596,7 +600,7 @@
             url: '@Url.RouteUrl("Consultant.User.GetAdminLink")',
 
             success: function (data) {
-                $("#admin-link-js-ajax").html(data);
+                $(".admin-link-js-ajax").html(data);
             }
         });
 
@@ -674,21 +678,21 @@
     });
     $("#menuBar").click(function () {
         $(".overlay").css("display", "block");
-        $(".rightMenu").css("display", "block");
+        $(".rightMenu").css({ "-webkit-transform": "translate(0px)", "-ms-transform": "translate(0px)", "-moz-transform": "translate(0px)", "transform": "translate(0px)", "box-shadow": "1px 0 5px rgba(0,0,0,0.5)" });
         $(".topFixed").css("z-index", "1060");
     });
     $(".rightMenu .top_header i").click(function () {
         $(".overlay").css("display", "none");
-        $(".rightMenu").css("display", "none");
+        $(".rightMenu").css({ "-webkit-transform": "translate(320px)", "-ms-transform": "translate(320px)", "-moz-transform": "translate(320px)", "transform": "translate(320px)", "box-shadow": "none" });
         $(".topFixed").css("z-index", "1070");
     });
     $(".subItem").click(function () {
         $(".overlay").css("display", "block");
-        $(".subRightMenu").css("display", "block");
+        $(".subRightMenu").css({ "-webkit-transform": "translate(0px)", "-ms-transform": "translate(0px)", "-moz-transform": "translate(0px)", "transform": "translate(0px)", "box-shadow": "1px 0 5px rgba(0,0,0,0.5)"});
         $(".topFixed").css("z-index", "1070");
     });
     $(".subRightMenu .top_header i").click(function () {
-        $(".subRightMenu").css("display", "none");
+        $(".subRightMenu").css({ "-webkit-transform": "translate(313px)", "-ms-transform": "translate(313px)", "-moz-transform": "translate(313px)", "transform": "translate(313px)", "box-shadow": "none"});
         $(".topFixed").css("z-index", "1060");
     });
     $("#myAccount").click(function () {
@@ -701,9 +705,11 @@
     });
     $(".overlay").click(function () {
         $(this).css("display", "none");
-        $(".rightMenu").css("display", "none");
-        $(".subRightMenu").css("display", "none");
+        $(".rightMenu").css({ "-webkit-transform": "translate(320px)", "-ms-transform": "translate(320px)", "-moz-transform": "translate(320px)", "transform": "translate(320px)" , "box-shadow": "none" });
+        $(".subRightMenu").css({ "-webkit-transform": "translate(313px)", "-ms-transform": "translate(313px)", "-moz-transform": "translate(313px)", "transform": "translate(313px)", "box-shadow": "none"});
         $("#myAccountScreenFull").css("display", "none");
         $("#searchScreenFull").css("display", "none");
+        $(".manage").css("display", "none");
+        $(".top_bar").css("display", "block");
     });
 </script>

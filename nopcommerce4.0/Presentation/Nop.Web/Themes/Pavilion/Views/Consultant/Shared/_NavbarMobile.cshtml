@@ -4,13 +4,13 @@
 <ul>
     @foreach (var item in Model.Items)
     {
-    <li class="subItem">
+    <li>
         @Html.RouteLink(item.Name, "Consultant.GetAllClosedPostsByCategoryId", new { CategoryId = item.Id })
 
         @if (item.SubCategories != null && item.SubCategories.Count > 0)
         {
-            <a class=""><i data-cat-id="@item.Id" class="fa fa-chevron-left cat-list-js pull-left"></i></a>
-        } 
+            <i data-cat-id="@item.Id" class="fa fa-chevron-left cat-list-js subItem pull-left"></i>
+}
     </li>
      }
 
