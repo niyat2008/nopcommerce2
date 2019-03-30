@@ -27,14 +27,20 @@
     .topbarspan { cursor: pointer; color: #fff; font-size: 17px; padding: 9px 30px; padding-top:10px }
     .topbarspanActive { background: #3e874b }
     .header label { color: white; }
-    .admin-header-links a { color: white; }
-    /*#sticky { display: none; background-color: #546bcb; height: 70px; }*/
-    /*#sticky.fixed { position: fixed; top: 0; width: 100%; background-color: rgb(246,246,246); }*/
+    .admin-header-links a { color: white;  }
+    .admin-header-links a:hover { text-decoration: underline; color: #40ca40 }
+        /*#sticky { display: none; background-color: #546bcb; height: 70px; }*/
+        /*#sticky.fixed { position: fixed; top: 0; width: 100%; background-color: rgb(246,246,246); }*/
     .imgsizing { width: 90px; }
     .searchpadding { padding-top: 4px !important; }
     .topFixed { position:fixed; top: 0; z-index: 1070; width: 100%; }
     .header-middle { margin-top:43px }
     .header .center.menAll { width:100% }
+    @@media(min-width:1000px) {
+        .admin-header-links a {
+            line-height: 25px
+        }
+    }
 </style>
 
 

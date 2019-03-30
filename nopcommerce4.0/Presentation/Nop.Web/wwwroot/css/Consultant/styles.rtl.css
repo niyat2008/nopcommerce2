@@ -1099,8 +1099,8 @@ label, label + * {
 	position: absolute;
 	top: 2px;
 	right: 0;
-	width: 16px;
-	height: 16px;
+	width: 15px;
+	height: 15px;
 	background-color: #f74258;
 	background-image: url('/images/Consultant/images/img/footer-sprite.png');
 	background-repeat: no-repeat;

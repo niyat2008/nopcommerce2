@@ -2,7 +2,6 @@
 @model CategoryWithSubCategoriesOutputModel
 
 
-
 <style type="text/css">
     li:hover div {
         display: block !important;
@@ -10,13 +9,11 @@
 </style>
 
 
-
-
-
 <!-- Nav -->
 <nav class="navbar navbar-default">
-    <div class="col-md-2" style="padding-right: 12px;"></div>
+    @*<div class="col-md-2" style="padding-right: 12px;"></div>*@
     <div class="container-fluid">
+        <div class="col-md-1"></div>
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -34,27 +31,29 @@
                 @foreach (var item in Model.Items)
                 {
                 <li class="main hasSubMenu">
-                   
+
                     @Html.RouteLink(item.Name, "Consultant.GetAllClosedPostsByCategoryId", new { CategoryId = item.Id })
-                    
-                    <div class="subNav">
+
+                    @if (item.SubCategories.Count > 0)
+                    {
+                        <div class="subNav">
+
+                            <ul>
+
+                                @foreach (var subCat in item.SubCategories)
+                                {
+                                    <li>
+                                        @Html.RouteLink(subCat.Name, "Consultant.GetAllClosedPostsBySubCategoryId", new { SubCategoryId = subCat.Id })
+                                    </li>
+                                }
 
 
-                        <ul class="col-md-3 col-sm-6">
 
-                            @foreach (var subCat in item.SubCategories)
-                            {
-                                <li>
-                                    @Html.RouteLink(subCat.Name, "Consultant.GetAllClosedPostsBySubCategoryId", new { SubCategoryId = subCat.Id })
-                                </li>
-                            }
+                            </ul>
 
 
-
-                        </ul>
-
-
-                    </div>
+                        </div>
+                    }
                 </li>
                 }
 

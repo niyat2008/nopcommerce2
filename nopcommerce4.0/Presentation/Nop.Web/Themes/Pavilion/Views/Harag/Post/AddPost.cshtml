@@ -1,4 +1,22 @@
-﻿@model Nop.Services.Z_Harag.Post.PostForPostListModel
+﻿
+<style>
+    button, button:focus { outline:none }
+    button.add2 {
+        padding: 10px 20px;
+        color: #479a47;
+        font-weight: bold;
+        transition: all .4s;
+        cursor: pointer;
+        background: #eee;
+        border: 1px solid #3e874b;
+        border-bottom: 3px solid #3e874b;
+        border-radius: 0;
+        font-family: 'Tajawal', serif;
+        width: 50%
+    }
+</style>
+
+@model Nop.Services.Z_Harag.Post.PostForPostListModel
 
 @{
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
@@ -65,16 +83,17 @@
                     </div>
                 </div>
                 <div class="row">
-                    <p class="file">
-                        <input type="file" name="file" accept="image/*" id="file">
-                        <label for="file">تحميل الصور</label>
-                    </p>
+                    <div class="col-xs-12">
+                        <p class="file">
+                            <input type="file" name="file" accept="image/*" id="file">
+                            <label for="file">تحميل الصور</label>
+                        </p>
+                    </div>
                 </div>
 
-
             </div>
-            <div class="col-md-12">
-                <button class="btn btn-default add" type="submit">اضافة الاعلان للموقع</button>
+            <div class="col-md-12 text-center">
+                <button class="btn btn-default add add2" type="submit">اضافة الاعلان للموقع</button>
             </div>
         </form>
 
