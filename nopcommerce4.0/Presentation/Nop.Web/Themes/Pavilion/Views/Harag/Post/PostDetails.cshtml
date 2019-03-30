@@ -15,7 +15,7 @@
 <style>
     .followed:hover { 
         color: white;
-    }
+   }
 
     .followed { 
         color: red !important; 
@@ -37,7 +37,7 @@
                             <a href="/Harag/City/@Model.CityName"><span><i class="fa fa-map-marker"></i> @Model.CityName </span></a>
                             <a href="/Harag/Cat/@Model.CategoryId"><span><i class="fa fa-address-book"></i> @Model.CategoryName </span></a>
                             <a href="/Harag/user/@Model.PostOwner"><span><i class="fa fa-user"></i> @Model.PostOwnerFullName </span></a>
-                            <a><span> رقم الاعلان:  @Model.Id </span></a>
+                            <a style="text-decoration:none; cursor:default"><span> رقم الاعلان:  @Model.Id </span></a>
                         </div>
                     </div>
                     <div class="det-bottom">
@@ -49,8 +49,6 @@
                                     <img style="width: 97%" src="~/HaragApi/Uploads/Images/@image" alt="Single Image" />
                                 </a>
                             </div>
-
-
                         }
                         <br />
                         <div class="row">
@@ -64,8 +62,6 @@
                                 <p class="phone">@Model.Contact<i class="fa fa-phone" style="padding-right:5px"></i></p>
                             }
                         </div>
-
-
                     </div>
                 </div>
 

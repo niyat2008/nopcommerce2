@@ -134,15 +134,8 @@
             margin: 0 0 60px;
         }
 
-            .header .center {
-                width: 880px;
-                /*margin: auto;*/
-            }
-
-        .header-menu {
-            width: 90%;
-        }
-
+        .header .center { width: 880px;  }
+        .header-menu { width: 100%; }
         .men {
             padding-right: 4%;
         }
