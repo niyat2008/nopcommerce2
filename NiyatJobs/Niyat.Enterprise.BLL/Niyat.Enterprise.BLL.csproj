@@ -4,4 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Niyat.Enterprise.DAL\Niyat.Enterprise.DAL.csproj" />
+    <ProjectReference Include="..\Niyat.Enterprise.Helpers\Niyat.Enterprise.Helpers.csproj" />
+    <ProjectReference Include="..\Niyat.Enterprise.ViewModels\Niyat.Enterprise.ViewModels.csproj" />
+  </ItemGroup>
+
 </Project>
