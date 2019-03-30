@@ -82,8 +82,19 @@ namespace Nop.Web.Controllers.Harag
             return Ok(count);
         }
 
-   
-         
+
+        [HttpGet]
+        public IActionResult DeleteHaragNotifications()
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Redirect("/Login");
+
+            _notificationsService.DeleteNotifications(_workContext.CurrentCustomer.Id);
+            return Redirect("/Harag/Notifications");
+        }
+
+
+
         //[HttpGet]
         //public IActionResult GetUserInfo()
         //{

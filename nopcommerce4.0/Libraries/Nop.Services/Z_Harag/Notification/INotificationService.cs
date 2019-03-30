@@ -25,6 +25,6 @@ namespace Nop.Services.Z_Harag.Notification
         bool PushPostOwnerNotification(CommentForNotifyModel adviceDeal);
         bool PushSiteToUserNotification(SiteToUserNotificationModel notificationModel);
         bool PushSiteToAllUserNotification(SiteToUserNotificationModel notificationModel);
-
+        bool DeleteNotifications(int id);
     }
 }

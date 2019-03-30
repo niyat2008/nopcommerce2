@@ -111,6 +111,16 @@ namespace Nop.Services.Z_Consultant.Notification
 
         }
 
+        public void DeleteNotifications(int id)
+        {
+            var userNotifications = _notidficationRepository.Table.Where(m => m.OwnerId == id).ToList();
+
+            foreach (var item in userNotifications)
+            {
+                _notidficationRepository.Delete(item);
+            } 
+        }
+
 
 
         #endregion

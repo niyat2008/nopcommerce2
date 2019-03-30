@@ -1,7 +1,7 @@
 ﻿@using Nop.Services.Z_Harag.Notification
 @model Nop.Web.Models.Harag.Notification.NotificationListModel
 
-@{ 
+@{
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
 }
 
@@ -19,7 +19,7 @@
                     {
                         <div class=" ">
                             <h3 dir="rtl">
-                                <a href="/Harag/User/@n.Username">@n.CustomerName</a>  تم التعليق علي اعلانك بواسطه  <a href="#">@n.PostTitle</a> @n.DateDescription  :
+                                <strong>@n.DateDescription :</strong>  تم التعليق علي اعلانك <a class="text-danger" href="/Harag/Post/@n.PostId">@n.PostTitle</a> بواسطه  <a href="/Harag/User/@n.Username">@n.CustomerName</a>
                             </h3>
                         </div>
                     }
@@ -50,16 +50,22 @@
                     else if (n.Type == NotificationType.General)
                     {
                         <div class="feat- adv-blck">
-                        <h3 class="text-danger">
-                            @n.DateDescription: @n.Note
-                        </h3>
-                    </div>
-
+                            <h3 class="text-danger">
+                                @n.DateDescription: @n.Note
+                            </h3>
+                        </div>
+                    }
                 }
-                
-            }
-
-            </div>
-            </div>
+                @if (Model.Notifications.ToList().Count > 0)
+                {
+                    <div class="feat- adv-blck">
+                        <a href="/DeleteHaragNotifications" class="btn btn-default">
+                            مسح الاشعارات
+                        </a>
+                    </div>
+                }
+                </div>
+        </div>
     </div>
 </div>
+ 

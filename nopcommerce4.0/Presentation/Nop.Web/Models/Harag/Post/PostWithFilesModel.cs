@@ -46,7 +46,7 @@ namespace Nop.Web.Models.Harag.Post
         {
             get
             {
-                return GetDateDescrition(this.DateCreated);
+                return GetDateDescrition(this.DateUpdated);
             }
             set { }
         }
@@ -61,14 +61,14 @@ namespace Nop.Web.Models.Harag.Post
 
             var diff = DateTime.Now - dateCreated;
 
-            int s = diff.Milliseconds/1000;
+            int s = (int)diff.Milliseconds/1000;
 
            
             int m = 0;
             int h = 0;
             int d = 0;
             int mo = 0;
-            int y = 0;
+            int y = 0; 
 
             if ( s < 60)
             {

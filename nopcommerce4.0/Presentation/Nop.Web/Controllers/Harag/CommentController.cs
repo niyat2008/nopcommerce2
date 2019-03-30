@@ -100,6 +100,7 @@ namespace Nop.Web.Controllers.Harag
                         Id = m.Id,
                         Text = m.Text,
                         PostId = m.PostId,
+                        IsCommentOwner = ((int)m.CustomerId == currentUserId),
                         DateCreated = m.DateCreated,
                         DateUpdated = m.DateUpdated,
                         CommentedBy = m.CommentedBy,
@@ -108,6 +109,9 @@ namespace Nop.Web.Controllers.Harag
                         //Photos = m.Photos.Select(p => p.Url).ToList()
                     }).ToList(),
                 };
+                
+
+
                 return PartialView("~/Themes/Pavilion/Views/Harag/Comment/CommentsOnPost.cshtml", outputModel);
             }
             else

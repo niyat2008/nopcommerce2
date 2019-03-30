@@ -23,5 +23,6 @@ namespace Nop.Services.Z_Consultant.Notification
 
         //Get Un Read Notifications
          int GetUnReadNotifications(int userId);
+        void DeleteNotifications(int id);
     }
 }

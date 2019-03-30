@@ -65,6 +65,16 @@ namespace Nop.Web.Controllers.Consultant
             return Json(new { query });
         }
 
+
+        [HttpGet]
+        public IActionResult DeleteConsultantNotifications()
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Redirect("/Login");
+
+             _notificationService.DeleteNotifications(_workContext.CurrentCustomer.Id);
+            return Redirect("/Consultant/Notifications");
+        }
         //Update Notification
         //[HttpPost]
         //public IActionResult UpdateNotification(List<int> model)
@@ -77,7 +87,7 @@ namespace Nop.Web.Controllers.Consultant
         //    return Ok();
         //}
 
-       
+
         #endregion
 
 

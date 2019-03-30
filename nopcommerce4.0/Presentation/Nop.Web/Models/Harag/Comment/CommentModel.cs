@@ -15,7 +15,7 @@ namespace Nop.Web.Models.Harag.Comment
         public string CommentOwner { get; set; }
         public int PostId { get; set; }
 
-
+        public bool IsCommentOwner { get; set; }
         public string DateDescription
         {
             get

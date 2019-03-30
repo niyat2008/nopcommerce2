@@ -413,6 +413,10 @@
             success: function (data) {
                 
                 var n = parseInt(data);
+
+                if (n === 0) {
+                    return false;
+                }
                 $("#notification-count-js").html(n);
                 $("#notification-count-jsa").html(n);
             }

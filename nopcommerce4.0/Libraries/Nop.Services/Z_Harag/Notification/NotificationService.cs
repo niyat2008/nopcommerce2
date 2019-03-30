@@ -255,5 +255,17 @@ namespace Nop.Services.Z_Harag.Notification
             }
             return true;
         }
+
+        public bool DeleteNotifications(int id)
+        {
+            var userNotifications = _notificationService.Table.Where(m => m.OwnerId == id).ToList();
+
+            foreach (var item in userNotifications)
+            {
+                _notificationService.Delete(item);
+            }
+
+            return true;
+        }
     }
 }

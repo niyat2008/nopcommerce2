@@ -2,31 +2,39 @@
 @model Nop.Web.Models.Harag.Comment.CommentModel
 
 <div class="comment">
-    <div class="commentHeader"> 
+    <div class="commentHeader">
         <div class=" adxExtraInfo">
-            <div class="adxExtraInfoPart"> 
+            <div class="adxExtraInfoPart">
                 ››
-                &nbsp;  <a href="/Harag/User/@Model.CommentOwner" class="username">@Model.CommentOwner</a>   
-            </div> 
-            <div  class="pull-left adxExtraInfoPart"> 
-                <div class="pull-left">
-                    ››
-                    <a href="/Harag/Messages/Post/@Model.PostOwnerId/@((int)MessageType.Comment)/@Model.PostId" data-report="@Model.Id" data-commentId="@Model.Id" data-postId="@Model.PostId">ارسال رساله</a>
-                </div> 
+                &nbsp;  <a href="/Harag/User/@Model.CommentOwner" class="username">@Model.CommentOwner</a>
             </div>
-        </div> 
+
+            @if (!Model.IsCommentOwner)
+            {
+                <div class="pull-left adxExtraInfoPart">
+                    <div class="pull-left">
+                        ››
+                        <a href="/Harag/Messages/Post/@Model.PostOwnerId/@((int)MessageType.Comment)/@Model.PostId" data-report="@Model.Id" data-commentId="@Model.Id" data-postId="@Model.PostId">ارسال رساله</a>
+                    </div>
+                </div>
+            }
+
+        </div>
         ››
         &nbsp;  @Model.DateDescription
-         
-        <div class="pull-left reportPanel" id="id-@Model.Id" >
-            <span class="report" data-report="@Model.Id"><i class="fa fa-flag"></i>  إبلاغ  </span>
-            <div class=" report reportPanelInfo" id="@Model.Id">
-                إبلاغ عن العضو: <br> <a href="@Model.CommentOwner" class="username">@Model.CommentOwner</a> <br> <br> 
-                <button data-report="@Model.Id" data-commentId="@Model.Id" data-postId="@Model.PostId" class="uprate btn btn-danger btn-xs">بخس السلعة</button><br>
-                <button data-report="@Model.Id" data-commentId="@Model.Id" data-postId="@Model.PostId" class="downrate btn btn-danger btn-xs">رد غير لائق</button><br>
+
+        @if (!Model.IsCommentOwner)
+        {
+            <div class="pull-left reportPanel" id="id-@Model.Id">
+                <span class="report" data-report="@Model.Id"><i class="fa fa-flag"></i>  إبلاغ  </span>
+                <div class=" report reportPanelInfo" id="@Model.Id">
+                    إبلاغ عن العضو: <br> <a href="@Model.CommentOwner" class="username">@Model.CommentOwner</a> <br> <br>
+                    <button data-report="@Model.Id" data-commentId="@Model.Id" data-postId="@Model.PostId" class="uprate btn btn-danger btn-xs">بخس السلعة</button><br>
+                    <button data-report="@Model.Id" data-commentId="@Model.Id" data-postId="@Model.PostId" class="downrate btn btn-danger btn-xs">رد غير لائق</button><br>
+                </div>
             </div>
+        }
         </div> 
-    </div> 
     <div class="commentBody">  
         @Model.Text 
     </div> 

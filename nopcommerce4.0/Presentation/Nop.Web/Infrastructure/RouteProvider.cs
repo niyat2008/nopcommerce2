@@ -23,6 +23,12 @@ namespace Nop.Web.Infrastructure
             routeBuilder.MapRoute("Harag.Home", "Harag",
             new { controller = "HaragHome", action = "Home" });
 
+            routeBuilder.MapRoute("Harag.Notification.DeleteHaragNotifications", "DeleteHaragNotifications",
+            new { controller = "Notification", action = "DeleteHaragNotifications" }); 
+            // done
+            routeBuilder.MapRoute("Harag.Notification.DeleteConsultantNotifications", "DeleteConsultantNotifications",
+            new { controller = "Notification", action = "DeleteConsultantNotifications" });
+             
             // done
             routeBuilder.MapRoute("Harag.User.GetAdminLink", "GetAdminLink",
             new { controller = "User", action = "GetHaragAdminLink" });
