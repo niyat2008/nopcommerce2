@@ -10,9 +10,25 @@
         @if (item.SubCategories != null && item.SubCategories.Count > 0)
         {
             <i data-cat-id="@item.Id" class="fa fa-chevron-left cat-list-js subItem pull-left"></i>
-}
+            <ul  class="subRightMenu @(String.Concat("subRightMenu", item.Id))">
+                <li class="top_header">
+                    <i class="fa fa-times pull-left"></i>
+                </li>
+                <li class="@(String.Concat("sub-mobile-navbar-js", item.Id))">
+                    <ul>
+                        @foreach (var i in item.SubCategories)
+                        {
+                            <li>
+                                @Html.RouteLink(i.Name, "Consultant.GetAllClosedPostsBySubCategoryId", new { SubCategoryId = i.Id })
+                            </li>
+                        }
+                    </ul>
+                    
+                </li>
+            </ul>
+        }
     </li>
-     }
+    }
 
     @*<li>
                 <a href="#">الرئيسية</a>

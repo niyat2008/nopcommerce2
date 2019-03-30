@@ -239,6 +239,9 @@
     <Content Update="Themes\Pavilion\Views\Consultant\Post\ChangeCatAndSub.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Themes\Pavilion\Views\Consultant\Post\CommonConsultations.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Themes\Pavilion\Views\Consultant\Post\ListOfCategory - Copy.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

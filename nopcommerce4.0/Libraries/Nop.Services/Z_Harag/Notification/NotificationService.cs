@@ -103,11 +103,23 @@ namespace Nop.Services.Z_Harag.Notification
 
             foreach (var item in postFollowers)
             {
-               if(item == notifyModel.PostOwner)
+               if(item == notifyModel.PostOwner && item != notifyModel.CustomerId)
                 {
                     this.AddCommentNotification(new Z_Harag_Notification
                     {
                         NotificationType = (int)NotificationType.PostOwnnerComment,
+                        OwnerId = item,
+                        NotificationTime = notifyModel.Time,
+                        PostId = notifyModel.PostId,
+                        CustomerId = notifyModel.CustomerId,
+                        IsRead = false
+                    });
+                }
+                else if (item != notifyModel.CustomerId)
+                { 
+                    this.AddCommentNotification(new Z_Harag_Notification
+                    {
+                        NotificationType = (int)NotificationType.Comment,
                         OwnerId = item,
                         NotificationTime = notifyModel.Time,
                         PostId = notifyModel.PostId,

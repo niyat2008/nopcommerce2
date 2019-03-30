@@ -118,6 +118,9 @@ namespace Nop.Web.Controllers.Harag
                 }).ToList()
             };
             model.ToUserId = userId;
+
+
+            model.ToUserName = user.GetFullName();
             model.MessageType = (MessageType)type;
 
             if (post != null)

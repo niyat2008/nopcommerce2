@@ -6,6 +6,7 @@
 
     <div class="content">
         <div class="container-fluid">
+            <h1>الرسائل</h1>
             <div class="row">
                 <div class="col-md-9">
                     <div class="items">
@@ -23,7 +24,7 @@
                                     <div class="det">
                                         <a href="/Harag/Messages/Post/@item.MessageUserId"><h3>@item.MessageUser</h3></a>
                                         <div class="det-det">
-                                            <small>منذ 4 دقيقة</small>
+                                            <small>@item.LastMessageTime.ToLongDateString()</small>
                                             <span><i class="fa fa-user"></i> @item.SenderName </span>
                                         </div>
                                         <hr style="margin:7px" />

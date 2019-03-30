@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="LanguagesFiles\NiyatJobsResourceManager.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NiyatJobsResourceManager.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="NiyatJobsResourceManagerArabic.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NiyatJobsResourceManagerArabic.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="LanguagesFiles\NiyatJobsResourceManager.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NiyatJobsResourceManager.resx</DependentUpon>
+    </Compile>
+    <Compile Update="NiyatJobsResourceManagerArabic.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>NiyatJobsResourceManagerArabic.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

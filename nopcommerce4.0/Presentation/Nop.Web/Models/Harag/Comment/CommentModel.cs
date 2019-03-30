@@ -26,6 +26,7 @@ namespace Nop.Web.Models.Harag.Comment
         }
 
         public int PostOwnerId { get; internal set; }
+        public string UserFullName { get;  set; }
 
         private string GetDateDescrition(DateTime dateCreated)
         {

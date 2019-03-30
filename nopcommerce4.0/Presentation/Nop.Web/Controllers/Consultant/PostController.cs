@@ -546,7 +546,7 @@ namespace Nop.Web.Controllers.Consultant
                     Photo = GetPostPhoto(m.Photos?.FirstOrDefault()?.Url)
                 }).ToList(),
             };
-            return View("~/Themes/Pavilion/Views/Consultant/Post/CustomerClosedConsultations.cshtml", outputModel);
+            return View("~/Themes/Pavilion/Views/Consultant/Post/CommonConsultations.cshtml", outputModel);
         }
         [HttpGet]
 

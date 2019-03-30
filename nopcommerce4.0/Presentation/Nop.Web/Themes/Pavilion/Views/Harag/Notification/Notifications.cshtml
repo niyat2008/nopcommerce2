@@ -13,7 +13,8 @@
             <h3>الاشعارات</h3>
             <div class="col-md-3 cont"></div>
             <div class="col-md-9 cont">
-                @foreach (var n in Model.Notifications.OrderByDescending(m => m.Time))
+                @if(Model.Notifications.Count > 0) {
+                foreach (var n in Model.Notifications.OrderByDescending(m => m.Time))
                 {
                     if (n.Type == NotificationType.PostOwnnerComment)
                     {
@@ -54,7 +55,12 @@
                                 @n.DateDescription: @n.Note
                             </h3>
                         </div>
+                        }
                     }
+                }
+                else
+                {
+                    <p>لا توجد اشعارات</p>
                 }
                 @if (Model.Notifications.ToList().Count > 0)
                 {

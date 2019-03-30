@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Nop.Core.Domain.Customers;
 using Nop.Core.Domain.Z_Harag;
+using Nop.Services.Customers;
 using Nop.Services.Z_Harag.Comment;
 using Nop.Services.Z_Harag.Helpers;
 using Nop.Services.Z_Harag.Notification;
@@ -104,6 +105,7 @@ namespace Nop.Web.Controllers.Harag
                         DateCreated = m.DateCreated,
                         DateUpdated = m.DateUpdated,
                         CommentedBy = m.CommentedBy,
+                        UserFullName = m.Customer.GetFullName(),
                         CommentOwner = m.Customer.Username,
                         PostOwnerId = (int)m.CustomerId
                         //Photos = m.Photos.Select(p => p.Url).ToList()

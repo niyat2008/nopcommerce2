@@ -72,7 +72,7 @@ namespace Nop.Web.Models.Harag.Post
 
             if ( s < 60)
             {
-                return "حالا";
+                return "الان";
             }
              
             m = s / 60;

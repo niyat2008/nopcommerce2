@@ -433,12 +433,12 @@
     <div id="mobile-navbar-js"></div>
 </div>
 
-<div class="subRightMenu">
+@*<div class="subRightMenu">
     <div class="top_header">
         <i class="fa fa-times pull-left"></i>
     </div>
     <div id="sub-mobile-navbar-js"></div>
-</div>
+</div>*@
 
 @*<link href="~/css/Consultant/bootstrap.min.css" rel="stylesheet" />*@
 <script src="~/js/Consultant/bootstrap.min.js"></script>
@@ -557,21 +557,25 @@
     $(document).ready(function () {
 
         $('#mobile-navbar-js').on('click', '.cat-list-js', function () {
-            var subCatArea = $('#sub-mobile-navbar-js');
+
+          
             var cat = $(this);
+            //var subCatArea = $('.sub-mobile-navbar-js' + cat.attr('data-cat-id'));
+            //alert('.' + 'sub-mobile-navbar-js' + cat.attr('data-cat-id'));
+            //subCatArea.html(data);
+            $(".subRightMenu" + cat.attr('data-cat-id')).css({ "-webkit-transform": "translate(0px)", "-ms-transform": "translate(0px)", "-moz-transform": "translate(0px)", "transform": "translate(0px)", "box-shadow": "1px 0 5px rgba(0,0,0,0.5)" });
 
-            $.ajax({
-                type: 'GET', 
-                url: '/Consultations/Post/GetSubCategoriesByCategoryIdMobile?id=' + cat.attr('data-cat-id'),
 
-                success: function (data) { 
-                    subCatArea.html(data);
-                    subCatArea.show();
-                   // $(".rightMenu .top_header i").click();
-                   // $(".subRightMenu").show();
-                    $(".subRightMenu").css({ "-webkit-transform": "translate(0px)", "-ms-transform": "translate(0px)", "-moz-transform": "translate(0px)", "transform": "translate(0px)", "box-shadow": "1px 0 5px rgba(0,0,0,0.5)" });
-                }
-            });
+            //$.ajax({
+            //    type: 'GET', 
+            //    url: '/Consultations/Post/GetSubCategoriesByCategoryIdMobile?id=' + cat.attr('data-cat-id'),
+
+            //    success: function (data) { 
+            //        subCatArea.html(data);
+            //        subCatArea.show();
+            //        $(".subRightMenu").css({ "-webkit-transform": "translate(0px)", "-ms-transform": "translate(0px)", "-moz-transform": "translate(0px)", "transform": "translate(0px)", "box-shadow": "1px 0 5px rgba(0,0,0,0.5)" });
+            //    }
+            //});
         });
 
         $.ajax({

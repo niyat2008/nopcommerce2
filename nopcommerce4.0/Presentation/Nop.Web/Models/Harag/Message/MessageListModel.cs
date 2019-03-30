@@ -14,6 +14,7 @@ namespace Nop.Web.Models.Harag.Message
         public List<MessageOutputModel> Messages  { get; set; }
         public MessageType MessageType { get; set; }
         public int ToUserId { get; set; }
+        public string ToUserName { get; internal set; }
     }
 
     public class MessageThreadListModel : BaseNopEntityModel

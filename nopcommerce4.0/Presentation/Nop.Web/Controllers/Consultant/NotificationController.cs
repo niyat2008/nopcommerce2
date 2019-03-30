@@ -29,8 +29,8 @@ namespace Nop.Web.Controllers.Consultant
         //Get Notifications
         public IActionResult GetNotifications()
         {
-            if (!_workContext.CurrentCustomer.IsRegistered())
-                return Unauthorized();
+            if (!_workContext.CurrentCustomer.IsRegistered()) 
+                return Redirect("/Login");
 
             int customerId = _workContext.CurrentCustomer.Id;
 
@@ -75,19 +75,7 @@ namespace Nop.Web.Controllers.Consultant
              _notificationService.DeleteNotifications(_workContext.CurrentCustomer.Id);
             return Redirect("/Consultant/Notifications");
         }
-        //Update Notification
-        //[HttpPost]
-        //public IActionResult UpdateNotification(List<int> model)
-        //{
-        //    if (!_workContext.CurrentCustomer.IsRegistered())
-        //        return Unauthorized();
-
-        //    _notificationService.UpdateNotification(model);
-
-        //    return Ok();
-        //}
-
-
+      
         #endregion
 
 

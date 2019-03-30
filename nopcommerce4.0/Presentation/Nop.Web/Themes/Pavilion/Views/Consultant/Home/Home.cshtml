@@ -1,8 +1,7 @@
 ﻿@{
     Layout = "~/Themes/Pavilion/Views/Consultant/Shared/_Header.cshtml";
 }
-
-
+ 
 
 
 <script type="text/javascript">
@@ -12,8 +11,8 @@
         $.ajax({
             type: 'GET',
             url: '@Url.RouteUrl("Consultant.Post.GetAllClosedPostsAjax")',
-            complete: function (data) {
-                $("#posts").html(data);
+            complete: function (data) { 
+                $("#posts").html(data.responseText);
             }
         });
 

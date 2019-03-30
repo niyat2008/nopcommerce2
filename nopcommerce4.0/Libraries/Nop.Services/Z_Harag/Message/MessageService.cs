@@ -90,7 +90,7 @@ namespace Nop.Services.Z_Harag.Message
         {
             var users = _messageRepository.TableNoTracking 
                 .Where(m => m.ToUserId == userId || m.FromUserId == userId)
-                .Select(n => n.FromUserId)
+                .Select(n => n.ToUserId)
                 .Distinct()
                 .ToList(); 
              
