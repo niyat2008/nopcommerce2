@@ -46,7 +46,7 @@ input.form-control { border: 1px solid #ddd }
 .form-group { margin-bottom: 0; position: relative; }
 .form-control { height: 44px; }
 .search input { box-shadow: 0 1px 2px 0 rgba(0,0,0,.08); border: 1px solid #ddd; margin-bottom: 10px }
-.search button { position: absolute; top: 0; left: 0; height: 100%; width: 50px; text-align: center; border: 0; background: #4da74d; color: #fff }
+.search button { position: absolute; top: 0; left: 0; height: 100%; width: 50px; text-align: center; border: 0; background: #3e874b; color: #fff }
 /* .welcome { position: relative; width: 145px; } */
 .welcome { position: relative; }
 .welcome a { text-decoration: none; color: #888; cursor: pointer; font-size: 18px; line-height: 46px; padding: 10px 20px; border: 1px solid #ddd; }
@@ -250,7 +250,7 @@ input.form-control { border: 1px solid #ddd }
 .content .form-control { height: 40px; }
 .content select { margin-bottom: 10px }
 .content button { background: #eee; border-bottom: 3px solid #ccc; }
-.content button.srchBtn { width: 100%; }
+.content button.srchBtn { width: 100%; height: 37px; }
 .content button.add { margin-bottom: 20px; margin-top: 20px; }
 .content button.add i { color: #4da74d }
 

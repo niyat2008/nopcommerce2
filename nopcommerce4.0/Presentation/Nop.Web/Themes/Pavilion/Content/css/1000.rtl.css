@@ -182,10 +182,20 @@
 
             .header-links-wrapper label {
                 background-position: right 0;
+
             }
 
             .header-selectors-wrapper label {
                 background-position: right -40px;
+            }
+            .header-links-wrapper label:before {
+                content: "";
+                position: absolute;
+                top: 4px;
+                right: 0px;
+                width: 16px;
+                height: 16px;
+                background: url("../../Content/img/user.png") center no-repeat;
             }
 
         .header-links,
