@@ -329,10 +329,9 @@
     <div class="footer-lower">
         <div class="center">
             <ul class="accepted-payments">
-                <li class="method1"></li>
                 <li class="method2"></li>
                 <li class="method3"></li>
-                <li class="method4"></li>
+                <li class="method4"></li> 
             </ul>
             <div class="footer-disclaimer">
                 حقوق الطبع والنشر © 2019 Niyat Store. جميع الحقوق محفوظة.
@@ -447,7 +446,31 @@
         }
     });
 
-    $("#search-js1").on('click', function () {
+    $("#searchText").on('change', function () {
+        var Term = $("#searchText").val();
+
+        if (Term) {
+
+            window.location = '/Harag/Search/' + Term;
+        }
+        else {
+            alert("ادخل كلمات للبحث");
+        }
+    });
+
+    $("#search-js").on('click', function () {
+        var Term = $("#searchText1").val();
+
+        if (Term) {
+
+            window.location = '/Harag/Search/' + Term;
+        }
+        else {
+            alert("ادخل كلمات للبحث");
+        }
+    });
+
+    $("#searchText1").on('change', function () {
         var Term = $("#searchText1").val();
 
         if (Term) {

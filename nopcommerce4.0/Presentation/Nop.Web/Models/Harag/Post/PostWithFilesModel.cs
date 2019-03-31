@@ -46,11 +46,20 @@ namespace Nop.Web.Models.Harag.Post
         {
             get
             {
-                return GetDateDescrition(this.DateUpdated);
+                return GetDateDescrition(this.DateCreated);
             }
             set { }
         }
 
+        public string LastUpdateDateDescription
+        {
+            get
+            {
+                return GetDateDescrition(this.DateUpdated);
+            }
+            set { }
+        }
+      
         public bool IsPostOwner { get; set; }
         public bool IsUserFeatured { get;  set; }
 
@@ -61,7 +70,7 @@ namespace Nop.Web.Models.Harag.Post
 
             var diff = DateTime.Now - dateCreated;
 
-            int s = (int)diff.Milliseconds/1000;
+            int s = (int)diff.TotalMilliseconds/1000;
 
            
             int m = 0;

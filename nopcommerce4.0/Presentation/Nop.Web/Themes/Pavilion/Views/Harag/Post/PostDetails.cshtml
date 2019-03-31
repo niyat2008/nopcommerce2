@@ -30,7 +30,7 @@
                     <div class="det-top">
                         <h4>@Model.Title</h4>
                         <small>
-                            @Model.DateDescription
+                            @Model.DateDescription @Model.DateCreated.ToLongDateString()
                         </small>
 
                         <div class="det-det">
@@ -38,6 +38,12 @@
                             <a href="/Harag/Cat/@Model.CategoryId"><span><i class="fa fa-address-book"></i> @Model.CategoryName </span></a>
                             <a href="/Harag/user/@Model.PostOwner"><span><i class="fa fa-user"></i> @Model.PostOwnerFullName </span></a>
                             <a style="text-decoration:none; cursor:default"><span> رقم الاعلان:  @Model.Id </span></a>
+
+                            @if (Model.LastUpdateDateDescription != null)
+                            {
+                                <a style="text-decoration:none; cursor:default"><span> تاريخ اخر تحديث:  @Model.LastUpdateDateDescription </span></a>
+                            }
+
                         </div>
                     </div>
                     <div class="det-bottom">

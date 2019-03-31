@@ -17,5 +17,6 @@ namespace Nop.Web.Models.Harag.Profile
         public int FollowerCount { get; set; }
 
         public List<PostModel> Posts { get; set; }
+        public string FullName { get;  set; }
     }
 }

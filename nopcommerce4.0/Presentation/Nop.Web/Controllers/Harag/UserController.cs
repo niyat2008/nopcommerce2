@@ -160,7 +160,8 @@ namespace Nop.Web.Controllers.Harag
                 //Rate = p.Rate,
                 DateUpdated = p.DateUpdated,
                 IsDispayed = p.IsDispayed,
-                PostOwner = p.Customer.Username
+                PostOwner = p.Customer.Username,
+                PostOwnerFullName = p.Customer.GetFullName()
             }).ToList();
             
             var model = new ProfileModel
@@ -171,7 +172,9 @@ namespace Nop.Web.Controllers.Harag
                 LastSeen = result.LastActivityDateUtc,
                 Posts = posts,
                 userId = result.Id,
-                UserName = result.Username
+                UserName = result.Username,
+                FullName = result.GetFullName()
+
             };
             return View("~/Themes/Pavilion/Views/Harag/Profile/MainProfile.cshtml", model);
         }
@@ -335,6 +338,7 @@ namespace Nop.Web.Controllers.Harag
                 Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
                 //Rate = p.Rate,
                 DateUpdated = p.DateUpdated,
+                    PostOwnerFullName = p.Customer.GetFullName(),
                 IsDispayed = p.IsDispayed,
                 PostOwner = p.Customer.Username
             }).ToList();
@@ -347,7 +351,8 @@ namespace Nop.Web.Controllers.Harag
                 LastSeen = result.LastActivityDateUtc,
                 Posts = posts,
                 userId = result.Id,
-                UserName = result.Username
+                UserName = result.Username,
+                FullName = result.GetFullName()
             };
 
             return View("~/Themes/Pavilion/Views/Harag/Profile/MainProfile.cshtml", model);
@@ -412,8 +417,6 @@ namespace Nop.Web.Controllers.Harag
 
         //    return PartialView("~/Themes/Pavilion/Views/Consultant/User/_UserRolesAndThreeButtons.cshtml");
         //}
-
-
-
+        
     }
 }

@@ -1202,6 +1202,7 @@ namespace Nop.Web.Controllers.Harag
                     IsClosed = m.IsCommentingClosed,
                     IsDispayed = m.IsDispayed,
                     City = m.City.ArName,
+                    
                     CategoryName = m.Category.Name,
                     Photo = m.Z_Harag_Photo?.FirstOrDefault()?.Url
                 }).ToList(),

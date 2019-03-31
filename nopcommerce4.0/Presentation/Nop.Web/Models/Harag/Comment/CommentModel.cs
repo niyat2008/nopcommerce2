@@ -31,11 +31,10 @@ namespace Nop.Web.Models.Harag.Comment
         private string GetDateDescrition(DateTime dateCreated)
         {
             if (dateCreated == null)
-                return "";
-
+                return ""; 
             var diff = DateTime.Now - dateCreated;
 
-            int s = diff.Milliseconds / 1000;
+            int s = (int)diff.TotalMilliseconds / 1000;
 
 
             int m = 0;
