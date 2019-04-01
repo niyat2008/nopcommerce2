@@ -10,9 +10,10 @@
 
 @*@Html.Partial("~/Themes/Pavilion/Views/ConsultantAdmin/Shared/_CSS.cshtml")*@
 
-<div class="page-title">اضف صنف رئيسى </div>
+<div class="page-title">تعديل   @Model.Name </div>
 
 <form id="addCategory" >
+    @Html.HiddenFor(m => m.Id, new { id ="category-id-js" })
     <div class="form-group">
         <label>اسم الصنف</label>
         <div class="col-md-10">
@@ -29,16 +30,12 @@
         </div>
     </div>
 
-    <input type="submit" value="اضافة" class="btn btn-primary add" />    
+    <input type="submit" value="تحديث" class="btn btn-primary add" />    
 </form>
 
 
 <script src="~/js/ConsultantAdmin/notify.js"></script>
-
-
-
-
-
+  
 
 @*@Html.Partial("~/Themes/Pavilion/Views/ConsultantAdmin/Shared/_Js.cshtml")*@
 
@@ -53,7 +50,8 @@
             //var values = JSON.stringify($("#addCategory").serializeArray());
             var model = {
                 "Name": $(".categoryName").val(),
-                "Description": $(".categoryDescription").val() 
+                "Description": $(".categoryDescription").val(),
+                "Id": $('#category-id-js').val()
             }; 
             if (model.Name === "") {
                 alert("ادخل اسم الصنف")
@@ -68,7 +66,7 @@
 
                 var values = JSON.stringify(model);
                 ajaxRequest = $.ajax({
-                    url: "/Consultations/Admin/Categories/AddCategoryAjax",
+                    url: "/Consultations/Admin/Categories/UpdateCategoryAjax",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     type: "post",
@@ -76,9 +74,8 @@
                 });
                 ajaxRequest.done(function (response) {
                     if (response.result == true) {
-                        $(".categoryName").val("");
-                        $(".categoryDescription").val("");
-                        $.notify("تمت الاضافة بنجاح", "success",
+                       
+                        $.notify("تمت التعديل بنجاح", "success",
                             {position:"center"}
                         );
                     }

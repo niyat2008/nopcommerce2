@@ -615,13 +615,14 @@ new { controller = "Post", action = "GetSubCategoriesByCategoryIdMobile" });
             routeBuilder.MapRoute("Consultant.Admin.AddCategoryAjax", "Consultations/Admin/Categories/AddCategoryAjax",
              new { controller = "Categories", action = "AddCategoryAjax" });
 
-        
 
-
-
-
-
-
+            // Update Category 
+            routeBuilder.MapRoute("Consultant.Admin.UpdateCategory", "Consultations/Admin/Categories/UpdateCategory",
+             new { controller = "Categories", action = "UpdateCategory" });
+            // Update Category Ajax
+            routeBuilder.MapRoute("Consultant.Admin.UpdateCategoryAjax", "Consultations/Admin/Categories/UpdateCategoryAjax",
+             new { controller = "Categories", action = "UpdateCategoryAjax" });
+             
             //SubCategories
             routeBuilder.MapRoute("Consultant.Admin.GetSubCategories", "Consultations/Admin/SubCategories/GetSubCategories",
              new { controller = "SubCategories", action = "GetSubCategories" });
@@ -640,6 +641,16 @@ new { controller = "Post", action = "GetSubCategoriesByCategoryIdMobile" });
             //Add SubCategory Ajax
             routeBuilder.MapRoute("Consultant.Admin.AddSubCategoryAjax", "Consultations/Admin/SubCategories/AddSubCategoryAjax",
               new { controller = "SubCategories", action = "AddSubCategoryAjax" });
+
+
+            //Update SubCategory
+            routeBuilder.MapRoute("Consultant.Admin.UpdateSubCategory", "Consultations/Admin/SubCategories/UpdateSubCategory",
+              new { controller = "SubCategories", action = "UpdateSubCategory" });
+            //Update SubCategory Ajax
+            routeBuilder.MapRoute("Consultant.Admin.UpdateSubCategoryAjax", "Consultations/Admin/SubCategories/UpdateSubCategoryAjax",
+              new { controller = "SubCategories", action = "UpdateSubCategoryAjax" });
+
+
             // Delete SubCategory
             routeBuilder.MapRoute("Consultant.Admin.DeleteSubCategory", "Consultations/Admin/SubCategories/DeleteSubCategory",
              new { controller = "SubCategories", action = "DeleteSubCategory" });

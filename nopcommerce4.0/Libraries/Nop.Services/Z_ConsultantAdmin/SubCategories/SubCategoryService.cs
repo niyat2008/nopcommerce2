@@ -97,6 +97,20 @@ namespace Nop.Services.Z_ConsultantAdmin.SubCategories
 
             return subCategory;
         }
+
+        //Update SubCategory
+        public Z_Consultant_SubCategory UpdateSubCategory(SubCategoryForPost subCategoryModel)
+        {
+            var subCategory = _subcategoryRepository.TableNoTracking.Where(m => m.Id == subCategoryModel.Id).FirstOrDefault();
+
+            subCategory.Name = subCategoryModel.Name;
+            subCategory.DateUpdated = DateTime.Now;  
+
+            if (subCategory != null)
+                _subcategoryRepository.Update(subCategory);
+
+            return subCategory;
+        }
         //Delete SubCategory
         public void DeleteSubCategory(int subCategoryId)
         {
@@ -139,6 +153,11 @@ namespace Nop.Services.Z_ConsultantAdmin.SubCategories
         {
             var allCategories = _categoryRepository.TableNoTracking;
             return allCategories.ToList();
+        }
+
+        public Z_Consultant_SubCategory GetSubByCategoryId(int subCatId)
+        {
+            return _subcategoryRepository.GetById(subCatId);
         }
 
         #endregion

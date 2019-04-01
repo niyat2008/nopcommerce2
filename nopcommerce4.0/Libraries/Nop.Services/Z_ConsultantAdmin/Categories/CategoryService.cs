@@ -73,8 +73,36 @@ namespace Nop.Services.Z_ConsultantAdmin.Categories
             }
             return categoryDb;
         }
+
+
+        //Update category
+        public Z_Consultant_Category UpdateCategory(CategoryModelForPost category)
+        {
+            var query = _categoryRepository.TableNoTracking.AsQueryable();
+
+            // query
+            query.Where(m => m.Id == category.Id);
+
+            var categoryDb = query.FirstOrDefault();
+            categoryDb.Name = category.Name;
+            categoryDb.Description = category.Description;
+
+            categoryDb.DateUpdated = DateTime.Now;
+
+            if (query.FirstOrDefault() == null)
+            {
+                return null;
+            }
+            
+            
+           _categoryRepository.Update(categoryDb);
+           
+            return categoryDb;
+        }
+
+
         //Get All Categories
-       public List<Z_Consultant_Category> GetAllCategor()
+        public List<Z_Consultant_Category> GetAllCategor()
         {
             var allCategories = _categoryRepository.TableNoTracking;
             return allCategories.ToList();
@@ -148,6 +176,13 @@ namespace Nop.Services.Z_ConsultantAdmin.Categories
 
             }
             _categoryRepository.Delete(category);
+        }
+
+        public Z_Consultant_Category GetCategory(int catId)
+        {
+            var category = _categoryRepository.TableNoTracking.Where(m => m.Id == catId).FirstOrDefault();
+
+            return category;
         }
         #endregion
     }

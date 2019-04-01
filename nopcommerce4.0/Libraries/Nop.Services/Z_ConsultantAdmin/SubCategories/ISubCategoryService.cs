@@ -19,7 +19,7 @@ namespace Nop.Services.Z_ConsultantAdmin.SubCategories
          void DeleteSubCategory(int subCategoryId);
         //Get All Categories
         List<Z_Consultant_Category> GetAllCategor();
-       
-
+        Z_Consultant_SubCategory UpdateSubCategory(SubCategoryForPost subCategoryModel);
+        Z_Consultant_SubCategory GetSubByCategoryId(int subCatId);
     }
 }

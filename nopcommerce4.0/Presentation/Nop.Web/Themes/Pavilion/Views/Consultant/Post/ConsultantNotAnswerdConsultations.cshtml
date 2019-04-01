@@ -199,6 +199,8 @@
                             <!-- Footer -->
                             <div class="post-footer">
                                 <div class="pull-left">
+                                    @Html.Partial("/Themes/Pavilion/Views/Consultant/Post/ShareButtonsa.cshtml", Url.Link("Consultant.Post.GetPost", new { PostId = @post.Id }))
+
                                     <a href="@Url.RouteUrl("Consultant.Post.GetPost",new { PostId=@post.Id})">
                                         <span class="buton primary btndarckgreen"> التفاصيل </span>
                                     </a>

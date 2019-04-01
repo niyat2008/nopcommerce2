@@ -26,7 +26,7 @@
                 <th>الوصف</th>
                 <th>الصنف الرئيسى </th>
                 
-                @*<th>---</th>*@
+                <th>---</th>
             </tr>
         </thead>
     </table>
@@ -105,11 +105,8 @@
                             dataTable.row(button.parents("tr")).remove().draw();
                             //dataTable.rows().remove().draw();
                             swal("تم مسح الاستشارة بنجاح", {
-                                icon: "success",
-
-                            });
-
-
+                                icon: "success", 
+                            }); 
                         }
                     });
                 } else {

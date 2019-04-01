@@ -169,6 +169,44 @@ namespace Nop.Web.Controllers.ConsultantAdmin
 
             return Json(new { result = true });
         }
+
+
+        //Add SubCategory
+        public ActionResult UpdateSubCategory( int subCatId ) 
+        {
+            var allCategories = _subCategory.GetAllCategor();
+            var subCat = _subCategory.GetSubByCategoryId(subCatId);
+            var subCategoryViewModel = new SubCategoryForPost
+            {
+                Categories = allCategories,
+                CategoryId = subCat.CategoryId,
+                Id = subCat.Id,
+                Name = subCat.Name,
+                Description = subCat.Description
+            };
+
+            return View("~/Themes/Pavilion/Views/ConsultantAdmin/Subcategories/UpdateSubCategory.cshtml", subCategoryViewModel);
+        }
+        //Add SubCategory Ajax
+        public ActionResult UpdateSubCategoryAjax([FromBody]SubCategoryForPost subCategoryModel)
+        {
+               if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized()              ;
+
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.ConsultationAdmin, true))
+                return Forbid();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var subCategory = _subCategory.UpdateSubCategory(subCategoryModel);
+
+            if (subCategory == null)
+                return Json(new { result = false });
+
+            return Json(new { result = true });
+        }
         //Delete Category
         [HttpDelete]
         public ActionResult DeleteSubCategory(int subCategoryId)

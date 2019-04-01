@@ -32,16 +32,34 @@ namespace Nop.Web.ConsultantTasks
                         {
                             command.CommandType = System.Data.CommandType.StoredProcedure;
                             command.CommandText = "checkHaragPostTime";
-                            
+
                             sqlConnection.Open();
-                            int u = command.ExecuteNonQuery(); 
+                            int u = command.ExecuteNonQuery();
+                            sqlConnection.Close ();
+                        }
+
+                        using (var command = sqlConnection.CreateCommand())
+                        {
+                            command.CommandType = System.Data.CommandType.StoredProcedure;
+                            command.CommandText = "SetPostsUnFeaturedHaragPost";
+                            sqlConnection.Open();
+                            int u = command.ExecuteNonQuery();
+                            sqlConnection.Close();
+                        }
+
+
+                        using (var command = sqlConnection.CreateCommand())
+                        {
+                            command.CommandType = System.Data.CommandType.StoredProcedure;
+                            command.CommandText = "deleteHaragPost";
+                            sqlConnection.Open();
+                            int u = command.ExecuteNonQuery();
+                            sqlConnection.Close();
                         }
                     }
                      Thread.Sleep(TimeSpan.FromHours(1).Milliseconds);
                 }
-
-              
-
+               
             }).Start();
 
 
@@ -51,26 +69,26 @@ namespace Nop.Web.ConsultantTasks
         public void StartPostDeletingService()
         {
                             Console.WriteLine("StartPostDeletingService: ");
-            new Thread(() =>
-            {
-                while (true)
-                {
-                    var connectionString = new DataSettingsManager().LoadSettings().DataConnectionString;
-                    using (var sqlConnection = new SqlConnection(connectionString))
-                    {
-                        using (var command = sqlConnection.CreateCommand())
-                        {
-                            command.CommandType = System.Data.CommandType.StoredProcedure;
-                            command.CommandText = "deleteHaragPost";
-                            sqlConnection.Open();
-                            int u = command.ExecuteNonQuery(); 
-                        }
-                    }
-                    Thread.Sleep(TimeSpan.FromHours(5).Milliseconds);
-                }
+            //new Thread(() =>
+            //{
+            //    while (true)
+            //    {
+            //        var connectionString = new DataSettingsManager().LoadSettings().DataConnectionString;
+            //        using (var sqlConnection = new SqlConnection(connectionString))
+            //        {
+            //            using (var command = sqlConnection.CreateCommand())
+            //            {
+            //                command.CommandType = System.Data.CommandType.StoredProcedure;
+            //                command.CommandText = "deleteHaragPost";
+            //                sqlConnection.Open();
+            //                int u = command.ExecuteNonQuery(); 
+            //            }
+            //        }
+            //        Thread.Sleep(TimeSpan.FromHours(5).Milliseconds);
+            //    }
 
                 
-            }).Start();
+            //}).Start();
 
 
 
@@ -79,26 +97,26 @@ namespace Nop.Web.ConsultantTasks
 
         public void SetPostsUnFeaturedHaragPostService()
         {  
-            new Thread(() =>
-            {
-                while (true)
-                {
-                    var connectionString = new DataSettingsManager().LoadSettings().DataConnectionString;
-                    using (var sqlConnection = new SqlConnection(connectionString))
-                    {
-                        using (var command = sqlConnection.CreateCommand())
-                        {
-                            command.CommandType = System.Data.CommandType.StoredProcedure;
-                            command.CommandText = "SetPostsUnFeaturedHaragPost";
-                            sqlConnection.Open();
-                            int u = command.ExecuteNonQuery();
-                        }
-                    }
-                     Thread.Sleep(TimeSpan.FromHours(1).Milliseconds);
-                }
+            //new Thread(() =>
+            //{
+            //    while (true)
+            //    {
+            //        var connectionString = new DataSettingsManager().LoadSettings().DataConnectionString;
+            //        using (var sqlConnection = new SqlConnection(connectionString))
+            //        {
+            //            using (var command = sqlConnection.CreateCommand())
+            //            {
+            //                command.CommandType = System.Data.CommandType.StoredProcedure;
+            //                command.CommandText = "SetPostsUnFeaturedHaragPost";
+            //                sqlConnection.Open();
+            //                int u = command.ExecuteNonQuery();
+            //            }
+            //        }
+            //         Thread.Sleep(TimeSpan.FromHours(1).Milliseconds);
+            //    }
 
                 
-            }).Start();
+            //}).Start();
 
 
 

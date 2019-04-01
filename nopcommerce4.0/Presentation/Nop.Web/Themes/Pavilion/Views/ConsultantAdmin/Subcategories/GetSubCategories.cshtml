@@ -24,7 +24,7 @@
                 <th>الوصف</th>
                 <th>الصنف الرئيسى</th>
                 
-                @*<th>---</th>*@
+                <th>---</th>
             </tr>
         </thead>
     </table>
@@ -53,14 +53,15 @@
     { "data": "Name"},
     { "data": "Description","width":"35%"},
     { "data": "CategoryName" },
-    //{
-    //"data": "Id",
-    //"render": function (data) {
-    //return "<button class='btn btn-danger' id='delete' data-post-id=" + data + "><i class='fa fa-trash'></i>حذف</button>" ;
+    {
+    "data": "Id",
+    "render": function (data) {
+        return "<button class='btn btn-danger' id='delete' data-post-id=" + data + "><i class='fa fa-trash'></i>حذف</button>" +
+            "<a  href='/Consultations/Admin/SubCategories/UpdateSubCategory?subCatId=" + data + "' class='btn btn-primary' ><i class='fa fa-trash'></i>تعديل</a>";;
 
-    //}
+    }
 
-    //}
+    }
 
 
     ],

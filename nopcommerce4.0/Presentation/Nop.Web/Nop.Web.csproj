@@ -170,6 +170,9 @@
     <Content Update="Themes\Pavilion\Content\img\_ShareButton.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Themes\Pavilion\Views\ConsultantAdmin\Categories\UpdateCategory.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Themes\Pavilion\Views\ConsultantAdmin\Categories\AddCategory.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
@@ -228,6 +231,9 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\ConsultantAdmin\shared\_DataTable.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\ConsultantAdmin\Subcategories\UpdateSubCategory.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\ConsultantAdmin\Subcategories\AddSubCategory.cshtml">

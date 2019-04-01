@@ -119,6 +119,51 @@ namespace Nop.Web.Controllers.ConsultantAdmin
             return Json(new { result = true });
 
         }
+
+
+
+        //Add Category 
+        public ActionResult UpdateCategory(int catId)
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+             
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.ConsultationAdmin, true))
+                return Forbid();
+
+            var cat = _category.GetCategory(catId);
+
+            var model = new CategoryModelForPost()
+            {
+                Id = cat.Id,
+                Name = cat.Name,
+                Description = cat.Description 
+            };
+
+            return View("~/Themes/Pavilion/Views/ConsultantAdmin/Categories/UpdateCategory.cshtml", model);
+        }
+        //Add Category Ajax
+        [HttpPost]
+        public ActionResult UpdateCategoryAjax([FromBody] CategoryModelForPost categoryModel)
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.ConsultationAdmin, true))
+                return Forbid();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var category = _category.UpdateCategory(categoryModel);
+            if (category == null)
+                return Json(new { result = false });
+
+            return Json(new { result = true });
+
+        }
+
         //Delete Category
         [HttpDelete]
         public ActionResult DeleteCategory(int categoryId)

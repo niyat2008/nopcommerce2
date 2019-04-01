@@ -50,17 +50,18 @@
                 "type": "post"
             },
 
-            "columns": [
+            "aoColumns": [
 
                 { "data": "Id", "name": "Id", "width": "10%" },
                 { "data": "Name", "width": "35%" },
                 { "data": "Description", "width": "35%" },
 
-                {
+                 {
                     "data": "Id",
                     "render": function (data) {
-                        return "<a id='details' href='/Consultations/Admin/SubCategories/GetSubCategoriesByCategoryId?categoryId=" + data + "' class='btn btn-xs btn-default' data-post-id=" + data + "><i class='fa fa-eye'></i> الاصناف الفرعية </a>" /*+ " " + "<button class='btn btn-xs btn-danger' id='delete' data-post-id=" + data + "><i class='fa fa-trash' ></i> حذف</button>"*/;
-
+                        return "<a id='details' href='/Consultations/Admin/SubCategories/GetSubCategoriesByCategoryId?categoryId=" + data + "' class='btn btn-xs btn-default' data-post-id=" + data + "><i class='fa fa-eye'></i> الاصناف الفرعية </a>" +
+                            "<a  href='/Consultations/Admin/Categories/UpdateCategory?catId=" + data + "' class='btn btn-xs btn-primary'><i class='fa fa-eye'></i>  تعديل </a>";
+ 
                     }
 
                 }
@@ -106,11 +107,8 @@
                                 dataTable.row(button.parents("tr")).remove().draw();
                                 //dataTable.rows().remove().draw();
                                 swal("تم مسح الاستشارة بنجاح", {
-                                    icon: "success",
-
+                                    icon: "success"
                                 });
-
-
                             }
                         });
                     } else {

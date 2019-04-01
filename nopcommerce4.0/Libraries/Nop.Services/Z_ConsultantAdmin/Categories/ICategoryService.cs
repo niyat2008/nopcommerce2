@@ -18,5 +18,7 @@ namespace Nop.Services.Z_ConsultantAdmin.Categories
 
         //Delete Category
         void DeleteCategory(int categoryId);
+        Z_Consultant_Category UpdateCategory(CategoryModelForPost categoryModel);
+        Z_Consultant_Category GetCategory(int catId);
     }
 }

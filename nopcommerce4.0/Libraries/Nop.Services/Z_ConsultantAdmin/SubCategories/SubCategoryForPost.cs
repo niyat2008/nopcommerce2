@@ -9,6 +9,7 @@ namespace Nop.Services.Z_ConsultantAdmin.SubCategories
 {
     public class SubCategoryForPost
     {
+        public int Id { get; set; }
         public IEnumerable<Z_Consultant_Category> Categories { get; set; }
         public string Name { get; set; }
         public DateTime? DateCreated { get; set; }
