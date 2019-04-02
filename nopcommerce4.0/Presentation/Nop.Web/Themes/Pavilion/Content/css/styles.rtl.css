@@ -3735,9 +3735,9 @@ label, label + * {
 	color: #fff;
 	cursor: pointer;
 }
-.order-progress li.active-step a:after {
-	border-right-color: #f74258;
-}
+    .order-progress li.active-step a:after {
+        border-right-color: #3e874b;
+    }
 .order-progress li.inactive-step a {
 	cursor: default;
 }

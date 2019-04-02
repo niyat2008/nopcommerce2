@@ -8,26 +8,11 @@
     <!-- Comment -->
     <div class="comment">
         <div class="row">
-            @if (Model.CommentedBy == "Registered")
-            {
-                <div class="col-xs-2 text-center">
-                    <img class="userimagelarge" src="~/images/Consultant/images/no-img.png" />
-                    <img class="userimagemedium" src="~/images/Consultant/images/no-img-mobile.png" style="width:50px;height:50px;" />
-                    <img class="userimagesmall" src="~/images/Consultant/images/no-img-mobile.png" style="width:35px;height:35px;" />
-                </div>
-            }
-            else
-            {
-                <div class="col-xs-2 text-center">
-                    <img class="userimagelarge" src="~/images/Consultant/images/no-img-consultant.png" />
-                    <img class="userimagemedium" src="~/images/Consultant/images/no-img-mobile-consultant.png" style="width:50px;height:50px;" />
-                    <img class="userimagesmall" src="~/images/Consultant/images/no-img-mobile-consultant.png" style="width:35px;height:35px;" />
-                </div>
-            }
+         
                 <div class="col-xs-10">
-                    @if (ViewBag.UserRole == "Consultant")
+                    @if (Model.CommentedBy != "Registered")
                     {
-                        <h4 class="text-danger">@Model.CommentOwner</h4>
+                        <h4 class="text-danger"><strong class="text-danger">المستشار: </strong>@Model.CommentOwner</h4>
                     }
                     else
                     {

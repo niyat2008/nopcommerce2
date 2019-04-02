@@ -2,13 +2,16 @@
 @model CategoryWithSubCategoriesOutputModel
 
 
-
+@{
+    var controller = ViewContext.RouteData.Values["controller"];
+    var action = ViewContext.RouteData.Values["action"];
+}
 <style type="text/css">
     li:hover div {
         display: block !important;
     }
 </style>
- 
+
 <!-- Nav -->
 <nav class="navbar navbar-default">
     <div class="col-md-2" style="padding-right: 12px;"></div>
@@ -32,16 +35,16 @@
                         <a href="/Harag/Cat/@item.Id">@item.Name</a>
                     </li>
                 }
-                    <li class="main hasSubMenu">
-                        <a href="/Harag">أحدث الاعلانات</a>
-                    </li>
-             
+                <li class="main hasSubMenu">
+                    <a href="/Harag">أحدث الاعلانات</a>
+                </li>
+
             </ul>
         </div><!-- /.navbar-collapse -->
-         
+
     </div><!-- /.container-fluid -->
 </nav>
- 
+
 <div class="" id="navSelectedCat">
     <div class="container-fluid">
         <div class="col-md-3"></div>
@@ -56,13 +59,12 @@
 
 <script type="text/javascript">
 
-        $(document).ready(function () {
-            $("#navSelectedCat").css("display", "none");
-            //$(".navbar-default .navbar-nav > li.main > a").click(function () {
-            //    $(this).css({ "background": "#fff !important", "color": "green !important" });
-            //})
-        }); 
+    $(document).ready(function () {
+        $("#navSelectedCat").css("display", "none");
+        //$(".navbar-default .navbar-nav > li.main > a").click(function () {
+        //    $(this).css({ "background": "#fff !important", "color": "green !important" });
+        //})
+    });
 </script>
 
 
- 

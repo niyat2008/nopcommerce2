@@ -24,6 +24,10 @@
     .btndarckgreen:hover {
         background-color: darkgreen !important;
     }
+
+    .active-rate {
+        background: orange !important;
+    }
 </style>
 
 <!-- Details -->
@@ -166,11 +170,11 @@
     <div class="post-body">
         <div class="row">
 
-            <div class="col-xs-2 text-center">
+            @*<div class="col-xs-2 text-center">
                 <img class="userimagelarge" src="~/images/Consultant/images/no-img.png" />
                 <img class="userimagemedium" src="~/images/Consultant/images/no-img-mobile.png" style="width:50px;height:50px;" />
                 <img class="userimagesmall" src="~/images/Consultant/images/no-img-mobile.png" style="width:35px;height:35px;" />
-            </div>
+            </div>*@
 
             <div class="col-xs-10">
                 <h4>@Model.PostOwner</h4>
@@ -210,11 +214,11 @@
         @if (!Model.IsClosed && ViewBag.UserRole == "Registered")
         {<strong> قم بتقييم المستشار </strong>
             <span id="test" class="will-rate">
-                <i class="fa fa-star-o" onclick="RatePost(@Model.Id,1,this)"></i>
-                <i class="fa fa-star-o" onclick="RatePost(@Model.Id,2,this)"></i>
-                <i class="fa fa-star-o" onclick="RatePost(@Model.Id,3,this)"></i>
-                <i class="fa fa-star-o" onclick="RatePost(@Model.Id,4,this)"></i>
                 <i class="fa fa-star-o" onclick="RatePost(@Model.Id,5,this)"></i>
+                <i class="fa fa-star-o" onclick="RatePost(@Model.Id,4,this)"></i>
+                <i class="fa fa-star-o" onclick="RatePost(@Model.Id,3,this)"></i>
+                <i class="fa fa-star-o" onclick="RatePost(@Model.Id,2,this)"></i>
+                <i class="fa fa-star-o" onclick="RatePost(@Model.Id,1,this)"></i>
             </span>
 
             <button class="pull-left btndarckgreen" onclick="closePost('@Model.Id')">غلق الاستشارة</button>
@@ -258,7 +262,20 @@
 
 <script type="text/javascript">
 
-    
+
+
+    $('#test > i').mouseenter(function () {
+        $('#test > i').removeClass("active-rate");
+        $(this).addClass("active-rate");
+
+        $('.active-rate ~ i').addClass("active-rate");
+
+    });
+
+    $('#test > i').mouseleave(function () {
+        $('#test > i').removeClass("active-rate");
+
+    });
 
     function deleteFile(index) {
 

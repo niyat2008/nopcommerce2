@@ -260,8 +260,7 @@ button.ticket-info-button.k-button:before,
 .ropc .section .title.active {
   border-bottom-color: #3e874b;
 }
-.order-progress li.active-step a:after {
-  border-left-color: #3e874b;
+.order-progress li.active-step a:after { 
 }
 /* JCarousel Styling */
 
