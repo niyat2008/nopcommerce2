@@ -440,6 +440,9 @@
     <Content Update="Themes\Pavilion\Views\Shared\Components\OrderSummar\Default.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Themes\Pavilion\Views\Shared\_ColumnsTwo - Copy.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

@@ -16,6 +16,7 @@ namespace Nop.Web.Models.Harag.Category
             SubCategories = new Collection<SubCategoryModel>();
         }
         public string Name { get; set; }
+        public bool IsSelected { get; set; }
 
         public ICollection<SubCategoryModel> SubCategories { get; set; }
     }

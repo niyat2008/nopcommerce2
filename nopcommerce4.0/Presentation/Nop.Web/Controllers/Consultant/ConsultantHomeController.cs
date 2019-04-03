@@ -124,7 +124,7 @@ namespace Nop.Web.Controllers.Consultant
         }
 
 
-        public virtual IActionResult Navbar(PagingParams pagingParams)
+        public virtual IActionResult Navbar(PagingParams pagingParams, int catId)
         {
 
             var model = _categoryService.GetCategoriesWithSubCategories(pagingParams);
@@ -139,6 +139,7 @@ namespace Nop.Web.Controllers.Consultant
                 {
                     Id = m.Id,
                     Name = m.Name,
+                    IsSelected = (catId == m.Id),
                     SubCategories = m.SubCategories.Select(s => new SubCategoryModel()
                     {
                         Id = s.Id,

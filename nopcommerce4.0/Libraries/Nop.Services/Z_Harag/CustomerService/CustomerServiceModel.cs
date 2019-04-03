@@ -10,6 +10,12 @@ namespace Nop.Services.Z_Harag.Category
     {
         public int UserId { get; set; }
         public string Message { get; set; }
+        public bool IsLoggedIn { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string ContactType { get; set; }
+        public string ContactDepartment { get; set; }
+        public string FullName { get; set; }
     }
 
     public class CustomerServiceOutputModel

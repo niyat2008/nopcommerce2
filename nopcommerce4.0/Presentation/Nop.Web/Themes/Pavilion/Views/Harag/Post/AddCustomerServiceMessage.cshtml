@@ -1,10 +1,9 @@
 ﻿@model Nop.Services.Z_Harag.Category.CustomerServiceModel
 
 @{
-    //Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
+    //Layout = "~/Themes/Pavilion/Views/Consultant/Shared/_Header.cshtml";
     Layout = "~/Themes/Pavilion/Views/Shared/_ColumnsTwo.cshtml";
-}
-
+} 
 @{
     string getCustomerPosts = "";
     if (@ViewBag.UserRole == "Registered")
@@ -21,45 +20,162 @@
     }
 }
 
+<head>
+    <title>reCAPTCHA demo: Explicit render after an onload callback</title>
+    <script type="text/javascript">
+        var onloadCallback = function () {
+            grecaptcha.render('html_element', {
+                'sitekey': '6LfpypsUAAAAAI1iYuentJVEoBGRV-VcpYlwwwTo'
+            });
+        };
+    </script>
+</head>
+
 @*@if (ViewBag.UserRole == "Registered")
     {
         if (@ViewBag.CanAddNewPost == true)
         {*@
-<h3>اضافه رساله جديده</h3>
-<div class="row">
-    <div class="col-md-12">
-        <form  action="@Url.RouteUrl("Harag.CustomerService.AddNewMessageAjax")" method="post" class="add-adverse">
 
-            <div class="row"> 
-                @Html.TextAreaFor(m => m.Message, new { id = "Title-js-ajax", @class = "form-control",col=20, placeholder = "الرساله", required = "required" })
-            </div>
-            <br />
-            <div class="row">
-                <button class="btn btn-default add" type="submit">اضافة الرساله للموقع</button>
-            </div>
-</form>
-    </div>
-</div>
+@*<div class="row">
+        <div class="col-md-12">
+            <form action="@Url.RouteUrl("Harag.CustomerService.AddNewMessageAjax")" method="post" class="add-adverse">
 
-@*}
-            else
-            {
-    <a href="~/Themes/Pavilion/Views/Harag/Post/AddCustomerServiceMessage.cshtml">~/Themes/Pavilion/Views/Harag/Post/AddCustomerServiceMessage.cshtml</a>
-    <div id="AddPost">
+                <div class="row">
+                    @Html.TextAreaFor(m => m.Message, new { id = "Title-js-ajax", @class = "form-control", col = 20, placeholder = "الرساله", required = "required" })
+                </div>
+                <br />
+                <div class="row">
+                    <button class="btn btn-default add" type="submit">اضافة الرساله للموقع</button>
+                </div>
+            </form>
+        </div>
+    </div>*@
 
-        <div class="row">
-            <div class="col-md-9 col-lg-offset-2">
-                <form id="addPostForm">
-                    <div class="form-group" style="margin-bottom:5%;">
-                        <h3>لا يمكنك اضافه استشاره الا بعد اغلاق جميع الاستشارات المفتوحه.</h3>
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container" >
+    <h3 class="text-bold">دائما في خدمتك , ادخل اقتراحك او شكوي او استفسار</h3>
+    <div class="row">
+
+        <div class="col-md-4"> 
+                <legend><span class="glyphicon glyphicon-globe"></span> مقرنا</legend>
+                <address>
+                    <strong>موقع المزارع.</strong><br>
+                    المملكة العربية السعودية<br>
+                    <abbr title="Phone">
+                        P:
+                    </abbr>
+                    (123) 456-7890
+                </address>
+                <address>
+                    <strong>البريد الالكتروني</strong><br>
+                    <a href="mailto:#">info@farms.com</a>
+                </address> 
+        </div>
+        <div class="col-md-8">
+            <div class="well well-sm">
+                <form action="@Url.RouteUrl("Harag.CustomerService.AddNewMessageAjax")" method="post" >
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">
+                                    الرساله
+                                </label>
+                                <textarea name="Message" id="message" class="form-control" rows="9" cols="25" required="required"
+                                          placeholder="نص الرساله"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">
+                                    الاسم
+                                </label>
+                                <input type="text" class="form-control" placeholder="الاسم" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <label for="name">
+                                    رقم الهاتف
+                                </label>
+                                <input type="tel" name="Phone" class="form-control" placeholder="رقم الهاتف" />
+                            </div>
+                            <div class="form-group">
+                                <label for="email">
+                                    البريد الالكتروني
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-envelope"></span>
+                                    </span>
+                                    <input name="Email" type="text" class="form-control" id="email" placeholder="ادخل البريد الالكتروني" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">
+                                    الموضوع والقسم
+                                </label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <select id="subject" name="ContactDepartment" class="form-control" required="required">
+                                            <option value="المتجر">المتجر</option>
+                                            <option value="الحراج">الحراج</option>
+                                            <option value="الاستشارات">الاستشارات</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select id="subject" name="ContactType" class="form-control" required="required">
+                                            <option value="شكوي">شكوي</option>
+                                            <option value="استفسار">استفسار</option>
+                                            <option value="اقتراح">اقتراح</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div id="html_element"></div>
+                            </div>
+                        </div> 
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-success pull-right green" id="btnContactUs">
+                                ارسال
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
-
         </div>
+
     </div>
-            }
-        }*@
+</div>
+
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+</script>
+<style type="text/css">
+    .jumbotron {
+        background: #358CCE;
+        color: #FFF;
+        border-radius: 0px;
+    }
+
+    .jumbotron-sm {
+        padding-top: 24px;
+        padding-bottom: 24px;
+    }
+
+    .jumbotron small {
+        color: #FFF;
+    }
+
+    .h1 small {
+        font-size: 24px;
+    }
+
+</style>
 
 <script type="text/javascript">
 

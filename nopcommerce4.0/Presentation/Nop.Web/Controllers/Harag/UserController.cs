@@ -19,6 +19,7 @@ using Nop.Services.Z_Harag.Payment;
 using Nop.Services.Z_HaragAdmin.Setting;
 using Nop.Services.Z_Harag.Notification;
 using Nop.Services.Z_Harag.Category;
+using Nop.Web.Infrastructure.Harag;
 
 namespace Nop.Web.Controllers.Harag
 {
@@ -26,16 +27,22 @@ namespace Nop.Web.Controllers.Harag
     {
         private SettingsModel Settings;
         private readonly Core.IWorkContext _workContext;
-        private readonly  ICustomerService _customerContext;
-        private readonly  ICustomerServicesService _customerServiceContext;
+        private readonly ICustomerService _customerContext;
+        private readonly ICustomerServicesService _customerServiceContext;
         private readonly IRateSrevice _rateRepository;
         private readonly INotificationService _notificationService;
         private readonly IPaymentService _paymentRepository;
         private readonly ISettingService _settingRepository;
 
         private readonly IFollowService _followRepository; 
-        private readonly  IBlackListService _blackListService;
-        private readonly  IPostService _postService;
+        private readonly IBlackListService _blackListService;
+        private readonly IPostService _postService;
+
+
+        private string emails = @"a.shehata@niyat.com.sa";
+        private string server = @"niyat.com.sa";
+        private string email = @"a.shehata@niyat.com.sa";
+        private string pass = @"pM3^43rn";
 
         public PagingParams PagingParams { get; set; }
 
@@ -74,7 +81,30 @@ namespace Nop.Web.Controllers.Harag
         [HttpGet]
         public IActionResult CustomerServiseMessage()
         {
-            return View("~/Themes/Pavilion/Views/Harag/Post/AddCustomerServiceMessage.cshtml");
+            var model = new CustomerServiceModel();
+
+            if ((_workContext.CurrentCustomer.IsRegistered()))
+            { 
+                var user = _workContext.CurrentCustomer;
+                model = new CustomerServiceModel
+                {
+                    IsLoggedIn = true,
+                    Phone = user.Mobile,
+                    Email = user.Email,
+                    FullName = user.GetFullName(),
+                    UserId = user.Id
+
+                };
+            }
+            else
+            {
+                model = new CustomerServiceModel
+                {
+                    IsLoggedIn = true
+                };
+            }
+          
+            return View("~/Themes/Pavilion/Views/Harag/Post/AddCustomerServiceMessage.cshtml", model);
         }
 
         [HttpPost]
@@ -87,20 +117,30 @@ namespace Nop.Web.Controllers.Harag
                     Message = customerService.Message,
                     UserId = _workContext.CurrentCustomer.Id,
                     Time = DateTime.Now
-                }; 
-                _customerServiceContext.AddCustomerServiceMessage(message);
-                return View("~/Themes/Pavilion/Views/Harag/Post/CustomerServiceMessageAdded.cshtml");
+                };
+
+                var emeilaManager = new EmailManager(this.email, this.server, this.pass);
+
+                var result = emeilaManager.SendMail(customerService.Email ?? "farmsuser@user.com", this.emails, customerService);
+
+                if (result)
+                {
+                    _customerServiceContext.AddCustomerServiceMessage(message);
+                    return View("~/Themes/Pavilion/Views/Harag/Post/CustomerServiceMessageAdded.cshtml");
+                }
+                else
+                {
+                    return View("~/Themes/Pavilion/Views/Harag/Post/CustomerServiceMessageAdded.cshtml");
+
+                } 
             }
 
-            return Redirect("/Login?returnUrl=/Harag/CustomerService");
-
-            
+            return View("~/Themes/Pavilion/Views/Harag/Post/AddCustomerServiceMessage.cshtml", customerService);
         }
 
         [HttpGet]
         public IActionResult GetCustomerServiseMessage(int id)
-        { 
-                
+        {  
                var m = _customerServiceContext.GetCustomerServiceMessage(id);
  
             var model = new CustomerServiceOutputModel

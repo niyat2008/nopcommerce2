@@ -700,7 +700,7 @@ namespace Nop.Web.Controllers.Harag
         }
 
         [HttpGet]
-        public IActionResult GetHaragNavbar()
+        public IActionResult GetHaragNavbar(int catId)
         {
             var categories = _categoryService.GetCategories();
             var model = new CategoryWithSubCategoriesOutputModel();
@@ -709,7 +709,8 @@ namespace Nop.Web.Controllers.Harag
                 model.Items = categories.Select(m => new CategoryWithSubCategoriesModel
                 {
                     Id = m.Id,
-                    Name = m.Name
+                    Name = m.Name,
+                    IsSelected = (catId == m.Id)
                 }).ToList();
                 return PartialView("~/Themes/Pavilion/Views/Harag/Shared/_Navbar.cshtml", model);
             }

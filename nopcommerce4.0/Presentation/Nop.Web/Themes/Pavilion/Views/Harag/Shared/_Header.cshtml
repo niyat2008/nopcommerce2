@@ -1,5 +1,17 @@
 ﻿
+@{ 
+    var controllerName = Url.ActionContext.RouteData.Values["controller"].ToString();
+    var actionName = Url.ActionContext.RouteData.Values["action"].ToString();
 
+    var incat = controllerName.Equals("post", StringComparison.InvariantCultureIgnoreCase) &&
+      actionName.Equals("getHaragcatposts", StringComparison.InvariantCultureIgnoreCase);
+    var catId = 0;
+
+    if (incat)
+    {
+        catId = Convert.ToInt32(Url.ActionContext.RouteData.Values["catId"].ToString());
+    }
+}
 <head>
     @*<link href="~/css/Consultant/styles.rtl.css" rel="stylesheet" />
         <link href="~/css/Consultant/1000.rtl.css" rel="stylesheet" />
@@ -49,7 +61,9 @@
     <link href="~/Themes/Pavilion/Content/css/pages.css" rel="stylesheet" />
     <script defer src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD7aG1kYv0KXd-QUetcJUwa3APdzvyQzSk"></script>
 </head>
+@{
 
+        }
 <!-- Header -->
 <!-- Top Bar -->
 <section class="topFixed">
@@ -176,16 +190,16 @@
 <section class="search">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-1"></div>
+            <div class="col-md-2"></div>
 
-            <div class="col-md-2 col-xs-12 logoContainer">
+            <div class="col-md-2 col-xs-12 logoContainer" style="margin-right: -47px;">
                 <img class="logo" src="~/images/Consultant/images/logo3.png" onclick="goToHome()" />
             </div>
 
             <div class="col-md-6" style="padding-top:12px;">
                 <div class="form-group">
                     <input id="searchText" type="text" style="height:44px;"
-                           class="form-control" placeholder="ابحث عن ...">
+                           class="form-control" placeholder="البحث في الاستشارات">
                     <button id="search-js" style="height:44px;" class="btndarckgreen">
                         <i class="fa fa-search"></i>
                     </button>
@@ -197,7 +211,9 @@
 </section>
 
 <!--<!-- Nav -->
-<div id="Nav"></div>
+<div id="Nav">
+
+</div>
 
 
 <div class="home" id="homeBody">
@@ -379,7 +395,7 @@
 
         $.ajax({
             type: 'GET',
-            url: '@Url.RouteUrl("Harag.Navbar")',
+            url: '@Url.RouteUrl("Harag.Navbar")?catId=@catId',
 
             success: function (data) {
                 $("#Nav").html(data);

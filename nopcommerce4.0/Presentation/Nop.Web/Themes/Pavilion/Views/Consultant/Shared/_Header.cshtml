@@ -1,5 +1,16 @@
-﻿
+﻿    @{
+        var controllerName = Url.ActionContext.RouteData.Values["controller"].ToString();
+        var actionName = Url.ActionContext.RouteData.Values["action"].ToString();
 
+        var incat = controllerName.Equals("post", StringComparison.InvariantCultureIgnoreCase) &&
+          actionName.Equals("GetAllClosedPostsByCategoryId", StringComparison.InvariantCultureIgnoreCase);
+        var catId = 0;
+
+        if (incat)
+        {
+            catId = Convert.ToInt32(Url.ActionContext.RouteData.Values["CategoryId"].ToString());
+        }
+    }
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Tajawal" rel="stylesheet">
 <script src="~/js/Consultant/jquery.min.js"></script>
@@ -205,16 +216,28 @@
         -webkit-transition: all 3s ease-in-out;
         transition: all 3s ease-in-out;
     }
-    @@media (min-width: 768px){
-        .navbar-nav>li {
+
+    @@media (min-width: 768px) {
+        .navbar-nav > li {
             float: right;
             position: initial;
         }
     }
     /* .subNav { display: none; min-height: 100px; padding: 10px 0; background:#fff; border:1px solid #ddd; position: absolute; top: 51px; right: -292px; z-index: 9999; width: 1518px; box-shadow: 0 1px 2px 0 rgba(0,0,0,.08); -ms-transition: all 3s ease-in-out; -o-transition: all 3s ease-in-out; -webkit-transition: all 3s ease-in-out; transition: all 3s ease-in-out; } */
     /* .navbar-default .navbar-nav>li.hasSubMenu :hover { background:#fff; border-top:1px solid #4da74d } */
-   .navbar-default .navbar-nav > li.hasSubMenu :hover ~ .subNav { display: block; -ms-transition: all 3s ease-in-out; -o-transition: all 3s ease-in-out; -webkit-transition: all 3s ease-in-out; transition: all 3s ease-in-out; }
-   .navbar-default .navbar-nav > li.hasSubMenu a:hover { color: #4da74d; font-weight: bold }
+    .navbar-default .navbar-nav > li.hasSubMenu :hover ~ .subNav {
+        display: block;
+        -ms-transition: all 3s ease-in-out;
+        -o-transition: all 3s ease-in-out;
+        -webkit-transition: all 3s ease-in-out;
+        transition: all 3s ease-in-out;
+    }
+
+    .navbar-default .navbar-nav > li.hasSubMenu a:hover {
+        color: #4da74d;
+        font-weight: bold
+    }
+
     .navbar-default .navbar-nav > li.hasSubMenu a {
         font-size: 15px;
         padding-bottom: 2px;
@@ -223,52 +246,248 @@
         color: #333;
         font-weight: bold;
     }
-   .navbar-default .navbar-nav > li.hasSubMenu a:hover { text-decoration: none }
-   .subNav:hover { display: block }
-   .subNav ul { float: right; min-width: 220px; margin-right: 15px; border-left: 1px solid #ddd; }
-   .subNav ul:last-of-type { border-left: 0 }
-   .subNav ul li { padding-bottom: 15px; float:right; margin-left: 20px; }
-   .subNav ul li a { font-size: 14px; color: #888; margin: 0 0 10px; width: fit-content; border-bottom: 3px solid #3e874b; padding: 0 0 5px; font-weight: bold; padding: 10px 0 }
-   .heading_nav { background: #e8ebee; padding: 10px; margin-bottom: 15px; border-radius: 20px; border: 1px solid #ddd; }
 
-   .fixedNavScreen { background: #fff; box-shadow: 0 3px 5px rgba(0,0,0,0.1); display: none; }
-   .fixedNavScreen ul { display: flex; justify-content: center; margin-bottom: 0; padding: 0 }
-   .fixedNavScreen ul li { float: right; cursor: pointer; padding: 10px; border-left: 1px solid #ddd; border-right: 1px solid #ddd; }
-   .fixedNavScreen ul li i { color: #4da74d; font-weight: bold; }
+        .navbar-default .navbar-nav > li.hasSubMenu a:hover {
+            text-decoration: none
+        }
 
-   .siteDetails { background-color: #e8ebee; padding: 8px; margin-top: 43px }
+    .subNav:hover {
+        display: block
+    }
+
+    .subNav ul {
+        float: right;
+        min-width: 220px;
+        margin-right: 15px;
+        border-left: 1px solid #ddd;
+    }
+
+        .subNav ul:last-of-type {
+            border-left: 0
+        }
+
+        .subNav ul li {
+            padding-bottom: 15px;
+            float: right;
+            margin-left: 20px;
+        }
+
+            .subNav ul li a {
+                font-size: 14px;
+                color: #888;
+                margin: 0 0 10px;
+                width: fit-content;
+                border-bottom: 3px solid #3e874b;
+                padding: 0 0 5px;
+                font-weight: bold;
+                padding: 10px 0
+            }
+
+    .heading_nav {
+        background: #e8ebee;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 20px;
+        border: 1px solid #ddd;
+    }
+
+    .fixedNavScreen {
+        background: #fff;
+        box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+        display: none;
+    }
+
+        .fixedNavScreen ul {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 0;
+            padding: 0
+        }
+
+            .fixedNavScreen ul li {
+                float: right;
+                cursor: pointer;
+                padding: 10px;
+                border-left: 1px solid #ddd;
+                border-right: 1px solid #ddd;
+            }
+
+                .fixedNavScreen ul li i {
+                    color: #4da74d;
+                    font-weight: bold;
+                }
+
+    .siteDetails {
+        background-color: #e8ebee;
+        padding: 8px;
+        margin-top: 43px
+    }
 
     @@media only screen and (max-width : 1024px) {
-      .top-user-menu { display: none }
-      .fixedNavScreen { display: block }
-      .search { padding: 15px 0; margin-bottom:15px }
-      .search .logoContainer { text-align: center }
-      .navbar-default, #userInfo, .search .form-group { display: none }
-      .siteDetails { margin-top: 93px  }
-   }
+        .top-user-menu {
+            display: none
+        }
 
-   #searchScreenFull { display: none; background: #3e874b; margin-top: 50px; min-height: 50px; }
-   #searchScreenFull input { border-radius: 0; height: 33px; width: 75%; float: right; margin-top: 6px }
-   #searchScreenFull i { float: right; line-height: 40px; width: 10%; margin-right: 12px; cursor: pointer; color: #fff; font-size: 15px }
+        .fixedNavScreen {
+            display: block
+        }
 
-   #myAccountScreenFull { display: none }
-   #myAccountScreenFull ul { width: 100%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1); background-color: #f9f9f9;  display: block }
-   #myAccountScreenFull ul li { border-top: 1px solid #ececec; float: none; text-align: center }
-   #myAccountScreenFull ul li a { padding: 15px 25px; font-size: 13px; }
-   #myAccountScreenFull ul li a i { color: #999; font-weight: normal; padding-left: 15px }
+        .search {
+            padding: 15px 0;
+            margin-bottom: 15px
+        }
 
-   .overlay { display: none; background: rgba(0,0,0,0.6); position: fixed; top: 0; right: 0; bottom: 0; width: 100%; height: 100%; z-index: 1060; }
+            .search .logoContainer {
+                text-align: center
+            }
 
-   .rightMenu { position: fixed; top: 0; right: 0; width: 320px; height: 100%; text-align: right; background: #f6f6f6; box-shadow: none; overflow: hidden; z-index: 1070; transition: all 0.5s ease; -webkit-transform: translate(320px); -ms-transform: translate(320px); transform: translate(320px); }
-   .subRightMenu { position: fixed; top: 0; right: 0; width: 313px; height: 100%; text-align: right; background: #f6f6f6; box-shadow: none; overflow: hidden; z-index: 1080; transition: all 0.5s ease; -webkit-transform: translate(313px); -ms-transform: translate(313px); transform: translate(313px); }
-   .rightMenu .top_header { height: 50px; }
-   .rightMenu .top_header i { color: #aaa; cursor: pointer; margin-left: 20px; line-height: 50px }
-    .rightMenu ul .subRightMenu ul  { margin: 0; padding: 0; background: #fff; }
-   .rightMenu ul li { padding: 20px; line-height: 19px; cursor: pointer }
-   .rightMenu ul li a { color: #333; font-size: 15px; text-decoration: none; font-weight: bold; text-transform: uppercase; }
-   .rightMenu ul li:hover a { color: #4da74d }
-   .rightMenu ul li i { color: #4da74d; cursor: pointer; }
+            .navbar-default, #userInfo, .search .form-group {
+                display: none
+            }
 
+        .siteDetails {
+            margin-top: 93px
+        }
+    }
+
+    #searchScreenFull {
+        display: none;
+        background: #3e874b;
+        margin-top: 50px;
+        min-height: 50px;
+    }
+
+        #searchScreenFull input {
+            border-radius: 0;
+            height: 33px;
+            width: 75%;
+            float: right;
+            margin-top: 6px
+        }
+
+        #searchScreenFull i {
+            float: right;
+            line-height: 40px;
+            width: 10%;
+            margin-right: 12px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 15px
+        }
+
+    #myAccountScreenFull {
+        display: none
+    }
+
+        #myAccountScreenFull ul {
+            width: 100%;
+            box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            display: block
+        }
+
+            #myAccountScreenFull ul li {
+                border-top: 1px solid #ececec;
+                float: none;
+                text-align: center
+            }
+
+                #myAccountScreenFull ul li a {
+                    padding: 15px 25px;
+                    font-size: 13px;
+                }
+
+                    #myAccountScreenFull ul li a i {
+                        color: #999;
+                        font-weight: normal;
+                        padding-left: 15px
+                    }
+
+    .overlay {
+        display: none;
+        background: rgba(0,0,0,0.6);
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1060;
+    }
+
+    .rightMenu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 320px;
+        height: 100%;
+        text-align: right;
+        background: #f6f6f6;
+        box-shadow: none;
+        overflow: hidden;
+        z-index: 1070;
+        transition: all 0.5s ease;
+        -webkit-transform: translate(320px);
+        -ms-transform: translate(320px);
+        transform: translate(320px);
+    }
+
+    .subRightMenu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 313px;
+        height: 100%;
+        text-align: right;
+        background: #f6f6f6;
+        box-shadow: none;
+        overflow: hidden;
+        z-index: 1080;
+        transition: all 0.5s ease;
+        -webkit-transform: translate(313px);
+        -ms-transform: translate(313px);
+        transform: translate(313px);
+    }
+
+    .rightMenu .top_header {
+        height: 50px;
+    }
+
+        .rightMenu .top_header i {
+            color: #aaa;
+            cursor: pointer;
+            margin-left: 20px;
+            line-height: 50px
+        }
+
+    .rightMenu ul .subRightMenu ul {
+        margin: 0;
+        padding: 0;
+        background: #fff;
+    }
+
+    .rightMenu ul li {
+        padding: 20px;
+        line-height: 19px;
+        cursor: pointer
+    }
+
+        .rightMenu ul li a {
+            color: #333;
+            font-size: 15px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .rightMenu ul li:hover a {
+            color: #4da74d
+        }
+
+        .rightMenu ul li i {
+            color: #4da74d;
+            cursor: pointer;
+        }
 </style>
 
 
@@ -358,7 +577,7 @@
                                     <i class="fa fa-lock"></i>
                                     <span>دخول</span>
                                 </a>
-                            </li> 
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -374,9 +593,9 @@
 <section class="search">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-1"></div>
+            <div class="col-md-2"></div>
 
-            <div class="col-md-2 col-xs-12 logoContainer">
+            <div class="col-md-2 col-xs-12 logoContainer" style="margin-right: -47px;">
                 <img class="logo" src="~/images/Consultant/images/logo3.png" onclick="goToHome()" />
             </div>
 
@@ -434,11 +653,11 @@
 </div>
 
 @*<div class="subRightMenu">
-    <div class="top_header">
-        <i class="fa fa-times pull-left"></i>
-    </div>
-    <div id="sub-mobile-navbar-js"></div>
-</div>*@
+        <div class="top_header">
+            <i class="fa fa-times pull-left"></i>
+        </div>
+        <div id="sub-mobile-navbar-js"></div>
+    </div>*@
 
 @*<link href="~/css/Consultant/bootstrap.min.css" rel="stylesheet" />*@
 <script src="~/js/Consultant/bootstrap.min.js"></script>
@@ -535,7 +754,7 @@
             <ul class="accepted-payments">
                 <li class="method2"></li>
                 <li class="method3"></li>
-                <li class="method4"></li> 
+                <li class="method4"></li>
             </ul>
             <div class="footer-disclaimer">
                 حقوق الطبع والنشر © 2019 Niyat Store. جميع الحقوق محفوظة.
@@ -557,7 +776,7 @@
 
         $('#mobile-navbar-js').on('click', '.cat-list-js', function () {
 
-          
+
             var cat = $(this);
             //var subCatArea = $('.sub-mobile-navbar-js' + cat.attr('data-cat-id'));
             //alert('.' + 'sub-mobile-navbar-js' + cat.attr('data-cat-id'));
@@ -566,10 +785,10 @@
 
 
             //$.ajax({
-            //    type: 'GET', 
+            //    type: 'GET',
             //    url: '/Consultations/Post/GetSubCategoriesByCategoryIdMobile?id=' + cat.attr('data-cat-id'),
 
-            //    success: function (data) { 
+            //    success: function (data) {
             //        subCatArea.html(data);
             //        subCatArea.show();
             //        $(".subRightMenu").css({ "-webkit-transform": "translate(0px)", "-ms-transform": "translate(0px)", "-moz-transform": "translate(0px)", "transform": "translate(0px)", "box-shadow": "1px 0 5px rgba(0,0,0,0.5)" });
@@ -622,7 +841,7 @@
 
         $.ajax({
             type: 'GET',
-            url: '@Url.RouteUrl("Consultant.Navbar")',
+            url: '@Url.RouteUrl("Consultant.Navbar")?catId=@catId',
 
             success: function (data) {
                 $("#Nav").html(data);
@@ -704,11 +923,11 @@
     });
     $(".subItem").click(function () {
         $(".overlay").css("display", "block");
-        $(".subRightMenu").css({ "-webkit-transform": "translate(0px)", "-ms-transform": "translate(0px)", "-moz-transform": "translate(0px)", "transform": "translate(0px)", "box-shadow": "1px 0 5px rgba(0,0,0,0.5)"});
+        $(".subRightMenu").css({ "-webkit-transform": "translate(0px)", "-ms-transform": "translate(0px)", "-moz-transform": "translate(0px)", "transform": "translate(0px)", "box-shadow": "1px 0 5px rgba(0,0,0,0.5)" });
         $(".topFixed").css("z-index", "1070");
     });
     $(".subRightMenu .top_header i").click(function () {
-        $(".subRightMenu").css({ "-webkit-transform": "translate(313px)", "-ms-transform": "translate(313px)", "-moz-transform": "translate(313px)", "transform": "translate(313px)", "box-shadow": "none"});
+        $(".subRightMenu").css({ "-webkit-transform": "translate(313px)", "-ms-transform": "translate(313px)", "-moz-transform": "translate(313px)", "transform": "translate(313px)", "box-shadow": "none" });
         $(".topFixed").css("z-index", "1060");
     });
     $("#myAccount").click(function () {
@@ -721,8 +940,8 @@
     });
     $(".overlay").click(function () {
         $(this).css("display", "none");
-        $(".rightMenu").css({ "-webkit-transform": "translate(320px)", "-ms-transform": "translate(320px)", "-moz-transform": "translate(320px)", "transform": "translate(320px)" , "box-shadow": "none" });
-        $(".subRightMenu").css({ "-webkit-transform": "translate(313px)", "-ms-transform": "translate(313px)", "-moz-transform": "translate(313px)", "transform": "translate(313px)", "box-shadow": "none"});
+        $(".rightMenu").css({ "-webkit-transform": "translate(320px)", "-ms-transform": "translate(320px)", "-moz-transform": "translate(320px)", "transform": "translate(320px)", "box-shadow": "none" });
+        $(".subRightMenu").css({ "-webkit-transform": "translate(313px)", "-ms-transform": "translate(313px)", "-moz-transform": "translate(313px)", "transform": "translate(313px)", "box-shadow": "none" });
         $("#myAccountScreenFull").css("display", "none");
         $("#searchScreenFull").css("display", "none");
         $(".manage").css("display", "none");

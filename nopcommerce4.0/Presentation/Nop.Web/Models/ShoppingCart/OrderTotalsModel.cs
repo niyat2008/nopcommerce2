@@ -20,12 +20,14 @@ namespace Nop.Web.Models.ShoppingCart
         public bool RequiresShipping { get; set; }
         public string SelectedShippingMethod { get; set; }
         public bool HideShippingTotal { get; set; }
+        public string TotalAfterTax { get; set; }
 
         public string PaymentMethodAdditionalFee { get; set; }
 
         public string Tax { get; set; }
         public IList<TaxRate> TaxRates { get; set; }
         public bool DisplayTax { get; set; }
+        public string OverTax { get; set; }
         public bool DisplayTaxRates { get; set; }
 
         public IList<GiftCard> GiftCards { get; set; }

@@ -2,6 +2,7 @@
 <div class="total-info">
     <table class="cart-total">
         <tbody>
+
             <tr class="order-subtotal">
                 <td class="cart-total-left">
                     <label>@T("ShoppingCart.Totals.SubTotal"):</label>
@@ -41,7 +42,7 @@
                             else
                             {
                                 <span>@T("ShoppingCart.Totals.Defaultshippingcost")</span>
-                              
+
                             }
                         }
                         else
@@ -130,22 +131,40 @@
                     </td>
                 </tr>
             }
-            <tr class="order-total">
+            <tr class="order-subtotal">
                 <td class="cart-total-left">
                     <label>@T("ShoppingCart.Totals.OrderTotal"):</label>
                 </td>
                 <td class="cart-total-right">
                     @if (!string.IsNullOrEmpty(Model.OrderTotal))
                     {
-                        <span class="value-summary"><strong>@Model.OrderTotal</strong></span>
+                        <span class="value-summary"><strong>@Model.TotalAfterTax</strong></span>
                     }
                     else
                     {
                         <span>
                             @*@T("ShoppingCart.Totals.CalculatedDuringCheckout")*@
-                            @Model.OrderTotal
+                            @Model.TotalAfterTax
                         </span>
                     }
+                </td>
+            </tr>
+            <tr class="order-subtotal">
+                <td class="cart-total-left">
+                    @*amsfci92*@
+                    <label>@T("ShoppingCart.Totals.OverTax"):</label>
+                </td>
+                <td class="cart-total-right">
+                    <span class="value-summary">@Model.OverTax</span>
+                </td>
+            </tr>
+            <tr class="order-total">
+                <td class="cart-total-left">
+                    @*amsfci92*@
+                    <label>@T("ShoppingCart.Totals.OrderTotalAtAll"):</label>
+                </td>
+                <td class="cart-total-right">
+                    <span class="value-summary">@Model.OrderTotal </span>
                 </td>
             </tr>
             @if (Model.WillEarnRewardPoints > 0)
@@ -160,8 +179,8 @@
                 </tr>
             }
 
-            
-          
+
+
 
         </tbody>
     </table>

@@ -1040,6 +1040,8 @@ namespace Nop.Web.Factories
         /// <returns>Order totals model</returns>
         public virtual OrderTotalsModel PrepareOrderTotalsModel(IList<ShoppingCartItem> cart, bool isEditable)
         {
+            var totalTax = 0.05;
+
             // to get it in case of null
             decimal customSubTotal = 0;
 
@@ -1144,13 +1146,21 @@ namespace Nop.Web.Factories
                 if (shoppingCartTotalBase.HasValue)
                 {
                     var shoppingCartTotal = _currencyService.ConvertFromPrimaryStoreCurrency(shoppingCartTotalBase.Value, _workContext.WorkingCurrency);
-                    model.OrderTotal = _priceFormatter.FormatPrice(shoppingCartTotal, true, false);
+
+                    // amsfci92
+                    model.OrderTotal = _priceFormatter.FormatPrice(shoppingCartTotal  + ((decimal)totalTax* shoppingCartTotal), true, false);;
+                    model.OverTax = _priceFormatter.FormatPrice( ((decimal)totalTax * shoppingCartTotal), true, false); ;
+                    model.TotalAfterTax = _priceFormatter.FormatPrice(shoppingCartTotal, true, false);
                 }
                 else
                 {
+                    // amsfci92
                     shoppingCartTotalBase = customSubTotal + 20;
+                 
                     var shoppingCartTotal = _currencyService.ConvertFromPrimaryStoreCurrency(shoppingCartTotalBase.Value, _workContext.WorkingCurrency);
                     model.OrderTotal = _priceFormatter.FormatPrice(shoppingCartTotal, true, false);
+                    model.OverTax =_priceFormatter.FormatPrice(((decimal)totalTax * (decimal)shoppingCartTotalBase), true, false); ;
+                    model.TotalAfterTax = _priceFormatter.FormatPrice(shoppingCartTotal, true, false);
                 }
 
                 //discount

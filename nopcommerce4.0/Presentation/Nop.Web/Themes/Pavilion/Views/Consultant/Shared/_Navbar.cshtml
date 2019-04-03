@@ -6,6 +6,13 @@
     li:hover div {
         display: block !important;
     }
+
+    .selected-link {
+        text-decoration: none;
+        color: #4da74d;
+        font-weight: bold; 
+        background: #fff;
+    }
 </style>
 
 
@@ -13,7 +20,7 @@
 <nav class="navbar navbar-default">
     @*<div class="col-md-2" style="padding-right: 12px;"></div>*@
     <div class="container-fluid">
-        <div class="col-md-1"></div>
+        <div class="col-md-2"></div>
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -25,30 +32,26 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav"  style="margin-right: -47px;">
                 
 
                 @foreach (var item in Model.Items)
                 {
                 <li class="main hasSubMenu">
 
-                    @Html.RouteLink(item.Name, "Consultant.GetAllClosedPostsByCategoryId", new { CategoryId = item.Id })
+                    @Html.RouteLink(item.Name, "Consultant.GetAllClosedPostsByCategoryId", new {@class= (item.IsSelected? "selected-link" : ""), CategoryId = item.Id }) 
 
                     @if (item.SubCategories.Count > 0)
                     {
                         <div class="subNav">
 
-                            <ul>
-
+                            <ul> 
                                 @foreach (var subCat in item.SubCategories)
                                 {
                                     <li>
                                         @Html.RouteLink(subCat.Name, "Consultant.GetAllClosedPostsBySubCategoryId", new { SubCategoryId = subCat.Id })
                                     </li>
-                                }
-
-
-
+                                } 
                             </ul>
 
 

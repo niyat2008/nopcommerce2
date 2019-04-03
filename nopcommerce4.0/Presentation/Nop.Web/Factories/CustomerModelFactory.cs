@@ -680,16 +680,16 @@ namespace Nop.Web.Factories
                     ItemClass = "forum-subscriptions"
                 });
             }
-            if (_catalogSettings.ShowProductReviewsTabOnAccountPage)
-            {
-                model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
-                {
-                    RouteName = "CustomerProductReviews",
-                    Title = _localizationService.GetResource("Account.CustomerProductReviews"),
-                    Tab = CustomerNavigationEnum.ProductReviews,
-                    ItemClass = "customer-reviews"
-                });
-            }
+            //if (_catalogSettings.ShowProductReviewsTabOnAccountPage)
+            //{
+            //    model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
+            //    {
+            //        RouteName = "CustomerProductReviews",
+            //        Title = _localizationService.GetResource("Account.CustomerProductReviews"),
+            //        Tab = CustomerNavigationEnum.ProductReviews,
+            //        ItemClass = "customer-reviews"
+            //    });
+            //}
             if (_vendorSettings.AllowVendorsToEditInfo && _workContext.CurrentVendor != null)
             {
                 model.CustomerNavigationItems.Add(new CustomerNavigationItemModel

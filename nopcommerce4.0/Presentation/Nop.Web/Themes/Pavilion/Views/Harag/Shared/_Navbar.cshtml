@@ -6,9 +6,17 @@
     var controller = ViewContext.RouteData.Values["controller"];
     var action = ViewContext.RouteData.Values["action"];
 }
+
 <style type="text/css">
     li:hover div {
         display: block !important;
+    }
+
+    .selected-link {
+        text-decoration: none; 
+        color: #4da74d !important;
+        font-weight: bold;
+        background: #fff;
     }
 </style>
 
@@ -27,12 +35,12 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav" style="margin-right: -47px;">
 
                 @foreach (var item in Model.Items)
                 {
-                    <li class="main hasSubMenu">
-                        <a href="/Harag/Cat/@item.Id">@item.Name</a>
+                    <li   class="main hasSubMenu @(item.IsSelected ? "selected-link" : "")">
+                        <a href="/Harag/Cat/@item.Id">@item.Name  </a>
                     </li>
                 }
                 <li class="main hasSubMenu">
