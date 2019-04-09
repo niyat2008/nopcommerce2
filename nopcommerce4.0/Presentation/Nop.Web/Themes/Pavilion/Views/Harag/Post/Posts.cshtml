@@ -5,11 +5,9 @@
 @{
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
 }
-
-
+ 
 @*<link href="~/css/Consultant/pagination.css" rel="stylesheet" />*@
-
-
+ 
 <style type="text/css">
     .orange-star {
         color: orange !important;
@@ -45,11 +43,26 @@
             </div>
             <div class="col-md-9">
                 <!-- أضف اعلانك -->
-                <div>
-                    @*<button class="btn btn-default add" type="button">
-                        <a href="@Url.RouteUrl("Harag.Post.AgreementBeforeAddPost")"> أضف اعلانك <i class="fa fa-plus"></i></a>
-                    </button>*@
-                </div> 
+                <!-- أضف اعلانك -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <a class=" add-btn " href="@Url.RouteUrl("Harag.Post.AgreementBeforeAddPost")"> أضف اعلانك <i class="fa fa-plus"></i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-4">
+                      
+                    </div>
+                </div>
+                <!-- List -->
                 <div id="posts" class="items">
 
                     @if (Model.Items.Count() <= 0)
@@ -90,8 +103,8 @@
                     }
                 </div>
                 @*<div>
-                    <button class="btn btn-default add" type="button">مشاهدة المزيد</button>
-                </div>*@
+            <button class="btn btn-default add" type="button">مشاهدة المزيد</button>
+        </div>*@
             </div>
         </div>
     </div>

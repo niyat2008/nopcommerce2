@@ -100,7 +100,7 @@ namespace Nop.Web.Controllers.Harag
             {
                 model = new CustomerServiceModel
                 {
-                    IsLoggedIn = true
+                    IsLoggedIn = false
                 };
             }
           
@@ -110,6 +110,15 @@ namespace Nop.Web.Controllers.Harag
         [HttpPost]
         public IActionResult CustomerServiseMessage(CustomerServiceModel customerService)
         {
+            var reCaptcha = Request.Form["g-recaptcha-response"];
+            
+            if (string.IsNullOrEmpty( reCaptcha))
+            {
+                ModelState.AddModelError("", "لم يتم التحقق اكمل اختبار الروبوت");
+                return View("~/Themes/Pavilion/Views/Harag/Post/AddCustomerServiceMessage.cshtml", customerService);
+            }
+
+            var r = reCaptcha.ToList();
             if (_workContext.CurrentCustomer.IsRegistered())
             {
                 var message = new Z_Harag_CustomerServicesMessage
@@ -130,9 +139,33 @@ namespace Nop.Web.Controllers.Harag
                 }
                 else
                 {
-                    return View("~/Themes/Pavilion/Views/Harag/Post/CustomerServiceMessageAdded.cshtml");
+                    ModelState.AddModelError("", "لم يتم الارسال حاول مجددا ");  
+                    return View("~/Themes/Pavilion/Views/Harag/Post/AddCustomerServiceMessage.cshtml", customerService); 
+                }
+            }
+            else
+            {
+                var message = new Z_Harag_CustomerServicesMessage
+                {
+                    Message = customerService.Message,
+                    UserId = 0,
+                    Time = DateTime.Now
+                };
 
-                } 
+                var emeilaManager = new EmailManager(this.email, this.server, this.pass);
+
+                var result = emeilaManager.SendMail(customerService.Email ?? "farmsuser@user.com", this.emails, customerService);
+
+                if (result)
+                {
+                    _customerServiceContext.AddCustomerServiceMessage(message);
+                    return View("~/Themes/Pavilion/Views/Harag/Post/CustomerServiceMessageAdded.cshtml");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "لم يتم الارسال حاول مجددا ");
+                    return View("~/Themes/Pavilion/Views/Harag/Post/AddCustomerServiceMessage.cshtml", customerService);
+                }
             }
 
             return View("~/Themes/Pavilion/Views/Harag/Post/AddCustomerServiceMessage.cshtml", customerService);

@@ -28,6 +28,16 @@
     .active-rate {
         background: orange !important;
     }
+
+    .comment .comment-content {
+        font-size: 16px;
+        color: #000;
+        background: #eee;
+        padding: 5px 10px;
+        width: 95%;
+        border-radius: 20px;
+        margin-bottom: 0;
+    }
 </style>
 
 <!-- Details -->
@@ -480,7 +490,7 @@
     var Files = []; 
 
     function addCommentConsultant() {
-        var Text = $("#CommentText").val();
+        var Text = $("#CommentText-consult").val();
 
         if (Text === null || Text === '') {
             alert("فضلا قم بكتابة التعليق اولا");
@@ -530,18 +540,17 @@
                         deleteFile(i++);
                     })
                 }
-            });
-            window.location = window.location;
+            }); 
 
 
             $.ajax({
-        type: 'GET',
-        url: '@Url.RouteUrl("Consultant.Comment.GetCommentsByPostId")',
-        data: { PostId: @Model.Id },
-        success: function (data) {
-            $("#comments").html(data);
-        }
-    });
+                type: 'GET',
+                url: '@Url.RouteUrl("Consultant.Comment.GetCommentsByPostId")',
+                data: { PostId: @Model.Id },
+                success: function (data) {
+                    $("#comments").html(data);
+                }
+            });
 
         }
 
@@ -605,10 +614,7 @@
                     })
                 }
             });
-
-           
-
-
+             
             $.ajax({
             type: 'GET',
             url: '@Url.RouteUrl("Consultant.Comment.GetCommentsByPostId")',

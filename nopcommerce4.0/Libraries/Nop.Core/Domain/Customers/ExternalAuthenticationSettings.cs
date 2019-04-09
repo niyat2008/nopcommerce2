@@ -31,5 +31,8 @@ namespace Nop.Core.Domain.Customers
         /// Gets or sets system names of active payment methods
         /// </summary>
         public List<string> ActiveAuthenticationMethodSystemNames { get; set; }
+
+        // amsfci
+        public bool RequirePhoneValidation { get; set; }
     }
 }

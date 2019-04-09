@@ -20,8 +20,7 @@
     }
 }
 
-<head>
-    <title>reCAPTCHA demo: Explicit render after an onload callback</title>
+<head> 
     <script type="text/javascript">
         var onloadCallback = function () {
             grecaptcha.render('html_element', {
@@ -79,73 +78,78 @@
         <div class="col-md-8">
             <div class="well well-sm">
                 <form action="@Url.RouteUrl("Harag.CustomerService.AddNewMessageAjax")" method="post" >
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="name">
-                                    الرساله
-                                </label>
-                                <textarea name="Message" id="message" class="form-control" rows="9" cols="25" required="required"
-                                          placeholder="نص الرساله"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="name">
-                                    الاسم
-                                </label>
-                                <input type="text" class="form-control" placeholder="الاسم" required="required" />
-                            </div>
-                            <div class="form-group">
-                                <label for="name">
-                                    رقم الهاتف
-                                </label>
-                                <input type="tel" name="Phone" class="form-control" placeholder="رقم الهاتف" />
-                            </div>
-                            <div class="form-group">
-                                <label for="email">
-                                    البريد الالكتروني
-                                </label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-envelope"></span>
-                                    </span>
-                                    <input name="Email" type="text" class="form-control" id="email" placeholder="ادخل البريد الالكتروني" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="subject">
-                                    الموضوع والقسم
-                                </label>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <select id="subject" name="ContactDepartment" class="form-control" required="required">
-                                            <option value="المتجر">المتجر</option>
-                                            <option value="الحراج">الحراج</option>
-                                            <option value="الاستشارات">الاستشارات</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <select id="subject" name="ContactType" class="form-control" required="required">
-                                            <option value="شكوي">شكوي</option>
-                                            <option value="استفسار">استفسار</option>
-                                            <option value="اقتراح">اقتراح</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="form-group">
-                                <div id="html_element"></div>
-                            </div>
-                        </div> 
+                    <div class="row">
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-success pull-right green" id="btnContactUs">
-                                ارسال
-                            </button>
+                            @Html.ValidationSummary(null, new { @class = "text-danger row" })
+                            
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">
+                                        الرساله
+                                    </label>
+                                    <textarea name="Message" id="message" class="form-control" rows="9" cols="25" required="required"
+                                              placeholder="نص الرساله"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">
+                                        الاسم
+                                    </label>
+                                    <input type="text" class="form-control" placeholder="الاسم" required="required" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">
+                                        رقم الهاتف
+                                    </label>
+                                    <input type="tel" name="Phone" class="form-control" placeholder="رقم الهاتف" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">
+                                        البريد الالكتروني
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-envelope"></span>
+                                        </span>
+                                        <input name="Email" type="text" class="form-control" id="email" placeholder="ادخل البريد الالكتروني" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject">
+                                        الموضوع والقسم
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <select id="subject" name="ContactDepartment" class="form-control" required="required">
+                                                <option value="المتجر">المتجر</option>
+                                                <option value="الحراج">الحراج</option>
+                                                <option value="الاستشارات">الاستشارات</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select id="subject" name="ContactType" class="form-control" required="required">
+                                                <option value="شكوي">شكوي</option>
+                                                <option value="استفسار">استفسار</option>
+                                                <option value="اقتراح">اقتراح</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div id="html_element"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-success pull-right green" id="btnContactUs">
+                                    ارسال
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+</form>
             </div>
         </div>
 

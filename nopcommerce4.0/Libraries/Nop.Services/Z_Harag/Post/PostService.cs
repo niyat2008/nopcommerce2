@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -231,7 +232,7 @@ namespace Nop.Services.Z_Harag.Post
             List<KeyAndValue> filesUrl = new List<KeyAndValue>();
 
             var ImagesPath = Path.Combine(_env.WebRootPath, "HaragApi\\Uploads\\Images");
-            var logoImage = Path.Combine(_env.WebRootPath, "images\\Consultant\\images\\logo3.png");
+            var logoImage = Path.Combine(_env.WebRootPath, "images\\thumbs\\0000303.png");
             //var Vedios = Path.Combine(_env.WebRootPath, "Uploads\\Videos");
 
             int MaxContentLength = 1024 * 1024 * SizeOfPhotoAllowedInMb; //Size = 1*SizeOfPhotoAllowedInMb  MB   
@@ -762,22 +763,41 @@ namespace Nop.Services.Z_Harag.Post
         }
         public List<Z_Harag_Post> SearchPosts(SearchModel searchModel, PagingParams pagingParams)
         {
-            var query = _postRepository.TableNoTracking
+            if (searchModel.City != 0)
+            {
+                pagingParams.PageNumber = 0;
+                return _postRepository.TableNoTracking
               .Include(m => m.Category)
               .Include(m => m.Customer)
               .Include(m => m.City)
               .Include(m => m.Z_Harag_Photo)
               .Include(m => m.Z_Harag_Comment)
-              .Where(c => (c.Text.Contains(searchModel.Term) 
-              || c.Title.Contains(searchModel.Term) 
-              || c.City.ArName.Contains(searchModel.Term) 
-              || c.Category.Name.Contains(searchModel.Term)) &&  c.IsDeleted == false)
-              .OrderByDescending(mbox =>mbox.DateUpdated)
-              
-              .Skip(pagingParams.PageNumber * pagingParams.PageSize)
-            .Take(pagingParams.PageSize).ToList();
-
-            return query;
+              .Where(c => (c.Text.Contains(searchModel.Term)
+                  || c.Title.Contains(searchModel.Term)
+                  || c.City.ArName.Contains(searchModel.Term)
+                  || c.Category.Name.Contains(searchModel.Term)) && (c.CityId == searchModel.City)
+                  && c.IsDeleted == false)
+              .OrderByDescending(mbox => mbox.DateUpdated)
+              .ToList()
+              .Where(m => DateTime.Now.Subtract(m.DateUpdated).Days < searchModel.Time)
+                .Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                .Take(pagingParams.PageSize).ToList();
+            }
+            else
+            {
+                return _postRepository.TableNoTracking
+              .Include(m => m.Category)
+              .Include(m => m.Customer)
+              .Include(m => m.City)
+              .Include(m => m.Z_Harag_Photo)
+              .Include(m => m.Z_Harag_Comment).Where(c => (c.Text.Contains(searchModel.Term)
+                 || c.Title.Contains(searchModel.Term)
+                 || c.City.ArName.Contains(searchModel.Term)
+                 || c.Category.Name.Contains(searchModel.Term)) && c.IsDeleted == false)
+                 .OrderByDescending(mbox => mbox.DateUpdated)
+                .Skip(pagingParams.PageNumber * pagingParams.PageSize)
+                .Take(pagingParams.PageSize).ToList();
+            } 
         }
 
         public List<Z_Harag_Post> SearchPostsCatCity(int cat, int city, PagingParams pagingParams)
@@ -789,7 +809,7 @@ namespace Nop.Services.Z_Harag.Post
             .Include(m => m.Z_Harag_Photo)
             .Include(m => m.Z_Harag_Comment)
             .Where(c => c.CityId == city
-            || c.CategoryId == cat && c.IsDeleted == false)
+            && c.CategoryId == cat && c.IsDeleted == false)
             .OrderByDescending(mbox => mbox.DateUpdated)
             .Skip(pagingParams.PageNumber * pagingParams.PageSize)
             .Take(pagingParams.PageSize).ToList();

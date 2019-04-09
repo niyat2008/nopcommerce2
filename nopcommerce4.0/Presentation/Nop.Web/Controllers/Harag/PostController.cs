@@ -1179,13 +1179,13 @@ namespace Nop.Web.Controllers.Harag
         }
 
         [HttpGet]
-        public IActionResult HaragSearch(string Term, int pageNo = 0)
+        public IActionResult HaragSearch(string Term, int time = 100, int city = 0, int pageNo = 0)
         {
             PagingParams.PageNumber = pageNo;
-            SearchModel SearchModel = new SearchModel() { Term = Term };
+            SearchModel SearchModel = new SearchModel() { Term = Term , City = city, Time = time};
 
             var model = _postService.SearchPosts(SearchModel, PagingParams);
-
+            ViewBag.Term = Term;
             var outputModel = new PostOutputModel
             {
                 Items = model.Select(m => new Models.Harag.Post.PostModel()
@@ -1214,7 +1214,7 @@ namespace Nop.Web.Controllers.Harag
 
             }
 
-            return View("~/Themes/Pavilion/Views/Harag/posts/PostsAjax.cshtml", outputModel);
+            return View("~/Themes/Pavilion/Views/Harag/post/PostsAjax.cshtml", outputModel);
 
         }
 

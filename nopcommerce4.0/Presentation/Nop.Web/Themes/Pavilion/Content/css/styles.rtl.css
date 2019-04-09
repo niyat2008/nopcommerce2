@@ -5686,3 +5686,17 @@ label, label + * {
     padding-left: 11px;
     background: #e6edeb;
 }
+
+.input-validation-error {
+    border: solid red 2px !important;
+}
+
+
+.add-btn {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 6px;
+    color: #4fbb41 !important;
+    box-shadow: 0 -2px rgba(255, 255, 255, 0.1) inset, 0 -3px rgba(0, 0, 0, 0.1) inset, 0 1px rgba(0, 0, 0, 0.05);
+}

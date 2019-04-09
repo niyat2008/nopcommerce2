@@ -13,8 +13,7 @@ namespace Nop.Data.Mapping.Z_Harag
         {
             this.ToTable("Z_Harag_Settings");
             this.HasKey(s => s.Id);
-            this.Property(s => s.Key).IsOptional();
-            this.Property(s => s.Value).IsRequired().HasMaxLength(4000);
+            this.Property(s => s.Key).IsOptional(); 
             this.Property(s => s.LastUpdated).IsOptional();
             this.Property(s => s.UpdatedBy).IsRequired();
         }

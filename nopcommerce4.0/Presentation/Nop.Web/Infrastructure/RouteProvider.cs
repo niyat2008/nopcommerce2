@@ -331,6 +331,10 @@ new { controller = "Post", action = "GetHaragMobileNavbar" });
             routeBuilder.MapRoute("Consultant.ConsultantHome", "Consultations",
             new { controller = "ConsultantHome", action = "Home" });
 
+            routeBuilder.MapRoute("Consultant.UrlRediect", "redirect",
+new { controller = "ConsultantHome", action = "UrlRedirect" });
+
+
 
             routeBuilder.MapRoute("Consultant.Navbar", "Consultations/Consultant/Navbar",
             new { controller = "ConsultantHome", action = "Navbar" });

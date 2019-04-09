@@ -110,6 +110,10 @@
 
         $(document).ready(function () {
 
+            $('#postText').change(function () {
+                var text = $(this).val();
+                $(this).val(urlify(text));
+            });
             $.ajax({
                 type: 'GET',
                 url: '@Url.RouteUrl("Consultant.Post.GetCategories")',
@@ -195,7 +199,7 @@
 
 
                 var postForPostModel = {
-                    Text: Text,
+                    Text: urlify(Text),
                     Title: Title,
                     CategoryId: CategoryId,
                     Files: Files
@@ -227,6 +231,13 @@
         });
 
 
-
+    function urlify(text) {
+        var urlRegex = /(https?:\/\/[^\s]+)/g;
+        return text.replace(urlRegex, function (url) {
+            return '<a href="' + '@Nop.Web.Helpers.URLSecurityManager.Instance("/redirect?url=").redirectUrl' + url + '">' + 'هنا' + '</a>';
+        })
+        // or alternatively
+        // return text.replace(urlRegex, '<a href="$1">$1</a>')
+    }
 
 </script>

@@ -9,5 +9,7 @@ namespace Nop.Services.Z_Harag.Post
     public class SearchModel
     {
         public string Term { get; set; }
+        public int Time { get; set; }
+        public int City { get; set; }
     }
 }

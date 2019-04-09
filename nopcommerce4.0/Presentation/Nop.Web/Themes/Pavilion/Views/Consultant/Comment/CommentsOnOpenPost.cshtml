@@ -4,7 +4,8 @@
 
 
 <link href="~/css/Consultant/pagination.css" rel="stylesheet" />
-
+<link rel="stylesheet" href="~/css/Consultant/richtext.min.css">
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
     .btndarckgreen:hover {
         background-color: darkgreen !important;
@@ -15,13 +16,13 @@
 
 @if (Model.Items != null)
 {
-<div id="commentDivToAppending">
-    @foreach (var comment in Model.Items)
-    {
-        <!-- Comments -->
-        @Html.Partial("~/Themes/Pavilion/Views/Consultant/Comment/_CommentTemplatePartial.cshtml", comment)
-    }
-</div>
+    <div id="commentDivToAppending">
+        @foreach (var comment in Model.Items)
+        {
+            <!-- Comments -->
+            @Html.Partial("~/Themes/Pavilion/Views/Consultant/Comment/_CommentTemplatePartial.cshtml", comment)
+        }
+    </div>
 }
 <div class="add-comment">
     <div class="row">
@@ -41,38 +42,46 @@
                 <img class="userimagesmall" src="~/images/Consultant/images/no-img-mobile-consultant.png" style="width:35px;height:35px;" />
             </div>
         }
-            <div class="col-xs-10">
-                <h4>@ViewBag.UserName</h4>
-                <div class="reply">
-                    <textarea class="form-control" id="CommentText" placeholder="اكتب تعليقا"></textarea>
-                </div>
-                <div class="form-group bordering">
-                    <div class="images" id="images">
+        <div class="col-xs-10">
+            <h4>@ViewBag.UserName</h4>
+            <div class="reply">
+                <textarea class="form-control" id="CommentText@(ViewBag.UserRole == "Consultant"?"-consult":"")" placeholder="اكتب تعليقا"></textarea>
+                <div class="comment-preview reply">
 
-                    </div>
                 </div>
-                <br /><br />
-                @if (ViewBag.UserRole == "Registered")
-                {
-                    <div class="reply">
-                        <p class="file">
-                            <input class="form-control-file" id="file" name="file" type="file" style="display:none" value="تحميل صورة">
-                            <label for="file">تحميل صورة</label>
-                        </p>
-                        <button onclick="addComment()" class="btndarckgreen">تعليق</button>
-                    </div>
-                }
-                else if (ViewBag.UserRole == "Consultant")
-                {
-                    <div class="reply">
-                        <p class="file">
-                            <input onchange="onFileChange(event)" class="form-control-file" id="file" name="file" type="file" style="display:none" value="تحميل صورة">
-                            <label for="file">تحميل صورة</label>
-                        </p>
-                        <button  class="btn btn-success" onclick="addCommentConsultant()">تعليق</button>
-                    </div>
-                }
             </div>
+            <div class="form-group bordering">
+                <div class="images" id="images">
+
+                </div>
+            </div>
+            <br /><br />
+            @if (ViewBag.UserRole == "Registered")
+            {
+                <div class="reply">
+                    <p class="file">
+                        <input class="form-control-file" id="file" name="file" type="file" style="display:none" value="تحميل صورة">
+                        <label for="file">تحميل صورة</label>
+                    </p>
+                    <button style="width: 100px; text-align: center; height: 39px;" onclick="addComment()" class="btndarckgreen">تعليق</button>
+                </div>
+            }
+            else if (ViewBag.UserRole == "Consultant")
+            {
+                <div class="reply">
+                    <p class="file">
+                        <input onchange="onFileChange(event)" class="form-control-file" id="file" name="file" type="file" style="display:none" value="تحميل صورة">
+                        <label for="file">تحميل صورة</label>
+                    </p>
+                    <button style="width: 100px; text-align: center; height: 39px;" class="btn btn-success" onclick="addCommentConsultant()">تعليق</button>
+                </div>
+
+                <div class="comment-preview reply">
+
+                </div>
+            }
+
+        </div>
     </div>
 </div>
 
@@ -147,7 +156,9 @@
 <script type="text/javascript">
 
 
+
     $(document).ready(function () {
+        $('#CommentText-consult').richText();
         $("#file").change(function (event) {
 
             if (Files.length >= 5) {
@@ -165,7 +176,22 @@
         });
     });
 
+    function urlify(text) {
+    var urlRegex = /(https?:\/\/[^\s]+)/g;
+        return text.replace(urlRegex, function (url) {
+            return '<a href="' + '@Nop.Web.Helpers.URLSecurityManager.Instance("/redirect?url=").redirectUrl' + url + '">' + 'هنا' + '</a>';
+        })
+    // or alternatively
+    // return text.replace(urlRegex, '<a href="$1">$1</a>')
+    }
 
+    $("#CommentText").keyup(function () {
+        var currentCommentText = $(this).val();
+        var urlfiedContent = urlify(currentCommentText);
+
+
+        $('.comment-preview').html(urlfiedContent);;
+    });
 
     function getCommentPaging(url) {
 
@@ -181,13 +207,9 @@
             }
         });
     }
-
-
-
-
 </script>
 
-
+<script src="~/css/Consultant/jquery.richtext.js"></script>
 
 
 

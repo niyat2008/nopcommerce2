@@ -227,7 +227,13 @@
 
 
                 $.each(data.data, function (key, value) {
-                    $("<div id='report'></div>").append($("<span class='postTitle'>عنوان الاعلان  : " + value.PostTitle + "</span>")).append($("<br/>")).append($("<span class='reportTitle'>عنوان البلاغ : " + value.ReportTitle + "</span>")).append($("<br/>")).append($("<div class='text'>نص البلاغ  : " + value.ReportDescription + "</div>")).append($("<br/>")).append($("<span class='reportOwner'>صاحب البلاغ : " + value.CustomerName + "</span>")).appendTo('#reports');
+                    $("<div id='report'></div>")
+
+                        .append($("<br/>"))
+                        .append($("<div class='text'>نص البلاغ  : " + value.ReportDescription + "</div>"))
+                        .append($("<br/>"))
+
+                        .appendTo('#reports');
 
 
 

@@ -92,6 +92,41 @@
                 success: function (data) {
                     $("#comments").html(data);
                 }
-            });
-        }
+            }); 
+    }
+
+    function findAllFunctionsLinks(str, id) {
+        var parent = $('#' + id);
+        var urlRegex = /(https?:\/\/[^\s]+)/g;
+        var m;
+
+        do {
+            m = urlRegex.exec(str);
+            if (m) {
+                getLinkPreview(m[1], parent); 
+
+            }
+        } while (m);
+        //return text.f(urlRegex, function (url) {
+        //    return '<a href="' + url + '">' + url + '</a>';
+        //});
+
+    }
+
+    function getLinkPreview(url, parent) {
+        console.log('http://api.linkpreview.net/?key=5cac6f7021f07e9f21860314b820e1214f9ab4fa63335&q=' + url + ' From Url');
+        $.ajax({
+            type: 'GET',
+            headers: {
+                'Access-Control-Allow-Origin' : '*'
+            },
+            url: url, 
+            success: function (data) {
+                alert(JSON.stringify(data));
+                parent.append(data);
+            }, error: function (data) {
+                parent.append(data);
+            }
+        });
+    }
 </script>

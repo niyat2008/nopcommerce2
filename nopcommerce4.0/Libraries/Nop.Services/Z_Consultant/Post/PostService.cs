@@ -125,7 +125,7 @@ namespace Nop.Services.Z_Consultant.Post
             List<KeyAndValue> filesUrl = new List<KeyAndValue>();
 
             var ImagesPath = Path.Combine(_env.WebRootPath, "ConsultantApi\\Uploads\\Images");
-            var logoImage = Path.Combine(_env.WebRootPath, "images\\Consultant\\images\\logo3.png");
+            var logoImage = Path.Combine(_env.WebRootPath, "images\\thumbs\\0000303.png");
 
             //var Vedios = Path.Combine(_env.WebRootPath, "Uploads\\Videos"); /images/Consultant/images/logo3.png
 

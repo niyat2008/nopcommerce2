@@ -166,8 +166,10 @@ namespace Nop.Services.Authentication.External
 
             //registration is approved if validation isn't required
             var registrationIsApproved = _customerSettings.UserRegistrationType == UserRegistrationType.Standard ||
-                (_customerSettings.UserRegistrationType == UserRegistrationType.EmailValidation && !_externalAuthenticationSettings.RequireEmailValidation);
-
+                (_customerSettings.UserRegistrationType == UserRegistrationType.EmailValidation && !_externalAuthenticationSettings.RequireEmailValidation ) 
+                // amsfci
+                || (_customerSettings.UserRegistrationType == UserRegistrationType.PhoneValidation && !_externalAuthenticationSettings.RequirePhoneValidation);
+ 
             //create registration request
             var registrationRequest = new CustomerRegistrationRequest(_workContext.CurrentCustomer,
                 parameters.Email,parameters.Mobile, parameters.Mobile,
@@ -243,7 +245,7 @@ namespace Nop.Services.Authentication.External
             return SuccessfulAuthentication(returnUrl);
         }
 
-        /// <summary>
+        /// <summary>S
         /// Add errors that occurred during authentication
         /// </summary>
         /// <param name="errors">Collection of errors</param>

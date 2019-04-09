@@ -24,12 +24,12 @@ namespace Nop.Web.Infrastructure.Harag
         public bool SendMail(string from, string to, CustomerServiceModel mailModel)
         {
             SmtpClient smtpClient = new SmtpClient();
-            smtpClient.Host = this.server;
-            smtpClient.Port = 587;
+            smtpClient.Host = this.emailHost;
+            smtpClient.Port = 25;
 
 
             smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtpClient.Credentials = new System.Net.NetworkCredential(emailHost, password);
+             smtpClient.Credentials = new System.Net.NetworkCredential(server, password);
             smtpClient.UseDefaultCredentials = false;
 
             MailMessage mailMessage = new MailMessage(from, to);

@@ -5,84 +5,95 @@
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
 }
 
+@{
+        var controllerName = Url.ActionContext.RouteData.Values["controller"].ToString();
+        var actionName = Url.ActionContext.RouteData.Values["action"].ToString();
+        var Term = System.Text.RegularExpressions.Regex.Unescape(((string.IsNullOrEmpty(ViewBag.Term) ? "" : ViewBag.Term)));
+    }
+<head>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+</head>
 <div class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">
-                <select id="search-category-js-ajax" class="form-control">
-                    <option>الاختيار 1</option>
-                </select>
-                <select id="search-city-js-ajax" class="form-control">
-                    <option>الاختيار 1</option>
-                </select>
-                @*<select id="search-date-js-ajax" class="form-control">
-            <option>الاختيار 1</option>
-        </select>*@
+               <input  type="text" value="@Term" class = "search-term hidden" />
+                <select id="search-category-js-ajax" class="form-control"></select>
+                <select id="search-city-js-ajax" class="form-control"></select>
+     
                 <button id="search-cat-city-js" class="btn btn-default srchBtn" type="button"><i class="fa fa-search"></i></button>
                 <hr>
                 @Html.Partial("~/Themes/Pavilion/Views/Harag/Post/_CategoriesImagesGrid.cshtml")
             </div>
             <div class="col-md-9">
                 <!-- أضف اعلانك -->
-                @*<div>
-                    <button class="btn btn-default add" type="button">
-                        <a href="@Url.RouteUrl(" Harag.Post.AgreementBeforeAddPost")"> أضف اعلانك <i class="fa fa-plus"></i></a>
-                    </button>
-                </div>*@
-                <!-- كل الاختيارات -->
-                @*
-                <div class="choices">
-                    <a>حراج السيارات</a>
-                    <a>حراج العقارات</a>
-                    <a>حراج العقارات</a>
-                    <a>حراج العقارات</a>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a class=" add-btn " href="@Url.RouteUrl("Harag.Post.AgreementBeforeAddPost")"> أضف اعلانك <i class="fa fa-plus"></i></a>
+                    </div>
                 </div>
-                *@
-                <!-- Select Search -->
-                <h3>نتيجه البحث</h3>
-                @*<div class="">
-                    <select id="category-js-ajax" class="form-control" style="width:20%">
-                        <option></option>
-                    </select>
-                </div>*@
-                
+                <div class="row">
+                    <div class="col-md-4">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-2">
+                        <select id="select-city-ajax"> 
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select id="select-time-ajax">
+                            <option value="1000">كل الاوقات</option> 
+                            <option value="1">قبل يوم</option>
+                            <option value="7">قبل اسبوع</option>
+                            <option value="30">قبل شهر</option>
+                            <option value="90">قبل ثلاثه شهور</option>
+                            <option value="360">قبل سنه</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- List -->
                 <!-- List -->
                 <div id="posts" class="items">
 
                     @if (Model.Items.Count() <= 0)
                     {
-                    <div id="tabpanelPosts" style="text-align:center"><b>لا يوجد</b></div>
+                        <div id="tabpanelPosts" style="text-align:center"><b>لا يوجد</b></div>
                     }
                     else
                     {
-                    @foreach (var post in Model.Items)
-                    {
-                    <div class="item">
-                        <div class="det">
-                            <a href="/Harag/Post/@post.Id"><h3>@post.Title</h3></a>
-                            <small> @post.DateDescription </small>
-                            <div class="det-det">
-                                <a href="/Harag/City/@post.City">
-                                    <span><i class="fa fa-map-marker"></i> @post.City </span>
-                                </a>
-                                <a href="/Harag/user/@post.PostOwner">
-                                    <span><i class="fa fa-user"></i> @post.PostOwner </span>
-                                </a>
+                        @foreach (var post in Model.Items)
+                        {
+                            <div class="item">
+                                <div class="det">
+                                    <a href="/Harag/Post/@post.Id"><h3>@post.Title</h3></a>
+                                    <small> @post.DateDescription </small>
+                                    <div class="det-det">
+                                        <a href="/Harag/City/@post.City">
+                                            <span><i class="fa fa-map-marker"></i> @post.City </span>
+                                        </a>
+                                        <a href="/Harag/user/@post.PostOwner">
+                                            <span><i class="fa fa-user"></i> @post.PostOwner </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="det-img">
+                                    @if (!String.IsNullOrEmpty(post.Photo))
+                                    {
+                                        <img src="/HaragApi/Uploads/Images/@post.Photo">
+                                    }
+                                </div>
                             </div>
-                        </div>
-                        <div class="det-img">
-                            @if (!String.IsNullOrEmpty(post.Photo))
-                            {
-                                <img src="/HaragApi/Uploads/Images/@post.Photo">
-                            }
-                        </div>
-                    </div>
-                    }
+                        }
                     }
                 </div>
                 @*<div>
-                    <button class="btn btn-default add" type="button">مشاهدة المزيد</button>
-                </div>*@
+                        <button class="btn btn-default add" type="button">مشاهدة المزيد</button>
+                    </div>*@
             </div>
         </div>
     </div>
@@ -107,7 +118,7 @@
             complete: function (data) {
                 $("#category-js-ajax").html(data.responseText);
             }
-        }); 
+        });
 
 
            $.ajax({
@@ -131,9 +142,10 @@
             url: '@Url.RouteUrl("Harag.Post.GetHaragCities")',
             complete: function (data) {
                 $("#search-city-js-ajax").html(data.responseText);
+                $("#select-city-ajax").html(data.responseText);
             }
         });
-   
+
     });
 
 
@@ -151,6 +163,30 @@
             }
         });
     });
-     
-</script>
 
+ $("#select-city-ajax").on('change', function () {
+        var cityId = $("#select-city-ajax option:selected").val();
+     var time = $("#select-time-ajax option:selected").val();
+     @*window.location.href = '/Harag/Search/@Term?city=' + cityId + '&time=' + time  ;*@
+        $.ajax({
+            type: 'GET',
+            url: '/Harag/Search/' + $('.search-term').val() + '?city=' + cityId + '&time=' + time + '&pageNo=1',
+            complete: function (data) {
+                $("#posts").html(data.responseText);
+            }
+        });
+    });
+    
+    $("#select-time-ajax").on('change', function () {
+        var cityId = $("#select-city-ajax option:selected").val();
+        var time = $("#select-time-ajax option:selected").val();
+        //window.location.href =  '/Harag/Search/@Term?city=' + cityId + '&time=' + time  ;
+        $.ajax({
+            type: 'GET',
+            url: '/Harag/Search/' + $('.search-term').val() + '?city=' + cityId + '&time=' + time + '&pageNo=1',
+            complete: function (data) {
+                $("#posts").html(data.responseText);
+            }
+        });
+    });
+</script>

@@ -39,7 +39,7 @@
                 {
                 <li class="main hasSubMenu">
 
-                    @Html.RouteLink(item.Name, "Consultant.GetAllClosedPostsByCategoryId", new {@class= (item.IsSelected? "selected-link" : ""), CategoryId = item.Id }) 
+                    @Html.RouteLink(item.Name, "Consultant.GetAllClosedPostsByCategoryId", new { CategoryId = item.Id }, new  { @class = (item.IsSelected ? "selected-link" : "") }) 
 
                     @if (item.SubCategories.Count > 0)
                     {

@@ -8,7 +8,8 @@
 
         if (incat)
         {
-            catId = Convert.ToInt32(Url.ActionContext.RouteData.Values["CategoryId"].ToString());
+
+            catId = Convert.ToInt32(this.Context.Request.Query["CategoryId"].ToString());
         }
     }
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
@@ -161,7 +162,7 @@
                 }
 
                     .avatar ul li.link:hover {
-                        background: #eee
+                        background: #eee 
                     }
 
         .avatar:hover ul {
@@ -595,26 +596,17 @@
         <div class="row">
             <div class="col-md-2"></div>
 
-            <div class="col-md-2 col-xs-12 logoContainer" style="margin-right: -47px;">
-                <img class="logo" src="~/images/Consultant/images/logo3.png" onclick="goToHome()" />
+            <div class="col-md-2 col-xs-12 logoContainer"  style="margin-right: -47px" >
+                <img class="logo" src="/images/thumbs/0000303.png" onclick="goToHome()" />
             </div>
 
             <div class="col-md-6" style="padding-top:12px;">
                 <div class="form-group">
                     <input id="searchText" type="text" style="height:44px;"
-                           class="form-control" placeholder="ابحث عن ...">
+                           class="form-control" placeholder="البحث في الاستشارات">
                     <button onclick="filterWithText('searchText')" style="height:44px;" class="btndarckgreen">
                         <i class="fa fa-search"></i>
                     </button>
-                </div>
-            </div>
-            <div class="col-md-3 consult " style="padding-top:25px;">
-                <div class="flyout-cart-wrapper" id="flyout-cart">
-                    <a href="/Consultant/Notifications">
-                        <span class="cart-qty badge NotificationNum"></span>
-                        <span class="cart-label ">الاشعارات</span>
-                    </a>
-
                 </div>
             </div>
         </div>
@@ -721,7 +713,9 @@
                 <div class="title">
                     <a id="open-customer-service">خدمة العملاء</a>
                 </div>
-                <ul class="list"></ul>
+                <ul class="list">
+                    <li><a href="/Harag/CustomerService"> خدمة العملاء</a></li>
+                </ul>
             </div>
             <div class="footer-block">
                 <div class="title">
@@ -743,8 +737,8 @@
                 </div>
                 <ul class="list">
                     <li class="address"><span>المملكة العربية السعودية</span></li>
-                    <li class="email"><span>info@Niyat.com</span></li>
-                    <li class="phone"><span>966-0000000</span></li>
+                    <li class="email"><span>info@farms.com</span></li>
+                    <li class="phone"><span>966-154875314</span></li>
                 </ul>
             </div>
         </div>
@@ -757,7 +751,7 @@
                 <li class="method4"></li>
             </ul>
             <div class="footer-disclaimer">
-                حقوق الطبع والنشر © 2019 Niyat Store. جميع الحقوق محفوظة.
+                حقوق الطبع والنشر © @DateTime.Now.Year.ToString() Farms Store. جميع الحقوق محفوظة.
             </div>
 
             <div class="footer-store-theme">
@@ -778,22 +772,9 @@
 
 
             var cat = $(this);
-            //var subCatArea = $('.sub-mobile-navbar-js' + cat.attr('data-cat-id'));
-            //alert('.' + 'sub-mobile-navbar-js' + cat.attr('data-cat-id'));
-            //subCatArea.html(data);
+        
             $(".subRightMenu" + cat.attr('data-cat-id')).css({ "-webkit-transform": "translate(0px)", "-ms-transform": "translate(0px)", "-moz-transform": "translate(0px)", "transform": "translate(0px)", "box-shadow": "1px 0 5px rgba(0,0,0,0.5)" });
-
-
-            //$.ajax({
-            //    type: 'GET',
-            //    url: '/Consultations/Post/GetSubCategoriesByCategoryIdMobile?id=' + cat.attr('data-cat-id'),
-
-            //    success: function (data) {
-            //        subCatArea.html(data);
-            //        subCatArea.show();
-            //        $(".subRightMenu").css({ "-webkit-transform": "translate(0px)", "-ms-transform": "translate(0px)", "-moz-transform": "translate(0px)", "transform": "translate(0px)", "box-shadow": "1px 0 5px rgba(0,0,0,0.5)" });
-            //    }
-            //});
+            
         });
 
         $.ajax({
@@ -835,6 +816,7 @@
             url: '@Url.RouteUrl("Consultant.User.GetAdminLink")',
 
             success: function (data) {
+                $(".admin-link-js-ajax").html(data);
                 $(".admin-link-js-ajax").html(data);
             }
         });
@@ -882,12 +864,9 @@
         window.location.href = '@Url.RouteUrl("Consultant.ConsultantHome")';
     }
 
-
     function filterWithText(s) {
         var Term = $("#" + s).val();
-
         if (Term) {
-
             window.location.href = '@Url.RouteUrl("Consultant.Post.Search")'+"?Term=" + Term;
         }
         else {

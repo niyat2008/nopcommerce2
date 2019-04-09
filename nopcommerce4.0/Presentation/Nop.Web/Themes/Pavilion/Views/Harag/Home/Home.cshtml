@@ -7,101 +7,45 @@
         <div class="row">
             <div class="col-md-3">
                 <div>
-                    <select id="search-category-js-ajax" class="form-control">
-                        <option>الاختيار 1</option>
+                    <select id="search-category-js-ajax" class="form-control"> 
                     </select>
-                    <select id="search-city-js-ajax" class="form-control">
-                        <option>الاختيار 1</option>
+                    <select id="search-city-js-ajax" class="form-control"> 
                     </select>
-                    @*<select id="search-date-js-ajax" class="form-control">
-                        <option>الاختيار 1</option>
-                    </select>*@
+                    
                     <button id="search-cat-city-js" class="btn btn-default srchBtn" type="button"><i class="fa fa-search"></i></button>
                 </div>
                 <hr>
-                @*<div class="choices">
-                    <a>حراج السيارات</a>
-                    <a>حراج العقارات</a>
-                    <a>حراج العقارات</a>
-                    <a>حراج العقارات</a>
-                </div>*@
+            
                 @Html.Partial("~/Themes/Pavilion/Views/Harag/Post/_CategoriesImagesGrid.cshtml")
             </div>
             <div class="col-md-9">
                 <!-- أضف اعلانك -->
-                <div>
-                    <a class="btn btn-default add" href="@Url.RouteUrl("Harag.Post.AgreementBeforeAddPost")"> أضف اعلانك <i class="fa fa-plus"></i></a>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a class=" add-btn " href="@Url.RouteUrl("Harag.Post.AgreementBeforeAddPost")"> أضف اعلانك <i class="fa fa-plus"></i></a>
+                    </div>
                 </div>
-                <!-- كل الاختيارات -->
-                @*<div class="choices">
-                    <a>حراج السيارات</a>
-                    <a>حراج العقارات</a>
-                    <a>حراج العقارات</a>
-                    <a>حراج العقارات</a>
-                </div>*@
-                <!-- Select Search -->
-                @*<div class="">
-                    <select id="category-js-ajax" class="form-control" style="width:20%">
-                        <option>الاختيار 1</option>
-                    </select>
-                </div>*@
+                <div class="row">
+                    <div class="col-md-4">
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-4">
+                        <select id="select-city-js-ajax">
+                            <option>كل المدن</option>
+                        </select>
+                    </div>
+                </div> 
                 <!-- List -->
                 <div id="posts" class="items">
-                    @*<div class="item">
-                        <div class="det">
-                            <h3>عنوان</h3>
-                            <small>منذ 4 دقيقة</small>
-                            <div class="det-det">
-                                <span><i class="fa fa-map-marker"></i> الرياض </span>
-                                <span><i class="fa fa-user"></i> الاسم </span>
-                            </div>
-                        </div>
-                        <div class="det-img">
-                            <img src="images/x.jpg">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="det">
-                            <h3>عنوان</h3>
-                            <small>منذ 4 دقيقة</small>
-                            <div class="det-det">
-                                <span><i class="fa fa-map-marker"></i> الرياض </span>
-                                <span><i class="fa fa-user"></i> الاسم </span>
-                            </div>
-                        </div>
-                        <div class="det-img">
-                            <img src="images/x.jpg">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="det">
-                            <h3>عنوان</h3>
-                            <small>منذ 4 دقيقة</small>
-                            <div class="det-det">
-                                <span><i class="fa fa-map-marker"></i> الرياض </span>
-                                <span><i class="fa fa-user"></i> الاسم </span>
-                            </div>
-                        </div>
-                        <div class="det-img">
-                            <img src="images/x.jpg">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="det">
-                            <h3>عنوان</h3>
-                            <small>منذ 4 دقيقة</small>
-                            <div class="det-det">
-                                <span><i class="fa fa-map-marker"></i> الرياض </span>
-                                <span><i class="fa fa-user"></i> الاسم </span>
-                            </div>
-                        </div>
-                        <div class="det-img">
-                            <img src="images/x.jpg">
-                        </div>
-                    </div>*@
+                
                 </div>
-                <div>
-                    <button   class="btn btn-default add view-more" data-postid="" data-pageno="1" type="button">مشاهدة المزيد</button>
+                <div class=" view-more-js">
+                    <button class="btn btn-default add view-more" data-postid="" data-pageno="1" type="button">مشاهدة المزيد</button>
                 </div>
             </div>
         </div>
@@ -120,7 +64,7 @@
                 type: 'GET',
                 url: '@Url.RouteUrl("Harag.Post.GetAllHaragPostsAjax")/' + pageNo,
                 complete: function (data) {
-                    if (data.responseText == '<div id="tabpanelPosts" style="text-align:center"><b>لا يوجد</b></div><!-- Post -->') {
+                    if (data.responseText.length < 400) {
                         $('.view-more').addClass("hidden");
                         return;
                     }
@@ -138,8 +82,9 @@
         $.ajax({
             type: 'GET',
             url: '@Url.RouteUrl("Harag.Post.GetAllHaragPostsAjax")',
-            complete: function (data) { 
+            complete: function (data) {  
                 $("#posts").html(data.responseText);
+              
             }
         }); 
         $.ajax({
@@ -163,6 +108,7 @@
             url: '@Url.RouteUrl("Harag.Post.GetHaragCities")',
             complete: function (data) {
                 $("#search-city-js-ajax").html(data.responseText);
+                $("#select-city-js-ajax").html(data.responseText);
             }
         });
     });
@@ -179,5 +125,6 @@
             }
         });
     });
+
 </script>
 

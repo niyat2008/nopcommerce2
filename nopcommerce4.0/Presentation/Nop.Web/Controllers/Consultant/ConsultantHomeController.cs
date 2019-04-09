@@ -102,7 +102,18 @@ namespace Nop.Web.Controllers.Consultant
 
 
         #region methods
+        [HttpGet]
+        public virtual IActionResult UrlRedirect(string url)
+        {
+            var isSave = Url.IsLocalUrl(url);
 
+            if (isSave)
+            {
+                return Redirect(url);
+            }
+
+            return Redirect(url);
+        }
 
         public virtual IActionResult Home()
         {

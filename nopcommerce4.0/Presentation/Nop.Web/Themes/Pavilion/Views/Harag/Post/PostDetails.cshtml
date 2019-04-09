@@ -99,7 +99,7 @@
                                 @if (!Model.IsCommentingClosed)
                                 {
                                     <div class="col-xs-2 text-center">
-                                        <a id="set-post-comment-closed" class="input-with-icon2" >  <i class="fa fa-comment fa-2x"></i><br> منع التعليق </a>
+                                        <a id="set-post-comment-closed" class="input-with-icon2">  <i class="fa fa-comment fa-2x"></i><br> منع التعليق </a>
                                     </div>
                                 }
                                 else
@@ -191,15 +191,18 @@
                         </div>
                     </div>
                 }
+                @if (!ViewBag.LoggedIn)
+                {
+                    <div class="alert alert-info">
+                        يجب عليك <a class="link" href="/login">تسجيل الدخول</a> حتى تتمكن من إضافة رد.
+                    </div>
+                }
 
             </div>
             <div class="col-sm-3">
-                <div class="disTable advBox">
-                    @*<div class="choices choices2 disTable">
-
-                        </div>*@
-                    @if (Model.RelatedPosts.Count > 0)
-                    {
+                @if (Model.RelatedPosts.Count > 0)
+                {
+                    <div class="disTable advBox">
                         <div class="adv-images">
                             <h4>ذات صله بـ @Model.CategoryName</h4>
                             @foreach (var image in Model.RelatedPosts)
@@ -212,12 +215,22 @@
                                         </a>
                                     </div>
                                 }
+                                else
+                                {
+
+                                    <div style="width:160px; display:inline;">
+                                        <a href="/Harag/Post/@image.Id">
+                                            <img src="/images/Consultant/images/logo3.png" style="width:150px;height:150px;" />
+                                        </a>
+                                    </div>
+                                }
 
                             }
                         </div>
-                    }
 
-                </div>
+
+                    </div>
+                }
                 @if (Model.SameCityPosts.Count > 0)
                 {
                     <div class="disTable advBox">
@@ -240,23 +253,23 @@
                 }
 
                 @*<div class="disTable advBox">
-                        <div class="choices choices2 disTable">
+            <div class="choices choices2 disTable">
 
+            </div>
+            <div class="adv-images">
+                @foreach (var item in Model.Files)
+                {
+                    @foreach (var image in Model.Files)
+                    {
+                        <div style="width:160px; display:inline;">
+                            <a href="~/HaragApi/Uploads/Images/@image" data-lightbox="image2-@Model.Id" data-title="My caption">
+                                <img src="~/HaragApi/Uploads/Images/@image" alt="Single Image" style="width:150px;height:150px;" />
+                            </a>
                         </div>
-                        <div class="adv-images">
-                            @foreach (var item in Model.Files)
-                            {
-                                @foreach (var image in Model.Files)
-                                {
-                                    <div style="width:160px; display:inline;">
-                                        <a href="~/HaragApi/Uploads/Images/@image" data-lightbox="image2-@Model.Id" data-title="My caption">
-                                            <img src="~/HaragApi/Uploads/Images/@image" alt="Single Image" style="width:150px;height:150px;" />
-                                        </a>
-                                    </div>
-                                }
-                            }
-                        </div>
-                    </div>*@
+                    }
+                }
+            </div>
+        </div>*@
             </div>
 
         </div>

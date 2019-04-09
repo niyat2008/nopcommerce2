@@ -5666,3 +5666,8 @@ label, label + * {
 .profile-page .topic-data span {
 	display: inline-block;
 }
+
+
+.input-validation-error {
+    border: solid red 2px !important;
+}

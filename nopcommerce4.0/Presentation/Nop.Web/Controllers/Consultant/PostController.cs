@@ -240,9 +240,7 @@ namespace Nop.Web.Controllers.Consultant
 
 
         #region methods
-
       
-
         [HttpGet]
         public virtual IActionResult GetAllClosedPosts(PagingParams pagingParams)
         {

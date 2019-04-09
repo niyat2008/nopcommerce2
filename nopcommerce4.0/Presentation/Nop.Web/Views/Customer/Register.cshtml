@@ -24,8 +24,7 @@
                     data: { "countryId": selectedItem, "addSelectStateItem": "true" },
                     success: function (data) {
                         ddlStates.html('');
-                        $.each(data, function (id, option) {
-                           
+                        $.each(data, function (id, option) { 
                             ddlStates.append($('<option></option>').val(option.id).html(option.name));
                         });
                         statesProgress.hide();

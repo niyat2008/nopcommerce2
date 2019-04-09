@@ -1,5 +1,12 @@
 ﻿
-@{ 
+
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+@using Nop.Services.Customers;
+@{
+    bool isRegistered = EngineContext.Current.Resolve<IWorkContext>().CurrentCustomer.Username != null;
+}
+@{
     var controllerName = Url.ActionContext.RouteData.Values["controller"].ToString();
     var actionName = Url.ActionContext.RouteData.Values["action"].ToString();
 
@@ -11,6 +18,9 @@
     {
         catId = Convert.ToInt32(Url.ActionContext.RouteData.Values["catId"].ToString());
     }
+
+
+
 }
 <head>
     @*<link href="~/css/Consultant/styles.rtl.css" rel="stylesheet" />
@@ -41,6 +51,19 @@
         .badge-danger {
             background-color: red !important;
         }
+
+        .add-btn {
+            padding: 10px 16px;
+            font-size: 18px;
+            line-height: 1.33;
+            border-radius: 6px;
+            color: #4fbb41 !important;
+            box-shadow: 0 -2px rgba(255, 255, 255, 0.1) inset, 0 -3px rgba(0, 0, 0, 0.1) inset, 0 1px rgba(0, 0, 0, 0.05);
+            font-family: Tahoma;
+        }
+        /**{
+            font-family: Tahoma !important;
+        }*/
     </style>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Tajawal" rel="stylesheet">
@@ -63,7 +86,7 @@
 </head>
 @{
 
-        }
+}
 <!-- Header -->
 <!-- Top Bar -->
 <section class="topFixed">
@@ -74,7 +97,7 @@
                     <div class="top_col_screen top_hid_sm"></div>
                 </div>
                 <div class="col-lg-2 col-md-2 hidden-sm hidden-xs">
-                    <div class="admin-link-js-ajax top_col_screen" style="color: white" ></div>
+                    <div class="admin-link-js-ajax top_col_screen" style="color: white"></div>
                     @*<a href="/Consultations/Admin">اداره الاستشارات</a>*@
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
@@ -117,7 +140,7 @@
                     <ul>
                         <li id="menuBar">
                             <i class="fa fa-bars fa-lg"></i>
-                        </li>  
+                        </li>
                         <li id="myAccount">
                             <a> <i class="fa fa-user-o fa-lg"></i> </a>
                         </li>
@@ -153,39 +176,40 @@
                 </div>
 
                 <div id="myAccountScreenFull">
-                    <div class="col-xs-12 text-center"  id ="userInfoMobile" style="padding:0">
-                       
+                    <div class="col-xs-12 text-center" id="userInfoMobile" style="padding:0">
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
 <div class="text-center top-user-menu">
-    <span>
-        <a href="/Harag/Profile">الملف الشخصي</a>
-    </span>
-    <span>
-        <a href="/Harag/Payment/Banks">حساب عمولات الموقع</a>
-    </span>
-    <span>
-        <a href="/Harag/Favorites">المفضله </a>
-    </span>
-    <span>
-        <a href="/Harag/Follow">المتابعه </a>
-    </span>
-    <span>
-        <a href="/Harag/Notifications">
-            <span id="notification-count-js" class="badge badge-danger"></span>
-            الاشعارات
-        </a>
-    </span>
-    <span>
-        <a href="/Harag/Messages">الرسائل </a>
-    </span>
+    @if (isRegistered)
+    {
+        <span>
+            <a href="/Harag/Profile">الملف الشخصي</a>
+        </span>
+        <span>
+            <a href="/Harag/Payment/Banks">حساب عمولات الموقع</a>
+        </span>
+        <span>
+            <a href="/Harag/Favorites">المفضله</a>
+        </span>
+        <span>
+            <a href="/Harag/Follow">المتابعه </a>
+        </span>
+        <span>
+            <a href="/Harag/Notifications">
+                <span id="notification-count-js" class="badge badge-danger"></span>
+                الاشعارات
+            </a>
+        </span>
+        <span>
+            <a href="/Harag/Messages">الرسائل </a>
+        </span>
+    }
 </div>
-
 <!-- Search -->
 <section class="search">
     <div class="container-fluid">
@@ -193,13 +217,13 @@
             <div class="col-md-2"></div>
 
             <div class="col-md-2 col-xs-12 logoContainer" style="margin-right: -47px;">
-                <img class="logo" src="~/images/Consultant/images/logo3.png" onclick="goToHome()" />
+                <img class="logo" src="/images/thumbs/0000303.png" onclick="goToHome()" />
             </div>
 
             <div class="col-md-6" style="padding-top:12px;">
                 <div class="form-group">
                     <input id="searchText" type="text" style="height:44px;"
-                           class="form-control" placeholder="البحث في الاستشارات">
+                           class="form-control" placeholder="البحث في الحراج">
                     <button id="search-js" style="height:44px;" class="btndarckgreen">
                         <i class="fa fa-search"></i>
                     </button>
@@ -271,22 +295,27 @@
     $("#add-service-message-event").click(function () {
         $("#changeCatAndSubDiv").hide();
     });
+
+    $("#select-city-js-ajax").on('change', function () {
+        var cityId = $("#select-city-js-ajax option:selected").text();
+
+        window.location = "/Harag/City/" + cityId;
+    });
 </script>
 
+<link href="~/css/Consultant/styles.rtl.css" rel="stylesheet" />
+<link href="~/css/Consultant/1000.rtl.css" rel="stylesheet" />
+
+<link href="~/css/Consultant/theme.custom-1.css" rel="stylesheet" />
+<link href="~/css/Consultant/theme.custom-2.css" rel="stylesheet" />
+
+<script src="~/js/Consultant/jquery.nicescroll.min.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="~/css/Consultant/mobile.css" rel="stylesheet" />
+
 <div class="footer">
-
-    <link href="~/css/Consultant/styles.rtl.css" rel="stylesheet" />
-    <link href="~/css/Consultant/1000.rtl.css" rel="stylesheet" />
-
-    <link href="~/css/Consultant/theme.custom-1.css" rel="stylesheet" />
-    <link href="~/css/Consultant/theme.custom-2.css" rel="stylesheet" />
-
-    <script src="~/js/Consultant/jquery.nicescroll.min.js"></script>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link href="~/css/Consultant/mobile.css" rel="stylesheet" />
-
     <div class="footer-upper">
         <div class="center">
             <ul class="social-sharing">
@@ -304,23 +333,26 @@
                     <strong>معلومات</strong>
                 </div>
                 <ul class="list">
-                    <li><a href="/Harag/FeaturedProducts">الاعلانات المميزه</a></li>
-                    <li><a href="/Harag/NotAllowed">	المنتجات الممنوعه</a></li>
-                    <li><a href="/Harag/Terms">شروط الاستخدام</a></li>
+                    <li><a href="/%D8%A7%D9%84%D8%B4%D8%AD%D9%86-%D9%88%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B1%D8%AC%D8%A7%D8%B9">	الشحن والاسترجاع</a></li>
+                    <li><a href="/%D8%A7%D9%84%D8%AE%D8%B5%D9%88%D8%B5%D9%8A%D8%A9">	الخصوصية</a></li>
+                    <li><a href="/%D8%B4%D8%B1%D9%88%D8%B7-%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85">شروط الاستخدام</a></li>
                     <li><a href="/%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA-%D8%B9%D9%86%D8%A7">معلومات عنا</a></li>
                 </ul>
             </div>
             <div class="footer-block">
                 <div class="title">
-                    @*<a id="open-customer-service">خدمة العملاء</a>*@
+                    <a id="open-customer-service">خدمة العملاء</a>
                 </div>
-                <ul class="list"></ul>
+                <ul class="list">
+                    <li><a href="/Harag/CustomerService"> خدمة العملاء</a></li>
+                </ul>
             </div>
             <div class="footer-block">
                 <div class="title">
                     <strong>حسابي</strong>
                 </div>
-                <ul class="list"> 
+                <ul class="list">
+                    <li><a href="/customer/info">معلومات العميل</a></li>
                     <li><a href="/customer/addresses">عناوين</a></li>
                     <li><a href="/order/history">طلبات</a></li>
 
@@ -335,8 +367,8 @@
                 </div>
                 <ul class="list">
                     <li class="address"><span>المملكة العربية السعودية</span></li>
-                    <li class="email"><span>info@Niyat.com</span></li>
-                    <li class="phone"><span>966-0000000</span></li>
+                    <li class="email"><span>info@farms.com</span></li>
+                    <li class="phone"><span>966-154875314</span></li>
                 </ul>
             </div>
         </div>
@@ -346,10 +378,10 @@
             <ul class="accepted-payments">
                 <li class="method2"></li>
                 <li class="method3"></li>
-                <li class="method4"></li> 
+                <li class="method4"></li>
             </ul>
             <div class="footer-disclaimer">
-                حقوق الطبع والنشر © 2019 Niyat Store. جميع الحقوق محفوظة.
+                حقوق الطبع والنشر © @DateTime.Now.Year.ToString() Farms Store. جميع الحقوق محفوظة.
             </div>
 
             <div class="footer-store-theme">
@@ -410,7 +442,7 @@
                 $("#mobile-navbar-js").html(data);
             }
         });
-         
+
 
          $.ajax({
             type: 'GET',
@@ -425,7 +457,7 @@
             url: '@Url.RouteUrl("Harag.Notification.NotificationsCount")',
 
             success: function (data) {
-                
+
                 var n = parseInt(data);
 
                 if (n === 0) {
@@ -520,7 +552,7 @@
     });
     $(".rightMenu .top_header i").click(function () {
         $(".overlay").css("display", "none");
-        $(".rightMenu").css({ "-webkit-transform": "translate(320px)", "-ms-transform": "translate(320px)", "-moz-transform": "translate(320px)", "transform": "translate(320px)" , "box-shadow": "none" });
+        $(".rightMenu").css({ "-webkit-transform": "translate(320px)", "-ms-transform": "translate(320px)", "-moz-transform": "translate(320px)", "transform": "translate(320px)", "box-shadow": "none" });
         $(".topFixed").css("z-index", "1070");
     });
     $("#myAccount").click(function () {
@@ -533,7 +565,7 @@
     });
     $(".overlay").click(function () {
         $(this).css("display", "none");
-        $(".rightMenu").css({ "-webkit-transform": "translate(320px)", "-ms-transform": "translate(320px)", "-moz-transform": "translate(320px)", "transform": "translate(320px)", "box-shadow" : "none" });
+        $(".rightMenu").css({ "-webkit-transform": "translate(320px)", "-ms-transform": "translate(320px)", "-moz-transform": "translate(320px)", "transform": "translate(320px)", "box-shadow": "none" });
         $(".subRightMenu").css("display", "none");
         $("#myAccountScreenFull").css("display", "none");
         $("#searchScreenFull").css("display", "none");

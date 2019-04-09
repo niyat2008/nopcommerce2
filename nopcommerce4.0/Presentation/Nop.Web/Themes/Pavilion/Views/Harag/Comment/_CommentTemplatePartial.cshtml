@@ -9,7 +9,7 @@
                 &nbsp;  <a href="/Harag/User/@Model.CommentOwner" class="username">@Model.UserFullName</a>
             </div>
 
-            @if (!Model.IsCommentOwner)
+            @if (!Model.IsCommentOwner && !this.Context.User.Identity.IsAuthenticated)
             {
                 <div class="pull-left adxExtraInfoPart">
                     <div class="pull-left">
@@ -23,7 +23,7 @@
         ››
         &nbsp;  @Model.DateDescription
 
-        @if (!Model.IsCommentOwner)
+        @if (!Model.IsCommentOwner && !this.Context.User.Identity.IsAuthenticated)
         {
             <div class="pull-left reportPanel" id="id-@Model.Id">
                 <span class="report" data-report="@Model.Id"><i class="fa fa-flag"></i>  إبلاغ  </span>
