@@ -134,7 +134,7 @@ namespace Nop.Web.Controllers.Harag
 
                 if (result)
                 {
-                    _customerServiceContext.AddCustomerServiceMessage(message);
+                    //_customerServiceContext.AddCustomerServiceMessage(message);
                     return View("~/Themes/Pavilion/Views/Harag/Post/CustomerServiceMessageAdded.cshtml");
                 }
                 else
@@ -250,9 +250,7 @@ namespace Nop.Web.Controllers.Harag
 
             };
             return View("~/Themes/Pavilion/Views/Harag/Profile/MainProfile.cshtml", model);
-        }
-
-
+        } 
 
         [HttpGet]
         public IActionResult GetHaragAdminLink()
@@ -266,6 +264,7 @@ namespace Nop.Web.Controllers.Harag
             }
             return PartialView("~/Themes/Pavilion/Views/Harag/User/_AdminLink.cshtml", 0);
         }
+
         /// <summary>
         /// Helper get the abilitty to add rate 
         /// </summary>
@@ -283,6 +282,25 @@ namespace Nop.Web.Controllers.Harag
                 return false;
             }
         }
+
+        /// <summary>
+        /// Helper get the abilitty to add rate 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        private bool CanRateUser(int id)
+        {
+            var rates = _rateRepository.GetUserRates(id);
+            if (rates.Where(m => m.CustomerId == _workContext.CurrentCustomer.Id).Count() == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         [HttpGet]
         public IActionResult RateUserView(string username)
         {
@@ -298,12 +316,10 @@ namespace Nop.Web.Controllers.Harag
 
             var model = new RateModel
             {
-                Username = user.Username,
+                Username = user.GetFullName(),
                 UserId = user.Id
             };
-
-           
-
+             
             if (user.Username == _workContext.CurrentCustomer.Username)
             { 
                 var note = "لا يمكنك تقييم نفسك";
@@ -312,6 +328,11 @@ namespace Nop.Web.Controllers.Harag
             else if (!CanRateOtherUsers())
             {
                 var note = "لابد من الوصول الي شرط التقييم لامكانيه تقييم عضو اخر";
+                return View("~/Themes/Pavilion/Views/Harag/Rate/RateNote.cshtml", note);
+            }
+            else if (!CanRateUser(user.Id))
+            {
+                var note = "لقد قمت بتقييم هذا العضو من قبل";
                 return View("~/Themes/Pavilion/Views/Harag/Rate/RateNote.cshtml", note);
             }
 
@@ -327,9 +348,13 @@ namespace Nop.Web.Controllers.Harag
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Redirect("/Login");
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Added = false;
                 return View("~/Themes/Pavilion/Views/Harag/Rate/RateUser.cshtml", model);
-            var user = _customerContext.GetCustomerByUsername(model.Username);
+            }
+               
+            var user = _customerContext.GetCustomerById(model.UserId);
 
             if (user == null)
                 return NotFound();
@@ -344,14 +369,13 @@ namespace Nop.Web.Controllers.Harag
             };
 
             var posts = _rateRepository.AddUserRate(rate);
-            var notification = _notificationService.PushRateNotification(_workContext.CurrentCustomer.Id,  model.AdviceDeal);
+            var notification = _notificationService.PushRateNotification(_workContext.CurrentCustomer.Id, user.Id,  model.AdviceDeal);
 
             ViewBag.Added = true;
 
             return View("~/Themes/Pavilion/Views/Harag/Rate/RateUser.cshtml", model);
         }
-
-
+         
         [HttpGet]
         public IActionResult GetUserRates(string userId)
         {
@@ -370,7 +394,7 @@ namespace Nop.Web.Controllers.Harag
                 AdviceDeal = m.AdviceDeal, 
                 IsBuyDone = m.IsBuyDone,
                 RateComment = m.RateComment,
-                Username = m.Customer.Username,
+                Username = m.Customer.GetFullName(),
                 User = m.User,
                 Customer = m.Customer
             }).ToList();
@@ -378,7 +402,8 @@ namespace Nop.Web.Controllers.Harag
             userRates.ConfirmedUserDownRateCount = userRates.Rates.Where(m => m.Customer.IsPaymentDone == true && m.AdviceDeal == true).ToList().Count;
             userRates.ConfirmedUserUpRateCount = userRates.Rates.Where(m => m.Customer.IsPaymentDone ==true && m.AdviceDeal == false).ToList().Count; ;
             userRates.UpRateCount = userRates.Rates.Where(m => m.AdviceDeal == true).ToList().Count; ;
-            userRates.DownRateCount = userRates.Rates.Where(m => m.AdviceDeal == false).ToList().Count; 
+            userRates.DownRateCount = userRates.Rates.Where(m => m.AdviceDeal == false).ToList().Count;
+
             ViewBag.Added = true;
 
             return View("~/Themes/Pavilion/Views/Harag/Rate/AllUserRates.cshtml", userRates);
@@ -429,8 +454,7 @@ namespace Nop.Web.Controllers.Harag
             };
 
             return View("~/Themes/Pavilion/Views/Harag/Profile/MainProfile.cshtml", model);
-        }
-
+        } 
 
         [HttpGet]
         public IActionResult GetUserSummaryInfo(string userId)
@@ -469,9 +493,7 @@ namespace Nop.Web.Controllers.Harag
         //            return PartialView("~/Themes/Pavilion/Views/Consultant/User/_AdminLink.cshtml", 1);
         //    }
         //    return PartialView("~/Themes/Pavilion/Views/Consultant/User/_AdminLink.cshtml", 0);
-        //}
-
-
+        //} 
 
         //[HttpGet]
         //public IActionResult GetUserRoles()

@@ -22,22 +22,25 @@
                     </div>
                     <form action="/Harag/RateAjax" method="post" class="add-adverse">
                         <div class="col-md-12">
-                            <input id="" type="checkbox" /> أتعهد وأقسم بالله أنا العضو شركة نياط أنني قمت بشراء سلعة من العضو dr.rare وأن المعلومات التي أقدمها في التقييم هي معلومات صحيحة ودقيقة وأتحمل مسؤولية صحة هذه المعلومات
+                            <input id="agreement" type="checkbox" /> أتعهد وأقسم بالله أنا العضو شركة نياط أنني قمت بشراء سلعة من العضو @Model.Username وأن المعلومات التي أقدمها في التقييم هي معلومات صحيحة ودقيقة وأتحمل مسؤولية صحة هذه المعلومات
                             <br /> <br />
-                            @Html.HiddenFor(m => m.Username, new { value=Model.Username})
+                            @Html.HiddenFor(m => m.UserId, new { value = Model.UserId })
                             <p>هل تنصح الأعضاء الآخرين بالتعامل مع البائع @Model.Username </p>
                             @Html.RadioButtonFor(m => m.AdviceDeal, true, new { @checked = "checked" })نعم ، أنصح الأعضاء بالتعامل معه <br />
                             @Html.RadioButtonFor(m => m.AdviceDeal, false) لا ، لا أنصح بالتعامل معه <br /> <br />
+                            @Html.ValidationMessageFor(m => m.AdviceDeal)
 
                         </div>
                         <div class="col-md-6">
                             @Html.TextAreaFor(m => m.RateComment, new { @class = "form-control txtArea", required = "required", placeholder = "نرجو ذكر تجربتك فى التعامل مع البائع مع ذكر السلعة", rows = "7" })
+                            @Html.ValidationMessageFor(m => m.RateComment)
                             <br />
                         </div>
                         <div class="col-md-12">
                             <p>هل تم الشراء</p>
                             @Html.RadioButtonFor(m => m.IsBuyDone, true, new { @checked = "checked" })نعم ، تم الشراء <br />
                             @Html.RadioButtonFor(m => m.IsBuyDone, true, new { @checked = "checked" })  لا لم يتم الشراء <br /><br />
+                            @Html.ValidationMessageFor(m => m.IsBuyDone)
                         </div>
 
                         <div class="col-md-12">
@@ -49,6 +52,8 @@
                                 <option value="4">قبل أكثر من ثلاث شهور </option>
                                 <option value="5"> لم يتم الشراء </option>
                             </select>
+                            @Html.ValidationMessageFor(m => m.WhenBuyDone)
+
                         </div>
                         @*<div class="col-md-12">
                                 <p>إذا كانت السلعة سيارة ، هل قمت بفحص السياراة قبل الشراء؟ </p>
@@ -57,7 +62,7 @@
                                 <input type="radio" name="value" /> لا ، لم أقوم بفحص السيارة لدى مركز فحص متخصص <br /><br />
                             </div>*@
                         <div class="col-xs-12">
-                            <button class="btn btn-default add" type="submit">ارسال التقييم >> </button>
+                            <button class="btn btn-default add add-rate-js" type="submit">ارسال التقييم >> </button>
                         </div>
                     </form>
                 </div>}
@@ -65,9 +70,9 @@
             {
                 <div class="col-md-10">
                     <div class="alert alert-success addRate" role="alert">
-                        تم اضافه التقييم بنجاح  <br /> 
+                        تم اضافه التقييم بنجاح  <br />
                     </div>
-                </div>     
+                </div>
             }
 
         </div>
@@ -106,6 +111,13 @@
             url: '@Url.RouteUrl("Harag.Post.GetHaragCities")',
             complete: function (data) {
                 $("#search-city-js-ajax").html(data.responseText);
+            }
+        });
+
+        $('.add-rate-js').click(function () {
+            if ($('#agreement')[0].checked !== true) {
+                alert('لا بد من الموافقه علي المعاهده');
+                return false;
             }
         });
     });

@@ -18,11 +18,10 @@
 @await Component.InvokeAsync("Widget", new { widgetZone = "body_start_html_tag_after" })
 @await Html.PartialAsync("_Notifications")
 @await Html.PartialAsync("_JavaScriptDisabledWarning")
-@await Html.PartialAsync("_OldInternetExplorerWarning")
-
+@await Html.PartialAsync("_OldInternetExplorerWarning") 
 <div class="master-wrapper-page @stickyLogoClass">
     @await Html.PartialAsync("_Header")
-    <script type="text/javascript" asp-location="Footer" >
+    <script type="text/javascript" asp-location="Footer">
         AjaxCart.init(false, '.header-links .cart-qty', '.header-links .wishlist-qty', '#flyout-cart');
     </script>
     <div class="overlayOffCanvas"></div>
@@ -43,7 +42,7 @@
             <div class="preferences-button" id="header-selectors-opener">
                 <span>@T("SevenSpikes.Themes.Pavilion.Header.Preferences")</span>
             </div>
-           
+
             <div class="search-wrap">
                 <span>@T("Search")</span>
             </div>
@@ -52,11 +51,11 @@
     </div>
     <div class="master-wrapper-content">
         @await Component.InvokeAsync("Widget", new { widgetZone = "content_before" })
-		@await Component.InvokeAsync("Widget", new { widgetZone = "pavilion_color_squares" })
+        @await Component.InvokeAsync("Widget", new { widgetZone = "pavilion_color_squares" })
 
         @if (IsSectionDefined("Breadcrumb"))
         {
-            @RenderSection("Breadcrumb") 
+            @RenderSection("Breadcrumb")
         }
         <div class="master-column-wrapper">
             @RenderBody()
@@ -65,7 +64,7 @@
     </div>
     @if (isHomePage)
     {
-		@await Component.InvokeAsync("Widget", new { widgetZone = "homepage_content_after" })
+        @await Component.InvokeAsync("Widget", new { widgetZone = "homepage_content_after" })
     }
 
     @await Component.InvokeAsync("Footer")

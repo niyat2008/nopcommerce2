@@ -180,16 +180,15 @@ namespace Nop.Services.Z_Harag.Notification
             return true;
         }
 
-        public bool PushRateNotification(int id, bool adviceDeal)
+        public bool PushRateNotification(int id, int ratedId, bool adviceDeal)
         {
             this.AddCommentNotification(new Z_Harag_Notification
             {
                 NotificationType = (int)NotificationType.Rate,
-                OwnerId = id,
-                NotificationTime = DateTime.Now,
-                PostId = 1,
-                NotificationContent = adviceDeal.ToString(),
-                CustomerId =1,
+                OwnerId = ratedId,
+                NotificationTime = DateTime.Now, 
+                CustomerId = id,
+                NotificationContent = adviceDeal ? 1+"":0+"", 
                 IsRead = false
             });
 

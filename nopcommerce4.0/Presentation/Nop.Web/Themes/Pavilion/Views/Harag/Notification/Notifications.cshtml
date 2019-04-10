@@ -13,54 +13,64 @@
             <h3>الاشعارات</h3>
             <div class="col-md-3 cont"></div>
             <div class="col-md-9 cont">
-                @if(Model.Notifications.Count > 0) {
-                foreach (var n in Model.Notifications.OrderByDescending(m => m.Time))
+                @if (Model.Notifications.Count > 0)
                 {
-                    if (n.Type == NotificationType.PostOwnnerComment)
+                    foreach (var n in Model.Notifications.OrderByDescending(m => m.Time))
                     {
-                        <div class=" ">
-                            <h3 dir="rtl">
-                                <strong>@n.DateDescription :</strong>  تم التعليق علي اعلانك <a class="text-danger" href="/Harag/Post/@n.PostId">@n.PostTitle</a> بواسطه  <a href="/Harag/User/@n.Username">@n.CustomerName</a>
-                            </h3>
-                        </div>
-                    }
-                    else if (n.Type == NotificationType.Comment)
-                    {
-                        <div class=" ">
-                            <h3>
-                                <strong>@n.DateDescription :</strong>  تم التعليق علي: <a class="text-danger" href="/Harag/Post/@n.PostId">@n.PostTitle</a> بواسطه   <a href="/Harag/User/@n.Username">  <strong> @n.CustomerName</strong> </a>
-                            </h3>
-                        </div>
-                    }
-                    else if (n.Type == NotificationType.Post)
-                    {
-                        <div class="feat- adv-blck">
-                            <h3>
-                                <strong>@n.DateDescription :</strong>  تم نشر اعلان  <a class="text-danger" href="/Harag/Post/@n.PostId">@n.PostTitle</a>  بواسطه <a href="/Harag/User/@n.Username"> @n.CustomerName </a>
-                            </h3>
-                        </div>
-                    }
-                    else if (n.Type == NotificationType.UpdatePost || n.Type == NotificationType.Note)
-                    {
-                        <div class="feat- adv-blck">
-                            <h3>
-                                ملاحظه: قم بتحديث اعلانك<a class="text-danger" href="/Harag/Post/@n.PostId"> @n.PostTitle</a> قبل @n.Time.AddMonths(3).ToLongDateString()
-                            </h3>
-                        </div>
-                    }
-                    else if (n.Type == NotificationType.General)
-                    {
-                        <div class="feat- adv-blck">
-                            <h3 class="text-danger">
-                                @n.DateDescription: @n.Note
-                            </h3>
-                        </div>
+                        if (n.Type == NotificationType.PostOwnnerComment)
+                        {
+                            <div class=" ">
+                                <h3 dir="rtl">
+                                    <strong>@n.DateDescription: </strong>  تم التعليق علي اعلانك <a class="text-danger" href="/Harag/Post/@n.PostId">@n.PostTitle</a> بواسطه  <a href="/Harag/User/@n.Username">@n.CustomerName</a>
+                                </h3>
+                            </div>
                         }
+                        else if (n.Type == NotificationType.Comment)
+                        {
+                            <div class=" ">
+                                <h3>
+                                    <strong>@n.DateDescription :</strong>  تم التعليق علي: <a class="text-danger" href="/Harag/Post/@n.PostId">@n.PostTitle</a> بواسطه   <a href="/Harag/User/@n.Username">  <strong> @n.CustomerName</strong> </a>
+                                </h3>
+                            </div>
+                        }
+                        else if (n.Type == NotificationType.Post)
+                        {
+                            <div class="feat- adv-blck">
+                                <h3>
+                                    <strong>@n.DateDescription :</strong>  تم نشر اعلان  <a class="text-danger" href="/Harag/Post/@n.PostId">@n.PostTitle</a>  بواسطه <a href="/Harag/User/@n.Username"> @n.CustomerName </a>
+                                </h3>
+                            </div>
+                        }
+                        else if (n.Type == NotificationType.UpdatePost || n.Type == NotificationType.Note)
+                        {
+                            <div class="feat- adv-blck">
+                                <h3>
+                                    ملاحظه: قم بتحديث اعلانك<a class="text-danger" href="/Harag/Post/@n.PostId"> @n.PostTitle</a> قبل @n.Time.AddMonths(3).ToLongDateString()
+                                </h3>
+                            </div>
+                        }
+                        else if (n.Type == NotificationType.General)
+                        {
+                            <div class="feat- adv-blck">
+                                <h3 class="text-danger">
+                                    @n.DateDescription: @n.Note
+                                </h3>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="feat- adv-blck">
+                                <h3 class="text-danger">
+                                    @n.DateDescription: @n.Note @n.Type
+                                </h3>
+                            </div>
+                        } 
+                        
                     }
                 }
                 else
                 {
-                    <p>لا توجد اشعارات</p>
+                    < p > لا توجد اشعارات</ p >
                 }
                 @if (Model.Notifications.ToList().Count > 0)
                 {
@@ -70,7 +80,7 @@
                         </a>
                     </div>
                 }
-                </div>
+            </div>
         </div>
     </div>
 </div>

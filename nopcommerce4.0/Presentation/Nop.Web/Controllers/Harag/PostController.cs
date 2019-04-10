@@ -758,6 +758,7 @@ namespace Nop.Web.Controllers.Harag
                 IsDispayed = p.IsDispayed,
                 IsFeatured = (bool)p.IsFeatured,
                 PostOwner = p.Customer.Username,
+                CommentsCount = (int) p.Z_Harag_Comment?.Count,
                 PostOwnerFullName = p.Customer.GetFullName()
             }).ToList();
 
@@ -788,6 +789,7 @@ namespace Nop.Web.Controllers.Harag
                 Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
                 DateUpdated = p.DateUpdated,
                 IsFeatured = (bool)p.IsFeatured,
+                CommentsCount = (int)p.Z_Harag_Comment?.Count,
                 IsDispayed = p.IsDispayed,
                 PostOwner = p.Customer.Username,
                 PostOwnerFullName = p.Customer.GetFullName()
@@ -816,6 +818,7 @@ namespace Nop.Web.Controllers.Harag
                 DateCreated = p.DateCreated,
                 Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
                 // Rate = p.Rate,
+                CommentsCount = (int)p.Z_Harag_Comment?.Count,
                 IsFeatured = (bool)p.IsFeatured,
                 DateUpdated = p.DateUpdated,
                 IsDispayed = p.IsDispayed,
@@ -847,6 +850,7 @@ namespace Nop.Web.Controllers.Harag
                 Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
                 //Rate = p.Rate,
                 IsFeatured = (bool)p.IsFeatured,
+                CommentsCount = (int)p.Z_Harag_Comment?.Count,
                 DateUpdated = p.DateUpdated,
                 IsDispayed = p.IsDispayed,
                 PostOwner = p.Customer.Username,
@@ -884,6 +888,7 @@ namespace Nop.Web.Controllers.Harag
                 IsFeatured = (bool)p.IsFeatured,
                 // Rate = p.Rate,
                 DateUpdated = p.DateUpdated,
+                CommentsCount = (int)p.Z_Harag_Comment?.Count,
                 IsDispayed = p.IsDispayed,
                 PostOwner = p.Customer.Username,
                 PostOwnerFullName = p.Customer.GetFullName()
@@ -921,6 +926,7 @@ namespace Nop.Web.Controllers.Harag
                 // Rate = p.Rate,
                 DateUpdated = p.DateUpdated,
                 IsDispayed = p.IsDispayed,
+                CommentsCount = (int)p.Z_Harag_Comment?.Count,
                 PostOwner = p.Customer.Username,
                 PostOwnerFullName = p.Customer.GetFullName()
             }).ToList();
@@ -960,6 +966,7 @@ namespace Nop.Web.Controllers.Harag
                 DateCreated = p.DateCreated,
                 Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
                 DateUpdated = p.DateUpdated,
+                CommentsCount = (int)p.Z_Harag_Comment?.Count,
                 IsDispayed = p.IsDispayed,
                 PostOwner = p.Customer.Username,
                 PostOwnerFullName = p.Customer.GetFullName()
@@ -993,6 +1000,7 @@ namespace Nop.Web.Controllers.Harag
                 //Rate = p.Rate,
                 DateUpdated = p.DateUpdated,
                 IsDispayed = p.IsDispayed,
+                CommentsCount = (int)p.Z_Harag_Comment?.Count,
                 PostOwner = p.Customer.Username,
                 PostOwnerFullName = p.Customer.GetFullName()
             }).ToList();
@@ -1032,6 +1040,7 @@ namespace Nop.Web.Controllers.Harag
                     // Rate = p.Rate,
                     DateUpdated = p.DateUpdated,
                     IsDispayed = p.IsDispayed,
+                    CommentsCount = (int)p.Z_Harag_Comment?.Count,
                     PostOwner = p.Customer.Username,
                     PostOwnerFullName = p.Customer.GetFullName()
                 }).ToList();
@@ -1198,16 +1207,17 @@ namespace Nop.Web.Controllers.Harag
                     PostOwnerFullName = m.Customer.GetFullName(),
                     DateCreated = m.DateCreated,
                     DateUpdated = m.DateUpdated,
-                    IsFeatured = (bool)m.IsFeatured,
+                    IsFeatured = (bool) m.IsFeatured,
                     IsAnswered = m.IsAnswered,
                     IsClosed = m.IsCommentingClosed,
+                    CommentsCount = (int)m.Z_Harag_Comment?.Count,
                     IsDispayed = m.IsDispayed,
                     City = m.City.ArName,
-                    
                     CategoryName = m.Category.Name,
                     Photo = m.Z_Harag_Photo?.FirstOrDefault()?.Url
                 }).ToList(),
             };
+
             if (pageNo == 0)
             {
                 return View("~/Themes/Pavilion/Views/Harag/Search/searchPage.cshtml", outputModel);
@@ -1242,6 +1252,7 @@ namespace Nop.Web.Controllers.Harag
                     IsFeatured = (bool)m.IsFeatured,
                     IsDispayed = m.IsDispayed,
                     City = m.City.ArName,
+                    CommentsCount = (int)m.Z_Harag_Comment?.Count,
                     CategoryName = m.Category.Name,
                     Photo = m.Z_Harag_Photo?.FirstOrDefault()?.Url
                 }).ToList(),

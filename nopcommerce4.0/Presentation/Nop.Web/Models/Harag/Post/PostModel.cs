@@ -30,6 +30,7 @@ namespace Nop.Web.Models.Harag.Post
         public string Photo { get; set; }
         public double Len { get; set; }
         public double Lat { get; set; }
+        public int CommentsCount { get; set; }
         public bool IsCommon { get; set; }
          
         /// <summary>

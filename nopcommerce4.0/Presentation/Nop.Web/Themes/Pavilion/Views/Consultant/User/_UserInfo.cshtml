@@ -10,12 +10,11 @@
             <ul>
 
                 <li>
-                    @Html.RouteLink("سجل الآن", "register", new { returnUrl = "consultations" }, new { @class = "ico-register" })
+                    @Html.RouteLink("سجل ", "register", new { returnUrl = "consultations" }, new { @class = "ico-register" })
                 </li>
-                <li> @Html.RouteLink("دخول", "login", new { returnUrl = "consultations" }, new { @class = "ico-login" })  </li>
+                <li> @Html.RouteLink("تسجيل الدخول", "login", new { returnUrl = "consultations" }, new { @class = "ico-login" })  </li>
                 <li>
-                    <a href="/wishlist" class="ico-wishlist">
-                        @*<p class="wishlist-label">قائمة الملاحظة</p>*@
+                    <a href="/wishlist" class="ico-wishlist"> 
                         <p class="wishlist-label">السلع المفضلة</p>
                     </a>
                 </li>

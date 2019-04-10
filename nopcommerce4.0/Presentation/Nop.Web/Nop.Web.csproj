@@ -84,6 +84,14 @@
     <None Remove="Themes\Pavilion\Content\css\pages.css" />
     <None Remove="Themes\Pavilion\Content\css\style.css" />
     <None Remove="Themes\Pavilion\Content\img\google-plus.png" />
+    <None Remove="Themes\Pavilion\Content\img\images_list\15.png" />
+    <None Remove="Themes\Pavilion\Content\img\images_list\16.png" />
+    <None Remove="Themes\Pavilion\Content\img\images_list\17.png" />
+    <None Remove="Themes\Pavilion\Content\img\images_list\18.png" />
+    <None Remove="Themes\Pavilion\Content\img\images_list\19.png" />
+    <None Remove="Themes\Pavilion\Content\img\images_list\20.png" />
+    <None Remove="Themes\Pavilion\Content\img\images_list\21.png" />
+    <None Remove="Themes\Pavilion\Content\img\images_list\22.png" />
     <None Remove="Themes\Pavilion\Content\img\New folder\ma3roof.png" />
     <None Remove="Themes\Pavilion\Content\img\whatsapp-image.png" />
     <EmbeddedResource Include="Themes\Pavilion\Views\Harag\Follow\Follow.cshtml">

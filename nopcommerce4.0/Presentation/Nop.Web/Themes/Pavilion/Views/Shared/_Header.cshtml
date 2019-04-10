@@ -105,20 +105,25 @@
         }
     });
 </script>
-
-
-
+ 
 <div id="topThreeHeader" style="width:100%; margin:auto !important; background-color:black;height:43px;text-align:center;top:0;position:fixed;z-index:1030;padding-top:10px;padding-bottom:5px;background-color:rgba(0,0,0,0.9); ">
     <span class="col-md-4 col-md-offset-17" style="text-align: center">
         <span class="topbarspan topbarspanActive">@Html.RouteLink("المتجر", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-        <span>@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+        <span class="topbarspan">@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
 
         <span class="topbarspan">@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
 
     </span>
 </div>
 
+<div class="text-center">
+    <span>@Html.RouteLink("المتجر", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+    <span class="active">@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
 
+    <span>@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+
+</div>
+  
 <div class="header">
     @await Component.InvokeAsync("Widget", new { widgetZone = "header" })
 
@@ -153,9 +158,9 @@
                 @*</section>*@
 
                 @if (!String.IsNullOrEmpty(taxTypeSelectorHtml.ToHtmlString()) ||
-          !String.IsNullOrEmpty(currencySelectorHtml.ToHtmlString()) ||
-          //!String.IsNullOrEmpty(languageSelectorHtml.ToHtmlString()) ||
-          !String.IsNullOrEmpty(headerSelectorWidgetHtml.ToHtmlString()))
+       !String.IsNullOrEmpty(currencySelectorHtml.ToHtmlString()) ||
+       //!String.IsNullOrEmpty(languageSelectorHtml.ToHtmlString()) ||
+       !String.IsNullOrEmpty(headerSelectorWidgetHtml.ToHtmlString()))
                 {
                     <div class="header-selectors-wrapper">
                         <label>@T("SevenSpikes.Themes.Pavilion.Header.Preferences")</label>
@@ -257,7 +262,7 @@
 
     </div>
 </div>
- 
+
 
 @if (isHomePage)
 {
