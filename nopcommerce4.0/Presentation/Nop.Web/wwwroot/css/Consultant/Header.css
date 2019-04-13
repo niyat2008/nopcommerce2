@@ -1,25 +1,11 @@
 ﻿/* Header Style */
-a:hover {
-    color: #40ca40
-}
+a:hover { color: #40ca40 }
 
 .topFixed { position: fixed; top: 0; z-index: 1070; width: 100%; }
 
 /*top-bar*/
 .top_bar { background: #333; padding: 10px 0; text-align: center; height: 43px; }
 .top_bar span { cursor: pointer; color: #fff; font-size: 17px; padding: 9px 30px; padding-top: 10px }
-@media(max-width:350px) {
-    .top_bar span {
-        font-size: 13px;
-        padding: 14px 7px
-    }
-}
-@media(min-width:350px) and (max-width:386px) {
-    .top_bar span {
-        font-size: 13px;
-        padding: 14px 30px;
-    }
-}
 .top_bar span.active { background: #3e874b }
 .top_bar span a, .top_bar span:hover a, .top_bar span a:hover, .top_bar span:focus a, .top_bar span a:focus { text-decoration: none }
 
@@ -27,6 +13,9 @@ a:hover {
 
 @media only screen and (max-width : 1024px) {
    .top_bar .top_col_screen { display: none }
+}
+@media(max-width:410px) {
+    .top_bar span { font-size: 13px; padding: 14px 7px  }
 }
 /*Search*/
 .search { padding: 2px 0; background: #f6f6f6; }
@@ -74,8 +63,8 @@ a:hover {
 /* .subNav { display: none; min-height: 100px; padding: 10px 0; background:#fff; border:1px solid #ddd; position: absolute; top: 51px; right: -292px; z-index: 9999; width: 1518px; box-shadow: 0 1px 2px 0 rgba(0,0,0,.08); -ms-transition: all 3s ease-in-out; -o-transition: all 3s ease-in-out; -webkit-transition: all 3s ease-in-out; transition: all 3s ease-in-out; } */
 /* .navbar-default .navbar-nav>li.hasSubMenu :hover { background:#fff; border-top:1px solid #4da74d } */
 .navbar-default .navbar-nav > li.hasSubMenu :hover ~ .subNav { display: block; -ms-transition: all 3s ease-in-out; -o-transition: all 3s ease-in-out; -webkit-transition: all 3s ease-in-out; transition: all 3s ease-in-out; }
-.navbar-default .navbar-nav > li.hasSubMenu a:hover { color: #4da74d; font-weight: bold; text-decoration: underline }
-.navbar-default .navbar-nav > li.hasSubMenu a { font-size: 15px; padding-bottom: 0; padding-top: 0; line-height: 30px }
+.navbar-default .navbar-nav > li.hasSubMenu a:hover { color: #4da74d; font-weight: bold; text-decoration: none }
+.navbar-default .navbar-nav > li.hasSubMenu a { padding: 5px 13px; font-size: 15px; padding-bottom: 0; padding-top: 2px; line-height: 40px; }
 .subNav:hover { display: block }
 .subNav ul { float: right; min-width: 220px; margin-right: 15px; border-left: 1px solid #ddd; }
 .subNav ul:last-of-type { border-left: 0 }
@@ -86,7 +75,7 @@ a:hover {
 .manage { background: #3e874b; color: #fff; min-height: 42px; display: none }
 .manage .admin-link-js-ajax { line-height: 42px; color: #fff; }
 
-.fixedNavScreen { background: #fff; box-shadow: 0 3px 5px rgba(0,0,0,0.1); display: none; }
+.fixedNavScreen { background:#fff; border-top: 3px solid #3e874b; padding-top: 1px; box-shadow: 0 3px 5px rgba(0,0,0,0.1); display: none; }
 .fixedNavScreen ul { display: flex; justify-content: center; margin-bottom: 0; padding: 0; line-height: 31px }
 .fixedNavScreen ul li { float: right; cursor: pointer; padding: 10px; border-left: 1px solid #ddd; border-right: 1px solid #ddd; }
 .fixedNavScreen ul li i { color: #4da74d; font-weight: bold; }
@@ -94,69 +83,19 @@ a:hover {
 /*@media(max-width:767px) {*/
 @media only screen and (max-width : 1024px) {
     .top-user-menu { display: none }
-    .fixedNavScreen {
-        display: block
-    }
-
-    .search {
-        padding: 15px 0;
-    }
-
-        .search .logoContainer {
-            text-align: center
-        }
-
-        .navbar-default, #userInfo, .search .form-group {
-            display: none
-        }
+    .fixedNavScreen { display: block }
+    .search { padding: 15px 0;  }
+    .search .logoContainer { text-align: center }
+    .navbar-default, #userInfo, .search .form-group { display: none }
 }
 
-#searchScreenFull {
-    display: none;
-    background: #3e874b;
-    margin-top: 50px;
-    min-height: 50px;
-}
-
-    #searchScreenFull input {
-        border-radius: 0;
-        height: 33px;
-        width: 75%;
-        float: right;
-        margin-top: 6px
-    }
-
-    #searchScreenFull i {
-        float: right;
-        line-height: 40px;
-        width: 10%;
-        margin-right: 12px;
-        cursor: pointer;
-        color: #fff;
-        font-size: 15px
-    }
-
-#myAccountScreenFull {
-    display: none
-}
-
-    #myAccountScreenFull ul {
-        width: 100%;
-        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-        background: #f9f9f9;
-        display: block
-    }
-
-        #myAccountScreenFull ul li {
-            border-top: 1px solid #ececec;
-            float: none;
-            text-align: center
-        }
-
-            #myAccountScreenFull ul li a {
-                padding: 15px 25px;
-                font-size: 13px;
-            }
+#searchScreenFull { display: none; background: #3e874b; margin-top: 50px; min-height: 50px; }
+#searchScreenFull input { border-radius: 0; height: 33px; width: 75%; float: right; margin-top: 6px }
+#searchScreenFull i { float: right; line-height: 40px; width: 10%; margin-right: 12px; cursor: pointer; color: #fff; font-size: 15px }
+#myAccountScreenFull { display: none }
+#myAccountScreenFull ul { width: 100%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1); background: #f9f9f9; display: block }
+#myAccountScreenFull ul li { border-top: 1px solid #ececec; float: none; text-align: center }
+#myAccountScreenFull ul li a { padding: 15px 25px; font-size: 13px; }
 #myAccountScreenFull ul li a i { color: #999; font-weight: normal; padding-left: 15px }
 
 .overlay { display: none; background: rgba(0,0,0,0.6); position: fixed; top: 0; right: 0; bottom: 0; width: 100%; height: 100%; z-index: 1060; }

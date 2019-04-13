@@ -174,8 +174,9 @@ label, label + * {
 	text-align: center;
 }
 .page-title {
-	margin: 0 0 30px;
-	border-bottom: 1px solid #ddd;
+    margin: 0 -15px 30px;
+    /*margin: 0 0 30px;*/
+    border-bottom: 1px solid #ddd;
     padding: 0 0 10px;
     text-transform: uppercase;
 }

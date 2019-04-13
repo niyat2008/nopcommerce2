@@ -8,15 +8,13 @@
 }
 
 /* Commission */
-.cont {
-    margin: 0 18px;
-    width: 90%
-}
+.cont { margin: 0; width: 90% }
+/*.cont { margin: 0 18px; width: 90% }*/
+form.commission { margin: 18px 0 }
 
-form.commission {
-    margin: 18px 0
+@media(max-width:992px){
+    .cont { margin: 0 }
 }
-
 /* Add Advertise */
 .content .form-control.txtArea {
     height: auto;
@@ -51,51 +49,24 @@ form.commission {
 
 /* Advertise Details */
 .content .det-block { display: table; border-radius: 4px; min-height: 50px; background: #f3f9f7; width: 100%; border: 1px solid #ddd;  font-size: 15px; margin-bottom: 10px; }
-    .content .det-block .det-top {
-        padding: 10px;
-        padding-bottom: 1px;
-        background: antiquewhite;
-        border-bottom: 1px solid #ddd;
-        border: 1px solid #ebe7d1;
-        border-radius: 4px 4px 0px 0px;
-        border-bottom: 1px solid #ebe7d1;
-        border-top: 1px solid #ebe7d1;
-        background-color: #f8f6e7;
-        padding-top: 20px;
-        font-family: "Times New Roman",Times,serif;
-    }
- .content .det-block .det-top h4 { margin-top: 0; font-weight: bold; color: #4da74d !important; font-size: 24px; }
+.content .det-block .det-top {
+    padding: 10px; padding-bottom: 6px; border-bottom: 1px solid #ddd; border: 1px solid #ebe7d1; border-radius: 4px 4px 0px 0px; border-bottom: 1px solid #ebe7d1; border-top: 1px solid #ebe7d1; background-color: #f8f6e7;
+    /*padding-top: 20px;*/
+    font-family: "Times New Roman",Times,serif;
+}
+.content .det-block .det-top h4 { margin-top: 0; font-weight: bold; color: #4da74d !important; font-size: 24px; }
 .content .det-block .det-top small { color: #777; line-height: 42px; }
- 
-
-        .content .det-block .det-top a span {
-            padding-left: 30px;
-            color: #5c9ac6;
-            font-size: 1.82rem;
-        }
+.content .det-block .det-top a span { padding-left: 30px; color: #5c9ac6; font-size: 1.82rem; }
 .content .det-block .det-top span:hover { color: #4da74d }
-    .content .det-block .det-bottom {
-        padding: 10px;
-        padding-right: 30px;
-    }
-    .content .det-block .det-bottom p{
-        padding: 10px;
-        font-size: 26px;
-        color: black; 
-        font-family: Tahoma;
-    }
+.content .det-block .det-bottom { padding: 10px; padding-right: 30px; }
+.content .det-block .det-bottom p { padding: 10px; font-size: 26px; color: black;  font-family: Tahoma; }
 .content .det-block .det-bottom img { width: 47%; float: right; margin-left: 15px; margin-bottom: 10px; }
-.content .det-block .det-bottom p.phone { font-size: 18px; color: #4da74d }
+.content .det-block .det-bottom span.label { font-size:13px }
+.content .det-block .det-bottom p.phone { font-size: 22px; color: #4da74d; padding-right: 0; margin-top: 10px; }
 .content .social-contact { min-height: 50px; display: flex; align-items: center; justify-content: center; margin: 4px 18px; border-bottom: 1px solid #ddd; margin-bottom: 30px }
 .content .social-contact a { cursor: pointer; color: #777 }
-        .content .social-contact a:hover {
-            color: #4da74d
-        }
-
-.content .follow button i {
-    color: #777
-}
-
+.content .social-contact a:hover { color: #4da74d }
+.content .follow button i { color: #777 }
 .content .advBox {
     width: 100%;
     min-height: 200px;

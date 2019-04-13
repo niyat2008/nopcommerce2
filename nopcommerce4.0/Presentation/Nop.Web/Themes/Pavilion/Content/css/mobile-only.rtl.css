@@ -20,52 +20,24 @@
 .header-upper {
 	display: none;
 }
-.header .header-logo {
-	position: absolute;
-	top: 85px;
-	z-index: 1020;
-	width: 100%;
-	height: 110px;
-	background-color: #fff;
-	line-height: 130px;
-}
-.responsive-nav-wrapper-parent {
-	position: fixed;
-	top: 32px;
-	z-index: 1020;
-	width: 100%;
-	height: 53px !important; /*override inline height*/
-	border-top: 3px solid #00a1b1;
-	box-shadow: 0 3px 5px rgba(0,0,0,0.1);
-	background-color: #fff;
-}
-.admin-header-links ~ .header .header-logo {
-	top: 95px;
-}
-.admin-header-links ~ .responsive-nav-wrapper-parent {
-	top: 42px;
-}
-
-.mobile-sticky-logo .header .header-logo {
-	position: fixed;
-	top: 0;
-}
-.mobile-sticky-logo .responsive-nav-wrapper-parent {
-	top: 110px;
-}
-.mobile-sticky-logo .admin-header-links ~ .header .header-logo {
-	top: 42px;
-}
-.mobile-sticky-logo .admin-header-links ~ .responsive-nav-wrapper-parent {
-	top: 152px;
-}
-
-.two-columns-area {
-	margin: 160px 0 25px;
-}
-.admin-header-links ~ .two-columns-area {
-	margin-top: 205px;
-}
+    .header .header-logo {
+        position: absolute;
+        top: 110px;
+        z-index: 1020;
+        width: 100%;
+        height: 110px;
+        background-color:#f6f6f6;
+        line-height: 130px;
+    }
+.responsive-nav-wrapper-parent { position: fixed; top: 43px; z-index: 1020; width: 100%; height: 53px !important; border-top: 3px solid #00a1b1; box-shadow: 0 3px 5px rgba(0,0,0,0.1); background-color: #fff; padding-top:1px }
+.admin-header-links ~ .header .header-logo { top: 95px; }
+.admin-header-links ~ .responsive-nav-wrapper-parent { top: 42px; }
+.mobile-sticky-logo .header .header-logo { position: fixed; top: 0; }
+.mobile-sticky-logo .responsive-nav-wrapper-parent { top: 110px; }
+.mobile-sticky-logo .admin-header-links ~ .header .header-logo { top: 42px; }
+.mobile-sticky-logo .admin-header-links ~ .responsive-nav-wrapper-parent { top: 152px; }
+.two-columns-area { margin: 160px 0 25px; }
+.admin-header-links ~ .two-columns-area { margin-top: 205px; }
 .master-wrapper-content {
 	margin-top: 160px;
 	padding: 25px 20px;
@@ -103,48 +75,21 @@
 .responsive-nav-wrapper div.menu-title {
 	background-position: 0 center;
 }
-.responsive-nav-wrapper div.shopping-cart-link {
-	background-position: -55px center;
-}
-.responsive-nav-wrapper div.personal-button {
-	background-position: -108px center;
-}
-.responsive-nav-wrapper div.preferences-button {
-	background-position: -162px center;
-}
-.responsive-nav-wrapper div.search-wrap {
-	background-position: -216px center;
-}
-.responsive-nav-wrapper div.filters-button {
-	display: none;
-	background-position: -271px center;
-}
-.responsive-nav-wrapper > div > span,
-.responsive-nav-wrapper > div > a {
-	display: block;
-	width: 52px;
-	height: 50px;
-	font-size: 0;
-}
+.responsive-nav-wrapper div.shopping-cart-link { background-position: -55px center; }
+.responsive-nav-wrapper div.personal-button { background-position: -108px center; }
+.responsive-nav-wrapper div.preferences-button { background-position: -162px center; }
+.responsive-nav-wrapper div.search-wrap { background-position: -216px center; }
+.responsive-nav-wrapper div.filters-button { display: none; background-position: -271px center; }
+.responsive-nav-wrapper > div > span, .responsive-nav-wrapper > div > a { display: block;	width: 52px; height: 49px; font-size: 0; }
 
 /* RESPONSIVE MENU */
 
-.ps-container > .ps-scrollbar-y-rail {
-    visibility: hidden !important;
-}
-.scrollYRemove {
-    overflow: hidden !important;
-    -ms-touch-action: none !important;
-    -webkit-overflow-scrolling: touch !important;
-}
+.ps-container > .ps-scrollbar-y-rail { visibility: hidden !important; }
+.scrollYRemove { overflow: hidden !important; -ms-touch-action: none !important; -webkit-overflow-scrolling: touch !important; }
 .overlayOffCanvas {
     display: none;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: 100%; height: 100%;
     background: rgba(0,0,0,0);
     z-index: 1060;
 }

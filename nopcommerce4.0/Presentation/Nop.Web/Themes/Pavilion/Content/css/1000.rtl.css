@@ -9,9 +9,7 @@
 
     @media all and (min-width: 1025px) {
 
-        #topThreeHeader {
-            display: none;
-        }
+        /*#topThreeHeader { display: none; }*/
 
         /* GLOBAL STYLES */
 
@@ -21,13 +19,8 @@
             margin: auto;
         }
 
-        .customer-pages-body .master-wrapper-content {
-            padding: 70px 0 0;
-        }
-
-        .product-details-page-body .center-1 {
-            margin: 0 0 90px;
-        }
+        .customer-pages-body .master-wrapper-content { padding: 70px 0 0; }
+        .product-details-page-body .center-1 { margin: 0 0 90px; }
 
         .center-2 {
             float: left;

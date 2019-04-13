@@ -106,23 +106,18 @@ input.form-control {
     .post .post-body {
         padding: 15px;
     }
-
         .post .post-body img {
-            width: 30px;
-            height: 30px; 
-            background: #fff;
-            border: 1px solid #98c24d;
-            padding: 0px;
+            /*width: 30px; height: 30px;*/
+            background: #fff; padding: 0px; height: auto;  width: auto;  max-width: 100%; margin-bottom:10px
         }
-
-            .post .post-body img.imgPost {
-                width: 50%;
-                height: auto;
-                border-radius: 0;
-                background: transparent;
-                border: 0;
-                padding: 0;
-            }
+        .post .post-body img.imgPost {
+            width: 50%;
+            height: auto;
+            border-radius: 0;
+            background: transparent;
+            border: 0;
+            padding: 0;
+        }
 
         .post .post-body h4 {
             margin-top: 5px;

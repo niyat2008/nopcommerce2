@@ -28,32 +28,34 @@
             <div class="col-sm-9">
                 <div class="cont det-block">
                     <div class="det-top">
-                        <h4> >> @Model.Title @Model.IsOrder</h4> 
-                        <div class="det-det">   
-                            <div class="row" style="padding-right: 20px" >
-                                <div class="col-md-7"> 
-                                    <div class="row"> 
-                                        <a href="/Harag/City/@Model.CityName"><span class="green"><i class="fa fa-map-marker"></i> @Model.CityName </span></a>
+                        <h4> >> @Model.Title</h4>
+                       
+                        <div class="det-det"> 
+
+                                <div class="row" style="padding-right: 20px" >
+                                    <div class="col-md-7"> 
+                                        <div class="row"> 
+                                            <a href="/Harag/City/@Model.CityName"><span class="green"><i class="fa fa-map-marker"></i> @Model.CityName </span></a>
+                                        </div>
+                                        <div class="row"> 
+                                            <small>
+                                                @Model.DateDescription
+                                            </small>
+                                        </div>
+                                        <div class="row">
+                                            @if (Model.LastUpdateDateDescription != null)
+                                            {
+                                                <span>  اخر تحديث:  @Model.LastUpdateDateDescription </span>
+                                            }
+                                        </div>
                                     </div>
-                                    <div class="row"> 
-                                        <small>
-                                            @Model.DateDescription
-                                        </small>
-                                    </div>
-                                    <div class="row">
-                                        @if (Model.LastUpdateDateDescription != null)
-                                        {
-                                            <span>  اخر تحديث:  @Model.LastUpdateDateDescription </span>
-                                        }
-                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row"> 
+                                            <a href="/Harag/user/@Model.PostOwner"><span><i class="fa fa-user"></i> @Model.PostOwnerFullName </span></a>
+                                        </div>
+                                        <div class="row"> <span class="text-gray"> #@Model.Id </span> </div>
+                                    </div>  
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="row"> 
-                                        <a href="/Harag/user/@Model.PostOwner"><span><i class="fa fa-user"></i> @Model.PostOwnerFullName </span></a>
-                                    </div>
-                                    <div class="row"> <span class="text-gray"> #@Model.Id </span> </div>
-                                </div>  
-                            </div>   
                         </div>
                     </div>
                     <div class="det-bottom">
@@ -75,7 +77,7 @@
                             }
                             else
                             {
-                                <p class="phone">@Model.Contact<i class="fa fa-phone" style="padding-right:5px"></i></p>
+                                <p class="phone"> <i class="fa fa-phone" style="padding-left:5px; transform: rotate(-90deg); -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg);"></i> @Model.Contact</p>
                             }
                         </div>
                     </div>
@@ -154,17 +156,21 @@
 
                 @if (Model.UserRating != null && (Model.UserRating.UpRating > 0 || Model.UserRating.DownRating > 0))
                 {
-                    <h3>تقييم المعلن</h3>
+                    <div>
+                        <div class="col-xs-12" style="margin-bottom:20px">
+                            <h3>تقييم المعلن</h3>
 
-                    @for (int i = 0; i < Model.UserRating.UpRating; i++)
-                    {
-                        <i class="fa  fa-thumbs-up text-success"></i>
-                    }
-                    <br />
-                    @for (int i = 0; i < Model.UserRating.DownRating; i++)
-                    {
-                        <i class="fa  fa-thumbs-down text-danger"></i>
-                    }
+                            @for (int i = 0; i < Model.UserRating.UpRating; i++)
+                            {
+                                <i class="fa  fa-thumbs-up text-success"></i>
+                            }
+                            <br />
+                            @for (int i = 0; i < Model.UserRating.DownRating; i++)
+                            {
+                                <i class="fa  fa-thumbs-down text-danger"></i>
+                            }
+                        </div>
+                    </div>
                 }
 
                 <div>
@@ -203,8 +209,12 @@
                 }
                 @if (!ViewBag.LoggedIn)
                 {
-                    <div class="alert alert-info">
-                        يجب عليك <a class="link" href="/login">تسجيل الدخول</a> حتى تتمكن من إضافة رد.
+                    <div >
+                        <div class="col-xs-12">
+                            <div class="alert alert-info">
+                                يجب عليك <a class="link" href="/login">تسجيل الدخول</a> حتى تتمكن من إضافة رد.
+                            </div>
+                        </div>
                     </div>
                 }
 
@@ -312,8 +322,6 @@
                     <div style="width:100px;background-color:red;" id="Ahmed"></div>
                     <div class="modal-footer">
                         <button type="button" onclick="submitChangeCatAndSub()" class="btn btn-success">تعديل</button>
-
-
                     </div>
                 </form>
             </div>
@@ -321,10 +329,6 @@
     </div><!-- /.modal-dialog -->
 
 </div><!-- /.modal !-->
-
-
-
-
 
 
 <script type="text/javascript">

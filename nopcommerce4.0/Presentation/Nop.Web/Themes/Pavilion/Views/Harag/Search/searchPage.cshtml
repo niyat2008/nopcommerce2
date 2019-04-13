@@ -17,7 +17,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">
-               <input  type="text" value="@Term" class = "search-term hidden" />
+               <input  type="text" value="@Term" class = "form-control search-term hidden" />
                 <select id="search-category-js-ajax" class="form-control"></select>
                 <select id="search-city-js-ajax" class="form-control"></select>
      
@@ -28,8 +28,8 @@
             <div class="col-md-9">
                 <!-- أضف اعلانك -->
                 <div class="row">
-                    <div class="col-md-4">
-                        <a class=" add-btn " href="@Url.RouteUrl("Harag.Post.AgreementBeforeAddPost")"> أضف اعلانك <i class="fa fa-plus"></i></a>
+                    <div class="col-md-4"  style="margin-bottom: 20px;">
+                        <a class="add-btn" style="background: #f2f2f2;" href="@Url.RouteUrl("Harag.Post.AgreementBeforeAddPost")">  <i class="fa fa-plus"></i> أضف اعلانك</a>
                     </div>
                 </div>
                 <div class="row">
@@ -42,7 +42,7 @@
 
                     </div>
                     <div class="col-md-2">
-                        <select id="select-city-ajax"> 
+                        <select id="select-city-ajax" class="form-control"> 
                         </select>
                     </div>
                     <div class="col-md-2">
