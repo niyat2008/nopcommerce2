@@ -16,7 +16,7 @@ namespace Nop.Web.Validators.Customer
             IStateProvinceService stateProvinceService,
             CustomerSettings customerSettings)
         {
-            RuleFor(x => x.Email).NotEmpty().WithMessage(localizationService.GetResource("Account.Fields.Email.Required"));
+            // RuleFor(x => x.Email).NotEmpty().WithMessage(localizationService.GetResource("Account.Fields.Email.Required"));
             RuleFor(x => x.Email).EmailAddress().WithMessage(localizationService.GetResource("Common.WrongEmail"));
 
             RuleFor(x => x.Mobile).NotEmpty().WithMessage(localizationService.GetResource("Account.Fields.Mobile.Required"));
@@ -47,9 +47,9 @@ namespace Nop.Web.Validators.Customer
             //form fields
             if (customerSettings.CountryEnabled && customerSettings.CountryRequired)
             {
-                RuleFor(x => x.CountryId)
-                    .NotEqual(0)
-                    .WithMessage(localizationService.GetResource("Account.Fields.Country.Required"));
+                //RuleFor(x => x.CountryId)
+                //    .NotEqual(0)
+                //    .WithMessage(localizationService.GetResource("Account.Fields.Country.Required"));
             }
             if (customerSettings.CountryEnabled &&
                 customerSettings.StateProvinceEnabled &&

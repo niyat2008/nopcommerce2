@@ -132,35 +132,35 @@
                 </tr>
             }
             <tr class="order-subtotal">
-                <td class="cart-total-left">
-                    <label>@T("ShoppingCart.Totals.OrderTotal"):</label>
-                </td>
-                <td class="cart-total-right">
-                    @if (!string.IsNullOrEmpty(Model.OrderTotal))
-                    {
-                        <span class="value-summary"><strong>@Model.TotalAfterTax</strong></span>
-                    }
-                    else
-                    {
-                        <span>
-                            @*@T("ShoppingCart.Totals.CalculatedDuringCheckout")*@
-                            @Model.TotalAfterTax
-                        </span>
-                    }
-                </td>
+                @* <td class="cart-total-left">
+                 <label>@T("ShoppingCart.Totals.OrderTotal"):</label>
+             </td>
+            <td class="cart-total-right">
+                 @if (!string.IsNullOrEmpty(Model.OrderTotal))
+                 {
+                     <span class="value-summary"><strong>@Model.TotalAfterTax</strong></span>
+                 }
+                 else
+                 {
+                     <span>
+                         @T("ShoppingCart.Totals.CalculatedDuringCheckout")
+                         @Model.OrderTotal
+                     </span>
+                 }
+             </td>*@
             </tr>
-            <tr class="order-subtotal">
-                <td class="cart-total-left">
-                    @*amsfci92*@
-                    <label>@T("ShoppingCart.Totals.OverTax"):</label>
-                </td>
-                <td class="cart-total-right">
-                    <span class="value-summary">@Model.OverTax</span>
-                </td>
-            </tr>
+            @*<tr class="order-subtotal">
+            <td class="cart-total-left">
+                 amsfci
+                <label>@T("ShoppingCart.Totals.OverTax"):</label>
+            </td>
+            <td class="cart-total-right">
+                <span class="value-summary">@Model.OverTax</span>
+            </td>amsfci
+        </tr>*@
             <tr class="order-total">
                 <td class="cart-total-left">
-                    @*amsfci92*@
+
                     <label>@T("ShoppingCart.Totals.OrderTotalAtAll"):</label>
                 </td>
                 <td class="cart-total-right">

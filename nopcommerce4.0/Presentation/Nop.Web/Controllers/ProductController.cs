@@ -274,13 +274,13 @@ namespace Nop.Web.Controllers
             //only registered users can leave reviews
             if (_workContext.CurrentCustomer.IsGuest() && !_catalogSettings.AllowAnonymousUsersToReviewProduct)
                 ModelState.AddModelError("", _localizationService.GetResource("Reviews.OnlyRegisteredUsersCanWriteReviews"));
-
+            // amsfci
             if (_catalogSettings.ProductReviewPossibleOnlyAfterPurchasing)
             {
                 var hasCompletedOrders = _orderService.SearchOrders(customerId: _workContext.CurrentCustomer.Id,
                     productId: productId,
                     osIds: new List<int> { (int)OrderStatus.Complete },
-                    pageSize: 1 ).Where(m=>  (DateTime.Now - m.CreatedOnUtc) < TimeSpan.FromDays(10)).Any();
+                    pageSize: 1 ).Where(m=>  (DateTime.Now - m.CreatedOnUtc) > TimeSpan.FromDays(10)).Any();
                 if (!hasCompletedOrders)
                 {
                      ModelState.AddModelError(string.Empty, _localizationService.GetResource("Reviews.ProductReviewPossibleOnlyAfterPurchasing"));
@@ -313,13 +313,14 @@ namespace Nop.Web.Controllers
             {
                 ModelState.AddModelError("", _localizationService.GetResource("Reviews.OnlyRegisteredUsersCanWriteReviews"));
             }
-
+            // amsfci
             if (_catalogSettings.ProductReviewPossibleOnlyAfterPurchasing)
             {
                 var hasCompletedOrders = _orderService.SearchOrders(customerId: _workContext.CurrentCustomer.Id,
                     productId: productId,
                     osIds: new List<int> { (int)OrderStatus.Complete },
                     pageSize: 1).Any();
+
                 if (!hasCompletedOrders)
                     ModelState.AddModelError(string.Empty, _localizationService.GetResource("Reviews.ProductReviewPossibleOnlyAfterPurchasing"));
             }

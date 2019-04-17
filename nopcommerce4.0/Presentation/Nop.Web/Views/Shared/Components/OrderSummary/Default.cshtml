@@ -82,17 +82,19 @@
                             <tr>
                                 @if (Model.IsEditable)
                                 {
-                                    <td class="remove-from-cart">
-                                        @if (item.DisableRemoval)
-                                        {
-                                            <text>&nbsp;</text>
-                                        }
-                                        else
-                                        {
-                                            <label class="td-title">@T("ShoppingCart.Remove"):</label>
-                                            <input type="checkbox" name="removefromcart" value="@(item.Id)" />
-                                        }
-                                    </td>
+                                <td class="remove-from-cart">
+                                    @if (item.DisableRemoval)
+                                    {
+                                        <text>&nbsp;</text>
+                                    }
+                                    else
+                                    {
+                                        <label class="td-title">@T("ShoppingCart.Remove"):</label>
+
+                                     
+                                        <input style="display: none" type="checkbox" name="removefromcart" value="@(item.Id)" />
+                                    }
+                                </td>
                                 }
                                 @if (Model.ShowSku)
                                 {
@@ -283,6 +285,21 @@
                                         $('#checkout').click(function () {
                                             //terms of service
                                             var termOfServiceOk = true;
+                                            if ($('#termsofservice').length > 0) {
+                                                //terms of service element exists
+                                                if (!$('#termsofservice').is(':checked')) {
+                                                    $("#terms-of-service-warning-box").dialog();
+                                                    termOfServiceOk = false;
+                                                } else {
+                                                    termOfServiceOk = true;
+                                                }
+                                            }
+                                            return termOfServiceOk;
+                                        });
+
+                                        $('.remove-item-btn').click(function () {
+                                            //terms of service
+                                            var termOfServiceOk = $(this).attr('');
                                             if ($('#termsofservice').length > 0) {
                                                 //terms of service element exists
                                                 if (!$('#termsofservice').is(':checked')) {

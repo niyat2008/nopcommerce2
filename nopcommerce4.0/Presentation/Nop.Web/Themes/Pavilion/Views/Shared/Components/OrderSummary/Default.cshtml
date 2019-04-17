@@ -98,16 +98,21 @@
                                         </td>
                                         @if (Model.IsEditable)
                                         {
-                                            <td class="remove-from-cart">
-                                                @if (item.DisableRemoval)
-                                                {
-                                                    <text>&nbsp;</text>
-                                                }
-                                                else
-                                                {
-                                                    <input type="checkbox" name="removefromcart" value="@(item.Id)" />
-                                                }
-                                            </td>
+                                        <td class="remove-from-cart">
+                                            @if (item.DisableRemoval)
+                                            {
+                                                <text>&nbsp;</text>
+                                                    }
+                                                    else
+                                                    {
+                                                //amsfci
+                                                <button type="button"  class="remove-item" name="removefromcart"
+                                                        data-item-value="@(item.Id)" value="@(item.Id)">
+                                                    <span><img src="https://cdn2.iconfinder.com/data/icons/e-business-helper/240/627249-delete3-512.png" width="25" height="25" /></span>
+                                                </button>
+                                                <input style="display: none" type="checkbox" id="item@(item.Id)" name="removefromcart" value="@(item.Id)" />
+                                            }
+                                        </td>
                                         }
                                         <td class="product">
                                             <a href="@Url.RouteUrl("Product", new {SeName = item.ProductSeName})" class="product-name">@item.ProductName</a>
@@ -309,6 +314,10 @@
                             right: -23px;
                             top: -40px;
                         }
+
+                        .remove-item {
+                            border: 0px aliceblue solid;
+                        }
                     </style>
                     <div class="cart-options">
                         @if (Model.IsEditable)
@@ -466,6 +475,11 @@
                                                         }
                                                     }
                                                     return termOfServiceOk;
+                                                });
+                                                // amsfci
+                                                $('.remove-item').click(function () { 
+                                                    $('#item' + $(this).attr('data-item-value'))[0].checked = true
+                                                    $('.update-cart-button').click();
                                                 });
                                             });
                                         </script>

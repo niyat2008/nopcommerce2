@@ -726,7 +726,7 @@
 	            </div>
             }
         }
-        @if (!Model.PrintMode)
+        @*@if (!Model.PrintMode)
         {
             if (Model.OrderNotes.Count > 0)
             {
@@ -773,7 +773,7 @@
 	                </div>
 	            </div>
             }
-        }
+        }*@
         @await Component.InvokeAsync("Widget", new { widgetZone = "orderdetails_page_bottom", additionalData = Model.Id })
     </div>
 </div>

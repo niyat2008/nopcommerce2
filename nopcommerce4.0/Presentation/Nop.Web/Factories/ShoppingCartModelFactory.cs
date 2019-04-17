@@ -1148,9 +1148,9 @@ namespace Nop.Web.Factories
                     var shoppingCartTotal = _currencyService.ConvertFromPrimaryStoreCurrency(shoppingCartTotalBase.Value, _workContext.WorkingCurrency);
 
                     // amsfci92
-                    model.OrderTotal = _priceFormatter.FormatPrice(shoppingCartTotal  + ((decimal)totalTax* shoppingCartTotal), true, false);;
-                    model.OverTax = _priceFormatter.FormatPrice( ((decimal)totalTax * shoppingCartTotal), true, false); ;
-                    model.TotalAfterTax = _priceFormatter.FormatPrice(shoppingCartTotal, true, false);
+                    model.OrderTotal = _priceFormatter.FormatPrice(shoppingCartTotal /* + ((decimal)totalTax* shoppingCartTotal)*/, true, false);;
+                    //model.OverTax = _priceFormatter.FormatPrice( ((decimal)totalTax * shoppingCartTotal), true, false); ;
+                    //model.TotalAfterTax = _priceFormatter.FormatPrice(shoppingCartTotal, true, false);
                 }
                 else
                 {
@@ -1159,8 +1159,8 @@ namespace Nop.Web.Factories
                  
                     var shoppingCartTotal = _currencyService.ConvertFromPrimaryStoreCurrency(shoppingCartTotalBase.Value, _workContext.WorkingCurrency);
                     model.OrderTotal = _priceFormatter.FormatPrice(shoppingCartTotal, true, false);
-                    model.OverTax =_priceFormatter.FormatPrice(((decimal)totalTax * (decimal)shoppingCartTotalBase), true, false); ;
-                    model.TotalAfterTax = _priceFormatter.FormatPrice(shoppingCartTotal, true, false);
+                    //model.OverTax =_priceFormatter.FormatPrice(((decimal)totalTax * (decimal)shoppingCartTotalBase), true, false); ;
+                    //model.TotalAfterTax = _priceFormatter.FormatPrice(shoppingCartTotal, true, false);
                 }
 
                 //discount

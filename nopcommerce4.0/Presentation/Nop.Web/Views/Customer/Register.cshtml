@@ -24,7 +24,7 @@
                     data: { "countryId": selectedItem, "addSelectStateItem": "true" },
                     success: function (data) {
                         ddlStates.html('');
-                        $.each(data, function (id, option) { 
+                        $.each(data, function (id, option) {
                             ddlStates.append($('<option></option>').val(option.id).html(option.name));
                         });
                         statesProgress.hide();
@@ -124,7 +124,7 @@
                     }
                     @if (Model.UsernamesEnabled)
                     {
-                        
+
                         <div class="inputs">
                             <label asp-for="Username" asp-postfix=":"></label>
                             <input asp-for="Username" />
@@ -170,7 +170,7 @@
                 </div>
             }
             @if (Model.StreetAddressEnabled || Model.StreetAddress2Enabled || Model.ZipPostalCodeEnabled
-             || Model.CityEnabled || Model.CountryEnabled)
+           || Model.CityEnabled || Model.CountryEnabled)
             {
                 <div class="fieldset">
                     <div class="title">
@@ -244,14 +244,14 @@
                                 <select asp-for="StateProvinceId" asp-items="Model.AvailableStates"></select>
 
                                 @*<select id="StateProvinceId" name="StateProvinceId">
-                                    @foreach (var item in Model.AvailableStates)
-                                    {
-                                        
-                                        <option value="@item.Value">@item.Text</option>
-                                    }
-                                    
-                                </select>*@
-                                
+                                        @foreach (var item in Model.AvailableStates)
+                                        {
+
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+
+                                    </select>*@
+
                                 @if (Model.StateProvinceRequired)
                                 {
                                     <nop-required />
@@ -415,3 +415,4 @@
         </div>
     </div>
 </div>
+ 

@@ -946,6 +946,7 @@ namespace Nop.Web.Factories
                         Name = manufacturer.GetLocalized(x => x.Name),
                         SeName = manufacturer.GetSeName(),
                         IsActive = currentManufacturer != null && currentManufacturer.Id == manufacturer.Id,
+                        
                     };
                     model.Manufacturers.Add(modelMan);
                 }

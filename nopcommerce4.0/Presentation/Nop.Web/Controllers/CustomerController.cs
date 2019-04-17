@@ -239,7 +239,7 @@ namespace Nop.Web.Controllers
 
         #endregion
 
-        #region Methods
+         #region Methods
 
         #region Login / logout
 

@@ -76,35 +76,41 @@
                     <div class="overview">
                         @await Component.InvokeAsync("Widget", new { widgetZone = "productdetails_overview_top", additionalData = Model.Id })
                         @await Html.PartialAsync("_Discontinued", Model)
-                        <!--manufacturers-->
-                        @await Html.PartialAsync("_ProductManufacturers", Model.ProductManufacturers)
+
+                        @*amsfci*@
                         <div class="product-name">
                             <h1 itemprop="name">
                                 @Model.Name
                             </h1>
                         </div>
-                        <!--reviews-->
-                        @await Html.PartialAsync("_ProductReviewOverview", Model.ProductReviewOverview)
-                        <!--price-->
                         @{
                             var dataDictPrice = new ViewDataDictionary(ViewData);
                             dataDictPrice.TemplateInfo.HtmlFieldPrefix = $"price_{Model.Id}";
                             @await Html.PartialAsync("_ProductPrice", Model.ProductPrice, dataDictPrice)
                         }
-                        <!--rental info-->
-                        @{
-                            var dataDictRental = new ViewDataDictionary(ViewData);
-                            dataDictRental.TemplateInfo.HtmlFieldPrefix = $"rental_{Model.Id}";
-                            @await Html.PartialAsync("_RentalInfo", Model, dataDictRental)
-                        }
+
                         @if (!String.IsNullOrEmpty(Model.ShortDescription))
                         {
                             <div class="short-description">
                                 @Html.Raw(Model.ShortDescription)
                             </div>
                         }
+                        <!--reviews-->
+                        @await Html.PartialAsync("_ProductReviewOverview", Model.ProductReviewOverview)
+
+                        <!--manufacturers-->
+                        @await Html.PartialAsync("_ProductManufacturers", Model.ProductManufacturers)
                         <!--SKU, MAN, GTIN, vendor-->
                         @await Html.PartialAsync("_SKU_Man_GTIN_Ven", Model)
+
+                        <!--price-->
+                        <!--rental info-->
+                        @{
+                            var dataDictRental = new ViewDataDictionary(ViewData);
+                            dataDictRental.TemplateInfo.HtmlFieldPrefix = $"rental_{Model.Id}";
+                            @await Html.PartialAsync("_RentalInfo", Model, dataDictRental)
+                        }
+                         
                         <!--sample download-->
                         @await Html.PartialAsync("_DownloadSample", Model)
                         <!--attributes-->

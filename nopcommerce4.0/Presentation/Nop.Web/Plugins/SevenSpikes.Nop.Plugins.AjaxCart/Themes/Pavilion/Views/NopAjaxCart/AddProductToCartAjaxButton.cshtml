@@ -17,7 +17,7 @@
 <div class="ajax-cart-button-wrapper" data-productid="@button.ProductId" data-isproductpage="@button.IsProductPage.ToString().ToLowerInvariant()">
     @if (button.IsProductPage)
     {
-        <input type="button" id="add-to-cart-button-@button.ProductId" value="@button.ButtonValue" class="button-1 add-to-cart-button nopAjaxCartProductVariantAddToCartButton" data-productid="@button.ProductId" />
+        @*<input type="button" id="add-to-cart-button-@button.ProductId" value="@button.ButtonValue" class="button-1 add-to-cart-button nopAjaxCartProductVariantAddToCartButton" data-productid="@button.ProductId" />*@
     }
     else
     {
@@ -27,22 +27,22 @@
             {
                 isThereAnyProductsWithAllowedQuantities = true;
 
-                <select id="@string.Concat("productQuantity", button.ProductId)" class="productQuantityDropdown">
+                @*<select id="@string.Concat("productQuantity", button.ProductId)" class="productQuantityDropdown">
                     @foreach (var allowedQuantity in button.AllowedQuantities)
                     {
                         <option value="@allowedQuantity.Value">@allowedQuantity.Text</option>
                     }
-                </select>
+                </select>*@
                 <button></button>
-                <input class="@string.Concat("productQuantityChanged", button.ProductId)" type="hidden" value="no" />
+                @*<input class="@string.Concat("productQuantityChanged", button.ProductId)" type="hidden" value="no" />*@
             }
             else
             {
-                <input id="@string.Concat("productQuantity", button.ProductId)" type="text" class="productQuantityTextBox" value="@button.DefaultProductMinimumQuantity" />
+                @*<input id="@string.Concat("productQuantity", button.ProductId)" type="text" class="productQuantityTextBox" value="@button.DefaultProductMinimumQuantity" />*@
 
 
 
-                <span id="@(string.Concat("productQuantity", button.ProductId)+ "p")" class="k-plus">+</span>
+                @*<span id="@(string.Concat("productQuantity", button.ProductId)+ "p")" class="k-plus">+</span>
                 <span id="@(string.Concat("productQuantity", button.ProductId) + "m")" class="k-minus">-</span>
 
                 <script type="text/javascript" asp-location="Footer">
@@ -64,10 +64,10 @@
                                     //$("#add-to-cart-button-@Model.ProductId").click();
                                     return false;
                                 }
-                            });*@
+                            });
 
                         });
-                </script>
+                </script>*@
 
                 @*<input type="button" value="+" class="productQuantityTextBox" />
                     <input type="button" value="-" class="productQuantityTextBox" />*@
