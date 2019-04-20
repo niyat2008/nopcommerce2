@@ -51,17 +51,22 @@
                 <label>عنوان الاعلان</label> <br>
                 @Html.TextBoxFor(m => m.Title, new { id = "Title-js-ajax", @class = "form-control", placeholder = "العنوان", required = "required" })
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label> اختر المدينه </label> <br>
                 <select name="CityId" id="city-js-ajax" class="form-control" required placeholder="اختر المدينه "></select>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label> اختر القسم </label> <br>
                 <select id="CategoryId-js-ajax" , name="CategoryId" required class="form-control" placeholder="اختر القسم "></select>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <label>وسيلة الاتصال</label> <br>
                 @Html.TextBoxFor(m => m.Contact, new { id = "Contact-js-ajax", required = "required", @class = "form-control", placeholder = "0134578888" })
+
+            </div>
+            <div class="col-md-2">
+                <label> هل هذا الاعلان طلب ؟</label> 
+                @Html.CheckBoxFor(m => m.IsOrder, new { id = "IsOrder-js-ajax", required = "required", @class = "form-control" })
 
             </div>
             <div class="col-md-6">
@@ -207,6 +212,7 @@
         var Text = $('#Text-js-ajax').val();
         var Contact = $('#Contact-js-ajax').val();
         var CityId = $('#city-js-ajax').val();
+        var IsOrder = $('#IsOrder-js-ajax')[0].checked;
 
 
         if (CategoryId <= 0) {
@@ -229,10 +235,11 @@
                 Contact: Contact,
                 CategoryId: CategoryId,
                 CityId: CityId,
-                Files: Files
+                Files: Files,
+                IsOrder: IsOrder
             };
 
-
+            console.log(postForPostModel);
             $.ajax({
                 headers: {
                     'Accept': 'application/json',

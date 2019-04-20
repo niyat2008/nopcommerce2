@@ -28,41 +28,32 @@
             <div class="col-sm-9">
                 <div class="cont det-block">
                     <div class="det-top">
-                        <h4> >> @Model.Title</h4>
-                       
-
-                        <div class="det-det"> 
-
-                                <div class="row" style="padding-right: 20px" >
-                                    <div class="col-md-7"> 
-                                        <div class="row"> 
-                                            <a href="/Harag/City/@Model.CityName"><span class="green"><i class="fa fa-map-marker"></i> @Model.CityName </span></a>
-                                        </div>
-                                        <div class="row"> 
-                                            <small>
-                                                @Model.DateDescription
-                                            </small>
-                                        </div>
-                                        <div class="row">
-                                            @if (Model.LastUpdateDateDescription != null)
-                                            {
-                                                <span>  اخر تحديث:  @Model.LastUpdateDateDescription </span>
-                                            }
-                                        </div>
+                        <h4> >> @Model.Title @Model.IsOrder</h4> 
+                        <div class="det-det">   
+                            <div class="row" style="padding-right: 20px" >
+                                <div class="col-md-7"> 
+                                    <div class="row"> 
+                                        <a href="/Harag/City/@Model.CityName"><span class="green"><i class="fa fa-map-marker"></i> @Model.CityName </span></a>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="row"> 
-                                            <a href="/Harag/user/@Model.PostOwner"><span><i class="fa fa-user"></i> @Model.PostOwnerFullName </span></a>
-                                        </div>
-                                        <div class="row"> <span class="text-gray"> #@Model.Id </span> </div>
-                                    </div>  
-                                </div> 
-                            
-                            
-                          
-                            
-
-
+                                    <div class="row"> 
+                                        <small>
+                                            @Model.DateDescription
+                                        </small>
+                                    </div>
+                                    <div class="row">
+                                        @if (Model.LastUpdateDateDescription != null)
+                                        {
+                                            <span>  اخر تحديث:  @Model.LastUpdateDateDescription </span>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row"> 
+                                        <a href="/Harag/user/@Model.PostOwner"><span><i class="fa fa-user"></i> @Model.PostOwnerFullName </span></a>
+                                    </div>
+                                    <div class="row"> <span class="text-gray"> #@Model.Id </span> </div>
+                                </div>  
+                            </div>   
                         </div>
                     </div>
                     <div class="det-bottom">
@@ -155,7 +146,7 @@
 
                 <div>
                     <div class="col-xs-12">
-                        <div class="alert alert-warning" role="alert">إحذر من التعامل غير المباشر.  استخدم <a href="@Url.RouteUrl("Harag.User.CheckBlackList")"><strong> القائمة السوداء </strong></a> قبل أى تحويل </div>
+                        <div class="alert alert-danger" role="alert">إحذر من التعامل غير المباشر.  استخدم <a href="@Url.RouteUrl("Harag.User.CheckBlackList")" class="text-blue"><strong class="text-blue"> القائمة السوداء </strong></a> قبل أى تحويل </div>
                     </div>
                 </div>
 
@@ -270,25 +261,7 @@
                     </div>
                 }
 
-
-                @*<div class="disTable advBox">
-            <div class="choices choices2 disTable">
-
-            </div>
-            <div class="adv-images">
-                @foreach (var item in Model.Files)
-                {
-                    @foreach (var image in Model.Files)
-                    {
-                        <div style="width:160px; display:inline;">
-                            <a href="~/HaragApi/Uploads/Images/@image" data-lightbox="image2-@Model.Id" data-title="My caption">
-                                <img src="~/HaragApi/Uploads/Images/@image" alt="Single Image" style="width:150px;height:150px;" />
-                            </a>
-                        </div>
-                    }
-                }
-            </div>
-        </div>*@
+ 
             </div>
 
         </div>

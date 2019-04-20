@@ -230,6 +230,7 @@ namespace Nop.Web.Controllers.Harag
 
         #region Methods
         [HttpGet]
+        
         public IActionResult AgreementBeforeAddPost()
         {
 
@@ -559,7 +560,6 @@ namespace Nop.Web.Controllers.Harag
             }
         }
 
-
         [HttpPost]
         public ActionResult UpdatePostLocationAjax([FromBody] UpdatePostLocationModel post)
         {
@@ -608,7 +608,6 @@ namespace Nop.Web.Controllers.Harag
             return View("~/Themes/Pavilion/Views/Harag/Post/ListOfCategory.cshtml", categoriesOutput);
         }
         //#region methods
-
 
         [HttpGet]
         public IActionResult GetHaragPost(int PostId)
@@ -667,6 +666,7 @@ namespace Nop.Web.Controllers.Harag
                     Contact = post.Contact,
                     CityId = (int)post.CityId,
                     Id = post.Id,
+                    IsOrder = post.IsOrder,
                     IsUserFeatured = post.Customer.IsFeatured,
                     DateUpdated = post.DateUpdated,
                     IsDispayed = post.IsDispayed,

@@ -44,14 +44,12 @@
     $("#agreement-js").click(function (event) {
 
         var agreementItems = $(".commission > input");
-        var agreed = false;
+        var agreed = true;
 
         for (var i = 0; i < agreementItems.length; i++) {
             if (agreementItems[i].checked == false) {
                 agreed = false;
-            } else {
-                agreed = true;
-            }
+            } 
         }
         if (!agreed) {
             alert("لابد من الموافقه علي جميع الشروط");

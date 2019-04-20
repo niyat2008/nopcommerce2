@@ -23,6 +23,7 @@ namespace Nop.Services.Z_Harag.Post
         public string Contact { get; set; }
         public IList<string> Files { get; set; } 
         public double Len { get; set; }
+        public bool IsOrder { get; set; }
         public double Lat { get; set; }
 
 

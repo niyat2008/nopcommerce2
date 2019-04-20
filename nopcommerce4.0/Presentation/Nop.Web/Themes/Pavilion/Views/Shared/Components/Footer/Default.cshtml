@@ -36,7 +36,7 @@
             </div>
             <div class="footer-block">
                 <div class="title">
-                    <a  >@T("Footer.CustomerService")</a>
+                    <a>@T("Footer.CustomerService")</a>
                 </div>
                 <ul class="list">
                     <li><a href="/Harag/CustomerService">@T("Footer.CustomerService")</a></li>
@@ -44,10 +44,16 @@
                     {
                         <li><a href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a></li>
                     }
+                    <li class="share-wha tsapp">
+                        <!-- Google+ -->
+                        <a   href="javascript:openShareWindow('https://api.whatsapp.com/phone=@T("Footer.WhatsappContactNumber")&send?text=اريد التواصل مع الموقع')">
+                            التواصل عبر واتساب
+                        </a>
+                    </li>
                 </ul>
             </div>
+           
 
-             
             <div class="footer-block">
                 <div class="title">
                     <strong>@T("Footer.MyAccount")</strong>
@@ -110,12 +116,7 @@
                 </div>
 
             }
-            @if (!removeDesignedBy)
-            {
-                <div class="footer-designed-by">
-                    Designed by <a href="http://www.nop-templates.com/" title="nopCommerce themes and plugins by Nop-Templates" target="_blank">Nop-Templates.com</a>
-                </div>
-            }
+            
 
             @if (Model.DisplayTaxShippingInfoFooter)
             {
@@ -132,3 +133,14 @@
     @await Component.InvokeAsync("Widget", new { widgetZone = "footer" })
 </div>
  
+
+<script type="text/javascript" asp-location="Footer">
+        function openShareWindow(url) {
+            var winWidth = 520;
+            var winHeight = 400;
+            var winTop = (screen.height / 2) - (winHeight / 2);
+            var winLeft = (screen.width / 2) - (winWidth / 2);
+
+            window.open(url, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
+        }
+</script>

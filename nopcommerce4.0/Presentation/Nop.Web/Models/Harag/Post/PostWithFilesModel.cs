@@ -35,7 +35,7 @@ namespace Nop.Web.Models.Harag.Post
         public IList<string> Files { get; set; }
         public List<PostModel> RelatedPosts { get;  set; }
         public List<PostModel> SameCityPosts { get; set; }
-
+        public bool IsOrder { get; set; }
         public PostWithFilesModel()
         {
             Files = new List<string>();

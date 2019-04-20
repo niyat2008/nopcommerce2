@@ -144,7 +144,7 @@ namespace Nop.Services.Z_Harag.Post
                 IsDispayed = false,
                 DateUpdated = DateTime.Now ,
                 IsDeleted = false,
-                
+                IsOrder = postForPostModel.IsOrder,
                 IsFeatured = false,
                 IsCommon = false
             };
