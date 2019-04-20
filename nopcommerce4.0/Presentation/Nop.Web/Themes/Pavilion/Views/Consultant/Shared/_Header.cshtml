@@ -1,17 +1,17 @@
-﻿    @{
-        var controllerName = Url.ActionContext.RouteData.Values["controller"].ToString();
-        var actionName = Url.ActionContext.RouteData.Values["action"].ToString();
+﻿@{
+    var controllerName = Url.ActionContext.RouteData.Values["controller"].ToString();
+    var actionName = Url.ActionContext.RouteData.Values["action"].ToString();
 
-        var incat = controllerName.Equals("post", StringComparison.InvariantCultureIgnoreCase) &&
-          actionName.Equals("GetAllClosedPostsByCategoryId", StringComparison.InvariantCultureIgnoreCase);
-        var catId = 0;
+    var incat = controllerName.Equals("post", StringComparison.InvariantCultureIgnoreCase) &&
+      actionName.Equals("GetAllClosedPostsByCategoryId", StringComparison.InvariantCultureIgnoreCase);
+    var catId = 0;
 
-        if (incat)
-        {
+    if (incat)
+    {
 
-            catId = Convert.ToInt32(this.Context.Request.Query["CategoryId"].ToString());
-        }
+        catId = Convert.ToInt32(this.Context.Request.Query["CategoryId"].ToString());
     }
+}
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Tajawal" rel="stylesheet">
 <script src="~/js/Consultant/jquery.min.js"></script>
@@ -160,7 +160,7 @@
                 }
 
                     .avatar ul li.link:hover {
-                        background: #eee 
+                        background: #eee
                     }
 
         .avatar:hover ul {
@@ -200,8 +200,7 @@
         }
 
     .subNav {
-        display: none;
-        padding: 15px;
+        display: none; padding: 15px;
         background: #fff;
         border: 1px solid #ddd;
         position: absolute;
@@ -215,7 +214,23 @@
         -webkit-transition: all 3s ease-in-out;
         transition: all 3s ease-in-out;
     }
-
+    /*.top-user-menu { padding: 20px; }*/
+    .top-user-menu {
+    background: #e8ebee;
+    padding: 8px;
+    margin-top: 42px;
+    /*margin-top: 29px;*/
+    display: block
+}
+@@media only screen and (max-width : 1024px) {
+    .top-user-menu {
+        display: none
+    }
+}
+        .top-user-menu > span {
+            padding: 9px;
+            font-weight: bold;
+        }
     @@media (min-width: 768px) {
         .navbar-nav > li {
             float: right;
@@ -240,7 +255,7 @@
     .navbar-default .navbar-nav > li.hasSubMenu a {
         font-size: 15px;
         padding-bottom: 2px;
-        padding-top: 0;  
+        padding-top: 0;
         line-height: 40px;
         color: #333;
         font-weight: bold;
@@ -317,9 +332,12 @@
                 }
 
     .siteDetails {
-        background-color: #e8ebee;
         padding: 8px;
-        margin-top: 43px
+        margin-top: 0px;
+        background: #e2e6eb;
+        border: 1px solid #ddd;
+        margin-bottom: 15px;
+        color: #000;
     }
 
     @@media only screen and (max-width : 1024px) {
@@ -335,9 +353,18 @@
             padding: 15px 0;
             margin-bottom: 15px
         }
-        .search .logoContainer { text-align: center  }
-        .navbar-default, #userInfo, .search .form-group { display: none }
-        .siteDetails { margin-top: 98px }
+
+            .search .logoContainer {
+                text-align: center
+            }
+
+            .navbar-default, #userInfo, .search .form-group {
+                display: none
+            }
+
+        /*.siteDetails {
+            margin-top: 98px
+        }*/
     }
 
     #searchScreenFull {
@@ -469,8 +496,15 @@
             font-weight: bold;
             text-transform: uppercase;
         }
-       .rightMenu ul li:hover a { color:#4da74d }
-      .rightMenu ul li i { color:#4da74d; cursor:pointer; }
+
+        .rightMenu ul li:hover a {
+            color: #4da74d
+        }
+
+        .rightMenu ul li i {
+            color: #4da74d;
+            cursor: pointer;
+        }
     /*.logoContainer { margin-right:-47px }*/
 </style>
 
@@ -571,101 +605,110 @@
     </div>
 </section>
 
-<div class="siteDetails"><p id="messagep" style="text-align:center;margin:0; font-size: 15px;">خدمة الاستشارات هى خدمة مجانية تقدم من قبل موقع المزراع لمساعدة حل المشاكل الزراعية بواسطة مستشارين مختصين فى هذا المجال.</p></div>
 
-<!-- Search -->
-<section class="search">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2"></div>
+<div class="text-center top-user-menu">
+    <div id="threebuttons" class="text-center"></div>
+</div>
 
-            <div class="col-md-2 col-xs-12 logoContainer">
-                <img class="logo" src="/images/thumbs/0000303.png" onclick="goToHome()" />
-            </div>
+@*<div class="siteDetails">
+    <p id="messagep" style="text-align:center;margin:0; font-size: 15px;">خدمة الاستشارات هى خدمة مجانية تقدم من قبل موقع المزراع لمساعدة حل المشاكل الزراعية بواسطة مستشارين مختصين فى هذا المجال.</p>
+</div>*@
 
-            <div class="col-md-6" style="padding-top:12px;">
-                <div class="form-group">
-                    <input id="searchText" type="text" style="height:44px;"
-                           class="form-control" placeholder="البحث في الاستشارات">
-                    <button onclick="filterWithText('searchText')" style="height:44px;" class="btndarckgreen">
-                        <i class="fa fa-search"></i>
-                    </button>
+    <!-- Search -->
+    <section class="search">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2"></div>
+
+                <div class="col-md-2 col-xs-12 logoContainer">
+                    <img class="logo" src="/images/thumbs/0000303.png" onclick="goToHome()" />
+                </div>
+
+                <div class="col-md-6" style="padding-top:12px;">
+                    <div class="form-group">
+                        <input id="searchText" type="text" style="height:44px;"
+                               class="form-control" placeholder="البحث في الاستشارات">
+                        <button onclick="filterWithText('searchText')" style="height:44px;" class="btndarckgreen">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-</section>
+    </section>
 
-<!--<!-- Nav -->
-<div id="Nav"></div>
+    <!--<!-- Nav -->
+    <div id="Nav"></div>
 
-<div class="home" id="homeBody">
-    <div class="container-fluid">
-        <div class="col-md-2"></div>
-        <div class="col-md-2" id="threebuttons" style="margin-bottom:5%;">
-        </div>
+    <div class="home" id="homeBody">
+        <div class="container-fluid">
+            <div class="col-md-2"></div>
+            @*<div class="col-md-2" id="threebuttons" style="margin-bottom:5%;"></div>*@
 
-        <div class="col-md-6">
-            <div class="allPage" id="allpage">
-                @RenderBody()
-                <div id="posts"></div>
-                <not-found *ngIf="!posts.length"></not-found>
-                <tw-pagination *ngIf="posts?.length" [numberOfPages]="totalNumberOfPages" (pageChanged)="getClosedPost($event)"></tw-pagination>
+            <div class="col-md-8">
+                <div class="allPage" id="allpage">
+                    <div class="siteDetails">
+                        <p id="messagep" style="text-align:center;margin:0; font-size: 14px;">خدمة الاستشارات هى خدمة مجانية تقدم من قبل موقع المزراع لمساعدة حل المشاكل الزراعية بواسطة مستشارين مختصين فى هذا المجال.</p>
+                    </div>
+                    @RenderBody()
+                    <div id="posts"></div>
+                    <not-found *ngIf="!posts.length"></not-found>
+                    <tw-pagination *ngIf="posts?.length" [numberOfPages]="totalNumberOfPages" (pageChanged)="getClosedPost($event)"></tw-pagination>
+                </div>
             </div>
+            <div class="col-md-2"></div>
         </div>
-        <div class="col-md-2"></div>
     </div>
-</div>
 
-<div class="overlay"></div>
+    <div class="overlay"></div>
 
-<div class="rightMenu">
-    <div class="top_header">
-        <i class="fa fa-times pull-left"></i>
-    </div>
-    <div id="mobile-navbar-js"></div>
-</div>
-
-@*<div class="subRightMenu">
+    <div class="rightMenu">
         <div class="top_header">
             <i class="fa fa-times pull-left"></i>
         </div>
-        <div id="sub-mobile-navbar-js"></div>
-    </div>*@
+        <div id="mobile-navbar-js"></div>
+    </div>
 
-@*<link href="~/css/Consultant/bootstrap.min.css" rel="stylesheet" />*@
-<script src="~/js/Consultant/bootstrap.min.js"></script>
-
-<div id="changeCatAndSubDiv" class="modal" tabindex="-1" role="dialog" Style="display:none">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-
-                <h4 class="modal-title"> اضف رسالتك الي اداره الموقع </h4>
+    @*<div class="subRightMenu">
+            <div class="top_header">
+                <i class="fa fa-times pull-left"></i>
             </div>
-            <div class="modal-body">
-                <form>
-                    <textarea type="text" class="form-control"></textarea>
-                    <div class="modal-footer">
-                        <button id="add-service-message-event" type="button" onclick="" class="btn btn-success">تعديل</button>
-                    </div>
-                </form>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+            <div id="sub-mobile-navbar-js"></div>
+        </div>*@
 
-</div><!-- /.modal !-->
+    @*<link href="~/css/Consultant/bootstrap.min.css" rel="stylesheet" />*@
+    <script src="~/js/Consultant/bootstrap.min.js"></script>
 
-<script type="text/javascript">
-    $("#open-customer-service").click(function () {
-        $("#changeCatAndSubDiv").show();
-    });
+    <div id="changeCatAndSubDiv" class="modal" tabindex="-1" role="dialog" Style="display:none">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
 
-    $("#add-service-message-event").click(function () {
-        $("#changeCatAndSubDiv").hide();
-    });
-</script>
+                    <h4 class="modal-title"> اضف رسالتك الي اداره الموقع </h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <textarea type="text" class="form-control"></textarea>
+                        <div class="modal-footer">
+                            <button id="add-service-message-event" type="button" onclick="" class="btn btn-success">تعديل</button>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+
+    </div><!-- /.modal !-->
+
+    <script type="text/javascript">
+        $("#open-customer-service").click(function () {
+            $("#changeCatAndSubDiv").show();
+        });
+
+        $("#add-service-message-event").click(function () {
+            $("#changeCatAndSubDiv").hide();
+        });
+    </script>
 
 
 <div class="footer">
@@ -741,17 +784,17 @@
                 حقوق الطبع والنشر © @DateTime.Now.Year.ToString() Farms Store. جميع الحقوق محفوظة.
             </div>
 
-            <div class="footer-store-theme">
+                <div class="footer-store-theme">
 
+                </div>
             </div>
         </div>
+
     </div>
 
-</div>
+    <div id="goToTop" style="display: block;"></div>
 
-<div id="goToTop" style="display: block;"></div>
-
-<script>
+    <script>
 
     $(document).ready(function () {
 
@@ -759,9 +802,9 @@
 
 
             var cat = $(this);
-        
+
             $(".subRightMenu" + cat.attr('data-cat-id')).css({ "-webkit-transform": "translate(0px)", "-ms-transform": "translate(0px)", "-moz-transform": "translate(0px)", "transform": "translate(0px)", "box-shadow": "1px 0 5px rgba(0,0,0,0.5)" });
-            
+
         });
 
         $.ajax({
@@ -862,10 +905,10 @@
     }
 
 
-</script>
-<script src="/Plugins/SevenSpikes.Core/Scripts/sevenspikes.core.min.js" type="text/javascript"></script>
-<script src="/Plugins/SevenSpikes.Core/Scripts/sevenspikes.theme.ex.min.js" type="text/javascript"></script>
-<script src="/Themes/Pavilion/Content/scripts/pavilion.js" type="text/javascript"></script>
+    </script>
+    <script src="/Plugins/SevenSpikes.Core/Scripts/sevenspikes.core.min.js" type="text/javascript"></script>
+    <script src="/Plugins/SevenSpikes.Core/Scripts/sevenspikes.theme.ex.min.js" type="text/javascript"></script>
+    <script src="/Themes/Pavilion/Content/scripts/pavilion.js" type="text/javascript"></script>
 
 
 <script>
@@ -925,3 +968,49 @@
         window.open(url, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
     }
 </script>
+    <script>
+        $("#searchScreen").click(function () {
+            $("#searchScreenFull").slideToggle("slow");
+            $("#myAccountScreenFull").css("display", "none");
+            $(".manage").toggle();
+            $(".overlay").toggle();
+            $(".top_bar").toggle();
+            $(".topFixed").css("z-index", "1070");
+        });
+        $("#menuBar").click(function () {
+            $(".overlay").css("display", "block");
+            $(".rightMenu").css({ "-webkit-transform": "translate(0px)", "-ms-transform": "translate(0px)", "-moz-transform": "translate(0px)", "transform": "translate(0px)", "box-shadow": "1px 0 5px rgba(0,0,0,0.5)" });
+            $(".topFixed").css("z-index", "1060");
+        });
+        $(".rightMenu .top_header i").click(function () {
+            $(".overlay").css("display", "none");
+            $(".rightMenu").css({ "-webkit-transform": "translate(320px)", "-ms-transform": "translate(320px)", "-moz-transform": "translate(320px)", "transform": "translate(320px)", "box-shadow": "none" });
+            $(".topFixed").css("z-index", "1070");
+        });
+        $(".subItem").click(function () {
+            $(".overlay").css("display", "block");
+            $(".subRightMenu").css({ "-webkit-transform": "translate(0px)", "-ms-transform": "translate(0px)", "-moz-transform": "translate(0px)", "transform": "translate(0px)", "box-shadow": "1px 0 5px rgba(0,0,0,0.5)" });
+            $(".topFixed").css("z-index", "1070");
+        });
+        $(".subRightMenu .top_header i").click(function () {
+            $(".subRightMenu").css({ "-webkit-transform": "translate(313px)", "-ms-transform": "translate(313px)", "-moz-transform": "translate(313px)", "transform": "translate(313px)", "box-shadow": "none" });
+            $(".topFixed").css("z-index", "1060");
+        });
+        $("#myAccount").click(function () {
+            $("#myAccountScreenFull").slideToggle("slow");
+            $("#searchScreenFull").css("display", "none");
+            $(".manage").toggle();
+            $(".overlay").toggle();
+            $(".top_bar").toggle();
+            $(".topFixed").css("z-index", "1070");
+        });
+        $(".overlay").click(function () {
+            $(this).css("display", "none");
+            $(".rightMenu").css({ "-webkit-transform": "translate(320px)", "-ms-transform": "translate(320px)", "-moz-transform": "translate(320px)", "transform": "translate(320px)", "box-shadow": "none" });
+            $(".subRightMenu").css({ "-webkit-transform": "translate(313px)", "-ms-transform": "translate(313px)", "-moz-transform": "translate(313px)", "transform": "translate(313px)", "box-shadow": "none" });
+            $("#myAccountScreenFull").css("display", "none");
+            $("#searchScreenFull").css("display", "none");
+            $(".manage").css("display", "none");
+            $(".top_bar").css("display", "block");
+        });
+    </script>

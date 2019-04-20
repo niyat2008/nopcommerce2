@@ -14,7 +14,7 @@
     }
 }
 
-<style type="text/css">
+@*<style type="text/css">
     .threebuttons:hover {
         background-color: darkgreen !important;
     }
@@ -22,46 +22,47 @@
     .nodoc:hover {
         text-decoration: none;
     }
-</style>
+</style>*@
 
 @if (@ViewBag.UserRole == "Registered")
 {
-    <a href="@Url.RouteUrl("Consultant.Post.AddPost")" class="nodoc">
-        <input id="searchText" type="button" class="form-control col-md-12 threebuttons" value="اضافة استشارة جديدة" style="margin:2px;background-color:#4da74d;color:#fff;">
-    </a>
+<a href="@Url.RouteUrl("Consultant.Post.AddPost")" class="nodoc">
+    @*<input id="searchText" type="button" class="form-control col-md-12 threebuttons" value="اضافة استشارة جديدة" style="margin:2px;background-color:#4da74d;color:#fff;">*@
+    <input id="searchText" type="button" class="form-control col-md-12" value="اضافة استشارة جديدة" />
+</a>
 }
 @if (@ViewBag.UserRole == "vistor")
 {
     <a href="@Url.RouteUrl("Consultant.Post.AddPost")" class="nodoc">
-        <input id="searchText" type="button" class="form-control col-md-12 threebuttons" value="اضافة استشارة جديدة" style="margin:2px;background-color:#4da74d;color:#fff;">
+        @*<input id="searchText" type="button" class="form-control col-md-12 threebuttons" value="اضافة استشارة جديدة" style="margin:2px;background-color:#4da74d;color:#fff;">*@
+        <input id="searchText" type="button" class="form-control col-md-12" value="اضافة استشارة جديدة" />
     </a>
 }
 
 @if (@ViewBag.UserRole == "vistor")
 {
     <a href="@Url.RouteUrl("Consultant.Post.GetCustomerOpenPosts")" class="nodoc">
-        <input id="searchText" type="button" class="form-control col-md-12 threebuttons" value="استشاراتى السابقة" style="margin:2px;background-color:#4da74d;color:#fff;">
+        @*<input id="searchText" type="button" class="form-control col-md-12 threebuttons" value="استشاراتى السابقة" style="margin:2px;background-color:#4da74d;color:#fff;">*@
+        <input id="searchText" type="button" class="form-control col-md-12" value="استشاراتى السابقة" />
     </a>
 }
 @if (@ViewBag.UserRole == "Registered")
 {
     <a href="@Url.RouteUrl("Consultant.Post.GetCustomerOpenPosts")" class="nodoc">
-        <input id="searchText" type="button" class="form-control col-md-12 threebuttons" value="استشاراتى السابقة" style="margin:2px;background-color:#4da74d;color:#fff;">
+        @*<input id="searchText" type="button" class="form-control col-md-12 threebuttons" value="استشاراتى السابقة" />*@
+        <input id="searchText" type="button" class="form-control col-md-12" value="استشاراتى السابقة" />
     </a>
 }
 @if (@ViewBag.UserRole == "Consultant")
 {
     <a href="@Url.RouteUrl("Consultant.Post.GetConsultantNotAnsweredPosts")" class="nodoc">
-        <input id="searchText" type="button" class="form-control col-md-12 threebuttons" value="استشاراتى السابقة" style="margin:2px;background-color:#4da74d;color:#fff;">
+        @*<input id="searchText" type="button" class="form-control col-md-12 threebuttons" value="استشاراتى السابقة" style="margin:2px;background-color:#4da74d;color:#fff;">*@
+        <input id="searchText" type="button" class="form-control col-md-12" value="استشاراتى السابقة" />
     </a>
 }
 <a href="@Url.RouteUrl("Consultant.Post.GetAllClosedPosts")" class="nodoc">
-    <input id="searchText" type="button" class="form-control col-md-12 threebuttons" value="احدث الاستشارات" style="margin:2px;background-color:#4da74d;color:#fff;">
+    <input id="searchText" type="button" class="form-control col-md-12" value="احدث الاستشارات" />
 </a>
 <a href="@Url.RouteUrl("Consultant.Post.GetCustomerCommonPosts")" class="nodoc">
-    <input id="searchText" type="button" class="form-control col-md-12 threebuttons" value= " الاستشارات الشائعه" style="margin:2px;background-color:#4da74d;color:#fff;">
+    <input id="searchText" type="button" class="form-control col-md-12" value= " الاستشارات الشائعه" />
 </a>
-
-
-
-

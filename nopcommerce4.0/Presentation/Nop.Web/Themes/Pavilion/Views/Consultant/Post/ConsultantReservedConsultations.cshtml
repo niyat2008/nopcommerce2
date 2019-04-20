@@ -47,7 +47,6 @@
 
 
 
-
                 @foreach (var post in Model.Items)
                 {
                     <div id="tabpanelPosts">
@@ -60,9 +59,9 @@
                                     {
                                         @if (post.IsClosed)
                                         {
-                                            <span class="status closed">
+                                            @*<span class="status closed">
                                                 مغلقة
-                                            </span>
+                                            </span>*@
                                         }
                                         else
                                         {
@@ -76,9 +75,9 @@
                                     {
                                         @if (post.IsClosed)
                                         {
-                                            <span class="status closed">
+                                            @*<span class="status closed">
                                                 مغلقة
-                                            </span>
+                                            </span>*@
                                         }
                                         else
                                         {

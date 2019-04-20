@@ -18,43 +18,100 @@
     bool showCategoriesInSideMenu = settingService.GetSettingByKey("pavilionthemesettings.ShowCategoriesInSideMenu", true, storeId, true);
 }
 
+<link href="~/fonts/Consultant/font-awesome.min.css" rel="stylesheet" />
 
 <style type="text/css">
-    a:hover { color:#40ca40 }
+        a:hover { color:#40ca40 }
 
-    /*top-bar*/
-    .top_bar { background: #333; padding: 10px 0; text-align: center; }
-    .topbarspan { cursor: pointer; color: #fff; font-size: 17px; padding: 9px 30px; padding-top: 10px }
-    .topbarspanActive { background:#3e874b }
-    .header label { color: white; }
-    .admin-header-links a { color: white; }
-    .admin-header-links a:hover { text-decoration: underline; color: #40ca40 }
-    /*#sticky { display: none; background-color: #546bcb; height: 70px; }*/
-    /*#sticky.fixed { position: fixed; top: 0; width: 100%; background-color: rgb(246,246,246); }*/
-    .imgsizing { width: 90px; }
-    .searchpadding { padding-top: 4px !important; }
-    .topFixed { position: fixed; top: 0; z-index: 1070; width: 100%; }
-    .header-middle { margin-top: 43px }
-    .header .center.menAll { width: 100% }
-
-    @@media(min-width:1000px) {
-        .admin-header-links a { line-height: 25px }
-    }
-    @@media(max-width:360px) {
-        .topbarspan { font-size: 13px; padding: 14px 7px }
-    }
-    @@media (min-width: 992px){
-        .spaceBeg { width: 16.66666667%; float:right }
-        /*#topThreeHeader { width: 50%; float: right }*/
-        #topThreeHeader { width: 100%; float: none }
+        /*top-bar*/
+        .top_bar { background: #333; padding: 10px 0; text-align: center; }
+        .topbarspan { cursor: pointer; color: #fff; font-size: 17px; padding: 9px 30px; padding-top: 10px }
+        .topbarspanActive { background:#3e874b }
+        .header label { color: white; }
+        .admin-header-links a { color: white; }
+        .admin-header-links a:hover { text-decoration: underline; color: #40ca40 }
+        /*#sticky { display: none; background-color: #546bcb; height: 70px; }*/
+        /*#sticky.fixed { position: fixed; top: 0; width: 100%; background-color: rgb(246,246,246); }*/
+        .imgsizing { width: 90px; }
+        .searchpadding { padding-top: 4px !important; }
+        .topFixed { position: fixed; top: 0; z-index: 1070; width: 100%; }
+        .header-middle { margin-top: 43px }
+        .header .center.menAll { width: 100% }
+        #topThreeHeader { margin: auto !important; background: #333; height: 43px; text-align: center; top: 0; position: fixed; z-index: 1030; padding-top: 10px; padding-bottom: 5px; }
+        .row { margin-right: -15px; margin-left: -15px; }
+        
+        @@media (min-width: 992px){
+            .col-md-1 {
+                width: 8.33333333%;
+            }
+            .col-md-2 {
+                width: 16.66666667%;
+            }
+            .col-md-6 {
+                width: 50%;
+            }
+            .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+                float: right;
+            }
+            .col-md-8 {
+                width: 66.66666667%;
+            }
+        }
+    .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+        position: relative;
+        min-height: 1px;
+        padding-left: 15px;
+        padding-right: 15px;
     }
     @@media (max-width: 992px) {
-        .spaceBeg { display:none }
-        #topThreeHeader { width: 100%; float: none }
+        .hidden-sm, .hidden-xs {
+            display: none
+        }
     }
-    @@media(min-width:1200px) {
-        #topThreeHeader { width: 33.33333333%; float: right }
+    @@media (min-width: 1200px) {
+        .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
+            float: right;
+        }
+
+        .col-lg-2 {
+            width: 16.66666667%
+        }
+
+        .col-lg-4 {
+            width: 33.33333333%;
+        }
+        .col-lg-8 {
+            width: 66.66666667%;
+        }
     }
+    @@media (min-width: 768px) and (max-width: 992px) {
+        .col-sm-12 {
+            width: 100%;
+        }
+    }
+        @@media(min-width:1000px) {
+            .admin-header-links a {
+                line-height: 25px
+            }
+        }
+
+        @@media(max-width:360px) {
+            .topbarspan {
+                font-size: 13px;
+                padding: 14px 7px
+            }
+        }
+        /*@@media (min-width: 992px){
+            .spaceBeg { width: 16.66666667%; float:right }
+            #topThreeHeader { width: 100%; float: none }
+        }
+        @@media (max-width: 992px) {
+            .spaceBeg { display:none }
+            #topThreeHeader { width: 100%; float: none }
+        }
+        @@media(min-width:1200px) {
+            #topThreeHeader { width: 33.33333333%; float: right }
+        }*/
 </style>
 
 
@@ -99,21 +156,47 @@
     <section class="topFixed">
         <div class="header-upper top_bar">
             <div class="center container-fluid" style="margin:auto !important;">
-                @await Component.InvokeAsync("AdminHeaderLinks")
-                @{
-                    var taxTypeSelectorHtml = await Component.InvokeAsync("TaxTypeSelector");
-                    var currencySelectorHtml = await Component.InvokeAsync("CurrencySelector");
-                    //var languageSelectorHtml = await Component.InvokeAsync("LanguageSelector");
-                    var headerSelectorWidgetHtml = await Component.InvokeAsync("Widget", new { widgetZone = "header_selectors" });
-                }
+                <div class="row">
+                    <div class="col-lg-2 col-md-1 hidden-sm hidden-xs">
+                        <div class="top_col_screen top_hid_sm"></div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 hidden-sm hidden-xs">
+                        <div class="top_col_screen" style="color: white">
+                            @await Component.InvokeAsync("AdminHeaderLinks")
+                            @{
+                                var taxTypeSelectorHtml = await Component.InvokeAsync("TaxTypeSelector");
+                                var currencySelectorHtml = await Component.InvokeAsync("CurrencySelector");
+                                //var languageSelectorHtml = await Component.InvokeAsync("LanguageSelector");
+                                var headerSelectorWidgetHtml = await Component.InvokeAsync("Widget", new { widgetZone = "header_selectors" });
+                            }
+                            @if (!String.IsNullOrEmpty(taxTypeSelectorHtml.ToHtmlString()) ||
+!String.IsNullOrEmpty(currencySelectorHtml.ToHtmlString()) ||
+//!String.IsNullOrEmpty(languageSelectorHtml.ToHtmlString()) ||
+!String.IsNullOrEmpty(headerSelectorWidgetHtml.ToHtmlString()))
+                            {
+                                <div class="header-selectors-wrapper">
+                                    <label>@T("SevenSpikes.Themes.Pavilion.Header.Preferences")</label>
+                                    <div class="header-selectors">
+                                        @taxTypeSelectorHtml
+                                        @currencySelectorHtml
+                                        @*@languageSelectorHtml*@
+                                        @headerSelectorWidgetHtml
+                                    </div>
+                                </div>
+                                <div class="header-selector-widget" style="display: none;">@headerSelectorWidgetHtml</div>
+                            }
 
-                @*<section class="top_bar">*@
-                @*<div class="container-fluid">*@
-                @*<div class="row">*@
-                @*<div class="col-md-12">*@
+                        </div>
+                    </div>
 
 
-                @*<span class=" " style="text-align: center">
+                    @*<section class="top_bar">*@
+                    @*<div class="container-fluid">*@
+                    @*<div class="row">*@
+                    @*<div class="col-md-12">*@
+
+
+                    @*<span class=" " style="text-align: center">
             <span class="topbarspan topbarspanActive">@Html.RouteLink("يبيبيبالمتجر", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
             <span class="topbarspan">@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
 
@@ -121,42 +204,30 @@
 
         </span>*@
 
-                @*</div>*@
-                @*</div>*@
-                @*</div>*@
-                @*</section>*@
+                    @*</div>*@
+                    @*</div>*@
+                    @*</div>*@
+                    @*</section>*@
 
-                @if (!String.IsNullOrEmpty(taxTypeSelectorHtml.ToHtmlString()) ||
-     !String.IsNullOrEmpty(currencySelectorHtml.ToHtmlString()) ||
-     //!String.IsNullOrEmpty(languageSelectorHtml.ToHtmlString()) ||
-     !String.IsNullOrEmpty(headerSelectorWidgetHtml.ToHtmlString()))
-                {
-                    <div class="header-selectors-wrapper">
-                        <label>@T("SevenSpikes.Themes.Pavilion.Header.Preferences")</label>
-                        <div class="header-selectors">
-                            @taxTypeSelectorHtml
-                            @currencySelectorHtml
-                            @*@languageSelectorHtml*@
-                            @headerSelectorWidgetHtml
+
+                    @*<div class="spaceBeg"></div>
+        <div class="spaceBeg"></div>*@
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" style="text-align: center; display: flex; align-items: center; justify-content: center;">
+                        <div id="topThreeHeader">
+                            <span style="text-align: center">
+                                <span class="topbarspan topbarspanActive">@Html.RouteLink("المتجر", "HomsePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                                <span class="topbarspan">@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                                <span class="topbarspan">@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                            </span>
                         </div>
                     </div>
-                    <div class="header-selector-widget" style="display: none;">@headerSelectorWidgetHtml</div>
-                }
-
-                <div class="spaceBeg"></div>
-                <div class="spaceBeg"></div>
-                <div id="topThreeHeader" style="margin:auto !important; background:#333;height:43px;text-align:center;top:0;position:fixed;z-index:1030;padding-top:10px;padding-bottom:5px;">
-                    <span style="text-align: center">
-                        <span class="topbarspan topbarspanActive">@Html.RouteLink("المتجر", "HomsePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-                        <span class="topbarspan">@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-                        <span class="topbarspan">@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-                    </span>
-                </div>
-                <div class="">
-                    <div class="header-links-wrapper">
-                        <label style="font-size:120% !important;">  @T("SevenSpikes.Themes.Pavilion.Header.MyAccount")</label>
-                        @await Component.InvokeAsync("HeaderLinks")
+                    <div class="col-md-2 hidden-sm hidden-xs top_col_screen">
+                        <div class="header-links-wrapper">
+                            <label> <i class="fa fa-user"></i> @T("SevenSpikes.Themes.Pavilion.Header.MyAccount")</label>
+                            @await Component.InvokeAsync("HeaderLinks")
+                        </div>
                     </div>
+                    <div class="col-lg-2 col-md-1 hidden-sm hidden-xs top_col_screen top_hid_sm"></div>
                 </div>
             </div>
         </div>
@@ -186,24 +257,30 @@
                             @await Component.InvokeAsync("TopMenu")
                         }
                     </div>*@
-                <div class="center">
-                    <div class="header-logo">
-                        @await Component.InvokeAsync("Logo")
+                <div class="center container-fluid">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
+                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 logoContainer header-logo">
+                            @await Component.InvokeAsync("Logo")
+                        </div>
+                        <div class="col-lg-8 col-md-6 search-box store-search-box">
+                            @await Component.InvokeAsync("SearchBox")
+                        @*</div>
+                        <div class="col-lg-2 col-md-2">*@
+                            @await Component.InvokeAsync("FlyoutShoppingCart")
+                        </div>
+                        @*<div class="col-lg-2 col-md-2"></div>*@
                     </div>
-                    <div class="search-box store-search-box">
-                        @await Component.InvokeAsync("SearchBox")
-                    </div>
+                 </div>
 
                 </div>
 
-            </div>
-
-            @await Component.InvokeAsync("FlyoutShoppingCart")
+            @*@await Component.InvokeAsync("FlyoutShoppingCart")*@
         </div>
     </div>
 
 
-    <div class="men" style="background-color:rgb(231, 234, 237);padding-bottom:.4%;padding-top:0;">
+    <div class="men" style="background-color:rgb(231, 234, 237);padding-top:0;">
         <div class="center menAll">
             @*@if (showCategoriesInSideMenu)
                 {

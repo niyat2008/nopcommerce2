@@ -8,13 +8,12 @@
         <label style="  color: white; font-size:100% !important;"> <i class="fa fa-user"></i> حسابى </label>
         <div style="margin-left: 20px !important; margin-top: -4px;" class="header-links">
             <ul>
-
-                <li>
-                    @Html.RouteLink("سجل ", "register", new { returnUrl = "consultations" }, new { @class = "ico-register" })
-                </li>
                 <li> @Html.RouteLink("تسجيل الدخول", "login", new { returnUrl = "consultations" }, new { @class = "ico-login" })  </li>
                 <li>
-                    <a href="/wishlist" class="ico-wishlist"> 
+                    @Html.RouteLink("عضو جديد", "register", new { returnUrl = "consultations" }, new { @class = "ico-register" })
+                </li>
+                <li>
+                    <a href="/wishlist" class="ico-wishlist">
                         <p class="wishlist-label">السلع المفضلة</p>
                     </a>
                 </li>

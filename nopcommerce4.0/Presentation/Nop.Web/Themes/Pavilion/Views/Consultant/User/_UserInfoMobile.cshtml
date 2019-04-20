@@ -3,20 +3,20 @@
 
 @if (string.IsNullOrEmpty(Model.UserRole))
 {
-    <ul>
-        <li>
-            <a href="/Register">
-                <i class="fa fa-pencil"></i>
-                <span>سجل الان</span>
-            </a>
-        </li>
-        <li>
-            <a href="/Login">
-                <i class="fa fa-lock"></i>
-                <span>دخول</span>
-            </a>
-        </li>
-    </ul>
+<ul>
+    <li>
+        <a href="/Login">
+            <i class="fa fa-lock"></i>
+            <span>دخول</span>
+        </a>
+    </li>
+    <li>
+        <a href="/Register">
+            <i class="fa fa-pencil"></i>
+            <span>سجل الان</span>
+        </a>
+    </li>
+</ul>
 }
 else
 {

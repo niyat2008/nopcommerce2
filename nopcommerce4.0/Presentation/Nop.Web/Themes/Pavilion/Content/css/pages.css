@@ -58,9 +58,9 @@ form.commission { margin: 18px 0 }
 .content .det-block .det-top small { color: #777; line-height: 42px; }
 .content .det-block .det-top a span { padding-left: 30px; color: #5c9ac6; font-size: 1.82rem; }
 .content .det-block .det-top span:hover { color: #4da74d }
-.content .det-block .det-bottom { padding: 10px; padding-right: 30px; }
+.content .det-block .det-bottom { padding: 10px; /*padding-right: 30px;*/ }
 .content .det-block .det-bottom p { padding: 10px; font-size: 26px; color: black;  font-family: Tahoma; }
-.content .det-block .det-bottom img { width: 47%; float: right; margin-left: 15px; margin-bottom: 10px; }
+.content .det-block .det-bottom img { width: 75%; float: right; margin-left: 15px; margin-bottom: 30px; }
 .content .det-block .det-bottom span.label { font-size:13px }
 .content .det-block .det-bottom p.phone { font-size: 22px; color: #4da74d; padding-right: 0; margin-top: 10px; }
 .content .social-contact { min-height: 50px; display: flex; align-items: center; justify-content: center; margin: 4px 18px; border-bottom: 1px solid #ddd; margin-bottom: 30px }
@@ -82,8 +82,17 @@ form.commission { margin: 18px 0 }
     margin-bottom: 10px
 }
 
-@media(max-width:597px) {
-    .content .det-block .det-bottom img { width: 90%; float: none }
+.tags { margin-top:5px }
+.tags a {
+    color: #919191;
+    background: #eee;
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 3px 12px;
+}
+
+@media(max-width:767px) {
+    .content .det-block .det-bottom img { width: 100%; float: none }
 }
 
 /* Featured Advertise */

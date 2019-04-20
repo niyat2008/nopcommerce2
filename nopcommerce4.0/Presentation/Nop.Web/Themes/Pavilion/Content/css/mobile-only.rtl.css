@@ -25,7 +25,7 @@
         top: 110px;
         z-index: 1020;
         width: 100%;
-        height: 110px;
+        height: 80px;
         background-color:#f6f6f6;
         line-height: 130px;
     }
@@ -37,7 +37,7 @@
 .mobile-sticky-logo .admin-header-links ~ .header .header-logo { top: 42px; }
 .mobile-sticky-logo .admin-header-links ~ .responsive-nav-wrapper-parent { top: 152px; }
 .two-columns-area { margin: 160px 0 25px; }
-.admin-header-links ~ .two-columns-area { margin-top: 205px; }
+.admin-header-links ~ .two-columns-area { margin-top: 142px; }
 .master-wrapper-content {
 	margin-top: 160px;
 	padding: 25px 20px;

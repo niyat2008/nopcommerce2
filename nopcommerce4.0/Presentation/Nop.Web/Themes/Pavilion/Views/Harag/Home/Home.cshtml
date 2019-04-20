@@ -21,31 +21,42 @@
             <div class="col-md-9">
                 <!-- أضف اعلانك -->
                 <div class="row">
-                    <div class="col-md-4"  style="margin-bottom: 20px;">
-                        <a class=" add-btn " style="background: #f2f2f2;" href="@Url.RouteUrl("Harag.Post.AgreementBeforeAddPost")"> <i class="fa fa-plus"></i> أضف اعلانك </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-
+                    <div class="col-md-4" style="margin-bottom: 20px;">
+                        <a class=" add-btn " style="background: #f2f2f2;line-height:2.4" href="@Url.RouteUrl("Harag.Post.AgreementBeforeAddPost")"> <i class="fa fa-plus"></i> أضف اعلانك </a>
                     </div>
                     <div class="col-md-4">
                         <select id="select-city-js-ajax" class="form-control">
                             @*<option>كل المدن</option>*@
                         </select>
                     </div>
-                </div> 
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+
+                    </div>
+                </div>
+                @*<div class="row">
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-4">
+                <select id="select-city-js-ajax" class="form-control">
+                </select>
+            </div>
+        </div>*@
+                <div class="row">
+                    <div class="col-md-12 tags">
+                        <a href="#">شقق</a>
+                        <a href="#">شقق</a>
+                        <a href="#">شقق</a>
+                    </div>
+                </div>
                 <!-- List -->
                 <div id="posts" class="items">
-                
+
                 </div>
-                <div class=" view-more-js">
-                    <button class="btn btn-default add view-more" data-postid="" data-pageno="1" type="button">مشاهدة المزيد</button>
+                <div class="view-more-js">
+                    <a class="add view-more" data-postid="" data-pageno="1" style="padding: 5px 15px; border: 1px solid #3e874b; border-radius:6px; font-size: 16px;">مشاهدة المزيد ...</a>
                 </div>
             </div>
         </div>

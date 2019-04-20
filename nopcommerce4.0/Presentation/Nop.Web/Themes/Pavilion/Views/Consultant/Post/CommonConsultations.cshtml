@@ -21,8 +21,6 @@
 
 <!-- Tab panes -->
 <div class="tab-content">
-    
-
 
 
     @if (Model.Items.Count() <= 0)
@@ -30,8 +28,6 @@
         <div id="tabpanelPosts" style="text-align:center"><b>لا يوجد</b></div>
     }
           
-
-
 
     @foreach (var post in Model.Items)
     {
@@ -45,9 +41,9 @@
                         {
                             @if (post.IsClosed)
                             {
-                                <span class="status closed">
+                                @*<span class="status closed">
                                     مغلقة
-                                </span>
+                                </span>*@
                             }
                             else
                             {
@@ -61,9 +57,9 @@
                         {
                             @if (post.IsClosed)
                             {
-                                <span class="status closed">
+                                @*<span class="status closed">
                                     مغلقة
-                                </span>
+                                </span>*@
                             }
                             else
                             {

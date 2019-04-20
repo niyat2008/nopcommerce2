@@ -14,13 +14,10 @@
     .orange-star {
         color: orange !important;
     }
+
     .btndarckgreen:hover {
         background-color: darkgreen !important;
     }
-
-
-
-
 </style>
 
 
@@ -32,7 +29,7 @@
 
 @foreach (var post in Model.Items)
 {
-    <div class="post">
+    <div class="items">
         <!-- Heading -->
         <div class="heading">
             <span>@post.CategoryName <span> /</span> @post.SubCategoryName  </span>
@@ -153,7 +150,7 @@
         <!-- Body -->
         <div class="post-body" style="overflow-wrap:break-word;">
             <div class="row">
-                
+
                 <div class="col-xs-10">
                     <h4>@post.PostOwner</h4>
                     <span>@post.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @post.DateCreated.ToString("hh:mm:ss")</span>
@@ -176,14 +173,41 @@
             </div>
         </div>
         <!-- Footer -->
-        <div class="post-footer">
+        @*<div class="post-footer">
             <div class="pull-left">
-                 
+
                 @Html.Partial("/Themes/Pavilion/Views/Consultant/Post/ShareButtonsa.cshtml", Url.Link("Consultant.Post.GetPost", new { PostId = @post.Id }))
                 <a href="@Url.RouteUrl("Consultant.Post.GetPost",new { PostId=@post.Id})">
                     <span class="buton primary btndarckgreen"> التفاصيل </span>
                 </a>
             </div>
+        </div>*@
+    </div>
+
+    <div class="item">
+        <div class="det">
+            <a href=""><h3>@post.Title</h3></a>
+            <small>منذ 4 دقيقة</small>
+            @*@if (post.IsFeatured)
+            {
+                <div class="row" style="color: gold"><span><i class="fa fa-star"></i></span></div>
+            }*@
+
+            <div class="det-det">
+                <a href="/Harag/City/@post.City">
+                    <span><i class="fa fa-map-marker"></i> @post.City </span>
+                </a>
+                <a href="/Harag/user/@post.PostOwner">
+                    <span><i class="fa fa-user"></i>@post.PostOwner</span>
+                </a>
+                <a><span> رقم الاعلان:  @post.Id </span></a>
+            </div>
+        </div>
+        <div class="det-img">
+            @if (!String.IsNullOrEmpty(post.Photo))
+            {
+                <img src="/HaragApi/Uploads/Images/@post.Photo">
+            }
         </div>
     </div>
 }
@@ -256,8 +280,6 @@
 
 
 }
-
-
 
 
 <script type="text/javascript">

@@ -39,12 +39,10 @@
 <div class="tab-content">
  
 
-
     @if (Model.Items.Count() <= 0)
     {
         <div id="tabpanelPosts" style="text-align:center"><b>لا يوجد</b></div>
     }
-
 
 
 
@@ -60,9 +58,9 @@
                         {
                             @if (post.IsClosed)
                             {
-                                <span class="status closed">
-                                    مغلقة
-                                </span>
+                                @*<span class="status closed">
+                          مغلقة
+                </span>*@
                             }
                             else
                             {
@@ -76,9 +74,9 @@
                         {
                             @if (post.IsClosed)
                             {
-                                <span class="status closed">
+                                @*<span class="status closed">
                                     مغلقة
-                                </span>
+                                </span>*@
                             }
                             else
                             {
@@ -275,13 +273,7 @@
             </nav>
         }
 
-
-
     }
-
-
-
-
 
 
     <not-found *ngIf="!unassignedPosts.length"></not-found>
@@ -289,17 +281,12 @@
 </div>
 
 
-
-
-
 <script type="text/javascript">
-
-
     function getPostPaging(url) {
 
         var indexmyurl = url.indexOf("Consultations/Consultations");
         var myurl = url.substring(indexmyurl);
         window.location.href = myurl;
-
+  
     }
 </script>

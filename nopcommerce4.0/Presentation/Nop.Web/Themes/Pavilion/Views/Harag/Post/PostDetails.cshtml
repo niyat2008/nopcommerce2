@@ -62,14 +62,14 @@
                         <p>@Model.Text</p>
                         @foreach (var image in Model.Files)
                         {
-                            <div class="row">
+                            <div class="col-xs-12">
                                 <a href="~/HaragApi/Uploads/Images/@image" data-lightbox="image-1@Model.Id" data-title="My caption">
-                                    <img style="width: 97%" src="~/HaragApi/Uploads/Images/@image" alt="Single Image" />
+                                    <img src="~/HaragApi/Uploads/Images/@image" alt="Single Image" />
                                 </a>
                             </div>
                         }
                         <br />
-                        <div class="row">
+                        <div class="col-xs-12">
                             <span class="label label-success" >وسيلة الاتصال</span>
                             @if (String.IsNullOrEmpty(Model.Contact))
                             {
@@ -229,9 +229,14 @@
                             {
                                 if (!String.IsNullOrEmpty(image.Photo))
                                 {
-                                    <div style="width:160px; display:inline;">
+                                    @*<div style="width:160px; display:inline;">
                                         <a href="/Harag/Post/@image.Id">
                                             <img src="~/HaragApi/Uploads/Images/@image.Photo" style="width:150px;height:150px;" />
+                                        </a>
+                                    </div>*@
+                                    <div class="col-md-6 col-sm-12 col-xs-12" style="padding:5px">
+                                        <a href="/Harag/Post/@image.Id">
+                                            <img src="~/HaragApi/Uploads/Images/@image.Photo" style="height:150px;" />
                                         </a>
                                     </div>
                                 }
@@ -243,32 +248,37 @@
                 {
                     <div class="disTable advBox">
                         <div class="adv-images">
-                            <p class="alert alert-light"SS>ذات صله بـ @Model.CategoryName</p>
+                            <p class="alert alert-light" style="margin-bottom:0; padding:10px 4px" SS>ذات صله بـ @Model.CategoryName</p>
                             @foreach (var image in Model.RelatedPosts)
                             {
                                 if (!String.IsNullOrEmpty(image.Photo))
                                 {
-                                    <div style="width:160px; display:inline;">
+                                    @*<div style="width:160px; display:inline;">
                                         <a href="/Harag/Post/@image.Id">
                                             <img src="~/HaragApi/Uploads/Images/@image.Photo" style="width:150px;height:150px;" />
+                                        </a>
+                                    </div>*@
+                                    <div class="col-md-6 col-sm-12 col-xs-12" style="padding:5px">
+                                        <a href="/Harag/Post/@image.Id">
+                                            <img src="~/HaragApi/Uploads/Images/@image.Photo" style="height:150px;" />
                                         </a>
                                     </div>
                                 }
                                 else
                                 {
 
-                                    <div style="width:160px; display:inline;">
-                                        <a href="/Harag/Post/@image.Id">
-                                            <img src="/images/Consultant/images/logo3.png" style="width:150px;height:150px;" />
-                                        </a>
-                                    </div>
+                                <div class="col-md-6 col-sm-12 col-xs-12" style="padding:5px">
+                                    <a href="/Harag/Post/@image.Id">
+                                        <img src="/images/Consultant/images/logo3.png" style="height:150px;" />
+                                    </a>
+                                </div>
                                 }
 
-                            }
-                        </div>
+                                }
+                            </div>
 
 
-                    </div>
+                                </div>
                 }
 
  
