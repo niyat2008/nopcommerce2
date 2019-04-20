@@ -7,8 +7,8 @@
 }
 
 
+<link href="~/../Themes/Pavilion/Content/css/style.css" />
 <link href="~/css/Consultant/pagination.css" rel="stylesheet" />
-
 
 <style type="text/css">
     .orange-star {
@@ -18,6 +18,153 @@
     .btndarckgreen:hover {
         background-color: darkgreen !important;
     }
+    /*Content*/
+    .content {
+        margin-top: 30px
+    }
+
+        .content .form-control {
+            height: 40px;
+            font-family: inherit;
+        }
+
+        .content select {
+            margin-bottom: 10px
+        }
+
+    textarea {
+        font-family: Tajawal,serif !important
+    }
+
+    .content button {
+        background: #eee;
+        border-bottom: 3px solid #ccc;
+        color: #000
+    }
+
+        .content button.srchBtn {
+            width: 100%;
+            height: 37px;
+        }
+
+        .content button.add {
+            margin-bottom: 20px;
+            margin-top: 20px;
+            font-family: Tajawal,serif !important
+        }
+
+            .content button.add i {
+                color: #4da74d
+            }
+
+    .content .choices {
+        margin-bottom: 40px
+    }
+
+        .content .choices a {
+            background: #eee;
+            padding: 5px;
+            border-radius: 3px;
+            cursor: pointer;
+            line-height: 35px;
+        }
+
+            .content .choices a:hover {
+                color: #0473c0;
+                background: #e6f1f9;
+                font-weight: bold;
+            }
+
+    .content .items {
+        margin: 25px 0
+    }
+
+        .content .items .item {
+            display: table;
+            /*border-bottom: 1px solid #ddd;*/
+            border: 1px solid #ddd;
+            /*padding: 5px 10px;*/
+            width: 100%;
+            margin-bottom: 10px
+        }
+
+            .content .items .item:nth-child(odd) {
+                background: #f3f9f7
+            }
+
+            .content .items .item .det {
+                width: 87%;
+                float: right
+            }
+
+                .content .items .item .det p {
+                    font-size: 16px;
+                    padding: 4px;
+                }
+
+                .content .items .item .det .det-det {
+                    margin: 10px 0
+                }
+                    .content .items .item .det .det-det a span i { padding-left:4px }
+                    .content .items .item .det h3 {
+                        margin-top: 0;
+                        font-weight: bold;
+                        color: #4da74d
+                    }
+
+                .content .items .item .det small {
+                    color: #777;
+                    padding-left: 30px;
+                }
+
+                .content .items .item .det span {
+                    padding-left: 30px;
+                    color: #777
+                }
+
+            .content .items .item .det-img {
+                width: 12%;
+                float: right
+            }
+
+                .content .items .item .det-img img {
+                    width: 100%;
+                    margin: 5px 0;
+                    height: auto;
+                    max-height: 100px; /*cursor:pointer*/
+                }
+
+            .content .items .item.msgItem {
+                width: 90%
+            }
+
+                .content .items .item.msgItem .det {
+                    width: 100%;
+                    float: none;
+                }
+
+            .content .items .item .cont-Header {
+                background: #EDEAEA;
+                padding: 5px 10px;
+            }
+            .content .items .item .cont-Body {
+                padding: 5px 10px;
+            }
+            .content .items .item .cont-Header .status { padding-left:10px }
+            span {
+                padding: 0;
+            }
+    span .report { cursor: pointer }
+
+    @@media(max-width:767px) {
+        .content .items .item .det {
+            width: 74%;
+        }
+
+        .content .items .item .det-img {
+            width: 25%
+        }
+    }
 </style>
 
 
@@ -26,193 +173,201 @@
     <div id="tabpanelPosts" style="text-align:center"><b>لا يوجد</b></div>
 }
 <!-- Post -->
-
-@foreach (var post in Model.Items)
-{
+<div class="content">
     <div class="items">
-        <!-- Heading -->
-        <div class="heading">
-            <span>@post.CategoryName <span> /</span> @post.SubCategoryName  </span>
-            <span class="pull-left">
-                @if (ViewBag.UserRole == "Vistor")
-                {
-                    @if (post.IsClosed)
-                    {
-                        <span class="status closed">
-                            مغلقة
-                        </span>
-                    }
-                    else
-                    {
-                        <span class="status open">
-                            مفتوحة
-                        </span>
-                    }
-                }
 
-                @if (ViewBag.UserRole == "Registered")
-                {
-                    @if (post.IsClosed)
-                    {
-                        <span class="status closed">
-                            مغلقة
-                        </span>
-                    }
-                    else
-                    {
-                        <span class="status open">
-                            مفتوحة
-                        </span>
-                    }
-                }
-
-                @if (ViewBag.UserRole == "Consultant")
-                {
-                    @if (post.IsClosed == true)
-                    {
-                        <span class="status closed">
-                            @Html.Raw(" مغلقة ")
-                        </span>
-                    }
-                    else if (!post.IsClosed && post.IsAnswered)
-                    {
-                        <span class="status open">
-                            @Html.Raw(" مفتوحة ")
-                        </span>
-                    }
-                    else if (!post.IsClosed && !post.IsAnswered && post.IsReserved)
-                    {
-                        <span class="status open">
-                            @Html.Raw(" محجوزة ")
-                        </span>
-                    }
-                    else if (!post.IsClosed && !post.IsAnswered && !post.IsReserved)
-                    {
-                        <span class="status open">
-                            @Html.Raw(" لم يرد عليها ")
-                        </span>
-                    }
-                }
-
-
-                @if (post.Rate != null)
-                {
-                    <span class="separator"> | </span>
-                    @if (post.IsClosed)
-                    {
-                        <span>
-                            @if (post.Rate >= 1)
+        @foreach (var post in Model.Items)
+        {
+            <div class="item">
+                <!-- Heading -->
+                <div class="cont-Header">
+                    <span>@post.CategoryName <span> /</span> @post.SubCategoryName  </span>
+                    <span class="pull-left">
+                        @if (ViewBag.UserRole == "Vistor")
+                        {
+                            @if (post.IsClosed)
                             {
-                                <i class="fa fa-star orange-star"></i>
+                                @*<span class="status closed">
+                                    مغلقة
+                                </span>*@
                             }
                             else
                             {
-                                <i class="fa fa-star"></i>
+                                <span class="status open">
+                                    مفتوحة
+                                </span>
                             }
-                            @if (post.Rate >= 2)
-                            {
-                                <i class="fa fa-star orange-star"></i>
-                            }
-                            else
-                            {
-                                <i class="fa fa-star"></i>
-                            }
-                            @if (post.Rate >= 3)
-                            {
-                                <i class="fa fa-star orange-star"></i>
-                            }
-                            else
-                            {
-                                <i class="fa fa-star"></i>
-                            }
-                            @if (post.Rate >= 4)
-                            {
-                                <i class="fa fa-star orange-star"></i>
-                            }
-                            else
-                            {
-                                <i class="fa fa-star"></i>
-                            }
-                            @if (post.Rate >= 5)
-                            {
-                                <i class="fa fa-star orange-star"></i>
-                            }
-                            else
-                            {
-                                <i class="fa fa-star"></i>
-                            }
+                        }
 
-                        </span>
-                    }
-                }
-            </span>
-        </div>
-        <!-- Body -->
-        <div class="post-body" style="overflow-wrap:break-word;">
-            <div class="row">
+                        @if (ViewBag.UserRole == "Registered")
+                        {
+                            @if (post.IsClosed)
+                            {
+                                @*<span class="status closed">
+                                    مغلقة
+                                </span>*@
+                            }
+                            else
+                            {
+                                <span class="status open">
+                                    مفتوحة
+                                </span>
+                            }
+                        }
 
-                <div class="col-xs-10">
-                    <h4>@post.PostOwner</h4>
-                    <span>@post.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @post.DateCreated.ToString("hh:mm:ss")</span>
-                    <div>
-                        <h4>
-                            @post.Title
-                        </h4>
-                    </div>
-                    <p>
-                        @post.Text
-                    </p>
-                    @if (@post.Photo != null)
-                    {
-                        <div style="width:160px;display:inline;">
-                            <a href="@post.Photo" data-lightbox="image-@post.Id" data-title="My caption"><img src="@post.Photo" alt="Single Image" style="width:150px;height:150px;" /></a>
-                        </div>
-                    }
+                        @if (ViewBag.UserRole == "Consultant")
+                        {
+                            @if (post.IsClosed == true)
+                            {
+                                <span class="status closed">
+                                    @Html.Raw(" مغلقة ")
+                                </span>
+                            }
+                            else if (!post.IsClosed && post.IsAnswered)
+                            {
+                                <span class="status open">
+                                    @Html.Raw(" مفتوحة ")
+                                </span>
+                            }
+                            else if (!post.IsClosed && !post.IsAnswered && post.IsReserved)
+                            {
+                                <span class="status open">
+                                    @Html.Raw(" محجوزة ")
+                                </span>
+                            }
+                            else if (!post.IsClosed && !post.IsAnswered && !post.IsReserved)
+                            {
+                                <span class="status open">
+                                    @Html.Raw(" لم يرد عليها ")
+                                </span>
+                            }
+                        }
 
+
+                        @if (post.Rate != null)
+                        {
+                            <span class="separator"> | </span>
+                            @if (post.IsClosed)
+                            {
+                                <span>
+                                    @if (post.Rate >= 1)
+                                    {
+                                        <i class="fa fa-star orange-star"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-star"></i>
+                                    }
+                                    @if (post.Rate >= 2)
+                                    {
+                                        <i class="fa fa-star orange-star"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-star"></i>
+                                    }
+                                    @if (post.Rate >= 3)
+                                    {
+                                        <i class="fa fa-star orange-star"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-star"></i>
+                                    }
+                                    @if (post.Rate >= 4)
+                                    {
+                                        <i class="fa fa-star orange-star"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-star"></i>
+                                    }
+                                    @if (post.Rate >= 5)
+                                    {
+                                        <i class="fa fa-star orange-star"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-star"></i>
+                                    }
+
+                                </span>
+                            }
+                        }
+                    </span>
                 </div>
-            </div>
-        </div>
-        <!-- Footer -->
-        @*<div class="post-footer">
-            <div class="pull-left">
+                <!-- Body -->
+                @*<div class="post-body" style="overflow-wrap:break-word;">
+                    <div class="row">
 
-                @Html.Partial("/Themes/Pavilion/Views/Consultant/Post/ShareButtonsa.cshtml", Url.Link("Consultant.Post.GetPost", new { PostId = @post.Id }))
-                <a href="@Url.RouteUrl("Consultant.Post.GetPost",new { PostId=@post.Id})">
-                    <span class="buton primary btndarckgreen"> التفاصيل </span>
-                </a>
-            </div>
-        </div>*@
-    </div>
+                        <div class="col-xs-10">
+                            <h4>@post.PostOwner</h4>
+                            <span>@post.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @post.DateCreated.ToString("hh:mm:ss")</span>
+                            <div>
+                                <h4>
+                                    @post.Title
+                                </h4>
+                            </div>
+                            <p>
+                                @post.Text
+                            </p>
+                            @if (@post.Photo != null)
+                            {
+                                <div style="width:160px;display:inline;">
+                                    <a href="@post.Photo" data-lightbox="image-@post.Id" data-title="My caption"><img src="@post.Photo" alt="Single Image" style="width:150px;height:150px;" /></a>
+                                </div>
+                            }
 
-    <div class="item">
-        <div class="det">
-            <a href=""><h3>@post.Title</h3></a>
-            <small>منذ 4 دقيقة</small>
-            @*@if (post.IsFeatured)
+                        </div>
+                    </div>
+                </div>*@
+                <!-- Footer -->
+                @*<div class="post-footer">
+                    <div class="pull-left">
+
+                        @Html.Partial("/Themes/Pavilion/Views/Consultant/Post/ShareButtonsa.cshtml", Url.Link("Consultant.Post.GetPost", new { PostId = @post.Id }))
+                        <a href="@Url.RouteUrl("Consultant.Post.GetPost",new { PostId=@post.Id})">
+                            <span class="buton primary btndarckgreen"> التفاصيل </span>
+                        </a>
+                    </div>
+                </div>*@
+
+                <div class="cont-Body">
+                    <div class="det">
+                        <a href="@Url.RouteUrl("Consultant.Post.GetPost",new { PostId=@post.Id})"><h3>@post.Title</h3></a>
+                        <small>@post.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @post.DateCreated.ToString("hh:mm:ss")</small>
+                        @*@if (post.IsFeatured)
             {
                 <div class="row" style="color: gold"><span><i class="fa fa-star"></i></span></div>
             }*@
 
-            <div class="det-det">
-                <a href="/Harag/City/@post.City">
+                        <div class="det-det">
+                            @*<a href="/Harag/City/@post.City">
                     <span><i class="fa fa-map-marker"></i> @post.City </span>
-                </a>
-                <a href="/Harag/user/@post.PostOwner">
-                    <span><i class="fa fa-user"></i>@post.PostOwner</span>
-                </a>
-                <a><span> رقم الاعلان:  @post.Id </span></a>
+                </a>*@
+                            <a href="#">
+                                <span><i class="fa fa-user"></i>@post.PostOwner</span>
+                            </a>
+                            <a>@*<span> رقم الاعلان:  @post.Id </span>*@</a>
+                        </div>
+                    </div>
+                    <div class="det-img">
+                        @if (@post.Photo != null)
+                        {
+                            <div>
+                                <a href="@post.Photo" data-lightbox="image-@post.Id" data-title="My caption">
+                                    <img src="@post.Photo" alt="Single Image" />
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="det-img">
-            @if (!String.IsNullOrEmpty(post.Photo))
-            {
-                <img src="/HaragApi/Uploads/Images/@post.Photo">
-            }
-        </div>
+
+        }
+
     </div>
-}
-
-
+</div>
 
 @if (Model.Paging.PageNumber <= Model.Paging.TotalPages)
 {

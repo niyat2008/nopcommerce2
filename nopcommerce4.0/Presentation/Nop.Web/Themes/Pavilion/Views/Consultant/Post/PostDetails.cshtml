@@ -13,7 +13,7 @@
 
 
 <link href="~/css/Consultant/PostDetails.css" rel="stylesheet" />
-
+<link href="~/../Themes/Pavilion/Content/css/pages.css" />
 
 
 <style type="text/css">
@@ -38,11 +38,118 @@
         border-radius: 20px;
         margin-bottom: 0;
     }
+    /* Advertise Details */
+    .content .det-block {
+        display: table;
+        border-radius: 4px;
+        min-height: 50px;
+        background: #f3f9f7;
+        width: 100%;
+        border: 1px solid #ddd;
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+
+        .content .det-block .det-top {
+            padding: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #ddd;
+            border: 1px solid #ebe7d1;
+            border-radius: 4px 4px 0px 0px;
+            border-bottom: 1px solid #ebe7d1;
+            border-top: 1px solid #ebe7d1;
+            background-color: #f8f6e7;
+            /*padding-top: 20px;*/
+            font-family: "Times New Roman",Times,serif;
+        }
+
+            .content .det-block .det-top h4 {
+                margin-top: 0;
+                font-weight: bold;
+                color: #4da74d !important;
+                font-size: 24px;
+            }
+
+            .content .det-block .det-top small {
+                color: #777;
+                line-height: 42px;
+            }
+
+            .content .det-block .det-top a span {
+                padding-left: 30px;
+                color: #5c9ac6;
+                font-size: 1.82rem;
+            }
+
+            .content .det-block .det-top span:hover {
+                color: #4da74d
+            }
+
+        .content .det-block .det-bottom {
+            padding: 10px; /*padding-right: 30px;*/
+        }
+
+            .content .det-block .det-bottom p {
+                padding: 10px;
+                font-size: 26px;
+                color: black;
+                font-family: Tahoma;
+            }
+
+            .content .det-block .det-bottom img {
+                width: 75%;
+                float: right;
+                margin-left: 15px;
+                margin-bottom: 30px;
+            }
+
+            .content .det-block .det-bottom span.label {
+                font-size: 13px
+            }
+
+            .content .det-block .det-bottom p.phone {
+                font-size: 22px;
+                color: #4da74d;
+                padding-right: 0;
+                margin-top: 10px;
+            }
+
+    .content .social-contact {
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 4px 18px;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 30px
+    }
+
+        .content .social-contact a {
+            cursor: pointer;
+            color: #777
+        }
+
+            .content .social-contact a:hover {
+                color: #4da74d
+            }
+
+    .content .follow button i {
+        color: #777
+    }
+
+    .content .advBox {
+        width: 100%;
+        min-height: 200px;
+        padding: 15px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 25px;
+    }
 </style>
 
 <!-- Details -->
 
-<div class="post">
+<div class="">
     <!-- Heading -->
     <div class="heading">
         <div>
@@ -57,7 +164,7 @@
                 <button onclick="UnReservePost(@Model.Id)" style="margin-bottom:2%;" class="btndarckgreen"> فك الحجز </button>
             }
         </div>
-        <span> <span id="CategoryNameSpan">@Model.CategoryName</span>  / <span id="SubCategoryNameSpan">@Model.SubCategoryName</span> </span>
+        @*<span> <span id="CategoryNameSpan">@Model.CategoryName</span>  / <span id="SubCategoryNameSpan">@Model.SubCategoryName</span> </span>*@
         @if (!Model.IsClosed && (Model.IsAnswered || Model.IsReserved) && ViewBag.UserRole == "Consultant")
         {
 
@@ -70,8 +177,8 @@
                 @if (Model.IsClosed)
                 {
                     @*<span class="status closed">
-                        مغلقة
-                    </span>*@
+                            مغلقة
+                        </span>*@
                 }
                 else
                 {
@@ -85,8 +192,8 @@
                 @if (Model.IsClosed)
                 {
                     @*<span class="status closed">
-                        مغلقة
-                    </span>*@
+                            مغلقة
+                        </span>*@
                 }
                 else
                 {
@@ -176,50 +283,9 @@
             }
         </span>
     </div>
-    <!-- Body -->
-    <div class="post-body">
-        <div class="row">
+    
 
-            @*<div class="col-xs-2 text-center">
-                <img class="userimagelarge" src="~/images/Consultant/images/no-img.png" />
-                <img class="userimagemedium" src="~/images/Consultant/images/no-img-mobile.png" style="width:50px;height:50px;" />
-                <img class="userimagesmall" src="~/images/Consultant/images/no-img-mobile.png" style="width:35px;height:35px;" />
-            </div>*@
-
-            <div class="col-xs-10">
-                <h4>@Model.PostOwner</h4>
-                <span>@Model.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @Model.DateCreated.ToString("hh:mm:ss")</span>
-
-                <h4 >
-                    <strong>@Model.Title</strong> 
-                </h4>
-                <p>
-                    @Model.Text
-                </p>
-                @foreach (var image in Model.Files)
-                {
-                    <div style="width:160px;display:inline;">
-                        <a href="@image" data-lightbox="image-@Model.Id" data-title="My caption"><img src="@image" alt="Single Image" /></a>
-                    </div>
-                }
-
-            </div>
-        </div>
-
-        <hr />
-
-
-
-
-        <div id="comments">
-            
-        </div>
-
-
-
-    </div>
     <!-- Footer -->
-   
     <div class="post-footer">
         @if (!Model.IsClosed && ViewBag.UserRole == "Registered")
         {<strong> قم بتقييم المستشار </strong>
@@ -234,29 +300,71 @@
             <button class="pull-left btndarckgreen" onclick="closePost('@Model.Id')">غلق الاستشارة</button>
         }
 
-        @Html.Partial("/Themes/Pavilion/Views/Consultant/Post/ShareButtonsa.cshtml", Url.Link("Consultant.Post.GetPost", new { PostId = Model.Id }))
+        @*@Html.Partial("/Themes/Pavilion/Views/Consultant/Post/ShareButtonsa.cshtml", Url.Link("Consultant.Post.GetPost", new { PostId = Model.Id }))*@
     </div>
-   
 </div>
 
+
+<div class="content">
+    <div class="cont det-block">
+        <div class="">
+            <div class="det-top">
+                <h4> >> @Model.Title</h4>
+
+                <div class="det-det">
+
+                    <div class="row" style="padding-right: 20px">
+                        <div class="col-md-7">
+                            <div class="row">
+                                <strong> <i class="fa fa-sitemap"></i> <span id="CategoryNameSpan">@Model.CategoryName</span>  / <span id="SubCategoryNameSpan">@Model.SubCategoryName</span> </strong>
+                            </div>
+                            <div class="row">
+                                <small>
+                                    @Model.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @Model.DateCreated.ToString("hh:mm:ss")
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <a href="/Harag/user/@Model.PostOwner"><span><i class="fa fa-user"></i> @Model.PostOwner </span></a>
+                            </div>
+                            @*<div class="row"> <span class="text-gray"> #@Model.Id </span> </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="det-bottom">
+                <p>@Model.Text</p>
+                @foreach (var image in Model.Files)
+                {
+                    <div class="col-xs-12">
+                        <a href="@image" data-lightbox="image-@Model.Id" data-title="My caption">
+                            <img src="@image" alt="Single Image" />
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+        <div>
+            @Html.Partial("/Themes/Pavilion/Views/Consultant/Post/ShareButtonsa.cshtml", Url.Link("Consultant.Post.GetPost", new { PostId = Model.Id }))
+        </div>
+        <div id="comments"> </div>
+    </div>
+</div>
 
 <div id="changeCatAndSubDiv" class="modal" tabindex="-1" role="dialog" Style="display:none">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-
                 <h4 class="modal-title"> تعديل التصنيف</h4>
             </div>
             <div class="modal-body">
                 <form>
-
                     @*<select id="CategorySelectList"></select>*@
                     <select id="subCategoriesSelectList"></select>
                     <div style="width:100px;background-color:red;" id="Ahmed"></div>
                     <div class="modal-footer">
                         <button type="button" onclick="submitChangeCatAndSub()" class="btn btn-success">تعديل</button>
-                        
-
                     </div>
                 </form>
             </div>
@@ -265,21 +373,12 @@
 
 </div><!-- /.modal !-->
 
-
-
-
-
-
 <script type="text/javascript">
-
-
 
     $('#test > i').mouseenter(function () {
         $('#test > i').removeClass("active-rate");
         $(this).addClass("active-rate");
-
         $('.active-rate ~ i').addClass("active-rate");
-
     });
 
     $('#test > i').mouseleave(function () {
@@ -487,7 +586,7 @@
         $("#changeCatAndSubDiv").css("display", "none");
     }
 
-    var Files = []; 
+    var Files = [];
 
     function addCommentConsultant() {
         var Text = $("#CommentText-consult").val();
@@ -518,7 +617,7 @@
             var CommentForPostModel = {
                 PostId: @PostId,
                 Text: Text,
-                Files: Files  
+                Files: Files
             };
 
 
@@ -533,14 +632,14 @@
                 data: JSON.stringify(CommentForPostModel),
                 complete: function (data) {
                     console.log($("#commentDivToAppending"));
-                    appendComment(data); 
+                    appendComment(data);
                     $("#CommentText").val("");
                     var i = 0;
                     Files.forEach(function (d) {
                         deleteFile(i++);
                     })
                 }
-            }); 
+            });
 
 
             $.ajax({
@@ -590,7 +689,7 @@
             var CommentForPostModel = {
                 PostId: @PostId,
                 Text: Text,
-                Files: Files 
+                Files: Files
             };
 
 
@@ -607,14 +706,14 @@
                     console.log(appendComment(data));
                     appendComment(data);
 
-                    $("#CommentText").val(""); 
+                    $("#CommentText").val("");
                         var i = 0;
                     Files.forEach(function (d) {
                         deleteFile(i++);
                     })
                 }
             });
-             
+
             $.ajax({
             type: 'GET',
             url: '@Url.RouteUrl("Consultant.Comment.GetCommentsByPostId")',
@@ -644,8 +743,8 @@
                 "<i class='fa fa-trash imageli' ></i>" +
                 "</div>");
         };
-    } 
-    
-   
+    }
+
+
 
 </script>  

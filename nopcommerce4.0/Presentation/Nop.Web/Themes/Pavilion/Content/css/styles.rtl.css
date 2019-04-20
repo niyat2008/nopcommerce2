@@ -1514,9 +1514,10 @@ label, label + * {
 	font-weight: normal;
 	color: #333;
 }
-.item-box .product-title a {
-	display: block;
-}
+    .item-box .product-title a {
+        display: block;
+        font-size: 15px;
+    }
 .item-box .product-title + .sku {
 	display: none;
 }
@@ -5674,6 +5675,7 @@ label, label + * {
     /* margin-top: 4px; */
     padding: 7px;
     background: #e6edeb;
+    cursor:pointer
 }
 
 .add-to-cart-panel > div > .k-minus {
@@ -5685,12 +5687,12 @@ label, label + * {
     padding-right: 11px;
     padding-left: 11px;
     background: #e6edeb;
+    cursor: pointer
 }
 
 .input-validation-error {
     border: solid red 2px !important;
 }
-
 
 .add-btn {
     padding: 10px 16px;
