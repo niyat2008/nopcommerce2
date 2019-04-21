@@ -523,7 +523,40 @@ namespace Nop.Web.Controllers.Harag
             //return CreatedAtRoute("Consultant.Api.Post.GetPost", new { PostId = postToReturn.Id }, postToReturn);
             return Ok(new { postId = post.Id });
         }
+        [HttpGet]
+        public ActionResult GetAllOrders(int pageNo, int size)
+        {
+            var pagingParams = new PagingParams
+            {
+                PageNumber = pageNo
+            };
 
+
+            var posts = _postService.GetHaragOrders(pagingParams);
+
+            var modelOutput = new Models.Harag.Post.PostOutputModel();
+
+            modelOutput.Items = posts.Select(p => new Models.Harag.Post.PostModel
+            {
+                CategoryId = p.CategoryId,
+                CategoryName = p.Category.Name,
+                Text = p.Text,
+                Id = p.Id,
+                Title = p.Title,
+                City = p.City.ArName,
+                DateCreated = p.DateCreated,
+                Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
+                // Rate = p.Rate,
+                DateUpdated = p.DateUpdated,
+                IsDispayed = p.IsDispayed,
+                IsFeatured = (bool)p.IsFeatured,
+                PostOwner = p.Customer.Username,
+                CommentsCount = (int)p.Z_Harag_Comment?.Count,
+                PostOwnerFullName = p.Customer.GetFullName()
+            }).ToList();
+
+            return View("~/Themes/Pavilion/Views/Harag/Post/HaragOrders.cshtml", modelOutput);
+        }
         [HttpGet]
         public ActionResult UpdatePostLocation(int postId)
         {
@@ -871,6 +904,8 @@ namespace Nop.Web.Controllers.Harag
             if (cityO == null)
                 return NotFound();
 
+            ViewBag.City = cityO.Id;
+
             var posts = _postService.SearchByCity(cityO.Id, PagingParams);
 
             var modelOutput = new Models.Harag.Post.PostOutputModel();
@@ -1063,13 +1098,15 @@ namespace Nop.Web.Controllers.Harag
         }
 
         [HttpGet]
-        public IActionResult GetHaragCities()
+        public IActionResult GetHaragCities(int City = 0)
         {
             var cities = _postService.GetCities();
+
             var model = cities.Select(m => new CityOutputModel
             {
                 Id = m.Id,
-                Name = m.ArName
+                Name = m.ArName,
+                IsSelected = (m.Id == City)
             }).ToList();
             return PartialView("~/Themes/Pavilion/Views/Harag/Post/ListOfCities.cshtml", model);
         }

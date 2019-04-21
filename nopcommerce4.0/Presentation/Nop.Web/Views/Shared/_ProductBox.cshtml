@@ -38,12 +38,13 @@
                 @Model.Sku
             </div>
         }
+
         @if (Model.ReviewOverviewModel.AllowCustomerReviews)
         {
             var ratingPercent = 0;
             if (Model.ReviewOverviewModel.TotalReviews != 0)
             {
-                ratingPercent = ((Model.ReviewOverviewModel.RatingSum*100)/Model.ReviewOverviewModel.TotalReviews)/5;
+                ratingPercent = ((Model.ReviewOverviewModel.RatingSum * 100) / Model.ReviewOverviewModel.TotalReviews) / 5;
             }
             <div class="product-rating-box" title="@string.Format(T("Reviews.TotalReviews").Text, Model.ReviewOverviewModel.TotalReviews)">
                 <div class="rating">
@@ -95,14 +96,16 @@
                     }
                     <input type="button" value="@(addToCartText)" class="button-2 product-box-add-to-cart-button" onclick="AjaxCart.addproducttocart_catalog('@addtocartlink');return false;" />
                 }
-                @if (!Model.ProductPrice.DisableAddToCompareListButton)
+                @*
+                    amsfci
+                    @if (!Model.ProductPrice.DisableAddToCompareListButton)
                 {
                     <input type="button" value="@T("ShoppingCart.AddToCompareList")" title="@T("ShoppingCart.AddToCompareList")" class="button-2 add-to-compare-list-button" onclick="AjaxCart.addproducttocomparelist('@addtocomparelink');return false;" />
                 }
                 @if (!Model.ProductPrice.DisableWishlistButton)
                 {
                     <input type="button" value="@T("ShoppingCart.AddToWishlist")" title="@T("ShoppingCart.AddToWishlist")" class="button-2 add-to-wishlist-button" onclick="AjaxCart.addproducttocart_catalog('@addtowishlistlink');return false;" />
-                }
+                }*@
             </div>
             @await Component.InvokeAsync("Widget", new { widgetZone = "productbox_addinfo_after", additionalData = Model.Id })
         </div>

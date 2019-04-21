@@ -1,6 +1,7 @@
 ﻿@model ManufacturerNavigationModel
 @if (Model.Manufacturers.Count > 0)
 {
+    //amsfci
     <div class="block block-manufacturer-navigation">
         <div class="title">
             <strong>@T("Manufacturers")</strong>
@@ -9,16 +10,18 @@
             <ul class="list">
                 @foreach (var manufacturer in Model.Manufacturers)
                 {
-                    <li class="@(manufacturer.IsActive ? "active" : "inactive")"><a href="@Url.RouteUrl("Manufacturer", new { SeName = manufacturer.SeName })">@manufacturer.Name</a>
+                    <li style="float: right" class="@(manufacturer.IsActive ? "active" : "inactive")">
+                        <a href="@Url.RouteUrl("Manufacturer", new { SeName = manufacturer.SeName })">
+                        <img  src="/images/thumbs/0000337_basmati_100.png" width="100"/>
+                        @manufacturer.Name</a>
                     </li>
                 }
             </ul>
-            @if (Model.TotalManufacturers > Model.Manufacturers.Count)
-            {
+            <div style="clear: both"></div>
+           
                 <div class="view-all">
                     <a href="@Url.RouteUrl("ManufacturerList")">@T("Manufacturers.ViewAll")</a>
-                </div>
-            }
+                </div> 
         </div>
     </div>
 }

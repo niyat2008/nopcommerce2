@@ -14,9 +14,9 @@
                 var controlId = $"checkout_attribute_{attribute.Id}";
                 var textPrompt = !string.IsNullOrEmpty(attribute.TextPrompt) ? attribute.TextPrompt : attribute.Name;
                 <dt id="@($"checkout_attribute_label_{attribute.Id}")">
-                    <label class="text-prompt" >
+                    <h3 style="color: #3e874b" class="text-prompt" >
                         @textPrompt
-                    </label>
+                    </h3>
                     @if (attribute.IsRequired)
                     {
                         <span class="required" >*</span>
@@ -85,7 +85,7 @@
                             break;
                         case AttributeControlType.MultilineTextbox:
                             {
-                                <textarea id="@(controlId)" name="@(controlId)">@attribute.DefaultValue</textarea>
+                                <textarea style="width: 100%; border: solid 1px #3e874b !important" id="@(controlId)" name="@(controlId)">@attribute.DefaultValue</textarea>
                             }
                             break;
                         case AttributeControlType.Datepicker:

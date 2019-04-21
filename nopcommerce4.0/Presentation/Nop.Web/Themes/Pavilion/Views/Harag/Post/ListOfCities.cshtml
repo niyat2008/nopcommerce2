@@ -2,13 +2,16 @@
 @model List<CityOutputModel>
 
 
- 
-    <option selected disabled
-            value="0">
-        اختر المدينه
-    </option>
-    @foreach (var SubCat in Model)
-    {
 
-    <option value="@SubCat.Id">@SubCat.Name</option>
-    } 
+@foreach (var SubCat in Model)
+{ 
+    if (SubCat.IsSelected)
+    {
+        <option selected="selected" value="@SubCat.Id">@SubCat.Name </option>
+    }
+    else
+    {
+        <option value="@SubCat.Id">@SubCat.Name</option>
+    }
+
+}

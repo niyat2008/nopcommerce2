@@ -1,11 +1,11 @@
 ﻿@model CategoryGroupModel
-    
+    @*amsfci*@
 <div class="spc-header">
     <ul class="navigation">
         @foreach (var tab in Model.Tabs)
         {
             <li class="tab" data-tabId="@tab.Id" notloaded>
-                <span>@tab.Title</span>
+                <span>@tab.Title </span>
             </li>
         }
     </ul>

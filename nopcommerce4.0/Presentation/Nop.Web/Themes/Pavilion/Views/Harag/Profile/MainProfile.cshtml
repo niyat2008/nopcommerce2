@@ -25,35 +25,52 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="profile_info">
-                    <p><i class="fa fa-user-o"></i> @Model.FullName</p>
+
+                    <h3><i class="fa fa-user-o"></i> @Model.FullName</h3>
                     <hr />
-                    <p> @Model.LastSeen </p>
-                    <hr />
+                    @if ((DateTime.Now - Model.LastSeen) < TimeSpan.FromSeconds(12))
+                    {
+                        <span class="badge badge-success"><strong>متصل</strong></span>
+                    }
+                    else
+                    {
+                        <h4> اخر نشاط قبل @Model.LastSeenDesc  </h4>
+                        <hr />
+                    }
+
+
+
                     @if (!ViewBag.SameUser)
                     {
                         <p><a href="/Harag/Messages/Post/@Model.userId/@((int)MessageType.User)"><i class="fa fa-envelope-o"></i> مراسلة </a></p>
-
                     }
                     <hr />
-                        <p><a href="/Harag/User/@Model.UserName/Rates">مشاهدة كل التقييمات</a></p>
-                        <div class="col-xs-12" style="padding:0">
-                            <a href="/Harag/User/@Model.UserName/Rates" class="btn btn-default add"> <i class="fa fa-thumbs-o-up"></i> <span> @Model.UpRating </span> تقييم ايجابى</a>
-                            <a href="/Harag/User/@Model.UserName/Rates" class="btn btn-default add"> <i class="fa fa-thumbs-o-down" style="color:#d03333"></i> <span> @Model.DownRating </span> تقييم سلبى</a>
-                        </div>
-                        <hr />
-                        @if (!ViewBag.SameUser && ViewBag.CanRateOtherUsers)
-                        {
-                            <p><a href="/Harag/Rate/@Model.UserName"> <i class="fa fa-thumbs-o-up"></i> اضافة تقييم </a></p>
-                        }
 
-                        <hr />
-                        <p><i class="fa fa-user-o"></i> <span> @Model.FollowerCount </span> متابع </p>
-                        <hr />
-                        @if (!ViewBag.SameUser)
-                        {
-                            <button id="follow-user-js" class="btn btn-default add full" type="button"> متابعة >>  </button>
-                        }
+
+
+                    <p><a href="/Harag/User/@Model.UserName/Rates">مشاهدة كل التقييمات</a></p>
+                    <div class="col-xs-12" style="padding:0">
+                        <a href="/Harag/User/@Model.UserName/Rates" class="btn btn-default add"> <i class="fa fa-thumbs-o-up"></i> <span> @Model.UpRating </span> تقييم ايجابى</a>
+                        <a href="/Harag/User/@Model.UserName/Rates" class="btn btn-default add"> <i class="fa fa-thumbs-o-down" style="color:#d03333"></i> <span> @Model.DownRating </span> تقييم سلبى</a>
                     </div>
+                    <hr />
+                    @if (!ViewBag.SameUser && ViewBag.CanRateOtherUsers)
+                    {
+                        <p><a href="/Harag/Rate/@Model.UserName"> <i class="fa fa-thumbs-o-up"></i> اضافة تقييم </a></p>
+                    }
+
+
+                    <hr />
+                    
+                    <h4> عضو منذ @Model.MemberSinceDesc  </h4>
+                    <hr />
+                    <p><i class="fa fa-user-o"></i> <span> @Model.FollowerCount </span> متابع </p>
+                    <hr />
+                    @if (!ViewBag.SameUser)
+                    {
+                        <button id="follow-user-js" class="btn btn-default add full" type="button"> متابعة >>  </button>
+                    }
+                </div>
             </div>
             <div class="col-md-9">
                 <div id="posts" class="items">

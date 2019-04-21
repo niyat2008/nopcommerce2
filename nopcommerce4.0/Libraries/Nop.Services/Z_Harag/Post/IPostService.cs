@@ -53,6 +53,6 @@ namespace Nop.Services.Z_Harag.Post
         bool SetFeatured(int postId);
         bool CloseCommenting(int pid);
         bool openCommenting(int pid);
-
+        List<Z_Harag_Post> GetHaragOrders(PagingParams pagingParams);
     }
 }

@@ -244,10 +244,10 @@ namespace Nop.Web.Controllers.Harag
                 FollowerCount = _followRepository.GetFollowedUsers(result.Id).Count,
                 LastSeen = result.LastActivityDateUtc,
                 Posts = posts,
+                MemberSince = result.CreatedOnUtc,
                 userId = result.Id,
                 UserName = result.Username,
-                FullName = result.GetFullName()
-
+                FullName = result.GetFullName() 
             };
             return View("~/Themes/Pavilion/Views/Harag/Profile/MainProfile.cshtml", model);
         } 
@@ -448,6 +448,7 @@ namespace Nop.Web.Controllers.Harag
                 FollowerCount = _followRepository.GetFollowedUsers(result.Id).Count,
                 LastSeen = result.LastActivityDateUtc,
                 Posts = posts,
+                MemberSince = result.CreatedOnUtc,
                 userId = result.Id,
                 UserName = result.Username,
                 FullName = result.GetFullName()

@@ -11,8 +11,7 @@
         <div class="row">
             <div class="col-md-3">
                 
-                <div class="choices">
-                   
+                <div class="choices"> 
                 </div>
                 @Html.Partial("~/Themes/Pavilion/Views/Harag/Post/_CategoriesImagesGrid.cshtml")
             </div>
@@ -24,7 +23,7 @@
                     </div>
                     <div class="col-md-4">
                         <select id="select-city-js-ajax" class="form-control">
-                            <option>كل المدن</option>
+                            <option>جميع المدن</option>
                         </select>
                     </div>
                 </div>
@@ -153,9 +152,9 @@
 
          $.ajax({
             type: 'GET',
-            url: '@Url.RouteUrl("Harag.Post.GetHaragCities")',
-            complete: function (data) {
-                $("#select-city-js-ajax").html(data.responseText);
+            url: '@Url.RouteUrl("Harag.Post.GetHaragCities")?City=@ViewBag.City',
+             complete: function (data) {
+                 $("#select-city-js-ajax").append(data.responseText);
             }
         });
     });

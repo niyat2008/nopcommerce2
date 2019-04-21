@@ -132,14 +132,15 @@
             </div>
         }
         <div class="attribute-squares-wrapper"></div>
-        <h2 class="product-title">
-            <a href="@Url.RouteUrl("Product", new { SeName = Model.SeName })">@Model.Name</a>
-        </h2>
+        <div class="product-title"  style="font-size: 30px; font-weight: bold; height: auto !important; ">
+            <a style="font-size: 30px; font-weight: bold" href="@Url.RouteUrl("Product", new { SeName = Model.SeName })">@Model.Name</a>
+        </div>
         @if (catalogSettings.ShowSkuOnCatalogPages && !string.IsNullOrEmpty(Model.Sku))
         {
             <div class="sku">
                 @Model.Sku
             </div>
+            //amsfci
         }
         <div class="add-info">
             @await Component.InvokeAsync("Widget", new { widgetZone = "productbox_addinfo_before", additionalData = Model.Id })
@@ -186,10 +187,10 @@
                 {
                     <input type="button" value="@T("ShoppingCart.AddToCompareList")" title="@T("ShoppingCart.AddToCompareList")" class="button-2 add-to-compare-list-button" onclick="AjaxCart.addproducttocomparelist('@addtocomparelink');return false;" />
                 }*@
-                @if (!Model.ProductPrice.DisableWishlistButton)
+                @*@if (!Model.ProductPrice.DisableWishlistButton)
                 {
                     <input type="button" value="@T("ShoppingCart.AddToWishlist")" title="@T("ShoppingCart.AddToWishlist")" class="button-2 add-to-wishlist-button" onclick="AjaxCart.addproducttocart_catalog('@addtowishlistlink');return false;" />
-                }
+                }*@
             </div>
             @*@if (Model.IsRegistered)
                 {*@

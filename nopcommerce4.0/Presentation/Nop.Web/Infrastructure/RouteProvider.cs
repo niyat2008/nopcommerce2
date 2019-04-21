@@ -146,6 +146,8 @@ new { controller = "Post", action = "GetHaragMobileNavbar" });
             routeBuilder.MapRoute("Harag.Comment.GetAllPostCommentsAjax", "Harag/AllCommentsAjax/{pageNo?}",
             new { controller = "Comment", action = "GetAllPostComments" });
 
+      
+
             //  Harag Comment  
             routeBuilder.MapRoute("Harag.Comment.AddHaragComment", "Harag/AddComment",
             new { controller = "Comment", action = "AddHaragComment" });
@@ -321,9 +323,14 @@ new { controller = "Post", action = "GetHaragMobileNavbar" });
 
             routeBuilder.MapRoute("Harag.Notification.NotificationsCount", "Harag/Notifications/Unseen",
             new { controller = "Notification", action = "NotificationsCount" });
-            
 
 
+            ////////
+            // Orders 
+            /////////
+            // Harag Orders
+            routeBuilder.MapRoute("Harag.Post.GetAllOrders", "Harag/Orders",
+            new { controller = "Post", action = "GetAllOrders" });
 
 
             // ------------------------ Consultant ------------------------- 

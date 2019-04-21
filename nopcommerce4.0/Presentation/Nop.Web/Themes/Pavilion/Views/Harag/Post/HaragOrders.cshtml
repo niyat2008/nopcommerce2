@@ -1,0 +1,132 @@
+﻿@using Nop.Web.Models.Harag.Post;
+@model PostOutputModel
+
+@{
+    Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
+
+} 
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div>
+                    <select id="search-category-js-ajax" class="form-control"></select>
+                    <select id="search-city-js-ajax" class="form-control"></select>
+                    <button id="search-cat-city-js" class="btn btn-default srchBtn" type="button"><i class="fa fa-search"></i></button>
+                </div>
+                <hr>
+
+                @Html.Partial("~/Themes/Pavilion/Views/Harag/Post/_CategoriesImagesGrid.cshtml")
+            </div>
+            <div class="col-md-9">
+                <h1 style="margin: 0;">الطلبات</h1> 
+                <!-- List -->
+                <div id="posts" class="items">
+
+                    @if (Model.Items.Count() <= 0)
+                    {
+                    <div id="tabpanelPosts" style="text-align:center"><b>لا يوجد</b></div>
+                    }
+                    else
+                    {
+                    @foreach (var post in Model.Items)
+                        {
+                    <div class="item">
+                        <div class="det">
+                            <a href="/Harag/Post/@post.Id"><h3>@post.Title</h3></a>
+                            <div class="ro w">
+                                <div class="col-md-6">
+                                    @if (post.IsFeatured)
+                                            {
+                                    <div class="row"><span><i class="fa fa-star"></i></span></div>
+                                            }
+                                    <div class="row">
+                                        <a href="/Harag/City/@post.City">
+                                            <span><i class="fa fa-map-marker"></i> @post.City </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row"> <strong>@post.DateDescription</strong></div>
+                                    <div class="row">
+                                        <a href="/Harag/User/@post.PostOwner">
+                                            <span><i class="fa fa-user"></i> @post.PostOwnerFullName </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="det-det"> 
+                            </div> 
+                        </div>
+                        <div class="det-img">
+                            @if (!String.IsNullOrEmpty(post.Photo))
+                                    {
+                            <img src="/HaragApi/Uploads/Images/@post.Photo">
+                                    }
+
+                        </div>
+                    </div>
+                        }
+                    }
+                </div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+       
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetAllHaragPostsAjax")',
+            complete: function (data) {
+                // $("#posts").html(data.responseText);
+
+            }
+        });
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetCategories")',
+            complete: function (data) {
+                $("#category-js-ajax").html(data.responseText);
+            }
+        });
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetCategories")',
+            complete: function (data) {
+                $("#search-category-js-ajax").html(data.responseText);
+            }
+        });
+
+         $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.Post.GetHaragCities")',
+            complete: function (data) {
+                $("#search-city-js-ajax").html(data.responseText);
+                $("#select-city-js-ajax").html(data.responseText);
+            }
+        });
+    });
+
+    $("#search-cat-city-js").on('click', function () {
+        var cityId = $("#search-city-js-ajax option:selected").val();
+        var catId = $("#search-category-js-ajax option:selected").val();
+
+         $.ajax({
+             type: 'GET',
+             url: '/Harag/HaragSearchCatCity/' + catId + '/' + cityId,
+            complete: function (data) {
+                $("#posts").html(data.responseText);
+            }
+        });
+    });
+
+</script>
+

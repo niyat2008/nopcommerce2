@@ -5,7 +5,7 @@
         @foreach (var tab in Model.Tabs)
         {
             <li class="tab" data-tabId="@tab.Id" notloaded>
-                <span>@tab.Title</span>
+                <span>@tab.Title </span>
             </li>
         }
     </ul>
@@ -33,7 +33,10 @@
                     @foreach (var subcategory in Model.SubCategories)
                     {
                         <li>
-                            <a href="@Url.RouteUrl("Category", new {SeName = subcategory.SeName})" title="@subcategory.Name">@subcategory.Name</a>
+                            <a href="@Url.RouteUrl("Category", new {SeName = subcategory.SeName})" title="@subcategory.Name">
+                                <img src="@Model.PictureModel.FullSizeImageUrl" alt="@Model.PictureModel.Title" />
+                                @subcategory.Name
+                            </a>
                         </li>
                     }
                     @if (Model.DisplayViewAllSubcategoriesLink)

@@ -35,14 +35,14 @@ namespace Nop.Web.Models.Harag.Message
 
             var diff = DateTime.Now - dateCreated;
 
-            int s = (int)diff.TotalMilliseconds / 1000;
+            long s = (long)diff.TotalMilliseconds / 1000;
 
 
-            int m = 0;
-            int h = 0;
-            int d = 0;
-            int mo = 0;
-            int y = 0;
+            long m = 0;
+            long h = 0;
+            long d = 0;
+            long mo = 0;
+            long y = 0;
 
             if (s < 60)
             {

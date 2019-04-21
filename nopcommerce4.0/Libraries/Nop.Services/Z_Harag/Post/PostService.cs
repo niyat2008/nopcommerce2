@@ -935,6 +935,22 @@ namespace Nop.Services.Z_Harag.Post
 
             return false;
         }
+
+        public List<Z_Harag_Post> GetHaragOrders(PagingParams pagingParams)
+        {
+            var query = _postRepository.TableNoTracking
+           .Include(m => m.Category)
+           .Include(m => m.Customer)
+           .Include(m => m.City)
+           .Include(m => m.Z_Harag_Photo)
+           .Include(m => m.Z_Harag_Comment)
+           .Where(c => c.IsOrder == true && c.IsDeleted == false)
+           .OrderByDescending(mbox => mbox.DateUpdated)
+           .Skip(pagingParams.PageNumber * pagingParams.PageSize)
+           .Take(pagingParams.PageSize).ToList();
+
+            return query;
+        }
         #endregion
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Nop.Web.Framework.Mvc.Models;
+using Nop.Web.Helpers;
 using Nop.Web.Models.Harag.Post;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,9 @@ namespace Nop.Web.Models.Harag.Profile
 
         public List<PostModel> Posts { get; set; }
         public string FullName { get;  set; }
+        public DateTime MemberSince { get; internal set; }
+
+        public string LastSeenDesc { get { return TimeString.Instance.GetDateDescrition(this.LastSeen);  } set { } }
+        public string MemberSinceDesc { get { return TimeString.Instance.GetDateDescrition(this.MemberSince); } }
     }
 }

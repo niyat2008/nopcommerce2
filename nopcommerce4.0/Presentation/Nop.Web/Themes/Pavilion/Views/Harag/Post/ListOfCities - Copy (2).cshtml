@@ -1,0 +1,14 @@
+﻿@using Nop.Web.Models.Harag.Post;
+@model List<CityOutputModel>
+
+
+ 
+    <option selected disabled
+            value="0">
+        اختر المدينه
+    </option>
+    @foreach (var SubCat in Model)
+    {
+
+    <option value="@SubCat.Id">@SubCat.Name</option>
+    } 

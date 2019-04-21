@@ -318,6 +318,14 @@
                         .remove-item {
                             border: 0px aliceblue solid;
                         }
+
+                        .IncludedInShipping {
+                            border: #f86000 1px solid;
+                            background: antiquewhite;
+                            padding: 20px;
+                            border-radius: 5px;
+                            font-size: 20px;
+                        }
                     </style>
                     <div class="cart-options">
                         @if (Model.IsEditable)
@@ -327,12 +335,12 @@
                                 <input type="submit" name="continueshopping" value="@T("ShoppingCart.ContinueShopping")" class="button-2 continue-shopping-button" />
                             </div>
                         }
-                        @if (Model.CheckoutAttributes.Count > 0)
+                        @*@if (Model.CheckoutAttributes.Count > 0)
                         {
                             @await Component.InvokeAsync("SelectedCheckoutAttributes")
-                        }
+                        }*@
                     </div>
-
+                    
 
                     @{
                         double allSubTotal = 0;
@@ -343,7 +351,7 @@
 
                     }
 
-                    <div class="IncludedInShipping" style="width:100%;float:left;margin-bottom:1%;clear:both;font-size: 20px">
+                    <div class="IncludedInShipping  " style="width:100%;float:left;margin-bottom:1%;clear:both;font-size: 20px">
                         @if (allSubTotal < 500)
                         {
                             <label style="font-size: 20px; " class="info">@T("Checkout.AddProductsMoreThan")</label>

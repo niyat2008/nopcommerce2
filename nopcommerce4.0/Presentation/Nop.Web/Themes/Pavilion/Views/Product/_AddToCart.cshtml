@@ -27,51 +27,8 @@
         @if (!Model.DisableBuyButton)
         {
             <div class="add-to-cart-panel">
-                <label asp-for="EnteredQuantity" asp-postfix=":" class="qty-label"></label>
-                @if (Model.AllowedQuantities.Count > 0)
-                {
-                    <select asp-for="EnteredQuantity" asp-items="Model.AllowedQuantities" class="qty-dropdown"></select>
-                }
-                else
-                {
-                    <div>
-                        <input asp-for="EnteredQuantity" class="qty-input" type="text" />
 
-                        <span id="@(Html.IdFor(model => model.EnteredQuantity) + "p")" class="k-plus">+</span>
-                        <span id="@(Html.IdFor(model => model.EnteredQuantity) + "m")" class="k-minus">-</span>
-                    </div>
                 
-                    //when a customer clicks 'Enter' button we submit the "add to cart" button (if visible)
-                    <script type="text/javascript" asp-location="Footer">
-                        $(document).ready(function() {
-                            $("#@Html.IdFor(model => model.EnteredQuantity)").keydown(function(event) {
-                                if (event.keyCode == 13) {
-                                    $("#add-to-cart-button-@Model.ProductId").click();
-                                    return false;
-                                }
-                            });
-
-                            $("#@Html.IdFor(model => model.EnteredQuantity)" + "p").click(function (event) { 
-                                
-                                $("#@Html.IdFor(model => model.EnteredQuantity)").val(
-                                    parseInt($("#@Html.IdFor(model => model.EnteredQuantity)").val()) + 1);
-                                    //$("#add-to-cart-button-@Model.ProductId").click();
-                                        return false;
-                            });
-
-                            $("#@Html.IdFor(model => model.EnteredQuantity)" + "m").click(function (event) {
-                                if (parseInt($("#@Html.IdFor(model => model.EnteredQuantity)").val()) > 0){
-                                      $("#@Html.IdFor(model => model.EnteredQuantity)").val(
-                                        parseInt($("#@Html.IdFor(model => model.EnteredQuantity)").val()) - 1);
-
-                                    //$("#add-to-cart-button-@Model.ProductId").click();
-                                    return false;
-                                }
-                            });
-
-                        });
-                    </script>
-                }
                 @{
                     var addToCartText = "";
                     if (Model.UpdatedShoppingCartItemId > 0 && Model.UpdateShoppingCartItemType.HasValue && Model.UpdateShoppingCartItemType.Value == ShoppingCartType.ShoppingCart)
@@ -90,7 +47,53 @@
                             addToCartText = T("ShoppingCart.PreOrder").Text;
                         }
                     }
-                    <input type="button" id="add-to-cart-button-@Model.ProductId" class="button-1 add-to-cart-button" value="@addToCartText" data-productid="@Model.ProductId" onclick="AjaxCart.addproducttocart_details('@Url.RouteUrl("AddProductToCart-Details", new {productId = Model.ProductId, shoppingCartTypeId = (int) ShoppingCartType.ShoppingCart})', '#product-details-form');return false;"/>
+
+                    <label asp-for="EnteredQuantity" asp-postfix=":" class="qty-label"></label>
+                    @if (Model.AllowedQuantities.Count > 0)
+                    {
+                        <select asp-for="EnteredQuantity" asp-items="Model.AllowedQuantities" class="qty-dropdown"></select>
+                    }
+                    else
+                    {
+                        <div>
+                            <input asp-for="EnteredQuantity" class="qty-input" type="text" />
+
+                            <span id="@(Html.IdFor(model => model.EnteredQuantity) + "p")" class="k-plus">+</span>
+                            <span id="@(Html.IdFor(model => model.EnteredQuantity) + "m")" class="k-minus">-</span>
+                        </div>
+
+                        //when a customer clicks 'Enter' button we submit the "add to cart" button (if visible)
+                        <script type="text/javascript" asp-location="Footer">
+                        $(document).ready(function() {
+                            $("#@Html.IdFor(model => model.EnteredQuantity)").keydown(function(event) {
+                                if (event.keyCode == 13) {
+                                    $("#add-to-cart-button-@Model.ProductId").click();
+                                    return false;
+                                }
+                            });
+
+                            $("#@Html.IdFor(model => model.EnteredQuantity)" + "p").click(function (event) {
+
+                                $("#@Html.IdFor(model => model.EnteredQuantity)").val(
+                                    parseInt($("#@Html.IdFor(model => model.EnteredQuantity)").val()) + 1);
+                                    //$("#add-to-cart-button-@Model.ProductId").click();
+                                        return false;
+                            });
+
+                            $("#@Html.IdFor(model => model.EnteredQuantity)" + "m").click(function (event) {
+                                if (parseInt($("#@Html.IdFor(model => model.EnteredQuantity)").val()) > 0){
+                                      $("#@Html.IdFor(model => model.EnteredQuantity)").val(
+                                        parseInt($("#@Html.IdFor(model => model.EnteredQuantity)").val()) - 1);
+
+                                    //$("#add-to-cart-button-@Model.ProductId").click();
+                                    return false;
+                                }
+                            }); 
+                        });
+                        </script>
+                    }
+
+                    <input type="button" id="add-to-cart-button-@Model.ProductId" class="button-1 add-to-cart-button" value="@addToCartText" data-productid="@Model.ProductId" onclick="AjaxCart.addproducttocart_details('@Url.RouteUrl("AddProductToCart-Details", new {productId = Model.ProductId, shoppingCartTypeId = (int) ShoppingCartType.ShoppingCart})', '#product-details-form');return false;" />
                 }
             </div>
         }

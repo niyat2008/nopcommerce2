@@ -358,6 +358,15 @@
     <Content Update="Themes\Pavilion\Views\Harag\Post\AddCustomerServiceMessage.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\HaragOrders.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\ListOfCities - Copy %282%29.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\ListOfCities - Copy.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Post\UpdatePost.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
