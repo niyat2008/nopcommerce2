@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -188,6 +190,7 @@ namespace Nop.Web.Factories
             {
                 foreach (var option in activeOptions)
                 {
+                    // amsfci
                     var currentPageUrl = _webHelper.GetThisPageUrl(true);
                     var sortUrl = _webHelper.ModifyQueryString(currentPageUrl, "orderby=" + (option.Key).ToString(), null);
                     var sortValue = ((ProductSortingEnum)option.Key).GetLocalizedEnum(_localizationService, _workContext);
@@ -940,13 +943,18 @@ namespace Nop.Web.Factories
 
                 foreach (var manufacturer in manufacturers)
                 {
+
+                    var manfPicture = Convert.ToBase64String(_pictureService.GetPictureById(manufacturer.PictureId).PictureBinary);
+
+
                     var modelMan = new ManufacturerBriefInfoModel
-                    {
+                    {// amsfci
                         Id = manufacturer.Id,
                         Name = manufacturer.GetLocalized(x => x.Name),
                         SeName = manufacturer.GetSeName(),
                         IsActive = currentManufacturer != null && currentManufacturer.Id == manufacturer.Id,
-                        
+                        ImageUrl = manfPicture
+
                     };
                     model.Manufacturers.Add(modelMan);
                 }

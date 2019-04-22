@@ -79,7 +79,16 @@ namespace Nop.Plugin.Payments.CashOnDelivery
             //you can put any logic here
             //for example, hide this payment method if all products in the cart are downloadable
             //or hide this payment method if current customer is from certain country
-            return _cashOnDeliveryPaymentSettings.ShippableProductRequired && !cart.RequiresShipping();
+            // amsfcii
+
+            int maxValue = 5000; 
+            var result =(cart.OrderTotal > 5000) && _cashOnDeliveryPaymentSettings.ShippableProductRequired && !cart.RequiresShipping();
+            if (result)
+            {
+                return true;
+            }
+
+            return false; 
         }
 
         /// <summary>

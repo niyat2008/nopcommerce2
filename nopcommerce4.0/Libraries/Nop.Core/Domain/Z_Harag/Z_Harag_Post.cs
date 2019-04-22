@@ -31,6 +31,7 @@ namespace Nop.Core.Domain.Z_Harag
         public Nullable<int> NeighborhoodId { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
+        public string Tags { get; set; }
         public string PaymentMethod { get; set; }
         public string Contact { get; set; }
         //public Nullable<int> Rate { get; set; }

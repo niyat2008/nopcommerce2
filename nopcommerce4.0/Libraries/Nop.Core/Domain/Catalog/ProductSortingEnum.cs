@@ -1,4 +1,6 @@
-﻿namespace Nop.Core.Domain.Catalog
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Nop.Core.Domain.Catalog
 {
     /// <summary>
     /// Represents the product sorting
@@ -36,6 +38,7 @@
         /// <summary>
         /// Newst 
         /// </summary>
+        [Display(Name = "الاحدث")]
         Newest = 20,
         /// <summary>
         /// Rating 

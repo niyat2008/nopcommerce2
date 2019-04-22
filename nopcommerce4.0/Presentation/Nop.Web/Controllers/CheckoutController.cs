@@ -163,11 +163,13 @@ namespace Nop.Web.Controllers
 
             //if we have only "button" payment methods available (displayed onthe shopping cart page, not during checkout),
             //then we should allow standard checkout
+            // amsfci
             //all payment methods (do not filter by country here as it could be not specified yet)
             var paymentMethods = _paymentService
                 .LoadActivePaymentMethods(_workContext.CurrentCustomer, _storeContext.CurrentStore.Id)
                 .Where(pm => !pm.HidePaymentMethod(cart))
                 .ToList();
+             
             //payment methods displayed during checkout (not with "Button" type)
             var nonButtonPaymentMethods = paymentMethods
                 .Where(pm => pm.PaymentMethodType != PaymentMethodType.Button)

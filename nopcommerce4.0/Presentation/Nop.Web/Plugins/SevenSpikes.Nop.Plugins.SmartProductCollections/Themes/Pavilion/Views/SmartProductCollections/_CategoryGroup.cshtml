@@ -4,8 +4,8 @@
     <ul class="navigation">
         @foreach (var tab in Model.Tabs)
         {
-            <li class="tab" data-tabId="@tab.Id" notloaded>
-                <span>@tab.Title </span>
+            <li class="tab"  data-tabId="@tab.Id" notloaded>
+                <span style="font-size: 21px;">@tab.Title </span>
             </li>
         }
     </ul>
@@ -13,9 +13,10 @@
 
     <ul class="" style="float: inline-start;">
          
-        <li class="tab">
-            <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">@Model.Name</a>
-            <span>@tab.Title </span>
+        <li class="tab" style="background-color: #3e874b; color: white; font-size: 44px;"  notloaded> 
+            <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">
+                <span style="font-size: 21px;">@Model.Name</span>
+            </a>
         </li>
         
     </ul>

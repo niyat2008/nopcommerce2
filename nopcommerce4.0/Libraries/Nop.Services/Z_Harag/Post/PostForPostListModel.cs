@@ -26,6 +26,6 @@ namespace Nop.Services.Z_Harag.Post
         public bool IsOrder { get; set; }
         public double Lat { get; set; }
 
-
+        public string Tags { get; set; }
     }
 }

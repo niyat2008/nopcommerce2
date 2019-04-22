@@ -72,6 +72,7 @@
             <div class="col-md-6">
                 <label>نص الاعلان</label> <br>
                 @Html.TextAreaFor(m => m.Text, new { id = "Text-js-ajax", @class = "form-control txtArea", required = "required", rows = "7", placeholder = "نص الاعلان" })
+                @Html.TextBoxFor(m => m.Tags, new { id = "Tags-js-ajax", @class = "form-control", disabled="disabled" , placeholder = "وسوم الاعلان" })
 
             </div>
 
@@ -137,7 +138,41 @@
 
         });
 
+    $('#city-js-ajax').change(function () {
+        var city = $(this).find('option:selected').text();
+        var cat = $("#CategoryId-js-ajax").find('option:selected').text();
+        var tag = setTags(cat, city);
 
+        $('#Tags-js-ajax').val(tag);
+    });
+
+    $('#CategoryId-js-ajax').change(function () {
+        var cat = $(this).find('option:selected').text();
+        var city = $("#city-js-ajax").find('option:selected').text();
+        var tag = setTags(cat, city);
+
+        $('#Tags-js-ajax').val(tag);
+    });
+
+
+    function setTags(cat, city) {
+        var tag = '';
+
+        if (city === '' && cat === '') {
+            tag = 'قسم غير مصنف'
+        }
+
+        else if (city === '' && cat !== '') {
+            tag = 'قسم ' + cat;
+        }
+        else if (city !== '' && cat === '') {
+            tag = 'قسم غير مصنف في  ' + city;
+        }
+        else if (city !== '' && cat !== '') {
+            tag = cat + ' في ' + city;
+        }
+        return tag;
+    }
     $.ajax({
         cache: false,
         type: "GET",

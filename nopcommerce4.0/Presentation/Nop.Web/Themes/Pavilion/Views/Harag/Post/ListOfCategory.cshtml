@@ -3,13 +3,11 @@
 
 <div class="select">
     <select class="form-control" formControlName="categoryId">
-        <option selected disabled value="" style="color:#fff">اختر التصنيف</option>
+        <option disabled value="" style="color:#fff">اختر التصنيف</option>
 
         @foreach (var cat in Model.Items)
         {
-            <option  value="@cat.Id">
-                @cat.Name
-            </option>
+            <option  value="@cat.Id">@cat.Name</option>
         }
 
 

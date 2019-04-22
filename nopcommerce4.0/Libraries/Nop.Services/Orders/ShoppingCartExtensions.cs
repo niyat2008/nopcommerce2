@@ -44,6 +44,21 @@ namespace Nop.Services.Orders
         }
 
         /// <summary>
+        /// Gets a number of product in the cart
+        /// </summary>
+        /// <param name="shoppingCart">Shopping cart</param>
+        /// <returns>Result</returns> amsfcii
+        public static double GetTotalAmountProducts(this IList<ShoppingCartItem> shoppingCart)
+        {
+            var result = 0.0d;
+            foreach (var sci in shoppingCart)
+            {
+                result += sci.Quantity * (double)sci.Product.Price;
+            }
+            return result;
+        }
+
+        /// <summary>
         /// Gets a value indicating whether shopping cart is recurring
         /// </summary>
         /// <param name="shoppingCart">Shopping cart</param>
