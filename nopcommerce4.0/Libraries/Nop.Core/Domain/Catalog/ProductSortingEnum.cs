@@ -29,5 +29,17 @@
         /// Product creation date
         /// </summary>
         CreatedOn = 15,
+        /// <summary>
+        /// BestSeller sorting
+        /// </summary>
+        BestSeller = 18,
+        /// <summary>
+        /// Newst 
+        /// </summary>
+        Newest = 20,
+        /// <summary>
+        /// Rating 
+        /// </summary>
+        MostRating = 21,
     }
 }

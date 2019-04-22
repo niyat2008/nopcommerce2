@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Nop.Core;
 using Nop.Core.Caching;
@@ -17,6 +18,7 @@ using Nop.Services.Customers;
 using Nop.Services.Events;
 using Nop.Services.Localization;
 using Nop.Services.Messages;
+using Nop.Services.Orders;
 using Nop.Services.Security;
 using Nop.Services.Stores;
 
@@ -72,6 +74,10 @@ namespace Nop.Services.Catalog
         private readonly IEventPublisher _eventPublisher;
         private readonly IAclService _aclService;
         private readonly IStoreMappingService _storeMappingService;
+        private readonly IOrderReportService _orderReportService;
+
+
+        
 
         #endregion
 
@@ -133,7 +139,7 @@ namespace Nop.Services.Catalog
             CatalogSettings catalogSettings,
             IEventPublisher eventPublisher,
             IAclService aclService,
-            IStoreMappingService storeMappingService)
+            IStoreMappingService storeMappingService, IOrderReportService orderReportService)
         {
             this._cacheManager = cacheManager;
             this._productRepository = productRepository;
@@ -162,6 +168,7 @@ namespace Nop.Services.Catalog
             this._eventPublisher = eventPublisher;
             this._aclService = aclService;
             this._storeMappingService = storeMappingService;
+            this._orderReportService = orderReportService;
         }
 
         #endregion
@@ -461,16 +468,40 @@ namespace Nop.Services.Catalog
                 //creation date
                 query = query.OrderByDescending(p => p.CreatedOnUtc);
             }
+
+            // amsfci 
+            else if (orderBy == ProductSortingEnum.MostRating)
+            {
+                //creation date
+                query = query.OrderByDescending(p => p.ApprovedRatingSum);
+            }
+            else if (orderBy == ProductSortingEnum.Newest)
+            {
+                //creation date
+                query = query.OrderByDescending(p => p.CreatedOnUtc);
+            }
             else
             {
                 //actually this code is not reachable
                 query = query.OrderBy(p => p.Name);
             }
 
-            var products = new PagedList<Product>(query, pageIndex, pageSize);
+            // amsfci 
+            if (orderBy == ProductSortingEnum.BestSeller)
+            {
+                var bestSellerPorduct = _orderReportService.BestSellersReport().OrderByDescending(m => m.TotalQuantity);
+                var queryBest = bestSellerPorduct.Select(m => _productRepository.GetById(m.ProductId)).AsQueryable();
+                var products = new PagedList<Product>(queryBest, pageIndex, pageSize);
+                return products;
+            }
+            else
+            {
+                var products = new PagedList<Product>(query, pageIndex, pageSize);
+                return products;
+            }
 
             //return products
-            return products;
+           
         }
 
         /// <summary>

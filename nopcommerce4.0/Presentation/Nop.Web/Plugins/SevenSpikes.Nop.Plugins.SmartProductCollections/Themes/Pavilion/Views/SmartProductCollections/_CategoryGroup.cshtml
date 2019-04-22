@@ -9,13 +9,24 @@
             </li>
         }
     </ul>
+
+
+    <ul class="" style="float: inline-start;">
+         
+        <li class="tab">
+            <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">@Model.Name</a>
+            <span>@tab.Title </span>
+        </li>
+        
+    </ul>
+
 </div>
 
 <div class="spc-body">
     <div class="category-info">
-        <h2 class="category-title">
+        @*<h2 class="category-title">
             <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">@Model.Name</a>
-        </h2>
+        </h2>*@
 
         <div class="mobile-navigation category-mobile-navigation">
             <select class="category-mobile-navigation-select">
@@ -26,7 +37,7 @@
             </select>
         </div>
 
-        @if (Model.SubCategories.Count > 0)
+        @*@if (Model.SubCategories.Count > 0)
         {
             <div class="category-details" style="background-color:rgba(0, 0, 0,.4); color:white;font-size:larger;font-weight:bolder;">
                 <h2 class="category-inner-title">
@@ -47,7 +58,7 @@
                     }
                 </ul>
             </div>
-        }
+        }*@
         <div class="category-picture">
             <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">
                 <img src="@Model.PictureModel.FullSizeImageUrl" alt="@Model.PictureModel.Title" />
