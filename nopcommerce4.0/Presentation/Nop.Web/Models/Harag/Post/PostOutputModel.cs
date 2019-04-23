@@ -11,5 +11,6 @@ namespace Nop.Web.Models.Harag.Post
         public PagingHeader Paging { get; set; }
         public List<LinkInfo> Links { get; set; }
         public List<PostModel> Items { get; set; }
+        public List<string> Tags { get; set; }
     }
 }

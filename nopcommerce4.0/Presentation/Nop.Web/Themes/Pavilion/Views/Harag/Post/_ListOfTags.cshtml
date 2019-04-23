@@ -1,0 +1,17 @@
+﻿@model List<string>
+  
+@{ 
+      Layout = null;
+  }
+
+<br />
+@foreach(var r in Model.ToList())
+{
+    <ul>
+        <li>
+            <a style="font-size: 24px"  href="/Harag/tag/@r"> @r</a>
+        </li>
+    </ul> 
+}
+<br /> 
+ 

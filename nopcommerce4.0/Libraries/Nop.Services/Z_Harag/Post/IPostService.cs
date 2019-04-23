@@ -17,7 +17,8 @@ namespace Nop.Services.Z_Harag.Post
         bool IsDisplayed(int postId); 
         Z_Harag_Post AddNewPost(PostForPostListModel postForPostModel, int currentUserId, IList<string> files, List<string> errors);
         Z_Harag_Post UpdatePost(PostForPostListModel postForPostModel, int currentUserId, IList<string> files, List<string> errors);
-
+        List<Z_Harag_Post> GetTagsPost(PagingParams pagingParams, string tag);
+        List<string> GetTagsList(PagingParams pagingParams);
         List<Z_Harag_Post> GetFeaturedPosts( PagingParams pagingParams);
         // get Cities
         List<City> GetCities();

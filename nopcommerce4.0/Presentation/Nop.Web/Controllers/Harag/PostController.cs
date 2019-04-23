@@ -343,7 +343,7 @@ namespace Nop.Web.Controllers.Harag
         }
 
         [HttpGet]
-        public IActionResult HaragAddPost()
+        public IActionResult HaragAddPost(int t =0, int a =0)
         {
 
             if (_workContext.CurrentCustomer.IsRegistered())
@@ -355,16 +355,28 @@ namespace Nop.Web.Controllers.Harag
                 else if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
                     ViewBag.UserRole = RolesType.Registered;
 
-                if (_postService.CanAddNewPost(_workContext.CurrentCustomer.Id))
+                if (t == 0 && a ==0 )
+                { 
+                    return View("~/Themes/Pavilion/Views/Harag/Post/PostTypeBeforeAddPost.cshtml");
+                }
+                else if (t != 0 && a ==0)
                 {
-                    ViewBag.CanAddNewPost = true;
+                    ViewBag.IsOrder = t;
+                    return View("~/Themes/Pavilion/Views/Harag/Post/AgreementBeforeAddPost.cshtml");
                 }
                 else
                 {
-                    ViewBag.CanAddNewPost = false;
-                }
-
-                return View("~/Themes/Pavilion/Views/Harag/Post/AddPost.cshtml", new PostForPostListModel());
+                    ViewBag.IsOrder = (t == 1 ? true : false);
+                    if (_postService.CanAddNewPost(_workContext.CurrentCustomer.Id))
+                    {
+                        ViewBag.CanAddNewPost = true;
+                    }
+                    else
+                    {
+                        ViewBag.CanAddNewPost = false;
+                    }
+                    return View("~/Themes/Pavilion/Views/Harag/Post/AddPost.cshtml", new PostForPostListModel());
+                }  
             }
             else
             {
@@ -641,6 +653,49 @@ namespace Nop.Web.Controllers.Harag
             return View("~/Themes/Pavilion/Views/Harag/Post/ListOfCategory.cshtml", categoriesOutput);
         }
         //#region methods
+        [HttpGet]
+        public IActionResult GetHaragTagsList()
+        {
+            var tags = _postService.GetTagsList(PagingParams);
+            return View("~/Themes/Pavilion/Views/Harag/Post/_ListOfTags.cshtml", tags);
+        }
+
+        [HttpGet]
+        public IActionResult GetHaragTagsPosts(string tag)
+        {
+            var tagPosts = _postService.GetTagsPost(PagingParams, tag);
+
+            var modelOutput = new Models.Harag.Post.PostOutputModel();
+
+            if (tagPosts.Count > 0)
+            {
+                ViewBag.City = tagPosts[0].CityId; 
+            }
+
+            ViewBag.Title = tag;
+
+
+            modelOutput.Items = tagPosts.Select(p => new Models.Harag.Post.PostModel
+            {
+                CategoryId = p.CategoryId,
+                CategoryName = p.Category.Name,
+                Text = p.Text,
+                Id = p.Id,
+                Title = p.Title,
+                City = p.City.ArName,
+                DateCreated = p.DateCreated,
+                Photo = p.Z_Harag_Photo.Select(ppp => ppp.Url).FirstOrDefault(),
+                DateUpdated = p.DateUpdated,
+                IsFeatured = (bool)p.IsFeatured,
+                CommentsCount = (int)p.Z_Harag_Comment?.Count,
+                IsDispayed = p.IsDispayed,
+                PostOwner = p.Customer.Username,
+                PostOwnerFullName = p.Customer.GetFullName()
+            }).ToList();
+
+            return View("~/Themes/Pavilion/Views/Harag/Post/PostsForSearch.cshtml", modelOutput);
+
+        }
 
         [HttpGet]
         public IActionResult GetHaragPost(int PostId)
@@ -705,6 +760,7 @@ namespace Nop.Web.Controllers.Harag
                     IsDispayed = post.IsDispayed,
                     IsFeatured = (bool)post.IsFeatured,
                     IsCommentingClosed = post.IsCommentingClosed,
+                    Tags = post.Tags,
                     PostOwner = post.Customer.Username,
                     PostOwnerFullName = post.Customer.GetFullName(),
                     RelatedPosts = relatedPosts.Select(m => new Models.Harag.Post.PostModel

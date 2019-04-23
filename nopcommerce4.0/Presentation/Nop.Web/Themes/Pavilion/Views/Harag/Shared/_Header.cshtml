@@ -489,6 +489,13 @@
         window.location.href = '@Url.RouteUrl("Harag.Home")';
     }
 
+     $.ajax({
+            type: 'GET',
+            url: '@Url.RouteUrl("Harag.HaragTagsList")',
+             complete: function (data) {
+                 $("#tags-js").html(data.responseText);
+            }
+    });
 
     $("#search-js").on('click', function () {
         var Term = $("#searchText").val();

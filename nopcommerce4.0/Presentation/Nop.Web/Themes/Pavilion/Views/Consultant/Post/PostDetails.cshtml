@@ -167,7 +167,7 @@
         @*<span> <span id="CategoryNameSpan">@Model.CategoryName</span>  / <span id="SubCategoryNameSpan">@Model.SubCategoryName</span> </span>*@
         @if (!Model.IsClosed && (Model.IsAnswered || Model.IsReserved) && ViewBag.UserRole == "Consultant")
         {
-
+            
             <button id="Ahmed" onclick="changeCatAndSub()" class="btndarckgreen"> تعديل </button>
         }
         @*onclick="changeCatAndSub()"*@
@@ -589,13 +589,10 @@
     var Files = [];
 
     function addCommentConsultant() {
-        var Text = $("#CommentText-consult").val();
+        var Text = $("#CommentText-consult").val() + ' ';
 
-        if (Text === null || Text === '') {
-            alert("فضلا قم بكتابة التعليق اولا");
-        }
-        else if (!Text.replace(/\s/g, '').length) {
-            alert("فضلا قم بكتابة التعليق اولا");
+        if ((Text === null || Text === '') && Files.length == 0) {
+            alert("  فضلا قم بكتابة التعليق او اضافه صوره");
         }
         else {
 

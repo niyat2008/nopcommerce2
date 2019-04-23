@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
+}
+
+<!-- Content -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 cont">
+                <h2>اختر نوع الاعلان</h2> <br /> 
+
+                        <form class="commission">
+                            <input type="radio" id="tno" value="false" checked="checked"  name="t"/> <a href="/Harag/Post/New?t=2">عرض سلعه</a>
+                            <input type="radio" id="to" value="true" name="t" /> <a href="/Harag/Post/New?t=1">طلب سلعه</a> 
+                        </form>
+                        
+                <div> 
+                    <a class="btn btn-default add" id="posttype-js" >استمرار</a> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    $("#posttype-js").click(function (event) {
+
+        var to = $(".commission > #to");
+        var tno = $(".commission > #tno");
+        
+        if (to.checked == true) {
+             window.location = '@Url.RouteUrl("Harag.Post.AddNewPost")?t=1';
+        } else {
+            window.location = '@Url.RouteUrl("Harag.Post.AddNewPost")?t=2';
+        }
+    
+    });
+</script>
