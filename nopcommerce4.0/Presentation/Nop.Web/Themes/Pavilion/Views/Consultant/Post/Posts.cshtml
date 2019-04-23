@@ -94,7 +94,8 @@
 
             .content .items .item .det {
                 width: 87%;
-                float: right
+                float: right;
+                /*min-height:100px*/
             }
 
                 .content .items .item .det p {
@@ -150,11 +151,25 @@
             .content .items .item .cont-Body {
                 padding: 5px 10px;
             }
-            .content .items .item .cont-Header .status { padding-left:10px }
+            .content .items .item .cont-Body .body-cont {
+                 width: 100%;
+                display: flex;
+                /*min-height: 100px;*/
+            }
             span {
                 padding: 0;
             }
-    span .report { cursor: pointer }
+    .content .items .item .cont-Footer {
+        padding: 5px 10px;
+        background: rgba(237, 234, 234, 0.3);
+        border-top: 1px solid #edeaea;
+    }
+
+        /*.content .items .item .cont-Footer span.buton { line-height:42px }*/
+        span .report {
+            cursor: pointer
+        }
+
 
     @@media(max-width:767px) {
         .content .items .item .det {
@@ -181,186 +196,167 @@
             <div class="item">
                 <!-- Heading -->
                 <div class="cont-Header">
-                    <span>@post.CategoryName <span> /</span> @post.SubCategoryName  </span>
-                    <span class="pull-left">
-                        @if (ViewBag.UserRole == "Vistor")
-                        {
-                            @if (post.IsClosed)
+                    <div>
+                        <span>@post.CategoryName <span> /</span> @post.SubCategoryName  </span>
+                        <span class="pull-left" style="padding-left: 10px">
+                            @if (ViewBag.UserRole == "Vistor")
                             {
-                                @*<span class="status closed">
-                                    مغلقة
-                                </span>*@
+                                @if (post.IsClosed)
+                                {
+                                    @*<span class="status closed">
+                                        مغلقة
+                                    </span>*@
+                                }
+                                else
+                                {
+                                    <span class="status open">
+                                        مفتوحة
+                                    </span>
+                                }
                             }
-                            else
-                            {
-                                <span class="status open">
-                                    مفتوحة
-                                </span>
-                            }
-                        }
 
-                        @if (ViewBag.UserRole == "Registered")
-                        {
-                            @if (post.IsClosed)
+                            @if (ViewBag.UserRole == "Registered")
                             {
-                                @*<span class="status closed">
-                                    مغلقة
-                                </span>*@
+                                @if (post.IsClosed)
+                                {
+                                    @*<span class="status closed">
+                                        مغلقة
+                                    </span>*@
+                                }
+                                else
+                                {
+                                    <span class="status open">
+                                        مفتوحة
+                                    </span>
+                                }
                             }
-                            else
-                            {
-                                <span class="status open">
-                                    مفتوحة
-                                </span>
-                            }
-                        }
 
-                        @if (ViewBag.UserRole == "Consultant")
-                        {
-                            @if (post.IsClosed == true)
+                            @if (ViewBag.UserRole == "Consultant")
                             {
-                                <span class="status closed">
-                                    @Html.Raw(" مغلقة ")
-                                </span>
+                                @if (post.IsClosed == true)
+                                {
+                                    <span class="status closed">
+                                        @Html.Raw(" مغلقة ")
+                                    </span>
+                                }
+                                else if (!post.IsClosed && post.IsAnswered)
+                                {
+                                    <span class="status open">
+                                        @Html.Raw(" مفتوحة ")
+                                    </span>
+                                }
+                                else if (!post.IsClosed && !post.IsAnswered && post.IsReserved)
+                                {
+                                    <span class="status open">
+                                        @Html.Raw(" محجوزة ")
+                                    </span>
+                                }
+                                else if (!post.IsClosed && !post.IsAnswered && !post.IsReserved)
+                                {
+                                    <span class="status open">
+                                        @Html.Raw(" لم يرد عليها ")
+                                    </span>
+                                }
                             }
-                            else if (!post.IsClosed && post.IsAnswered)
-                            {
-                                <span class="status open">
-                                    @Html.Raw(" مفتوحة ")
-                                </span>
-                            }
-                            else if (!post.IsClosed && !post.IsAnswered && post.IsReserved)
-                            {
-                                <span class="status open">
-                                    @Html.Raw(" محجوزة ")
-                                </span>
-                            }
-                            else if (!post.IsClosed && !post.IsAnswered && !post.IsReserved)
-                            {
-                                <span class="status open">
-                                    @Html.Raw(" لم يرد عليها ")
-                                </span>
-                            }
-                        }
 
 
-                        @if (post.Rate != null)
-                        {
+                            @if (post.Rate != null)
+                            {
                             <span class="separator"> | </span>
                             @if (post.IsClosed)
                             {
-                                <span>
-                                    @if (post.Rate >= 1)
-                                    {
-                                        <i class="fa fa-star orange-star"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="fa fa-star"></i>
-                                    }
-                                    @if (post.Rate >= 2)
-                                    {
-                                        <i class="fa fa-star orange-star"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="fa fa-star"></i>
-                                    }
-                                    @if (post.Rate >= 3)
-                                    {
-                                        <i class="fa fa-star orange-star"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="fa fa-star"></i>
-                                    }
-                                    @if (post.Rate >= 4)
-                                    {
-                                        <i class="fa fa-star orange-star"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="fa fa-star"></i>
-                                    }
-                                    @if (post.Rate >= 5)
-                                    {
-                                        <i class="fa fa-star orange-star"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="fa fa-star"></i>
-                                    }
+                            <span>
+                                @if (post.Rate >= 1)
+                                {
+                                    <i class="fa fa-star orange-star"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-star"></i>
+                                }
+                                @if (post.Rate >= 2)
+                                {
+                                    <i class="fa fa-star orange-star"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-star"></i>
+                                }
+                                @if (post.Rate >= 3)
+                                {
+                                    <i class="fa fa-star orange-star"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-star"></i>
+                                }
+                                @if (post.Rate >= 4)
+                                {
+                                    <i class="fa fa-star orange-star"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-star"></i>
+                                }
+                                @if (post.Rate >= 5)
+                                {
+                                    <i class="fa fa-star orange-star"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-star"></i>
+                                }
 
-                                </span>
+                            </span>
                             }
-                        }
-                    </span>
+                            }
+                        </span>
+                    </div>
+                    <div style="margin:5px 0">
+                        <small>@post.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @post.DateCreated.ToString("hh:mm:ss")</small>
+                    </div>
                 </div>
-                <!-- Body -->
-                @*<div class="post-body" style="overflow-wrap:break-word;">
-                    <div class="row">
 
-                        <div class="col-xs-10">
-                            <h4>@post.PostOwner</h4>
-                            <span>@post.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @post.DateCreated.ToString("hh:mm:ss")</span>
-                            <div>
-                                <h4>
-                                    @post.Title
-                                </h4>
+                <!-- Body -->
+                <div class="cont-Body">
+                    <div class="body-cont">
+                        <div class="det">
+                            <a href="@Url.RouteUrl("Consultant.Post.GetPost",new { PostId=@post.Id})"><h3>@post.Title</h3></a>
+                            @*<small>@post.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @post.DateCreated.ToString("hh:mm:ss")</small>*@
+
+                            <div class="det-det">
+                                <div>
+                                    <a href="#">
+                                        <span><i class="fa fa-user"></i>@post.PostOwner</span>
+                                    </a>
+                                </div>
+                                <div id="customText" onload="function mySubStrFunc() { var str = @post.Text; var res = str.substring(0, 4); document.getElementById('customText').innerHTML = res;}">
+                                    @*@post.Text*@
+                                </div>
                             </div>
-                            <p>
-                                @post.Text
-                            </p>
+                        </div>
+                        <div class="det-img">
                             @if (@post.Photo != null)
                             {
-                                <div style="width:160px;display:inline;">
-                                    <a href="@post.Photo" data-lightbox="image-@post.Id" data-title="My caption"><img src="@post.Photo" alt="Single Image" style="width:150px;height:150px;" /></a>
+                                <div>
+                                    <a href="@post.Photo" data-lightbox="image-@post.Id" data-title="My caption">
+                                        <img src="@post.Photo" alt="Single Image" />
+                                    </a>
                                 </div>
                             }
-
                         </div>
                     </div>
-                </div>*@
+                </div>
                 <!-- Footer -->
-                @*<div class="post-footer">
-                    <div class="pull-left">
-
-                        @Html.Partial("/Themes/Pavilion/Views/Consultant/Post/ShareButtonsa.cshtml", Url.Link("Consultant.Post.GetPost", new { PostId = @post.Id }))
+                <div class="cont-Footer">
+                    <span class="">
                         <a href="@Url.RouteUrl("Consultant.Post.GetPost",new { PostId=@post.Id})">
-                            <span class="buton primary btndarckgreen"> التفاصيل </span>
+                            <span class="buton primary"> التفاصيل </span>
                         </a>
-                    </div>
-                </div>*@
-
-                <div class="cont-Body">
-                    <div class="det">
-                        <a href="@Url.RouteUrl("Consultant.Post.GetPost",new { PostId=@post.Id})"><h3>@post.Title</h3></a>
-                        <small>@post.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @post.DateCreated.ToString("hh:mm:ss")</small>
-                        @*@if (post.IsFeatured)
-            {
-                <div class="row" style="color: gold"><span><i class="fa fa-star"></i></span></div>
-            }*@
-
-                        <div class="det-det">
-                            @*<a href="/Harag/City/@post.City">
-                    <span><i class="fa fa-map-marker"></i> @post.City </span>
-                </a>*@
-                            <a href="#">
-                                <span><i class="fa fa-user"></i>@post.PostOwner</span>
-                            </a>
-                            <a>@*<span> رقم الاعلان:  @post.Id </span>*@</a>
-                        </div>
-                    </div>
-                    <div class="det-img">
-                        @if (@post.Photo != null)
-                        {
-                            <div>
-                                <a href="@post.Photo" data-lightbox="image-@post.Id" data-title="My caption">
-                                    <img src="@post.Photo" alt="Single Image" />
-                                </a>
-                            </div>
-                        }
-                    </div>
+                    </span>
+                    <span class="pull-left" style="padding-left:10px">
+                        @Html.Partial("/Themes/Pavilion/Views/Consultant/Post/ShareButtonsa.cshtml", Url.Link("Consultant.Post.GetPost", new { PostId = @post.Id }))
+                    </span>
                 </div>
             </div>
 
@@ -368,6 +364,7 @@
 
     </div>
 </div>
+
 
 @if (Model.Paging.PageNumber <= Model.Paging.TotalPages)
 {
