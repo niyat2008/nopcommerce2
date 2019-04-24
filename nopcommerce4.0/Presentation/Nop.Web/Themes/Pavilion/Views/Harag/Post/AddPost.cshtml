@@ -64,11 +64,11 @@
                 @Html.TextBoxFor(m => m.Contact, new { id = "Contact-js-ajax", required = "required", @class = "form-control", placeholder = "0134578888" })
 
             </div>
-            <div class="col-md-2">
+            @*<div class="col-md-2">
                 <label> هل هذا الاعلان طلب ؟</label> 
                 @Html.CheckBoxFor(m => m.IsOrder, new { id = "IsOrder-js-ajax", required = "required", @class = "form-control" })
 
-            </div>
+            </div>*@
             <div class="col-md-6">
                 <label>نص الاعلان</label> <br>
                 @Html.TextAreaFor(m => m.Text, new { id = "Text-js-ajax", @class = "form-control txtArea", required = "required", rows = "7", placeholder = "نص الاعلان" })
@@ -247,7 +247,8 @@
         var Text = $('#Text-js-ajax').val();
         var Contact = $('#Contact-js-ajax').val();
         var CityId = $('#city-js-ajax').val();
-        var IsOrder = $('#IsOrder-js-ajax')[0].checked;
+        var IsOrder = '@ViewBag.IsOrder';
+        var Tags =  $('#Tags-js-ajax').val();
 
 
         if (CategoryId <= 0) {
@@ -271,7 +272,8 @@
                 CategoryId: CategoryId,
                 CityId: CityId,
                 Files: Files,
-                IsOrder: IsOrder
+                IsOrder: IsOrder,
+                Tags: Tags
             };
 
             console.log(postForPostModel);

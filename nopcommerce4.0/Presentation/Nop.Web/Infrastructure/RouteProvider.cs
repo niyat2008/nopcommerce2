@@ -115,7 +115,16 @@ namespace Nop.Web.Infrastructure
             new { controller = "Post", action = "GetHaragNavbar" });
 
             routeBuilder.MapRoute("Harag.NavbarMobile", "Harag/NavbarMobileAjax",
-new { controller = "Post", action = "GetHaragMobileNavbar" });
+            new { controller = "Post", action = "GetHaragMobileNavbar" });
+
+            ///
+            /// Harag Tags 
+            ///
+            routeBuilder.MapRoute("Harag.HaragTags", "Harag/Tag/{tag}",
+            new { controller = "Post", action = "GetHaragTagsPosts" });
+
+            routeBuilder.MapRoute("Harag.HaragTagsList", "Harag/Tags",
+            new { controller = "Post", action = "GetHaragTagsList" });
 
             ////
             ////  Featured Members

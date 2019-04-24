@@ -55,7 +55,7 @@
             alert("لابد من الموافقه علي جميع الشروط");
             return false;
         } else {
-            window.location = '@Url.RouteUrl("Harag.Post.AddNewPost")';
+            window.location = '@Url.RouteUrl("Harag.Post.AddNewPost")?t=@ViewBag.IsOrder&a=1';
         }
     
     });

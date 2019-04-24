@@ -316,13 +316,13 @@
                         <small>@post.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @post.DateCreated.ToString("hh:mm:ss")</small>
                     </div>
                 </div>
+                @* Go Ahead  *@
 
                 <!-- Body -->
                 <div class="cont-Body">
                     <div class="body-cont">
                         <div class="det">
                             <a href="@Url.RouteUrl("Consultant.Post.GetPost",new { PostId=@post.Id})"><h3>@post.Title</h3></a>
-                            @*<small>@post.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @post.DateCreated.ToString("hh:mm:ss")</small>*@
 
                             <div class="det-det">
                                 <div>
@@ -347,6 +347,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <!-- Footer -->
                 <div class="cont-Footer">
                     <span class="">

@@ -352,6 +352,9 @@
     <Content Update="Themes\Pavilion\Views\Harag\Payment\_BanksAccountsPartial.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\PostTypeBeforeAddPost.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Post\CustomerServiceMessageList.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
@@ -374,6 +377,9 @@
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Post\AddPost.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Themes\Pavilion\Views\Harag\Post\_ListOfTags.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Themes\Pavilion\Views\Harag\Post\_CategoriesImagesGrid.cshtml">

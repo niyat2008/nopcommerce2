@@ -10,40 +10,69 @@
     }
 }
  
+<style>
+    .comment { margin-bottom: 10px; background: #F5F5F5; border-radius: 4px; border: 1px solid #cee7bc }
+        .comment .comment-Header {
+            background: #e9e7e7;
+            padding: 10px 15px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+        .comment .comment-Header h3 {
+            margin-top: 0;
+            color: #555;
+        }
+        .comment .comment-Header h3 i { font-size:14px }
+        .comment .comment-Header small {
+            font-size: 13px
+        }
+        .comment .comment-Body {
+            padding: 10px 15px
+        }
+        .comment .comment-Body p {
+            font-size: 17px;
+            color: #000;
+        }
+</style>
 
 <div class="comments">
     <!-- Comment -->
     <div class="comment">
-        <div class="row">
-         
-                <div class="col-xs-10">
-                    @if (Model.CommentedBy != "Registered")
-                    {
-                        <h4 class="text-danger"><strong class="text-danger">المستشار: </strong>@Model.CommentOwner</h4>
-                    }
-                    else
-                    {
-                        <h4 >@Model.CommentOwner</h4>
+        <div class="row">      
+            <div class="col-xs-12">
+                <div class="comment-Header">
+                    <div>
+                        @if (Model.CommentedBy != "Registered")
+                        {
+                            <h3 class="text-primary"><strong class="text-primary">المستشار: </strong> <i class="fa fa-user"></i> @Model.CommentOwner</h3>
+                        }
+                        else
+                        {
+                            <h3><i class="fa fa-user"></i> @Model.CommentOwner</h3>
 
-                    }
-
-                    <span>@Model.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @Model.DateCreated.ToString("hh:mm:ss")</span>
-                    <div class="comment-content" id="comment-@Model.Id" style="width:fit-content;" onclick="findAllFunctionsLinks('@Model.Text https://facebook.com', 'comment-@Model.Id')">
-                        @Html.Raw(Model.Text)  
-                        
-                        <div class="row" style="padding-right: 20px;  ">
-                            @foreach (var image in Model.Photos)
-                            {
-                                <div style="width:60px;display:inline;">
-                                    <a href="/Consultations/Imgs/@image" data-lightbox="image-@Model.Id" data-title="My caption">
-                                        <img src="/Consultations/Imgs/@image" alt="Single Image" style="width:150px;height:150px;" />
-                                    </a>
-                                </div>
-                            }
-                        </div>
+                        }
                     </div>
-                 
+                    <div>
+                        <small>@Model.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @Model.DateCreated.ToString("hh:mm:ss")</small>
+                    </div>
                 </div>
+                
+                <div class="comment-Body" id="comment-@Model.Id" onclick="findAllFunctionsLinks('@Model.Text https://facebook.com', 'comment-@Model.Id')">
+                    <p>@Html.Raw(Model.Text)</p>
+                        
+                    <div style="margin:8px 0">
+                        @foreach (var image in Model.Photos)
+                        {
+                            <div style="width:60px;display:inline;">
+                                <a href="/Consultations/Imgs/@image" data-lightbox="image-@Model.Id" data-title="My caption">
+                                    <img src="/Consultations/Imgs/@image" alt="Single Image" style="width:150px;height:150px;" />
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+                 
+            </div>
         </div>
        
     </div> 

@@ -9,13 +9,13 @@ using Nop.Core.Domain.Z_Consultant;
 using Nop.Services.Z_Consultant.Category;
 using Nop.Services.Z_Consultant.Comment;
 using Nop.Services.Z_Consultant.Helpers;
-using Nop.Services.Z_Consultant.Post;
+using Nop.Services.Z_Harag.Post;
 using Nop.Services.Z_Consultant.SubCategory;
 using Nop.Services.Z_HaragAdmin.Setting;
 using Nop.Web.Extensions.Consultant;
 using Nop.Web.Models.Consultant.Category;
 using Nop.Web.Models.Consultant.Comment;
-using Nop.Web.Models.Consultant.Post;
+using Nop.Web.Models.Harag.Post;
 using Nop.Web.Models.Consultant.SubCategory;
 using Nop.Web.Models.Consultant.User;
 
@@ -124,8 +124,8 @@ namespace Nop.Web.Controllers.Harag
             {
                 ViewBag.UserRole = "vistor";
             }
-
-            return View("~/Themes/Pavilion/Views/Harag/Home/Home.cshtml");
+            var tags = _postService.GetTagsList(new Services.Z_Harag.Helpers.PagingParams());
+            return View("~/Themes/Pavilion/Views/Harag/Home/Home.cshtml", tags);
         }
 
 

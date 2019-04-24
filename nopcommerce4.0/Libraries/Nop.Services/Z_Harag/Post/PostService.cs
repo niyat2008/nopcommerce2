@@ -146,7 +146,8 @@ namespace Nop.Services.Z_Harag.Post
                 IsDeleted = false,
                 IsOrder = postForPostModel.IsOrder,
                 IsFeatured = false,
-                IsCommon = false
+                IsCommon = false,
+                Tags = postForPostModel.Tags
             };
             foreach (var item in filesUrl)
             {
@@ -187,6 +188,8 @@ namespace Nop.Services.Z_Harag.Post
 
             return true;
         }
+
+        
         public static Bitmap ResizeImage(Image image, int width, int height)
         {
             var destRect = new Rectangle(0, 0, width, height);
@@ -457,7 +460,20 @@ namespace Nop.Services.Z_Harag.Post
 
             return result;
         }
+        public List<Z_Harag_Post> GetTagsPost(PagingParams pagingParams, string tag)
+        {
+            
+            var result = _postRepository.TableNoTracking
+                .Include(m => m.Category)
+                .Include(m => m.Customer)
+                .Include(m => m.City)
+                .Include(m => m.Z_Harag_Photo)
+                .Include(m => m.Z_Harag_Comment)
+                .Where(m => m.IsDeleted == false && m.Tags.Contains(tag)).OrderByDescending(mbox => mbox.DateUpdated).Skip(pagingParams.PageNumber * pagingParams.PageSize)
+            .Take(pagingParams.PageSize).ToList();
 
+            return result;
+        }
         public List<City> GetCities()
         {
             var query = _cityRepository.TableNoTracking.ToList();
@@ -949,6 +965,15 @@ namespace Nop.Services.Z_Harag.Post
            .Skip(pagingParams.PageNumber * pagingParams.PageSize)
            .Take(pagingParams.PageSize).ToList();
 
+            return query;
+        }
+
+        public List<string> GetTagsList(PagingParams pagingParams )
+        {
+            var query = _postRepository.TableNoTracking
+             .GroupBy(m => m.Tags)
+               .OrderByDescending(m => m.Count())  
+              .Take(5).Select(m => m.Key).ToList();
             return query;
         }
         #endregion

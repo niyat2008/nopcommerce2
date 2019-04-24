@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<string>
+@{
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
 }
  
@@ -16,13 +17,13 @@
                 </div>
                 <hr>
             
-                @Html.Partial("~/Themes/Pavilion/Views/Harag/Post/_CategoriesImagesGrid.cshtml")
+                @Html.Partial("~/Themes/Pavilion/Views/Harag/Post/_CategoriesImagesGrid.cshtml", Model)
             </div>
             <div class="col-md-9">
                 <!-- أضف اعلانك -->
                 <div class="row">
                     <div class="col-md-4" style="margin-bottom: 20px;">
-                        <a class=" add-btn " style="background: #f2f2f2;line-height:2.4" href="@Url.RouteUrl("Harag.Post.AgreementBeforeAddPost")"> <i class="fa fa-plus"></i> أضف اعلانك </a>
+                        <a class=" add-btn " style="background: #f2f2f2;line-height:2.4" href="@Url.RouteUrl("Harag.Post.AddNewPost")"> <i class="fa fa-plus"></i> أضف اعلانك </a>
                     </div>
                     <div class="col-md-4">
                         <select id="select-city-js-ajax" class="form-control">
