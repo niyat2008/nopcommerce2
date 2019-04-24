@@ -62,74 +62,77 @@
     </div>
 }
 
-<div class="side-2">
-    @if (IsSectionDefined("left"))
-    {
-        @RenderSection("left")
-    }
-    else
-    {
-        var isManufacturerPage = currentManufacturerId != 0 || (isCatalogController && actionName.Equals("ManufacturerAll", StringComparison.InvariantCultureIgnoreCase));
-        var isVendorPage = isCatalogController && (actionName.Equals("Vendor", StringComparison.InvariantCultureIgnoreCase) || actionName.Equals("VendorAll", StringComparison.InvariantCultureIgnoreCase));
-        var isCategoryPage = isCatalogController && (actionName.Equals("Category", StringComparison.InvariantCultureIgnoreCase));
-        var isPopularTagsPage = isCatalogController && (actionName.Equals("ProductTagsAll", StringComparison.InvariantCultureIgnoreCase) || actionName.Equals("ProductsByTag", StringComparison.InvariantCultureIgnoreCase));
-        var isRecentlyViewedProductsPage = isProductController && actionName.Equals("RecentlyViewedProducts", StringComparison.InvariantCultureIgnoreCase);
-
-        if (IsSectionDefined("AsidePageTitle"))
+    <div class="side-2">
+        @if (IsSectionDefined("left"))
         {
-            @RenderSection("AsidePageTitle")
-        }
-        
-        @await Component.InvokeAsync("Widget", new { widgetZone = "left_side_column_before" })
-
-        if (isCategoryPage)
-        {
-            @await Component.InvokeAsync("CategoryNavigation", new { currentCategoryId = currentCategoryId, currentProductId = currentProductId })
-            @await Component.InvokeAsync("Widget", new { widgetZone = "left_side_column_after_category_navigation" })
-
-            @await Component.InvokeAsync("ManufacturerNavigation", new { currentManufacturerId = currentManufacturerId })
-
-            @await Component.InvokeAsync("VendorNavigation")
-        }
-        else if (isManufacturerPage)
-        {
-            @await Component.InvokeAsync("ManufacturerNavigation", new { currentManufacturerId = currentManufacturerId })
-
-            @await Component.InvokeAsync("Widget", new { widgetZone = "left_side_column_after_category_navigation" })
-
-            @await Component.InvokeAsync("VendorNavigation")
-        }
-        else if (isVendorPage)
-        {
-            @await Component.InvokeAsync("VendorNavigation")
-
-            @await Component.InvokeAsync("Widget", new { widgetZone = "left_side_column_after_category_navigation" })
-
-            @await Component.InvokeAsync("ManufacturerNavigation", new { currentManufacturerId = currentManufacturerId })
+            @RenderSection("left")
         }
         else
         {
-            @await Component.InvokeAsync("Widget", new { widgetZone = "left_side_column_after_category_navigation" })
+            var isManufacturerPage = currentManufacturerId != 0 || (isCatalogController && actionName.Equals("ManufacturerAll", StringComparison.InvariantCultureIgnoreCase));
+            var isVendorPage = isCatalogController && (actionName.Equals("Vendor", StringComparison.InvariantCultureIgnoreCase) || actionName.Equals("VendorAll", StringComparison.InvariantCultureIgnoreCase));
+            var isCategoryPage = isCatalogController && (actionName.Equals("Category", StringComparison.InvariantCultureIgnoreCase));
+            var isPopularTagsPage = isCatalogController && (actionName.Equals("ProductTagsAll", StringComparison.InvariantCultureIgnoreCase) || actionName.Equals("ProductsByTag", StringComparison.InvariantCultureIgnoreCase));
+            var isRecentlyViewedProductsPage = isProductController && actionName.Equals("RecentlyViewedProducts", StringComparison.InvariantCultureIgnoreCase);
 
-            @await Component.InvokeAsync("ManufacturerNavigation", new { currentManufacturerId = currentManufacturerId })
+            if (IsSectionDefined("AsidePageTitle"))
+            {
+                @RenderSection("AsidePageTitle")
+            }
 
-            @await Component.InvokeAsync("VendorNavigation")
+            if (isCategoryPage)
+            {
+          
+                @await Component.InvokeAsync("Widget", new { widgetZone = "left_side_column_before" })
+                
+                @await Component.InvokeAsync("CategoryNavigation", new { currentCategoryId = currentCategoryId, currentProductId = currentProductId, isSame = false })
+                @await Component.InvokeAsync("Widget", new { widgetZone = "left_side_column_after_category_navigation" })
+
+                @await Component.InvokeAsync("ManufacturerNavigation", new { currentManufacturerId = currentManufacturerId })
+
+                @await Component.InvokeAsync("VendorNavigation")
+            }
+            else if (isManufacturerPage)
+            {
+                @await Component.InvokeAsync("Widget", new { widgetZone = "left_side_column_before" })
+
+                @await Component.InvokeAsync("ManufacturerNavigation", new { currentManufacturerId = currentManufacturerId })
+
+                @await Component.InvokeAsync("Widget", new { widgetZone = "left_side_column_after_category_navigation" })
+
+                @await Component.InvokeAsync("VendorNavigation")
+            }
+            else if (isVendorPage)
+            {
+                @await Component.InvokeAsync("VendorNavigation")
+
+                @await Component.InvokeAsync("Widget", new { widgetZone = "left_side_column_after_category_navigation" })
+
+                @await Component.InvokeAsync("ManufacturerNavigation", new { currentManufacturerId = currentManufacturerId })
+            }
+            else
+            {
+                @await Component.InvokeAsync("Widget", new { widgetZone = "left_side_column_after_category_navigation" })
+
+                @await Component.InvokeAsync("ManufacturerNavigation", new { currentManufacturerId = currentManufacturerId })
+
+                @await Component.InvokeAsync("VendorNavigation")
+            }
+
+            if (!isRecentlyViewedProductsPage)
+            {
+                @await Component.InvokeAsync("RecentlyViewedProductsBlock", new { productThumbPictureSize = 64 })
+            }
+
+            if (!isPopularTagsPage)
+            {
+                @await Component.InvokeAsync("PopularProductTags")
+            }
+
+            @await Component.InvokeAsync("PollBlock", new { systemKeyword = "LeftColumnPoll" })
+            @await Component.InvokeAsync("Widget", new { widgetZone = "left_side_column_after" })
         }
-
-        if (!isRecentlyViewedProductsPage)
-        {
-        	@await Component.InvokeAsync("RecentlyViewedProductsBlock", new { productThumbPictureSize = 64 })
-        }
-
-        if (!isPopularTagsPage)
-        {
-        	@await Component.InvokeAsync("PopularProductTags")
-        }
-
-        @await Component.InvokeAsync("PollBlock", new { systemKeyword = "LeftColumnPoll" })
-        @await Component.InvokeAsync("Widget", new { widgetZone = "left_side_column_after" })
-    }
-</div>
+    </div>
 
 @if (isAccountPage)
 {

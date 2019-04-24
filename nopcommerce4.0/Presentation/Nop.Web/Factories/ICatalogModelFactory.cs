@@ -60,7 +60,7 @@ namespace Nop.Web.Factories
         /// <param name="currentProductId">Current product identifier</param>
         /// <returns>Category navigation model</returns>
         CategoryNavigationModel PrepareCategoryNavigationModel(int currentCategoryId,
-            int currentProductId);
+            int currentProductId, bool IsSame);
 
         /// <summary>
         /// Prepare top menu model

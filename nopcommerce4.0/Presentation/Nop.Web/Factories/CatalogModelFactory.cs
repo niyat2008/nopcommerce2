@@ -65,6 +65,7 @@ namespace Nop.Web.Factories
         private readonly ForumSettings _forumSettings;
         private readonly IStaticCacheManager _cacheManager;
         private readonly DisplayDefaultMenuItemSettings _displayDefaultMenuItemSettings;
+        private bool IsSame { get; set; }
 
         #endregion
 
@@ -545,8 +546,10 @@ namespace Nop.Web.Factories
         /// <param name="currentCategoryId">Current category identifier</param>
         /// <param name="currentProductId">Current product identifier</param>
         /// <returns>Category navigation model</returns>
-        public virtual CategoryNavigationModel PrepareCategoryNavigationModel(int currentCategoryId, int currentProductId)
+        public virtual CategoryNavigationModel PrepareCategoryNavigationModel(int currentCategoryId, int currentProductId, bool IsSame)
         {
+            this.IsSame = IsSame;
+
             //get active category
             var activeCategoryId = 0;
             if (currentCategoryId > 0)
@@ -566,7 +569,8 @@ namespace Nop.Web.Factories
             var model = new CategoryNavigationModel
             {
                 CurrentCategoryId = activeCategoryId,
-                Categories = cachedCategoriesModel
+                Categories = cachedCategoriesModel,
+                
             };
 
             return model;
@@ -672,14 +676,23 @@ namespace Nop.Web.Factories
         /// Prepare category (simple) models
         /// </summary>
         /// <returns>List of category (simple) models</returns>
-        public virtual List<CategorySimpleModel> PrepareCategorySimpleModels()
+        public virtual List<CategorySimpleModel> PrepareCategorySimpleModels( )
         {
             //load and cache them
             var cacheKey = string.Format(ModelCacheEventConsumer.CATEGORY_ALL_MODEL_KEY,
                 _workContext.WorkingLanguage.Id,
                 string.Join(",", _workContext.CurrentCustomer.GetCustomerRoleIds()),
                 _storeContext.CurrentStore.Id);
-            return _cacheManager.Get(cacheKey, () => PrepareCategorySimpleModels(0));
+            if (!IsSame)
+            {
+                return _cacheManager.Get(cacheKey, () => PrepareCategorySimpleModels(0));
+
+            }
+            else
+            {
+                return _cacheManager.Get(cacheKey, () => PrepareCategorySimpleModels(0));
+
+            }
         }
 
         /// <summary>
@@ -709,6 +722,15 @@ namespace Nop.Web.Factories
                 allCategories = _categoryService.GetAllCategories(storeId: _storeContext.CurrentStore.Id);
             }
             var categories = allCategories.Where(c => c.ParentCategoryId == rootCategoryId).ToList();
+            var maincat = allCategories.Where(c => c.Id == 1).FirstOrDefault();
+
+            var mainCatList = new List<Category>();
+
+            if (maincat != null)
+            {
+                 mainCatList = allCategories.Where(c => c.ParentCategoryId == maincat.ParentCategoryId).ToList();
+            } 
+
             foreach (var category in categories)
             {
                 var categoryModel = new CategorySimpleModel
@@ -716,7 +738,13 @@ namespace Nop.Web.Factories
                     Id = category.Id,
                     Name = category.GetLocalized(x => x.Name),
                     SeName = category.GetSeName(),
-                    IncludeInTopMenu = category.IncludeInTopMenu
+                    IncludeInTopMenu = category.IncludeInTopMenu,
+                    // amsfcii
+                    SameCategories = mainCatList.Select(m => new CategorySimpleModel {
+                        Name = m.Name,
+                        SeName = m.GetSeName(),
+                        Id = m.Id
+                    }).ToList()
                 };
 
                 //number of products in each category

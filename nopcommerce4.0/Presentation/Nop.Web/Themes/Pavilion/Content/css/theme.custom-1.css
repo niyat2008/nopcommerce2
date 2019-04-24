@@ -124,8 +124,9 @@ button.ticket-info-button.k-button:before,
 .sale-of-the-day-offer .owl-nav .owl-next:hover,
 .sale-of-the-day-offer .owl-dot.active,
 .sale-of-the-day-offer .go-to-product-page,
-.home-page-filter-button .search-button {
-  background-color: #3e874b;
+.home-page-filter-button .search-button
+,.overview .add-to-cart-button1 {
+    background-color: #3e874b;
 }
 .cart .edit-item a,
 .ui-dialog-titlebar,
