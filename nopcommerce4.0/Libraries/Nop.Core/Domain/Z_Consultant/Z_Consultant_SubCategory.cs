@@ -19,7 +19,7 @@ namespace Nop.Core.Domain.Z_Consultant
         public DateTime DateUpdated { get; set; }
         public string Description { get; set; }
         public int CategoryId { get; set; }
-
+        public bool IsActive { get; set; }
 
         public Z_Consultant_Category Category { get; set; }
         public ICollection<Z_Consultant_Post> Posts { get; set; }

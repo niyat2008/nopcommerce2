@@ -30,6 +30,16 @@
         </div>
     </div>
 
+    <div class="form-group">
+
+        <div class="col-md-10 checkbox">
+            <label>الحالة</label>
+            @Html.CheckBoxFor(m => m.IsActive, new { @class = "details-check" })
+
+        </div>
+    </div>
+
+
     <input type="submit" value="تحديث" class="btn btn-primary add" />    
 </form>
 
@@ -45,13 +55,22 @@
         $("#addCategory").submit(function (event) {
             var ajaxRequest;
             event.preventDefault();
-            
+            var status = false;
+            if ($('.details-check').is(':checked')) {
+                status = true;
+
+            } else {
+                status = false;
+
+            }
+            console.log("status " + status);
             //var values = $(this).serialize();
             //var values = JSON.stringify($("#addCategory").serializeArray());
             var model = {
                 "Name": $(".categoryName").val(),
                 "Description": $(".categoryDescription").val(),
-                "Id": $('#category-id-js').val()
+                "Id": $('#category-id-js').val(),
+                "IsActive": status
             }; 
             if (model.Name === "") {
                 alert("ادخل اسم الصنف")

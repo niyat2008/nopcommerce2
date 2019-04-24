@@ -79,7 +79,8 @@ namespace Nop.Web.Controllers.ConsultantAdmin
                     Name = m.Name,
                     Description = m.Description,
                     CategoryId=m.CategoryId,
-                    CategoryName=m.Category?.Name
+                    CategoryName=m.Category?.Name,
+                    IsActive=m.IsActive
                 }).ToList()
             };
 
@@ -131,7 +132,8 @@ namespace Nop.Web.Controllers.ConsultantAdmin
                     Name = m.Name,
                     Description = m.Description,
                     CategoryId = m.CategoryId,
-                    CategoryName = m.Category?.Name
+                    CategoryName = m.Category?.Name,
+                    IsActive=m.IsActive
                 }).ToList()
             };
 
@@ -182,7 +184,9 @@ namespace Nop.Web.Controllers.ConsultantAdmin
                 CategoryId = subCat.CategoryId,
                 Id = subCat.Id,
                 Name = subCat.Name,
-                Description = subCat.Description
+                Description = subCat.Description,
+                IsActive=subCat.IsActive
+
             };
 
             return View("~/Themes/Pavilion/Views/ConsultantAdmin/Subcategories/UpdateSubCategory.cshtml", subCategoryViewModel);

@@ -808,6 +808,13 @@ new { controller = "Post", action = "GetSubCategoriesByCategoryIdMobile" });
             routeBuilder.MapRoute("Harag.Admin.HaragPosts", "Harag/Admin/Post/HaragPosts", new { controller = "Post", action = "GetHaragPosts" });
             //Get Posts Ajax 
             routeBuilder.MapRoute("Harag.Admin.HaragPostAjax", "Harag/Admin/Post/HaragPostsAjax", new { controller = "Post", action = "GetHaragPostsAjax" });
+
+
+            //Get Posts  
+            routeBuilder.MapRoute("Harag.Admin.HaragDeletedPosts", "Harag/Admin/Post/HaragDeletedPosts", new { controller = "Post", action = "GetHaragDeletedPosts" });
+            //Get Posts Ajax 
+            routeBuilder.MapRoute("Harag.Admin.HaragDeletedPostAjax", "Harag/Admin/Post/HaragDeletedPostsAjax", new { controller = "Post", action = "GetHaragDeletedPostsAjax" });
+
             //Get Post Details
             routeBuilder.MapRoute("Harag.Admin.HaragPostDetails", "Harag/Admin/Post/HaragPostsDetails", new { controller = "Post", action = "GetPostDetails" });
 

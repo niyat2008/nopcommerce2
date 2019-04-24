@@ -11,6 +11,8 @@ namespace Nop.Services.Z_HaragAdmin.Post
     {
         //Get All Posts
         List<Z_Harag_Post> GetAllPosts(int start, int length, string searchValue, string sortColumnName, string sortDirection);
+        //Get All Posts
+         List<Z_Harag_Post> GetAllDeletedPosts(int start, int length, string searchValue, string sortColumnName, string sortDirection);
         //Delete Post
         void DeletePost(int id);
         //post Details

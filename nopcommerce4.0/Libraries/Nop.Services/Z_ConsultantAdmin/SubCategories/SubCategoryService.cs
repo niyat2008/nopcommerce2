@@ -90,7 +90,8 @@ namespace Nop.Services.Z_ConsultantAdmin.SubCategories
                 DateCreated = DateTime.Now,
                 DateUpdated = DateTime.Now,
                 Description = subCategoryModel.Description,
-                CategoryId = subCategoryModel.CategoryId
+                CategoryId = subCategoryModel.CategoryId,
+                IsActive=subCategoryModel.IsActive
             };
             if(subCategory !=null)
                 _subcategoryRepository.Insert(subCategory);
@@ -101,10 +102,14 @@ namespace Nop.Services.Z_ConsultantAdmin.SubCategories
         //Update SubCategory
         public Z_Consultant_SubCategory UpdateSubCategory(SubCategoryForPost subCategoryModel)
         {
-            var subCategory = _subcategoryRepository.TableNoTracking.Where(m => m.Id == subCategoryModel.Id).FirstOrDefault();
+            var subCategory = _subcategoryRepository.Table.Where(m => m.Id == subCategoryModel.Id).FirstOrDefault();
+
+            if (subCategory == null)
+                return null;
 
             subCategory.Name = subCategoryModel.Name;
-            subCategory.DateUpdated = DateTime.Now;  
+            subCategory.DateUpdated = DateTime.Now;
+            subCategory.IsActive = subCategoryModel.IsActive;
 
             if (subCategory != null)
                 _subcategoryRepository.Update(subCategory);

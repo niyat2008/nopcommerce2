@@ -16,5 +16,6 @@ namespace Nop.Services.Z_ConsultantAdmin.SubCategories
         public DateTime? DateUpdated { get; set; }
         public string Description { get; set; }
         public int CategoryId { get; set; }
+        public bool IsActive { get; set; }
     }
 }

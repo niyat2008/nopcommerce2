@@ -18,6 +18,7 @@ namespace Nop.Data.Mapping.Z_Consultant
             this.Property(s => s.DateCreated).IsRequired();
             this.Property(s => s.DateUpdated).IsOptional();
             this.Property(s => s.Description).IsOptional().HasMaxLength(4000);
+            this.Property(s => s.IsActive);
 
             this.HasRequired(s => s.Category)
                 .WithMany(c => c.SubCategories)

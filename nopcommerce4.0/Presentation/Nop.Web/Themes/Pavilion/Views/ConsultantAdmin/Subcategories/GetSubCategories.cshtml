@@ -22,6 +22,7 @@
                 <th>الرقم</th>
                 <th>الاسم</th>
                 <th>الوصف</th>
+                <th>الحالة</th>
                 <th>الصنف الرئيسى</th>
                 
                 <th>---</th>
@@ -51,13 +52,23 @@
 
         { "data": "Id", "name": "Id","width":"5%"},
     { "data": "Name"},
-    { "data": "Description","width":"35%"},
+    { "data": "Description", "width": "35%" },
+    {
+        "data": "IsActive",
+        "render": function (data) {
+            return (data) ? "<input type='checkbox' disabled checked >" : "<input type='checkbox' disabled  >";
+
+        }
+    },
     { "data": "CategoryName" },
     {
     "data": "Id",
     "render": function (data) {
-        return "<button class='btn btn-danger' id='delete' data-post-id=" + data + "><i class='fa fa-trash'></i>حذف</button>" +
-            "<a  href='/Consultations/Admin/SubCategories/UpdateSubCategory?subCatId=" + data + "' class='btn btn-primary' ><i class='fa fa-trash'></i>تعديل</a>";;
+
+        return "<a  href='/Consultations/Admin/SubCategories/UpdateSubCategory?subCatId=" + data + "' class='btn btn-primary' >تعديل</a>";
+
+        //return "<button class='btn btn-danger' id='delete' data-post-id=" + data + "><i class='fa fa-trash'></i>حذف</button>" +
+        //    "<a  href='/Consultations/Admin/SubCategories/UpdateSubCategory?subCatId=" + data + "' class='btn btn-primary' ><i class='fa fa-trash'></i>تعديل</a>";;
 
     }
 

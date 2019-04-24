@@ -30,7 +30,7 @@ namespace Nop.Services.Z_HaragAdmin.Post
         //Get All Posts
         public List<Z_Harag_Post> GetAllPosts(int start, int length, string searchValue, string sortColumnName, string sortDirection)
         {
-            var posts = _postRepository.TableNoTracking.Include(p => p.Category).Include(p => p.Customer).Include(p => p.Z_Harag_Photo);
+            var posts = _postRepository.TableNoTracking.Include(p => p.Category).Include(p => p.Customer).Include(p => p.Z_Harag_Photo).Where(po=>po.IsDeleted==false);
 
             //filter
 
@@ -52,8 +52,33 @@ namespace Nop.Services.Z_HaragAdmin.Post
 
             return posts.ToList();
         }
+        //Get All Posts
+        public List<Z_Harag_Post> GetAllDeletedPosts(int start, int length, string searchValue, string sortColumnName, string sortDirection)
+        {
+            var posts = _postRepository.TableNoTracking.Include(p => p.Category).Include(p => p.Customer).Include(p => p.Z_Harag_Photo).Where(po => po.IsDeleted == true);
+
+            //filter
+
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                posts = posts.Where(p => p.Title.ToLower().Contains(searchValue.ToLower()) || p.Text.ToLower().Contains(searchValue.ToLower()));
+            }
+
+            //sorting
+            if (!string.IsNullOrEmpty(sortColumnName) && !string.IsNullOrEmpty(sortDirection))
+            {
+
+                posts = posts.OrderBy(sortColumnName + " " + sortDirection);
+
+            }
+
+            //paging
+            posts = posts.OrderByDescending(p => p.DateCreated).Skip(start).Take(length);
+
+            return posts.ToList();
+        }
         //Delete Post
-       public void DeletePost(int id)
+        public void DeletePost(int id)
         {
             var query = _postRepository.Table.Where(p => p.Id == id).FirstOrDefault();
         }

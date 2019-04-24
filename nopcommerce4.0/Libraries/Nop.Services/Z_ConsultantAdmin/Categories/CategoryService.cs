@@ -64,7 +64,9 @@ namespace Nop.Services.Z_ConsultantAdmin.Categories
                 Name = category.Name,
                 DateCreated = DateTime.Now,
                 DateUpdated=DateTime.Now,
-                Description=category.Description
+                Description=category.Description,
+                IsActive=category.IsActive
+
             };
 
             if (categoryDb != null)
@@ -78,21 +80,23 @@ namespace Nop.Services.Z_ConsultantAdmin.Categories
         //Update category
         public Z_Consultant_Category UpdateCategory(CategoryModelForPost category)
         {
-            var query = _categoryRepository.TableNoTracking.AsQueryable();
-
-            // query
-            query.Where(m => m.Id == category.Id);
-
-            var categoryDb = query.FirstOrDefault();
-            categoryDb.Name = category.Name;
-            categoryDb.Description = category.Description;
-
-            categoryDb.DateUpdated = DateTime.Now;
-
-            if (query.FirstOrDefault() == null)
+            //var query = _categoryRepository.TableNoTracking.AsQueryable();
+            var categoryDb = _categoryRepository.Table.Where(c => c.Id == category.Id).FirstOrDefault();
+            if (categoryDb == null)
             {
                 return null;
             }
+            // query
+            //query.Where(m => m.Id == category.Id);
+
+            //var categoryDb = query.FirstOrDefault();
+            categoryDb.Name = category.Name;
+            categoryDb.Description = category.Description;
+            categoryDb.IsActive = category.IsActive;
+
+            categoryDb.DateUpdated = DateTime.Now;
+
+            
             
             
            _categoryRepository.Update(categoryDb);

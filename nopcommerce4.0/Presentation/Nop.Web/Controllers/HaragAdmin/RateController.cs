@@ -116,7 +116,7 @@ namespace Nop.Web.Controllers.HaragAdmin
 
         }
         //Delete Rate
-        [HttpDelete]
+        [HttpPost]
         public IActionResult DeleteRate(int rateId)
         {
             if (!_workContext.CurrentCustomer.IsRegistered())

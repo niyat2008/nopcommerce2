@@ -1,0 +1,182 @@
+﻿@model Nop.Web.Models.HaragAdmin.Post.PostModel
+
+
+@{
+    Layout = "~/Themes/Pavilion/Views/HaragAdmin/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Themes/Pavilion/Views/HaragAdmin/Shared/_DataTable.cshtml")
+
+<div class="page-title">الاعلانات المحذوفة </div>
+
+@*_SearchSection.cshtml*@
+
+<div class="posts-search">
+    <div class="row">
+        <div class="col-md-1" style="margin-top:6px;font-size:17px;">
+            رقم الاعلان
+        </div>
+        <div class="col-md-3">
+            <div id="inputGroup" class="input-group">
+
+                <input class="form-control" id="postId" type="text" placeholder="">
+                <button id="postById" class="input-group-append btn btn-info">بحث</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="table-responsive">
+        <table id="posts" class="table table-bordered table-striped  table-condensed table-hover  table-light" cellspacing="5">
+            <thead>
+                <tr class="table-light">
+                    <th>رقم </th>
+                    <th>العنوان</th>
+                    <th>الوصف</th>
+                    <th>التاريخ</th>
+                    <th>الصنف </th>
+                    <th>المدينة</th>
+                    <th>صاحب الاعلان</th>
+                    <th>سبب الحذف</th>
+                    <th> تاريخ الحذف</th>
+                    <th>عمليات</th>
+
+
+                </tr>
+            </thead>
+        </table>
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+
+
+            var dataTable = $("#posts").DataTable({
+                "serverSide": "true",
+                "responsive": "true",
+                "processing": "true",
+                "autoWidth": "true",
+                "order": [[3, "des"]],
+                "ajax": {
+
+                    "url": "/Harag/Admin/Post/HaragDeletedPostsAjax",
+                    "dataType": "json",
+
+                    "type": "post"
+                },
+
+                "columns": [
+
+
+                    { "data": "Id", "name": "Id" },
+                    { "data": "Title", "width": "10%" },
+                    { "data": "Text", "width": "35%" },
+                    { "data": "DateCreated", "width": "13%" },
+                    { "data": "Category", "width": "10%" },
+                    { "data": "City", "width": "10%" },
+                    { "data": "Customer", "width": "15%" },
+                    { "data": "DeletionReason"  },
+                    { "data": "DeletionTime" },
+                    {
+                        "data": "Title", "width": "25%",
+                        "render": function (data, type, post) {
+                            return "<a id='details' href='/Harag/Admin/Post/HaragPostsDetails?postId=" + post.Id + "' class='btn btn-xs btn-hover btn-small' data-post-id=" + post.Id + " ><i class='fa fa-eye' ></i> التفاصيل </a>" /*+ " " + "<button class='btn btn-danger' id='delete' data-post-id=" + post.Id + " ><i class='fa fa-trash' ></i>حذف</button>"*/;
+
+                        }
+
+                    }
+
+
+                ],
+                "language": {
+                    "sProcessing": "جارٍ التحميل...",
+                    "sLengthMenu": "أظهر _MENU_ مدخلات",
+                    "sZeroRecords": "لم يعثر على أية سجلات",
+                    "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ مدخل",
+                    "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                    "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                    "sInfoPostFix": "",
+                    "sSearch": "ابحث:",
+                    "sUrl": "",
+                    "oPaginate": {
+                        "sFirst": "الأول",
+                        "sPrevious": "السابق",
+                        "sNext": "التالي",
+                        "sLast": "الأخير"
+                    }
+                }
+
+
+            });
+
+            //$("#posts").on("click", "#details", function () {
+            //    var button = $(this);
+            //    $.ajax({
+            //        url: "/Consultations/Admin/Posts/GetPostDetails?postId=" + button.attr("data-post-id") + ""
+
+
+            //    });
+            //});
+
+
+
+
+            $("#postById").on("click", function (e) {
+                e.preventDefault();
+
+                dataTable.ajax.url("/Harag/Admin/Post/PostById?postId=" + $('#postId').val() + "").load();
+
+
+            });
+
+
+
+            $("#posts").on("click", "#delete", function () {
+                var button = $(this);
+                swal({
+                    title: "هل انت متاكد؟",
+                    text: "هل انت متاكد انك تريد مسح هذه الاستشارة؟",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                                "url": "/Consultations/Admin/Posts/RemovePost?postId=" + button.attr("data-post-id") + "",
+                                "method": "DELETE",
+                                "success": function (result) {
+                                    dataTable.row(button.parents("tr")).remove().draw();
+                                    //dataTable.rows().remove().draw();
+                                    swal("تم مسح الاستشارة بنجاح", {
+                                        icon: "success",
+
+                                    });
+
+
+                                }
+                            });
+                        } else {
+                            swal("التراجع عن مسح هذه الرسالة؟");
+                        }
+                    });
+            });
+
+
+
+
+
+
+
+
+
+
+
+        });
+
+
+          /* href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "'*/
+        /*href='/Consultations/Admin/Posts/GetPostDetails?postId=" + data + "'*/
+
+    </script>

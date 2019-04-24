@@ -80,7 +80,8 @@ namespace Nop.Web.Controllers.ConsultantAdmin
                 {
                     Id = m.Id,
                     Name = m.Name,
-                    Description = m.Description
+                    Description = m.Description,
+                    IsActive=m.IsActive
                 }).ToList()
             };
 
@@ -137,7 +138,8 @@ namespace Nop.Web.Controllers.ConsultantAdmin
             {
                 Id = cat.Id,
                 Name = cat.Name,
-                Description = cat.Description 
+                Description = cat.Description ,
+                IsActive=cat.IsActive
             };
 
             return View("~/Themes/Pavilion/Views/ConsultantAdmin/Categories/UpdateCategory.cshtml", model);

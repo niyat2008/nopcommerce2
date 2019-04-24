@@ -23,6 +23,7 @@
                     <th>الرقم</th>
                     <th>الاسم</th>
                     <th>الوصف</th>
+                    <th>الحالة</th>
                     <th>---</th>
                 </tr>
             </thead>
@@ -33,6 +34,7 @@
 
 
     <script>
+       
         var dataTable = $("#category").DataTable({
             "fixedHeader": {
                 "header": "true",
@@ -54,7 +56,15 @@
 
                 { "data": "Id", "name": "Id", "width": "10%" },
                 { "data": "Name", "width": "35%" },
-                { "data": "Description", "width": "35%" },
+                { "data": "Description", "width": "25%" },
+                {
+                    "data": "IsActive",
+                    "render": function (data) {
+                        
+                        return (data) ? "<input type='checkbox' disabled checked >" : "<input type='checkbox' disabled >";
+
+                    }
+                },
 
                  {
                     "data": "Id",

@@ -41,6 +41,16 @@
 
     </div>
 
+    <div class="form-group">
+
+        <div class="col-md-10 checkbox">
+            <label>الحالة</label>
+            @Html.CheckBoxFor(m => m.IsActive, new { @class = "details-check" })
+
+        </div>
+    </div>
+
+
     <button type="submit" class="btn btn-primary add">اضافة</button>
 </form>
 
@@ -56,13 +66,24 @@
             var ajaxRequest;
             event.preventDefault();
 
+
+            var status = false;
+            if ($('.details-check').is(':checked')) {
+                status = true;
+
+            } else {
+                status = false;
+
+            }
+            console.log("status " + status);
+
             //var values = $(this).serialize();
             //var values = JSON.stringify($("#addCategory").serializeArray());
             var model = {
                 "CategoryId": $(".detailsDropDown").val(),
                 "Name": $(".add-name").val(),
-                "Description": $(".add-description").val()
-
+                "Description": $(".add-description").val(),
+                 "IsActive": status
             };
 
             if ((model.CategoryId === null || model.CategoryId === "") && model.Name === "" && model.Description == "") {
@@ -89,6 +110,7 @@
             } else {
 
                 var values = JSON.stringify(model);
+                console.log("model " + values);
                 ajaxRequest = $.ajax({
                     url: "/Consultations/Admin/SubCategories/AddSubCategoryAjax",
                     contentType: "application/json; charset=utf-8",

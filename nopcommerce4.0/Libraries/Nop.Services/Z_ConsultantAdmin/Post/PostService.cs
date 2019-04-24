@@ -24,18 +24,20 @@ namespace Nop.Services.Z_ConsultantAdmin.Post
         private readonly IRepository<Z_Consultant_Category> _categoryRepository;
         private readonly IRepository<Z_Consultant_Comment> _commentRepository;
         private readonly IRepository<Z_Consultant_Photo> _photoRepository;
+        private readonly IRepository<Z_Consultant_Notification> _notificationRepository;
         #endregion
         #region Ctor
         public PostService(IRepository<Z_Consultant_Post> postRepository,
            IRepository<Z_Consultant_Category> categoryRepository,
            IRepository<Z_Consultant_Comment> commentRepository,
-           IRepository<Z_Consultant_Photo> photoRepository)
+           IRepository<Z_Consultant_Photo> photoRepository,
+           IRepository<Z_Consultant_Notification>notificationRepository)
         {
             this._postRepository = postRepository;
             this._categoryRepository = categoryRepository;
             this._commentRepository = commentRepository;
             this._photoRepository = photoRepository;
-
+            this._notificationRepository = notificationRepository;
         }
         #endregion
         #region Methods
@@ -114,7 +116,7 @@ namespace Nop.Services.Z_ConsultantAdmin.Post
 
             return null;
         }
-        //Remove Closed Displayed Post
+        //Remove  Post
         public void RemovePost(int postId)
         {
 
@@ -135,6 +137,15 @@ namespace Nop.Services.Z_ConsultantAdmin.Post
 
                     }
                 }
+
+                var notifications = _notificationRepository.Table.Where(n => n.PostId == postId).ToList();
+
+                if(notifications !=null)
+                {
+                    _notificationRepository.Delete(notifications);
+                }
+
+
                 _postRepository.Delete(post);
             }
 

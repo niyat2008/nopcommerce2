@@ -952,7 +952,7 @@
                 if (willDelete) {
                     $.ajax({
                         "url": "/Consultations/Admin/Posts/RemovePost?postId=" + button.attr("data-post-id") + "",
-                        "method": "DELETE",
+                        "method": "POST",
                         "success": function (result) {
                             dataTable.row(button.parents("tr")).remove().draw();
                             //dataTable.rows().remove().draw();

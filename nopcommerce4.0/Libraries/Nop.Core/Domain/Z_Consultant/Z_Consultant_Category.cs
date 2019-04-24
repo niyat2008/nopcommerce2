@@ -20,7 +20,7 @@ namespace Nop.Core.Domain.Z_Consultant
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
         public string Description { get; set; }
-
+        public bool IsActive { get; set; }
         public ICollection<Z_Consultant_Post> Posts { get; set; }
 
         public ICollection<Z_Consultant_SubCategory> SubCategories { get; set; }

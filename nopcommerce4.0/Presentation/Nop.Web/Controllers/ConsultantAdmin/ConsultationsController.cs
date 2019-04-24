@@ -260,7 +260,7 @@ namespace Nop.Web.Controllers.Consultant_Admin
         }
        
         //Remove  Post
-        [HttpDelete]
+        [HttpPost]
         public ActionResult RemovePost(int postId)
         {
             if (!_workContext.CurrentCustomer.IsRegistered())

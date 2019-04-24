@@ -182,7 +182,7 @@
                     $(".modal-backdrop").removeClass('show');
                     $.ajax({
                         "url": "/Harag/Admin/Comment/HaragRateDelete?rateId=" + button.attr("data-rate-id") + "",
-                        "method": "DELETE",
+                        "method": "POST",
                         "success": function (result) {
                             dataTable.row(button.parents("tr")).remove().draw();
                             //dataTable.rows().remove().draw();

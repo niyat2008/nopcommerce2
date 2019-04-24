@@ -24,9 +24,10 @@
                 <th>الرقم </th>
                 <th>الاسم</th>
                 <th>الوصف</th>
+                <th>الحالة</th>
                 <th>الصنف الرئيسى </th>
                 
-                <th>---</th>
+                @*<th>---</th>*@
             </tr>
         </thead>
     </table>
@@ -53,7 +54,14 @@
 
         { "data": "Id", "name": "Id","width":"5%"},
     { "data": "Name"},
-    { "data": "Description","width":"35%"},
+    { "data": "Description", "width": "35%" },
+    {
+        "data": "IsActive",
+        "render": function (data) {
+            return (data) ? "<input type='checkbox' disabled checked >" : "<input type='checkbox' disabled  >";
+
+        }
+    },
     { "data": "CategoryName" },
     //{
     //"data": "Id",

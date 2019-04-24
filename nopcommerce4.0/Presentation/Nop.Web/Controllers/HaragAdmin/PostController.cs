@@ -100,6 +100,70 @@ namespace Nop.Web.Controllers.HaragAdmin
 
             return Json(new { data = outputModel.Items });
         }
+
+       
+        //Get All Posts
+        public IActionResult GetHaragDeletedPosts()
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
+                return Forbid();
+
+
+
+            return View("~/Themes/Pavilion/Views/HaragAdmin/Post/GetAllDeletedPosts.cshtml");
+        }
+        //Get All Posts Ajax
+        [HttpPost]
+        public IActionResult GetHaragDeletedPostsAjax()
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Administrators, true) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.HaragAdmin, true))
+                return Forbid();
+
+            //Server Side Parameters
+            var start = Convert.ToInt32(Request.Form["start"].FirstOrDefault());
+            //int startRec = Request.Form.GetValues("start").First;
+            //int start = Convert.ToInt32(Request.Form.GetValues("start")[0]);
+            int length = Convert.ToInt32(Request.Form["length"]);
+            string searchValue = Request.Form["search[value]"];
+            string sortColumnName = Request.Form["columns[" + Request.Form["order[0][column]"] + "][name]"];
+            string sortDirection = Request.Form["order[0][dir]"];
+            var posts = _postService.GetAllDeletedPosts(start, length, searchValue, sortColumnName, sortDirection);
+
+
+            var outputModel = new PostOutputModel
+            {
+                Items = posts.Select(m => new PostModel()
+                {
+                    Id = m.Id,
+                    Text = m.Text,
+                    Title = m.Title,
+                    DateCreated = m.DateCreated.Date,
+                    DateUpdated = m.DateUpdated,
+                    IsClosed = m.IsCommentingClosed,
+                    IsAnswered = m.IsAnswered,
+                    City = m.City?.ArName,
+
+                    IsDispayed = m.IsDispayed,
+                    IsFeatured = (m.IsFeatured == null ? false : (bool)m.IsFeatured),
+                    Customer = m.Customer.Username,
+                    Category = m.Category.Name,
+                    DeletionReason=m.DeleteMessage,
+                    DeletionTime=m.DeleteTime
+
+                }).ToList()
+            };
+
+            return Json(new { data = outputModel.Items });
+        }
+
         //Get  Post Details
         public ActionResult GetPostDetails(int postId)
         {

@@ -32,6 +32,8 @@ namespace Nop.Web.Models.HaragAdmin.Post
 
         public string Customer { get; set; }
         public string Category { get; set; }
+        public DateTime? DeletionTime { get; set; }
+        public string DeletionReason { get; set; }
 
     }
 }

@@ -130,7 +130,7 @@ namespace Nop.Web.Controllers.HaragAdmin
 
         }
         //Delete Bank Account 
-        [HttpDelete]
+        [HttpPost]
         public IActionResult DeleteBankAccount(int accountId)
         {
             if (!_workContext.CurrentCustomer.IsRegistered())
