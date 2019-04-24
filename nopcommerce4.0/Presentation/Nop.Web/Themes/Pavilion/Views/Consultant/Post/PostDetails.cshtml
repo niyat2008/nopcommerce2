@@ -32,10 +32,8 @@
     .comment .comment-content {
         font-size: 16px;
         color: #000;
-        background: #eee;
         padding: 5px 10px;
-        width: 95%;
-        border-radius: 20px;
+        border-radius: 4px;
         margin-bottom: 0;
     }
     /* Advertise Details */
@@ -48,31 +46,34 @@
         border: 1px solid #ddd;
         font-size: 15px;
         margin-bottom: 10px;
+        padding-bottom: 15px;
     }
 
         .content .det-block .det-top {
             padding: 10px;
             padding-bottom: 6px;
             border-bottom: 1px solid #ddd;
-            border: 1px solid #ebe7d1;
             border-radius: 4px 4px 0px 0px;
-            border-bottom: 1px solid #ebe7d1;
-            border-top: 1px solid #ebe7d1;
-            background-color: #f8f6e7;
+            border-bottom: 1px solid #EDEAEA;
+            background-color: #EDEAEA;
             /*padding-top: 20px;*/
             font-family: "Times New Roman",Times,serif;
         }
 
-            .content .det-block .det-top h4 {
-                margin-top: 0;
-                font-weight: bold;
-                color: #4da74d !important;
-                font-size: 24px;
-            }
+        .content .det-block .det-bottom h4 {
+            margin-top: 0;
+            font-weight: bold;
+            color: #5c9ac6 !important;
+            font-size: 24px;
+            padding: 10px;
+            margin-bottom: 0;
+            border-bottom: 1px solid #ddd;
+        }
 
             .content .det-block .det-top small {
                 color: #777;
                 line-height: 42px;
+                font-size:13px
             }
 
             .content .det-block .det-top a span {
@@ -91,16 +92,18 @@
 
             .content .det-block .det-bottom p {
                 padding: 10px;
-                font-size: 26px;
+                font-size: 18px;
                 color: black;
                 font-family: Tahoma;
             }
 
             .content .det-block .det-bottom img {
-                width: 75%;
-                float: right;
+                /*width: 75%;
+                float: right;*/
                 margin-left: 15px;
-                margin-bottom: 30px;
+                margin-bottom: 10px;
+                width: 100%;
+                height: 120px;
             }
 
             .content .det-block .det-bottom span.label {
@@ -145,6 +148,22 @@
         border-radius: 4px;
         margin-bottom: 25px;
     }
+    .socialSec {
+        padding: 15px 0;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 20px;
+        padding-bottom:30px
+    }
+
+        .socialSec a {
+            width: 33%;
+            float: right;
+            text-align: center
+        }
+
+        .socialSec a i {
+            font-size: 22px
+        } 
 </style>
 
 <!-- Details -->
@@ -155,19 +174,16 @@
         <div>
             @if (!Model.IsClosed && !Model.IsReserved && !Model.IsAnswered && ViewBag.UserRole == "Consultant")
             {
-
                 <button onclick="ReservePost(@Model.Id)" style="margin-bottom:2%;" class="btndarckgreen"> حجز الاستشارة </button>
             }
             @if (!Model.IsClosed && Model.IsReserved && !Model.IsAnswered && ViewBag.UserRole == "Consultant")
             {
-
                 <button onclick="UnReservePost(@Model.Id)" style="margin-bottom:2%;" class="btndarckgreen"> فك الحجز </button>
             }
         </div>
         @*<span> <span id="CategoryNameSpan">@Model.CategoryName</span>  / <span id="SubCategoryNameSpan">@Model.SubCategoryName</span> </span>*@
         @if (!Model.IsClosed && (Model.IsAnswered || Model.IsReserved) && ViewBag.UserRole == "Consultant")
-        {
-            
+        {         
             <button id="Ahmed" onclick="changeCatAndSub()" class="btndarckgreen"> تعديل </button>
         }
         @*onclick="changeCatAndSub()"*@
@@ -207,9 +223,9 @@
             {
                 @if (Model.IsClosed == true)
                 {
-                    <span class="status closed">
+                    @*<span class="status closed">
                         @Html.Raw(" مغلقة ")
-                    </span>
+                    </span>*@
                 }
                 else if (!Model.IsClosed && Model.IsAnswered)
                 {
@@ -309,15 +325,18 @@
     <div class="cont det-block">
         <div class="">
             <div class="det-top">
-                <h4> >> @Model.Title</h4>
+                @*<h4> >> @Model.Title</h4>*@
 
                 <div class="det-det">
 
                     <div class="row" style="padding-right: 20px">
-                        <div class="col-md-7">
+                        <div class="col-md-12">
                             <div class="row">
                                 <strong> <i class="fa fa-sitemap"></i> <span id="CategoryNameSpan">@Model.CategoryName</span>  / <span id="SubCategoryNameSpan">@Model.SubCategoryName</span> </strong>
                             </div>
+                        </div>
+                        <div class="col-md-7">
+                            
                             <div class="row">
                                 <small>
                                     @Model.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @Model.DateCreated.ToString("hh:mm:ss")
@@ -326,7 +345,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="row">
-                                <a href="/Harag/user/@Model.PostOwner"><span><i class="fa fa-user"></i> @Model.PostOwner </span></a>
+                                <a href="/Harag/user/@Model.PostOwner" style="line-height:40px"><span><i class="fa fa-user"></i> @Model.PostOwner </span></a>
                             </div>
                             @*<div class="row"> <span class="text-gray"> #@Model.Id </span> </div>*@
                         </div>
@@ -334,10 +353,11 @@
                 </div>
             </div>
             <div class="det-bottom">
+                <h4> >> @Model.Title</h4>
                 <p>@Model.Text</p>
                 @foreach (var image in Model.Files)
                 {
-                    <div class="col-xs-12">
+                    <div class="col-xs-2" style="padding:4px">
                         <a href="@image" data-lightbox="image-@Model.Id" data-title="My caption">
                             <img src="@image" alt="Single Image" />
                         </a>
@@ -345,12 +365,19 @@
                 }
             </div>
         </div>
-        <div>
-            @Html.Partial("/Themes/Pavilion/Views/Consultant/Post/ShareButtonsa.cshtml", Url.Link("Consultant.Post.GetPost", new { PostId = Model.Id }))
-        </div>
-        <div id="comments"> </div>
+        
     </div>
 </div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="text-center socialSec">
+            @Html.Partial("/Themes/Pavilion/Views/Consultant/Post/ShareButtonsa.cshtml", Url.Link("Consultant.Post.GetPost", new { PostId = Model.Id }))
+        </div>
+    </div>
+</div>
+
+<div id="comments"> </div>
+
 
 <div id="changeCatAndSubDiv" class="modal" tabindex="-1" role="dialog" Style="display:none">
     <div class="modal-dialog" role="document">
