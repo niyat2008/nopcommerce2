@@ -10,298 +10,444 @@
 <link href="~/css/Consultant/pagination.css" rel="stylesheet" />
 
 <style type="text/css">
+    .orange-star {
+        color: orange !important;
+    }
+
     .btndarckgreen:hover {
         background-color: darkgreen !important;
+    }
+    /*Content*/
+    .content {
+        margin-top: 30px
+    }
+
+        .content .form-control {
+            height: 40px;
+            font-family: inherit;
+        }
+
+        .content select {
+            margin-bottom: 10px
+        }
+
+    textarea {
+        font-family: Tajawal,serif !important
+    }
+
+    .content button {
+        background: #eee;
+        border-bottom: 3px solid #ccc;
+        color: #000
+    }
+
+        .content button.srchBtn {
+            width: 100%;
+            height: 37px;
+        }
+
+        .content button.add {
+            margin-bottom: 20px;
+            margin-top: 20px;
+            font-family: Tajawal,serif !important
+        }
+
+            .content button.add i {
+                color: #4da74d
+            }
+
+    .content .choices {
+        margin-bottom: 40px
+    }
+
+        .content .choices a {
+            background: #eee;
+            padding: 5px;
+            border-radius: 3px;
+            cursor: pointer;
+            line-height: 35px;
+        }
+
+            .content .choices a:hover {
+                color: #0473c0;
+                background: #e6f1f9;
+                font-weight: bold;
+            }
+
+    .content .items {
+        margin: 25px 0
+    }
+
+        .content .items .item {
+            display: table;
+            /*border-bottom: 1px solid #ddd;*/
+            border: 1px solid #ddd;
+            /*padding: 5px 10px;*/
+            width: 100%;
+            margin-bottom: 10px
+        }
+
+            .content .items .item:nth-child(odd) {
+                background: #f3f9f7
+            }
+
+            .content .items .item .det {
+                width: 87%;
+                float: right;
+                /*min-height:100px*/
+            }
+
+                .content .items .item .det p {
+                    font-size: 16px;
+                    padding: 4px;
+                }
+
+                .content .items .item .det .det-det {
+                    margin: 10px 0
+                }
+
+                    .content .items .item .det .det-det a span i {
+                        padding-left: 4px
+                    }
+
+                .content .items .item .det h3 {
+                    margin-top: 0;
+                    font-weight: bold;
+                    color: #4da74d
+                }
+
+                .content .items .item .det small {
+                    color: #777;
+                    padding-left: 30px;
+                }
+
+                .content .items .item .det span {
+                    padding-left: 30px;
+                    color: #777
+                }
+
+            .content .items .item .det-img {
+                width: 12%;
+                float: right
+            }
+
+                .content .items .item .det-img img {
+                    width: 100%;
+                    margin: 5px 0;
+                    height: auto;
+                    max-height: 100px; /*cursor:pointer*/
+                }
+
+            .content .items .item.msgItem {
+                width: 90%
+            }
+
+                .content .items .item.msgItem .det {
+                    width: 100%;
+                    float: none;
+                }
+
+            .content .items .item .cont-Header {
+                background: #EDEAEA;
+                padding: 5px 10px;
+            }
+
+            .content .items .item .cont-Body {
+                padding: 5px 10px;
+            }
+
+                .content .items .item .cont-Body .body-cont {
+                    width: 100%;
+                    display: flex;
+                    /*min-height: 100px;*/
+                }
+
+    span {
+        padding: 0;
+    }
+
+    .content .items .item .cont-Footer {
+        padding: 5px 10px;
+        background: rgba(237, 234, 234, 0.3);
+        border-top: 1px solid #edeaea;
+    }
+
+    /*.content .items .item .cont-Footer span.buton { line-height:42px }*/
+    span .report {
+        cursor: pointer
+    }
+
+
+    @@media(max-width:767px) {
+        .content .items .item .det {
+            width: 74%;
+        }
+
+        .content .items .item .det-img {
+            width: 25%
+        }
     }
 </style>
 
 <!-- Tab -->
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" Class="active">
+        <a href="@Url.RouteUrl("Consultant.Post.GetConsultantNotAnsweredPosts")">لم يرد عليها  </a>
+    </li>
+    <li role="presentation">
+        <a href="@Url.RouteUrl("Consultant.Post.GetConsultantReservedPosts")">المحجوزة</a>
+    </li>
+    <li role="presentation">
+        <a href="@Url.RouteUrl("Consultant.Post.GetConsultantOpenPosts")">المفتوحة</a>
+    </li>
+    <li role="presentation">
+        <a href="@Url.RouteUrl("Consultant.Post.GetConsultantClosedPosts")">المغلقة</a>
+    </li>
+</ul>
 
+<!-- Post -->
+<div class="content">
+    <div class="items">
 
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" Class="active">
-                    <a href="@Url.RouteUrl("Consultant.Post.GetConsultantNotAnsweredPosts")">لم يرد عليها  </a>
-                </li>
-                <li role="presentation">
-                    <a href="@Url.RouteUrl("Consultant.Post.GetConsultantReservedPosts")">المحجوزة</a>
-                </li>
-                <li role="presentation">
-                    <a href="@Url.RouteUrl("Consultant.Post.GetConsultantOpenPosts")">المفتوحة</a>
-                </li>
-                <li role="presentation">
-                    <a href="@Url.RouteUrl("Consultant.Post.GetConsultantClosedPosts")">المغلقة</a>
-                </li>
-            </ul>
+        @if (Model.Items.Count() <= 0)
+        {
+            <div id="tabpanelPosts" style="text-align:center"><b>لا يوجد</b></div>
+        }
 
-            <!-- Tab panes -->
-            <div class="tab-content">
-                
-
-
-                @if (Model.Items.Count() <= 0)
-                {
-                    <div id="tabpanelPosts" style="text-align:center"><b>لا يوجد</b></div>
-                }
-
-
-
-
-                @foreach (var post in Model.Items)
-                {
-                    <div id="tabpanelPosts">
-                        <div class="post">
-                            <!-- Heading -->
-                            <div class="heading">
-                                <span>@post.CategoryName <span> /</span> @post.SubCategoryName  </span>
-                                <span class="pull-left">
-                                    @if (ViewBag.UserRole == "Vistor")
+        @foreach (var post in Model.Items)
+        {
+            <div id="tabpanelPosts">
+                <div class="item">
+                    <!-- Heading -->
+                    <div class="cont-Header">
+                        <div>
+                            <span>@post.CategoryName <span> /</span> @post.SubCategoryName  </span>
+                            <span class="pull-left" style="padding-left: 10px">
+                                @if (ViewBag.UserRole == "Vistor")
+                                {
+                                    @if (post.IsClosed)
                                     {
-                                        @if (post.IsClosed)
-                                        {
-                                            @*<span class="status closed">
-                                                مغلقة
-                                            </span>*@
-                                        }
-                                        else
-                                        {
-                                            <span class="status open">
-                                                مفتوحة
-                                            </span>
-                                        }
+                                        @*<span class="status closed"> مغلقة </span>*@
                                     }
-
-                                    @if (ViewBag.UserRole == "Registered")
+                                    else
                                     {
-                                        @if (post.IsClosed)
-                                        {
-                                            @*<span class="status closed">
-                                                مغلقة
-                                            </span>*@
-                                        }
-                                        else
-                                        {
-                                            <span class="status open">
-                                                مفتوحة
-                                            </span>
-                                        }
+                                        <span class="status open">
+                                            مفتوحة
+                                        </span>
                                     }
+                                }
 
-                                    @if (ViewBag.UserRole == "Consultant")
+                                @if (ViewBag.UserRole == "Registered")
+                                {
+                                    @if (post.IsClosed)
                                     {
-                                        @if (post.IsClosed == true)
-                                        {
-                                            <span class="status closed">
-                                                @Html.Raw(" مغلقة ")
-                                            </span>
-                                        }
-                                        else if (!post.IsClosed && post.IsAnswered)
-                                        {
-                                            <span class="status open">
-                                                @Html.Raw(" مفتوحة ")
-                                            </span>
-                                        }
-                                        else if (!post.IsClosed && !post.IsAnswered && post.IsReserved)
-                                        {
-                                            <span class="status open">
-                                                @Html.Raw(" محجوزة ")
-                                            </span>
-                                        }
-                                        else if (!post.IsClosed && !post.IsAnswered && !post.IsReserved)
-                                        {
-                                            <span class="status open">
-                                                @Html.Raw(" لم يرد عليها ")
-                                            </span>
-                                        }
+                                        @*<span class="status closed">
+                                مغلقة
+                            </span>*@
                                     }
-
-
-                                    @if (post.Rate != null)
+                                    else
                                     {
-                                        <span class="separator"> | </span>
-                                        @if (post.IsClosed)
-                                        {
-                                            <span>
-                                                @if (post.Rate >= 1)
-                                                {
-                                                    <i class="fa fa-star orange-star"></i>
-                                                }
-                                                else
-                                                {
-                                                    <i class="fa fa-star"></i>
-                                                }
-                                                @if (post.Rate >= 2)
-                                                {
-                                                    <i class="fa fa-star orange-star"></i>
-                                                }
-                                                else
-                                                {
-                                                    <i class="fa fa-star"></i>
-                                                }
-                                                @if (post.Rate >= 3)
-                                                {
-                                                    <i class="fa fa-star orange-star"></i>
-                                                }
-                                                else
-                                                {
-                                                    <i class="fa fa-star"></i>
-                                                }
-                                                @if (post.Rate >= 4)
-                                                {
-                                                    <i class="fa fa-star orange-star"></i>
-                                                }
-                                                else
-                                                {
-                                                    <i class="fa fa-star"></i>
-                                                }
-                                                @if (post.Rate >= 5)
-                                                {
-                                                    <i class="fa fa-star orange-star"></i>
-                                                }
-                                                else
-                                                {
-                                                    <i class="fa fa-star"></i>
-                                                }
-
-                                            </span>
-                                        }
+                                        <span class="status open">
+                                            مفتوحة
+                                        </span>
                                     }
-                                </span>
-                            </div>
-                            <!-- Body -->
-                            <div class="post-body" style="overflow-wrap:break-word;">
-                                <div class="row">
-                                    <div class="col-xs-2 text-center">
-                                        <img class="userimagelarge" src="~/images/Consultant/images/no-img.png" />
-                                        <img class="userimagemedium" src="~/images/Consultant/images/no-img-mobile.png" style="width:50px;height:50px;" />
-                                        <img class="userimagesmall" src="~/images/Consultant/images/no-img-mobile.png" style="width:35px;height:35px;" />
+                                }
+
+                                @if (ViewBag.UserRole == "Consultant")
+                                {
+                                    @if (post.IsClosed == true)
+                                    {
+                                        @*<span class="status closed">
+                                @Html.Raw(" مغلقة ")
+                            </span>*@
+                                    }
+                                    else if (!post.IsClosed && post.IsAnswered)
+                                    {
+                                        <span class="status open">
+                                            @Html.Raw(" مفتوحة ")
+                                        </span>
+                                    }
+                                    else if (!post.IsClosed && !post.IsAnswered && post.IsReserved)
+                                    {
+                                        <span class="status open">
+                                            @Html.Raw(" محجوزة ")
+                                        </span>
+                                    }
+                                    else if (!post.IsClosed && !post.IsAnswered && !post.IsReserved)
+                                    {
+                                        <span class="status open">
+                                            @Html.Raw(" لم يرد عليها ")
+                                        </span>
+                                    }
+                                }
+
+
+                                @if (post.Rate != null)
+                                {
+                                    <span class="separator"> | </span>
+                                    @if (post.IsClosed)
+                                    {
+                                        <span>
+                                            @if (post.Rate >= 1)
+                                            {
+                                                <i class="fa fa-star orange-star"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
+                                            @if (post.Rate >= 2)
+                                            {
+                                                <i class="fa fa-star orange-star"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
+                                            @if (post.Rate >= 3)
+                                            {
+                                                <i class="fa fa-star orange-star"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
+                                            @if (post.Rate >= 4)
+                                            {
+                                                <i class="fa fa-star orange-star"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
+                                            @if (post.Rate >= 5)
+                                            {
+                                                <i class="fa fa-star orange-star"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
+
+                                        </span>
+                                    }
+                                }
+                            </span>
+                        </div>
+                        <div style="margin:5px 0">
+                            <small>@post.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @post.DateCreated.ToString("hh:mm:ss")</small>
+                        </div>
+                    </div>
+                    <!-- Body -->
+                    <div class="cont-Body">
+                        <div class="body-cont">
+                            <div class="det">
+                                <a href="@Url.RouteUrl("Consultant.Post.GetPost",new { PostId=@post.Id})"><h3>@post.Title</h3></a>
+
+                                <div class="det-det">
+                                    <div>
+                                        <a href="#">
+                                            <span><i class="fa fa-user"></i>@post.PostOwner</span>
+                                        </a>
                                     </div>
-                                    <div class="col-xs-10">
-                                        <h4>@post.PostOwner</h4>
-                                        <span>@post.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @post.DateCreated.ToString("hh:mm:ss")</span>
-                                        <div>
-                                            <h4>
-                                                @post.Title
-                                            </h4>
-                                        </div>
-                                        <p>
-                                            @post.Text
-                                        </p>
-                                        @if (@post.Photo != null)
-                                        {
-                                        <div style="width:160px;display:inline;">
-                                            <a href="@post.Photo" data-lightbox="image-@post.Id" data-title="My caption"><img src="@post.Photo" alt="Single Image" style="width:150px;height:150px;" /></a>
-                                        </div>
-                                        }
+                                    <div id="customText" onload="function mySubStrFunc() { var str = @post.Text; var res = str.substring(0, 4); document.getElementById('customText').innerHTML = res;}">
+                                        @*@post.Text*@
                                     </div>
-                                </div>
-                            </div>
-                            <!-- Footer -->
-                            <div class="post-footer">
-                                <div class="pull-left">
-                                    @Html.Partial("/Themes/Pavilion/Views/Consultant/Post/ShareButtonsa.cshtml", Url.Link("Consultant.Post.GetPost", new { PostId = @post.Id }))
-
-                                    <a href="@Url.RouteUrl("Consultant.Post.GetPost",new { PostId=@post.Id})">
-                                        <span class="buton primary btndarckgreen"> التفاصيل </span>
-                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                }
+                    <div class="cont-Footer">
+                        <span class="">
+                            <a href="@Url.RouteUrl("Consultant.Post.GetPost",new { PostId=@post.Id})">
+                                <span class="buton primary"> التفاصيل </span>
+                            </a>
+                        </span>
+                        <span class="pull-left" style="padding-left:10px">
+                            @Html.Partial("/Themes/Pavilion/Views/Consultant/Post/ShareButtonsa.cshtml", Url.Link("Consultant.Post.GetPost", new { PostId = @post.Id }))
+                        </span>
+                    </div>
 
-
-
-
-
-
-                @if (Model.Paging.PageNumber <= Model.Paging.TotalPages)
-                {
-
-
-                    @if (Model.Links.Count == 2)
-                    {
-                        @if (Model.Paging.PageNumber == 1)
-                        {
-                            <!-- Pager -->
-                            <nav class="pagination-outer" aria-label="Page navigation">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a class="page- link  btn btn-default" aria-label="Next" onclick="getPostPaging('@Model.Links[1]?.Href')">
-                                            <span aria-hidden="true"> <<< </span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page -link  btn btn-default">@Model.Paging.PageNumber</a>
-                                    </li>
-
-                                </ul>
-                            </nav>
-                        }
-                        else if (Model.Paging.PageNumber == Model.Paging.TotalPages)
-                        {
-                            <!-- Pager -->
-                            <nav class="pagination-outer" aria-label="Page navigation">
-                                <ul class="pagination">
-
-                                    <li class="page-item">
-                                        <a class="page-lin k  btn btn-default">@Model.Paging.PageNumber</a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-lin k  btn btn-default" aria-label="Previous" onclick="getPostPaging('@Model.Links[0]?.Href')">
-                                            <span aria-hidden="true"> >>> </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        }
-                    }
-                    else if (Model.Links.Count > 2)
-                    {
-                        <!-- Pager -->
-                        <nav class="pagination-outer" aria-label="Page navigation">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-l ink  btn btn-default" aria-label="Next" onclick="getPostPaging('@Model.Links[2]?.Href')">
-                                        <span aria-hidden="true"> <<< </span>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-li nk  btn btn-default">@Model.Paging.PageNumber</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-li nk  btn btn-default" aria-label="Previous" onclick="getPostPaging('@Model.Links[0]?.Href')">
-                                        <span aria-hidden="true"> >>> </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    }
-
-
-
-                }
-
-
-
-
-
-                <not-found *ngIf="!unassignedPosts.length"></not-found>
-                <tw-pagination *ngIf="unassignedPosts.length" [numberOfPages]="paging?.totalPages" (pageChanged)="unassignedPageChanged($event)"></tw-pagination>
+                </div>
             </div>
-        
+        }
 
+        @if (Model.Paging.PageNumber <= Model.Paging.TotalPages)
+        {
 
+            @if (Model.Links.Count == 2)
+            {
+                @if (Model.Paging.PageNumber == 1)
+                {
+                    <!-- Pager -->
+                    <nav class="pagination-outer" aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page- link  btn btn-default" aria-label="Next" onclick="getPostPaging('@Model.Links[1]?.Href')">
+                                    <span aria-hidden="true"> <<< </span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page -link  btn btn-default">@Model.Paging.PageNumber</a>
+                            </li>
 
-
-            <script type="text/javascript">
-
-
-                function getPostPaging(url) {
-
-                    var indexmyurl = url.indexOf("Consultations/Consultations");
-                    var myurl = url.substring(indexmyurl);
-                    window.location.href = myurl;
-
+                        </ul>
+                    </nav>
                 }
-            </script>
+                else if (Model.Paging.PageNumber == Model.Paging.TotalPages)
+                {
+                    <!-- Pager -->
+                    <nav class="pagination-outer" aria-label="Page navigation">
+                        <ul class="pagination">
+
+                            <li class="page-item">
+                                <a class="page-lin k  btn btn-default">@Model.Paging.PageNumber</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-lin k  btn btn-default" aria-label="Previous" onclick="getPostPaging('@Model.Links[0]?.Href')">
+                                    <span aria-hidden="true"> >>> </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                }
+            }
+            else if (Model.Links.Count > 2)
+            {
+                <!-- Pager -->
+                <nav class="pagination-outer" aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-l ink  btn btn-default" aria-label="Next" onclick="getPostPaging('@Model.Links[2]?.Href')">
+                                <span aria-hidden="true"> <<< </span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-li nk  btn btn-default">@Model.Paging.PageNumber</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-li nk  btn btn-default" aria-label="Previous" onclick="getPostPaging('@Model.Links[0]?.Href')">
+                                <span aria-hidden="true"> >>> </span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            }
+
+        }
+
+        <not-found *ngIf="!unassignedPosts.length"></not-found>
+        <tw-pagination *ngIf="unassignedPosts.length" [numberOfPages]="paging?.totalPages" (pageChanged)="unassignedPageChanged($event)"></tw-pagination>
+    </div>
+</div>
+
+<script stype="text/javascript">
+    function getPostPaging(url) {
+
+        var indexmyurl = url.indexOf("Consultations/Consultations");
+        var myurl = url.substring(indexmyurl);
+        window.location.href = myurl;
+
+    }
+</script>
