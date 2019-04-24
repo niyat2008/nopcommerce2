@@ -2073,17 +2073,17 @@ label, label + * {
 	width: 55px;
 }
 .overview .add-to-cart-button,
-.variant-overview .add-to-cart-button {
-	height: 45px;
+.variant-overview .add-to-cart-button, .overview .add-to-cart-button1 {
+    height: 45px;
     border: none;
     background: #f74258 url('../img/cart-button-2.png') no-repeat right center;
-	padding: 0 48px 0 28px;
+    padding: 0 48px 0 28px;
     font-size: 13px;
     font-weight: bold;
     color: #fff;
-	text-transform: uppercase;
-	outline: 1px solid transparent;
-	transition: all 0.2s ease;
+    text-transform: uppercase;
+    outline: 1px solid transparent;
+    transition: all 0.2s ease;
 }
 .overview .add-to-cart-button:hover,
 .variant-overview .add-to-cart-button:hover {

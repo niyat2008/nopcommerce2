@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Nop.Core.Domain.Orders;
+using Nop.Core.Domain.Payments;
+using Nop.Core.Domain.Shipping;
 using Nop.Web.Framework.Mvc.Models;
 
 namespace Nop.Web.Models.Order
@@ -30,6 +32,9 @@ namespace Nop.Web.Models.Order
             public string PaymentStatus { get; set; }
             public string ShippingStatus { get; set; }
             public DateTime CreatedOn { get; set; }
+            public ShippingStatus ShippingStatusEnum { get;  set; }
+            public PaymentStatus PaymentStatusEnum { get;  set; }
+            public string PaymentMethod { get;  set; }
         }
 
         public partial class RecurringOrderModel : BaseNopEntityModel

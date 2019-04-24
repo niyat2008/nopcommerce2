@@ -38,11 +38,14 @@
     @if (IsSectionDefined("left"))
     {
         @RenderSection("left")
+
     }
     else
     {
-        @await Component.InvokeAsync("Widget", new { widgetZone = "left_side_column_before" })
+        @*@await Component.InvokeAsync("Widget", new { widgetZone = "left_side_column_before" })*@
+         
         @await Component.InvokeAsync("CategoryNavigation", new { currentCategoryId = currentCategoryId, currentProductId = currentProductId })
+
         @await Component.InvokeAsync("Widget", new { widgetZone = "left_side_column_after_category_navigation" })
         @await Component.InvokeAsync("ManufacturerNavigation", new { currentManufacturerId = currentManufacturerId })
         @await Component.InvokeAsync("VendorNavigation")

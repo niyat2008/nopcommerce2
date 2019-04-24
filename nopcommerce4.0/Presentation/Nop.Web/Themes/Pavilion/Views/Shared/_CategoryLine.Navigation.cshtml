@@ -6,6 +6,8 @@
     foreach (var subCategory in Model.Category.SubCategories)
     {
         @await Html.PartialAsync("_CategoryLine.Navigation.ListItem", subCategory)
+
+    
     }
 }
 else

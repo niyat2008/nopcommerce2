@@ -19,6 +19,8 @@ namespace Nop.Web.Models.Catalog
         {
             public int CurrentCategoryId { get; set; }
             public CategorySimpleModel Category { get; set; }
+            public List<CategorySimpleModel> Categories { get; set; }
+
         }
 
         #endregion

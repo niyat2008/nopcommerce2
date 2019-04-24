@@ -2118,13 +2118,15 @@ label, label + * {
 	margin: 0 8px 0 0;
 	font-size: 13px;
 }
-.product-social-buttons ul {
-	display: inline-block;
-	margin: 0;
-}
+    .product-social-buttons ul {
+        display: inline-block;
+        margin: 0;
+        background: red;
+    }
 .product-social-buttons li {
 	position: relative;
 	z-index: 0;
+
 	margin: 0;
 }
 .product-social-buttons li:hover {
@@ -2132,26 +2134,20 @@ label, label + * {
 }
 .product-social-buttons li a {
 	width: 26px;
-	height: 24px;
-	background: url('../img/social-sprite-2.png') no-repeat;
-	outline: 1px solid transparent;
+	height: 24px;  
 	transition: all 0.2s ease;
 }
 .product-social-buttons .facebook a {
-	background-color: #5f7ca7;
-	background-position: 0 0;
+	background-color: #5f7ca7; 
 }
 .product-social-buttons .twitter a {
-	background-color: #5dc4e6;
-	background-position: -26px 0;
+	background-color: #5dc4e6; 
 }
 .product-social-buttons .pinterest a {
-	background-color: #e56363;
-	background-position: -52px 0;
+	background-color: #e56363; 
 }
 .product-social-buttons .google a {
-	background-color: #4f4f4f;
-	background-position: -78px 0;
+	background-color: #4f4f4f; 
 }
 .product-social-buttons .facebook a:hover {
 	outline-color: #5f7ca7;

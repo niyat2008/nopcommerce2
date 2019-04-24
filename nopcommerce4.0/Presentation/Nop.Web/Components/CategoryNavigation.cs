@@ -13,9 +13,9 @@ namespace Nop.Web.Components
             this._catalogModelFactory = catalogModelFactory;
         }
 
-        public IViewComponentResult Invoke(int currentCategoryId, int currentProductId)
+        public IViewComponentResult Invoke(int currentCategoryId, int currentProductId, bool IsSame = false)
         {
-            var model = _catalogModelFactory.PrepareCategoryNavigationModel(currentCategoryId, currentProductId);
+            var model = _catalogModelFactory.PrepareCategoryNavigationModel(currentCategoryId, currentProductId, IsSame);
             return View(model);
         }
     }

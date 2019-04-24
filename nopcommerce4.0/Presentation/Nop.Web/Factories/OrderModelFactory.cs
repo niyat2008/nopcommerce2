@@ -131,8 +131,11 @@ namespace Nop.Web.Factories
                     OrderStatus = order.OrderStatus.GetLocalizedEnum(_localizationService, _workContext),
                     PaymentStatus = order.PaymentStatus.GetLocalizedEnum(_localizationService, _workContext),
                     ShippingStatus = order.ShippingStatus.GetLocalizedEnum(_localizationService, _workContext),
+                    ShippingStatusEnum = order.ShippingStatus, 
                     IsReturnRequestAllowed = _orderProcessingService.IsReturnRequestAllowed(order),
-                    CustomOrderNumber = order.CustomOrderNumber
+                    CustomOrderNumber = order.CustomOrderNumber,
+                    PaymentStatusEnum = order.PaymentStatus,
+                    PaymentMethod = order.PaymentMethodSystemName
                 };
                 var orderTotalInCustomerCurrency = _currencyService.ConvertCurrency(order.OrderTotal, order.CurrencyRate);
                 orderModel.OrderTotal = _priceFormatter.FormatPrice(orderTotalInCustomerCurrency, true, order.CustomerCurrencyCode, false, _workContext.WorkingLanguage);
@@ -182,9 +185,10 @@ namespace Nop.Web.Factories
                 IsReturnRequestAllowed = _orderProcessingService.IsReturnRequestAllowed(order),
                 PdfInvoiceDisabled = _pdfSettings.DisablePdfInvoicesForPendingOrders && order.OrderStatus == OrderStatus.Pending,
                 CustomOrderNumber = order.CustomOrderNumber,
-
+                
                 //shipping info
-                ShippingStatus = order.ShippingStatus.GetLocalizedEnum(_localizationService, _workContext)
+                ShippingStatus = order.ShippingStatus.GetLocalizedEnum(_localizationService, _workContext),
+                
             };
             if (order.ShippingStatus != ShippingStatus.ShippingNotRequired)
             {
