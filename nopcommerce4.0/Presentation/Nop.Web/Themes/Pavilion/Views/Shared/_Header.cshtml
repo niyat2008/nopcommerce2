@@ -21,42 +21,118 @@
 <link href="~/fonts/Consultant/font-awesome.min.css" rel="stylesheet" />
 
 <style type="text/css">
-        a:hover { color:#40ca40 }
-
-        /*top-bar*/
-        .top_bar { background: #333; padding: 10px 0; text-align: center; }
-        .topbarspan { cursor: pointer; color: #fff; font-size: 17px; padding: 9px 30px; padding-top: 10px }
-        .topbarspanActive { background:#3e874b }
-        .header label { color: white; }
-        .admin-header-links a { color: white; }
-        .admin-header-links a:hover { text-decoration: underline; color: #40ca40 }
-        /*#sticky { display: none; background-color: #546bcb; height: 70px; }*/
-        /*#sticky.fixed { position: fixed; top: 0; width: 100%; background-color: rgb(246,246,246); }*/
-        .imgsizing { width: 90px; }
-        .searchpadding { padding-top: 4px !important; }
-        .topFixed { position: fixed; top: 0; z-index: 1070; width: 100%; }
-        .header-middle { margin-top: 43px }
-        .header .center.menAll { width: 100% }
-        #topThreeHeader { margin: auto !important; background: #333; height: 43px; text-align: center; top: 0; position: fixed; z-index: 1030; padding-top: 10px; padding-bottom: 5px; }
-        .row { margin-right: -15px; margin-left: -15px; }
-        
-        @@media (min-width: 992px){
-            .col-md-1 {
-                width: 8.33333333%;
-            }
-            .col-md-2 {
-                width: 16.66666667%;
-            }
-            .col-md-6 {
-                width: 50%;
-            }
-            .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
-                float: right;
-            }
-            .col-md-8 {
-                width: 66.66666667%;
-            }
+    a {
+        color: #333;
+        text-decoration:none
+    }
+        a:hover {
+            color: #40ca40;
+            text-decoration: none
         }
+
+    /*top-bar*/
+    .top_bar {
+        background: #333;
+        padding: 10px 0;
+        text-align: center;
+        height: 43px;
+    }
+
+    .topbarspan {
+        cursor: pointer;
+        color: #fff;
+        font-size: 17px;
+        padding: 10px 30px;
+        padding-top: 10px
+    }
+
+    .topbarspanActive {
+        background: #3e874b
+    }
+
+    .header label {
+        color: white;
+    }
+
+    .admin-header-links a {
+        color: white;
+    }
+
+        .admin-header-links a:hover {
+            text-decoration: underline;
+            color: #40ca40
+        }
+    /*#sticky { display: none; background-color: #546bcb; height: 70px; }*/
+    /*#sticky.fixed { position: fixed; top: 0; width: 100%; background-color: rgb(246,246,246); }*/
+    .imgsizing {
+        width: 90px;
+    }
+
+    .searchpadding {
+        padding-top: 4px !important;
+    }
+
+    .topFixed {
+        position: fixed;
+        top: 0;
+        z-index: 1070;
+        width: 100%;
+    }
+
+    .header-middle {
+        margin-top: 43px
+    }
+
+    .header .center.menAll {
+        width: 100%
+    }
+
+    #topThreeHeader {
+        margin: auto !important;
+        background: #333;
+        height: 43px;
+        text-align: center;
+        top: 0;
+        position: fixed;
+        z-index: 1030;
+        padding-top: 10px;
+        padding-bottom: 5px;
+    }
+
+    .row {
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    @@media (min-width: 992px) {
+        .col-md-1 {
+            width: 8.33333333%;
+        }
+
+        .col-md-2 {
+            width: 16.66666667%;
+        }
+
+        .col-md-6 {
+            width: 50%;
+        }
+
+        .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+            float: right;
+        }
+
+        .col-md-8 {
+            width: 66.66666667%;
+        }
+
+        .col-md-7 {
+            width: 58.33333333%;
+        }
+        .col-lg-7 {
+            width: 75%
+        }
+    }
+
     .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
         position: relative;
         min-height: 1px;
@@ -83,6 +159,13 @@
         .col-lg-8 {
             width: 66.66666667%;
         }
+
+        .col-lg-7 {
+            width: 58.33333333%;
+        }
+        .col-lg-9 {
+            width:75%
+        }
     }
     @@media (min-width: 768px) and (max-width: 992px) {
         .col-sm-12 {
@@ -95,13 +178,30 @@
             }
         }
 
-        @@media(max-width:360px) {
-            .topbarspan {
-                font-size: 13px;
-                padding: 14px 7px
-            }
+    @@media(max-width:435px) {
+        .topbarspan {
+            font-size: 13px;
+            padding: 14px 7px
         }
-        /*@@media (min-width: 992px){
+    }
+    /*@@media(max-width:435px){
+    .fixedNavScreen ul li i {
+        font-size: 0.9em;
+    }
+}*/
+@@media(max-width:260px) {
+    /*.fixedNavScreen ul li i {
+        font-size: 0.75em;
+    }*/
+    .topbarspan {
+        font-size: 10px;
+        padding: 15px 5px
+    }
+    /*.fixedNavScreen ul li{
+        padding:10px 5px
+    }*/
+}
+    /*@@media (min-width: 992px){
             .spaceBeg { width: 16.66666667%; float:right }
             #topThreeHeader { width: 100%; float: none }
         }
@@ -112,6 +212,7 @@
         @@media(min-width:1200px) {
             #topThreeHeader { width: 33.33333333%; float: right }
         }*/
+
 </style>
 
 

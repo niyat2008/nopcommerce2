@@ -4,8 +4,19 @@
 
 =====================================================*/
 
-
-
+@media all and (max-width: 1025px) {
+    .header-links, .header-selectors {
+        display: none;
+        /*position: fixed;
+        top: 85px;
+        right: 0;
+        z-index: 1070;
+        width: 100%;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+        font-size: 13px;*/
+    }
+}
 
     @media all and (min-width: 1025px) {
 

@@ -56,14 +56,20 @@
         }
         else
         {
-            <li><a href="@Url.RouteUrl("Register")" class="ico-register">@T("Account.Register")</a></li>
-            <li><a href="@Url.RouteUrl("Login")" class="ico-login @if (shouldShowLoginInPopup){<text>modal-login</text>}" 
-                   data-loginUrl="@Url.Action("Login", "Customer")">@T("Account.Login")</a></li>
+            <li>
+                <a href="@Url.RouteUrl("Login")" class="ico-login @if (shouldShowLoginInPopup){<text>modal-login</text>}"
+                   data-loginUrl="@Url.Action("Login", "Customer")">تسجيل الدخول</a>
+            </li>
+            <li><a href="@Url.RouteUrl("Register")" class="ico-register">عضو جديد</a></li>
+            @*@T("Account.Register")*@
+            
+            @*@T("Account.Login")*@
         }
         @if (Model.AllowPrivateMessages)
         {
             var unreadMessagesCount = "0";
-            if (!String.IsNullOrEmpty(Model.UnreadPrivateMessages)) {
+            if (!String.IsNullOrEmpty(Model.UnreadPrivateMessages))
+            {
                 unreadMessagesCount = Model.UnreadPrivateMessages;
             }
             <li>

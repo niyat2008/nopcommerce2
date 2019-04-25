@@ -506,6 +506,17 @@
             cursor: pointer;
         }
     /*.logoContainer { margin-right:-47px }*/
+
+    @@media(max-width:992px){
+        .allPage { margin-top:70px }
+    }
+
+    .navbar-default .navbar-nav > li { position:static }
+    @@media(max-width:260px) {
+    .fixedNavScreen ul li{
+        padding:10px 5px
+    }
+}
 </style>
 
 
@@ -557,6 +568,26 @@
                         </li>
                         <li id="myAccount">
                             <a> <i class="fa fa-user-o fa-lg"></i> </a>
+                        </li>
+                        <li>
+                            <a>
+                                <i class="fa fa-plus fa-lg"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <i class="fa fa-long-arrow-left fa-lg"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <i class="fa fa-asterisk fa-lg"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <i class="fa fa-eye fa-lg"></i>
+                            </a>
                         </li>
                         <li>
                             <a href="/Consultant/Notifications">

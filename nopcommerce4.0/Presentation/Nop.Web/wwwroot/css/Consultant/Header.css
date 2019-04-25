@@ -5,7 +5,7 @@ a:hover { color: #40ca40 }
 
 /*top-bar*/
 .top_bar { background: #333; padding: 10px 0; text-align: center; height: 43px; }
-.top_bar span { cursor: pointer; color: #fff; font-size: 17px; padding: 9px 30px; padding-top: 10px }
+.top_bar span { cursor: pointer; color: #fff; font-size: 17px; padding: 10px 30px; padding-top: 10px }
 .top_bar span.active { background: #3e874b }
 .top_bar span a, .top_bar span:hover a, .top_bar span a:hover, .top_bar span:focus a, .top_bar span a:focus { text-decoration: none }
 
@@ -14,7 +14,7 @@ a:hover { color: #40ca40 }
 @media only screen and (max-width : 1024px) {
    .top_bar .top_col_screen { display: none }
 }
-@media(max-width:410px) {
+@media(max-width:435px) {
     .top_bar span { font-size: 13px; padding: 14px 7px  }
 }
 /*Search*/
@@ -54,7 +54,11 @@ a:hover { color: #40ca40 }
 .profile_blck:hover .user { background: #fff; border: 1px solid #ddd; border-bottom: 0 }
 
 /*Nav*/
-.navbar-collapse { padding: 0; position: relative; background: #e8ebee }
+.navbar-collapse {
+    padding: 0;
+    position: relative;
+    background: #e8ebee
+}
 .navbar-default { border-color: #ededed; background: #e8ebee; min-height: 30px; }
 .navbar-default .navbar-nav > li > a, .subNav li a { color: #000; font-size: 16px; cursor: pointer; text-decoration: none }
 .navbar-default .navbar-nav > li.main > a.active, .navbar-default .navbar-nav > li.main:hover > a { color: #4da74d; font-weight: bold; background: #fff; }
@@ -109,3 +113,21 @@ a:hover { color: #40ca40 }
 .rightMenu ul li a , .subRightMenu ul li a { color: #333; font-size: 15px; text-decoration: none; font-weight: bold; text-transform: uppercase; }
 .rightMenu ul li:hover a, .subRightMenu ul li:hover a { color: #4da74d }
 .rightMenu ul li i, .subRightMenu ul li i  { color: #4da74d; cursor: pointer }
+
+@media(max-width:435px){
+    .fixedNavScreen ul li i {
+        font-size: 0.9em;
+    }
+}
+@media(max-width:260px) {
+    .fixedNavScreen ul li i {
+        font-size: 0.75em;
+    }
+    .top_bar span {
+        font-size: 10px;
+        padding: 15px 5px
+    }
+    .fixedNavScreen ul li{
+        padding:10px 5px
+    }
+}
