@@ -14,9 +14,7 @@ a:hover { color: #40ca40 }
 @media only screen and (max-width : 1024px) {
    .top_bar .top_col_screen { display: none }
 }
-@media(max-width:435px) {
-    .top_bar span { font-size: 13px; padding: 14px 7px  }
-}
+
 /*Search*/
 .search { padding: 2px 0; background: #f6f6f6; }
 .form-group { margin-bottom: 0; position: relative; }
@@ -54,12 +52,13 @@ a:hover { color: #40ca40 }
 .profile_blck:hover .user { background: #fff; border: 1px solid #ddd; border-bottom: 0 }
 
 /*Nav*/
-.navbar-collapse {
-    padding: 0;
-    position: relative;
-    background: #e8ebee
-}
-.navbar-default { border-color: #ededed; background: #e8ebee; min-height: 30px; }
+.navbar-collapse { padding: 0; position: relative; background: #e8ebee }
+.navbar-default {
+    border-color: #ededed;
+    background: #e8ebee;
+    min-height: 30px;
+    border-radius: 0;
+ }
 .navbar-default .navbar-nav > li > a, .subNav li a { color: #000; font-size: 16px; cursor: pointer; text-decoration: none }
 .navbar-default .navbar-nav > li.main > a.active, .navbar-default .navbar-nav > li.main:hover > a { color: #4da74d; font-weight: bold; background: #fff; }
 
@@ -88,8 +87,8 @@ a:hover { color: #40ca40 }
 @media only screen and (max-width : 1024px) {
     .top-user-menu { display: none }
     .fixedNavScreen { display: block }
-    .search { padding: 15px 0;  }
-    .search .logoContainer { text-align: center }
+    .search { padding: 15px 0; padding-bottom:5px }
+    /*.search .logoContainer { text-align: center }*/
     .navbar-default, #userInfo, .search .form-group { display: none }
 }
 
@@ -114,20 +113,57 @@ a:hover { color: #40ca40 }
 .rightMenu ul li:hover a, .subRightMenu ul li:hover a { color: #4da74d }
 .rightMenu ul li i, .subRightMenu ul li i  { color: #4da74d; cursor: pointer }
 
-@media(max-width:435px){
+@media(max-width:435px) {
+    .top_bar span {
+        font-size: 13px;
+        padding: 14px 7px
+    }
+
     .fixedNavScreen ul li i {
-        font-size: 0.9em;
+        font-size: 1rem;
     }
 }
+
 @media(max-width:260px) {
-    .fixedNavScreen ul li i {
-        font-size: 0.75em;
-    }
     .top_bar span {
-        font-size: 10px;
-        padding: 15px 5px
+        font-size: 11px;
+        padding: 15px 5px;
     }
-    .fixedNavScreen ul li{
-        padding:10px 5px
+
+    .fixedNavScreen ul li i {
+        font-size: 0.85rem;
     }
+
+    .fixedNavScreen ul li {
+        padding: 10px 5px
+    }
+}
+
+@media(min-width:350px) and (max-width:440px){
+    .rightMenu { width:250px }
+}
+@media(max-width:350px) {
+    .rightMenu {
+        width: 175px
+    }
+}
+@media (max-width: 1030px) {
+    .header .header-logo {
+        position: absolute;
+        top: 110px;
+        z-index: 1020;
+        width: 100%;
+        height: 80px;
+        background-color: #f6f6f6;
+        line-height: 130px;
+    }
+    .search .logoContainer {
+        text-align: center;
+        width:100%
+    }
+}
+@media (min-width:1024px) and (max-width: 1030px) {
+    .searchContr { display:none }
+    .logo { margin-bottom:3px }
+    .header .header-logo, .search .logoContainer { margin-top:0 }
 }

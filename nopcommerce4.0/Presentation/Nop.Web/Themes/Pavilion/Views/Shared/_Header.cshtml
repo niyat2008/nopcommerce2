@@ -23,8 +23,9 @@
 <style type="text/css">
     a {
         color: #333;
-        text-decoration:none
+        text-decoration: none
     }
+
         a:hover {
             color: #40ca40;
             text-decoration: none
@@ -128,7 +129,8 @@
         .col-md-7 {
             width: 58.33333333%;
         }
-        .col-lg-7 {
+
+        .col-md-9 {
             width: 75%
         }
     }
@@ -139,11 +141,13 @@
         padding-left: 15px;
         padding-right: 15px;
     }
+
     @@media (max-width: 992px) {
         .hidden-sm, .hidden-xs {
             display: none
         }
     }
+
     @@media (min-width: 1200px) {
         .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
             float: right;
@@ -156,6 +160,7 @@
         .col-lg-4 {
             width: 33.33333333%;
         }
+
         .col-lg-8 {
             width: 66.66666667%;
         }
@@ -163,20 +168,23 @@
         .col-lg-7 {
             width: 58.33333333%;
         }
+
         .col-lg-9 {
-            width:75%
+            width: 75%
         }
     }
+
     @@media (min-width: 768px) and (max-width: 992px) {
         .col-sm-12 {
             width: 100%;
         }
     }
-        @@media(min-width:1000px) {
-            .admin-header-links a {
-                line-height: 25px
-            }
+
+    @@media(min-width:1000px) {
+        .admin-header-links a {
+            line-height: 25px
         }
+    }
 
     @@media(max-width:435px) {
         .topbarspan {
@@ -185,36 +193,39 @@
         }
     }
     /*@@media(max-width:435px){
-    .fixedNavScreen ul li i {
-        font-size: 0.9em;
-    }
-}*/
-@@media(max-width:260px) {
-    /*.fixedNavScreen ul li i {
-        font-size: 0.75em;
-    }*/
-    .topbarspan {
-        font-size: 10px;
-        padding: 15px 5px
-    }
-    /*.fixedNavScreen ul li{
-        padding:10px 5px
-    }*/
-}
-    /*@@media (min-width: 992px){
-            .spaceBeg { width: 16.66666667%; float:right }
-            #topThreeHeader { width: 100%; float: none }
+        .fixedNavScreen ul li i {
+            font-size: 0.9em;
         }
-        @@media (max-width: 992px) {
-            .spaceBeg { display:none }
-            #topThreeHeader { width: 100%; float: none }
-        }
-        @@media(min-width:1200px) {
-            #topThreeHeader { width: 33.33333333%; float: right }
+    }*/
+    @@media(max-width:260px) {
+        /*.fixedNavScreen ul li i {
+            font-size: 0.75em;
         }*/
+        .topbarspan {
+            font-size: 10px;
+            padding: 15px 5px
+        }
+        /*.fixedNavScreen ul li{
+            padding:10px 5px
+        }*/
+    }
+    /*@@media (min-width: 992px){
+                .spaceBeg { width: 16.66666667%; float:right }
+                #topThreeHeader { width: 100%; float: none }
+            }
+            @@media (max-width: 992px) {
+                .spaceBeg { display:none }
+                #topThreeHeader { width: 100%; float: none }
+            }
+            @@media(min-width:1200px) {
+                #topThreeHeader { width: 33.33333333%; float: right }
+            }*/
 
 </style>
 
+<link href="~/css/Consultant/bootstrap.min.css" rel="stylesheet" />
+<link href="~/css/Consultant/bootstrap-rtl.min.css" rel="stylesheet" />
+<script src="~/js/Consultant/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 
@@ -233,24 +244,24 @@
         }
     });
 </script>
- 
+
 @*<div class="spaceBeg"></div>
-<div id="topThreeHeader" style="margin:auto !important; background-color:#333;height:43px;text-align:center;top:0;position:fixed;z-index:1030;padding-top:10px;padding-bottom:5px;">
-    <span style="text-align: center">
-        <span class="topbarspan topbarspanActive">@Html.RouteLink("المتجر", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-        <span class="topbarspan">@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-        <span class="topbarspan">@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-    </span>
-</div>*@
+    <div id="topThreeHeader" style="margin:auto !important; background-color:#333;height:43px;text-align:center;top:0;position:fixed;z-index:1030;padding-top:10px;padding-bottom:5px;">
+        <span style="text-align: center">
+            <span class="topbarspan topbarspanActive">@Html.RouteLink("المتجر", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+            <span class="topbarspan">@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+            <span class="topbarspan">@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+        </span>
+    </div>*@
 
 @*<div class="text-center">
-    <span>@Html.RouteLink("اسلمتجر", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-    <span class="active">@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+        <span>@Html.RouteLink("اسلمتجر", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+        <span class="active">@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
 
-    <span>@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+        <span>@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
 
-</div>*@
-  
+    </div>*@
+
 <div class="header">
     @await Component.InvokeAsync("Widget", new { widgetZone = "header" })
 
@@ -258,12 +269,14 @@
         <div class="header-upper top_bar">
             <div class="center container-fluid" style="margin:auto !important;">
                 <div class="row">
-                    <div class="col-lg-2 col-md-1 hidden-sm hidden-xs">
+                    <div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
                         <div class="top_col_screen top_hid_sm"></div>
                     </div>
+
                     <div class="col-lg-2 col-md-2 hidden-sm hidden-xs">
                         <div class="top_col_screen" style="color: white">
-                            @await Component.InvokeAsync("AdminHeaderLinks")
+
+
                             @{
                                 var taxTypeSelectorHtml = await Component.InvokeAsync("TaxTypeSelector");
                                 var currencySelectorHtml = await Component.InvokeAsync("CurrencySelector");
@@ -286,7 +299,7 @@
                                 </div>
                                 <div class="header-selector-widget" style="display: none;">@headerSelectorWidgetHtml</div>
                             }
-
+                            @await Component.InvokeAsync("AdminHeaderLinks")
                         </div>
                     </div>
 
@@ -298,12 +311,12 @@
 
 
                     @*<span class=" " style="text-align: center">
-            <span class="topbarspan topbarspanActive">@Html.RouteLink("يبيبيبالمتجر", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-            <span class="topbarspan">@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                            <span class="topbarspan topbarspanActive">@Html.RouteLink("يبيبيبالمتجر", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                            <span class="topbarspan">@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
 
-            <span class="topbarspan">@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                            <span class="topbarspan">@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
 
-        </span>*@
+                        </span>*@
 
                     @*</div>*@
                     @*</div>*@
@@ -312,8 +325,8 @@
 
 
                     @*<div class="spaceBeg"></div>
-        <div class="spaceBeg"></div>*@
-                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" style="text-align: center; display: flex; align-items: center; justify-content: center;">
+                        <div class="spaceBeg"></div>*@
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="text-align: center; display: flex; align-items: center; justify-content: center;">
                         <div id="topThreeHeader">
                             <span style="text-align: center">
                                 <span class="topbarspan topbarspanActive">@Html.RouteLink("المتجر", "HomsePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
@@ -322,13 +335,13 @@
                             </span>
                         </div>
                     </div>
-                    <div class="col-md-2 hidden-sm hidden-xs top_col_screen">
+                    <div class="col-lg-2 col-md-2 hidden-sm hidden-xs top_col_screen">
                         <div class="header-links-wrapper">
                             <label> <i class="fa fa-user"></i> @T("SevenSpikes.Themes.Pavilion.Header.MyAccount")</label>
                             @await Component.InvokeAsync("HeaderLinks")
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-1 hidden-sm hidden-xs top_col_screen top_hid_sm"></div>
+                    <div class="col-lg-1 col-md-1 hidden-sm hidden-xs top_col_screen top_hid_sm"></div>
                 </div>
             </div>
         </div>
@@ -366,15 +379,15 @@
                         </div>
                         <div class="col-lg-8 col-md-6 search-box store-search-box">
                             @await Component.InvokeAsync("SearchBox")
-                        @*</div>
-                        <div class="col-lg-2 col-md-2">*@
+                            @*</div>
+                                <div class="col-lg-2 col-md-2">*@
                             @await Component.InvokeAsync("FlyoutShoppingCart")
                         </div>
                         @*<div class="col-lg-2 col-md-2"></div>*@
                     </div>
-                 </div>
-
                 </div>
+
+            </div>
 
             @*@await Component.InvokeAsync("FlyoutShoppingCart")*@
         </div>
