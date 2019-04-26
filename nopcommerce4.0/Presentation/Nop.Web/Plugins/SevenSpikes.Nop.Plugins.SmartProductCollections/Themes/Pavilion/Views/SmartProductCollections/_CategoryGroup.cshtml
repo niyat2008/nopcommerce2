@@ -5,7 +5,7 @@
         @foreach (var tab in Model.Tabs)
         {
             <li class="tab"  data-tabId="@tab.Id" notloaded>
-                <span style="font-size: 21px;">@tab.Title </span>
+                <span>@tab.Title </span>
             </li>
         }
     </ul>
@@ -15,7 +15,7 @@
          
         <li class="tab" style="background-color: #3e874b; color: white; font-size: 44px;"  notloaded> 
             <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">
-                <span style="font-size: 21px;">@Model.Name</span>
+                <span>@Model.Name</span>
             </a>
         </li>
         

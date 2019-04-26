@@ -133,7 +133,7 @@
         }
         <div class="attribute-squares-wrapper"></div>
         <div class="product-title"  style="font-size: 30px; font-weight: bold; height: auto !important; ">
-            <a style="font-size: 30px; font-weight: bold" href="@Url.RouteUrl("Product", new { SeName = Model.SeName })">@Model.Name</a>
+            <a href="@Url.RouteUrl("Product", new { SeName = Model.SeName })">@Model.Name</a>
         </div>
         @if (catalogSettings.ShowSkuOnCatalogPages && !string.IsNullOrEmpty(Model.Sku))
         {
