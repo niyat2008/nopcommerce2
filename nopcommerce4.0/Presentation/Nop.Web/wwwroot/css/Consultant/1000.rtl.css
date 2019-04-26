@@ -910,13 +910,14 @@
             .footer-block li {
                 padding: 6px 0;
             }
-        .footer ul li a {
+        /*.footer ul li a {
             color: #337ab7
-        }
+        }*/
+        .footer ul li a:hover { text-decoration:none }
 
-            .footer-block.quick-contact li {
-                padding: 6px 0 16px;
-            }
+        .footer-block.quick-contact li {
+            padding: 6px 0 16px;
+        }
 
             .footer-block.quick-contact span {
                 padding: 0 28px 0 0;
