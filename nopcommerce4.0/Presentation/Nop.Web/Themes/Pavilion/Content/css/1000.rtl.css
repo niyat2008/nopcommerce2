@@ -288,6 +288,7 @@
         .header-menu-parent {
             display: table-cell;
             vertical-align: middle;
+            padding: 0 123px;
         }
 .header-menu { position: relative; z-index: 1010; text-align: right; }
 .header-menu > ul { font-size: 0; }
@@ -310,6 +311,7 @@
             padding: 0 32px 0 0;
             vertical-align: middle;
             text-align: right;
+            float:left;
         }
 
         .cart-trigger {
@@ -603,7 +605,7 @@
                 }
 
         .store-search-box {
-            /*float: left;*/
+           float: left;
             clear: left;
             margin: 0;
         }
