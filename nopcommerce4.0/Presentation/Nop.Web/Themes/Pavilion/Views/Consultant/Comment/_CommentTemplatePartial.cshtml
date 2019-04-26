@@ -21,6 +21,7 @@
         .comment .comment-Header h3 {
             margin-top: 0;
             color: #555;
+            font-size:18px;
         }
         .comment .comment-Header h3 i { font-size:14px }
         .comment .comment-Header small {
@@ -44,7 +45,7 @@
                     <div>
                         @if (Model.CommentedBy != "Registered")
                         {
-                            <h3 class="text-primary"><strong class="text-primary">المستشار: </strong> <i class="fa fa-user"></i> @Model.CommentOwner</h3>
+                            <h3 class="text-primary"><i class="fa fa-user"></i> <strong class="text-primary">المستشار: </strong> @Model.CommentOwner</h3>
                         }
                         else
                         {
