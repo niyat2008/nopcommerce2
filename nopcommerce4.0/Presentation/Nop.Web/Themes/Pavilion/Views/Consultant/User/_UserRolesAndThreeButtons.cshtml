@@ -18,7 +18,14 @@
     /*.threebuttons:hover { background-color: darkgreen !important;}
      .nodoc:hover { text-decoration: none; }*/
     span { padding: 9px; font-weight: bold; }
-    span a { padding:0 5px  }
+    span a {
+        color: #777;
+        text-decoration: none
+    }
+        span a:hover {
+            color: #3e874b; text-decoration:none
+        } 
+    #threebuttons span a { padding:0 5px }
 </style>
 
 @if (@ViewBag.UserRole == "Registered")
