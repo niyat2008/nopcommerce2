@@ -288,7 +288,7 @@
         .header-menu-parent {
             display: table-cell;
             vertical-align: middle;
-            padding: 0 123px;
+            padding-right:123px;
         }
 .header-menu { position: relative; z-index: 1010; text-align: right; }
 .header-menu > ul { font-size: 0; }
@@ -1645,3 +1645,18 @@
     }
 
 
+@media(min-width:1210px) and (max-width:1280px) {
+    .header-menu-parent {
+        padding-right: 50px;
+    }
+}
+@media(min-width:1053px) and (max-width:1210px) {
+    .header-menu-parent {
+        padding-right: 88px;
+    }
+}
+@media(min-width:1025px) and (max-width:1053px) {
+    .header-menu-parent {
+        padding-right: 95px;
+    }
+}

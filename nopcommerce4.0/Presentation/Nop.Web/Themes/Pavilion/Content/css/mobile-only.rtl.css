@@ -37,13 +37,13 @@
 .mobile-sticky-logo .admin-header-links ~ .header .header-logo { top: 42px; }
 .mobile-sticky-logo .admin-header-links ~ .responsive-nav-wrapper-parent { top: 152px; }
 /*.two-columns-area { margin: 160px 0 25px; }*/
-.admin-header-links ~ .two-columns-area { margin-top: 142px; }
+.admin-header-links ~ .two-columns-area { /*margin-top: 142px;*/ }
 .master-wrapper-content {
-	margin-top: 160px;
+	/*margin-top: 160px;*/
 	padding: 25px 20px;
 }
 .admin-header-links ~ .master-wrapper-content {
-	margin-top: 205px;
+	/*margin-top: 205px;*/
 }
 .two-columns-area ~ .master-wrapper-content {
 	margin-top: 0 !important; /*important because of demo-strip*/

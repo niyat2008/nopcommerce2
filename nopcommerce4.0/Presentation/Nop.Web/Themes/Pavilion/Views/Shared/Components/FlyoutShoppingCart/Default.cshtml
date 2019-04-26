@@ -1,4 +1,15 @@
-﻿@model MiniShoppingCartModel
+﻿<style>
+@@media(max-width:1025px){
+    #flyout-cart { display:none }
+}
+    @@media(min-width:1025px) {
+        #flyout-cart {
+            display: block
+        }
+    }
+</style>
+
+@model MiniShoppingCartModel
 <div class="flyout-cart-wrapper" id="flyout-cart">
     <a href="@Url.RouteUrl("ShoppingCart")" class="cart-trigger">
         <span class="cart-qty">@T("ShoppingCart.HeaderQuantity", Model.TotalProducts)</span>
