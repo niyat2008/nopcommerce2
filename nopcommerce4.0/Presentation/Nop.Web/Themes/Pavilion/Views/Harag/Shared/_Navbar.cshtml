@@ -23,8 +23,9 @@
 
 <!-- Nav -->
 <nav class="navbar navbar-default">
-    <div class="col-md-2" style="padding-right: 12px;"></div>
+    @*<div class="col-md-2" style="padding-right: 12px;"></div>*@
     <div class="container-fluid">
+        <div class="col-lg-1 col-md-1" style="padding-right: 12px;"></div>
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -34,23 +35,26 @@
             </button>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
+        <div class="col-lg-9 col-md-9" style="padding:0">
 
-                @foreach (var item in Model.Items)
-                {
-                    <li   class="main hasSubMenu @(item.IsSelected ? "selected-link" : "")">
-                        <a href="/Harag/Cat/@item.Id">@item.Name  </a>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+
+                    @foreach (var item in Model.Items)
+                    {
+                        <li class="main hasSubMenu @(item.IsSelected ? "selected-link" : "")">
+                            <a href="/Harag/Cat/@item.Id">@item.Name  </a>
+                        </li>
+                    }
+                    <li class="main hasSubMenu">
+                        <a href="/Harag">أحدث الاعلانات</a>
                     </li>
-                }
-                <li class="main hasSubMenu">
-                    <a href="/Harag">أحدث الاعلانات</a>
-                </li>
 
-            </ul>
-        </div><!-- /.navbar-collapse -->
+                </ul>
+            </div><!-- /.navbar-collapse -->
 
+        </div>
     </div><!-- /.container-fluid -->
 </nav>
 
