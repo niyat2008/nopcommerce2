@@ -220,7 +220,41 @@
             @@media(min-width:1200px) {
                 #topThreeHeader { width: 33.33333333%; float: right }
             }*/
-
+    @@media(min-width:1025px){
+        .top_col_screen {
+            width: 25%;
+            float: right;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .threeHeaderContainer {
+            width: 50%;
+            float: right;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .top2 {
+            width: 25%;
+            float: left;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    @@media(max-width:1025px) {
+        .top_col_screen { display:none }
+        .threeHeaderContainer {
+            width: 100%;
+            float: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .top2 { display:none }
+    }
 </style>
 
 @*<link href="~/css/Consultant/bootstrap.min.css" rel="stylesheet" />
@@ -267,41 +301,43 @@
 
     <section class="topFixed">
         <div class="header-upper top_bar">
-            <div class="center container-fluid" style="margin:auto !important;">
-                <div class="row">
-                    <div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
-                        <div class="top_col_screen top_hid_sm"></div>
-                    </div>
+            @*<div class="center container-fluid" style="margin:auto !important;">*@
+            <div class="center" style="margin:auto !important;">
+                @*<div class="row">*@
+                <div class="">
+                    @*<div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
+            <div class="top_col_screen top_hid_sm"></div>
+        </div>*@
 
-                    <div class="col-lg-2 col-md-2 hidden-sm hidden-xs">
-                        <div class="top_col_screen" style="color: white">
+                    @*<div class="col-lg-2 col-md-2 hidden-sm hidden-xs">*@
+                    <div class="top_col_screen" style="color: white">
 
 
-                            @{
-                                var taxTypeSelectorHtml = await Component.InvokeAsync("TaxTypeSelector");
-                                var currencySelectorHtml = await Component.InvokeAsync("CurrencySelector");
-                                //var languageSelectorHtml = await Component.InvokeAsync("LanguageSelector");
-                                var headerSelectorWidgetHtml = await Component.InvokeAsync("Widget", new { widgetZone = "header_selectors" });
-                            }
-                            @if (!String.IsNullOrEmpty(taxTypeSelectorHtml.ToHtmlString()) ||
+                        @{
+                            var taxTypeSelectorHtml = await Component.InvokeAsync("TaxTypeSelector");
+                            var currencySelectorHtml = await Component.InvokeAsync("CurrencySelector");
+                            //var languageSelectorHtml = await Component.InvokeAsync("LanguageSelector");
+                            var headerSelectorWidgetHtml = await Component.InvokeAsync("Widget", new { widgetZone = "header_selectors" });
+                        }
+                        @if (!String.IsNullOrEmpty(taxTypeSelectorHtml.ToHtmlString()) ||
 !String.IsNullOrEmpty(currencySelectorHtml.ToHtmlString()) ||
 //!String.IsNullOrEmpty(languageSelectorHtml.ToHtmlString()) ||
 !String.IsNullOrEmpty(headerSelectorWidgetHtml.ToHtmlString()))
-                            {
-                                <div class="header-selectors-wrapper">
-                                    <label>@T("SevenSpikes.Themes.Pavilion.Header.Preferences")</label>
-                                    <div class="header-selectors">
-                                        @taxTypeSelectorHtml
-                                        @currencySelectorHtml
-                                        @*@languageSelectorHtml*@
-                                        @headerSelectorWidgetHtml
-                                    </div>
+                        {
+                            <div class="header-selectors-wrapper">
+                                <label>@T("SevenSpikes.Themes.Pavilion.Header.Preferences")</label>
+                                <div class="header-selectors">
+                                    @taxTypeSelectorHtml
+                                    @currencySelectorHtml
+                                    @*@languageSelectorHtml*@
+                                    @headerSelectorWidgetHtml
                                 </div>
-                                <div class="header-selector-widget" style="display: none;">@headerSelectorWidgetHtml</div>
-                            }
-                            @await Component.InvokeAsync("AdminHeaderLinks")
-                        </div>
+                            </div>
+                            <div class="header-selector-widget" style="display: none;">@headerSelectorWidgetHtml</div>
+                        }
+                        @await Component.InvokeAsync("AdminHeaderLinks")
                     </div>
+                    @*</div>*@
 
 
                     @*<section class="top_bar">*@
@@ -311,12 +347,12 @@
 
 
                     @*<span class=" " style="text-align: center">
-                            <span class="topbarspan topbarspanActive">@Html.RouteLink("يبيبيبالمتجر", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-                            <span class="topbarspan">@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+            <span class="topbarspan topbarspanActive">@Html.RouteLink("يبيبيبالمتجر", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+            <span class="topbarspan">@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
 
-                            <span class="topbarspan">@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+            <span class="topbarspan">@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
 
-                        </span>*@
+        </span>*@
 
                     @*</div>*@
                     @*</div>*@
@@ -325,8 +361,9 @@
 
 
                     @*<div class="spaceBeg"></div>
-                        <div class="spaceBeg"></div>*@
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="text-align: center; display: flex; align-items: center; justify-content: center;">
+        <div class="spaceBeg"></div>*@
+                    @*<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="text-align: center; display: flex; align-items: center; justify-content: center;">*@
+                    <div class="threeHeaderContainer">
                         <div id="topThreeHeader">
                             <span style="text-align: center">
                                 <span class="topbarspan topbarspanActive">@Html.RouteLink("المتجر", "HomsePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
@@ -335,14 +372,15 @@
                             </span>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-2 hidden-sm hidden-xs top_col_screen">
-                        <div class="header-links-wrapper">
-                            <label> <i class="fa fa-user"></i> @T("SevenSpikes.Themes.Pavilion.Header.MyAccount")</label>
-                            @await Component.InvokeAsync("HeaderLinks")
+                    @*<div class="col-lg-2 col-md-2 hidden-sm hidden-xs top_col_screen">*@
+                        <div class="top_col_screen top2">
+                            <div class="header-links-wrapper">
+                                <label> <i class="fa fa-user"></i> @T("SevenSpikes.Themes.Pavilion.Header.MyAccount")</label>
+                                @await Component.InvokeAsync("HeaderLinks")
+                            </div>
                         </div>
+                        @*<div class="col-lg-1 col-md-1 hidden-sm hidden-xs top_col_screen top_hid_sm"></div>*@
                     </div>
-                    <div class="col-lg-1 col-md-1 hidden-sm hidden-xs top_col_screen top_hid_sm"></div>
-                </div>
             </div>
         </div>
     </section>
