@@ -291,6 +291,56 @@ namespace Nop.Web.Controllers.Consultant
                 return null;
         }
 
+        [HttpGet]
+        public IActionResult UpdatePostTitle(int postId, string text)
+        {
+
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return BadRequest();
+
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Consultant, true))
+                return BadRequest();
+
+            var post = _postService.GetPost(postId);
+
+            if (post == null || text == null || text.Length < 20)
+            {
+                return BadRequest();
+            }
+
+            _postService.UpdatePostTitle(postId, text);
+
+
+            return Ok(text);
+            //_postService.UpdatePostTitle(postId);
+        }
+
+
+        [HttpGet]
+        public IActionResult UpdatePostText(int postId, string text)
+        {
+
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return BadRequest();
+
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Consultant, true))
+                return BadRequest();
+
+            var post = _postService.GetPost(postId);
+
+            if (post == null || text == null || text.Length < 20)
+            {
+                return BadRequest();
+            }
+
+            _postService.UpdatePostText(postId, text);
+
+
+            return Ok(text);
+            //_postService.UpdatePostTitle(postId);
+        }
 
         [HttpGet]
         public virtual IActionResult GetAllClosedPostsAjax(PagingParams pagingParams)

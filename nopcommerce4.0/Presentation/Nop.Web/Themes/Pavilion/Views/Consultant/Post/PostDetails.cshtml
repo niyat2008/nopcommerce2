@@ -359,7 +359,8 @@
             <div class="det-bottom">
                
                 <h4>
-                    @Model.Title
+                    <span class="post-title-org-js">  @Model.Title</span>
+                  
                     @if (!Model.IsClosed && ViewBag.UserRole == "Consultant")
                     {
                         <a id="changeTitleBtn" class="btn btn-sm btn-success"> تعديل العنوان</a>
@@ -367,7 +368,7 @@
 
                 </h4>
                 <p>
-                    @Model.Text
+                    <span class="post-text-org-js">@Model.Text</span> 
 
                     @if (!Model.IsClosed && ViewBag.UserRole == "Consultant")
                     {
@@ -406,7 +407,7 @@
             </div>
             <div class="modal-body">
                 <form>
-                    @Html.TextBoxFor(m => m.Title, "", new { @class = "form-control  post-title-js" })
+                    @Html.TextBoxFor(m => m.Title, "", new { @class = "form-control  post-title-js" , minLength = "20", required = "required" })
                     <div style="width:100px;background-color:red;" id="Ahmed"></div>
                     <div class="modal-footer">
 
@@ -417,6 +418,7 @@
                 </form>
             </div>
         </div><!-- /.modal-content -->
+
     </div><!-- /.modal-dialog -->
 
 </div><!-- /.modal !-->
@@ -430,7 +432,7 @@
             </div>
             <div class="modal-body">
                 <form>
-                    @Html.TextAreaFor(m => m.Text, new { @class = "form-control post-text-js" })
+                    @Html.TextAreaFor(m => m.Text, new { @class = "form-control post-text-js", minLength="20", required = "required"})
                     <div style="width:100px;background-color:red;" id="Ahmed"></div>
                     <div class="modal-footer"> 
                         <button type="button" onclick="changeText()" class="btn btn-success">تعديل</button>
@@ -632,10 +634,13 @@
     function changeTitle() {
         $.ajax({
             type: "GET",
-            url: "/Consultations/Post/UpdateText?id=" +@Model.Id+"&text=" + $('.post-title-js').val() ,
+            url: "/Consultations/Post/UpdateTitle?postId=@Model.Id&text=" + $('.post-title-js').val() ,
 
             success: function (data) {
-                $('.post-title-js').val(data);
+                $('.post-title-org-js').html(data);
+                $('.close-popup').click();
+            }, error: function () {
+                alert('حاول مره اخري');
             }
         });
 
@@ -644,10 +649,14 @@
     function changeText() {
         $.ajax({
             type: "GET",
-            url: "/Consultations/Post/UpdateTitle?id=" +@Model.Id + "&text="  + $('.post-text-js').val()  ,
+            url: "/Consultations/Post/UpdateText?postId=" +@Model.Id + "&text="  + $('.post-text-js').val()  ,
 
-            success: function (data) {
-                $('.post-text-js').val(data);
+            success: function (data) { 
+                $('.post-text-org-js').html(data);
+                $('.close-popup').click();
+
+            }, error: function () {
+                alert('حاول مره اخري');
             }
         });
     }
@@ -832,11 +841,12 @@
             success: function (data) {
                 $("#comments").html(data);
                 } // window.location = window.location;
-    });
+            });
 
         }
     }
     function convertToBase64(file) {
+
         var image;
         var fileReader = new FileReader();
 
@@ -854,8 +864,6 @@
                 "<i class='fa fa-trash imageli' ></i>" +
                 "</div>");
         };
-    }
-
-
+    } 
 
 </script>  

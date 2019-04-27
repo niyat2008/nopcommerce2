@@ -89,9 +89,11 @@ namespace Nop.Services.Z_Consultant.Post
 
         List<City> GetCities();
         List<Neighborhood> GetCityNeighborhood(int cityId);
+        bool UpdatePostTitle(int postId, string text);
+        bool UpdatePostText(int postId, string text);
 
 
         //Get Reserved Post By Id
-         //Z_Consultant_Post GetReservedPostById(int postId);
+        //Z_Consultant_Post GetReservedPostById(int postId);
     }
 }

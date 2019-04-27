@@ -52,6 +52,8 @@ namespace Nop.Web.Infrastructure
             // UpdatePost  
             routeBuilder.MapRoute("Harag.Post.HaragUpdatePost", "Harag/Post/Update/{postId?}",
             new { controller = "Post", action = "HaragUpdatePost" });
+
+             
             // UpdatePostAjax 
             routeBuilder.MapRoute("Harag.Post.UpdatePostAjax", "Harag/Post/UpdateAjax",
             new { controller = "Post", action = "UpdatePostAjax" });
@@ -581,6 +583,14 @@ new { controller = "Post", action = "GetSubCategoriesByCategoryIdMobile" });
                 new { controller = "Consultations", action = "GetAllNotRepliedPostsWithSubCategoryInJson" });
 
 
+
+            // UpdatePostAjax 
+            routeBuilder.MapRoute("Consultant.Post.UpdatePostTitle", "Consultations/Post/UpdateTitle",
+            new { controller = "Post", action = "UpdatePostTitle" });
+
+            // UpdatePostAjax 
+            routeBuilder.MapRoute("Consultant.Post.UpdatePostText", "Consultations/Post/UpdateText",
+            new { controller = "Post", action = "UpdatePostText" });
 
 
             //  Reserved Posts

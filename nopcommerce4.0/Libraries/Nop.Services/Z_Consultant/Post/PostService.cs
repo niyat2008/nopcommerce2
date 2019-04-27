@@ -1131,5 +1131,27 @@ namespace Nop.Services.Z_Consultant.Post
 
             return query.ToList();
         }
+
+        public bool UpdatePostTitle(int postId, string text)
+        {
+            var post = _postRepository.Table.Where(m => m.Id == postId).FirstOrDefault();
+
+            post.Title = text;
+
+            _postRepository.Update(post);
+
+            return true;
+        }
+
+        public bool UpdatePostText(int postId, string text)
+        {
+            var post = _postRepository.Table.Where(m => m.Id == postId).FirstOrDefault();
+
+            post.Text = text;
+
+            _postRepository.Update(post);
+
+            return true;
+        }
     }
 }
