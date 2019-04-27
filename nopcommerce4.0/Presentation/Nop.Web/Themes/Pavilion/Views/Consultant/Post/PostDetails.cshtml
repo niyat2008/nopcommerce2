@@ -22,11 +22,11 @@
     }
 
     .btndarckgreen:hover {
-        background-color: darkgreen !important;
+        color: darkgreen !important;
     }
 
     .active-rate {
-        background: orange !important;
+        color: orange !important;
     }
 
     .comment .comment-content {
@@ -63,7 +63,7 @@
         .content .det-block .det-bottom h4 {
             margin-top: 0;
             font-weight: bold;
-            color: #5c9ac6 !important;
+            color: #88c65c !important ;
             font-size: 24px;
             padding: 10px;
             margin-bottom: 0;
@@ -306,11 +306,11 @@
         @if (!Model.IsClosed && ViewBag.UserRole == "Registered")
         {<strong> قم بتقييم المستشار </strong>
             <span id="test" class="will-rate">
-                <i class="fa fa-star-o" onclick="RatePost(@Model.Id,5,this)"></i>
-                <i class="fa fa-star-o" onclick="RatePost(@Model.Id,4,this)"></i>
-                <i class="fa fa-star-o" onclick="RatePost(@Model.Id,3,this)"></i>
-                <i class="fa fa-star-o" onclick="RatePost(@Model.Id,2,this)"></i>
-                <i class="fa fa-star-o" onclick="RatePost(@Model.Id,1,this)"></i>
+                <i class="fa fa-star" onclick="RatePost(@Model.Id,1,this)"></i>
+                <i class="fa fa-star" onclick="RatePost(@Model.Id,2,this)"></i>
+                <i class="fa fa-star" onclick="RatePost(@Model.Id,3,this)"></i>
+                <i class="fa fa-star" onclick="RatePost(@Model.Id,4,this)"></i>
+                <i class="fa fa-star" onclick="RatePost(@Model.Id,5,this)"></i>
             </span>
 
             <button class="pull-left btndarckgreen" onclick="closePost('@Model.Id')">غلق الاستشارة</button>

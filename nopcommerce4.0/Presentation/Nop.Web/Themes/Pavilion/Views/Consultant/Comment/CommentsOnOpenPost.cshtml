@@ -26,24 +26,9 @@
 }
 <div class="add-comment">
     <div class="row">
-        @if (ViewBag.UserRole == "Registered")
-        {
-            <div class="col-xs-2 text-center">
-                <img class="userimagelarge" src="~/images/Consultant/images/no-img.png" />
-                <img class="userimagemedium" src="~/images/Consultant/images/no-img-mobile.png" style="width:50px;height:50px;" />
-                <img class="userimagesmall" src="~/images/Consultant/images/no-img-mobile.png" style="width:35px;height:35px;" />
-            </div>
-        }
-        else if (ViewBag.UserRole == "Consultant")
-        {
-            <div class="col-xs-2 text-center">
-                <img class="userimagelarge" src="~/images/Consultant/images/no-img-consultant.png" />
-                <img class="userimagemedium" src="~/images/Consultant/images/no-img-mobile-consultant.png" style="width:50px;height:50px;" />
-                <img class="userimagesmall" src="~/images/Consultant/images/no-img-mobile-consultant.png" style="width:35px;height:35px;" />
-            </div>
-        }
-        <div class="col-xs-10">
-            <h4>@ViewBag.UserName</h4>
+         
+        <div class="col-xs-12">
+            <h4>اكتب تعليقك</h4>
             <div class="reply">
                 <textarea class="form-control" id="CommentText@(ViewBag.UserRole == "Consultant"?"-consult":"")" placeholder="اكتب تعليقا"></textarea>
                 <div class="comment-preview reply">
