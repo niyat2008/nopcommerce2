@@ -63,28 +63,28 @@
         .content .det-block .det-bottom h4 {
             margin-top: 0;
             font-weight: bold;
-            color: #88c65c !important ;
+            color: #88c65c !important;
             font-size: 24px;
             padding: 10px;
             margin-bottom: 0;
             border-bottom: 1px solid #ddd;
         }
 
-            .content .det-block .det-top small {
-                color: #777;
-                line-height: 42px;
-                font-size:13px
-            }
+        .content .det-block .det-top small {
+            color: #777;
+            line-height: 42px;
+            font-size: 13px
+        }
 
-            .content .det-block .det-top a span {
-                padding-left: 30px;
-                color: #5c9ac6;
-                /*font-size: 1.82rem;*/
-            }
+        .content .det-block .det-top a span {
+            padding-left: 30px;
+            color: #5c9ac6;
+            /*font-size: 1.82rem;*/
+        }
 
-            .content .det-block .det-top span:hover {
-                color: #4da74d
-            }
+        .content .det-block .det-top span:hover {
+            color: #4da74d
+        }
 
         .content .det-block .det-bottom {
             padding: 10px; /*padding-right: 30px;*/
@@ -148,11 +148,12 @@
         border-radius: 4px;
         margin-bottom: 25px;
     }
+
     .socialSec {
         padding: 15px 0;
         border-bottom: 1px solid #ddd;
         margin-bottom: 20px;
-        padding-bottom:30px
+        padding-bottom: 30px
     }
 
         .socialSec a {
@@ -161,9 +162,9 @@
             text-align: center
         }
 
-        .socialSec a i {
-            font-size: 22px
-        } 
+            .socialSec a i {
+                font-size: 22px
+            }
 </style>
 
 <!-- Details -->
@@ -171,20 +172,23 @@
 <div class="">
     <!-- Heading -->
     <div class="heading">
-        <div>
-            @if (!Model.IsClosed && !Model.IsReserved && !Model.IsAnswered && ViewBag.UserRole == "Consultant")
-            {
-                <button onclick="ReservePost(@Model.Id)" style="margin-bottom:2%;" class="btndarckgreen"> حجز الاستشارة </button>
-            }
-            @if (!Model.IsClosed && Model.IsReserved && !Model.IsAnswered && ViewBag.UserRole == "Consultant")
-            {
-                <button onclick="UnReservePost(@Model.Id)" style="margin-bottom:2%;" class="btndarckgreen"> فك الحجز </button>
-            }
-        </div>
+
+
         @*<span> <span id="CategoryNameSpan">@Model.CategoryName</span>  / <span id="SubCategoryNameSpan">@Model.SubCategoryName</span> </span>*@
+
+        @if (!Model.IsClosed && !Model.IsReserved && !Model.IsAnswered && ViewBag.UserRole == "Consultant")
+        {
+            <button onclick="ReservePost(@Model.Id)" class=" btn btn-success   pull-right"> حجز الاستشارة </button>
+        }
+
         @if (!Model.IsClosed && (Model.IsAnswered || Model.IsReserved) && ViewBag.UserRole == "Consultant")
-        {         
-            <button id="Ahmed" onclick="changeCatAndSub()" class="btndarckgreen"> تعديل </button>
+        {
+            <button id="Ahmed" onclick="changeCatAndSub()" class="btn btn-success"> تعديل </button>
+        }
+
+        @if (!Model.IsClosed && Model.IsReserved && !Model.IsAnswered && ViewBag.UserRole == "Consultant")
+        {
+            <button onclick="UnReservePost(@Model.Id)" class=" btn btn-danger"> فك الحجز </button>
         }
         @*onclick="changeCatAndSub()"*@
         <span class="pull-left">
@@ -198,7 +202,7 @@
                 }
                 else
                 {
-                    <span class="status open">
+                    <span class="badge badge-success open">
                         مفتوحة
                     </span>
                 }
@@ -213,7 +217,7 @@
                 }
                 else
                 {
-                    <span class="status open">
+                    <span class="badge badge-success  open">
                         مفتوحة
                     </span>
                 }
@@ -224,24 +228,24 @@
                 @if (Model.IsClosed == true)
                 {
                     @*<span class="status closed">
-                        @Html.Raw(" مغلقة ")
-                    </span>*@
+                            @Html.Raw(" مغلقة ")
+                        </span>*@
                 }
                 else if (!Model.IsClosed && Model.IsAnswered)
                 {
-                    <span class="status open">
+                    <span class="badge badge-success  open">
                         @Html.Raw(" مفتوحة ")
                     </span>
                 }
                 else if (!Model.IsClosed && !Model.IsAnswered && Model.IsReserved)
                 {
-                    <span class="status open">
+                    <span class="badge badge-success  open">
                         @Html.Raw(" محجوزة ")
                     </span>
                 }
                 else if (!Model.IsClosed && !Model.IsAnswered && !Model.IsReserved)
                 {
-                    <span class="status open">
+                    <span class="badge badge-success  open">
                         @Html.Raw(" لم يرد عليها ")
                     </span>
                 }
@@ -299,7 +303,7 @@
             }
         </span>
     </div>
-    
+
 
     <!-- Footer -->
     <div class="post-footer">
@@ -336,7 +340,7 @@
                             </div>
                         </div>
                         <div class="col-md-7">
-                            
+
                             <div class="row">
                                 <small>
                                     @Model.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @Model.DateCreated.ToString("hh:mm:ss")
@@ -353,8 +357,23 @@
                 </div>
             </div>
             <div class="det-bottom">
-                <h4> >> @Model.Title</h4>
-                <p>@Model.Text</p>
+               
+                <h4>
+                    @Model.Title
+                    @if (!Model.IsClosed && ViewBag.UserRole == "Consultant")
+                    {
+                        <a id="changeTitleBtn" class="btn btn-sm btn-success"> تعديل العنوان</a>
+                    }
+
+                </h4>
+                <p>
+                    @Model.Text
+
+                    @if (!Model.IsClosed && ViewBag.UserRole == "Consultant")
+                    {
+                        <a id="changeTextBtn" class="btn btn-sm btn-success"> تعديل النص</a>
+                    } 
+                </p>
                 @foreach (var image in Model.Files)
                 {
                     <div class="col-xs-2" style="padding:4px">
@@ -365,7 +384,7 @@
                 }
             </div>
         </div>
-        
+
     </div>
 </div>
 <div class="row">
@@ -379,19 +398,43 @@
 <div id="comments"> </div>
 
 
-<div id="changeCatAndSubDiv" class="modal" tabindex="-1" role="dialog" Style="display:none">
+<div id="changeTitleModal" class="modal" tabindex="-1" role="dialog" Style="display:none">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"> تعديل التصنيف</h4>
+                <h4 class="modal-title"> تعديل العنوان</h4>
             </div>
             <div class="modal-body">
                 <form>
-                    @*<select id="CategorySelectList"></select>*@
-                    <select id="subCategoriesSelectList"></select>
+                    @Html.TextBoxFor(m => m.Title, "", new { @class = "form-control  post-title-js" })
                     <div style="width:100px;background-color:red;" id="Ahmed"></div>
                     <div class="modal-footer">
-                        <button type="button" onclick="submitChangeCatAndSub()" class="btn btn-success">تعديل</button>
+
+                        <button type="button" onclick="changeTitle()" class="btn btn-success">تعديل</button>
+                        <button type="button" data-id="changeTitleModal" class="btn btn-default closebtn close-popup">اغلاق</button>
+
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+
+</div><!-- /.modal !-->
+
+
+<div id="changeTextModal" class="modal" tabindex="-1" role="dialog" Style="display:none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> تعديل النص</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    @Html.TextAreaFor(m => m.Text, new { @class = "form-control post-text-js" })
+                    <div style="width:100px;background-color:red;" id="Ahmed"></div>
+                    <div class="modal-footer"> 
+                        <button type="button" onclick="changeText()" class="btn btn-success">تعديل</button>
+                        <button type="button" data-id="changeTextModal" class="btn btn-default closebtn close-popup">اغلاق</button> 
                     </div>
                 </form>
             </div>
@@ -401,6 +444,25 @@
 </div><!-- /.modal !-->
 
 <script type="text/javascript">
+    $(document).ready(function () {
+        function close(id) {
+            $('#' + id).hide();
+        }
+    });
+
+    $('.close-popup').click(function () {
+        var id = $(this).attr('data-id');
+
+        $('#' + id).hide();
+    });
+
+    $('#changeTitleBtn').click(function () {
+        $('#changeTitleModal').show();
+    });
+
+    $('#changeTextBtn').click(function () {
+        $('#changeTextModal').show();
+    });
 
     $('#test > i').mouseenter(function () {
         $('#test > i').removeClass("active-rate");
@@ -561,8 +623,33 @@
             console.log("cate " +@Model.CategoryId);
             $("#changeCatAndSubDiv").css("display","block");
         }
-    });
+        });
 
+
+
+    }
+
+    function changeTitle() {
+        $.ajax({
+            type: "GET",
+            url: "/Consultations/Post/UpdateText?id=" +@Model.Id+"&text=" + $('.post-title-js').val() ,
+
+            success: function (data) {
+                $('.post-title-js').val(data);
+            }
+        });
+
+    }
+
+    function changeText() {
+        $.ajax({
+            type: "GET",
+            url: "/Consultations/Post/UpdateTitle?id=" +@Model.Id + "&text="  + $('.post-text-js').val()  ,
+
+            success: function (data) {
+                $('.post-text-js').val(data);
+            }
+        });
     }
 
     //$('#CategorySelectList').find(":selected").val();
