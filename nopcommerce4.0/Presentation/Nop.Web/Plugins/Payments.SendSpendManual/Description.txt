@@ -1,0 +1,9 @@
+﻿Group: Payment methods
+FriendlyName: SendSpend
+SystemName: Payments.SendSpend
+Version: 1.00
+SupportedVersions: 3.90
+Author: SendSpend
+DisplayOrder: 1
+FileName: Nop.Plugin.Payments.SendSpendManual.dll
+Description: This plugin SendSpend payments.

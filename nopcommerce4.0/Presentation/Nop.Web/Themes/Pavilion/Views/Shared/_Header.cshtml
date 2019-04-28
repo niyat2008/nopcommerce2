@@ -34,7 +34,8 @@
     /*top-bar*/
     .top_bar {
         background: #333;
-        padding: 10px 0;
+        padding: 0px;
+        padding-top: 10px;
         text-align: center;
         height: 43px;
     }
@@ -80,9 +81,9 @@
         width: 100%;
     }
 
-    .header-middle {
+    /*.header-middle {
         margin-top: 43px
-    }
+    }*/
 
     .header .center.menAll {
         width: 100%
@@ -205,6 +206,16 @@
             font-size: 10px;
             padding: 15px 5px
         }
+
+        .siteDetails {
+            padding: 8px;
+            margin-top: 159px;
+            background: #e2e6eb;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #000;
+        }
         /*.fixedNavScreen ul li{
             padding:10px 5px
         }*/
@@ -245,6 +256,16 @@
             justify-content: center;
         }
     }
+
+    .siteDetails {
+        padding: 8px; 
+        margin-top:39px;
+        background: #e2e6eb;
+        border: 1px solid #ddd;
+        margin-bottom: 0px;
+        text-align: center;
+        color: #000;
+    }
     @@media(max-width:1025px) {
         .top_col_screen { display:none }
         .threeHeaderContainer {
@@ -255,6 +276,12 @@
             justify-content: center;
         }
         .top2 { display:none }
+    }
+
+    .header-menu-parent {
+        display: inherit !important;
+        vertical-align: middle;
+        padding-right: 123px;
     }
 </style>
 
@@ -304,11 +331,14 @@
         <div class="header-upper top_bar">
             @*<div class="center container-fluid" style="margin:auto !important;">*@
             <div class="center" style="margin:auto !important;">
+
+
+
                 @*<div class="row">*@
                 <div class="">
                     @*<div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
-            <div class="top_col_screen top_hid_sm"></div>
-        </div>*@
+                            <div class="top_col_screen top_hid_sm"></div>
+                        </div>*@
 
                     @*<div class="col-lg-2 col-md-2 hidden-sm hidden-xs">*@
                     <div class="top_col_screen" style="color: white">
@@ -348,12 +378,12 @@
 
 
                     @*<span class=" " style="text-align: center">
-            <span class="topbarspan topbarspanActive">@Html.RouteLink("يبيبيبالمتجر", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
-            <span class="topbarspan">@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                            <span class="topbarspan topbarspanActive">@Html.RouteLink("يبيبيبالمتجر", "HomePage", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                            <span class="topbarspan">@Html.RouteLink("الحراج", "Harag.Home", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
 
-            <span class="topbarspan">@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
+                            <span class="topbarspan">@Html.RouteLink("الاستشارات", "Consultant.ConsultantHome", null, new { style = "color:#fff;", @class = "consultantlink" })</span>
 
-        </span>*@
+                        </span>*@
 
                     @*</div>*@
                     @*</div>*@
@@ -362,7 +392,7 @@
 
 
                     @*<div class="spaceBeg"></div>
-        <div class="spaceBeg"></div>*@
+                        <div class="spaceBeg"></div>*@
                     @*<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="text-align: center; display: flex; align-items: center; justify-content: center;">*@
                     <div class="threeHeaderContainer">
                         <div id="topThreeHeader">
@@ -374,18 +404,22 @@
                         </div>
                     </div>
                     @*<div class="col-lg-2 col-md-2 hidden-sm hidden-xs top_col_screen">*@
-                        <div class="top_col_screen top2">
-                            <div class="header-links-wrapper">
-                                <label> <i class="fa fa-user"></i> @T("SevenSpikes.Themes.Pavilion.Header.MyAccount")</label>
-                                @await Component.InvokeAsync("HeaderLinks")
-                            </div>
+                    <div class="top_col_screen top2">
+                        <div class="header-links-wrapper">
+                            <label> <i class="fa fa-user"></i> @T("SevenSpikes.Themes.Pavilion.Header.MyAccount")</label>
+                            @await Component.InvokeAsync("HeaderLinks")
                         </div>
-                        @*<div class="col-lg-1 col-md-1 hidden-sm hidden-xs top_col_screen top_hid_sm"></div>*@
                     </div>
+                    @*<div class="col-lg-1 col-md-1 hidden-sm hidden-xs top_col_screen top_hid_sm"></div>*@
+                </div>
             </div>
+
+
         </div>
     </section>
-
+    <div class="siteDetails">
+        <p id="messagep" style="text-align:center;margin:0; font-size: 14px;">خدمة الاستشارات هى خدمة مجانية تقدم من قبل موقع المزراع لمساعدة حل المشاكل الزراعية بواسطة مستشارين مختصين فى هذا المجال.</p>
+    </div>
     <div id="sticky" class="header-middle">
         <div class="" id="problem">
 
@@ -410,23 +444,21 @@
                             @await Component.InvokeAsync("TopMenu")
                         }
                     </div>*@
-                <div class="center">
-                    <div class="">
+                <div class="center"> 
                         @*<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>*@
                         @*<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 logoContainer header-logo">*@
                         @*<div class="header-logo">*@
-                            @await Component.InvokeAsync("Logo")
+                        @await Component.InvokeAsync("Logo")
                         @*</div>*@
                         @*<div class="col-lg-8 col-md-6 search-box store-search-box">*@
-                            <div class="search-box store-search-box">
-                                @await Component.InvokeAsync("SearchBox")
-                                @*</div>
-                <div class="col-lg-2 col-md-2">*@
-                                @await Component.InvokeAsync("FlyoutShoppingCart")
-                            </div>
-                            @*<div class="col-lg-2 col-md-2"></div>*@
+                        <div class="search-box store-search-box" style="margin-left: 16%;">
+                            @await Component.InvokeAsync("SearchBox")
+                            @*</div>
+                                <div class="col-lg-2 col-md-2">*@
+                            @await Component.InvokeAsync("FlyoutShoppingCart")
                         </div>
-                    </div>
+                        @*<div class="col-lg-2 col-md-2"></div>*@ 
+                </div>
 
             </div>
 

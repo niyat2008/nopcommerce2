@@ -1,0 +1,90 @@
+﻿@{
+    Layout = "";
+}
+@model Nop.Plugin.Payments.SendSpendManual.Models.ConfigurationModel
+@using Nop.Web.Framework;
+
+@Html.Action("StoreScopeConfiguration", "Setting", new { area = "Admin" })
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.OverrideStoreCheckboxFor(model => model.AppUrl_OverrideForStore, model => model.AppUrl, Model.ActiveStoreScopeConfiguration)
+                        @Html.NopLabelFor(model => model.AppUrl)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.AppUrl)
+                        @Html.ValidationMessageFor(model => model.AppUrl)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.OverrideStoreCheckboxFor(model => model.MerchantName_OverrideForStore, model => model.MerchantName, Model.ActiveStoreScopeConfiguration)
+                        @Html.NopLabelFor(model => model.MerchantName)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.MerchantName)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.OverrideStoreCheckboxFor(model => model.MerchantUniqueId_OverrideForStore, model => model.MerchantUniqueId, Model.ActiveStoreScopeConfiguration)
+                        @Html.NopLabelFor(model => model.MerchantUniqueId)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.MerchantUniqueId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.OverrideStoreCheckboxFor(model => model.MerchantBaseUrl_OverrideForStore, model => model.MerchantBaseUrl, Model.ActiveStoreScopeConfiguration)
+                        @Html.NopLabelFor(model => model.MerchantBaseUrl)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.MerchantBaseUrl)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.OverrideStoreCheckboxFor(model => model.ContinueUrl_OverrideForStore, model => model.ContinueUrl, Model.ActiveStoreScopeConfiguration)
+                        @Html.NopLabelFor(model => model.ContinueUrl)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.ContinueUrl)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.OverrideStoreCheckboxFor(model => model.MerchantOrderAlive_OverrideForStore, model => model.MerchantOrderAlive, Model.ActiveStoreScopeConfiguration)
+                        @Html.NopLabelFor(model => model.MerchantOrderAlive)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.MerchantOrderAlive)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.OverrideStoreCheckboxFor(model => model.PreAuth_OverrideForStore, model => model.PreAuth, Model.ActiveStoreScopeConfiguration)
+                        @Html.NopLabelFor(model => model.PreAuth)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.PreAuth)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-9">
+                        <input type="submit" name="save" class="btn bg-blue" value="@T("Admin.Common.Save")" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
