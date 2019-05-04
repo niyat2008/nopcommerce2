@@ -216,7 +216,7 @@
             text-align: center;
             color: #000;
         }
-        
+
         /*.fixedNavScreen ul li{
             padding:10px 5px
         }*/
@@ -259,7 +259,7 @@
     }
 
     .siteDetails {
-        padding: 8px; 
+        padding: 8px;
         margin-top:39px;
         background: #e2e6eb;
         border: 1px solid #ddd;
@@ -311,53 +311,30 @@
     }
     @@media(min-width:1037px) and (max-width:1071px) {
         a.logo { margin-left:30px }
-        .header-menu-parent {
-            padding-right: 70px;
-        }
+        .header-menu-parent { padding-right: 70px; }
     }
     @@media(min-width:1025px) and (max-width:1037px) {
-        a.logo {
-            margin-left: 10px
-        }
-        .header-menu-parent {
-            padding-right: 70px;
-        }
+        a.logo { margin-left: 10px }
+        .header-menu-parent {  padding-right: 70px;  }
     }
-    .siteDetails p {
-        text-align: center;
-        margin: 0;
-        font-size: 14px;
-    }
+    .siteDetails p { text-align: center; margin: 0; font-size: 14px;  }
 
     @@media(min-width:1025px) {
-        .siteDetails1 {
-            display: block
-        }
-
-        .siteDetails2 {
-            display: none
-        }
+        .siteDetails1 { display: block }
+        .siteDetails2 { display: none }
     }
 
     @@media(max-width:1025px) {
-        .siteDetails1 {
-            display: none
-        }
+        .siteDetails1 { display: none }
+        .siteDetails2 { display: block; margin-top: 20px; margin-right: 20px; margin-left: 20px; }
+        a.logo {  width: auto; float: none; margin-left: 0; }
+        .header-menu-parent {  padding-right:0 }
+    }
 
-        .siteDetails2 {
-            display: block;
-            margin-top: 20px;
-            margin-right: 20px;
-            margin-left: 20px;
-        }
-        a.logo {
-            width: auto;
-            float: none;
-            margin-left: 0;
-        }
-        .header-menu-parent {
-            padding-right:0
-        }
+    @@media (min-width: 1810px){
+        #problem { padding-right: 8% !important; }
+        .header .center { margin-right:15px }
+        .header-menu-parent { padding-right: 0 }
     }
 </style>
 
