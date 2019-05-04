@@ -332,9 +332,17 @@
     }
 
     @@media (min-width: 1810px){
-        #problem { padding-right: 8% !important; }
+        /*#problem { padding-right: 8% !important; }
         .header .center { margin-right:15px }
-        .header-menu-parent { padding-right: 0 }
+        .header-menu-parent { padding-right: 0 }*/
+    }
+    .men {
+        background-color: rgb(231, 234, 237);
+        padding-top: 0;
+        min-height: 80px;
+    }
+    @@media (min-width: 1810px) {
+        .men { min-height:41px }
     }
 </style>
 
@@ -520,7 +528,7 @@
     </div>
 
 
-    <div class="men" style="background-color:rgb(231, 234, 237);padding-top:0; min-height: 80px;">
+    <div class="men">
         <div class="center menAll">
             @*@if (showCategoriesInSideMenu)
                 {

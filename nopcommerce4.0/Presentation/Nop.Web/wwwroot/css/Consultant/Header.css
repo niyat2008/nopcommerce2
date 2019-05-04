@@ -167,3 +167,7 @@ a:hover { color: #40ca40 }
     .logo { margin-bottom:3px }
     .header .header-logo, .search .logoContainer { margin-top:0 }
 }
+@media (min-width: 1810px) {
+    .spcXL { width:20% }
+    .logoXL { width:13% }
+}
