@@ -216,6 +216,7 @@
             text-align: center;
             color: #000;
         }
+        
         /*.fixedNavScreen ul li{
             padding:10px 5px
         }*/
@@ -320,6 +321,42 @@
         }
         .header-menu-parent {
             padding-right: 70px;
+        }
+    }
+    .siteDetails p {
+        text-align: center;
+        margin: 0;
+        font-size: 14px;
+    }
+
+    @@media(min-width:1025px) {
+        .siteDetails1 {
+            display: block
+        }
+
+        .siteDetails2 {
+            display: none
+        }
+    }
+
+    @@media(max-width:1025px) {
+        .siteDetails1 {
+            display: none
+        }
+
+        .siteDetails2 {
+            display: block;
+            margin-top: 20px;
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+        a.logo {
+            width: auto;
+            float: none;
+            margin-left: 0;
+        }
+        .header-menu-parent {
+            padding-right:0
         }
     }
 </style>
@@ -456,8 +493,8 @@
 
         </div>
     </section>
-    <div class="siteDetails">
-        <p id="messagep" style="text-align:center;margin:0; font-size: 14px;">خدمة الاستشارات هى خدمة مجانية تقدم من قبل موقع المزراع لمساعدة حل المشاكل الزراعية بواسطة مستشارين مختصين فى هذا المجال.</p>
+    <div class="siteDetails siteDetails1">
+        <p>خدمة الاستشارات هى خدمة مجانية تقدم من قبل موقع المزراع لمساعدة حل المشاكل الزراعية بواسطة مستشارين مختصين فى هذا المجال.</p>
     </div>
     <div id="sticky" class="header-middle">
         <div class="" id="problem">
@@ -549,6 +586,10 @@
 
 @if (isHomePage)
 {
+    <div class="siteDetails siteDetails2">
+        <p>خدمة الاستشارات هى خدمة مجانية تقدم من قبل موقع المزراع لمساعدة حل المشاكل الزراعية بواسطة مستشارين مختصين فى هذا المجال.</p>
+    </div>
+
     var homePageSliderCss = isHomeSliderFullWidth ? "slider-fullwidth" : "slider-right-column";
 
     <div class="two-columns-area @homePageSliderCss">
