@@ -123,6 +123,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\API\" />
     <Folder Include="Models\ConsultantAdmin\" />
     <Folder Include="Models\Harag\BlackList\" />
     <Folder Include="Models\Harag\Follow\" />
