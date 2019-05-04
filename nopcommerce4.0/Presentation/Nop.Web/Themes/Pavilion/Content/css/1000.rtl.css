@@ -606,7 +606,8 @@
                 }
 
         .store-search-box {
-           float: left;
+            /*float: left;*/
+            float: right;
             clear: left;
             margin: 0;
         }
