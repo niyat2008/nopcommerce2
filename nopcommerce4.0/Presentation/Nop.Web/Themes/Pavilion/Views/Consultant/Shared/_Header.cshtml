@@ -616,27 +616,8 @@
                         </li>
                         <li id="myAccount">
                             <a> <i class="fa fa-user-o fa-lg"></i> </a>
-                        </li>
-                        <li>
-                            <a>
-                                <i class="fa fa-plus fa-lg"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <i class="fa fa-long-arrow-left fa-lg"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <i class="fa fa-asterisk fa-lg"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <i class="fa fa-eye fa-lg"></i>
-                            </a>
-                        </li>
+                        </li> 
+                        
                         <li>
                             <a href="/Consultant/Notifications">
                                 <sup id="notification-count-jsa" class="badge badge-danger"></sup>
@@ -685,12 +666,52 @@
 </section>
 
 
-<div class="text-center top-user-menu">
-    @if (isRegistered)
-    {
-        <div id="threebuttons" class="text-center"></div>
-    }
+<div class="text-center top-user-menu"> 
+        <style type="text/css">
+                   /*.threebuttons:hover { background-color: darkgreen !important;}
+            .nodoc:hover { text-decoration: none; }*/
+                   span {
+                       padding: 9px;
+                       font-weight: bold;
+                   }
 
+                       span a {
+                           color: #777;
+                           text-decoration: none
+                       }
+
+                           span a:hover {
+                               color: #3e874b;
+                               text-decoration: none
+                           }
+
+                   #threebuttons span a {
+                       padding: 0 5px
+                   }
+
+                       #threebuttons span a:hover {
+                           text-decoration: underline
+                       }
+        </style>
+
+
+        <span>
+            <a href="/الشحن-والاسترجاع" class="nodoc">
+                الشحن والاسترجاع
+            </a>
+        </span>
+        <span>
+            <a href="/customer/addresses" class="nodoc">
+                عناوين الشحن
+            </a>
+        </span>
+
+        <span>
+            <a href="/شروط-الاستخدام">
+
+                شروط الاستخدام
+            </a>
+        </span> 
 </div>
 
 @*<div class="siteDetails">
@@ -733,7 +754,11 @@
             <div class="allPage" id="allpage">
                 <div class="siteDetails">
                     <p id="messagep" style="text-align:center;margin:0; font-size: 14px;">خدمة الاستشارات هى خدمة مجانية تقدم من قبل موقع المزراع لمساعدة حل المشاكل الزراعية بواسطة مستشارين مختصين فى هذا المجال.</p>
+
                 </div>
+                
+                <div id="threebuttons" style="color:darkgreen !important; padding-bottom: 15px;" class="text-center"></div>
+
                 @RenderBody()
                 <div id="posts"></div>
                 <not-found *ngIf="!posts.length"></not-found>
