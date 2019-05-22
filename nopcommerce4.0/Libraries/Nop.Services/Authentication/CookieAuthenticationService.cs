@@ -74,12 +74,12 @@ namespace Nop.Services.Authentication
             };
 
             //sign in
-             await _httpContextAccessor.HttpContext.SignInAsync(NopCookieAuthenticationDefaults.AuthenticationScheme, userPrincipal, authenticationProperties);
+            await _httpContextAccessor.HttpContext.SignInAsync(NopCookieAuthenticationDefaults.AuthenticationScheme, userPrincipal, authenticationProperties);
 
             //cache authenticated customer
             _cachedCustomer = customer;
         }
-        
+
         /// <summary>
         /// Sign out
         /// </summary>

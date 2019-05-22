@@ -362,14 +362,13 @@
                 opacity: 0.9;
             }
 
-            .spc-categories .category-products {
-                float: right;
-                width: 65%;
+            .spc-categories .category-products { 
+                width: 100%;
                 padding: 0 0 0 20px;
             }
 
             .spc-categories .item-box {
-                width: 49% !important;
+                width: 33% !important;
                 height: 137px; /*match grids height with category picture, based on 4 items per grid + margins,
 	always use fixed height to prevent "content shifting" bug in Firefox*/
                 clear: none !important;

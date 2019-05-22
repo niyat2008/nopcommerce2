@@ -15,7 +15,7 @@
     <div class="spc spc-products @supportRtlClass"
          notloaded
          data-getitemproductsurl="@Url.Action("GetProductsForItem", "SmartProductCollections")">
-        <div class="spc-header">
+        <div class="spc-header" style="margin-top: 25px !important;"> 
             <h2 class="title"><span>@group.Title</span></h2>
             <ul class="navigation">
                 @foreach (var item in group.Items)

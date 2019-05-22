@@ -22,7 +22,9 @@
                 <select class="category-mobile-navigation-select">
                     @foreach (var tab in Model.Tabs)
                     {
-                        <option class="tab" value="@tab.Id" data-tabId="@tab.Id">@tab.Title</option>
+                    <option class="tab" value="@tab.Id" data-tabId="@tab.Id"> 
+                    
+                    @tab.Title</option>
                     }
                 </select>
             </div>

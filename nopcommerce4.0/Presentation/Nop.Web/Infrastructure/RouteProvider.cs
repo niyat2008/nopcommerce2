@@ -18,26 +18,6 @@ namespace Nop.Web.Infrastructure
         /// <param name="routeBuilder">Route builder</param>
         public void RegisterRoutes(IRouteBuilder routeBuilder)
         {
-            //---------Test---------
-
-            routeBuilder.MapRoute("Test.TestApiAhmed", "Test.TestApiAhmed",
-          new { controller = "api/TestApi", action = "AuthTest" });
-
-            routeBuilder.MapRoute("Ahmed.AhmedHegazy", "Tsts.AhmedYousry",
-          new { controller = "Test", action = "AuthTest" });
-
-          
-
-
-
-            routeBuilder.MapRoute("Harag.AuthTest", "AuthTest",
-          new { controller = "AuthTest", action = "Login" });
-
-
-            //login
-            routeBuilder.MapLocalizedRoute("LoginTest", "loginTest/",
-                new { controller = "Customer", action = "LoginTest" });
-            //-----------End Test-----------
             // ----------------  Harag ------------------------------
             // done
             routeBuilder.MapRoute("Harag.Home", "Harag",
