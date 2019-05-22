@@ -8,10 +8,11 @@
 @model LogoModel
 
 @{
+    //var logoPath = $"~/Themes/{themeContext.WorkingThemeName}/Content/img/logo.png";
     var logoPath = $"~/Themes/{themeContext.WorkingThemeName}/Content/img/logo.png";
 
     var themeLogo = await Component.InvokeAsync("Widget", new { widgetZone = "pavilion_theme_logo" });
-    
+
 }
 
 <style>
