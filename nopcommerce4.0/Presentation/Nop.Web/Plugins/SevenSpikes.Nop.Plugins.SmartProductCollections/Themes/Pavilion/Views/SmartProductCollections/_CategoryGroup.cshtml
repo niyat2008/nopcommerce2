@@ -26,45 +26,53 @@
 <div class="spc-body">
     <div class="category-info">
         @*<h2 class="category-title">
-            <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">@Model.Name</a>
-        </h2>*@
+                <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">@Model.Name</a>
+            </h2>*@
 
         <div class="mobile-navigation category-mobile-navigation">
             <select class="category-mobile-navigation-select">
                 @foreach (var tab in Model.Tabs)
-                {
+            {
                     <option class="tab" value="@tab.Id" data-tabId="@tab.Id">@tab.Title</option>
                 }
             </select>
         </div>
 
         @*@if (Model.SubCategories.Count > 0)
-        {
-            <div class="category-details" style="background-color:rgba(0, 0, 0,.4); color:white;font-size:larger;font-weight:bolder;">
-                <h2 class="category-inner-title">
-                    <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">@Model.Name</a>
-                </h2>
-                <ul class="category-sublist">
-                    @foreach (var subcategory in Model.SubCategories)
-                    {
-                        <li>
-                            <a href="@Url.RouteUrl("Category", new {SeName = subcategory.SeName})" title="@subcategory.Name">@subcategory.Name</a>
-                        </li>
-                    }
-                    @if (Model.DisplayViewAllSubcategoriesLink)
-                    {
-                        <li>
-                            <a class="view-all" href="@Url.RouteUrl("Category", new { SeName = Model.SeName })" title="@Model.Name">@T("SevenSpikes.Nop.Plugins.SmartProductCollections.Categories.ViewAll")</a>
-                        </li>
-                    }
-                </ul>
-            </div>
-        }*@
+            {
+                <div class="category-details" style="background-color:rgba(0, 0, 0,.4); color:white;font-size:larger;font-weight:bolder;">
+                    <h2 class="category-inner-title">
+                        <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">@Model.Name</a>
+                    </h2>
+                    <ul class="category-sublist">
+                        @foreach (var subcategory in Model.SubCategories)
+                        {
+                            <li>
+                                <a href="@Url.RouteUrl("Category", new {SeName = subcategory.SeName})" title="@subcategory.Name">@subcategory.Name</a>
+                            </li>
+                        }
+                        @if (Model.DisplayViewAllSubcategoriesLink)
+                        {
+                            <li>
+                                <a class="view-all" href="@Url.RouteUrl("Category", new { SeName = Model.SeName })" title="@Model.Name">@T("SevenSpikes.Nop.Plugins.SmartProductCollections.Categories.ViewAll")</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }*@
+
         <div class="category-picture">
             <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">
-                <img src="@Model.PictureModel.FullSizeImageUrl" style="width: 77%" alt="@Model.PictureModel.Title" />
-            </a>            
+                <img src="@Model.PictureModel.FullSizeImageUrl" alt="@Model.PictureModel.Title" />
+            </a>
         </div>
+
+
+        @*<div class="category-picture">
+                <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">
+                    <img src="@Model.PictureModel.FullSizeImageUrl" style="width: 77%" alt="@Model.PictureModel.Title" />
+                </a>
+            </div>*@
     </div>
     <div class="category-products">
         @foreach (var tab in Model.Tabs)

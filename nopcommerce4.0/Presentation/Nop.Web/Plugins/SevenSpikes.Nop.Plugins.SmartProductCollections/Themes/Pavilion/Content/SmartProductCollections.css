@@ -259,13 +259,13 @@
 	display: block;
 	transition: all 0.3s ease;
 }
-.spc-categories .category-picture img {
+    
+    /*.spc-categories .category-picture img {
 	width: 100%;
-}
-
-.spc-categories .category-products {
-	position: relative;
-}
+}*/
+    .spc-categories .category-products {
+        position: relative;
+    }
 .spc-categories .product-grid {
 	display: none;
 }
@@ -577,4 +577,11 @@
 	width: 63%;
 }
 
+}
+.spc-categories .category-picture {
+    text-align: center!important;
+}
+.spc-categories .category-picture a {
+    height: 342px;
+    line-height: 342px;
 }
