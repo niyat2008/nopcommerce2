@@ -7,7 +7,7 @@
 
   //"DataConnectionString": "Data Source=68.66.228.7;Initial Catalog=niyatcom_nop_farmsstore_db;Integrated Security=false;MultipleActiveResultSets=true;uid=niyatcom_niyat_db_user1;password=Ali123;",
 
-  "DataConnectionString": "Data Source=68.66.228.7;Initial Catalog=niyatcom_final_farmsstore_db;Integrated Security=False;Persist Security Info=False;User ID=niyatcom_alisheh;Password=9i7d&7tD",
+  //"DataConnectionString": "Data Source=68.66.228.7;Initial Catalog=niyatcom_final_farmsstore_db;Integrated Security=False;Persist Security Info=False;User ID=niyatcom_alisheh;Password=9i7d&7tD",
   //"DataConnectionString": "Data Source=sql6007.site4now.net;Initial Catalog=DB_A4877E_finalfarmsstore2;Integrated Security=False;Persist Security Info=False;User ID=DB_A4877E_finalfarmsstore2_admin;Password=9i7A7tD1",
 
   //"DataConnectionString": "Data Source=10.2.2.105;Initial Catalog=DB_A409B4_nop4;Integrated Security=false;MultipleActiveResultSets=true;uid=sa;password=123;",
@@ -16,7 +16,7 @@
 
   //"DataConnectionString": "Data Source=10.2.2.106;Initial Catalog=DB_A409B4_nop4;Integrated Security=false;MultipleActiveResultSets=true;uid=sa;password=123;",
 
-  //"DataConnectionString": "Data Source=DESKTOP-NRGMDCN\\SQLEXPRESS;Initial Catalog=DB_A409B4_nop4;Integrated Security=true;",
+  "DataConnectionString": "Data Source=SQL6007.site4now.net;Initial Catalog=DB_A4877E_info;Integrated Security=false;MultipleActiveResultSets=true;uid=DB_A4877E_info_admin;password=Asd12345;",
 
   "RawDataSettings": {}
 }

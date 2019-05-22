@@ -17,6 +17,45 @@
 
 
 <style type="text/css">
+
+/*
+    Rating System
+*/
+    svg {
+        width: 2em;
+        height: 2em;
+        fill: white;
+        pointer-events: none;
+    }
+
+    .stars {
+        display: flex;
+        flex-flow: row-reverse;
+        justify-content: flex-end;
+    }
+
+    .star.is-selected svg,
+    .star.is-selected ~ .star svg {
+        fill: darken(orange, 20%);
+    }
+
+    .star:hover svg,
+    .star:hover ~ .star svg {
+        fill: orange;
+    }
+
+
+    #rated {
+        margin-top: 1em;
+    }
+
+    .rtl {
+        direction: rtl
+    }
+
+
+
+
     .orange-star {
         color: orange !important;
     }
@@ -191,135 +230,161 @@
             <button onclick="UnReservePost(@Model.Id)" class=" btn btn-danger"> فك الحجز </button>
         }
         @*onclick="changeCatAndSub()"*@
-        <span class="pull-left">
-            @if (ViewBag.UserRole == "Vistor")
-            {
-                @if (Model.IsClosed)
+            <span class="pull-left">
+                @if (ViewBag.UserRole == "Vistor")
                 {
-                    @*<span class="status closed">
-                            مغلقة
-                        </span>*@
+                    @if (Model.IsClosed)
+                    {
+                        @*<span class="status closed">
+                    مغلقة
+                </span>*@
+                    }
+                    else
+                    {
+                        <span class="badge badge-success open">
+                            مفتوحة
+                        </span>
+                    }
                 }
-                else
+                @if (ViewBag.UserRole == "Registered")
                 {
-                    <span class="badge badge-success open">
-                        مفتوحة
-                    </span>
+                    @if (Model.IsClosed)
+                    {
+                        @*<span class="status closed">
+                    مغلقة
+                </span>*@
+                    }
+                    else
+                    {
+                        <span class="badge badge-success  open">
+                            مفتوحة
+                        </span>
+                    }
                 }
-            }
-            @if (ViewBag.UserRole == "Registered")
-            {
-                @if (Model.IsClosed)
-                {
-                    @*<span class="status closed">
-                            مغلقة
-                        </span>*@
-                }
-                else
-                {
-                    <span class="badge badge-success  open">
-                        مفتوحة
-                    </span>
-                }
-            }
 
-            @if (ViewBag.UserRole == "Consultant")
-            {
-                @if (Model.IsClosed == true)
+                 
+                @if (ViewBag.UserRole == "Consultant")
                 {
-                    @*<span class="status closed">
-                            @Html.Raw(" مغلقة ")
-                        </span>*@
+                    @if (Model.IsClosed == true)
+                    {
+                        @*<span class="status closed">
+                    @Html.Raw(" مغلقة ")
+                </span>*@
+                    }
+                    else if (!Model.IsClosed && Model.IsAnswered)
+                    {
+                        <span class="badge badge-success  open">
+                            @Html.Raw(" مفتوحة ")
+                        </span>
+                    }
+                    else if (!Model.IsClosed && !Model.IsAnswered && Model.IsReserved)
+                    {
+                        <span class="badge badge-success  open">
+                            @Html.Raw(" محجوزة ")
+                        </span>
+                    }
+                    else if (!Model.IsClosed && !Model.IsAnswered && !Model.IsReserved)
+                    {
+                        <span class="badge badge-success  open">
+                            @Html.Raw(" لم يرد عليها ")
+                        </span>
+                    }
                 }
-                else if (!Model.IsClosed && Model.IsAnswered)
-                {
-                    <span class="badge badge-success  open">
-                        @Html.Raw(" مفتوحة ")
-                    </span>
-                }
-                else if (!Model.IsClosed && !Model.IsAnswered && Model.IsReserved)
-                {
-                    <span class="badge badge-success  open">
-                        @Html.Raw(" محجوزة ")
-                    </span>
-                }
-                else if (!Model.IsClosed && !Model.IsAnswered && !Model.IsReserved)
-                {
-                    <span class="badge badge-success  open">
-                        @Html.Raw(" لم يرد عليها ")
-                    </span>
-                }
-            }
 
-            @if (Model.Rate != null)
-            {
-                <span class="separator"> | </span>
-                @*@if (Model.IsClosed)
-                    {*@
-                <span>
-                    @if (Model.Rate >= 1)
-                    {
-                        <i class="fa fa-star orange-star"></i>
-                    }
-                    else
-                    {
-                        <i class="fa fa-star"></i>
-                    }
-                    @if (Model.Rate >= 2)
-                    {
-                        <i class="fa fa-star orange-star"></i>
-                    }
-                    else
-                    {
-                        <i class="fa fa-star"></i>
-                    }
-                    @if (Model.Rate >= 3)
-                    {
-                        <i class="fa fa-star orange-star"></i>
-                    }
-                    else
-                    {
-                        <i class="fa fa-star"></i>
-                    }
-                    @if (Model.Rate >= 4)
-                    {
-                        <i class="fa fa-star orange-star"></i>
-                    }
-                    else
-                    {
-                        <i class="fa fa-star"></i>
-                    }
-                    @if (Model.Rate >= 5)
-                    {
-                        <i class="fa fa-star orange-star"></i>
-                    }
-                    else
-                    {
-                        <i class="fa fa-star"></i>
-                    }
+                @if (Model.Rate != null)
+                {
+                    <span class="separator"> | </span>
+                    @*@if (Model.IsClosed)
+            {*@
+                    <span>
+                        @if (Model.Rate >= 1)
+                        {
+                            <i class="fa fa-star orange-star"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-star"></i>
+                        }
+                        @if (Model.Rate >= 2)
+                        {
+                            <i class="fa fa-star orange-star"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-star"></i>
+                        }
+                        @if (Model.Rate >= 3)
+                        {
+                            <i class="fa fa-star orange-star"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-star"></i>
+                        }
+                        @if (Model.Rate >= 4)
+                        {
+                            <i class="fa fa-star orange-star"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-star"></i>
+                        }
+                        @if (Model.Rate >= 5)
+                        {
+                            <i class="fa fa-star orange-star"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-star"></i>
+                        }
 
-                </span>
-                //}
-            }
-        </span>
+                    </span>
+                    //}
+                }
+            </span>
     </div>
 
 
     <!-- Footer -->
     <div class="post-footer">
         @if (!Model.IsClosed && ViewBag.UserRole == "Registered")
-        {<strong> قم بتقييم المستشار </strong>
-            <span id="test" class="will-rate">
+        {
+            <strong> قم بتقييم المستشار </strong>
+
+            <svg style="display: none;">
+                <symbol id="star" viewBox="0 0 98 92">
+                    <title>star</title>
+                    <path stroke='#000' stroke-width='5' d='M49 73.5L22.55 87.406l5.05-29.453-21.398-20.86 29.573-4.296L49 6l13.225 26.797 29.573 4.297-21.4 20.86 5.052 29.452z' fill-rule='evenodd' />
+            </svg>
+
+            <div style="display: inline-block">
+                <div id="stars" class="stars">
+                    <a class="star" href="#"><svg><use xlink:href="#star"></use></svg></a>
+                    <a class="star" href="#"><svg><use xlink:href="#star"></use></svg></a>
+                    <a class="star" href="#"><svg><use xlink:href="#star"></use></svg></a>
+                    <a class="star" href="#"><svg><use xlink:href="#star"></use></svg></a>
+                    <a class="star" href="#"><svg><use xlink:href="#star"></use></svg></a>
+                </div>
+            </div>
+
+            @*<div id="rated"></div>*@
+
+
+            @*<span id="test" class="will-rate">
                 <i class="fa fa-star" onclick="RatePost(@Model.Id,1,this)"></i>
                 <i class="fa fa-star" onclick="RatePost(@Model.Id,2,this)"></i>
                 <i class="fa fa-star" onclick="RatePost(@Model.Id,3,this)"></i>
                 <i class="fa fa-star" onclick="RatePost(@Model.Id,4,this)"></i>
                 <i class="fa fa-star" onclick="RatePost(@Model.Id,5,this)"></i>
-            </span>
+            </span>*@
 
             <button class="pull-left btndarckgreen" onclick="closePost('@Model.Id')">غلق الاستشارة</button>
         }
-
+        else if (Model.IsClosed && Model.IsConsultantOwner && !Model.IsDispayed)
+        {
+            <button class="pull-left btndarckgreen" onclick="displayPost('@Model.Id')">نشر الاستشارة</button>
+        }
+       
         @*@Html.Partial("/Themes/Pavilion/Views/Consultant/Post/ShareButtonsa.cshtml", Url.Link("Consultant.Post.GetPost", new { PostId = Model.Id }))*@
     </div>
 </div>
@@ -450,6 +515,21 @@
         function close(id) {
             $('#' + id).hide();
         }
+
+
+        var starContainer = document.getElementById('stars');
+        var stars = Array.prototype.slice.call(starContainer.children);
+        var totalStars = stars.length
+        var rated = document.getElementById('rated')
+
+        starContainer.addEventListener('click', function (e) {
+            var index = stars.indexOf(e.target)
+            var count = count = totalStars - index;
+            stars.forEach(el => el.classList.remove('is-selected'))
+            e.target.classList.add('is-selected')
+
+            RatePost(@Model.Id, count,this) 
+        })
     });
 
     $('.close-popup').click(function () {
@@ -517,6 +597,33 @@
                 }
                 else {
                     alert(" لا يمكن غلق الاستشارة قبل الرد عليها من قبل المستشار ومن ثم تقييم المستشار");
+                }
+            }
+        });
+    }
+
+      function displayPost(Id) {
+
+        var closePostModel = {
+            Id: Id
+        };
+
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "POST",
+            url: '@Url.RouteUrl("Consultant.Post.DisplayPostAfterClosing")',
+            dataType: 'json',
+            data: JSON.stringify(closePostModel),
+            complete: function (data) {
+                if (data.status == 200) {
+                    alert("تمت نشر الاستئارة بنجاح");
+                    window.location.reload();
+                }
+                else {
+                    alert(" لا يمكن نشر الاستشارة ");
                 }
             }
         });

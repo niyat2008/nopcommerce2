@@ -491,29 +491,18 @@ new { controller = "Post", action = "GetSubCategoriesByCategoryIdMobile" });
             routeBuilder.MapRoute("Consultant.Post.GetAllCityNeighborhoodAjax", "Consultations/GetAllStateCityNeighborhoodsAjax",
            new { controller = "Post", action = "GetAllCityNeighborhoodAjax" });
 
+            // Display Post 
+            routeBuilder.MapRoute("Consultant.Post.DisplayPostAfterClosing", "Consultations/DisplayPost",
+          new { controller = "Post", action = "DisplayPost" });
+
 
             //-----------------enf of Consultant----------------------------
 
-             
+
             //-----------------Admin Consultant----------------------------
             routeBuilder.MapRoute("Consultant.Admin.GetAllCustomers", "Consultations/Admin/Posts/GetAllCustomers",
                new { controller = "Consultations", action = "GetAllCustomers" });
-
-
-
             
-
-
-
-
-            
-
-
-
-
-
-
-
             //Dashboard 
             routeBuilder.MapRoute("Consultant.Admin.Dashboard", "Consultations/Admin",
             new { controller = "DashboardConsultant", action = "Home" });
@@ -568,7 +557,7 @@ new { controller = "Post", action = "GetSubCategoriesByCategoryIdMobile" });
                 new { controller = "Consultations", action = "PostDisplay" });
 
 
-
+            // 
             // Not Replied Posts
             routeBuilder.MapRoute("Consultant.Admin.GetAllNotRepliedPosts", "Consultations/Admin/Posts/GetAllNotRepliedPosts",
                 new { controller = "Consultations", action = "GetNotRepliedPosts" });

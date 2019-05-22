@@ -245,10 +245,11 @@ namespace Nop.Services.Z_Consultant.Post
             var image = new Bitmap(img);
 
             Image ib = Image.FromFile(logo); // This is 300x300 
-            ib = ResizeImage(ib, 60, 60);
+            ib = ResizeImage(ib, img.Width / 6, img.Height / 6);
             using (Graphics g = Graphics.FromImage(image))
             {
-                g.DrawImage(ib, 0, 0, 60, 40);
+                //g.DrawImage(ib, 0, 0, img.Width / 6, img.Height / 6);
+                g.DrawImage(ib, image.Width - (img.Width / 6), image.Height - (img.Height / 6), (img.Width / 6), (img.Height / 6));
             }
 
             return image;
@@ -489,13 +490,15 @@ namespace Nop.Services.Z_Consultant.Post
         public bool IsCustomerAuthToPost(int postId, int customerId)
         {
             var post = _postRepository.TableNoTracking
-                .Where(p => p.Id == postId && p.CustomerId == customerId).FirstOrDefault();
-
+                .Where(p => p.Id == postId && p.CustomerId == customerId)
+                .FirstOrDefault();
+             
             if (post == null)
                 return false;
 
             return true;
         }
+
 
         public PagedList<Z_Consultant_Post> GetOpenPostsNotAns(PagingParams pagingParams)
         {
@@ -959,6 +962,8 @@ namespace Nop.Services.Z_Consultant.Post
             var post = _postRepository.Table.Where(p => p.Id == PostId).FirstOrDefault();
             if (post != null)
                 post.IsDispayed = true;
+
+            _postRepository.Update(post);
         }
 
         public void HidePost(int PostId)

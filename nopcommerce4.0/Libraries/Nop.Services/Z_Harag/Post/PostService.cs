@@ -352,18 +352,19 @@ namespace Nop.Services.Z_Harag.Post
         }
 
         private Bitmap DrawLogo(string logo, Image img )
-        { 
-                var image = new Bitmap(img);
-               
-                Image ib = Image.FromFile(logo); // This is 300x300 
-                ib = ResizeImage(ib, img.Width/6 , img.Height/6);
-                using (Graphics g = Graphics.FromImage(image))
-                {
-                    g.DrawImage(ib, 0, 0, img.Width / 6, img.Height / 6);
-                }
+        {
+            var image = new Bitmap(img);
 
-                return image;
-              
+            Image ib = Image.FromFile(logo); // This is 300x300 
+            ib = ResizeImage(ib, img.Width / 6, img.Height / 6);
+            using (Graphics g = Graphics.FromImage(image))
+            {
+                //g.DrawImage(ib, 0, 0, img.Width / 6, img.Height / 6);
+                g.DrawImage(ib, image.Width - (img.Width / 6), image.Height - (img.Height / 6), (img.Width / 6), (img.Height / 6));
+            }
+
+            return image;
+
         }
 
         //Get  Post By Id

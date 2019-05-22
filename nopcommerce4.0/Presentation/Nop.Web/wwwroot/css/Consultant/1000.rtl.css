@@ -341,7 +341,7 @@
         .cart-trigger {
             display: inline-block;
             position: relative;
-            height: 42px;
+            height: 43px;
             border: 1px solid #f0f0f0;
             padding: 0 18px 0 19px;
             line-height: 40px;
@@ -357,7 +357,7 @@
                 top: -1px;
                 right: -32px;
                 width: 32px;
-                height: 42px;
+                height: 43px;
                 background: #f74258 url('/images/Consultant/images/img/flyout-cart.png') center no-repeat;
             }
 

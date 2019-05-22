@@ -304,7 +304,7 @@ namespace Nop.Web.Controllers.Consultant
 
             var post = _postService.GetPost(postId);
 
-            if (post == null || text == null || text.Length < 20)
+            if (post == null || text == null)
             {
                 return BadRequest();
             }
@@ -330,7 +330,7 @@ namespace Nop.Web.Controllers.Consultant
 
             var post = _postService.GetPost(postId);
 
-            if (post == null || text == null || text.Length < 20)
+            if (post == null || text == null  )
             {
                 return BadRequest();
             }
@@ -795,23 +795,23 @@ namespace Nop.Web.Controllers.Consultant
             };
             return PartialView("~/Themes/Pavilion/Views/Consultant/Post/ConsultantClosedConsultations.cshtml", outputModel);
         }
-
-
-
-
-
-
-
+         
         [HttpGet]
         public IActionResult GetPost(int PostId)
-        {
-            if (!_postService.IsExist(PostId))
+        { 
+            if (!_postService.IsExist(PostId) )
                 return NotFound();
+
+            var post = _postService.GetPost(PostId);
+
+            if ( (!post.IsDispayed && _workContext.CurrentCustomer.Id != post.CustomerId) && !_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Consultant, true))
+                return NotFound();
+
             string UserRole = "Vistor";
 
             PostWithFilesModel model  = new PostWithFilesModel();
-
-            if (!_postService.IsClosed(PostId))
+             
+                if (!_postService.IsClosed(PostId))
             {
                 if (!_workContext.CurrentCustomer.IsRegistered())
                     return Unauthorized();
@@ -820,13 +820,14 @@ namespace Nop.Web.Controllers.Consultant
                 ViewBag.UserName = _workContext.CurrentCustomer.Username;
 
                 if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Consultant, true))
-                {
+                { 
                     UserRole = RolesType.Consultant;
                     if (_postService.IsReserved(PostId))
                     {
                         if (_postService.IsConsultantAuthToPost(PostId, currentUserId))
                         {
                             model = GetPostWithPhotosPrivate(PostId);
+                            model.IsConsultantOwner = true;
                         }
                         else
                         {
@@ -845,6 +846,8 @@ namespace Nop.Web.Controllers.Consultant
                     if (_postService.IsCustomerAuthToPost(PostId, currentUserId))
                     {
                         model = GetPostWithPhotosPrivate(PostId);
+                        model.IsConsultantOwner = false;
+
                     }
                     else
                     {
@@ -859,6 +862,10 @@ namespace Nop.Web.Controllers.Consultant
             else
             {
                 model = GetPostWithPhotos(PostId);
+
+                if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Consultant, true)) 
+                    model.IsConsultantOwner = true; 
+                   
             }
 
             ViewBag.UserRole = UserRole;
@@ -893,10 +900,7 @@ namespace Nop.Web.Controllers.Consultant
             return modelToReturn;
         }
 
-
-
-
-
+         
         [HttpGet]
         public IActionResult getFilePrivate(string path)
         {
@@ -963,6 +967,52 @@ namespace Nop.Web.Controllers.Consultant
                 return Ok();
             else
                 return BadRequest();
+        }
+
+        /// <summary>
+        /// Display Post by the Consultant 
+        /// </summary>
+        /// <param name="closePostModel"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult DisplayPost([FromBody]ClosePostModel closePostModel)
+        {
+            if (!_workContext.CurrentCustomer.IsRegistered())
+                return Unauthorized();
+
+
+            if (!_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Consultant, true))
+                return Forbid();
+
+
+            var currentUserId = _workContext.CurrentCustomer.Id;
+
+
+            if (!_postService.IsConsultantAuthToPost(closePostModel.Id, currentUserId))
+                return Forbid();
+
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+
+            if (closePostModel.Id <= 0)
+                return BadRequest("Rating and closing must be belong to post");
+
+
+            if (!_postService.IsClosed(closePostModel.Id))
+                return BadRequest("The post must be closed to display it");
+
+            if (!_postService.IsAnswered(closePostModel.Id))
+                return BadRequest("The post must be answered to closing it");
+
+            if (!_postService.IsRated(closePostModel.Id))
+                return BadRequest("The post must be rated to closing it");
+
+           _postService.DisplayPost(closePostModel.Id);
+
+
+            return Ok();
         }
 
 
