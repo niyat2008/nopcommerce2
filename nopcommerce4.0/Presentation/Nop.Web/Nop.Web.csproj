@@ -123,6 +123,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\API\" />
     <Folder Include="Models\ConsultantAdmin\" />
     <Folder Include="Models\Harag\BlackList\" />
     <Folder Include="Models\Harag\Follow\" />
@@ -137,6 +138,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Plugins\Payments.SendSpendManual\Nop.Plugin.Payments.SendSpendManual.dll.config" />
+    <None Include="Plugins\Payments.SendSpendManual\Views\Configure.cshtml" />
+    <None Include="Plugins\Payments.SendSpendManual\Views\PaymentInfo.cshtml" />
+    <None Include="Plugins\Payments.SendSpendManual\web.config" />
+    <None Include="Plugins\Payments.Tap\Views\Configure.cshtml" />
+    <None Include="Plugins\Payments.Tap\Views\PaymentInfo.cshtml" />
+    <None Include="Plugins\Payments.Tap\Views\_ViewImports.cshtml" />
     <None Include="Themes\Pavilion\Views\ConsultantAdmin\DashboardConsultant\Home.cshtml" />
     <None Include="Themes\Pavilion\Views\ConsultantAdmin\Posts\GetClosedDisplayedPostDetails.cshtml" />
     <None Include="Themes\Pavilion\Views\ConsultantAdmin\Posts\GetClosedDisplayedPosts.cshtml" />

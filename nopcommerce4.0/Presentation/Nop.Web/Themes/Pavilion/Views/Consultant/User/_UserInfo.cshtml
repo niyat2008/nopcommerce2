@@ -33,11 +33,11 @@ else
             <ul>
                 <li class="name"><a class="ico-register">@Model.Username</a></li>
                 <li class="link" (click)="logout()">@Html.RouteLink("تسجيل  خروج", "logout", new { returnUrl = "consultations" }, new { @class = "ico-logout" })</li>
-                <li>
+                @*<li>
                     <a href="/wishlist" class="ico-wishlist">
                         السلع المفضلة
                     </a>
-                </li>
+                </li>*@
             </ul>
         </div>
 

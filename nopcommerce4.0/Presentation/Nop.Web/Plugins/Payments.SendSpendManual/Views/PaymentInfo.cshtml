@@ -1,0 +1,69 @@
+﻿@{
+    Layout = "";
+}
+@model Nop.Plugin.Payments.SendSpendManual.Models.PaymentInfoModel
+
+<style>
+    .payment-form {
+        background-color: #f2f2f2;
+        width: 100%;
+        border-radius: 25px;
+        padding: 20px 0;
+        border: 3px solid #04b9e6;
+    }
+
+    .payment-form img {
+        display: block;
+        width: 200px;
+        margin: auto;
+    }
+
+        .payment-form div.record {
+            width: 100%;
+            margin: 10px 0;
+            line-height: 30px;
+            vertical-align: middle;
+        }
+
+            .payment-form div.record div.caption {
+                width: 50%;
+                text-align: right;
+                font-weight: bold;
+                float: left;
+                padding-right:10px;
+            }
+
+            .payment-form div.record div.field {
+                width: 50%;
+                text-align: left;
+                float: left;
+            }
+    @@media screen and (max-width: 980px) {
+        .payment-form div.record div.caption,
+        .payment-form div.record div.field {
+            width: 100%;
+            text-align:center;
+        }
+    }
+</style>
+
+
+<div id="fields" class="payment-form">
+    <img src="~/plugins/Payments.SendSpendManual/sendspend-logo.png" alt="SendSpend">
+    <div class="record">
+        <div class="caption">@Html.LabelFor(model => model.Countries, false)</div>
+        <div class="field">@Html.DropDownListFor(model => model.Country, Model.Countries, new { @class = "dropdownlists", style = "Width: 150px;" })</div>
+        <div style="clear:both;"></div>
+    </div>
+    <div class="record">
+        <div class="caption">@Html.LabelFor(model => model.PhoneNumber, false)</div>
+        <div class="field">
+            @Html.TextBoxFor(model => model.PhoneNumber, new { style = "Width: 150px;", autocomplete = "off", maxlength = 15 })
+            @Html.ValidationMessageFor(model => model.PhoneNumber)
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div class="record" style="text-align:center; color:#f00;">
+        <label style="font-weight:bold;">* After placing your order, Please authorize it on your phone.</label>
+    </div>
+</div>

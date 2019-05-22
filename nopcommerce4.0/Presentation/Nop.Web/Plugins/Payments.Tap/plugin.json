@@ -1,0 +1,11 @@
+{
+  "Group": "Payment methods",
+  "FriendlyName": "Tap Payments",
+  "SystemName": "Payments.TapPayments",
+  "Version": "1.1",
+  "SupportedVersions": [ "4.10" ],
+  "Author": "Charan Kumar Dommara",
+  "DisplayOrder": 1,
+  "FileName": "Nop.Plugin.Payments.TapPayments.dll",
+  "Description": "This plugin allows paying with Tap Payments"
+}

@@ -1,4 +1,13 @@
-﻿@{
+﻿
+
+@using Nop.Core;
+@using Nop.Core.Infrastructure;
+@using Nop.Services.Customers;
+@{
+    bool isRegistered = EngineContext.Current.Resolve<IWorkContext>().CurrentCustomer.Username != null;
+}
+
+@{
     var controllerName = Url.ActionContext.RouteData.Values["controller"].ToString();
     var actionName = Url.ActionContext.RouteData.Values["action"].ToString();
 
@@ -173,7 +182,7 @@
         border-bottom: 0
     }
 
- 
+
     .navbar-collapse {
         padding: 0;
         position: relative;
@@ -200,12 +209,13 @@
         }
 
     .subNav {
-        display: none; padding: 15px;
+        display: none;
+        padding: 15px;
         background: #fff;
         border: 1px solid #ddd;
         position: absolute;
         top: auto;
-        left:5px;
+        left: 5px;
         z-index: 9999;
         width: 100%;
         box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
@@ -216,21 +226,24 @@
     }
     /*.top-user-menu { padding: 20px; }*/
     .top-user-menu {
-    background: #e8ebee;
-    padding: 8px;
-    margin-top: 42px;
-    /*margin-top: 29px;*/
-    display: block
-}
-@@media only screen and (max-width : 1024px) {
-    .top-user-menu {
-        display: none
+        background: #e8ebee;
+        padding: 8px;
+        margin-top: 42px;
+        /*margin-top: 29px;*/
+        display: block
     }
-}
-        .top-user-menu > span {
-            padding: 9px;
-            font-weight: bold;
+
+    @@media only screen and (max-width : 1024px) {
+        .top-user-menu {
+            display: none
         }
+    }
+
+    .top-user-menu > span {
+        padding: 9px;
+        font-weight: bold;
+    }
+
     @@media (min-width: 768px) {
         .navbar-nav > li {
             float: right;
@@ -351,7 +364,7 @@
 
         .search {
             padding: 15px 0;
-            padding-bottom:5px;
+            padding-bottom: 5px;
             margin-bottom: 15px
         }
 
@@ -362,7 +375,6 @@
             .navbar-default, #userInfo, .search .form-group {
                 display: none
             }
-
         /*.siteDetails {
             margin-top: 98px
         }*/
@@ -512,12 +524,16 @@
         .allPage { margin-top:70px }
     }*/
 
-    .navbar-default .navbar-nav > li { position:static }
-    @@media(max-width:260px) {
-    .fixedNavScreen ul li{
-        padding:10px 5px
+    .navbar-default .navbar-nav > li {
+        position: static
     }
-}
+
+    @@media(max-width:260px) {
+        .fixedNavScreen ul li {
+            padding: 10px 5px
+        }
+    }
+
     @@media (max-width: 1030px) {
         .header .header-logo, .search .logoContainer {
             /*position: absolute;
@@ -525,21 +541,30 @@
             z-index: 1020;
             width: 100%;
             /*height: 80px;*/
-            margin-top:85px;
+            margin-top: 85px;
             background-color: #f6f6f6;
             line-height: 130px;
         }
-    .search .logoContainer {
-        text-align: center;
-        width:100%
+
+        .search .logoContainer {
+            text-align: center;
+            width: 100%
+        }
     }
 
-}
     @@media (min-width:1024px) and (max-width: 1030px) {
-    .searchContr { display:none }
-    .logo { margin-bottom:3px }
-    .header .header-logo, .search .logoContainer { margin-top:0 }
-}
+        .searchContr {
+            display: none
+        }
+
+        .logo {
+            margin-bottom: 3px
+        }
+
+        .header .header-logo, .search .logoContainer {
+            margin-top: 0
+        }
+    }
 </style>
 
 
@@ -591,27 +616,8 @@
                         </li>
                         <li id="myAccount">
                             <a> <i class="fa fa-user-o fa-lg"></i> </a>
-                        </li>
-                        <li>
-                            <a>
-                                <i class="fa fa-plus fa-lg"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <i class="fa fa-long-arrow-left fa-lg"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <i class="fa fa-asterisk fa-lg"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
-                                <i class="fa fa-eye fa-lg"></i>
-                            </a>
-                        </li>
+                        </li> 
+                        
                         <li>
                             <a href="/Consultant/Notifications">
                                 <sup id="notification-count-jsa" class="badge badge-danger"></sup>
@@ -660,25 +666,69 @@
 </section>
 
 
-<div class="text-center top-user-menu">
-    <div id="threebuttons" class="text-center"></div>
+<div class="text-center top-user-menu"> 
+        <style type="text/css">
+                   /*.threebuttons:hover { background-color: darkgreen !important;}
+            .nodoc:hover { text-decoration: none; }*/
+                   span {
+                       padding: 9px;
+                       font-weight: bold;
+                   }
+
+                       span a {
+                           color: #777;
+                           text-decoration: none
+                       }
+
+                           span a:hover {
+                               color: #3e874b;
+                               text-decoration: none
+                           }
+
+                   #threebuttons span a {
+                       padding: 0 5px
+                   }
+
+                       #threebuttons span a:hover {
+                           text-decoration: underline
+                       }
+        </style>
+
+
+        <span>
+            <a href="/الشحن-والاسترجاع" class="nodoc">
+                الشحن والاسترجاع
+            </a>
+        </span>
+        <span>
+            <a href="/customer/addresses" class="nodoc">
+                عناوين الشحن
+            </a>
+        </span>
+
+        <span>
+            <a href="/شروط-الاستخدام">
+
+                شروط الاستخدام
+            </a>
+        </span> 
 </div>
 
 @*<div class="siteDetails">
-    <p id="messagep" style="text-align:center;margin:0; font-size: 15px;">خدمة الاستشارات هى خدمة مجانية تقدم من قبل موقع المزراع لمساعدة حل المشاكل الزراعية بواسطة مستشارين مختصين فى هذا المجال.</p>
-</div>*@
+        <p id="messagep" style="text-align:center;margin:0; font-size: 15px;">خدمة الاستشارات هى خدمة مجانية تقدم من قبل موقع المزراع لمساعدة حل المشاكل الزراعية بواسطة مستشارين مختصين فى هذا المجال.</p>
+    </div>*@
 
-    <!-- Search -->
-    <section class="search">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-1"></div>
+<!-- Search -->
+<section class="search">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1 spcXL"></div>
 
-                <div class="col-md-2 col-xs-12 logoContainer">
-                    <img class="logo" src="/images/thumbs/0000303.png" onclick="goToHome()" />
-                </div>
+            <div class="col-md-2 col-xs-12 logoContainer logoXL">
+                <img class="logo" src="/images/thumbs/0000303.png" onclick="goToHome()" />
+            </div>
 
-                <div class="col-md-6 searchContr" style="padding-top:12px;">
+                <div class="col-md-7 searchContr" style="padding-top:12px;">
                     <div class="form-group">
                         <input id="searchText" type="text" style="height:44px;"
                                class="form-control" placeholder="البحث في الاستشارات">
@@ -690,79 +740,83 @@
             </div>
         </div>
 
-    </section>
+</section>
 
-    <!--<!-- Nav -->
-    <div id="Nav"></div>
+<!--<!-- Nav -->
+<div id="Nav"></div>
 
-    <div class="home" id="homeBody">
-        <div class="container-fluid">
-            <div class="col-md-2"></div>
-            @*<div class="col-md-2" id="threebuttons" style="margin-bottom:5%;"></div>*@
+<div class="home" id="homeBody">
+    <div class="container-fluid">
+        <div class="col-md-2"></div>
+        @*<div class="col-md-2" id="threebuttons" style="margin-bottom:5%;"></div>*@
 
-            <div class="col-md-8">
-                <div class="allPage" id="allpage">
-                    <div class="siteDetails">
-                        <p id="messagep" style="text-align:center;margin:0; font-size: 14px;">خدمة الاستشارات هى خدمة مجانية تقدم من قبل موقع المزراع لمساعدة حل المشاكل الزراعية بواسطة مستشارين مختصين فى هذا المجال.</p>
-                    </div>
-                    @RenderBody()
-                    <div id="posts"></div>
-                    <not-found *ngIf="!posts.length"></not-found>
-                    <tw-pagination *ngIf="posts?.length" [numberOfPages]="totalNumberOfPages" (pageChanged)="getClosedPost($event)"></tw-pagination>
+        <div class="col-md-8">
+            <div class="allPage" id="allpage">
+                <div class="siteDetails">
+                    <p id="messagep" style="text-align:center;margin:0; font-size: 14px;">خدمة الاستشارات هى خدمة مجانية تقدم من قبل موقع المزراع لمساعدة حل المشاكل الزراعية بواسطة مستشارين مختصين فى هذا المجال.</p>
+
                 </div>
+                
+                <div id="threebuttons" style="color:darkgreen !important; padding-bottom: 15px;" class="text-center"></div>
+
+                @RenderBody()
+                <div id="posts"></div>
+                <not-found *ngIf="!posts.length"></not-found>
+                <tw-pagination *ngIf="posts?.length" [numberOfPages]="totalNumberOfPages" (pageChanged)="getClosedPost($event)"></tw-pagination>
             </div>
-            <div class="col-md-2"></div>
         </div>
+        <div class="col-md-2"></div>
     </div>
+</div>
 
-    <div class="overlay"></div>
+<div class="overlay"></div>
 
-    <div class="rightMenu">
+<div class="rightMenu">
+    <div class="top_header">
+        <i class="fa fa-times pull-left"></i>
+    </div>
+    <div id="mobile-navbar-js"></div>
+</div>
+
+@*<div class="subRightMenu">
         <div class="top_header">
             <i class="fa fa-times pull-left"></i>
         </div>
-        <div id="mobile-navbar-js"></div>
-    </div>
+        <div id="sub-mobile-navbar-js"></div>
+    </div>*@
 
-    @*<div class="subRightMenu">
-            <div class="top_header">
-                <i class="fa fa-times pull-left"></i>
+@*<link href="~/css/Consultant/bootstrap.min.css" rel="stylesheet" />*@
+<script src="~/js/Consultant/bootstrap.min.js"></script>
+
+<div id="changeCatAndSubDiv" class="modal" tabindex="-1" role="dialog" Style="display:none">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title"> اضف رسالتك الي اداره الموقع </h4>
             </div>
-            <div id="sub-mobile-navbar-js"></div>
-        </div>*@
+            <div class="modal-body">
+                <form>
+                    <textarea type="text" class="form-control"></textarea>
+                    <div class="modal-footer">
+                        <button id="add-service-message-event" type="button" onclick="" class="btn btn-success">تعديل</button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 
-    @*<link href="~/css/Consultant/bootstrap.min.css" rel="stylesheet" />*@
-    <script src="~/js/Consultant/bootstrap.min.js"></script>
+</div><!-- /.modal !-->
 
-    <div id="changeCatAndSubDiv" class="modal" tabindex="-1" role="dialog" Style="display:none">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
+<script type="text/javascript">
+    $("#open-customer-service").click(function () {
+        $("#changeCatAndSubDiv").show();
+    });
 
-                    <h4 class="modal-title"> اضف رسالتك الي اداره الموقع </h4>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <textarea type="text" class="form-control"></textarea>
-                        <div class="modal-footer">
-                            <button id="add-service-message-event" type="button" onclick="" class="btn btn-success">تعديل</button>
-                        </div>
-                    </form>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-
-    </div><!-- /.modal !-->
-
-    <script type="text/javascript">
-        $("#open-customer-service").click(function () {
-            $("#changeCatAndSubDiv").show();
-        });
-
-        $("#add-service-message-event").click(function () {
-            $("#changeCatAndSubDiv").hide();
-        });
-    </script>
+    $("#add-service-message-event").click(function () {
+        $("#changeCatAndSubDiv").hide();
+    });
+</script>
 
 
 <div class="footer">
@@ -838,17 +892,17 @@
                 حقوق الطبع والنشر © @DateTime.Now.Year.ToString() Farms Store. جميع الحقوق محفوظة.
             </div>
 
-                <div class="footer-store-theme">
+            <div class="footer-store-theme">
 
-                </div>
             </div>
         </div>
-
     </div>
 
-    <div id="goToTop" style="display: block;"></div>
+</div>
 
-    <script>
+<div id="goToTop" style="display: block;"></div>
+
+<script>
 
     $(document).ready(function () {
 
@@ -959,15 +1013,15 @@
     }
 
 
-    </script>
-    <script src="/Plugins/SevenSpikes.Core/Scripts/sevenspikes.core.min.js" type="text/javascript"></script>
-    <script src="/Plugins/SevenSpikes.Core/Scripts/sevenspikes.theme.ex.min.js" type="text/javascript"></script>
-    <script src="/Themes/Pavilion/Content/scripts/pavilion.js" type="text/javascript"></script>
+</script>
+<script src="/Plugins/SevenSpikes.Core/Scripts/sevenspikes.core.min.js" type="text/javascript"></script>
+<script src="/Plugins/SevenSpikes.Core/Scripts/sevenspikes.theme.ex.min.js" type="text/javascript"></script>
+<script src="/Themes/Pavilion/Content/scripts/pavilion.js" type="text/javascript"></script>
 
 
 <script>
     $("#searchScreen").click(function () {
-       // debugger;
+        // debugger;
         $("#searchScreenFull").slideToggle("slow");
         $("#myAccountScreenFull").css("display", "none");
         $(".manage").toggle();
@@ -1023,7 +1077,7 @@
         window.open(url, 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=' + winWidth + ',height=' + winHeight);
     }
 </script>
-    @*<script type="text/javascript">
+@*<script type="text/javascript">
 
         $(document).ready(function () {
             $("#searchScreen").click(function () {
@@ -1034,7 +1088,7 @@
                 $(".top_bar").toggle();
                 $(".topFixed").css("z-index", "1070");
             });
-           
+
             $("#menuBar").click(function () {
                 $(".overlay").css("display", "block");
                 $(".rightMenu").css({ "-webkit-transform": "translate(0px)", "-ms-transform": "translate(0px)", "-moz-transform": "translate(0px)", "transform": "translate(0px)", "box-shadow": "1px 0 5px rgba(0,0,0,0.5)" });
@@ -1072,5 +1126,5 @@
                 $(".top_bar").css("display", "block");
             });
         });
-      
+
     </script>*@

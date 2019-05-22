@@ -88,7 +88,13 @@
                     var discountPercentage = Math.Round(100 / (OldPrice / discountValue)); // calculate the percentage
                     if (discountPercentage > 0)
                     {
-                        <div style="text-align: right;position: relative;z-index: 10;width: 100%;bottom: 0px;left: 0px" class=""> <span style="background-color:#f74258; color:white; font-size:small; padding:1% 1% 1% 1%;" class="">@discountPercentage% خصم</span> </div>
+                        <div style="text-align: right;position: relative;z-index: 10;width: 100%;bottom: 0px;left: 0px" class=""> 
+                            <span dir="rtl" style="background-color: #f74258;       color: white;font-size: small;padding: 1% 1% 1% 1%;
+       position: absolute;        text-align: right;
+right: 71%; width: 65px;
+        
+        " class=""> خصم @discountPercentage%</span> </div>
+                        <div style="clear: both"></div>
                     }
                 }
             }

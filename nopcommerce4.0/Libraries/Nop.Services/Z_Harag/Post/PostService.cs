@@ -235,7 +235,7 @@ namespace Nop.Services.Z_Harag.Post
             List<KeyAndValue> filesUrl = new List<KeyAndValue>();
 
             var ImagesPath = Path.Combine(_env.WebRootPath, "HaragApi\\Uploads\\Images");
-            var logoImage = Path.Combine(_env.WebRootPath, "images\\thumbs\\0000303.png");
+            var logoImage = Path.Combine(_env.WebRootPath, "images\\thumbs\\watermark.png");
             //var Vedios = Path.Combine(_env.WebRootPath, "Uploads\\Videos");
 
             int MaxContentLength = 1024 * 1024 * SizeOfPhotoAllowedInMb; //Size = 1*SizeOfPhotoAllowedInMb  MB   
