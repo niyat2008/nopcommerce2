@@ -218,6 +218,7 @@
                     complete: function (data) {
                         if (data.status == 200) {
                             alert("تمت اضافة الاستئارة بنجاح يمكنك الذهاب الى استشاراتى لرؤية الاستشاراة");
+                            window.location = "/Consultations/UserOpenConsultations";
                         }
                         else {
                             alert("حدث خطأ ما تأكد من الاتصال بالانترنت");

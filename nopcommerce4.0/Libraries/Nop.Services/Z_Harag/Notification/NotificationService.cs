@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Nop.Services.Z_Harag.Notification
 {
-    public class NotificationService:INotificationService
+    public class NotificationService : INotificationService
     {
         private readonly IRepository<Z_Harag_Notification> _notificationService;
         private readonly IRepository<Z_Harag_Post> _postRepository;

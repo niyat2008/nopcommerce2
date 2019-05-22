@@ -20,11 +20,12 @@ namespace Nop.Web.Models.Consultant.Post
         public bool IsDispayed { get; set; }
         public bool IsReserved { get; set; }
         public int CategoryId { get; set; }
+        public int ConsultantId { get; set; }
         public bool IsSetToSubCategory { get; set; }
         public string CategoryName { get; set; }
         public string SubCategoryName { get; set; }
         public string PostOwner { get; set; }
-
+        public bool IsConsultantOwner { get; set; }
         public IList<string> Files { get; set; }
         public CommentOutputModel CommentOutputModel { get; set; }
         public PostWithFilesModel()
