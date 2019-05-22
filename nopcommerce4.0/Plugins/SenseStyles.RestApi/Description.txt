@@ -1,0 +1,9 @@
+﻿Group: CartMaster
+FriendlyName: NopCommerce Rest Api
+SystemName: CartMaster.NopRestApi
+Version: 0.1
+SupportedVersions: 3.90
+Author: CartMaster
+DisplayOrder: 1
+FileName: SenseStyles.NopPlugin.RestApi.dll
+Description: NopCommerce Rest Api plugin

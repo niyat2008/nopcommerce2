@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "";
+}
+@model ConfigurationModel
+@using SenseStyles.NopPlugin.RestApi.Models;
+@using Nop.Web.Framework;
+
+@Html.Action("StoreScopeConfiguration", "Setting", new { area = "Admin" })
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <center>
+                    <a href="/apidocs" target="_blank" style="font-size: 17px;font-weight: bold;">Explore REST API</a>
+                </center>
+                <br />
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.OverrideStoreCheckboxFor(model => model.Enable_OverrideForStore, model => model.Enable, Model.ActiveStoreScopeConfiguration)
+                        @Html.NopLabelFor(model => model.Enable)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(model => model.Enable)
+                        @Html.ValidationMessageFor(model => model.Enable)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-9 col-md-offset-3">
+                        <input type="submit" name="save" class="btn btn-primary" value="@T("Admin.Common.Save")" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

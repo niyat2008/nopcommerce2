@@ -35,6 +35,7 @@ using Nop.Web.Framework.Mvc.Filters;
 using Nop.Web.Framework.Security;
 using Nop.Web.Framework.Security.Captcha;
 using Nop.Web.Models.Customer;
+using System.IO;
 
 namespace Nop.Web.Controllers
 {
@@ -77,6 +78,7 @@ namespace Nop.Web.Controllers
         private readonly LocalizationSettings _localizationSettings;
         private readonly CaptchaSettings _captchaSettings;
         private readonly StoreInformationSettings _storeInformationSettings;
+        public Customer _cachedCustomer;
 
         #endregion
 
@@ -271,7 +273,7 @@ namespace Nop.Web.Controllers
         [CheckAccessClosedStore(true)]
         //available even when navigation is not allowed
         [CheckAccessPublicStore(true)]
-        public virtual IActionResult Login(LoginModel model, string returnUrl, bool captchaValid)
+        public virtual IActionResult Login([FromBody]LoginModel model, string returnUrl, bool captchaValid)
         {
             //validate CAPTCHA
             if (_captchaSettings.Enabled && _captchaSettings.ShowOnLoginPage && !captchaValid)
@@ -301,6 +303,99 @@ namespace Nop.Web.Controllers
 
                             //sign in new customer
                             _authenticationService.SignIn(customer, model.RememberMe);
+                           
+                            //using (var x = new StreamWriter("E:\\foo\\bar.txt"))
+                            //{
+                            //    x.WriteLine("Customer "+cash);
+                            //}
+                            //    Console.WriteLine("Customer " + cash);
+                            //raise event       
+                            _eventPublisher.Publish(new CustomerLoggedinEvent(customer));
+
+                            //activity log
+                            _customerActivityService.InsertActivity(customer, "PublicStore.Login", _localizationService.GetResource("ActivityLog.PublicStore.Login"));
+
+                          var _cachedCustomer =  _workContext.CurrentCustomer;
+
+                            if ((string)TempData["ReturnURL"] == "consultations")
+                                 return RedirectToRoute("Consultant.ConsultantHome");
+
+                                //return Json(new { result = _workContext.CurrentCustomer });
+                            if (string.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
+                                return RedirectToRoute("HomePage");
+                            
+                            //return Json(new { result = _workContext.CurrentCustomer });
+                            //return Json(new { result = _workContext.CurrentCustomer });
+                             return RedirectToRoute(returnUrl);
+                        }
+                    case CustomerLoginResults.CustomerNotExist:
+                        ModelState.AddModelError("", _localizationService.GetResource("Account.Login.WrongCredentials.CustomerNotExist"));
+                        break;
+                    case CustomerLoginResults.Deleted:
+                        ModelState.AddModelError("", _localizationService.GetResource("Account.Login.WrongCredentials.Deleted"));
+                        break;
+                    case CustomerLoginResults.NotActive:
+                        ModelState.AddModelError("", _localizationService.GetResource("Account.Login.WrongCredentials.NotActive"));
+                        break;
+                    case CustomerLoginResults.NotRegistered:
+                        ModelState.AddModelError("", _localizationService.GetResource("Account.Login.WrongCredentials.NotRegistered"));
+                        break;
+                    case CustomerLoginResults.LockedOut:
+                        ModelState.AddModelError("", _localizationService.GetResource("Account.Login.WrongCredentials.LockedOut"));
+                        break;
+                    case CustomerLoginResults.WrongPassword:
+                    default:
+                        ModelState.AddModelError("", _localizationService.GetResource("Account.Login.WrongCredentials"));
+                        break;
+                }
+            }
+
+            //If we got this far, something failed, redisplay form
+            model = _customerModelFactory.PrepareLoginModel(model.CheckoutAsGuest);
+
+
+            return View(model);
+        }
+
+
+        //----Login Test------
+        #region Login Test
+        [HttpPost]
+        [ValidateCaptcha]
+        //available even when a store is closed
+        [CheckAccessClosedStore(true)]
+        //available even when navigation is not allowed
+        [CheckAccessPublicStore(true)]
+        public virtual IActionResult LoginTest([FromBody]LoginModel model, string returnUrl, bool captchaValid)
+        {
+            //validate CAPTCHA
+            if (_captchaSettings.Enabled && _captchaSettings.ShowOnLoginPage && !captchaValid)
+            {
+                ModelState.AddModelError("", _captchaSettings.GetWrongCaptchaMessage(_localizationService));
+            }
+
+            if (ModelState.IsValid)
+            {
+                if (_customerSettings.UsernamesEnabled && model.Username != null)
+                {
+                    model.Username = model.Username.Trim();
+                }
+
+                var loginResult = _customerRegistrationService.ValidateCustomerByMobile(_customerSettings.UsernamesEnabled ? model.Username : model.Mobile, model.Password);
+
+                switch (loginResult)
+                {
+                    case CustomerLoginResults.Successful:
+                        {
+                            var customer = _customerSettings.UsernamesEnabled
+                                ? _customerService.GetCustomerByUsername(model.Username)
+                                : _customerService.GetCustomerByMobile(model.Mobile);
+
+                            //migrate shopping cart
+                            _shoppingCartService.MigrateShoppingCart(_workContext.CurrentCustomer, customer, true);
+
+                            //sign in new customer
+                            _authenticationService.SignIn(customer, model.RememberMe);
 
                             //raise event       
                             _eventPublisher.Publish(new CustomerLoggedinEvent(customer));
@@ -308,7 +403,7 @@ namespace Nop.Web.Controllers
                             //activity log
                             _customerActivityService.InsertActivity(customer, "PublicStore.Login", _localizationService.GetResource("ActivityLog.PublicStore.Login"));
 
-                            if((string)TempData["ReturnURL"]== "consultations")
+                            if ((string)TempData["ReturnURL"] == "consultations")
                                 return RedirectToRoute("Consultant.ConsultantHome");
 
                             if (string.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
@@ -343,6 +438,8 @@ namespace Nop.Web.Controllers
 
             return View(model);
         }
+        #endregion
+        //----End Login Test------
 
         //available even when a store is closed
         [CheckAccessClosedStore(true)]
