@@ -1,79 +1,33 @@
 ﻿@model CategoryGroupModel
-    @*amsfci*@
-<div class="spc-header">
+@*amsfci*@
+<div class="spc-header" style="margin-top: 25px !important;">
     <ul class="navigation">
         @foreach (var tab in Model.Tabs)
         {
-            <li class="tab"  data-tabId="@tab.Id" notloaded>
-                <span>@tab.Title </span>
+            <li class="tab" data-tabId="@tab.Id" notloaded>
+                <span  style="font-size: 20px">@tab.Title</span>
             </li>
         }
     </ul>
 
 
     <ul class="" style="float:none;">
-         
-        <li class="tab" style="background-color: #3e874b; color: white; font-size: 44px;"  notloaded> 
+
+        <li class="tab" style="background-color: #3e874b; color: white; font-size: 44px;" notloaded>
             <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">
-                <span>@Model.Name</span>
+                <span style="font-size: 20px">
+                    <img src="@Model.PictureModel.FullSizeImageUrl" style="margin-bottom: -10px !important;" width="30" alt="@Model.PictureModel.Title" />
+                    @Model.Name
+                </span>
             </a>
         </li>
-        
+
     </ul>
 
 </div>
 
 <div class="spc-body">
-    <div class="category-info">
-        @*<h2 class="category-title">
-                <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">@Model.Name</a>
-            </h2>*@
 
-        <div class="mobile-navigation category-mobile-navigation">
-            <select class="category-mobile-navigation-select">
-                @foreach (var tab in Model.Tabs)
-            {
-                    <option class="tab" value="@tab.Id" data-tabId="@tab.Id">@tab.Title</option>
-                }
-            </select>
-        </div>
-
-        @*@if (Model.SubCategories.Count > 0)
-            {
-                <div class="category-details" style="background-color:rgba(0, 0, 0,.4); color:white;font-size:larger;font-weight:bolder;">
-                    <h2 class="category-inner-title">
-                        <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">@Model.Name</a>
-                    </h2>
-                    <ul class="category-sublist">
-                        @foreach (var subcategory in Model.SubCategories)
-                        {
-                            <li>
-                                <a href="@Url.RouteUrl("Category", new {SeName = subcategory.SeName})" title="@subcategory.Name">@subcategory.Name</a>
-                            </li>
-                        }
-                        @if (Model.DisplayViewAllSubcategoriesLink)
-                        {
-                            <li>
-                                <a class="view-all" href="@Url.RouteUrl("Category", new { SeName = Model.SeName })" title="@Model.Name">@T("SevenSpikes.Nop.Plugins.SmartProductCollections.Categories.ViewAll")</a>
-                            </li>
-                        }
-                    </ul>
-                </div>
-            }*@
-
-        <div class="category-picture">
-            <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">
-                <img src="@Model.PictureModel.FullSizeImageUrl" alt="@Model.PictureModel.Title" />
-            </a>
-        </div>
-
-
-        @*<div class="category-picture">
-                <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">
-                    <img src="@Model.PictureModel.FullSizeImageUrl" style="width: 77%" alt="@Model.PictureModel.Title" />
-                </a>
-            </div>*@
-    </div>
     <div class="category-products">
         @foreach (var tab in Model.Tabs)
         {
@@ -88,3 +42,53 @@
         </div>
     </div>
 </div>
+
+
+
+<!--
+
+
+        <div class="category-info">
+        @*<h2 class="category-title">
+            <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">@Model.Name</a>
+        </h2>*@
+
+        <div class="mobile-navigation category-mobile-navigation">
+            <select class="category-mobile-navigation-select">
+                @@foreach (var tab in Model.Tabs)
+                {
+                    <option class="tab" value="@@tab.Id" data-tabId="@@tab.Id">@@tab.Title</option>
+                }
+            </select>
+        </div>
+
+        @*@if (Model.SubCategories.Count > 0)
+        {
+            <div class="category-details" style="background-color:rgba(0, 0, 0,.4); color:white;font-size:larger;font-weight:bolder;">
+                <h2 class="category-inner-title">
+                    <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">@Model.Name</a>
+                </h2>
+                <ul class="category-sublist">
+                    @foreach (var subcategory in Model.SubCategories)
+                    {
+                        <li>
+                            <a href="@Url.RouteUrl("Category", new {SeName = subcategory.SeName})" title="@subcategory.Name">@subcategory.Name</a>
+                        </li>
+                    }
+                    @if (Model.DisplayViewAllSubcategoriesLink)
+                    {
+                        <li>
+                            <a class="view-all" href="@Url.RouteUrl("Category", new { SeName = Model.SeName })" title="@Model.Name">@T("SevenSpikes.Nop.Plugins.SmartProductCollections.Categories.ViewAll")</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }*@
+       @*<div class="category-picture">
+            <a href="@Url.RouteUrl("Category", new {SeName = Model.SeName})" title="@Model.Name">
+                <img src="@Model.PictureModel.FullSizeImageUrl" style="width: 77%" alt="@Model.PictureModel.Title" />
+            </a>
+        </div>*@
+    </div>
+
+-->
