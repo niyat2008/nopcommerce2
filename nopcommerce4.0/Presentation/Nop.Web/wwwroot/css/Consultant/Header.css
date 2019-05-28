@@ -9,7 +9,7 @@ a:hover { color: #40ca40 }
 .top_bar span.active { background: #3e874b }
 .top_bar span a, .top_bar span:hover a, .top_bar span a:hover, .top_bar span:focus a, .top_bar span a:focus { text-decoration: none }
 
-.logo { width: 116px; height: 64px; cursor: pointer; }
+.logo { /*width: 116px; height: 64px;*/ cursor: pointer; }
 
 @media only screen and (max-width : 1024px) {
    .top_bar .top_col_screen { display: none }

@@ -107,15 +107,7 @@
             <div class="footer-disclaimer">
                 @T("Content.CopyrightNotice", DateTime.Now.Year, Model.StoreName)
             </div>
-            @if (!removeCopyright)
-            {
-                <div class="footer-powered-by">
-                    Powered by <a href="https://www.nopcommerce.com/">nopCommerce</a>
-                    @*Would you like to remove the "Powered by nopCommerce" link in the bottom of the footer?
-                        Please find more info here https://www.nopcommerce.com/copyrightremoval.aspx*@
-                </div>
-
-            }
+           
             
 
             @if (Model.DisplayTaxShippingInfoFooter)

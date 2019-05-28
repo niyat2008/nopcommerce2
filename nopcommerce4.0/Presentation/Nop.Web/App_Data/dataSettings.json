@@ -14,9 +14,9 @@
 
   //"DataConnectionString": "Data Source=10.2.2.112;Initial Catalog=DB_A409B4_nop4;Integrated Security=false;MultipleActiveResultSets=true;uid=sa;password=123;",
 
-  "DataConnectionString": "Data Source=192.168.8.100;Initial Catalog=DB_A4877E_info;Integrated Security=True;",
+  //"DataConnectionString": "Data Source=10.2.2.128;Initial Catalog=DB_A4877E_info;Integrated Security=True;",
 
-  //"DataConnectionString": "Data Source=SQL6007.site4now.net;Initial Catalog=DB_A4877E_info;Integrated Security=false;MultipleActiveResultSets=true;uid=DB_A4877E_info_admin;password=Asd12345;",
+  "DataConnectionString": "Data Source=SQL6007.site4now.net;Initial Catalog=DB_A4877E_info;Integrated Security=false;MultipleActiveResultSets=true;uid=DB_A4877E_info_admin;password=Asd12345;",
 
   "RawDataSettings": {}
 }
