@@ -1489,9 +1489,10 @@ label, label + * {
 	right: 0;
 	bottom: 0;
 	left: 0;
-	max-width: 45%;
+	max-width: 100%;
 	margin: auto;
-	-webkit-transform: translateZ(0) scale(1.0, 1.0); /* fixes the bug of the 1px moving product images when hover on category */
+	-webkit-transform: translateZ(0) scale(1.0, 1.0); 
+    /* fixes the bug of the 1px moving product images when hover on category */
 }
 .item-box .product-rating-box {
     display: inline-block;

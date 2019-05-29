@@ -35,7 +35,7 @@
 
                     }
 
-                    <span>@Model.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @Model.DateCreated.ToString("hh:mm:ss")</span>
+                    <span>@Model.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @Model.DateCreated.ToShortTimeString()</span>
                     <p style="width:fit-content;">
                         @Model.Text
                     </p>

@@ -247,21 +247,21 @@ namespace Nop.Services.Customers
                 result.AddError("Current customer is already registered");
                 return result;
             }
-            if (string.IsNullOrEmpty(request.Email))
-            {
-                result.AddError(_localizationService.GetResource("Account.Register.Errors.EmailIsNotProvided"));
-                return result;
-            }
+            //if (string.IsNullOrEmpty(request.Email))
+            //{
+            //    result.AddError(_localizationService.GetResource("Account.Register.Errors.EmailIsNotProvided"));
+            //    return result;
+            //}
             if (string.IsNullOrEmpty(request.Mobile))
             {
                 result.AddError(_localizationService.GetResource("Account.Register.Errors.MobileIsNotProvided"));
                 return result;
             }
-            if (!CommonHelper.IsValidEmail(request.Email))
-            {
-                result.AddError(_localizationService.GetResource("Common.WrongEmail"));
-                return result;
-            }
+            //if (!CommonHelper.IsValidEmail(request.Email))
+            //{
+            //    result.AddError(_localizationService.GetResource("Common.WrongEmail"));
+            //    return result;
+            //}
             if (string.IsNullOrWhiteSpace(request.Password))
             {
                 result.AddError(_localizationService.GetResource("Account.Register.Errors.PasswordIsNotProvided"));
@@ -299,7 +299,7 @@ namespace Nop.Services.Customers
 
             //at this point request is valid
             request.Customer.Username = request.Username;
-            request.Customer.Email = request.Email;
+            request.Customer.Email = request.Username;
             request.Customer.Mobile = request.Mobile;
 
 

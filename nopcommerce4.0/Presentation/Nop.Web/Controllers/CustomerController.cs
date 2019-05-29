@@ -305,8 +305,14 @@ namespace Nop.Web.Controllers
                             //raise event       
                             _eventPublisher.Publish(new CustomerLoggedinEvent(customer));
 
-                            //activity log
+                            //activity log 
+                            //amsfci last seen record
                             _customerActivityService.InsertActivity(customer, "PublicStore.Login", _localizationService.GetResource("ActivityLog.PublicStore.Login"));
+
+                            customer.LastActivityDateUtc = DateTime.Now;
+                            customer.LastLoginDateUtc = DateTime.Now;
+
+                            _customerService.UpdateCustomer(customer);
 
                             if((string)TempData["ReturnURL"]== "consultations")
                                 return RedirectToRoute("Consultant.ConsultantHome");

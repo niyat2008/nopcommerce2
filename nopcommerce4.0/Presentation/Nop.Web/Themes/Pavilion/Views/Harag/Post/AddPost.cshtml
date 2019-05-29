@@ -61,7 +61,7 @@
             </div>
             <div class="col-md-2">
                 <label>وسيلة الاتصال</label> <br>
-                @Html.TextBoxFor(m => m.Contact, new { id = "Contact-js-ajax", required = "required", @class = "form-control", placeholder = "0134578888" })
+                @Html.TextBoxFor(m => m.Contact, new { id = "Contact-js-ajax", required = "required", @class = "form-control", placeholder = "0505050505" })
 
             </div>
             @*<div class="col-md-2">
@@ -69,9 +69,9 @@
                 @Html.CheckBoxFor(m => m.IsOrder, new { id = "IsOrder-js-ajax", required = "required", @class = "form-control" })
 
             </div>*@
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <label>نص الاعلان</label> <br>
-                @Html.TextAreaFor(m => m.Text, new { id = "Text-js-ajax", @class = "form-control txtArea", required = "required", rows = "7", placeholder = "نص الاعلان" })
+                @Html.TextAreaFor(m => m.Text, new { id = "Text-js-ajax", @class = "form-control txtArea" , rows = "7", placeholder = "نص الاعلان" })
                 @Html.TextBoxFor(m => m.Tags, new { id = "Tags-js-ajax", @class = "form-control", disabled="disabled" , placeholder = "وسوم الاعلان" })
 
             </div>
@@ -99,7 +99,7 @@
 
             </div>
             <div class="col-md-12 text-center">
-                <button class="btn btn-default add add2" type="submit">اضافة الاعلان للموقع</button>
+                <button  class="btn btn-default add add2" type="submit">اضافة الاعلان للموقع</button>
             </div>
         </form>
 
@@ -276,6 +276,8 @@
                 Tags: Tags
             };
 
+            $('.add2').addClass("disabled");
+
             console.log(postForPostModel);
             $.ajax({
                 headers: {
@@ -291,6 +293,8 @@
                         window.location = "/Harag/Post/" + data.postId;
                     }
                     else {
+                        $('.add2').removeClass("disabled");
+
                         alert("حدث خطأ ما تأكد من الاتصال بالانترنت");
                     }
                 }

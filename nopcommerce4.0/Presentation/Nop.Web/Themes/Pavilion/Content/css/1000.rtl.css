@@ -318,7 +318,7 @@
         .cart-trigger {
             display: inline-block;
             position: relative;
-            height: 42px;
+            height: 43px;
             border: 1px solid #f0f0f0;
             padding: 0 18px 0 19px;
             line-height: 40px;
@@ -551,6 +551,7 @@
             overflow: hidden;
             box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
             background-color: #fff;
+            margin: -10px;
             padding: 15px;
         }
 

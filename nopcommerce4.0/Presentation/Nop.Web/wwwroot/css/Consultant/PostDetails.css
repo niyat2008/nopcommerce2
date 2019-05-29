@@ -67,8 +67,12 @@
     margin-right: 6px;
     line-height: 20px;
     padding: 42x 18px;
+    margin-top: 7px;
 }
 
+.disabled {
+    cursor: not-allowed;
+}
 .add-comment {
     margin-top: 15px
 }

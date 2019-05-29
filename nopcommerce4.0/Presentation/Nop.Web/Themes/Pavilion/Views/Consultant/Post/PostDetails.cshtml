@@ -62,6 +62,7 @@
 
     .btndarckgreen:hover {
         color: darkgreen !important;
+        color: white !important ;
     }
 
     .active-rate {
@@ -222,7 +223,7 @@
 
         @if (!Model.IsClosed && (Model.IsAnswered || Model.IsReserved) && ViewBag.UserRole == "Consultant")
         {
-            <button id="Ahmed" onclick="changeCatAndSub()" class="btn btn-success"> تعديل </button>
+            <button id="Ahmed" onclick="changeCatAndSub()" class="btn btn-success">  تعديل التصنيف الفرعي</button>
         }
 
         @if (!Model.IsClosed && Model.IsReserved && !Model.IsAnswered && ViewBag.UserRole == "Consultant")
@@ -256,7 +257,7 @@
                     }
                     else
                     {
-                        <span class="badge badge-success  open">
+                        <span style="padding: 5px" class="badge badge-success  open">
                             مفتوحة
                         </span>
                     }
@@ -408,13 +409,13 @@
 
                             <div class="row">
                                 <small>
-                                    @Model.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @Model.DateCreated.ToString("hh:mm:ss")
+                                    @Model.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @Model.DateCreated.ToShortTimeString()
                                 </small>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="row">
-                                <a href="/Harag/user/@Model.PostOwner" style="line-height:40px"><span><i class="fa fa-user"></i> @Model.PostOwner </span></a>
+                            <div  class="pull-left row">
+                                <a  style="line-height:40px"><span><i class="fa fa-user"></i> @Model.PostOwner </span></a>
                             </div>
                             @*<div class="row"> <span class="text-gray"> #@Model.Id </span> </div>*@
                         </div>
@@ -592,7 +593,7 @@
             data: JSON.stringify(closePostModel),
             complete: function (data) {
                 if (data.status == 200) {
-                    alert("تمت غلق الاستئارة بنجاح");
+                    alert("تم غلق الاستئارة بنجاح");
                     window.location.reload();
                 }
                 else {
@@ -619,7 +620,7 @@
             data: JSON.stringify(closePostModel),
             complete: function (data) {
                 if (data.status == 200) {
-                    alert("تمت نشر الاستئارة بنجاح");
+                    alert("تم نشر الاستشارة بنجاح");
                     window.location.reload();
                 }
                 else {
@@ -649,7 +650,7 @@
             data: JSON.stringify(RatePostModel),
             complete: function (data) {
                 if (data.status == 200) {
-                    alert(" تمت نقييم الاستشارة بنجاح , التقييم " + Rate);
+                    alert(" تم نقييم الاستشارة بنجاح , التقييم " + Rate);
                     window.location.reload();
                 }
                 else {
@@ -679,7 +680,7 @@
             data: JSON.stringify(reservePost),
             complete: function (data) {
                 if (data.status == 200) {
-                    alert("تمت حجز الاستئارة بنجاح");
+                    alert("تم حجز الاستئارة بنجاح");
                     window.location.reload();
                 }
                 else {
@@ -708,7 +709,7 @@
             data: JSON.stringify(reservePost),
             complete: function (data) {
                 if (data.status == 200) {
-                    alert("تمت فك حجز الاستئارة بنجاح");
+                    alert("تم فك حجز الاستئارة بنجاح");
                     window.location.reload();
                 }
                 else {
@@ -801,7 +802,7 @@
             complete: function (data) {
                 if (data.status == 200) {
                     $("#changeCatAndSubDiv").css("display", "none");
-                    alert("تمت التغيير  بنجاح");
+                    alert("تم التغيير  بنجاح");
                     @*$("#CategoryNameSpan").text('@Model.CategoryName');*@
                     $("#SubCategoryNameSpan").text(SelectedSubCategoryName);
                 }
@@ -949,7 +950,7 @@
                 $("#comments").html(data);
                 } // window.location = window.location;
             });
-
+            
         }
     }
     function convertToBase64(file) {
