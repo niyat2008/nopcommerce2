@@ -141,7 +141,8 @@ label, label + * {
 }
 
 .master-wrapper-page {
-	background-color: #f6f6f6;
+    /*background-color: #f6f6f6;*/
+    background-color: #fafafa;
 }
 .master-wrapper-content {
 	position: relative;

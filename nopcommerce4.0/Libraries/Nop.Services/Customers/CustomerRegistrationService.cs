@@ -173,9 +173,10 @@ namespace Nop.Services.Customers
 
         public virtual CustomerLoginResults ValidateCustomerByMobile(string usernameOrMobile, string password)
         {
-            var customer = _customerSettings.UsernamesEnabled ?
-                _customerService.GetCustomerByUsername(usernameOrMobile) :
-                _customerService.GetCustomerByMobile(usernameOrMobile);
+            //var customer = _customerSettings.UsernamesEnabled ?
+            //    _customerService.GetCustomerByUsername(usernameOrMobile) :
+            //    _customerService.GetCustomerByMobile(usernameOrMobile);
+            var customer= _customerService.GetCustomerByMobile(usernameOrMobile);
 
             if (customer == null)
                 return CustomerLoginResults.CustomerNotExist;

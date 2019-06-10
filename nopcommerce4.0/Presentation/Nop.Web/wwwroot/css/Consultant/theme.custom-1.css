@@ -363,6 +363,7 @@ button.ticket-info-button.k-button:before,
   .rich-blog-body .block:hover .title,
   .rich-blog-body .blog-search-box.active .search-box-button {
     background-color: #3e874b;
+    min-height:45px!important;
   }
   .side-2 .page-title h1,
   .category-navigation-list > li:hover > a,

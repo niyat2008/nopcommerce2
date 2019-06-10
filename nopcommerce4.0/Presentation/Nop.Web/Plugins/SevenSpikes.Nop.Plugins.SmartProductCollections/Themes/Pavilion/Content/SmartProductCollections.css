@@ -446,6 +446,7 @@
 .spc-header li {
 	display: inline-block;
 	border: none;
+    height:45px;
 }
 .spc-header li span {
 	padding: 9px 22px;

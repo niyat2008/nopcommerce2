@@ -281,20 +281,23 @@ namespace Nop.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                if (_customerSettings.UsernamesEnabled && model.Username != null)
-                {
-                    model.Username = model.Username.Trim();
-                }
+                //if (_customerSettings.UsernamesEnabled && model.Username != null)
+                //{
+                //    model.Username = model.Username.Trim();
+                //}
+                //_customerSettings.UsernamesEnabled ? model.Username :
+                var loginResult = _customerRegistrationService.ValidateCustomerByMobile( model.Mobile, model.Password);
 
-                var loginResult = _customerRegistrationService.ValidateCustomerByMobile(_customerSettings.UsernamesEnabled ? model.Username : model.Mobile, model.Password);
-              
                 switch (loginResult)
                 {
                     case CustomerLoginResults.Successful:
                         {
-                            var customer = _customerSettings.UsernamesEnabled
-                                ? _customerService.GetCustomerByUsername(model.Username)
-                                : _customerService.GetCustomerByMobile(model.Mobile);
+                            //var customer = _customerSettings.UsernamesEnabled
+                            //    ? _customerService.GetCustomerByUsername(model.Username)
+                            //    : _customerService.GetCustomerByMobile(model.Mobile);
+
+
+                            var customer = _customerService.GetCustomerByMobile(model.Mobile);
 
                             //migrate shopping cart
                             _shoppingCartService.MigrateShoppingCart(_workContext.CurrentCustomer, customer, true);
@@ -308,7 +311,7 @@ namespace Nop.Web.Controllers
                             //activity log
                             _customerActivityService.InsertActivity(customer, "PublicStore.Login", _localizationService.GetResource("ActivityLog.PublicStore.Login"));
 
-                            if((string)TempData["ReturnURL"]== "consultations")
+                            if ((string)TempData["ReturnURL"] == "consultations")
                                 return RedirectToRoute("Consultant.ConsultantHome");
 
                             if (string.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
@@ -343,6 +346,78 @@ namespace Nop.Web.Controllers
 
             return View(model);
         }
+        //public virtual IActionResult Login(LoginModel model, string returnUrl, bool captchaValid)
+        //{
+        //    //validate CAPTCHA
+        //    if (_captchaSettings.Enabled && _captchaSettings.ShowOnLoginPage && !captchaValid)
+        //    {
+        //        ModelState.AddModelError("", _captchaSettings.GetWrongCaptchaMessage(_localizationService));
+        //    }
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (_customerSettings.UsernamesEnabled && model.Username != null)
+        //        {
+        //            model.Username = model.Username.Trim();
+        //        }
+
+        //        var loginResult = _customerRegistrationService.ValidateCustomerByMobile(_customerSettings.UsernamesEnabled ? model.Username : model.Mobile, model.Password);
+
+        //        switch (loginResult)
+        //        {
+        //            case CustomerLoginResults.Successful:
+        //                {
+        //                    var customer = _customerSettings.UsernamesEnabled
+        //                        ? _customerService.GetCustomerByUsername(model.Username)
+        //                        : _customerService.GetCustomerByMobile(model.Mobile);
+
+        //                    //migrate shopping cart
+        //                    _shoppingCartService.MigrateShoppingCart(_workContext.CurrentCustomer, customer, true);
+
+        //                    //sign in new customer
+        //                    _authenticationService.SignIn(customer, model.RememberMe);
+
+        //                    //raise event       
+        //                    _eventPublisher.Publish(new CustomerLoggedinEvent(customer));
+
+        //                    //activity log
+        //                    _customerActivityService.InsertActivity(customer, "PublicStore.Login", _localizationService.GetResource("ActivityLog.PublicStore.Login"));
+
+        //                    if((string)TempData["ReturnURL"]== "consultations")
+        //                        return RedirectToRoute("Consultant.ConsultantHome");
+
+        //                    if (string.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
+        //                        return RedirectToRoute("HomePage");
+
+        //                    return Redirect(returnUrl);
+        //                }
+        //            case CustomerLoginResults.CustomerNotExist:
+        //                ModelState.AddModelError("", _localizationService.GetResource("Account.Login.WrongCredentials.CustomerNotExist"));
+        //                break;
+        //            case CustomerLoginResults.Deleted:
+        //                ModelState.AddModelError("", _localizationService.GetResource("Account.Login.WrongCredentials.Deleted"));
+        //                break;
+        //            case CustomerLoginResults.NotActive:
+        //                ModelState.AddModelError("", _localizationService.GetResource("Account.Login.WrongCredentials.NotActive"));
+        //                break;
+        //            case CustomerLoginResults.NotRegistered:
+        //                ModelState.AddModelError("", _localizationService.GetResource("Account.Login.WrongCredentials.NotRegistered"));
+        //                break;
+        //            case CustomerLoginResults.LockedOut:
+        //                ModelState.AddModelError("", _localizationService.GetResource("Account.Login.WrongCredentials.LockedOut"));
+        //                break;
+        //            case CustomerLoginResults.WrongPassword:
+        //            default:
+        //                ModelState.AddModelError("", _localizationService.GetResource("Account.Login.WrongCredentials"));
+        //                break;
+        //        }
+        //    }
+
+        //    //If we got this far, something failed, redisplay form
+        //    model = _customerModelFactory.PrepareLoginModel(model.CheckoutAsGuest);
+
+        //    return View(model);
+        //}
 
         //available even when a store is closed
         [CheckAccessClosedStore(true)]
