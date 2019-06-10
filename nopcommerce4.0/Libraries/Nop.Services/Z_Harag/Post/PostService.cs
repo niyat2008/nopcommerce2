@@ -484,7 +484,7 @@ namespace Nop.Services.Z_Harag.Post
         public bool CanAddNewPost(int userId)
         {
             var query = _postRepository.TableNoTracking;
-            var result = query.OrderByDescending(m => m.DateUpdated).FirstOrDefault();
+            var result = query.Where(m => m.CustomerId == userId).OrderByDescending(m => m.DateUpdated).FirstOrDefault();
             if(result == null)
             {
                 return true;

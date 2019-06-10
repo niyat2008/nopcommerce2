@@ -239,7 +239,7 @@ namespace Nop.Web.Controllers
 
         #endregion
 
-        #region Methods
+                #region Methods
 
         #region Login / logout
 
@@ -300,6 +300,7 @@ namespace Nop.Web.Controllers
                             _shoppingCartService.MigrateShoppingCart(_workContext.CurrentCustomer, customer, true);
 
                             //sign in new customer
+
                             _authenticationService.SignIn(customer, model.RememberMe);
 
                             //raise event       
