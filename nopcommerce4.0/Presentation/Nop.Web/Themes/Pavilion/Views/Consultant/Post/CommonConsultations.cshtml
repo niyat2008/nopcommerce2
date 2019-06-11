@@ -17,6 +17,7 @@
 
     .btndarckgreen:hover {
         background-color: darkgreen !important;
+        color: white !important ;
     }
     /*Content*/
     .content {
@@ -323,7 +324,7 @@
                             </span>
                         </div>
                         <div style="margin:5px 0">
-                            <span>@post.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @post.DateCreated.ToString("hh:mm:ss")</span>
+                            <span>@post.DateCreated.ToLongDateString() &nbsp;&nbsp;&nbsp; @post.DateCreated.ToShortTimeString()</span>
                         </div>
                     </div>
                     <!-- Body -->

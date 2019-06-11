@@ -17,7 +17,7 @@ namespace Nop.Web.Validators.Customer
             CustomerSettings customerSettings)
         {
             // RuleFor(x => x.Email).NotEmpty().WithMessage(localizationService.GetResource("Account.Fields.Email.Required"));
-            RuleFor(x => x.Email).EmailAddress().WithMessage(localizationService.GetResource("Common.WrongEmail"));
+            //RuleFor(x => x.Email).EmailAddress().WithMessage(localizationService.GetResource("Common.WrongEmail"));
 
             RuleFor(x => x.Mobile).NotEmpty().WithMessage(localizationService.GetResource("Account.Fields.Mobile.Required"));
             RuleFor(x => x.Mobile).MaximumLength(15).WithMessage(localizationService.GetResource("Account.Fields.MobileErrorMessage"));

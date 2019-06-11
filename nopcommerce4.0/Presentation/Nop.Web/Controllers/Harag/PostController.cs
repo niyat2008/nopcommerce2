@@ -355,6 +355,12 @@ namespace Nop.Web.Controllers.Harag
                 else if (_workContext.CurrentCustomer.IsInCustomerRole(RolesType.Registered, true))
                     ViewBag.UserRole = RolesType.Registered;
 
+
+                if (!_postService.CanAddNewPost(_workContext.CurrentCustomer.Id))
+                {
+                    return View("~/Themes/Pavilion/Views/Harag/Post/CannotAddNewPost.cshtml");
+                }
+                 
                 if (t == 0 && a ==0 )
                 { 
                     return View("~/Themes/Pavilion/Views/Harag/Post/PostTypeBeforeAddPost.cshtml");
@@ -380,7 +386,7 @@ namespace Nop.Web.Controllers.Harag
             }
             else
             {
-                return RedirectToRoute("Login", new { returnUrl = "Harag" });
+                return RedirectToRoute("Login", new { returnUrl = "/Harag/Post/New" });
             }
         }
 

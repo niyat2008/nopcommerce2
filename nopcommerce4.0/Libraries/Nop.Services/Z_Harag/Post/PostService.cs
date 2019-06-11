@@ -484,12 +484,12 @@ namespace Nop.Services.Z_Harag.Post
         public bool CanAddNewPost(int userId)
         {
             var query = _postRepository.TableNoTracking;
-            var result = query.OrderByDescending(m => m.DateCreated).FirstOrDefault();
+            var result = query.Where(m => m.CustomerId == userId).OrderByDescending(m => m.DateUpdated).FirstOrDefault();
             if(result == null)
             {
                 return true;
             }
-            else if( (DateTime.Now - result.DateCreated) < new TimeSpan(1, 0, 0 ))
+            else if( (DateTime.Now - result.DateUpdated) < new TimeSpan(24, 0, 0 ))
             {
                 return false;
             }

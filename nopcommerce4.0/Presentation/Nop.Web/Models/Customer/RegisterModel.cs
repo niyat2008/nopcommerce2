@@ -25,8 +25,7 @@ namespace Nop.Web.Models.Customer
 
         //MVC is suppressing further validation if the IFormCollection is passed to a controller method. That's why we add to the model
         public IFormCollection Form { get; set; }
-
-        [DataType(DataType.EmailAddress)]
+         
         [NopResourceDisplayName("Account.Fields.Email")]
         public string Email { get; set; }
         

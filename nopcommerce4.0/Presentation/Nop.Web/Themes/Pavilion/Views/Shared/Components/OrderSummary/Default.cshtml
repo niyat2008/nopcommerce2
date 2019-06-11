@@ -220,7 +220,7 @@
                                                         $(document).ready(function() {
 
 
-                                                            $("#itemquantity@(item.Id)").change(function (event) {
+                                                            $("#itemquantity@(item.Id)").on('touchstart change', function (event) {
                                                                 var s = $(this);
                                                                 var selected = s.find(":selected").text();
                                                                 var selectedValue = s.find(":selected").val();
@@ -240,16 +240,15 @@
 
                                                             });
 
-                                                                $(".itemquantity@(item.Id)ppppp").click(function (event) {
+                                                            $(".itemquantity@(item.Id)ppppp").on('touchstart click', function (event) {
 
                                                                    $("#itemquantity@(item.Id)input").val(
                                                                         parseInt($("#itemquantity@(item.Id)input").val()) + 1); 
                                                                     $(".update-cart-button").click();
 
                                                                             return false;
-                                                            });
-
-                                                              $(".itemquantity@(item.Id)mmmmm").click(function (event) {
+                                                            }); 
+                                                            $(".itemquantity@(item.Id)mmmmm").on('touchstart click', function (event) {
                                                                   if (parseInt($(".itemquantity@(item.Id)mmmmm").val()) > 0) {
                                                                       $("#itemquantity@(item.Id)input").val(
                                                                           parseInt($("#itemquantity@(item.Id)input").val()) - 1);
@@ -485,7 +484,7 @@
                                                     return termOfServiceOk;
                                                 });
                                                 // amsfci
-                                                $('.remove-item').click(function () { 
+                                                $('.remove-item').on('touchstart click', function () { 
                                                     $('#item' + $(this).attr('data-item-value'))[0].checked = true
                                                     $('.update-cart-button').click();
                                                 });

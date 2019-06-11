@@ -321,7 +321,7 @@
         padding-right: 9%;
     }
     .flyout-cart-wrapper {
-        padding: 0 150px 0 0;
+        padding: 0 0px 0 0;
     }
 }
 
@@ -333,4 +333,10 @@
         padding-top: 2px;
         line-height: 40px;
     }   
+}
+
+@media(min-width:500px) {
+     .listbox1{
+         display: none;
+     }
 }

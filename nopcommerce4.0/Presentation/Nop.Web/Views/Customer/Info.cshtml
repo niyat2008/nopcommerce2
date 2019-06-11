@@ -115,11 +115,11 @@
                         <span asp-validation-for="Mobile"></span>
                     </div>
 
-                    <div class="inputs">
-                        <label asp-for="Email" asp-postfix=":"></label>
+                    <div class="inputs" >
+                        @*<label asp-for="Email" asp-postfix=":"></label>
                         <input asp-for="Email" />
                         <nop-required />
-                        <span asp-validation-for="Email"></span>
+                        <span asp-validation-for="Email"></span>*@
                     </div>
                     @if (!string.IsNullOrEmpty(Model.EmailToRevalidate))
                     {

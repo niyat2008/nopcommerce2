@@ -61,15 +61,16 @@
                                 <input class="form-control-file" id="file" name="file" type="file" style="display:none" value="تحميل صورة">
                                 <label for="file">تحميل صورة</label>
                             </p>
-                        </div>
-                        <div class="form-group" style="margin-bottom:3%;">
-                            <button class="form-control" style="text-align:center;background-color:#4da74d;color:white;width:100%" type="submit">نشر</button>
-                        </div>
+                        </div> 
                         <div class="form-group bordering">
-                            <div class="images" id="images">
+                            <div style="margin-bottom:3%;clear:both;" class="images row" id="images">
 
                             </div>
                         </div>
+                        <div class="form-group" style="margin-bottom:3%;">
+                            <button class="form-control add2" style="text-align:center;background-color:#4da74d;color:white;width:100%" type="submit">نشر</button>
+                        </div>
+
 
                     </form>
                 </div>
@@ -139,7 +140,7 @@
 
                     $("#images").append("<div  class='col-xs-4 img_blck' style='padding-right:0px' id='imgno" + index + "'>" +
                         "<img src='" + image + "' width='100' height='60' />" +
-                        "<div class='overlay' onclick='deleteFile(" + index + ")'>" +
+                        "<div class=' btn btn-danger' style='padding: 3px;  position: absolute; right: -1px;' onclick='deleteFile(" + index + ")'>" +
                         "<i class='fa fa-trash imageli' ></i>" +
                         "</div>");
                 };
@@ -204,7 +205,7 @@
                     CategoryId: CategoryId,
                     Files: Files
                 };
-
+                $('.add2').attr("disabled", true);
 
                 $.ajax({
                     headers: {
@@ -217,7 +218,10 @@
                     data: JSON.stringify(postForPostModel),
                     complete: function (data) {
                         if (data.status == 200) {
-                            alert("تمت اضافة الاستئارة بنجاح يمكنك الذهاب الى استشاراتى لرؤية الاستشاراة");
+
+                            $('.add2').removeAttr("disabled");
+
+                            alert("تمت اضافة الاستشارة بنجاح");
                             window.location = "/Consultations/UserOpenConsultations";
                         }
                         else {
