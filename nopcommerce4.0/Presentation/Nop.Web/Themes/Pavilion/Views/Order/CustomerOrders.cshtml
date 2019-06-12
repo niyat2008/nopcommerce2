@@ -152,7 +152,7 @@
                     int status = 0;
                     bool cod = (order.PaymentMethod == "Payments.CashOnDelivery");
                     bool Paid = order.PaymentStatusEnum == PaymentStatus.Paid;
-                    bool Delivered = order.ShippingStatusEnum != ShippingStatus.Delivered;
+                    bool Delivered = order.ShippingStatusEnum == ShippingStatus.Delivered;
                     bool Shipped = order.ShippingStatusEnum == ShippingStatus.Shipped;
 
                     if (order.OrderStatusEnum == Nop.Core.Domain.Orders.OrderStatus.Pending 
@@ -221,7 +221,7 @@
                             }
 
                         .active {
-                            background: dodgerblue!important;
+                            background: dodgerblue;
                         }
 
                             .active ~ li.li {
