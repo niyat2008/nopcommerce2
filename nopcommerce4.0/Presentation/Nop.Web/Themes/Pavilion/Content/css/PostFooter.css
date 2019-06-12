@@ -1,0 +1,7 @@
+﻿
+
+@media all and (min-width: 500px) {
+    #con-rate{
+        display:none!important;
+    }
+}

@@ -39,6 +39,10 @@
         #threebuttons span a:hover {
             text-decoration: underline
         }
+    .active{
+        font-weight:bold!important;
+        color:green!important;
+    }
 </style>
 
 @if (@ViewBag.UserRole == "Registered")
@@ -116,5 +120,12 @@
 </span>
 
 
-
+<script>
+    $(document).ready(function () { 
+        $("span .nodoc").on("click", function () {
+            $(this).addClass('active');
+            $('span .nodoc').not(this).removeClass('active');
+        });
+    })
+</script>
 
