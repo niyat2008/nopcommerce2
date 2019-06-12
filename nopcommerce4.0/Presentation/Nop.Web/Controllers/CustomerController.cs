@@ -310,6 +310,11 @@ namespace Nop.Web.Controllers
 
                             //activity log
                             _customerActivityService.InsertActivity(customer, "PublicStore.Login", _localizationService.GetResource("ActivityLog.PublicStore.Login"));
+                            customer.LastActivityDateUtc = DateTime.Now;
+                            customer.LastLoginDateUtc = DateTime.Now;
+
+                            _customerService.UpdateCustomer(customer);
+
 
                             if ((string)TempData["ReturnURL"] == "consultations")
                                 return RedirectToRoute("Consultant.ConsultantHome");
@@ -992,10 +997,15 @@ namespace Nop.Web.Controllers
         [PublicAntiForgery]
         public virtual IActionResult Info(CustomerInfoModel model)
         {
+            //var errors = ModelState.Select(x => x.Value.Errors).ToList();
+            //return Json(new { res = errors, model });
+
             if (!_workContext.CurrentCustomer.IsRegistered())
                 return Challenge();
 
             var customer = _workContext.CurrentCustomer;
+
+           
 
             //custom customer attributes
             var customerAttributesXml = ParseCustomCustomerAttributes(model.Form);
@@ -1004,11 +1014,14 @@ namespace Nop.Web.Controllers
             {
                 ModelState.AddModelError("", error);
             }
+          
 
             try
             {
                 if (ModelState.IsValid)
                 {
+                    //var res = ModelState.IsValid;
+                    //return Json(new { res=res,model });
                     //username 
                     if (_customerSettings.UsernamesEnabled && this._customerSettings.AllowUsersToChangeUsernames)
                     {

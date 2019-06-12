@@ -91,8 +91,10 @@
 }
     .spc-body .no-data {
         display: block;
-        padding: 7% 43%;
+        /*padding: 7% 43%;*/
         font-size: 22px;
+        text-align:center;
+        padding-top:4%;
     }
 
 /* LOADING OVERLAY */
@@ -402,7 +404,7 @@
 }
 
 .spc-categories .item-box {
-	width: 33% !important;
+	width: 33.33% !important;
 	clear: none !important;
 	margin: 0 0 -1px !important;
 }

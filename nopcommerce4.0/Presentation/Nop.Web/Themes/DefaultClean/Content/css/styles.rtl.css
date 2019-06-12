@@ -1090,6 +1090,7 @@ label, label + * {
 }
 .block .listbox {
 	display: none;
+    /*display:block!important;*/
 	border-bottom: 1px solid #ddd;
 	padding: 10px 5px;
 }
@@ -1543,9 +1544,10 @@ label, label + * {
 	color: #fff;
 	text-transform: uppercase;
 }
-.item-box .product-box-add-to-cart-button:hover {
-	background-color: #248ece;
-}
+    .item-box .product-box-add-to-cart-button:hover {
+        background-color: #248ece;
+        
+    }
 .item-box .add-to-compare-list-button,
 .item-box .add-to-wishlist-button {
 	width: 20%;
@@ -6614,7 +6616,7 @@ input[type=text],.email,.password
 	font-weight: bold;
 }
 .block .listbox {
-	display: block;
+	/*display: block!important;*/
 	border-bottom: none;
 }
 .block a.product-picture {

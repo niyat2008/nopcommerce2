@@ -93,7 +93,7 @@ a:hover { color: #40ca40 }
 }
 
 #searchScreenFull { display: none; background: #3e874b; margin-top: 50px; min-height: 50px; }
-#searchScreenFull input { border-radius: 0; height: 33px; width: 75%; float: right; margin-top: 6px }
+#searchScreenFull input { border-radius: 0; height: 33px; width: 84%; float: right; margin-top: 6px }
 #searchScreenFull i { float: right; line-height: 40px; width: 10%; margin-right: 12px; cursor: pointer; color: #fff; font-size: 15px }
 #myAccountScreenFull { display: none }
 #myAccountScreenFull ul { width: 100%; box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1); background: #f9f9f9; display: block }

@@ -171,24 +171,29 @@
                     {
                         status = 4;
                     }
-                <div class="section order-item">
+                <div class="section order-item" style="padding-top:60px!important;">
                     <div class="title">
                         <strong>@T("Account.CustomerOrders.OrderNumber"): @order.CustomOrderNumber</strong>
                     </div> @*@order.ShippingStatusEnum  @order.PaymentStatusEnum @order.PaymentMethod*@
-                    <ul style="position: absolute; top: 10px; right: 290px">
-                        <li class="li @(status == 1?"active":"")"> قيد الانتظار</li>
-                        <li class="li @(status == 2 ?"active":"")">تم التاكيد</li>
-                        <li class="li  @( status == 3?"active":"")">تم الشحن</li>
-                        <li class="li  @(status ==4?"active":"")"> تم الاستلام </li> 
-                    </ul>
+                    @*right: 290px*@
+                   
+                        <ul style="position: absolute; top: -6px!important; ">
+                            <li class="li @(status == 1?"active":"")"> قيد الانتظار</li>
+                            <li class="li @(status == 2 ?"active":"")">تم التاكيد</li>
+                            <li class="li  @( status == 3?"active":"")">تم الشحن</li>
+                            <li class="li  @(status ==4?"active":"")"> تم الاستلام </li>
+                        </ul>
+                   
 
-                    <style type="text/css">
+                    <link href="/Themes/Pavilion/Content/css/ShippingPhases.css" rel="stylesheet" type="text/css" />
+
+                    @*<style type="text/css">
 
                         li.li {
-                            width: 5em;
-                            height: 5em;
+                            width: 3em;
+                            height: 3em;
                             text-align: center;
-                            line-height: 5em;
+                            line-height: 3em;
                             border-radius: 10em;
                             background: green;
                             margin: 1em;
@@ -196,6 +201,7 @@
                             color: white;
                             position: relative;
                         }
+                      
 
                             li.li::before {
                                 content: '';
@@ -227,9 +233,9 @@
                                 }
 
                         body {
-                            font-family: sans-serif; 
+                            font-family: sans-serif;
                         }
-                    </style>
+                    </style>*@
 
 
                     <ul class="info">

@@ -6,41 +6,46 @@
         <div class="spc-header">
             <h2 class="title"><span>  <strong>@T("Manufacturers")</strong></span></h2> 
         </div>
-        <div class="spc-body">
+       
 
-            <div class="block block-manufacturer-navigation">
+            <div class="block block-manufacturer-navigation" style="width:100%!important; text-align:center!important;">
+             
+              
 
-                <div class="listbox">
-                    <ul class="list">
-                        @foreach (var manufacturer in Model.Manufacturers)
-                        {
-                            <li style="float: right" class="@(manufacturer.IsActive ? "active" : "inactive")">
-                                <a title="@manufacturer.Name" href="@Url.RouteUrl("Manufacturer", new { SeName = manufacturer.SeName })">
-                                    <img src="data:image/jpeg;base64,@manufacturer.ImageUrl" width="200" />
-                                </a>
-                            </li>
-                        }
-                    </ul>
-                    <div style="clear: both"></div>
+                <div class="spc-body">
+                   
+                    <div class="listbox">
+                       
+                        <ul class="list">
+                            @foreach (var manufacturer in Model.Manufacturers)
+                            {
+                                <li style="float: right" class="@(manufacturer.IsActive ? "active" : "inactive")">
+                                    <a title="@manufacturer.Name" href="@Url.RouteUrl("Manufacturer", new { SeName = manufacturer.SeName })">
+                                        <img src="data:image/jpeg;base64,@manufacturer.ImageUrl" width="200" />
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                        <div style="clear: both"></div>
 
-                    <div class="view-all">
-                        <a href="@Url.RouteUrl("ManufacturerList")">@T("Manufacturers.ViewAll")</a>
+                        <div class="view-all">
+                            <a href="@Url.RouteUrl("ManufacturerList")">@T("Manufacturers.ViewAll")</a>
+                        </div>
+                    </div>
+                    <div class="listbox1">
+                        <ul class="list">
+                            @foreach (var manufacturer in Model.Manufacturers)
+                            {
+                                <li class="@(manufacturer.IsActive ? "active" : "inactive")">
+                                    <a title="@manufacturer.Name" href="@Url.RouteUrl("Manufacturer", new { SeName = manufacturer.SeName })">
+                                        <img src="data:image/jpeg;base64,@manufacturer.ImageUrl" width="200" />
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                        <div style="clear: both"></div>
                     </div>
                 </div>
-                <div class="listbox1">
-                    <ul class="list">
-                        @foreach (var manufacturer in Model.Manufacturers)
-                        {
-                            <li style="float: right" class="@(manufacturer.IsActive ? "active" : "inactive")">
-                                <a title="@manufacturer.Name" href="@Url.RouteUrl("Manufacturer", new { SeName = manufacturer.SeName })">
-                                    <img src="data:image/jpeg;base64,@manufacturer.ImageUrl" width="200" />
-                                </a>
-                            </li>
-                        }
-                    </ul>
-                    <div style="clear: both"></div>
-                </div>
-            </div>
         </div>
     </div>
     //amsfci

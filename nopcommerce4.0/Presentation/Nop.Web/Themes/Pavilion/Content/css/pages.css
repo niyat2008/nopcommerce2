@@ -60,7 +60,7 @@ form.commission { margin: 18px 0 }
 .content .det-block .det-top span:hover { color: #4da74d }
 .content .det-block .det-bottom { padding: 10px; /*padding-right: 30px;*/ }
 .content .det-block .det-bottom p { padding: 10px; font-size: 26px; color: black;  font-family: Tahoma; }
-.content .det-block .det-bottom img { width: 75%; float: right; margin-left: 15px; margin-bottom: 30px; }
+.content .det-block .det-bottom img { width: 75%; float: right; margin-left: 15px; margin-bottom: 30px;border:2px solid gray; }
 .content .det-block .det-bottom span.label { font-size:13px }
 .content .det-block .det-bottom p.phone { font-size: 22px; color: #4da74d; padding-right: 0; margin-top: 10px; }
 .content .social-contact { min-height: 50px; display: flex; align-items: center; justify-content: center; margin: 4px 18px; border-bottom: 1px solid #ddd; margin-bottom: 30px }

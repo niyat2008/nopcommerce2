@@ -126,12 +126,14 @@
     $("#search-cat-city-js").on('click', function () {
         var cityId = $("#search-city-js-ajax option:selected").val();
         var catId = $("#search-category-js-ajax option:selected").val();
+        var cityName = $("#search-city-js-ajax").val();
         
          $.ajax({
              type: 'GET',
              url: '/Harag/HaragSearchCatCity/' + catId + '/' + cityId,
             complete: function (data) {
                 $("#posts").html(data.responseText);
+                $("#select-city-js-ajax").val(cityName);
             }
         });
     });

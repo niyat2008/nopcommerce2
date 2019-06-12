@@ -1180,7 +1180,8 @@ label, label + * {
     display: block;
 }
 .block .listbox {
-	display: none;
+	/*display: none;*/
+    display:block!important;
 	margin: -1px 0 0;
 	border: 1px solid #e9e9e9;
 	background-color: #fff;

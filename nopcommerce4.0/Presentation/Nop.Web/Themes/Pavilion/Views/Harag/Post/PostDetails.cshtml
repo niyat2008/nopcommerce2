@@ -77,7 +77,9 @@
                             }
                             else
                             {
-                                <p class="phone"> <i class="fa fa-phone" style="padding-left:5px; transform: rotate(-90deg); -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg);"></i> @Model.Contact</p>
+                                @*<p class="phone"> <i class="fa fa-phone" style="padding-left:5px; transform: rotate(-90deg); -webkit-transform: rotate(-90deg); -moz-transform: rotate(-90deg);"></i> @Model.Contact</p>*@
+
+                                <p class="phone">  @Model.Contact <i class="fa fa-phone" style="padding-right:5px; transform: rotate(0deg); -webkit-transform: rotate(0deg); -moz-transform: rotate(0deg);"></i></p>
                             }
                         </div>
                     </div>
@@ -507,6 +509,7 @@
                     console.log(appendComment(data));
                     appendComment(data.responseText);
                     $("#CommentText").val("");
+                    window.location.href = window.location.href;
                 }
             });
         }

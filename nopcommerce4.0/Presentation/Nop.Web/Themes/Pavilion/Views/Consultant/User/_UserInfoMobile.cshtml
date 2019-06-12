@@ -22,7 +22,10 @@ else
 {
 
     <ul>
-        <li class="name"><a class="ico-register">@Model.Username</a></li>
+        @*<li class="name"><a class="ico-register">@Model.Username</a></li>*@
+       
+        <li><a href="@Url.RouteUrl("CustomerInfo")" class="ico-account">@*@T("Account.MyAccount")*@@Model.Username</a></li>
+
         <li class="link" (click)="logout()">@Html.RouteLink("تسجيل  خروج", "logout")</li>
          
     </ul>

@@ -138,11 +138,24 @@
         sendmessage($("#id-" + btn + ""), commentId, postId, 2);
     });
 
-    $(".report").on("click", function () {
-        var btn = $(this).attr("data-report");
-        console.log(btn);
-        $("#" + btn +"").toggleClass('reportToggle');  
+    $(document).on("click", function (e) {
+       
+
+        $(".reportPanelInfo").removeClass("reportToggle");
+
     });
+
+    $(".report").on("click", function (e) {
+       
+        e.stopPropagation();
+        var btn = $(this).attr("data-report");
+       
+        console.log(btn);
+        $("#" + btn + "").toggleClass('reportToggle');  
+       
+    });
+
+  
 
    
 </script>

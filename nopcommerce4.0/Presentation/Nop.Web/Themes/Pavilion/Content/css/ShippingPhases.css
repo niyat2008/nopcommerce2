@@ -1,0 +1,77 @@
+﻿
+li.li {
+    width: 4em;
+    height: 4em;
+    text-align: center;
+    line-height: 4em;
+    border-radius: 10em;
+    background: green;
+    margin: 1em;
+    display: inline-block;
+    color: white;
+    position: relative;
+}
+
+@media all and (min-width: 330px) {
+    li.li {
+        width: 4em;
+        height: 4em;
+        text-align: center;
+        line-height: 4em;
+        border-radius: 10em;
+        background: green;
+        margin: 1em;
+        display: inline-block;
+        color: white;
+        position: relative;
+    }
+}
+
+@media all and (max-width: 320px) {
+    li.li {
+        width: 2em;
+        height: 2em;
+        text-align: center;
+        line-height: 2em;
+        border-radius: 10em;
+        background: green;
+        margin: 1em;
+        display: inline-block;
+        color: white;
+        position: relative;
+    }
+}
+
+
+    li.li::before {
+        content: '';
+        position: absolute;
+        top: 2.1em;
+        left: -4em;
+        width: 4em;
+        height: .7em;
+        background: dodgerblue;
+        z-index: -1;
+    }
+
+
+
+    li.li:first-child::before {
+        display: none;
+    }
+
+    .active {
+        background: dodgerblue !important;
+    }
+
+        .active ~ li.li {
+            background: lightblue;
+        }
+
+            .active ~ li.li::before {
+                background: lightblue;
+            }
+
+    body {
+        font-family: sans-serif;
+    }
