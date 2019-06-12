@@ -158,6 +158,7 @@
         .block .listbox {
             margin: 0px 0 0;
             padding: 22px 35px;
+            float: right !important;
         }
 
         .block .view-all {
@@ -337,11 +338,11 @@
 
 @media(min-width:500px) {
      .listbox1{
-         display: none;
+         display: none  ;
      }
 }
 @media(max-width:500px) {
-    .listbox1 {
-        display: inline-block;
+    .listbox1 { 
+        display: inline-block !important;
     }
 }

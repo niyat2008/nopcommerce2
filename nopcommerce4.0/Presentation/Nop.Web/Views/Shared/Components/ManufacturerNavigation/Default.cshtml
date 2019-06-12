@@ -19,7 +19,7 @@
                         <ul class="list">
                             @foreach (var manufacturer in Model.Manufacturers)
                             {
-                                <li style="float: right" class="@(manufacturer.IsActive ? "active" : "inactive")">
+                                <li  class="@(manufacturer.IsActive ? "active" : "inactive")">
                                     <a title="@manufacturer.Name" href="@Url.RouteUrl("Manufacturer", new { SeName = manufacturer.SeName })">
                                         <img src="data:image/jpeg;base64,@manufacturer.ImageUrl" width="200" />
                                     </a>
