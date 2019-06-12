@@ -2,62 +2,146 @@
 @{
     Layout = "~/Themes/Pavilion/Views/Harag/Shared/_Header.cshtml";
 }
+
+<style>
+    .hid{
+        display:none!important;
+    }
+    
+</style>
+
+
+
  
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3">
-                <div>
-                    <select id="search-category-js-ajax" class="form-control"> 
-                    </select>
-                    <select id="search-city-js-ajax" class="form-control"> 
-                    </select>
-                    
-                    <button id="search-cat-city-js" class="btn btn-default srchBtn" type="button"><i class="fa fa-search"></i></button>
+            <!--AHmed-->
+            <div id="harag-search-desktop">
+                <div class="col-md-3">
+                    <div>
+                        <select id="search-category-js-ajax" class="form-control search-category-js-ajax"></select>
+                        <select id="search-city-js-ajax" class="form-control search-city-js-ajax"></select>
+
+                        <button id="search-cat-city-js" class="btn btn-default srchBtn search-cat-city-js" type="button"><i class="fa fa-search"></i></button>
+                    </div>
+                    <hr>
+                    @Html.Partial("~/Themes/Pavilion/Views/Harag/Post/_CategoriesImagesGrid.cshtml", Model)
+                    <a href="/Harag/Orders"><h2 style="color: dodgerblue"> الطلبات</h2></a>
+                    <div id="tags-js">
+
+                    </div> 
+
                 </div>
-                <hr>
-            
-                @Html.Partial("~/Themes/Pavilion/Views/Harag/Post/_CategoriesImagesGrid.cshtml", Model)
-            </div>
-            <div class="col-md-9">
-                <!-- أضف اعلانك -->
-                <div class="row">
-                    <div class="col-md-4" style="margin-bottom: 20px;">
-                        <a class=" add-btn " style="background: #f2f2f2;line-height:2.4" href="@Url.RouteUrl("Harag.Post.AddNewPost")"> <i class="fa fa-plus"></i> أضف اعلانك </a>
+
+
+              
+
+                <div class="col-md-9">
+                  
+                   
+                    <!-- أضف اعلانك -->
+                    <div class="row">
+                        <div class="col-md-4" style="margin-bottom: 20px;">
+                            <a class=" add-btn " style="background: #f2f2f2;line-height:2.4" href="@Url.RouteUrl("Harag.Post.AddNewPost")"> <i class="fa fa-plus"></i> أضف اعلانك </a>
+                        </div>
+                        <div class="col-md-4">
+                            <select id="select-city-js-ajax" class="form-control select-city-js-ajax">
+                                <option>جميع المدن</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+
+                        </div>
+                    </div>
+                    @*<div class="row">
+                    <div class="col-md-4">
+
                     </div>
                     <div class="col-md-4">
                         <select id="select-city-js-ajax" class="form-control">
-                            <option>جميع المدن</option>
                         </select>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
+                </div>*@
+                    <div class="row">
+                        <div class="col-md-12 tags">
+
+                        </div>
+                    </div>
+                    <!-- List -->
+                    <div id="posts" class="items posts">
 
                     </div>
-                </div>
-                @*<div class="row">
-            <div class="col-md-4">
-
-            </div>
-            <div class="col-md-4">
-                <select id="select-city-js-ajax" class="form-control">
-                </select>
-            </div>
-        </div>*@
-                <div class="row">
-                    <div class="col-md-12 tags">
-                      
+                    <div class="view-more-js">
+                        <a class="add view-more" data-postid="" data-pageno="1" style="padding: 5px 15px; border: 1px solid #3e874b; border-radius:6px; font-size: 16px;">مشاهدة المزيد ...</a>
                     </div>
                 </div>
-                <!-- List -->
-                <div id="posts" class="items">
+            </div>
+
+
+       
+
+
+            <div id="harag-search-mobile" class="hid">
+
+              
+
+                <div class="col-md-9">
+                    <div>
+                        <select id="search-category-js-ajax" class="form-control search-category-js-ajax"></select>
+                        <select id="search-city-js-ajax" class="form-control search-city-js-ajax"></select>
+
+                        <button id="search-cat-city-js" class="btn btn-default srchBtn search-cat-city-js" type="button"><i class="fa fa-search"></i></button>
+                    </div>
+                   
+                        <!-- أضف اعلانك -->
+                        <div class="row">
+                            <div class="col-md-4" style="margin-bottom: 20px;">
+                                <a class=" add-btn " style="background: #f2f2f2;line-height:2.4" href="@Url.RouteUrl("Harag.Post.AddNewPost")"> <i class="fa fa-plus"></i> أضف اعلانك </a>
+                            </div>
+                            <div class="col-md-4">
+                                <select id="select-city-js-ajax" class="form-control select-city-js-ajax">
+                                    <option>جميع المدن</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+
+                            </div>
+                        </div>
+                        @*<div class="row">
+                <div class="col-md-4">
 
                 </div>
-                <div class="view-more-js">
-                    <a class="add view-more" data-postid="" data-pageno="1" style="padding: 5px 15px; border: 1px solid #3e874b; border-radius:6px; font-size: 16px;">مشاهدة المزيد ...</a>
+                <div class="col-md-4">
+                    <select id="select-city-js-ajax" class="form-control">
+                    </select>
                 </div>
+            </div>*@
+                        <div class="row">
+                            <div class="col-md-12 tags">
+
+                            </div>
+                        </div>
+                        <!-- List -->
+                        <div id="posts" class="items posts">
+
+                        </div>
+                        <div class="view-more-js" style="padding-bottom:15px;">
+                            <a class="add view-more" data-postid="" data-pageno="1" style="padding: 5px 15px; border: 1px solid #3e874b; border-radius:6px; font-size: 16px;">مشاهدة المزيد ...</a>
+                        </div>
+                    <a href="/Harag/Orders"><h2 style="color: dodgerblue"> الطلبات</h2></a>
+                    <div id="tags-js">
+
+                    </div> 
+                    </div>
+
+                @Html.Partial("~/Themes/Pavilion/Views/Harag/Post/_CategoriesImagesGrid.cshtml", Model)
             </div>
+        
         </div>
     </div>
 </div>
@@ -65,6 +149,28 @@
 <script type="text/javascript">
     
     $(document).ready(function () {
+
+
+
+        $(window).resize(function () {
+            if ($(window).width() <= 500) {
+                console.log("mobile");
+                $("#harag-search-mobile").removeClass('hid');
+                $("#harag-search-desktop").addClass('hid');
+
+            }
+
+
+
+        });
+
+
+        if ($(window).width() <= 500) {
+            console.log("mobile");
+            $("#harag-search-mobile").removeClass("hid");
+            $("#harag-search-desktop").addClass("hid");
+
+        }
 
         $('.view-more').click(function () {
 
@@ -81,7 +187,7 @@
 
                     $('.view-more').attr("data-pageno", parseInt($('.view-more').attr("data-pageno")) + parseInt('1'));
 
-                    $("#posts").append("<br />" 
+                    $(".posts").append("<br />" 
                         + data.responseText);
 
                     $(this).attr("data-pageno", parseInt(pageNo) + 1);
@@ -109,7 +215,7 @@
             type: 'GET',
             url: '@Url.RouteUrl("Harag.Post.GetCategories")',
             complete: function (data) {
-                $("#search-category-js-ajax").html(data.responseText);
+                $(".search-category-js-ajax").html(data.responseText);
             }
         });
 
@@ -117,26 +223,28 @@
             type: 'GET',
             url: '@Url.RouteUrl("Harag.Post.GetHaragCities")',
             complete: function (data) {
-                $("#search-city-js-ajax").html(data.responseText);
-                $("#select-city-js-ajax").append(data.responseText);
+                $(".search-city-js-ajax").html(data.responseText);
+                $(".select-city-js-ajax").append(data.responseText);
             }
         });
     });
 
-    $("#search-cat-city-js").on('click', function () {
-        var cityId = $("#search-city-js-ajax option:selected").val();
-        var catId = $("#search-category-js-ajax option:selected").val();
-        var cityName = $("#search-city-js-ajax").val();
+    $(".search-cat-city-js").on('click', function () {
+        var cityId = $(".search-city-js-ajax option:selected").val();
+        var catId = $(".search-category-js-ajax option:selected").val();
+        var cityName = $(".search-city-js-ajax").val();
         
          $.ajax({
              type: 'GET',
              url: '/Harag/HaragSearchCatCity/' + catId + '/' + cityId,
             complete: function (data) {
-                $("#posts").html(data.responseText);
-                $("#select-city-js-ajax").val(cityName);
+                $(".posts").html(data.responseText);
+                $(".select-city-js-ajax").val(cityName);
             }
         });
     });
+
+   
 
 </script>
 
