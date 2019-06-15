@@ -716,14 +716,25 @@
                 <img class="logo" src="/images/thumbs/0000303.png" onclick="goToHome()" />
             </div>
 
-                <div class="col-md-7 searchContr" style="padding-top:12px;">
-                    <div class="form-group">
-                        <input id="searchText" type="text" style="height:44px;"
-                               class="form-control" placeholder="البحث في الاستشارات">
-                        <button onclick="filterWithText('searchText')" style="height:44px;" class="btndarckgreen">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
+            <div class="col-md-6 searchContr" style="padding-top:11px;">
+                <div class="form-group"  >
+                    <input id="searchText" type="text" style="height:44px;"
+                           class="form-control" placeholder="البحث في الاستشارات">
+                    <button onclick="filterWithText('searchText')" style="height:44px;" class="btndarckgreen">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-1" style="padding-top:19px; font-size: 20px ">
+                <div class="form-group">
+                    <span>
+                        <a style="color:#3e874b; " href="/Consultant/Notifications">
+                            <sup id="notification-count-jsa" class="badge badge-danger"></sup>
+                            <i class="fa fa-bell-o fa-lg"></i>
+                        </a>
+                    </span>
+                </div>
                 </div>
             </div>
         </div>
@@ -740,7 +751,7 @@
 
         <div class="col-md-8">
             <div class="allPage" id="allpage">
-                <div class="siteDetails">
+                @*<div class="siteDetails">
                     <p style="text-align:center;margin:0; font-size: 14px;">
                         <span>
                             <a href="/الشحن-والاسترجاع" class="nodoc">
@@ -761,7 +772,7 @@
                         </span>
                     </p>
                    
-                </div>
+                </div>*@
                 
                 <div id="threebuttons" style="color:darkgreen !important; padding-bottom: 15px;" class="text-center"></div>
 

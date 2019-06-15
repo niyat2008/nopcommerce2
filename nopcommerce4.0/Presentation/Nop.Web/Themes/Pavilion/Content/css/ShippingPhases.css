@@ -4,22 +4,20 @@ li.li {
     height: 4em;
     text-align: center;
     line-height: 4em;
-    border-radius: 10em;
-    background: green;
+    border-radius: 10em; 
     margin: 1em;
     display: inline-block;
     color: white;
     position: relative;
 }
 
-@media all and (min-width: 330px) {
+@media all and (min-width: 400px) {
     li.li {
         width: 4em;
         height: 4em;
         text-align: center;
         line-height: 4em;
-        border-radius: 10em;
-        background: green;
+        border-radius: 10em; 
         margin: 1em;
         display: inline-block;
         color: white;
@@ -27,14 +25,13 @@ li.li {
     }
 }
 
-@media all and (max-width: 320px) {
+@media all and (max-width: 400px) {
     li.li {
         width: 2em;
         height: 2em;
         text-align: center;
         line-height: 2em;
-        border-radius: 10em;
-        background: green;
+        border-radius: 10em; 
         margin: 1em;
         display: inline-block;
         color: white;
@@ -61,7 +58,7 @@ li.li {
     }
 
     .active {
-        background: dodgerblue !important;
+        background: dodgerblue ;
     }
 
         .active ~ li.li {
@@ -75,3 +72,9 @@ li.li {
     body {
         font-family: sans-serif;
     }
+li.li span {
+    position: relative;
+    bottom: -40px;
+    color: #000;
+    font-size: 12px;
+}

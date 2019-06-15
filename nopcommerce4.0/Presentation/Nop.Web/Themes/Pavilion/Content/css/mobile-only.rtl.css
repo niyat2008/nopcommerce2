@@ -61,14 +61,15 @@
 	display: block;
 	clear: both;
 }
-.responsive-nav-wrapper > div {
-	display: inline-block;
-	border-left: 1px solid #eee;
-	background-color: #f74258;
-	background-image: url('../img/mobile-sprite.png');
-	background-repeat: no-repeat;
-	vertical-align: middle;
-}
+    .responsive-nav-wrapper > div {
+        display: inline-block;
+        border-left: 1px solid #eee;
+        background-color: #f74258;
+        background-image: url('../img/mobile-sprite1.png');
+       
+        background-repeat: no-repeat;
+        vertical-align: middle;
+    }
 .responsive-nav-wrapper > div:first-child {
 	border-right: 1px solid #eee;
 }

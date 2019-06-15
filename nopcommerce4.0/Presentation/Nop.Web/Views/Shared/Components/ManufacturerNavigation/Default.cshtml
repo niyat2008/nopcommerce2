@@ -17,11 +17,18 @@
                     <div class="listbox">
                        
                         <ul class="list">
-                            @foreach (var manufacturer in Model.Manufacturers)
+                            @for (int counter = 0; counter < Model.Manufacturers.Count; counter++)
                             {
-                                <li  class="@(manufacturer.IsActive ? "active" : "inactive")">
+                                if (counter > 12)
+                                {
+                                    break;
+                                }
+
+                                var manufacturer = Model.Manufacturers[counter];
+
+                                <li class="@(manufacturer.IsActive ? "active" : "inactive")" style="float: left">
                                     <a title="@manufacturer.Name" href="@Url.RouteUrl("Manufacturer", new { SeName = manufacturer.SeName })">
-                                        <img src="data:image/jpeg;base64,@manufacturer.ImageUrl" width="200" />
+                                        <img style="margin-left: 20px; margin-right: 18px;" src="data:image/jpeg;base64,@manufacturer.ImageUrl" />
                                     </a>
                                 </li>
                             }
@@ -34,13 +41,24 @@
                     </div>
                     <div class="listbox1">
                         <ul class="list">
-                            @foreach (var manufacturer in Model.Manufacturers)
+
+
+                            @for (int counter = 0; counter < Model.Manufacturers.Count; counter++)
                             {
+                                if (counter > 12 )
+                                {
+                                    break;
+                                }
+                                
+                                var manufacturer = Model.Manufacturers[counter];
+
+                               
                                 <li class="@(manufacturer.IsActive ? "active" : "inactive")">
                                     <a title="@manufacturer.Name" href="@Url.RouteUrl("Manufacturer", new { SeName = manufacturer.SeName })">
-                                        <img src="data:image/jpeg;base64,@manufacturer.ImageUrl" width="200" />
+                                        <img src="data:image/jpeg;base64,@manufacturer.ImageUrl" />
                                     </a>
                                 </li>
+                                 
                             }
                         </ul>
                         <div style="clear: both"></div>

@@ -6,7 +6,7 @@
 @inject IWebHelper webHelper
 @inject IWorkContext workContext
 
-
+@*<link href="/Themes/Pavilion/Content/css/mobile-only.rtl.css" type="text/css" rel="stylesheet" />*@
 <div class="">
 
     <div class="order-summary-content">
@@ -106,10 +106,10 @@
                                                     else
                                                     {
                                                 //amsfci
-                                                <button type="button"  class="remove-item" name="removefromcart"
+                                                <span  class="remove-item" name="removefromcart"
                                                         data-item-value="@(item.Id)" value="@(item.Id)">
                                                     <span><img src="https://cdn2.iconfinder.com/data/icons/e-business-helper/240/627249-delete3-512.png" width="25" height="25" /></span>
-                                                </button>
+                                                </span>
                                                 <input style="display: none" type="checkbox" id="item@(item.Id)" name="removefromcart" value="@(item.Id)" />
                                             }
                                         </td>
@@ -214,8 +214,11 @@
                                                         <span hidden class="itemquantity@(item.Id)ppppp ppppp">+</span>
                                                     }
 
-
+                                                    @*<script type="text/javascript" src="/Themes/pavilion/Content/scripts/jquery.mobile-1.4.5.min.js" ></script>*@
                                                         <script type="text/javascript" asp-location="Footer">
+                                                           
+
+                                                        
                                                         //when a customer clicks 'Enter' button we submit the "add to cart" button (if visible)
                                                         $(document).ready(function() {
 
@@ -416,10 +419,12 @@
                                         </div>
                                     </div>
                                 }
+
                                 @await Html.PartialAsync("_CheckoutAttributes", Model)
                                 @await Component.InvokeAsync("Widget", new { widgetZone = "order_summary_content_deals" })
                             </div>
-                        }
+                                    }
+
                         <div class="totals">
                             @await Component.InvokeAsync("OrderTotals", new { isEditable = Model.IsEditable })
                             @if (Model.IsEditable)
@@ -483,8 +488,8 @@
                                                     }
                                                     return termOfServiceOk;
                                                 });
-                                                // amsfci
-                                                $('.remove-item').on('touchstart click', function (e) {
+                                                // amsfci tap vclick
+                                                $('.remove-item').on('click', function (e) {
                                                     e.preventDefault();
                                                     $('#item' + $(this).attr('data-item-value'))[0].checked = true
                                                    
@@ -494,7 +499,7 @@
 
                                                    
                                                     
-
+                                            
                                                     
 
 

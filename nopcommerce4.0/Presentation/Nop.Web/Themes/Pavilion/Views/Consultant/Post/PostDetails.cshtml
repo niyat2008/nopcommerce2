@@ -257,7 +257,7 @@
                     }
                     else
                     {
-                        <span style="padding: 5px" class="badge badge-success  open">
+                        <span style="padding: 5px" class=" open">
                             مفتوحة
                         </span>
                     }
@@ -345,12 +345,14 @@
             </span>
     </div>
 
-    <link type="text/css" rel="stylesheet" href="/Content/css/PostFooter.css" />
+    <link type="text/css" rel="stylesheet" href="~/../Themes/Pavilion/Content/css/postDetails.css" />
     <!-- Footer -->
     <div class="post-footer">
         @if (!Model.IsClosed && ViewBag.UserRole == "Registered")
         {
-            <strong id="con-rate" style="margin-left:15px!important;"> قم بتقييم المستشار </strong>
+  
+
+            <strong id="con-rate"> قم بتقييم المستشار </strong>
 
             <svg style="display: none;">
                 <symbol id="star" viewBox="0 0 98 92">
@@ -358,7 +360,7 @@
                     <path stroke='#000' stroke-width='5' d='M49 73.5L22.55 87.406l5.05-29.453-21.398-20.86 29.573-4.296L49 6l13.225 26.797 29.573 4.297-21.4 20.86 5.052 29.452z' fill-rule='evenodd' />
             </svg>
 
-            <div style="display: inline-block;float:right!important;">
+            <div style="display: inline-block">
                 <div id="stars" class="stars">
                     <a class="star" href="#"><svg><use xlink:href="#star"></use></svg></a>
                     <a class="star" href="#"><svg><use xlink:href="#star"></use></svg></a>
@@ -866,6 +868,7 @@
                     Files.forEach(function (d) {
                         deleteFile(i++);
                     })
+                    window.location.href = window.location.href;
                 }
             });
 
@@ -939,8 +942,6 @@
                     Files.forEach(function (d) {
                         deleteFile(i++);
                     })
-
-                    window.location.href = window.location.href;
                 }
             });
 

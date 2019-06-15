@@ -211,6 +211,8 @@ button.ticket-info-button.k-button:before,
 .nop-jcarousel .manufacturer-item:hover .title a,
 .nop-jcarousel .vendor-item:hover .title a {
   color: #3e874b;
+  font-weight:bold;
+  text-decoration:underline;
 }
 .mini-shopping-cart input.checkout-button:hover,
 .mini-shopping-cart input[type="button"]:only-child:hover,
