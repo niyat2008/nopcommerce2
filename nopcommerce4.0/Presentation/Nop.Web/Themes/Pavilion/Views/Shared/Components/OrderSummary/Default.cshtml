@@ -6,7 +6,6 @@
 @inject IWebHelper webHelper
 @inject IWorkContext workContext
 
-@*<link href="/Themes/Pavilion/Content/css/mobile-only.rtl.css" type="text/css" rel="stylesheet" />*@
 <div class="">
 
     <div class="order-summary-content">
@@ -26,6 +25,8 @@
                 </div>
             }
             @*we add enctype = "multipart/form-data" because "File upload" attribute control type requires it*@
+            <script type="text/javascript" src="/Themes/pavilion/Content/scripts/jquery.mobile-1.4.5.min.js"></script>
+
                 <form asp-route="ShoppingCart" method="post" enctype="multipart/form-data" id="shopping-cart-form">
                     <div class="table-wrapper">
                         <table class="cart">
@@ -106,10 +107,10 @@
                                                     else
                                                     {
                                                 //amsfci
-                                                <span  class="remove-item" name="removefromcart"
+                                                <button  class="remove-item" name="removefromcart"
                                                         data-item-value="@(item.Id)" value="@(item.Id)">
                                                     <span><img src="https://cdn2.iconfinder.com/data/icons/e-business-helper/240/627249-delete3-512.png" width="25" height="25" /></span>
-                                                </span>
+                                                </button>
                                                 <input style="display: none" type="checkbox" id="item@(item.Id)" name="removefromcart" value="@(item.Id)" />
                                             }
                                         </td>
@@ -213,8 +214,8 @@
                                                         <input hidden name="itemquantity@(item.Id)" id="itemquantity@(item.Id)input" type="text" value="@(item.Quantity)" class="qty-input" />
                                                         <span hidden class="itemquantity@(item.Id)ppppp ppppp">+</span>
                                                     }
+                                                    <script type="text/javascript" src="/Themes/pavilion/Content/scripts/jquery.mobile-1.4.5.min.js"></script>
 
-                                                    @*<script type="text/javascript" src="/Themes/pavilion/Content/scripts/jquery.mobile-1.4.5.min.js" ></script>*@
                                                         <script type="text/javascript" asp-location="Footer">
                                                            
 
@@ -472,6 +473,13 @@
                                 <div class="checkout-buttons">
                                     @if (String.IsNullOrEmpty(Model.MinOrderSubtotalWarning) && !Model.HideCheckoutButton)
                                     {
+
+
+
+                                        @*<link href="/Themes/Pavilion/Content/css/mobile-only.rtl.css" type="text/css" rel="stylesheet" />*@
+
+                                        @*<script type="text/javascript" src="/Themes/pavilion/Content/scripts/jquery.mobile-1.4.5.min.js"></script>*@
+
                                         <script type="text/javascript">
                                             $(document).ready(function () {
                                                 $('#checkout').click(function () {
@@ -488,25 +496,109 @@
                                                     }
                                                     return termOfServiceOk;
                                                 });
-                                                // amsfci tap vclick
-                                                $('.remove-item').on('click', function (e) {
-                                                    e.preventDefault();
-                                                    $('#item' + $(this).attr('data-item-value'))[0].checked = true
+
+                                                //Delete Desktop
+
+                                                $('.remove-item').on('click touchstart', function (event) {
+                                                    //async: true;
+                                                    //event.stopPropagation();
+                                                    event.preventDefault();
+
+                                                    if (event.type == "touchstart") {
+                                                        $(this).off('click');
+                                                        event.stopPropagation();
+                                                      
+                                                        $('#item' + $(this).attr('data-item-value'))[0].checked = true
+                                                       
+                                                        $('.update-cart-button').trigger('click');
+                                                        //var res = $('#item' + $(this).attr('data-item-value'))[0].checked;
+                                                        //console.log("res" + res);
+                                                        //console.log("dast2");
+                                                        //$('.update-cart-button').click();
+                                                       
+                                                        window.location.href = window.location.href;
+                                                        //console.log("dast3");
+                                                        //return false;
+                                                    } else {
+                                                        //$(this).off('touchstart');
+                                                        event.stopPropagation();
+                                                       
+                                                        $('#item' + $(this).attr('data-item-value'))[0].checked = true
+                                                       
+                                                        $('.update-cart-button').click();
+                                                        //window.location.href = window.location.href;
+
+                                                        //var res = $('#item' + $(this).attr('data-item-value'))[0].checked;
+                                                        //console.log("res" + res);
+                                                        //console.log("dast21");
+                                                        //$('.update-cart-button').click();
+                                                      
+                                                        //window.location.href = window.location.href;
+                                                        //console.log("dast31");
+                                                        return false;
+
+                                                    }
+
                                                    
-                                                    $('.update-cart-button').trigger("click");
-                                                    //$('.update-cart-button').click();
+                                                    //window.location.href = window.location.href;
+                                                    ////console.log("dast3");
+                                                    //return false;
+                                                   
+
+                                                    
+                                                });
 
 
+                                                //Delete Mobile
+                                                //$('.remove-item').on('touchstart', function (event) {
+                                                //    event.preventDefault();
+                                                //    $('#item' + $(this).attr('data-item-value'))[0].checked = true
+                                                //    $('.update-cart-button').click();
+                                                //});
+
+                                                // amsfci tap vclick
+                                                //$('.remove-item').on('touchstart click', function (event) {
+                                                //    event.preventDefault();
+
+                                                //    if (event.type == "touchstart") {
+                                                //        $(this).off('click');
+                                                //        console.log("touch inside");
+                                                //        console.log(event.type);
+                                                //        $('#item' + $(this).attr('data-item-value'))[0].checked = true
+
+                                                //        $('.update-cart-button').trigger("touchstart");
+                                                           
+
+                                                           
+
+                                                //            console.log("touch outside ref");
+
+                                                       
+
+                                                //    } else {
+
+                                                //        $(this).off('touchstart');
+                                                //        console.log("touch out1");
+
+                                                //        $('#item' + $(this).attr('data-item-value'))[0].checked = true
+                                                //        $('.update-cart-button').click();
+
+                                                //        console.log("touch out2");
+                                                //        //$('.update-cart-button').click();
+
+                                                //    }
                                                    
                                                     
                                             
                                                     
 
 
-                                                    return false;
-                                                });
+                                                //    return false;
+                                                //});
                                             });
                                         </script>
+                                        
+
                                         <button type="submit" id="checkout" name="checkout" value="checkout" class="button-1 checkout-button">
                                             @T("Checkout.Button")
                                         </button>
