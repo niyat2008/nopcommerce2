@@ -157,8 +157,8 @@
 
         .block .listbox {
             margin: 0px 0 0;
-            padding: 22px 35px;
-            float: right !important;
+            /*padding: 22px 35px;*/
+            /*float: right !important;*/
         }
 
         .block .view-all {

@@ -162,6 +162,31 @@
             }
         });
     });
+    function convertToBase64(file) {
+        var image;
+        var fileReader = new FileReader();
+
+        fileReader.readAsDataURL(file);
+        fileReader.onloadend = (e) => {
+            image = fileReader.result;
+            var indexofcomma = image.indexOf(",");
+            var imagebase64 = image.substring(indexofcomma + 1);
+            Files.push(imagebase64);
+            var index = Files.length - 1;
+
+            $("#images").append("<div  class='col-xs-4 img_blck' style='padding-right:0px' id='imgno" + index + "'>" +
+                "<img src='" + image + "' width='100' height='60' />" +
+                "<div class=' btn btn-danger' style='padding: 3px;  position: absolute; right: -1px;' onclick='deleteFile(" + index + ")'>" +
+                "<i class='fa fa-trash imageli' ></i>" +
+                "</div>");
+        };
+    }
+
+    function deleteFile(index) {
+
+        Files.splice(+index, 1);
+        $("#imgno" + index).remove();
+    }
 
     function urlify(text) {
     var urlRegex = /(https?:\/\/[^\s]+)/g;

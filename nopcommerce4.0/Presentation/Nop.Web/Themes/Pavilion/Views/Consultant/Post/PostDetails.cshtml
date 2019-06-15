@@ -257,7 +257,7 @@
                     }
                     else
                     {
-                        <span style="padding: 5px" class="badge badge-success  open">
+                        <span style="padding: 5px" class=" open">
                             مفتوحة
                         </span>
                     }
@@ -345,12 +345,14 @@
             </span>
     </div>
 
-
+    <link type="text/css" rel="stylesheet" href="~/../Themes/Pavilion/Content/css/postDetails.css" />
     <!-- Footer -->
     <div class="post-footer">
         @if (!Model.IsClosed && ViewBag.UserRole == "Registered")
         {
-            <strong> قم بتقييم المستشار </strong>
+  
+
+            <strong id="con-rate"> قم بتقييم المستشار </strong>
 
             <svg style="display: none;">
                 <symbol id="star" viewBox="0 0 98 92">
@@ -866,6 +868,7 @@
                     Files.forEach(function (d) {
                         deleteFile(i++);
                     })
+                    window.location.href = window.location.href;
                 }
             });
 

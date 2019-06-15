@@ -141,6 +141,50 @@ hr {
         cursor: pointer;
         transition: all 0.3s;
     }
+    @media all and (max-width : 500px)
+    {
+        .reply button {
+            position: absolute;
+            bottom: 2px;
+            left: -5px;
+            background: #4da74d;
+            color: #fff;
+            border: 1px solid #4da74d;
+            font-size: 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+    }
+    @media all and (max-width:320px)
+    {
+        .reply button {
+            position: absolute;
+            bottom: -32px;
+            left: 17px;
+            background: #4da74d;
+            color: #fff;
+            border: 1px solid #4da74d;
+            font-size: 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+    }
+@media all and (min-width:320px) {
+    .reply button {
+        position: absolute;
+        bottom: -32px;
+        left: 17px;
+        background: #4da74d;
+        color: #fff;
+        border: 1px solid #4da74d;
+        font-size: 14px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+}
 
 /* Customer Consultation Details Style */
 /* mat-card { margin-top:30px; border-radius: 20px; border: 1px solid #98c24d; }

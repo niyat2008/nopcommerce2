@@ -179,19 +179,20 @@
                    
                     <ul style="position: absolute; top: -6px!important; ">
                         @*<li class="li @(status == 1?" active":"")"> قيد الانتظار</li>
-                        <li class="li @(status == 2 ?" active":"")">تم التاكيد</li>
-                        <li class="li  @( status == 3?" active":"")">تم الشحن</li>
-                        <li class="li  @(status ==4?" active":"")"> تم الاستلام </li>*@
+        <li class="li @(status == 2 ?" active":"")">تم التاكيد</li>
+        <li class="li  @( status == 3?" active":"")">تم الشحن</li>
+        <li class="li  @(status ==4?" active":"")"> تم الاستلام </li>*@
                         @{
                             var none = status != 1 && status != 2 && status != 3 && status != 4;
 
                             var image = "background-color: green; background-image:  url('https://png2.kisspng.com/sh/b17667336e444eeded5ff370eeb4f031/L0KzQYm3VMIyN5d1fZH0aYP2gLBuTfNwdaF6jNd7LXnmf7B6TfNpbZRwRd9qcnuwgrFCgfx1gV5ritduLYT1hba0jCIubpJxi9c2NXHncoXohMg5OWY9Sqk3OUO7Roa7VMcyPWM5S6Q5OUi3RYOCWL5xdpg=/kisspng-computer-icons-check-mark-royalty-free-true-or-false-5adb4ad8815827.9386544715243209845298.png');     background-size: cover;";
-                            }
+                        }
+
+                        <li style="@(status == 1 || status == 2 || status == 3 || status == 4 || none ? image : "background-color: gray;")" class="li  ">  <span> قيد الانتظار</span> </li>
                         
-                        <li  style="@(status == 1 || status == 2 || status == 3 || status == 4 || none ? image : "background-color: gray;")" class="li  "> <span>قيد</span>  </li>
-                        <li  style="@((status == 2 || status == 3 || status == 4 || none) ? image : "background-color: gray;")" class="li ">تم  </li>
-                        <li  style="@((status == 3 || status == 4 || none)                           ? image : "background-color: gray;")" class="li  ">تم  </li>
-                        <li  style="@((status == 4  || none)                                          ? image : "background-color: gray;")" class="li  )"> تم   </li>
+                        <li style="@((status == 2 || status == 3 || status == 4 || none) ? image : "background-color: gray;")" class="li "><span>تم التاكيد</span>  </li>
+                        <li style="@((status == 3 || status == 4 || none)                           ? image : "background-color: gray;")" class="li  "><span>تم الشحن</span>  </li>
+                        <li style="@((status == 4  || none)                                          ? image : "background-color: gray;")" class="li  )"> <span>تم الاستلام</span>   </li>
                     </ul>
                    
 

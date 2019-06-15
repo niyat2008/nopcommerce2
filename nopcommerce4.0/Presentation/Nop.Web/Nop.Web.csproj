@@ -86,7 +86,9 @@
     <None Remove="Themes\Pavilion\Content\css\fontawesome-webfont.woff" />
     <None Remove="Themes\Pavilion\Content\css\fontawesome-webfont.woff2" />
     <None Remove="Themes\Pavilion\Content\css\FontAwesome.otf" />
+    <None Remove="Themes\Pavilion\Content\css\jquery.mobile-1.4.5.min.css" />
     <None Remove="Themes\Pavilion\Content\css\pages.css" />
+    <None Remove="Themes\Pavilion\Content\css\postDetails.css" />
     <None Remove="Themes\Pavilion\Content\css\style.css" />
     <None Remove="Themes\Pavilion\Content\img\google-plus.png" />
     <None Remove="Themes\Pavilion\Content\img\images_list\15.png" />
@@ -97,8 +99,10 @@
     <None Remove="Themes\Pavilion\Content\img\images_list\20.png" />
     <None Remove="Themes\Pavilion\Content\img\images_list\21.png" />
     <None Remove="Themes\Pavilion\Content\img\images_list\22.png" />
+    <None Remove="Themes\Pavilion\Content\img\mobile-sprite1.png" />
     <None Remove="Themes\Pavilion\Content\img\New folder\ma3roof.png" />
     <None Remove="Themes\Pavilion\Content\img\whatsapp-image.png" />
+    <None Remove="Themes\Pavilion\Content\scripts\jquery.mobile-1.4.5.min.js" />
     <EmbeddedResource Include="Themes\Pavilion\Views\Harag\Follow\Follow.cshtml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
